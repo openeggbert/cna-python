@@ -1,6 +1,6 @@
 # CNA-Python implementation plan
 
-**Status:** XNA namespace scaffold in place
+**Status:** XNA namespace scaffold in place (PascalCase standardized)
 
 **Date:** 2026-08-16
 
@@ -11,6 +11,8 @@
 - [x] Keep ABI implementation under private `_cna_native`.
 - [x] Add initial `Game`, `GameTime`, `Vector2`, and `Color` shapes.
 - [x] Remove the invalid invented `CNA.Framework` package tree.
+- [x] Standardize on PascalCase method names (Initialize, Draw, etc.) to match XNA 4.0.
+- [x] Add `GraphicsDevice`, `SpriteBatch`, `Texture2D`, `BasicEffect`, `Matrix`, `Vector3`, `Keyboard`.
 
 ## Phase 1 — canonical ABI
 
