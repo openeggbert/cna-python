@@ -1,28 +1,23 @@
 # Architecture
 
 ```text
-Python game or tool
-        ↓
-cna (Pythonic public objects and values)
-        ↓
-cna._native (private extension/FFI layer)
-        ↓
+Microsoft.Xna.Framework[.Graphics|.Input|.Content]
+                         ↓
+CNA.Framework[.Graphics|.Input|.Content]
+                         ↓
+CNA.Interop
+                         ↓
 CNA stable C ABI
-        ↓
-CNA C++ core → Sharp Runtime, subsystems, renderers
+                         ↓
+CNA C++ core
 ```
 
-The API uses Python properties, exceptions, inheritance, context managers, and
-standard-library types. Small values and math stay in Python. Native resources
-will provide explicit, idempotent `close()` and context-manager support; garbage
-collection is only a last-resort safety net for GPU/audio resources.
+The capitalized Python package tree intentionally mirrors CNA/XNA namespaces.
+`Microsoft.Xna.Framework` is the compatibility surface; `CNA.Framework` is the
+CNA-native surface. Aliasing is acceptable only for scaffold types whose
+contracts are identical. Compatibility-specific behavior belongs in distinct
+facade classes.
 
-The eventual native implementation may use a generated CPython extension,
-`ctypes`, CFFI, or another mechanism. That choice remains private. The public
-contract depends only on CNA's C ABI: opaque handles, fixed-width values, UTF-8,
-version checks, structured errors, explicit ownership, callback/GIL rules,
-snapshot input, and bulk transfers.
-
-Sharp Runtime stays below the C ABI as a C++ implementation detail. Python must
-never understand or expose its strings, collections, exceptions, tasks, or
-ownership model.
+Only `CNA.Interop` may load or call the native library. It converts UTF-8,
+results, callbacks, buffers, handles, ownership, GIL/threading, and shutdown.
+C++ exceptions and Sharp Runtime types must never cross into Python.
