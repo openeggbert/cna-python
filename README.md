@@ -1,5 +1,8 @@
 # CNA-Python
 
+> **Status: In progress - ZATÍM NEFUNKČNÍ**
+
+
 CNA-Python exposes [CNA](https://github.com/openeggbert/cna) through Python
 packages matching XNA 4.0 namespaces.
 
