@@ -1,0 +1,26 @@
+# Python bytecode, environments, and tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+/build/
+/dist/
+/.venv/
+/venv/
+
+# Native CNA binaries are packaged artifacts, not source
+/runtimes/
+*.dll
+*.dylib
+*.so
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
