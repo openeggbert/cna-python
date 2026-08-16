@@ -1,4 +1,4 @@
-"""Future low-level mapping of CNA's canonical C ABI."""
+"""Private implementation boundary for CNA's stable C ABI."""
 
 
 class NativeUnavailableError(RuntimeError):

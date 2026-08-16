@@ -1,35 +1,33 @@
 # CNA-Python
 
 CNA-Python exposes [CNA](https://github.com/openeggbert/cna) through Python
-packages matching the CNA and XNA 4.0 namespace hierarchy.
+packages matching XNA 4.0 namespaces.
 
 ```text
 Python game
     ↓
-Microsoft.Xna.Framework compatibility packages
+Microsoft.Xna.Framework[.Graphics|.Input|.Content]
     ↓
-CNA.Framework packages
+_cna_native
     ↓
-CNA.Interop → stable CNA C ABI → CNA C++
+CNA stable C ABI
+    ↓
+CNA C++ Microsoft::Xna::Framework implementation
 ```
 
 ## Status
 
-**Early scaffold.** The corrected package hierarchy and first local values are
-present. Native execution waits for the canonical CNA C ABI.
+**Early scaffold.** The compatibility package tree and first local values
+exist. Native execution waits for CNA's canonical C ABI.
 
 ```python
 from Microsoft.Xna.Framework import Color, Game, GameTime, Vector2
 from Microsoft.Xna.Framework.Graphics import *
-from Microsoft.Xna.Framework.Input import *
 ```
 
-The parallel CNA-native surface is imported from `CNA.Framework`. Raw native
-mapping belongs only in `CNA.Interop`.
-
-The compatibility facade currently reuses a few CNA value implementations as
-scaffolding. It will receive distinct facade types wherever XNA identity,
-conversion, overload, or behavior requirements demand them.
+The underscore-prefixed `_cna_native` package is binding infrastructure, not
+application API. There is deliberately no `CNA.Framework` Python package;
+CNA-specific packages will be added only for real native `CNA::...` extensions.
 
 See [architecture](docs/architecture.md) and [plan](plan.md).
 

@@ -1,23 +1,19 @@
 # Architecture
 
 ```text
-Microsoft.Xna.Framework[.Graphics|.Input|.Content]
-                         ↓
-CNA.Framework[.Graphics|.Input|.Content]
-                         ↓
-CNA.Interop
-                         ↓
+Microsoft.Xna.Framework compatibility packages
+                       ↓
+_cna_native (private extension/FFI boundary)
+                       ↓
 CNA stable C ABI
-                         ↓
-CNA C++ core
+                       ↓
+CNA C++: Microsoft::Xna::Framework
 ```
 
-The capitalized Python package tree intentionally mirrors CNA/XNA namespaces.
-`Microsoft.Xna.Framework` is the compatibility surface; `CNA.Framework` is the
-CNA-native surface. Aliasing is acceptable only for scaffold types whose
-contracts are identical. Compatibility-specific behavior belongs in distinct
-facade classes.
+The public package tree mirrors XNA 4.0. `_cna_native` owns library loading,
+UTF-8, native errors, handles, callbacks, GIL/thread rules, ownership, buffers,
+and shutdown.
 
-Only `CNA.Interop` may load or call the native library. It converts UTF-8,
-results, callbacks, buffers, handles, ownership, GIL/threading, and shutdown.
-C++ exceptions and Sharp Runtime types must never cross into Python.
+There is no public `CNA.Framework` layer because no corresponding
+`CNA::Framework` namespace exists in CNA C++. Future `CNA` packages must mirror
+specific real native extensions rather than duplicate XNA types.

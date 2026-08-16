@@ -1,8 +1,8 @@
 from datetime import timedelta
 import unittest
 
-from CNA.Framework import Color, Game, GameTime, NativeUnavailableError, Vector2
-from Microsoft.Xna.Framework import Color as XnaColor
+from _cna_native import NativeUnavailableError
+from Microsoft.Xna.Framework import Color, Game, GameTime, Vector2
 
 
 class ValueTypeTests(unittest.TestCase):
@@ -13,7 +13,6 @@ class ValueTypeTests(unittest.TestCase):
 
     def test_known_colors(self) -> None:
         self.assertEqual(Color.CornflowerBlue, Color(100, 149, 237, 255))
-        self.assertEqual(XnaColor.CornflowerBlue, Color.CornflowerBlue)
         with self.assertRaises(ValueError):
             Color(256, 0, 0)
 
