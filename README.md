@@ -1,6 +1,6 @@
 # CNA-Python
 
-> **Status: In progress - ZATÍM NEFUNKČNÍ**
+> **Status: In progress - NOT YET FUNCTIONAL**
 
 
 CNA-Python exposes [CNA](https://github.com/openeggbert/cna) through Python
