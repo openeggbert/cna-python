@@ -4,8 +4,8 @@
   "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
   "category": "PURE_XNA_DERIVED",
   "summary": {
-    "OBSERVATIONS": 119,
-    "ASSERTIONS": 538,
+    "OBSERVATIONS": 167,
+    "ASSERTIONS": 925,
     "FAILURES": 0
   },
   "results": [
@@ -1927,6 +1927,1372 @@
         "",
         true,
         0
+      ]
+    },
+    {
+      "id": "packedvector.alpha8",
+      "passed": true,
+      "expected": [
+        0,
+        128,
+        255,
+        255,
+        128,
+        90,
+        true
+      ],
+      "actual": [
+        0,
+        128,
+        255,
+        255,
+        128,
+        90,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.bgr565",
+      "passed": true,
+      "expected": [
+        0,
+        17431,
+        65535,
+        2047,
+        17431,
+        4660,
+        true
+      ],
+      "actual": [
+        0,
+        17431,
+        65535,
+        2047,
+        17431,
+        4660,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.bgra4444",
+      "passed": true,
+      "expected": [
+        0,
+        62603,
+        65535,
+        61680,
+        62603,
+        4660,
+        true
+      ],
+      "actual": [
+        0,
+        62603,
+        65535,
+        61680,
+        62603,
+        4660,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.bgra5551",
+      "passed": true,
+      "expected": [
+        0,
+        41495,
+        65535,
+        33760,
+        41495,
+        37428,
+        true
+      ],
+      "actual": [
+        0,
+        41495,
+        65535,
+        33760,
+        41495,
+        37428,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.byte4",
+      "passed": true,
+      "expected": [
+        0,
+        67371522,
+        4294967295,
+        4278255360,
+        67371522,
+        305419896,
+        true
+      ],
+      "actual": [
+        0,
+        67371522,
+        4294967295,
+        4278255360,
+        67371522,
+        305419896,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.halfsingle",
+      "passed": true,
+      "expected": [
+        0,
+        15872,
+        32767,
+        32767,
+        15872,
+        13653,
+        true,
+        1,
+        32767,
+        32767,
+        "47800000"
+      ],
+      "actual": [
+        0,
+        15872,
+        32767,
+        32767,
+        15872,
+        13653,
+        true,
+        1,
+        32767,
+        32767,
+        "47800000"
+      ]
+    },
+    {
+      "id": "packedvector.halfvector2",
+      "passed": true,
+      "expected": [
+        0,
+        3221240832,
+        4294934527,
+        2147450879,
+        3221240832,
+        894809429,
+        true
+      ],
+      "actual": [
+        0,
+        3221240832,
+        4294934527,
+        2147450879,
+        3221240832,
+        894809429,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.halfvector4",
+      "passed": true,
+      "expected": [
+        0,
+        4899977970451495936,
+        9223372041149710335,
+        422212465033215,
+        4899977970451495936,
+        3843177233707532288,
+        true
+      ],
+      "actual": [
+        0,
+        4899977970451495936,
+        9223372041149710335,
+        422212465033215,
+        4899977970451495936,
+        3843177233707532288,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.normalizedbyte2",
+      "passed": true,
+      "expected": [
+        0,
+        41248,
+        33151,
+        32641,
+        41248,
+        33151,
+        true
+      ],
+      "actual": [
+        0,
+        41248,
+        33151,
+        32641,
+        41248,
+        33151,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.normalizedbyte4",
+      "passed": true,
+      "expected": [
+        0,
+        3225461024,
+        2172617087,
+        2130739073,
+        3225461024,
+        2130739583,
+        true
+      ],
+      "actual": [
+        0,
+        3225461024,
+        2172617087,
+        2130739073,
+        3225461024,
+        2130739583,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.normalizedshort2",
+      "passed": true,
+      "expected": [
+        0,
+        2684428288,
+        2147581951,
+        2147450881,
+        2684428288,
+        2147581951,
+        true
+      ],
+      "actual": [
+        0,
+        2684428288,
+        2147581951,
+        2147450881,
+        2684428288,
+        2147581951,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.normalizedshort4",
+      "passed": true,
+      "expected": [
+        0,
+        13835128426710769664,
+        9223794247172456447,
+        9223090564025516033,
+        13835128426710769664,
+        9223090564025516033,
+        true
+      ],
+      "actual": [
+        0,
+        13835128426710769664,
+        9223794247172456447,
+        9223090564025516033,
+        13835128426710769664,
+        9223090564025516033,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.rg32",
+      "passed": true,
+      "expected": [
+        0,
+        3221176320,
+        4294967295,
+        4294901760,
+        3221176320,
+        305419896,
+        true
+      ],
+      "actual": [
+        0,
+        3221176320,
+        4294967295,
+        4294901760,
+        3221176320,
+        305419896,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.rgba1010102",
+      "passed": true,
+      "expected": [
+        0,
+        4026007808,
+        4294967295,
+        3222273024,
+        4026007808,
+        3240314215,
+        true
+      ],
+      "actual": [
+        0,
+        4026007808,
+        4294967295,
+        3222273024,
+        4026007808,
+        3240314215,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.rgba64",
+      "passed": true,
+      "expected": [
+        0,
+        18446673702817906688,
+        18446744073709551615,
+        18446462603027742720,
+        18446673702817906688,
+        1311768467463790320,
+        true
+      ],
+      "actual": [
+        0,
+        18446673702817906688,
+        18446744073709551615,
+        18446462603027742720,
+        18446673702817906688,
+        1311768467463790320,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.short2",
+      "passed": true,
+      "expected": [
+        0,
+        4294836226,
+        2147516415,
+        2147450880,
+        4294836226,
+        2147516415,
+        true
+      ],
+      "actual": [
+        0,
+        4294836226,
+        2147516415,
+        2147450880,
+        4294836226,
+        2147516415,
+        true
+      ]
+    },
+    {
+      "id": "packedvector.short4",
+      "passed": true,
+      "expected": [
+        0,
+        18445618195277414402,
+        9223512772195680255,
+        9223090564025516032,
+        18445618195277414402,
+        18446603336221294591,
+        true
+      ],
+      "actual": [
+        0,
+        18445618195277414402,
+        9223512772195680255,
+        9223090564025516032,
+        18445618195277414402,
+        18446603336221294591,
+        true
+      ]
+    },
+    {
+      "id": "curve.defaults",
+      "passed": true,
+      "expected": [
+        0,
+        0,
+        true,
+        "00000000"
+      ],
+      "actual": [
+        0,
+        0,
+        true,
+        "00000000"
+      ]
+    },
+    {
+      "id": "curve.key.ordering",
+      "passed": true,
+      "expected": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          2.0
+        ],
+        [
+          0.0,
+          10.0,
+          20.0,
+          30.0
+        ],
+        true,
+        true
+      ],
+      "actual": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          2.0
+        ],
+        [
+          0.0,
+          10.0,
+          20.0,
+          30.0
+        ],
+        true,
+        true
+      ]
+    },
+    {
+      "id": "curve.clone",
+      "passed": true,
+      "expected": [
+        true,
+        true,
+        true,
+        42.0
+      ],
+      "actual": [
+        true,
+        true,
+        true,
+        42.0
+      ]
+    },
+    {
+      "id": "curve.evaluate",
+      "passed": true,
+      "expected": [
+        "3FC80000",
+        "40B80000"
+      ],
+      "actual": [
+        "3FC80000",
+        "40B80000"
+      ]
+    },
+    {
+      "id": "curve.step",
+      "passed": true,
+      "expected": [
+        "40000000",
+        "41100000"
+      ],
+      "actual": [
+        "40000000",
+        "41100000"
+      ]
+    },
+    {
+      "id": "curve.tangents",
+      "passed": true,
+      "expected": [
+        "00000000",
+        "41200000",
+        "41A00000",
+        "00000000"
+      ],
+      "actual": [
+        "00000000",
+        "41200000",
+        "41A00000",
+        "00000000"
+      ]
+    },
+    {
+      "id": "curve.loops",
+      "passed": true,
+      "expected": [
+        "00000000",
+        "41200000",
+        "40A00000",
+        "40A00000",
+        "C0A00000",
+        "41700000",
+        "40A00000",
+        "40A00000",
+        "C0000000",
+        "41500000"
+      ],
+      "actual": [
+        "00000000",
+        "41200000",
+        "40A00000",
+        "40A00000",
+        "C0A00000",
+        "41700000",
+        "40A00000",
+        "40A00000",
+        "C0000000",
+        "41500000"
+      ]
+    },
+    {
+      "id": "curve.negative.cycles",
+      "passed": true,
+      "expected": [
+        "41200000",
+        "C1200000",
+        "41200000"
+      ],
+      "actual": [
+        "41200000",
+        "C1200000",
+        "41200000"
+      ]
+    },
+    {
+      "id": "curve.duplicates",
+      "passed": true,
+      "expected": [
+        "41200000",
+        "41200000",
+        "41A00000"
+      ],
+      "actual": [
+        "41200000",
+        "41200000",
+        "41A00000"
+      ]
+    },
+    {
+      "id": "curve.key.nan",
+      "passed": true,
+      "expected": [
+        1,
+        false
+      ],
+      "actual": [
+        1,
+        false
+      ]
+    },
+    {
+      "id": "design.base",
+      "passed": true,
+      "expected": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "design.properties.math",
+      "passed": true,
+      "expected": [
+        [],
+        []
+      ],
+      "actual": [
+        [],
+        []
+      ]
+    },
+    {
+      "id": "design.properties.boundingbox",
+      "passed": true,
+      "expected": [
+        [
+          "Min",
+          "Max"
+        ],
+        [
+          "Vector3",
+          "Vector3"
+        ]
+      ],
+      "actual": [
+        [
+          "Min",
+          "Max"
+        ],
+        [
+          "Vector3",
+          "Vector3"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.boundingsphere",
+      "passed": true,
+      "expected": [
+        [
+          "Center",
+          "Radius"
+        ],
+        [
+          "Vector3",
+          "float"
+        ]
+      ],
+      "actual": [
+        [
+          "Center",
+          "Radius"
+        ],
+        [
+          "Vector3",
+          "float"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.color",
+      "passed": true,
+      "expected": [
+        [
+          "R",
+          "G",
+          "B",
+          "A"
+        ],
+        [
+          "int",
+          "int",
+          "int",
+          "int"
+        ]
+      ],
+      "actual": [
+        [
+          "R",
+          "G",
+          "B",
+          "A"
+        ],
+        [
+          "int",
+          "int",
+          "int",
+          "int"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.matrix",
+      "passed": true,
+      "expected": [
+        [
+          "Translation",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M21",
+          "M22",
+          "M23",
+          "M24",
+          "M31",
+          "M32",
+          "M33",
+          "M34",
+          "M41",
+          "M42",
+          "M43",
+          "M44"
+        ],
+        [
+          "Vector3",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float"
+        ]
+      ],
+      "actual": [
+        [
+          "Translation",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M21",
+          "M22",
+          "M23",
+          "M24",
+          "M31",
+          "M32",
+          "M33",
+          "M34",
+          "M41",
+          "M42",
+          "M43",
+          "M44"
+        ],
+        [
+          "Vector3",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float",
+          "float"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.plane",
+      "passed": true,
+      "expected": [
+        [
+          "Normal",
+          "D"
+        ],
+        [
+          "Vector3",
+          "float"
+        ]
+      ],
+      "actual": [
+        [
+          "Normal",
+          "D"
+        ],
+        [
+          "Vector3",
+          "float"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.point",
+      "passed": true,
+      "expected": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "int",
+          "int"
+        ]
+      ],
+      "actual": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "int",
+          "int"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.quaternion",
+      "passed": true,
+      "expected": [
+        [
+          "X",
+          "Y",
+          "Z",
+          "W"
+        ],
+        [
+          "float",
+          "float",
+          "float",
+          "float"
+        ]
+      ],
+      "actual": [
+        [
+          "X",
+          "Y",
+          "Z",
+          "W"
+        ],
+        [
+          "float",
+          "float",
+          "float",
+          "float"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.ray",
+      "passed": true,
+      "expected": [
+        [
+          "Position",
+          "Direction"
+        ],
+        [
+          "Vector3",
+          "Vector3"
+        ]
+      ],
+      "actual": [
+        [
+          "Position",
+          "Direction"
+        ],
+        [
+          "Vector3",
+          "Vector3"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.rectangle",
+      "passed": true,
+      "expected": [
+        [
+          "X",
+          "Y",
+          "Width",
+          "Height"
+        ],
+        [
+          "int",
+          "int",
+          "int",
+          "int"
+        ]
+      ],
+      "actual": [
+        [
+          "X",
+          "Y",
+          "Width",
+          "Height"
+        ],
+        [
+          "int",
+          "int",
+          "int",
+          "int"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.vector2",
+      "passed": true,
+      "expected": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "float",
+          "float"
+        ]
+      ],
+      "actual": [
+        [
+          "X",
+          "Y"
+        ],
+        [
+          "float",
+          "float"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.vector3",
+      "passed": true,
+      "expected": [
+        [
+          "X",
+          "Y",
+          "Z"
+        ],
+        [
+          "float",
+          "float",
+          "float"
+        ]
+      ],
+      "actual": [
+        [
+          "X",
+          "Y",
+          "Z"
+        ],
+        [
+          "float",
+          "float",
+          "float"
+        ]
+      ]
+    },
+    {
+      "id": "design.properties.vector4",
+      "passed": true,
+      "expected": [
+        [
+          "X",
+          "Y",
+          "Z",
+          "W"
+        ],
+        [
+          "float",
+          "float",
+          "float",
+          "float"
+        ]
+      ],
+      "actual": [
+        [
+          "X",
+          "Y",
+          "Z",
+          "W"
+        ],
+        [
+          "float",
+          "float",
+          "float",
+          "float"
+        ]
+      ]
+    },
+    {
+      "id": "design.support",
+      "passed": true,
+      "expected": [
+        [
+          "MathTypeConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "BoundingBoxConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "BoundingSphereConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "ColorConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "MatrixConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "PlaneConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "PointConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "QuaternionConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "RayConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "RectangleConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "Vector2Converter",
+          true,
+          true,
+          true
+        ],
+        [
+          "Vector3Converter",
+          true,
+          true,
+          true
+        ],
+        [
+          "Vector4Converter",
+          true,
+          true,
+          true
+        ]
+      ],
+      "actual": [
+        [
+          "MathTypeConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "BoundingBoxConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "BoundingSphereConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "ColorConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "MatrixConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "PlaneConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "PointConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "QuaternionConverter",
+          true,
+          true,
+          true
+        ],
+        [
+          "RayConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "RectangleConverter",
+          false,
+          true,
+          true
+        ],
+        [
+          "Vector2Converter",
+          true,
+          true,
+          true
+        ],
+        [
+          "Vector3Converter",
+          true,
+          true,
+          true
+        ],
+        [
+          "Vector4Converter",
+          true,
+          true,
+          true
+        ]
+      ]
+    },
+    {
+      "id": "design.culture",
+      "passed": true,
+      "expected": [
+        "1.25, -2.5, 3.75",
+        "1,25; -2,5; 3,75",
+        "NaN, Infinity, -Infinity, 0",
+        "NaN; +unendlich; -unendlich; 0",
+        "1E-30, 3.402823E+38"
+      ],
+      "actual": [
+        "1.25, -2.5, 3.75",
+        "1,25; -2,5; 3,75",
+        "NaN, Infinity, -Infinity, 0",
+        "NaN; +unendlich; -unendlich; 0",
+        "1E-30, 3.402823E+38"
+      ]
+    },
+    {
+      "id": "design.parse",
+      "passed": true,
+      "expected": [
+        2147483647,
+        -2147483648,
+        "80000000",
+        "0DA24260",
+        "7F7FFFFF",
+        "3FC00000",
+        "C0100000",
+        "40700000",
+        0,
+        255,
+        10,
+        40
+      ],
+      "actual": [
+        2147483647,
+        -2147483648,
+        "80000000",
+        "0DA24260",
+        "7F7FFFFF",
+        "3FC00000",
+        "C0100000",
+        "40700000",
+        0,
+        255,
+        10,
+        40
+      ]
+    },
+    {
+      "id": "design.create",
+      "passed": true,
+      "expected": [
+        1.0,
+        2.0,
+        3.0,
+        1.0,
+        8.0,
+        13.0,
+        16.0
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        3.0,
+        1.0,
+        8.0,
+        13.0,
+        16.0
+      ]
+    },
+    {
+      "id": "design.descriptors",
+      "passed": true,
+      "expected": [
+        [
+          "BoundingBox",
+          2,
+          true
+        ],
+        [
+          "BoundingSphere",
+          2,
+          true
+        ],
+        [
+          "Color",
+          4,
+          true
+        ],
+        [
+          "Matrix",
+          16,
+          true
+        ],
+        [
+          "Plane",
+          2,
+          true
+        ],
+        [
+          "Point",
+          2,
+          true
+        ],
+        [
+          "Quaternion",
+          4,
+          true
+        ],
+        [
+          "Ray",
+          2,
+          true
+        ],
+        [
+          "Rectangle",
+          4,
+          true
+        ],
+        [
+          "Vector2",
+          2,
+          true
+        ],
+        [
+          "Vector3",
+          3,
+          true
+        ],
+        [
+          "Vector4",
+          4,
+          true
+        ]
+      ],
+      "actual": [
+        [
+          "BoundingBox",
+          2,
+          true
+        ],
+        [
+          "BoundingSphere",
+          2,
+          true
+        ],
+        [
+          "Color",
+          4,
+          true
+        ],
+        [
+          "Matrix",
+          16,
+          true
+        ],
+        [
+          "Plane",
+          2,
+          true
+        ],
+        [
+          "Point",
+          2,
+          true
+        ],
+        [
+          "Quaternion",
+          4,
+          true
+        ],
+        [
+          "Ray",
+          2,
+          true
+        ],
+        [
+          "Rectangle",
+          4,
+          true
+        ],
+        [
+          "Vector2",
+          2,
+          true
+        ],
+        [
+          "Vector3",
+          3,
+          true
+        ],
+        [
+          "Vector4",
+          4,
+          true
+        ]
+      ]
+    },
+    {
+      "id": "design.fallback",
+      "passed": true,
+      "expected": [
+        "{X:1 Y:2 Width:3 Height:4}",
+        "{ {M11:1 M12:0 M13:0 M14:0} {M21:0 M22:1 M23:0 M24:0} {M31:0 M32:0 M33:1 M34:0} {M41:0 M42:0 M43:0 M44:1} }"
+      ],
+      "actual": [
+        "{X:1 Y:2 Width:3 Height:4}",
+        "{ {M11:1 M12:0 M13:0 M14:0} {M21:0 M22:1 M23:0 M24:0} {M31:0 M32:0 M33:1 M34:0} {M41:0 M42:0 M43:0 M44:1} }"
+      ]
+    },
+    {
+      "id": "design.invalid",
+      "passed": true,
+      "expected": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true,
+        true,
+        true
       ]
     }
   ]

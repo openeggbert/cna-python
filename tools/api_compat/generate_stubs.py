@@ -63,6 +63,16 @@ HEADERS = {
         "",
         "T = TypeVar(\"T\")",
     ],
+    "Microsoft.Xna.Framework.Design": [
+        "from typing import Mapping",
+        "from .. import BoundingBox, BoundingSphere, Color, Matrix, Plane, Point, Quaternion, Ray, Rectangle, Vector2, Vector3, Vector4",
+    ],
+    "Microsoft.Xna.Framework.Graphics.PackedVector": [
+        "from typing import Generic, TypeVar, overload",
+        "from ... import Vector2, Vector3, Vector4",
+        "",
+        "TPacked = TypeVar(\"TPacked\")",
+    ],
 }
 
 
@@ -105,6 +115,14 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
     type_name = projected_type_name(identity)
     generic_names = tuple(value["name"] for value in expected.get("genericParameters", ()))
     base_items = [bases] if bases else []
+    if identity == "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1":
+        base_items.append("IPackedVector")
+    typed_packed = next((value for value in expected.get("directInterfaces", ())
+                         if identity.startswith("Microsoft.Xna.Framework.Graphics.PackedVector.")
+                         and value.startswith("Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1[")), None)
+    if typed_packed is not None:
+        argument = typed_packed[typed_packed.find("[") + 1:-1]
+        base_items.append(f"IPackedVectorOfT[{mapped_type(argument)}]")
     if generic_names:
         base_items.append(f"Generic[{', '.join(generic_names)}]")
     heading = f"class {type_name}" + (f"({', '.join(base_items)})" if base_items else "") + ":"
@@ -134,7 +152,7 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
         elif sample["kind"] == "property":
             annotation = rules.get("memberTypeMappings", {}).get(
                 f"{identity}.{sample['name']}",
-                mapped_type(sample["type"], return_position=True),
+                mapped_type(sample["type"], return_position=True, typevars=generic_names),
             )
             if sample.get("static"):
                 wrapper = "ClassVar" if sample.get("set") else "Final"
@@ -175,6 +193,12 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
                 and not any(line.lstrip().startswith("def __iter__") for line in lines)):
             argument = interface_name[interface_name.find("[") + 1:-1]
             lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
+        if interface_name.startswith("System.Collections.Generic.ICollection`1["):
+            argument = interface_name[interface_name.find("[") + 1:-1]
+            if raw_member(target, "__iter__") is not None:
+                lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
+            if raw_member(target, "__len__") is not None:
+                lines.append("    def __len__(self) -> int: ...")
     if "System.IDisposable" in expected.get("directInterfaces", ()):
         if raw_member(target, "__enter__") is not None:
             lines.append(f"    def __enter__(self) -> {type_name}: ...")

@@ -36,17 +36,25 @@ ownership graph. Multi-listener mixing remains an explicit CNA ABI-0.7 blocker;
 physical capture is hardware-pending and successful authored XACT playback is
 asset-pending. See [`docs/audio-xact-evidence.md`](docs/audio-xact-evidence.md).
 
+Foundation Milestone 7 completes the remaining managed/value layer: all six
+Curve types with XNA binary32 Hermite, loop, tangent, ordering, and clone
+semantics; both PackedVector interfaces plus all seventeen bit-exact packed
+structs; and all thirteen Design converters through a documented Python-native
+TypeConverter protocol. This milestone adds no CNA imports. See
+[`docs/curve-evidence.md`](docs/curve-evidence.md),
+[`docs/packed-vector-evidence.md`](docs/packed-vector-evidence.md), and
+[`docs/design-evidence.md`](docs/design-evidence.md).
+
 The maintained sibling starter completes 60- and 600-frame installed-wheel
 runs with both a raw PNG and a legal synthetic Texture2D XNB.
 
-This is not a complete XNA binding. The strict verifier exposes 180 of 257
+This is not a complete XNA binding. The strict verifier exposes 218 of 257
 reference types, all locally zero-diagnostic. Its full check intentionally
-remains red for 77 wholly missing future types; missing members and partial
-types are zero. Every structural mismatch, native leak, allowlist, and
-unmeasured-category counter is zero. Media, storage, touch, PackedVector,
-Curve, Design, GamerServices, FrameworkDispatcher, and unrelated Graphics
-families remain future dependency-complete milestones. No native library is
-bundled in the wheel.
+remains red for 39 wholly missing runtime/platform types; missing members and
+partial types are zero. Every structural mismatch, native leak, allowlist, and
+unmeasured-category counter is zero. Media, Storage, Touch, GamerServices,
+FrameworkDispatcher, OcclusionQuery, and RenderTargetCube remain future
+dependency-complete milestones. No native library is bundled in the wheel.
 
 ## Running
 

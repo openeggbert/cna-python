@@ -49,11 +49,35 @@ def int32(value: object, *, name: str = "value") -> int:
     return value
 
 
+def uint8(value: object, *, name: str = "value") -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise TypeError(f"{name} must be a Byte")
+    if value < 0 or value > 255:
+        raise OverflowError(f"{name} is outside the Byte range")
+    return value
+
+
+def uint16(value: object, *, name: str = "value") -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise TypeError(f"{name} must be a UInt16")
+    if value < 0 or value > 65_535:
+        raise OverflowError(f"{name} is outside the UInt16 range")
+    return value
+
+
 def uint32(value: object, *, name: str = "value") -> int:
     if isinstance(value, bool) or not isinstance(value, int):
         raise TypeError(f"{name} must be a UInt32")
     if value < 0 or value > 4_294_967_295:
         raise OverflowError(f"{name} is outside the UInt32 range")
+    return value
+
+
+def uint64(value: object, *, name: str = "value") -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise TypeError(f"{name} must be a UInt64")
+    if value < 0 or value > 18_446_744_073_709_551_615:
+        raise OverflowError(f"{name} is outside the UInt64 range")
     return value
 
 

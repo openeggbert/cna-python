@@ -7,6 +7,7 @@ from ._game_objects import (
     IDrawable, IGameComponent, IUpdateable, LaunchParameters,
 )
 from ._geometry import Color, Point, Rectangle
+from ._curve import Curve, CurveContinuity, CurveKey, CurveKeyCollection, CurveLoopType, CurveTangent
 from ._graphics_manager import (
     GraphicsDeviceInformation, GraphicsDeviceManager, IGraphicsDeviceManager,
     PreparingDeviceSettingsEventArgs,
@@ -20,6 +21,7 @@ from ._title import TitleContainer
 
 __all__ = [
     "BoundingBox", "BoundingFrustum", "BoundingSphere", "Color", "ContainmentType",
+    "Curve", "CurveContinuity", "CurveKey", "CurveKeyCollection", "CurveLoopType", "CurveTangent",
     "DisplayOrientation", "DrawableGameComponent", "Game", "GameComponent",
     "GameComponentCollection", "GameComponentCollectionEventArgs", "GameServiceContainer",
     "GameTime", "GameWindow", "GraphicsDeviceInformation", "GraphicsDeviceManager",

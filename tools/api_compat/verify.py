@@ -39,7 +39,9 @@ CATEGORIES = (
 PACKAGES = (
     "Microsoft.Xna.Framework",
     "Microsoft.Xna.Framework.Audio",
+    "Microsoft.Xna.Framework.Design",
     "Microsoft.Xna.Framework.Graphics",
+    "Microsoft.Xna.Framework.Graphics.PackedVector",
     "Microsoft.Xna.Framework.Input",
     "Microsoft.Xna.Framework.Content",
 )
@@ -53,6 +55,7 @@ _RULE_DATA = json.loads(RULES.read_text())
 _TYPE_NAMES: dict[str, str] = _RULE_DATA.get("typeNames", {})
 _TYPE_MAPPINGS: dict[str, str] = _RULE_DATA.get("typeMappings", {})
 _MEMBER_TYPE_MAPPINGS: dict[str, str] = _RULE_DATA.get("memberTypeMappings", {})
+_PARAMETER_OMISSIONS: list[dict[str, Any]] = _RULE_DATA.get("parameterOmissions", [])
 
 
 def projected_type_name(identity: str) -> str:
@@ -330,7 +333,7 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
         return typevars[index] if index < len(typevars) else f"T{index}"
     if value.startswith("!"):
         index = int(value[1:])
-        return "T" if index == 0 else f"T{index}"
+        return typevars[index] if index < len(typevars) else "T" if index == 0 else f"T{index}"
     if value in _TYPE_MAPPINGS:
         return _TYPE_MAPPINGS[value]
     if value in _PRIMITIVES:
@@ -378,7 +381,10 @@ def expected_callable(member: dict[str, Any], projected: str,
             ),
             bool(parameter.get("optional")),
         )
-        for parameter in member.get("parameters", ()) if not parameter.get("out")
+        for parameter in member.get("parameters", ())
+        if not parameter.get("out") and not _parameter_is_omitted(
+            owner_identity, member["name"], parameter["name"] or "value"
+        )
     )
     outputs = [
         mapped_type(parameter["type"], typevars=generic_names)
@@ -398,6 +404,21 @@ def expected_callable(member: dict[str, Any], projected: str,
         else:
             shape = "static" if member.get("static") else "instance"
     return ExpectedCallable(parameters, return_type, shape, generic_names)
+
+
+def _parameter_is_omitted(owner: str | None, member: str, parameter: str) -> bool:
+    if owner is None:
+        return False
+    for rule in _PARAMETER_OMISSIONS:
+        if rule.get("owner") not in (None, owner):
+            continue
+        if "ownerPrefix" in rule and not owner.startswith(rule["ownerPrefix"]):
+            continue
+        if rule.get("member") not in (None, member):
+            continue
+        if parameter in rule.get("parameters", ()):
+            return True
+    return False
 
 
 def expected_callables(owner: dict[str, Any], name: str,
@@ -702,10 +723,26 @@ def compare_interface_contract(identity: str, expected: dict[str, Any], target: 
             required = ("GetService",)
         elif base.startswith("System.Collections.Generic.IEnumerable`1"):
             required = ("GetEnumerator", "__iter__")
+        elif base.startswith("System.Collections.Generic.ICollection`1"):
+            required = ("Count", "IsReadOnly", "Add", "Clear", "Contains", "CopyTo",
+                        "Remove", "GetEnumerator", "__iter__", "__len__")
+        elif base.startswith("System.IComparable`1"):
+            required = ("CompareTo",)
         elif base.startswith("System.Collections.Generic.IEnumerator`1"):
             required = ("Current", "MoveNext", "Dispose", "__iter__")
         elif base == "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1":
             required = ("PackedValue",)
+            generic = _split_generic(interface)
+            if (generic is not None
+                    and identity.startswith("Microsoft.Xna.Framework.Graphics.PackedVector.")):
+                _, arguments = generic
+                wanted_base = f"IPackedVectorOfT[{mapped_type(arguments[0])}]"
+                if wanted_base not in stub.bases:
+                    add(diagnostics, "GENERIC_MAPPING_MISMATCH", identity,
+                        f"typed packed interface stub base {stub.bases}, expected {wanted_base}")
+                if not any(value.__name__ == "IPackedVectorOfT" for value in target.__mro__):
+                    add(diagnostics, "GENERIC_MAPPING_MISMATCH", identity,
+                        "runtime does not implement IPackedVectorOfT")
         elif base == "Microsoft.Xna.Framework.Graphics.IGraphicsResource":
             required = ("GraphicsDevice",)
         elif base == "Microsoft.Xna.Framework.Graphics.IDynamicGraphicsResource":
@@ -914,7 +951,8 @@ def verify() -> dict[str, Any]:
                         f"{name}: expected get={sample.get('get')} set={sample.get('set')} static={sample.get('static')}")
                 expected_type = _MEMBER_TYPE_MAPPINGS.get(
                     f"{identity}.{sample['name']}",
-                    mapped_type(sample["type"], return_position=True),
+                    mapped_type(sample["type"], return_position=True,
+                                typevars=generic_parameters),
                 )
                 if name == "__getitem__":
                     expected_indexers = [expected_callable({

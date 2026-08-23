@@ -5,10 +5,10 @@
     "REFERENCE_MEMBERS": 2964,
     "EXPECTED_PYTHON_TYPES": 257,
     "EXPECTED_PYTHON_MEMBERS": 2887,
-    "TARGET_TYPES": 180,
-    "TARGET_MEMBERS": 1772,
-    "TOTAL_DIAGNOSTICS": 77,
-    "MISSING_TYPE": 77,
+    "TARGET_TYPES": 218,
+    "TARGET_MEMBERS": 2061,
+    "TOTAL_DIAGNOSTICS": 39,
+    "MISSING_TYPE": 39,
     "MISSING_MEMBER": 0,
     "UNEXPECTED_TYPE": 0,
     "UNEXPECTED_MEMBER": 0,
@@ -36,101 +36,6 @@
   "diagnostics": [
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Curve",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.CurveContinuity",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.CurveKey",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.CurveKeyCollection",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.CurveLoopType",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.CurveTangent",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.BoundingBoxConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.BoundingSphereConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.ColorConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.MathTypeConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.MatrixConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.PlaneConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.PointConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.QuaternionConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.RayConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.RectangleConverter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.Vector2Converter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.Vector3Converter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Design.Vector4Converter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.FrameworkDispatcher",
       "detail": "type is not exported"
     },
@@ -142,101 +47,6 @@
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.OcclusionQuery",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Alpha8",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Bgr565",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Bgra4444",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Bgra5551",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Byte4",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.HalfSingle",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.HalfVector2",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.HalfVector4",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedByte2",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedByte4",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedShort2",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedShort4",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Rg32",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Rgba1010102",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Rgba64",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Short2",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Short4",
       "detail": "type is not exported"
     },
     {
@@ -457,6 +267,25 @@
     "Microsoft.Xna.Framework.Content.ContentTypeReaderManager",
     "Microsoft.Xna.Framework.Content.ContentTypeReader`1",
     "Microsoft.Xna.Framework.Content.ResourceContentManager",
+    "Microsoft.Xna.Framework.Curve",
+    "Microsoft.Xna.Framework.CurveContinuity",
+    "Microsoft.Xna.Framework.CurveKey",
+    "Microsoft.Xna.Framework.CurveKeyCollection",
+    "Microsoft.Xna.Framework.CurveLoopType",
+    "Microsoft.Xna.Framework.CurveTangent",
+    "Microsoft.Xna.Framework.Design.BoundingBoxConverter",
+    "Microsoft.Xna.Framework.Design.BoundingSphereConverter",
+    "Microsoft.Xna.Framework.Design.ColorConverter",
+    "Microsoft.Xna.Framework.Design.MathTypeConverter",
+    "Microsoft.Xna.Framework.Design.MatrixConverter",
+    "Microsoft.Xna.Framework.Design.PlaneConverter",
+    "Microsoft.Xna.Framework.Design.PointConverter",
+    "Microsoft.Xna.Framework.Design.QuaternionConverter",
+    "Microsoft.Xna.Framework.Design.RayConverter",
+    "Microsoft.Xna.Framework.Design.RectangleConverter",
+    "Microsoft.Xna.Framework.Design.Vector2Converter",
+    "Microsoft.Xna.Framework.Design.Vector3Converter",
+    "Microsoft.Xna.Framework.Design.Vector4Converter",
     "Microsoft.Xna.Framework.DisplayOrientation",
     "Microsoft.Xna.Framework.DrawableGameComponent",
     "Microsoft.Xna.Framework.Game",
@@ -526,6 +355,25 @@
     "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection",
     "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator",
     "Microsoft.Xna.Framework.Graphics.NoSuitableGraphicsDeviceException",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Alpha8",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Bgr565",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Bgra4444",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Bgra5551",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Byte4",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.HalfSingle",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.HalfVector2",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.HalfVector4",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedByte2",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedByte4",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedShort2",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedShort4",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Rg32",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Rgba1010102",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Rgba64",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Short2",
+    "Microsoft.Xna.Framework.Graphics.PackedVector.Short4",
     "Microsoft.Xna.Framework.Graphics.PresentInterval",
     "Microsoft.Xna.Framework.Graphics.PresentationParameters",
     "Microsoft.Xna.Framework.Graphics.PrimitiveType",
@@ -785,98 +633,98 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Curve",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.CurveContinuity",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.CurveKey",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.CurveKeyCollection",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.CurveLoopType",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.CurveTangent",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.BoundingBoxConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.BoundingSphereConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.ColorConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.MathTypeConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.MatrixConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.PlaneConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.PointConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.QuaternionConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.RayConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.RectangleConverter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.Vector2Converter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.Vector3Converter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Design.Vector4Converter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.DisplayOrientation",
@@ -1240,98 +1088,98 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Alpha8",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Bgr565",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Bgra4444",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Bgra5551",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Byte4",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.HalfSingle",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.HalfVector2",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.HalfVector4",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedByte2",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedByte4",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedShort2",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.NormalizedShort4",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Rg32",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Rgba1010102",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Rgba64",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Short2",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Short4",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PresentInterval",
@@ -1892,7 +1740,7 @@
   "familyScoreboard": {
     "Microsoft.Xna.Framework": {
       "types": 42,
-      "diagnostics": 7
+      "diagnostics": 1
     },
     "Microsoft.Xna.Framework.Audio": {
       "types": 19,
@@ -1904,7 +1752,7 @@
     },
     "Microsoft.Xna.Framework.Design": {
       "types": 13,
-      "diagnostics": 13
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.GamerServices": {
       "types": 1,
@@ -1916,7 +1764,7 @@
     },
     "Microsoft.Xna.Framework.Graphics.PackedVector": {
       "types": 19,
-      "diagnostics": 19
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Input": {
       "types": 17,

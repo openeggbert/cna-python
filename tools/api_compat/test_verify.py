@@ -4,10 +4,36 @@ import json
 from pathlib import Path
 import unittest
 
-from verify import diagnose_broken_fixture, expected_callable
+from verify import (
+    diagnose_broken_fixture, expected_callable, projected_type_identity,
+    projected_type_name,
+)
 
 
 class BrokenFixtureTests(unittest.TestCase):
+    def test_packed_vector_generic_collision_has_two_measured_identities(self) -> None:
+        generic = "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1"
+        package = "Microsoft.Xna.Framework.Graphics.PackedVector"
+        self.assertEqual(projected_type_name(generic), "IPackedVectorOfT")
+        self.assertEqual(projected_type_identity(package, "IPackedVectorOfT"), generic)
+        self.assertNotEqual(projected_type_name(generic), "IPackedVector")
+
+    def test_design_omits_unobserved_context_and_attribute_parameters(self) -> None:
+        callable_value = expected_callable({
+            "kind": "method", "name": "GetProperties",
+            "returnType": "System.ComponentModel.PropertyDescriptorCollection",
+            "genericParameters": [], "parameters": [
+                {"name": "context", "type": "System.ComponentModel.ITypeDescriptorContext", "out": False},
+                {"name": "value", "type": "System.Object", "out": False},
+                {"name": "attributes", "type": "System.Attribute[]", "out": False},
+            ],
+        }, "GetProperties", "Microsoft.Xna.Framework.Design.MathTypeConverter")
+        self.assertEqual(
+            [(value.name, value.annotation) for value in callable_value.parameters],
+            [("value", "object")],
+        )
+        self.assertEqual(callable_value.return_type, "Mapping[str, object]")
+
     def test_audio_contextual_member_mappings_are_machine_measured(self) -> None:
         get_data = expected_callable({
             "kind": "method", "name": "GetData", "returnType": "System.Int32",

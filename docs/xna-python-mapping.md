@@ -45,13 +45,41 @@ Python keywords receive a trailing underscore. This is the only routine public
 identifier rewrite: CLR `None` becomes `None_`. The verifier records this as a
 language rule, not an allowlist entry.
 
-The one selected CLR/Python generic-name collision has an explicit machine-readable
-rewrite: CLR `ContentTypeReader<T>` is exported as `ContentTypeReaderOfT[T]`, while
-the non-generic CLR `ContentTypeReader` keeps the unsuffixed name. This preserves two
-distinct public runtime identities without inventing a constructor or using a
-runtime alias. A concrete Python subclass declares
+The selected CLR/Python generic-name collisions have explicit machine-readable
+rewrites. CLR `ContentTypeReader<T>` is exported as `ContentTypeReaderOfT[T]`, while
+the non-generic CLR `ContentTypeReader` keeps the unsuffixed name. Likewise,
+`Graphics.PackedVector.IPackedVector<TPacked>` is exported as
+`IPackedVectorOfT[TPacked]`, while non-generic `IPackedVector` remains unsuffixed.
+Each pair has two distinct public runtime identities; no alias collapses them and
+no synthetic XNA type is introduced. A concrete content-reader subclass declares
 `ContentTypeReaderOfT[ConcreteTarget]`; the base recovers that target deterministically.
 An unresolved `TypeVar` fails construction instead of guessing a target type.
+
+## Design converter protocol
+
+XNA's thirteen `Microsoft.Xna.Framework.Design` converters are projected without
+a public `System.ComponentModel` or reflection package. `System.Type` is Python
+`type`. `CultureInfo` is an explicit culture-name string (`"invariant"`,
+`"en-US"`, or `"de-DE"`); `None` deterministically means invariant culture and
+never consults or mutates the process locale. `IDictionary` and
+`PropertyDescriptorCollection` map to insertion-ordered `Mapping[str, object]`
+values. `GetProperties` returns an immutable ordered snapshot mapping property
+names to copied values.
+
+`ITypeDescriptorContext` parameters are omitted because XNA's selected converter
+IL never observes them except when delegating to base converter services, which
+the private implementation supplies directly. The `Attribute[]` parameter on
+`GetProperties` is also omitted because the converters return one fixed ordered
+descriptor set regardless of that filter. These omissions are machine rules,
+not overload guesses or allowlist entries.
+
+An XNA `InstanceDescriptor` maps to the compact immutable pair
+`(constructor_or_factory, ordered_argument_tuple)`. The descriptor is executable
+as `callable(*arguments)` and performs no name lookup or general reflection.
+Callers select String conversion with destination type `str` and descriptor
+conversion with destination type `tuple`. `ExpandableObjectConverter` is
+flattened through the private `_MathTypeConverterBase`; no private helper is
+exported from the Design package.
 
 The public packages export only XNA identities. ctypes types, opaque handles,
 private helpers, filesystem paths, and CNA implementation types are forbidden.

@@ -16,8 +16,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from Microsoft.Xna.Framework import (  # noqa: E402
     BoundingBox, BoundingFrustum, BoundingSphere, Color, ContainmentType,
-    MathHelper, Matrix, Plane, Point, Quaternion, Ray, Rectangle, Vector2,
-    Vector3, Vector4,
+    Curve, CurveContinuity, CurveKey, CurveLoopType, CurveTangent, MathHelper,
+    Matrix, Plane, Point, Quaternion, Ray, Rectangle, Vector2, Vector3, Vector4,
 )
 from Microsoft.Xna.Framework.Graphics import (  # noqa: E402
     BlendState, DepthStencilState, EffectParameterClass, EffectParameterType,
@@ -36,6 +36,17 @@ from Microsoft.Xna.Framework.Audio import (  # noqa: E402
     AudioCategory, AudioChannels, AudioEmitter, AudioListener, AudioStopOptions,
     MicrophoneState, RendererDetail, SoundEffect, SoundState,
 )
+from Microsoft.Xna.Framework.Graphics.PackedVector import (  # noqa: E402
+    Alpha8, Bgr565, Bgra4444, Bgra5551, Byte4, HalfSingle, HalfVector2,
+    HalfVector4, NormalizedByte2, NormalizedByte4, NormalizedShort2,
+    NormalizedShort4, Rg32, Rgba1010102, Rgba64, Short2, Short4,
+)
+from Microsoft.Xna.Framework.Design import (  # noqa: E402
+    BoundingBoxConverter, BoundingSphereConverter, ColorConverter,
+    MathTypeConverter, MatrixConverter, PlaneConverter, PointConverter,
+    QuaternionConverter, RayConverter, RectangleConverter, Vector2Converter,
+    Vector3Converter, Vector4Converter,
+)
 
 
 def vector2(value): return Vector2(*value)
@@ -46,6 +57,51 @@ def sphere(value): return BoundingSphere(vector3(value[0]), value[1])
 def hex32(value): return f"{struct.unpack('=I', struct.pack('=f', value))[0]:08X}"
 def hex_values(value): return [hex32(component) for component in value]
 def float_from_bits(value): return struct.unpack('=f', struct.pack('=I', value))[0]
+
+
+_PACKED_CORPUS = {
+    "Alpha8": (Alpha8, (0.5,), (1.0,), (math.inf,), 0x5A),
+    "Bgr565": (Bgr565, (0.25, 0.5, 0.75), (1.0, 1.0, 1.0), (-1.0, 2.0, math.inf), 0x1234),
+    "Bgra4444": (Bgra4444, (0.25, 0.5, 0.75, 1.0), (1.0, 1.0, 1.0, 1.0), (-1.0, 2.0, math.nan, math.inf), 0x1234),
+    "Bgra5551": (Bgra5551, (0.25, 0.5, 0.75, 1.0), (1.0, 1.0, 1.0, 1.0), (-1.0, 2.0, math.nan, math.inf), 0x9234),
+    "Byte4": (Byte4, (1.5, 2.5, 3.5, 4.5), (255.0, 255.0, 255.0, 255.0), (-1.0, 256.0, math.nan, math.inf), 0x12345678),
+    "HalfSingle": (HalfSingle, (1.5,), (131008.0,), (math.inf,), 0x3555),
+    "HalfVector2": (HalfVector2, (1.0, -2.0), (131008.0, -131008.0), (math.inf, math.nan), 0x3555B555),
+    "HalfVector4": (HalfVector4, (1.0, -2.0, 0.5, 4.0), (131008.0, -131008.0, 0.0, -0.0), (math.inf, -math.inf, math.nan, 2.0 ** -24), 0x3555B55500018000),
+    "NormalizedByte2": (NormalizedByte2, (0.25, -0.75), (1.0, -1.0), (-2.0, 2.0), 0x817F),
+    "NormalizedByte4": (NormalizedByte4, (0.25, -0.75, 0.5, -0.5), (1.0, -1.0, 1.0, -1.0), (-2.0, 2.0, math.nan, math.inf), 0x7F00817F),
+    "NormalizedShort2": (NormalizedShort2, (0.25, -0.75), (1.0, -1.0), (-2.0, 2.0), 0x80017FFF),
+    "NormalizedShort4": (NormalizedShort4, (0.25, -0.75, 0.5, -0.5), (1.0, -1.0, 1.0, -1.0), (-2.0, 2.0, math.nan, math.inf), 0x7FFF00007FFF8001),
+    "Rg32": (Rg32, (0.25, 0.75), (1.0, 1.0), (-1.0, math.inf), 0x12345678),
+    "Rgba1010102": (Rgba1010102, (0.25, 0.5, 0.75, 1.0), (1.0, 1.0, 1.0, 1.0), (-1.0, 2.0, math.nan, math.inf), 0xC1234567),
+    "Rgba64": (Rgba64, (0.25, 0.5, 0.75, 1.0), (1.0, 1.0, 1.0, 1.0), (-1.0, 2.0, math.nan, math.inf), 0x123456789ABCDEF0),
+    "Short2": (Short2, (1.5, -2.5), (32767.0, -32768.0), (-40000.0, 40000.0), 0x80007FFF),
+    "Short4": (Short4, (1.5, -2.5, 3.5, -4.5), (32767.0, -32768.0, 32767.0, -32768.0), (-40000.0, 40000.0, math.nan, math.inf), 0xFFFF800000017FFF),
+}
+
+_DESIGN_CONVERTERS = {
+    value.__name__: value for value in (
+        MathTypeConverter, BoundingBoxConverter, BoundingSphereConverter,
+        ColorConverter, MatrixConverter, PlaneConverter, PointConverter,
+        QuaternionConverter, RayConverter, RectangleConverter, Vector2Converter,
+        Vector3Converter, Vector4Converter,
+    )
+}
+
+_DESIGN_VALUES = {
+    "BoundingBoxConverter": BoundingBox(Vector3(1), Vector3(2)),
+    "BoundingSphereConverter": BoundingSphere(Vector3(1), 2.0),
+    "ColorConverter": Color(10, 20, 30, 40),
+    "MatrixConverter": Matrix.Identity,
+    "PlaneConverter": Plane(Vector3(1), 2.0),
+    "PointConverter": Point(1, 2),
+    "QuaternionConverter": Quaternion(1, 2, 3, 4),
+    "RayConverter": Ray(Vector3(1), Vector3(2)),
+    "RectangleConverter": Rectangle(1, 2, 3, 4),
+    "Vector2Converter": Vector2(1, 2),
+    "Vector3Converter": Vector3(1, 2, 3),
+    "Vector4Converter": Vector4(1, 2, 3, 4),
+}
 
 
 def seven(value: int) -> bytes:
@@ -89,6 +145,95 @@ class _CorpusExternalReader(ContentTypeReaderOfT[_CorpusShared]):
 
 
 def observe(operation: str, args: list[object]) -> object:
+    if operation == "Packed.Format":
+        packed_type, ordinary_args, boundary_args, clamp_args, identity = _PACKED_CORPUS[args[0]]
+        ordinary = packed_type(*ordinary_args)
+        boundary = packed_type(*boundary_args)
+        clamped = packed_type(*clamp_args)
+        round_trip = packed_type(); round_trip.PackFromVector4(ordinary.ToVector4())
+        assigned = packed_type(); assigned.PackedValue = identity
+        result = [packed_type().PackedValue, ordinary.PackedValue, boundary.PackedValue,
+                  clamped.PackedValue, round_trip.PackedValue,
+                  assigned.PackedValue, assigned.Equals(assigned.__copy__())]
+        if packed_type is HalfSingle:
+            exponent31 = HalfSingle(); exponent31.PackedValue = 0x7C00
+            result.extend([HalfSingle(2.0 ** -24).PackedValue,
+                           HalfSingle(math.inf).PackedValue,
+                           HalfSingle(math.nan).PackedValue,
+                           hex32(exponent31.ToSingle())])
+        return result
+    if operation == "Curve.Defaults":
+        value=Curve();return [int(value.PreLoop),int(value.PostLoop),value.IsConstant,hex32(value.Evaluate(5))]
+    if operation == "Curve.KeyOrdering":
+        value=Curve();a=CurveKey(1,10);b=CurveKey(1,20)
+        value.Keys.Add(CurveKey(2,30));value.Keys.Add(a);value.Keys.Add(CurveKey(0,0));value.Keys.Add(b)
+        return [[key.Position for key in value.Keys],[key.Value for key in value.Keys],value.Keys[1] is a,value.Keys[2] is b]
+    if operation == "Curve.Clone":
+        value=Curve();value.Keys.Add(CurveKey(0,1));clone=value.Clone();clone.Keys[0].Value=42
+        return [clone is not value,clone.Keys is not value.Keys,clone.Keys[0] is value.Keys[0],value.Keys[0].Value]
+    if operation == "Curve.Evaluate":
+        ordinary=Curve();ordinary.Keys.Add(CurveKey(0,0));ordinary.Keys.Add(CurveKey(1,10))
+        asymmetric=Curve();asymmetric.Keys.Add(CurveKey(0,0,99,4));asymmetric.Keys.Add(CurveKey(2,10,-2,77))
+        return [hex32(ordinary.Evaluate(.25)),hex32(asymmetric.Evaluate(1))]
+    if operation == "Curve.Step":
+        value=Curve();value.Keys.Add(CurveKey(0,2,0,0,CurveContinuity.Step));value.Keys.Add(CurveKey(1,9))
+        return [hex32(value.Evaluate(.999)),hex32(value.Evaluate(1))]
+    if operation == "Curve.Tangents":
+        value=Curve();[value.Keys.Add(CurveKey(*item)) for item in ((0,0),(1,10),(3,30))]
+        value.ComputeTangents(CurveTangent.Smooth)
+        return [hex32(value.Keys[0].TangentIn),hex32(value.Keys[1].TangentIn),hex32(value.Keys[1].TangentOut),hex32(value.Keys[2].TangentOut)]
+    if operation == "Curve.Loops":
+        results=[]
+        for mode in CurveLoopType:
+            value=Curve();value.Keys.Add(CurveKey(5,0));value.Keys.Add(CurveKey(7,10))
+            value.Keys[0].TangentIn=2;value.Keys[1].TangentOut=3;value.PreLoop=mode;value.PostLoop=mode
+            results.extend((hex32(value.Evaluate(4)),hex32(value.Evaluate(8))))
+        return results
+    if operation == "Curve.NegativeCycles":
+        results=[]
+        for mode in (CurveLoopType.Cycle,CurveLoopType.CycleOffset,CurveLoopType.Oscillate):
+            value=Curve();value.Keys.Add(CurveKey(5,0));value.Keys.Add(CurveKey(7,10));value.PreLoop=mode
+            results.append(hex32(value.Evaluate(3)))
+        return results
+    if operation == "Curve.Duplicates":
+        value=Curve();value.Keys.Add(CurveKey(1,10));value.Keys.Add(CurveKey(1,20));value.PreLoop=CurveLoopType.Cycle;value.PostLoop=CurveLoopType.Oscillate
+        return [hex32(value.Evaluate(0)),hex32(value.Evaluate(1)),hex32(value.Evaluate(2))]
+    if operation == "Curve.KeyNaN":
+        a=CurveKey(math.nan,1);b=CurveKey(math.nan,1);return [a.CompareTo(b),a.Equals(b)]
+    if operation == "Design.Base":
+        value=MathTypeConverter();return [value.CanConvertFrom(str),value.CanConvertFrom(int),value.CanConvertTo(str),value.CanConvertTo(tuple),value.GetCreateInstanceSupported(),value.GetPropertiesSupported()]
+    if operation == "Design.Properties":
+        name=args[0];converter=_DESIGN_CONVERTERS[name]()
+        if name=="MathTypeConverter":return [list(converter.propertyDescriptions),list(converter.GetProperties(object()))]
+        value=_DESIGN_VALUES[name];properties=converter.GetProperties(value)
+        return [list(properties),[kind.__name__ for kind in converter.propertyDescriptions.values()]]
+    if operation == "Design.Support":
+        return [[name,converter().CanConvertFrom(str),converter().CanConvertTo(str),converter().CanConvertTo(tuple)] for name,converter in _DESIGN_CONVERTERS.items()]
+    if operation == "Design.Culture":
+        vector=Vector3(1.25,-2.5,3.75);special=Vector4(math.nan,math.inf,-math.inf,-0.0)
+        return [Vector3Converter().ConvertTo(None,vector,str),Vector3Converter().ConvertTo('de-DE',vector,str),Vector4Converter().ConvertTo(None,special,str),Vector4Converter().ConvertTo('de-DE',special,str),Vector2Converter().ConvertTo(None,Vector2(1e-30,3.40282347e38),str)]
+    if operation == "Design.Parse":
+        point=PointConverter().ConvertFrom(None,'2147483647, -2147483648');vector=Vector3Converter().ConvertFrom(None,'-0, 1e-30, 3.40282347E+38');german=Vector3Converter().ConvertFrom('de-DE','1,5; -2,25; 3,75');color=ColorConverter().ConvertFrom(None,'0,255,10,40')
+        return [point.X,point.Y,*hex_values(vector),*hex_values(german),*color]
+    if operation == "Design.Create":
+        value=Vector3Converter().CreateInstance({'X':1.0,'Y':2.0,'Z':3.0,'Extra':4.0});matrix=MatrixConverter().CreateInstance({name:float(index) for index,name in enumerate(Matrix._names,1)})
+        return [*value,matrix.M11,matrix.M24,matrix.M41,matrix.M44]
+    if operation == "Design.Descriptors":
+        result=[]
+        for name,value in _DESIGN_VALUES.items():
+            constructor,arguments=_DESIGN_CONVERTERS[name]().ConvertTo(None,value,tuple)
+            result.append([constructor.__name__,len(arguments),constructor(*arguments)==value])
+        return result
+    if operation == "Design.Fallback":
+        rectangle=Rectangle(1,2,3,4);matrix=Matrix.Identity
+        return [RectangleConverter().ConvertTo('de-DE',rectangle,str),MatrixConverter().ConvertTo('de-DE',matrix,str)]
+    if operation == "Design.Invalid":
+        failures=[]
+        for action in (lambda:Vector3Converter().ConvertFrom(None,'1,2'),lambda:Vector3Converter().ConvertFrom('de-DE','1.5;2.5;3.5'),lambda:ColorConverter().ConvertFrom(None,'256,0,0,0'),lambda:Vector3Converter().CreateInstance({'X':1.0,'Y':2.0})):
+            try:action()
+            except (TypeError,ValueError):failures.append(True)
+            else:failures.append(False)
+        return failures
     if operation == "Audio.EnumValues":
         return [[int(value) for value in enum] for enum in (
             AudioChannels, AudioStopOptions, SoundState, MicrophoneState)]
