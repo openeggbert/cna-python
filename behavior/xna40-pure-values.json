@@ -101,6 +101,16 @@
     {"id": "graphics.viewport.roundtrip.bits", "operation": "Graphics.ViewportRoundTrip", "args": [], "expected": ["3E800000", "BF000000", "3ECCCCCC"]},
     {"id": "graphics.presentation.defaults", "operation": "Graphics.PresentationDefaults", "args": [], "expected": [0, 0, 0, 0, 0, 0, 0, 0, 0, true, true]},
     {"id": "graphics.state.defaults", "operation": "Graphics.StateDefaults", "args": [], "expected": [0, 1, 0, true, true, 3, 2, 0, true, 0, 4, 0]},
-    {"id": "graphics.vertex.strides", "operation": "Graphics.VertexStrides", "args": [], "expected": [16, 24, 32, 20]}
+    {"id": "graphics.vertex.strides", "operation": "Graphics.VertexStrides", "args": [], "expected": [16, 24, 32, 20]},
+    {"id": "content.serializer.defaults", "operation": "Content.SerializerDefaults", "args": [], "expected": ["", false, false, true, false, "Item", false]},
+    {"id": "content.serializer.clone", "operation": "Content.SerializerClone", "args": [], "expected": ["Original", "Clone", "Entry", "Child", true]},
+    {"id": "content.root_directory", "operation": "Content.RootDirectory", "args": [], "expected": ["First", true, "Nested/Second", "Nested/Second"]},
+    {"id": "content.reader.primitives", "operation": "Content.ReaderPrimitives", "args": [], "expected": [true, 254, -2, -1234, -123456, 4000000000, -1234567890123, 1234567890123456789, 1.25, -2.5, "Ž", "xnb"]},
+    {"id": "content.reader.values", "operation": "Content.ReaderValues", "args": [], "expected": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10, 20, 30, 40]},
+    {"id": "content.cache.identity", "operation": "Content.CacheIdentity", "args": [], "expected": ["asset", true, "asset"]},
+    {"id": "content.reader.version", "operation": "Content.ReaderVersionFailure", "args": [], "expected": [true, true]},
+    {"id": "content.shared.fixup.order", "operation": "Content.SharedFixupOrder", "args": [], "expected": ["first:resource", "second:resource"]},
+    {"id": "content.external.normalization", "operation": "Content.ExternalNormalization", "args": [], "expected": ["external", true]},
+    {"id": "content.disposed.behavior", "operation": "Content.DisposedBehavior", "args": [], "expected": ["Content", true]}
   ]
 }

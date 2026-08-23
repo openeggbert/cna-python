@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from io import BytesIO
 import json
 import math
 from pathlib import Path
@@ -25,6 +26,11 @@ from Microsoft.Xna.Framework.Graphics import (  # noqa: E402
     VertexPositionTexture, Viewport,
 )
 from Microsoft.Xna.Framework._numeric import f32  # noqa: E402
+from Microsoft.Xna.Framework.Content import (  # noqa: E402
+    ContentLoadException, ContentManager, ContentReader, ContentSerializerAttribute,
+    ContentTypeReaderOfT, ResourceContentManager,
+)
+from Microsoft.Xna.Framework.Content._content import _register_content_type_reader  # noqa: E402
 
 
 def vector2(value): return Vector2(*value)
@@ -37,7 +43,84 @@ def hex_values(value): return [hex32(component) for component in value]
 def float_from_bits(value): return struct.unpack('=f', struct.pack('=I', value))[0]
 
 
+def seven(value: int) -> bytes:
+    result = bytearray()
+    while value >= 0x80:
+        result.append((value & 0x7f) | 0x80); value >>= 7
+    result.append(value)
+    return bytes(result)
+
+
+def binary_string(value: str) -> bytes:
+    encoded = value.encode("utf-8"); return seven(len(encoded)) + encoded
+
+
+def content_xnb(readers, body: bytes, shared: int = 0) -> bytes:
+    payload = bytearray(seven(len(readers)))
+    for reader, version in readers:
+        payload.extend(binary_string(reader)); payload.extend(struct.pack("<i", version))
+    payload.extend(seven(shared)); payload.extend(body)
+    return b"XNBw\x05\x00" + struct.pack("<I", len(payload) + 10) + payload
+
+
+_STRING_READER = "Microsoft.Xna.Framework.Content.StringReader"
+
+
+class _CorpusShared:
+    def __init__(self): self.values = []
+
+
+class _CorpusSharedReader(ContentTypeReaderOfT[_CorpusShared]):
+    def Read(self, input, existingInstance):
+        result = _CorpusShared()
+        input.ReadSharedResource(lambda value: result.values.append("first:" + value))
+        input.ReadSharedResource(lambda value: result.values.append("second:" + value))
+        return result
+
+
+class _CorpusExternalReader(ContentTypeReaderOfT[_CorpusShared]):
+    def Read(self, input, existingInstance):
+        result = _CorpusShared(); result.values.append(input.ReadExternalReference()); return result
+
+
 def observe(operation: str, args: list[object]) -> object:
+    if operation == "Content.SerializerDefaults":
+        value=ContentSerializerAttribute()
+        return [value.ElementName,value.FlattenContent,value.Optional,value.AllowNull,value.SharedResource,value.CollectionItemName,value.HasCollectionItemName]
+    if operation == "Content.SerializerClone":
+        value=ContentSerializerAttribute();value.ElementName="Original";value.CollectionItemName="Entry";clone=value.Clone();clone.ElementName="Clone";clone.CollectionItemName="Child"
+        return [value.ElementName,clone.ElementName,value.CollectionItemName,clone.CollectionItemName,value is not clone]
+    if operation == "Content.RootDirectory":
+        service=object();value=ContentManager(service,"First");before=[value.RootDirectory,value.ServiceProvider is service];value.RootDirectory="Nested/Second";before.append(value.RootDirectory);value.Dispose();before.append(value.RootDirectory);return before
+    if operation == "Content.ReaderPrimitives":
+        data=(b"\x01\xfe"+struct.pack("<bhiIqQfd",-2,-1234,-123456,4000000000,-1234567890123,1234567890123456789,1.25,-2.5)+"Ž".encode("utf-8")+binary_string("xnb"))
+        reader=ContentReader._create(ContentManager(object()),data,"primitive",None)
+        return [reader.ReadBoolean(),reader.ReadByte(),reader.ReadSByte(),reader.ReadInt16(),reader.ReadInt32(),reader.ReadUInt32(),reader.ReadInt64(),reader.ReadUInt64(),reader.ReadSingle(),reader.ReadDouble(),reader.ReadChar(),reader.ReadString()]
+    if operation == "Content.ReaderValues":
+        reader=ContentReader._create(ContentManager(object()),struct.pack("<9f4B",1,2,3,4,5,6,7,8,9,10,20,30,40),"values",None)
+        return [*reader.ReadVector2(),*reader.ReadVector3(),*reader.ReadQuaternion(),*reader.ReadColor()]
+    if operation == "Content.CacheIdentity":
+        asset=content_xnb([(_STRING_READER,0)],seven(1)+binary_string("asset"));manager=ResourceContentManager(object(),{"name":asset});first=manager.Load("name");second=manager.Load("NAME");manager.Unload();third=manager.Load("name");manager.Dispose();return [first,first is second,third]
+    if operation == "Content.ReaderVersionFailure":
+        asset=content_xnb([(_STRING_READER,1)],seven(1)+binary_string("bad"));manager=ResourceContentManager(object(),{"bad":asset})
+        try: manager.Load("bad")
+        except ContentLoadException as error: return ["version mismatch" in str(error),manager._loaded_assets=={}]
+        return [False,False]
+    if operation == "Content.SharedFixupOrder":
+        identity="CnaPython.Corpus.SharedReader";unregister=_register_content_type_reader(identity,_CorpusSharedReader)
+        try:
+            body=seven(1)+seven(1)+seven(1)+seven(2)+binary_string("resource");asset=content_xnb([(identity,0),(_STRING_READER,0)],body,1);manager=ResourceContentManager(object(),{"shared":asset});return manager.Load("shared").values
+        finally: unregister()
+    if operation == "Content.ExternalNormalization":
+        identity="CnaPython.Corpus.ExternalReader";unregister=_register_content_type_reader(identity,_CorpusExternalReader)
+        try:
+            parent=content_xnb([(identity,0)],seven(1)+binary_string("../target"));target=content_xnb([(_STRING_READER,0)],seven(1)+binary_string("external"));manager=ResourceContentManager(object(),{"folder/nested/root":parent,"folder/target":target});value=manager.Load("folder/nested/root");return [value.values[0],value.values[0] is manager.Load("folder/target")]
+        finally: unregister()
+    if operation == "Content.DisposedBehavior":
+        value=ContentManager(object(),"Content");value.Dispose()
+        try: value.Load("asset")
+        except RuntimeError as error: return [value.RootDirectory,"disposed" in str(error)]
+        return [value.RootDirectory,False]
     if operation == "Graphics.SurfaceFormatValues":
         return [int(value) for value in SurfaceFormat]
     if operation == "Graphics.ViewportProject":

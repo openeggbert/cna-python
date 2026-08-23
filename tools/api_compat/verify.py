@@ -48,6 +48,21 @@ STUB_PATHS = {
     for package in PACKAGES
 }
 
+_RULE_DATA = json.loads(RULES.read_text())
+_TYPE_NAMES: dict[str, str] = _RULE_DATA.get("typeNames", {})
+_TYPE_MAPPINGS: dict[str, str] = _RULE_DATA.get("typeMappings", {})
+
+
+def projected_type_name(identity: str) -> str:
+    return _TYPE_NAMES.get(identity, identity.rsplit(".", 1)[-1].split("`", 1)[0])
+
+
+def projected_type_identity(package: str, python_name: str) -> str:
+    for identity, mapped in _TYPE_NAMES.items():
+        if identity.rsplit(".", 1)[0] == package and mapped == python_name:
+            return identity
+    return f"{package}.{python_name}"
+
 
 @dataclass(frozen=True)
 class StubParameter:
@@ -213,6 +228,12 @@ def parse_stubs() -> tuple[dict[str, StubType], dict[str, TypeVarDeclaration]]:
             if not isinstance(node, ast.ClassDef) or node.name.startswith("_"):
                 continue
             declaration = StubType(node.name, tuple(_annotation(base) for base in node.bases))
+            class_typevars: set[str] = set()
+            for base in declaration.bases:
+                if base.startswith("Generic[") and base.endswith("]"):
+                    class_typevars.update(
+                        value.strip() for value in base[len("Generic["):-1].split(",")
+                    )
             for member in node.body:
                 if isinstance(member, ast.AnnAssign) and isinstance(member.target, ast.Name):
                     annotation, static, readonly = _unwrap_annotation(_annotation(member.annotation))
@@ -247,10 +268,13 @@ def parse_stubs() -> tuple[dict[str, StubType], dict[str, TypeVarDeclaration]]:
                 callable_value = StubCallable(
                     callable_value.name, callable_value.parameters, callable_value.return_type,
                     callable_value.shape, callable_value.overload,
-                    _typevars_in(callable_value, typevars),
+                    tuple(
+                        value for value in _typevars_in(callable_value, typevars)
+                        if value not in class_typevars
+                    ),
                 )
                 declaration.callables.setdefault(member.name, []).append(callable_value)
-            result[f"{package}.{node.name}"] = declaration
+            result[projected_type_identity(package, node.name)] = declaration
     return result, typevars
 
 
@@ -302,6 +326,11 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
     if value.startswith("!!"):
         index = int(value[2:])
         return typevars[index] if index < len(typevars) else f"T{index}"
+    if value.startswith("!"):
+        index = int(value[1:])
+        return "T" if index == 0 else f"T{index}"
+    if value in _TYPE_MAPPINGS:
+        return _TYPE_MAPPINGS[value]
     if value in _PRIMITIVES:
         return _PRIMITIVES[value]
     generic = _split_generic(value)
@@ -322,8 +351,8 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
             return f"MutableSequence[{mapped[0]}]"
         if owner.startswith("System.Collections.Generic.List`1"):
             return f"list[{mapped[0]}]"
-        return f"{owner.rsplit('.', 1)[-1].split('`', 1)[0]}[{', '.join(mapped)}]"
-    return value.rsplit(".", 1)[-1].replace("+", ".").split("`", 1)[0]
+        return f"{projected_type_name(owner)}[{', '.join(mapped)}]"
+    return projected_type_name(value).replace("+", ".")
 
 
 def _projected_generic_name(value: dict[str, Any]) -> str:
@@ -425,7 +454,7 @@ def target_types() -> tuple[dict[str, type], list[dict[str, str]]]:
             value = getattr(package, name)
             if not isinstance(value, type):
                 continue
-            identity = f"{package_name}.{name}"
+            identity = projected_type_identity(package_name, name)
             previous = seen_objects.get(id(value))
             if previous is not None and previous != identity:
                 diagnostics.append({"category": "UNEXPECTED_TYPE", "type": identity,
@@ -772,10 +801,41 @@ def verify() -> dict[str, Any]:
         if base_name and base_name.startswith("Microsoft.Xna.Framework") and base_name in targets:
             if targets[base_name] not in target.__bases__:
                 add(diagnostics, "BASE_MAPPING_MISMATCH", identity, f"expected direct base {base_name}")
-            stub_base = base_name.rsplit(".", 1)[-1]
+            stub_base = projected_type_name(base_name)
             if stub_base not in stub.bases:
                 add(diagnostics, "BASE_MAPPING_MISMATCH", identity,
                     f"stub bases {stub.bases}, expected mapped base {stub_base}")
+        elif base_name in rules.get("baseMappings", {}):
+            base_mapping = rules["baseMappings"][base_name]
+            if base_mapping.startswith("composition:"):
+                implementation_base = base_mapping.split(":", 1)[1]
+                if not any(value.__name__ == implementation_base for value in target.__bases__):
+                    add(diagnostics, "BASE_MAPPING_MISMATCH", identity,
+                        f"{base_name} must use the measured {base_mapping} relation")
+                if implementation_base in stub.bases:
+                    add(diagnostics, "INTERNAL_TYPE_LEAK", identity,
+                        f"stub exposes composition base {implementation_base}")
+            elif base_mapping == "object":
+                if object not in target.__bases__ or stub.bases:
+                    add(diagnostics, "BASE_MAPPING_MISMATCH", identity,
+                        f"{base_name} must map to an implicit Python object base")
+            else:
+                add(diagnostics, "UNMEASURED_STRUCTURAL_CATEGORY", identity,
+                    f"unknown formal base mapping {base_name} -> {base_mapping}")
+
+        generic_parameters = tuple(
+            _projected_generic_name(value) for value in expected.get("genericParameters", ())
+        )
+        if generic_parameters:
+            wanted_generic = f"Generic[{', '.join(generic_parameters)}]"
+            runtime_generic = tuple(
+                getattr(value, "__name__", str(value))
+                for value in getattr(target, "__parameters__", ())
+            )
+            if runtime_generic != generic_parameters or wanted_generic not in stub.bases:
+                add(diagnostics, "GENERIC_MAPPING_MISMATCH", identity,
+                    f"class generics runtime={runtime_generic}, stub bases={stub.bases}, "
+                    f"expected {generic_parameters}")
 
         grouped: dict[str, list[dict[str, Any]]] = {}
         expected_public_names: set[str] = set()

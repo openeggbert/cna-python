@@ -1,6 +1,6 @@
 # Missing XNA type inventory
 
-Missing types: **142**.
+Missing types: **131**.
 
 ## Microsoft.Xna.Framework
 
@@ -11,7 +11,6 @@ Missing types: **142**.
 - `CurveLoopType`
 - `CurveTangent`
 - `FrameworkDispatcher`
-- `TitleContainer`
 
 ## Microsoft.Xna.Framework.Audio
 
@@ -34,19 +33,6 @@ Missing types: **142**.
 - `SoundEffectInstance`
 - `SoundState`
 - `WaveBank`
-
-## Microsoft.Xna.Framework.Content
-
-- `ContentReader`
-- `ContentSerializerAttribute`
-- `ContentSerializerCollectionItemNameAttribute`
-- `ContentSerializerIgnoreAttribute`
-- `ContentSerializerRuntimeTypeAttribute`
-- `ContentSerializerTypeVersionAttribute`
-- `ContentTypeReader`
-- `ContentTypeReaderManager`
-- `ContentTypeReader`1`
-- `ResourceContentManager`
 
 ## Microsoft.Xna.Framework.Design
 

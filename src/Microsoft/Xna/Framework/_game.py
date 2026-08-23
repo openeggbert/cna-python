@@ -189,6 +189,8 @@ class _NativeGameHost:
         output = c.c_uint64()
         self.library.check(self.library.cna_game_create(c.byref(info), c.byref(output)), "cna_game_create")
         self.handle = int(output.value)
+        from ._title import _configure_native_title_root
+        _configure_native_title_root(self)
         self.library.check(self.library.cna_game_set_frame_hooks_ext(self.handle, c.byref(self._hooks)),
                            "cna_game_set_frame_hooks_ext")
         self.library.check(

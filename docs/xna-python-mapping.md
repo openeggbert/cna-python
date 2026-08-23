@@ -45,6 +45,14 @@ Python keywords receive a trailing underscore. This is the only routine public
 identifier rewrite: CLR `None` becomes `None_`. The verifier records this as a
 language rule, not an allowlist entry.
 
+The one selected CLR/Python generic-name collision has an explicit machine-readable
+rewrite: CLR `ContentTypeReader<T>` is exported as `ContentTypeReaderOfT[T]`, while
+the non-generic CLR `ContentTypeReader` keeps the unsuffixed name. This preserves two
+distinct public runtime identities without inventing a constructor or using a
+runtime alias. A concrete Python subclass declares
+`ContentTypeReaderOfT[ConcreteTarget]`; the base recovers that target deterministically.
+An unresolved `TypeVar` fails construction instead of guessing a target type.
+
 The public packages export only XNA identities. ctypes types, opaque handles,
 private helpers, filesystem paths, and CNA implementation types are forbidden.
 
@@ -146,6 +154,37 @@ writers require `write(bytes)`. The binding neither closes a caller-owned
 stream nor seeks without the selected overload's contract. Byte buffers accept
 bytes-like inputs for immutable native copies and mutable buffers/sequences for
 outputs. Native pointers never escape.
+
+`ContentReader` uses private composition/inheritance with `_BinaryReader` for the
+selected `System.IO.BinaryReader` behavior. `_BinaryReader` is not a public CLR/XNA
+projection and never appears in stubs. The verifier encodes this as the formal
+`composition:_BinaryReader` base relation. CLR attribute bases map to ordinary
+Python `object`; no synthetic public `System.Attribute` package is created.
+
+`System.Resources.ResourceManager` maps to `object` at the strict constructor
+boundary. `ResourceContentManager` accepts either a `Mapping[str, bytes | BinaryIO]`
+or an object with `GetObject(str)`/`get_object(str)`. Byte values are copied into a
+manager-owned `BytesIO`. Stream values are read into a manager-owned snapshot and
+are not closed by the binding. Missing/`None` values become `ContentLoadException`.
+No `System.Resources` package or XNA support type is projected.
+
+`TitleContainer.OpenStream` is title-root relative and returns a fresh caller-owned
+binary stream. The private `CNA_TITLE_ROOT` configuration must be absolute; otherwise
+the title root is the application module directory (with deterministic embedded
+Python fallbacks), never the process working directory. Relative `.`/`..` and mixed
+separators are normalized, but absolute paths, drive paths, NULs, lexical escapes,
+and symlink escapes are rejected. During a running `Game`, the same root is configured
+through CNA's ABI-0.7 title-location route and bytes are read through CNA title storage.
+
+`ContentManager.Load[T]` returns the object selected by the XNB root reader. Python
+cannot recover the caller's erased method-level `T`, so caller-requested wrong-type
+checking is a `LANGUAGE_MAPPING_LIMITATION`; reader-table identity, reader-declared
+target shape, and all binary structure remain validated. Similarly,
+`ContentReader.ReadRawObject[T]()` and its no-reader existing-instance overload raise
+`NotImplementedError` when no current explicit reader token exists. Overloads with a
+`ContentTypeReader`, and object reads carrying a stream reader index, remain fully
+operational. This limitation does not permit inference from assignment context,
+caller bytecode, asset names, or Python locals.
 
 ## Events and callbacks
 

@@ -90,6 +90,17 @@ def main() -> int:
             "BACKEND_BLOCKED": "yes" if any(value in blockers for value in ("BACKEND_BLOCKED", "HARDWARE_PENDING")) else "no",
             "QUALIFICATION": blockers,
         })
+    # The source report was the pre-Milestone-3 worktree report. Once that
+    # milestone is committed, HEAD quite correctly contains no matching
+    # missing-member diagnostics. Preserve the committed historical baseline
+    # in that case so this generator remains reproducible in later milestones.
+    if not rows:
+        historical = json.loads(subprocess.run(
+            ["git", "show", "HEAD:docs/generated/milestone3-dependency-matrix.json"],
+            cwd=ROOT, text=True, capture_output=True, check=True).stdout)
+        rows = historical.get("rows", [])
+    if not rows:
+        raise RuntimeError("Milestone-3 dependency baseline contains no rows")
     JSON_OUTPUT.write_text(json.dumps({"schemaVersion": 1, "baselineRows": len(rows), "rows": rows}, indent=2) + "\n")
     headers = list(rows[0])
     lines = ["# Foundation Milestone 3 dependency matrix", "",

@@ -321,6 +321,17 @@ class VertexBuffer(GraphicsResource):
         if offset == 0: result = getattr(library, operation)(self._require_handle(), native, len(payload), count, stride)
         else: result = getattr(library, operation)(self._require_handle(), offset, native, len(payload), count, stride)
         library.check(result, operation)
+    def _set_raw_bytes(self, payload: bytes) -> None:
+        """Upload one complete XNB vertex payload without inventing a public byte overload."""
+        if not isinstance(payload, bytes): raise TypeError("payload must be bytes")
+        stride = self._declaration.VertexStride
+        expected = self._vertex_count * stride
+        if len(payload) != expected: raise ValueError(f"vertex payload has {len(payload)} bytes; expected {expected}")
+        native = (c.c_uint8 * len(payload)).from_buffer_copy(payload)
+        library = get_library()
+        library.check(library.cna_vertex_buffer_set_data_raw(
+            self._require_handle(), native, len(payload), self._vertex_count, stride),
+            "cna_vertex_buffer_set_data_raw")
     def GetData(self, *args: object) -> None:
         data, start, count, offset, stride, _, _ = self._transfer(args, read=True)
         if not isinstance(data, MutableSequence): raise TypeError("GetData destination must be mutable")
@@ -415,6 +426,14 @@ class IndexBuffer(GraphicsResource):
         if offset == 0: result = getattr(library, operation)(self._require_handle(), c.byref(transfer), native, len(native))
         else: result = getattr(library, operation)(self._require_handle(), offset, c.byref(transfer), native, len(native))
         library.check(result, operation)
+    def _set_raw_bytes(self, payload: bytes) -> None:
+        """Upload one complete XNB index payload through the ordinary typed ABI route."""
+        if not isinstance(payload, bytes): raise TypeError("payload must be bytes")
+        width = 2 if self._element_size == IndexElementSize.SixteenBits else 4
+        expected = self._index_count * width
+        if len(payload) != expected: raise ValueError(f"index payload has {len(payload)} bytes; expected {expected}")
+        format_ = "<" + ("H" if width == 2 else "I") * self._index_count
+        self.SetData(struct.unpack(format_, payload))
     def GetData(self, *args: object) -> None:
         data, start, _, offset, native, transfer = self._transfer(args)
         if not isinstance(data, MutableSequence): raise TypeError("GetData destination must be mutable")

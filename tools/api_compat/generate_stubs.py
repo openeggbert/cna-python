@@ -18,6 +18,7 @@ from verify import (  # noqa: E402
     STUB_PATHS,
     expected_callables,
     mapped_type,
+    projected_type_name,
     projected_name,
     raw_member,
     target_types,
@@ -50,7 +51,7 @@ HEADERS = {
         "from .. import PlayerIndex, Vector2",
     ],
     "Microsoft.Xna.Framework.Content": [
-        "from typing import Any, Final, TypeVar, overload",
+        "from typing import Any, BinaryIO, Callable, Final, Generic, TypeVar, overload",
         "from .._language import Event",
         "",
         "T = TypeVar(\"T\")",
@@ -88,12 +89,17 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
     if expected["kind"] == "enum":
         bases = "IntFlag" if expected.get("flags") else "IntEnum"
     elif expected.get("baseType") in targets:
-        bases = expected["baseType"].rsplit(".", 1)[-1]
+        bases = projected_type_name(expected["baseType"])
     elif expected.get("baseType") == "System.Exception":
         bases = "Exception"
     else:
         bases = ""
-    heading = f"class {identity.rsplit('.', 1)[-1]}" + (f"({bases})" if bases else "") + ":"
+    type_name = projected_type_name(identity)
+    generic_names = tuple(value["name"] for value in expected.get("genericParameters", ()))
+    base_items = [bases] if bases else []
+    if generic_names:
+        base_items.append(f"Generic[{', '.join(generic_names)}]")
+    heading = f"class {type_name}" + (f"({', '.join(base_items)})" if base_items else "") + ":"
     lines = [heading]
     grouped: dict[str, list[dict]] = {}
     for member in expected["members"]:
@@ -154,14 +160,14 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
             lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
     if "System.IDisposable" in expected.get("directInterfaces", ()):
         if raw_member(target, "__enter__") is not None:
-            lines.append(f"    def __enter__(self) -> {identity.rsplit('.', 1)[-1]}: ...")
+            lines.append(f"    def __enter__(self) -> {type_name}: ...")
         if raw_member(target, "__exit__") is not None:
             lines.append("    def __exit__(self, exc_type: object, exc: object, traceback: object) -> None: ...")
     if expected["kind"] == "struct":
         if raw_member(target, "__copy__") is not None:
-            lines.append(f"    def __copy__(self) -> {identity.rsplit('.', 1)[-1]}: ...")
+            lines.append(f"    def __copy__(self) -> {type_name}: ...")
         if raw_member(target, "__deepcopy__") is not None:
-            lines.append(f"    def __deepcopy__(self, memo: object) -> {identity.rsplit('.', 1)[-1]}: ...")
+            lines.append(f"    def __deepcopy__(self, memo: object) -> {type_name}: ...")
     if len(lines) == 1 and not emitted:
         lines.append("    ...")
     return lines

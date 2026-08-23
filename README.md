@@ -12,22 +12,26 @@ Python game
     -> CNA C++
 ```
 
-The dependency-complete foundation now includes core math/value and geometry,
-non-touch input, the `Game` component/service/window object model, graphics
-adapter and presentation types, device states and collections, textures and
-PNG/JPEG encoding, explicit vertex codecs and vertex/index buffers, 2D render
-targets, native draw/reset/present routes, and SpriteFont metrics/DrawString.
-The maintained sibling starter still stays deliberately small and completes
-60- and 600-frame installed-wheel runs with a moving 128x128 PNG.
+The dependency-complete foundation includes core math/value and geometry,
+non-touch input, the Game component/service/window object model, selected 2D
+graphics device/state/resources, Texture2D, buffers, render targets,
+SpriteBatch, SpriteFont, and a genuine managed Content/XNB object-graph reader.
+Content supports exact reader tables and versions, custom readers, existing
+instances, deferred shared resources, external references, cache/Unload/
+rollback ownership, native Texture2D/SpriteFont/buffer graphs, and persistent
+multi-frame LZX decompression. See
+[`docs/content-xnb.md`](docs/content-xnb.md).
 
-This is not a complete XNA binding. The strict verifier exposes 115 of 257
-reference types; 114 are locally zero-diagnostic. Its full check intentionally
-remains red for 142 missing types and the two intentionally deferred
-`ContentManager` members, `OpenStream` and `ReadAsset`. Every structural
-mismatch, native leak, allowlist, and unmeasured-category counter is zero.
-Full Content/XNB, effects/models, audio, media, storage, touch, Texture3D/Cube,
-and broad 3D content remain future dependency-complete milestones. No native
-library is bundled in the wheel.
+The maintained sibling starter completes 60- and 600-frame installed-wheel
+runs with both a raw PNG and a legal synthetic Texture2D XNB.
+
+This is not a complete XNA binding. The strict verifier exposes 126 of 257
+reference types, all locally zero-diagnostic. Its full check intentionally
+remains red for 131 wholly missing future types; missing members and partial
+types are zero. Every structural mismatch, native leak, allowlist, and
+unmeasured-category counter is zero. Effects/models, audio, media, storage,
+touch, Texture3D/Cube, and broad 3D content remain future dependency-complete
+milestones. No native library is bundled in the wheel.
 
 ## Running
 
@@ -47,7 +51,7 @@ API is imported.
 
 | Platform/backend | Evidence |
 | --- | --- |
-| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, 2D/device/resource command paths, ownership stress, and 60/600 frames verified |
+| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Content/native resource graphs, ownership stress, and raw-PNG plus XNB 60/600 frames verified |
 | Linux windowed/GPU renderer | Not yet verified |
 | Windows | Not yet verified |
 | macOS | Not yet verified |

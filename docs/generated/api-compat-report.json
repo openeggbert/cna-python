@@ -5,11 +5,11 @@
     "REFERENCE_MEMBERS": 2964,
     "EXPECTED_PYTHON_TYPES": 257,
     "EXPECTED_PYTHON_MEMBERS": 2887,
-    "TARGET_TYPES": 115,
-    "TARGET_MEMBERS": 1465,
-    "TOTAL_DIAGNOSTICS": 144,
-    "MISSING_TYPE": 142,
-    "MISSING_MEMBER": 2,
+    "TARGET_TYPES": 126,
+    "TARGET_MEMBERS": 1501,
+    "TOTAL_DIAGNOSTICS": 131,
+    "MISSING_TYPE": 131,
+    "MISSING_MEMBER": 0,
     "UNEXPECTED_TYPE": 0,
     "UNEXPECTED_MEMBER": 0,
     "TYPE_KIND_MISMATCH": 0,
@@ -34,16 +34,6 @@
     "UNMEASURED_STRUCTURAL_CATEGORY": 0
   },
   "diagnostics": [
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Content.ContentManager",
-      "detail": "OpenStream(System.String)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Content.ContentManager",
-      "detail": "ReadAsset(System.String,System.Action`1[System.IDisposable])"
-    },
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Audio.AudioCategory",
@@ -137,56 +127,6 @@
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Audio.WaveBank",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentReader",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentSerializerAttribute",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentSerializerCollectionItemNameAttribute",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentSerializerIgnoreAttribute",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentSerializerRuntimeTypeAttribute",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentSerializerTypeVersionAttribute",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentTypeReader",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentTypeReaderManager",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ContentTypeReader`1",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Content.ResourceContentManager",
       "detail": "type is not exported"
     },
     {
@@ -748,11 +688,6 @@
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException",
       "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.TitleContainer",
-      "detail": "type is not exported"
     }
   ],
   "zeroDiagnosticTypes": [
@@ -762,6 +697,17 @@
     "Microsoft.Xna.Framework.Color",
     "Microsoft.Xna.Framework.ContainmentType",
     "Microsoft.Xna.Framework.Content.ContentLoadException",
+    "Microsoft.Xna.Framework.Content.ContentManager",
+    "Microsoft.Xna.Framework.Content.ContentReader",
+    "Microsoft.Xna.Framework.Content.ContentSerializerAttribute",
+    "Microsoft.Xna.Framework.Content.ContentSerializerCollectionItemNameAttribute",
+    "Microsoft.Xna.Framework.Content.ContentSerializerIgnoreAttribute",
+    "Microsoft.Xna.Framework.Content.ContentSerializerRuntimeTypeAttribute",
+    "Microsoft.Xna.Framework.Content.ContentSerializerTypeVersionAttribute",
+    "Microsoft.Xna.Framework.Content.ContentTypeReader",
+    "Microsoft.Xna.Framework.Content.ContentTypeReaderManager",
+    "Microsoft.Xna.Framework.Content.ContentTypeReader`1",
+    "Microsoft.Xna.Framework.Content.ResourceContentManager",
     "Microsoft.Xna.Framework.DisplayOrientation",
     "Microsoft.Xna.Framework.DrawableGameComponent",
     "Microsoft.Xna.Framework.Game",
@@ -867,6 +813,7 @@
     "Microsoft.Xna.Framework.Quaternion",
     "Microsoft.Xna.Framework.Ray",
     "Microsoft.Xna.Framework.Rectangle",
+    "Microsoft.Xna.Framework.TitleContainer",
     "Microsoft.Xna.Framework.Vector2",
     "Microsoft.Xna.Framework.Vector3",
     "Microsoft.Xna.Framework.Vector4"
@@ -999,58 +946,58 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentManager",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentReader",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentSerializerAttribute",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentSerializerCollectionItemNameAttribute",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentSerializerIgnoreAttribute",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentSerializerRuntimeTypeAttribute",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentSerializerTypeVersionAttribute",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentTypeReader",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentTypeReaderManager",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentTypeReader`1",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ResourceContentManager",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Curve",
@@ -2139,8 +2086,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.TitleContainer",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Vector2",
@@ -2161,7 +2108,7 @@
   "familyScoreboard": {
     "Microsoft.Xna.Framework": {
       "types": 42,
-      "diagnostics": 8
+      "diagnostics": 7
     },
     "Microsoft.Xna.Framework.Audio": {
       "types": 19,
@@ -2169,7 +2116,7 @@
     },
     "Microsoft.Xna.Framework.Content": {
       "types": 12,
-      "diagnostics": 12
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Design": {
       "types": 13,

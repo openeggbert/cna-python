@@ -1,6 +1,6 @@
 {
   "profile": "XNA 4.0 Windows runtime",
-  "missingTypeCount": 142,
+  "missingTypeCount": 131,
   "types": [
     "Microsoft.Xna.Framework.Audio.AudioCategory",
     "Microsoft.Xna.Framework.Audio.AudioChannels",
@@ -21,16 +21,6 @@
     "Microsoft.Xna.Framework.Audio.SoundEffectInstance",
     "Microsoft.Xna.Framework.Audio.SoundState",
     "Microsoft.Xna.Framework.Audio.WaveBank",
-    "Microsoft.Xna.Framework.Content.ContentReader",
-    "Microsoft.Xna.Framework.Content.ContentSerializerAttribute",
-    "Microsoft.Xna.Framework.Content.ContentSerializerCollectionItemNameAttribute",
-    "Microsoft.Xna.Framework.Content.ContentSerializerIgnoreAttribute",
-    "Microsoft.Xna.Framework.Content.ContentSerializerRuntimeTypeAttribute",
-    "Microsoft.Xna.Framework.Content.ContentSerializerTypeVersionAttribute",
-    "Microsoft.Xna.Framework.Content.ContentTypeReader",
-    "Microsoft.Xna.Framework.Content.ContentTypeReaderManager",
-    "Microsoft.Xna.Framework.Content.ContentTypeReader`1",
-    "Microsoft.Xna.Framework.Content.ResourceContentManager",
     "Microsoft.Xna.Framework.Curve",
     "Microsoft.Xna.Framework.CurveContinuity",
     "Microsoft.Xna.Framework.CurveKey",
@@ -142,7 +132,6 @@
     "Microsoft.Xna.Framework.Media.VisualizationData",
     "Microsoft.Xna.Framework.Storage.StorageContainer",
     "Microsoft.Xna.Framework.Storage.StorageDevice",
-    "Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException",
-    "Microsoft.Xna.Framework.TitleContainer"
+    "Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException"
   ]
 }

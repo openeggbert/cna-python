@@ -16,3 +16,8 @@ def current_game() -> object:
     if game is None:
         raise RuntimeError("input polling requires an active CNA Game.Run owner thread")
     return game
+
+
+def try_current_game() -> object | None:
+    """Returns the owner-thread Game when one is active, otherwise ``None``."""
+    return getattr(_state, "game", None)

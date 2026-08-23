@@ -5,7 +5,7 @@
   "statuses": [
     "VERIFIED_MANAGED", "VERIFIED_NATIVE", "UPSTREAM_CNA_BLOCKED",
     "BACKEND_BLOCKED", "PLATFORM_PENDING", "FIXTURE_PENDING",
-    "HARDWARE_PENDING", "UNIMPLEMENTED_CNA_PYTHON"
+    "HARDWARE_PENDING", "UNIMPLEMENTED_CNA_PYTHON", "LANGUAGE_MAPPING_LIMITATION"
   ],
   "operations": [
     {"operation": "Game.Components/services/traversal", "status": "VERIFIED_MANAGED", "evidence": "tests.test_game_graphics_foundation.GameObjectModelTests", "notes": "Per-Game services and snapshot traversal with stable ordering."},
@@ -37,8 +37,12 @@
     {"operation": "GraphicsDevice.DeviceLost", "status": "BACKEND_BLOCKED", "evidence": "event subscription exists", "notes": "HEADLESS has no deterministic device-loss transition and none is fabricated."},
     {"operation": "GraphicsDeviceManager lifecycle/preparing settings", "status": "VERIFIED_NATIVE", "evidence": "runtime_graphics_manager.h routes", "notes": "Mutable preparation callback writes validated settings back to CNA."},
     {"operation": "SpriteFont metrics and DrawString", "status": "VERIFIED_NATIVE", "evidence": "sprite_font.h plus SpriteBatch glyph submissions", "notes": "Private glyph factory is used until Content/XNB can construct public assets."},
-    {"operation": "SpriteFont public Content loading", "status": "FIXTURE_PENDING", "evidence": "Content/XNB intentionally deferred", "notes": "Synthetic legal atlas/metrics validate the runtime graph."},
-    {"operation": "ContentManager.OpenStream", "status": "UNIMPLEMENTED_CNA_PYTHON", "evidence": "No formal title-content path mapping selected", "notes": "Arbitrary process-CWD semantics are not substituted."},
-    {"operation": "ContentManager.ReadAsset/XNB", "status": "UNIMPLEMENTED_CNA_PYTHON", "evidence": "Foundation Milestone 3 scope", "notes": "Full XNB, readers, and LZX were not started."}
+    {"operation": "SpriteFont public Content loading", "status": "VERIFIED_NATIVE", "evidence": "SpriteFontReader graph; tests.test_content_native.NativeContentTests", "notes": "Real reader-table graph constructs the existing native SpriteFont, verifies metrics/DrawString, cache identity, and reverse atlas ownership."},
+    {"operation": "ContentManager.OpenStream / TitleContainer.OpenStream", "status": "VERIFIED_NATIVE", "evidence": "cna_title_location_set_path_ext; cna_title_container_read_ext; managed path suite", "notes": "Deterministic application title root with lexical and symlink escape rejection; no process-CWD fallback."},
+    {"operation": "ContentManager.ReadAsset/XNB", "status": "VERIFIED_NATIVE", "evidence": "managed ContentReader suite plus native Texture2D/SpriteFont/buffer graphs", "notes": "Header, exact reader resolver, versions, custom readers, shared fixups, external references, cache, rollback, and reverse disposal are exercised."},
+    {"operation": "XNB LZX framing and decoder", "status": "VERIFIED_MANAGED", "evidence": "single/multi-frame synthetic suite and independent MonoGame fixture comparison", "notes": "Persistent 64 KiB state, short/extended framing, exact declared output, malformed boundaries, and compressed resource graphs."},
+    {"operation": "ResourceContentManager", "status": "VERIFIED_MANAGED", "evidence": "Mapping/GetObject adapter and stream ownership tests", "notes": "No public System.Resources support package is introduced."},
+    {"operation": "Content Load[T] caller type enforcement", "status": "LANGUAGE_MAPPING_LIMITATION", "evidence": "docs/xna-python-mapping.md generic-erasure rule", "notes": "The root reader determines runtime shape; Python cannot recover erased caller T, while reader-declared target shape remains validated."},
+    {"operation": "ContentReader.ReadRawObject[T] without reader token", "status": "LANGUAGE_MAPPING_LIMITATION", "evidence": "tests.test_content.ContentTests", "notes": "No assignment-context, caller-bytecode, asset-name, or locals inference; explicit-reader overloads are functional."}
   ]
 }

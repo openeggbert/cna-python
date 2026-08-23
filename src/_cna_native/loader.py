@@ -40,6 +40,8 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_game_launch_parameters_copy_key", c.c_uint32, [c.c_uint64, c.c_uint64, c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     ("cna_game_launch_parameters_add", c.c_uint32, [c.c_uint64, abi.CNA_StringView, abi.CNA_StringView], "borrowed game"),
     ("cna_game_set_window_title", c.c_uint32, [c.c_uint64, abi.CNA_StringView], "borrowed game"),
+    ("cna_title_location_set_path_ext", c.c_uint32, [c.c_uint64, abi.CNA_StringView], "borrowed game; process-wide title path"),
+    ("cna_title_container_read_ext", c.c_uint32, [c.c_uint64, abi.CNA_StringView, c.POINTER(c.c_uint8), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     ("cna_game_window_get_allow_user_resizing", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)], "caller output"),
     ("cna_game_window_set_allow_user_resizing", c.c_uint32, [c.c_uint64, c.c_uint8], "borrowed game"),
     ("cna_game_window_get_client_bounds", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Rectangle)], "caller output"),

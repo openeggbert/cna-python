@@ -4,8 +4,8 @@
   "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
   "category": "PURE_XNA_DERIVED",
   "summary": {
-    "OBSERVATIONS": 98,
-    "ASSERTIONS": 413,
+    "OBSERVATIONS": 108,
+    "ASSERTIONS": 465,
     "FAILURES": 0
   },
   "results": [
@@ -1485,6 +1485,190 @@
         24,
         32,
         20
+      ]
+    },
+    {
+      "id": "content.serializer.defaults",
+      "passed": true,
+      "expected": [
+        "",
+        false,
+        false,
+        true,
+        false,
+        "Item",
+        false
+      ],
+      "actual": [
+        "",
+        false,
+        false,
+        true,
+        false,
+        "Item",
+        false
+      ]
+    },
+    {
+      "id": "content.serializer.clone",
+      "passed": true,
+      "expected": [
+        "Original",
+        "Clone",
+        "Entry",
+        "Child",
+        true
+      ],
+      "actual": [
+        "Original",
+        "Clone",
+        "Entry",
+        "Child",
+        true
+      ]
+    },
+    {
+      "id": "content.root_directory",
+      "passed": true,
+      "expected": [
+        "First",
+        true,
+        "Nested/Second",
+        "Nested/Second"
+      ],
+      "actual": [
+        "First",
+        true,
+        "Nested/Second",
+        "Nested/Second"
+      ]
+    },
+    {
+      "id": "content.reader.primitives",
+      "passed": true,
+      "expected": [
+        true,
+        254,
+        -2,
+        -1234,
+        -123456,
+        4000000000,
+        -1234567890123,
+        1234567890123456789,
+        1.25,
+        -2.5,
+        "\u017d",
+        "xnb"
+      ],
+      "actual": [
+        true,
+        254,
+        -2,
+        -1234,
+        -123456,
+        4000000000,
+        -1234567890123,
+        1234567890123456789,
+        1.25,
+        -2.5,
+        "\u017d",
+        "xnb"
+      ]
+    },
+    {
+      "id": "content.reader.values",
+      "passed": true,
+      "expected": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    {
+      "id": "content.cache.identity",
+      "passed": true,
+      "expected": [
+        "asset",
+        true,
+        "asset"
+      ],
+      "actual": [
+        "asset",
+        true,
+        "asset"
+      ]
+    },
+    {
+      "id": "content.reader.version",
+      "passed": true,
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ]
+    },
+    {
+      "id": "content.shared.fixup.order",
+      "passed": true,
+      "expected": [
+        "first:resource",
+        "second:resource"
+      ],
+      "actual": [
+        "first:resource",
+        "second:resource"
+      ]
+    },
+    {
+      "id": "content.external.normalization",
+      "passed": true,
+      "expected": [
+        "external",
+        true
+      ],
+      "actual": [
+        "external",
+        true
+      ]
+    },
+    {
+      "id": "content.disposed.behavior",
+      "passed": true,
+      "expected": [
+        "Content",
+        true
+      ],
+      "actual": [
+        "Content",
+        true
       ]
     }
   ]

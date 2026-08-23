@@ -34,7 +34,8 @@ fixed-width signedness. Foundation Milestone 3 expands the selected imports
 only for implemented Game/window events, adapters and presentation parameters,
 graphics states and collections, resource events and names, texture encoders,
 vertex declarations and vertex/index buffers, device bindings and draw routes,
-render targets, Reset/Present/lifecycle events, and SpriteFont metrics. This is
+render targets, Reset/Present/lifecycle events, SpriteFont metrics, and the two
+canonical title-location/title-read routes used by Content. This is
 not a claim that all CNA exports are bound.
 
 The ABI probe compares `sizeof`, `_Alignof`, and every field offset for each
@@ -42,8 +43,8 @@ ctypes structure used. ELF verification compares every imported symbol against
 the qualified artifact. Exact regenerated measurements are:
 
 ```text
-BOUND_FUNCTIONS=186
-CTYPES_SIGNATURE_MEASUREMENTS=186
+BOUND_FUNCTIONS=188
+CTYPES_SIGNATURE_MEASUREMENTS=188
 C_LAYOUT_MEASUREMENTS=526
 CTYPES_LAYOUT_MEASUREMENTS=526
 MISSING_SYMBOLS=0
@@ -65,4 +66,5 @@ Runtime support and blockers are not inferred from structural or ABI presence.
 The machine-readable classification is `docs/runtime-capabilities.json`; its
 generated rendering documents HEADLESS limits, missing non-default Present,
 identityless resource events, the split dynamic-vertex offset/options routes,
-and deferred Content/XNB and TextureCube/RenderTargetCube families.
+verified managed/native Content/XNB routes, erased-generic limitations, and the
+deferred TextureCube/RenderTargetCube family.

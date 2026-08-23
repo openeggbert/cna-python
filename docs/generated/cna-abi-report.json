@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 186,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 186,
+    "BOUND_FUNCTIONS": 188,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 188,
     "C_LAYOUT_MEASUREMENTS": 526,
     "CTYPES_LAYOUT_MEASUREMENTS": 526,
     "MISSING_SYMBOLS": 0,
@@ -29,6 +29,8 @@
     "cna_game_launch_parameters_copy_key",
     "cna_game_launch_parameters_add",
     "cna_game_set_window_title",
+    "cna_title_location_set_path_ext",
+    "cna_title_container_read_ext",
     "cna_game_window_get_allow_user_resizing",
     "cna_game_window_set_allow_user_resizing",
     "cna_game_window_get_client_bounds",
@@ -398,6 +400,29 @@
       ],
       "arity": 2,
       "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_title_location_set_path_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game; process-wide title path"
+    },
+    {
+      "symbol": "cna_title_container_read_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
     },
     {
       "symbol": "cna_game_window_get_allow_user_resizing",

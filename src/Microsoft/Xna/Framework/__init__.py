@@ -16,6 +16,7 @@ from ._intersections import (
     PlaneIntersectionType, Ray,
 )
 from ._math import MathHelper, Matrix, Quaternion, Vector2, Vector3, Vector4
+from ._title import TitleContainer
 
 __all__ = [
     "BoundingBox", "BoundingFrustum", "BoundingSphere", "Color", "ContainmentType",
@@ -26,7 +27,7 @@ __all__ = [
     "IUpdateable", "LaunchParameters", "MathHelper",
     "Matrix", "Plane", "PlaneIntersectionType", "PlayerIndex", "Point",
     "PreparingDeviceSettingsEventArgs", "Quaternion",
-    "Ray", "Rectangle", "Vector2", "Vector3", "Vector4",
+    "Ray", "Rectangle", "TitleContainer", "Vector2", "Vector3", "Vector4",
 ]
 
 for _name in __all__:

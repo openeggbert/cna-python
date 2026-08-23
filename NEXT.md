@@ -2,10 +2,10 @@
 
 Date: 2026-08-23.
 
-Foundation Milestone 3 is complete. The selected Game object model and 2D
-graphics device/state/resource foundation is structurally complete except for
-the intentionally deferred Content/XNB gateway. Runtime claims remain separate
-from structural completeness in `docs/runtime-capabilities.json`.
+Foundation Milestone 4 is complete. CNA-Python now has a general-purpose XNA
+4.0 Content/XNB architecture rather than an asset-name or Texture2D-only path.
+All selected public Content types and TitleContainer are structurally complete;
+there are no partial types or missing members anywhere in the current target.
 
 ## Strict before and after
 
@@ -15,17 +15,18 @@ REFERENCE_TYPES                          257    257
 REFERENCE_MEMBERS                       2964   2964
 EXPECTED_PYTHON_TYPES                    257    257
 EXPECTED_PYTHON_MEMBERS                 2887   2887
-TARGET_TYPES                              51    115
-TARGET_MEMBERS                          1003   1465
-TOTAL_DIAGNOSTICS                        310    144
-MISSING_TYPE                             206    142
-MISSING_MEMBER                           104      2
-COMPLETE_TYPES                            41    114
-PARTIAL_TYPES                             10      1
-MISSING_TYPES                            206    142
+TARGET_TYPES                             115    126
+TARGET_MEMBERS                          1465   1501
+TOTAL_DIAGNOSTICS                        144    131
+MISSING_TYPE                             142    131
+MISSING_MEMBER                             2      0
+COMPLETE_TYPES                           114    126
+PARTIAL_TYPES                              1      0
+MISSING_TYPES                            142    131
 ```
 
-Every final mismatch/safety category is zero:
+The predicted target-member count was not forced; 1,501 is the regenerated
+authoritative mapping result. Every final mismatch/safety category is zero:
 
 ```text
 UNEXPECTED_TYPE=0
@@ -52,80 +53,150 @@ ALLOWLIST_ENTRIES=0
 UNMEASURED_STRUCTURAL_CATEGORY=0
 ```
 
-The normal strict `--check` remains nonzero only for genuine missing surface.
-The leak-only gate passes.
+The normal strict `--check` remains nonzero only for 131 wholly absent future
+types. Leak-only, stub/runtime, and verifier self-tests pass.
 
-The only partial type is:
+## Content public types
+
+| Public type | Strict status | Managed status | Native status | Language limitations / blockers |
+|---|---|---|---|---|
+| `ContentManager` | COMPLETE, 0 diagnostics | VERIFIED: root normalization, cache, graph ownership, rollback, Unload/Dispose | VERIFIED: title route plus native resource graphs | Erased caller `Load[T]` cannot be runtime-enforced; reader-declared root shape is enforced. No implementation blocker. |
+| `ContentReader` | COMPLETE, 0 diagnostics | VERIFIED: primitives, values, objects, raw objects, shared/external reads | N/A except resources constructed by readers | No-token `ReadRawObject[T]` cannot recover erased T and raises `NotImplementedError`; explicit-reader and tagged forms work. |
+| `ContentSerializerAttribute` | COMPLETE, 0 diagnostics | VERIFIED defaults, setters, Clone independence | N/A | None. |
+| `ContentSerializerCollectionItemNameAttribute` | COMPLETE, 0 diagnostics | VERIFIED value behavior | N/A | None. |
+| `ContentSerializerIgnoreAttribute` | COMPLETE, 0 diagnostics | VERIFIED construction | N/A | None. |
+| `ContentSerializerRuntimeTypeAttribute` | COMPLETE, 0 diagnostics | VERIFIED construction | N/A | None. |
+| `ContentSerializerTypeVersionAttribute` | COMPLETE, 0 diagnostics | VERIFIED construction | N/A | None. |
+| `ContentTypeReader` | COMPLETE, 0 diagnostics | VERIFIED target/version/initialize/read/existing-instance abstraction | N/A | None. |
+| `ContentTypeReader<T>` (`ContentTypeReaderOfT[T]`) | COMPLETE, 0 diagnostics | VERIFIED deterministic concrete Generic-base target recovery | N/A | Subclasses with no recoverable concrete target fail explicitly; no public constructor token was invented. |
+| `ContentTypeReaderManager` | COMPLETE, 0 diagnostics | VERIFIED reader identity, table order, initialization | N/A | None. |
+| `ResourceContentManager` | COMPLETE, 0 diagnostics | VERIFIED Mapping/GetObject lookup, bytes/stream snapshot, disposal | Native objects still use ordinary readers/routes | CLR ResourceManager maps formally to `object`; no fake System.Resources package. |
+| `TitleContainer` | COMPLETE, 0 diagnostics | VERIFIED lexical and resolved-path containment outside Game | VERIFIED CNA title-location/read routes during Game | None on qualified platform. |
+
+`ContentLoadException` remains complete. `System.IO`, `System.Resources`, and
+`System.ComponentModel` support packages were not fabricated.
+
+## XNB architecture and behavior
+
+- Header/container: Windows target byte, XNB version 5, supported flags,
+  declared file size, compressed output size, truncation, and trailing data are
+  validated. Unsupported platforms/versions fail as chained
+  `ContentLoadException`.
+- Reader table: exact structurally normalized assembly-qualified identities,
+  1-based object tags, required identities, reader counts, exact versions,
+  table identity, and initialization order are implemented. Fuzzy matching is
+  never used.
+- Custom readers: the private general registration bridge maps a serialized
+  identity to any real `ContentTypeReader` subclass. The fixture proves
+  discovery, version, Initialize, Read, existing instances, exceptions,
+  shared callbacks, rollback, cache, and Unload without an asset-name branch.
+- Existing instances: `CanDeserializeIntoExistingObject`, None/wrong instances,
+  mutation, identity-preserving returns, and replacement returns are covered.
+- Shared resources: declared count, deferred registration, index validation,
+  multiple ordered fixups, null, callback failure, unresolved/truncated data,
+  identity, and cleanup are covered.
+- External references: resolution is relative to the containing asset and
+  constrained beneath the Content root. Nested references, normalization,
+  missing/wrong/circular targets, cache identity, rollback, shared resources,
+  compressed targets, and Unload are covered.
+- Cache/ownership: normalized case-insensitive keys provide repeated-Load,
+  shared, and external identity. Disposables are deduplicated by Python
+  identity; failures roll back uncommitted resources in reverse order.
+- Failure fidelity: malformed headers/compression/tables/tags/fixups, unknown or
+  wrong-version readers, wrong object shape, custom-reader errors, partial
+  native construction, circular externals, and disposal errors retain useful
+  exception chains.
+
+## Built-in readers
+
+Implemented private readers, because their runtime reader classes are not part
+of the selected public profile:
+
+- Boolean, Byte/SByte, Int16/UInt16, Int32/UInt32, Int64/UInt64, Single,
+  Double, variable-width UTF-8 Char, String, and exactly representable TimeSpan;
+- Vector2/3/4, Quaternion, Matrix, Color, Point, and Rectangle;
+- List, Array, and Nullable over implemented reader identities;
+- Texture2D, SpriteFont, VertexDeclaration, VertexBuffer, and IndexBuffer.
+
+Texture2D parses SurfaceFormat, UInt32 dimensions, full mip graph, and exact
+payload lengths. The CNA ABI 0.7 selected upload route is fully qualified for
+`SurfaceFormat.Color`; other formats fail explicitly and DXT is never decoded
+or relabeled. Multiple Color mip levels are tested.
+
+SpriteFont parses the real atlas/glyph/cropping/character/line-spacing/spacing/
+kerning/nullable-default-character graph and uses the existing public factory.
+MeasureString, DrawString glyph submissions, missing/default character, cache,
+Unload, and reverse atlas ownership all pass.
+
+VertexDeclaration, VertexBuffer, and IndexBuffer use their exact layouts and
+ordinary public/native constructors/transfers. Effects and Models were
+intentionally not implemented because their complete public object graphs are
+still absent; no private substitute objects are returned.
+
+## ContentManager
+
+- `OpenStream`: real normalized RootDirectory + asset + `.xnb` title path;
+  fresh owned stream; no CWD fallback or extension guessing.
+- `ReadAsset`: real header/decompression/table/object/shared-resource pipeline;
+  owned stream closes after the graph is read; failures are chained.
+- `Load`: returns the reader-selected root object, validates its declared reader
+  shape, and caches normalized asset identity.
+- `RootDirectory`: empty/nested behavior, mutation, malformed paths, traversal,
+  absolute paths, and mixed separators are tested.
+- `Unload`/`Dispose`: reverse-order, identity-deduplicated ownership with state
+  cleared before callbacks, reload after unload, idempotence, and exception
+  recovery.
+- Generic erasure: Python cannot observe caller `T`; this narrow difference is
+  recorded as `LANGUAGE_MAPPING_LIMITATION`, not hidden as a perpetual bug.
+
+## LZX compressed XNB
+
+The managed decoder maintains one 64 KiB state across XNA frames and supports
+short and extended big-endian frame headers, 32 KiB frames, verbatim/aligned/
+uncompressed LZX blocks, repeated offsets, and canonical Huffman tables.
+
+Qualification includes:
 
 ```text
-Microsoft.Xna.Framework.Content.ContentManager=2
-    OpenStream(System.String)
-    ReadAsset(System.String,System.Action`1[System.IDisposable])
+single frame=PASS
+multi frame with persistent state=PASS
+short and extended headers=PASS
+truncation/invalid block/size/output/trailing-data negatives=PASS
+independent real fixture byte comparisons=2 PASS
+compressed primitive/custom/shared graphs=PASS
+compressed Texture2D=PASS
+compressed SpriteFont=PASS
+compressed VertexDeclaration/VertexBuffer/IndexBuffer=PASS
+external uncompressed -> compressed=PASS
+external compressed -> uncompressed=PASS
+external compressed -> compressed=PASS
+cache/rollback/Unload after decompression=PASS
 ```
 
-`ContentManager.ServiceProvider` is complete and uses the owning Game's stable,
-isolated service container.
+The XNA runtime does not use the Intel E8 transform for these files; a stream
+requesting it is rejected explicitly. No third-party binary dependency or
+Microsoft source/content was added.
 
-## Game foundation
+## Behavior corpus
 
-- `Game` local diagnostics: **0 / STRICT_COMPLETE**.
-- `IGameComponent`, `IUpdateable`, `IDrawable`, `GameComponent`,
-  `DrawableGameComponent`, `GameComponentCollection`, collection event args,
-  `GameServiceContainer`, `LaunchParameters`, and `GameWindow` are complete.
-- Component insertion/equal-order behavior, live Enabled/Visible checks,
-  snapshot traversal, traversal-time removal, self-removal, order mutation,
-  initialization, and collection events are **MANAGED_VERIFIED**.
-- Services are exactly keyed, reject duplicate/null registrations, preserve
-  provider identity, and are isolated per Game: **MANAGED_VERIFIED**.
-- `ResetElapsedTime` and `SuppressDraw` reach the active CNA Game lifecycle:
-  **NATIVE_VERIFIED**.
-- Activation/deactivation and window event infrastructure is real, but HEADLESS
-  produces no OS transition and no fake event: **BACKEND_BLOCKED** for delivery.
-- HEADLESS `GameWindow.Handle` is the real null handle, never a Python object id.
+```text
+OBSERVATIONS: 98 -> 108
+ASSERTIONS: 413 -> 465
+FAILURES: 0
+PROVENANCE: pinned XNA metadata plus IL/algorithm analysis; platform-neutral
+```
 
-## Graphics foundation
-
-| Family | Structural status | Runtime qualification |
-|---|---|---|
-| `SurfaceFormat` and selected graphics enums | STRICT_COMPLETE | MANAGED_VERIFIED from XNA metadata |
-| `Viewport.Project` / `Unproject` | STRICT_COMPLETE | MANAGED_VERIFIED binary32 behavior |
-| `GraphicsResource` | STRICT_COMPLETE | NATIVE_VERIFIED disposal/name/tag; exactly-once event |
-| resource-created/destroyed event args | STRICT_COMPLETE | Event delivery UPSTREAM_CNA_BLOCKED by identityless ABI payloads |
-| adapters/display/presentation/device information | STRICT_COMPLETE | NATIVE_VERIFIED on the actual HEADLESS adapter |
-| blend/depth/rasterizer/sampler states and stock states | STRICT_COMPLETE | MANAGED defaults/freeze + NATIVE binding verified |
-| sampler/texture collections | STRICT_COMPLETE | NATIVE_VERIFIED durable per-device stage facades |
-| `Texture` / `Texture2D` | STRICT_COMPLETE | NATIVE metadata, transfers, PNG and JPEG verified |
-| vertex declarations and four built-in vertex codecs | STRICT_COMPLETE | MANAGED_VERIFIED deterministic layouts |
-| static/dynamic vertex/index buffers and bindings | STRICT_COMPLETE | NATIVE_VERIFIED ownership, transfer, binding and lifetime guards |
-| draw routes | STRICT_COMPLETE | Native dispatch verified; 3D draw output BACKEND_BLOCKED under HEADLESS |
-| instanced draw | STRICT_COMPLETE | Real route bound; HARDWARE_PENDING, never emulated |
-| `RenderTarget2D` and render-target binding | STRICT_COMPLETE | NATIVE command/lifetime verified; visible output HARDWARE_PENDING |
-| `RenderTargetCube` | missing/deferred with TextureCube family | UNIMPLEMENTED_CNA_PYTHON |
-| `GraphicsDevice` | STRICT_COMPLETE, local diagnostics 0 | Selected native state/binding/reset/present routes verified |
-| `GraphicsDeviceManager` | STRICT_COMPLETE, local diagnostics 0 | Native lifecycle and mutable preparing-settings callback verified |
-| `SpriteFont` / all selected `DrawString` overloads | STRICT_COMPLETE | Private legal glyph factory and native glyph submissions verified |
-
-Important runtime qualifications:
-
-- Default `Present()` reaches CNA. Rectangle/window Present has no ABI-0.7 route
-  and raises `NativeCapabilityError`: **UPSTREAM_CNA_BLOCKED**.
-- Resetting/Reset are real native transitions. Deterministic DeviceLost remains
-  **BACKEND_BLOCKED** on HEADLESS and is never fabricated.
-- `ResourceCreated`/`ResourceDestroyed` public infrastructure and argument types
-  exist, but stable identity/Tag delivery is **UPSTREAM_CNA_BLOCKED**.
-- ABI 0.7 cannot combine DynamicVertexBuffer raw destination offset with typed
-  streaming options in one call: that combination is **UPSTREAM_CNA_BLOCKED**.
-- Public SpriteFont loading is **FIXTURE_PENDING** on Content/XNB; runtime glyph
-  metrics, measurement, missing-character/default-character behavior, and
-  DrawString are implemented without rectangle fakes.
-- HEADLESS command success is not visible GPU-rendering evidence.
+New groups cover serializer defaults/Clone, RootDirectory/disposed behavior,
+ContentReader primitive/value decoding, cache identity, reader versions,
+shared-fixup order, and external-reference normalization. HEADLESS filesystem
+or native errors are not encoded as XNA golden observations.
 
 ## ABI evidence
 
 Current CNA HEAD was rechecked read-only at
 `1bb2145d99ed572dd4eb15009c34e2e5f410fcf0`. Its clean C-API build remains
 blocked by the upstream renderer identity assertion `49 == 50`; CNA was not
-modified. Its checkout has one unrelated pre-existing untracked discovery file.
+modified.
 
 Qualified artifact:
 
@@ -136,99 +207,110 @@ platform=Linux x86-64
 renderer=HEADLESS
 audio=NULL
 library SHA-256=42e099146bf3b470f82fd963a516f8bdd7ff0406da8c37dd53747699117db086
-BOUND_FUNCTIONS=186
-CTYPES_SIGNATURE_MEASUREMENTS=186
+BOUND_FUNCTIONS: 186 -> 188
+CTYPES_SIGNATURE_MEASUREMENTS: 186 -> 188
 C_LAYOUT_MEASUREMENTS=526
 CTYPES_LAYOUT_MEASUREMENTS=526
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
 
-The binding uses only canonical ABI-0.7 C headers/symbols. It binds neither C++
-nor another language binding. The qualified older artifact permits destroying
-bound vertex/index buffers even though CNA HEAD rejects it; Python therefore
-guards disposal and unbinds retained resources before parent shutdown.
-
-## Behavior corpus
-
-```text
-OBSERVATIONS: 92 -> 98
-ASSERTIONS: 360 -> 413
-FAILURES: 0
-PROVENANCE: PURE_XNA_DERIVED metadata/IL/algorithm evidence
-```
-
-New groups are:
-
-```text
-graphics.surface_format.values
-graphics.viewport.project.bits
-graphics.viewport.roundtrip.bits
-graphics.presentation.defaults
-graphics.state.defaults
-graphics.vertex.strides
-```
-
-HEADLESS/backend observations are not encoded as XNA goldens.
+Only canonical `cna_title_location_set_path_ext` and
+`cna_title_container_read_ext` were added. Content parsing and LZX remain
+managed; no unused Content ABI surface, C++ ABI, or other binding is used.
 
 ## Ownership stress
 
+Existing native stress remains green, and dedicated Content stress reports:
+
 ```text
-LIFECYCLE_CYCLES=20
-CHILD_RESOURCE_CYCLES=20
-EXPLICIT_DOUBLE_DISPOSE_CYCLES=10
-PARENT_BEFORE_CHILD_CYCLES=20
-BUFFER_FAMILY_CYCLES=20
-RENDER_TARGET_CYCLES=20
-SPRITE_FONT_CYCLES=20
-GRAPHICS_STATE_CYCLES=20
-CALLBACK_EXCEPTION_CYCLES=20
+CONTENT_MANAGER_CYCLES=20
+TEXTURE_XNB_CYCLES=20
+SPRITEFONT_XNB_CYCLES=20
+CUSTOM_READER_CYCLES=20
+SHARED_RESOURCE_CYCLES=20
+EXTERNAL_REFERENCE_CYCLES=20
+COMPRESSED_XNB_CYCLES=20
 CRASHES=0
 OBSERVED_UAF_OR_DOUBLE_FREE=0
 SANITIZER_STATUS=NOT_RUN
 ```
 
-Stress covers state/buffer/target/font resource families, child-before-parent,
-parent-before-child, double dispose, bound-dispose rejection, replacement,
-dynamic discard transfer, shutdown with live children, and handler exception.
-No allocator-leak claim is made without sanitizer evidence, and no interpreter
-finalizer calls CNA.
+It includes repeated cache hits, Unload/reload, double Dispose, failed and
+partial graphs, callback errors, three compressed/external directions, buffers,
+and Game shutdown with live Content resources. No allocator-leak claim is made
+without sanitizer evidence, and no interpreter finalizer calls CNA.
 
-## Package and templates
+## Runtime capability inventory
+
+- `ContentManager.OpenStream / TitleContainer.OpenStream`:
+  `UNIMPLEMENTED_CNA_PYTHON -> VERIFIED_NATIVE`.
+- `ContentManager.ReadAsset/XNB`:
+  `UNIMPLEMENTED_CNA_PYTHON -> VERIFIED_NATIVE`.
+- `SpriteFont public Content loading`: `FIXTURE_PENDING -> VERIFIED_NATIVE`.
+- XNB LZX and ResourceContentManager: new `VERIFIED_MANAGED` entries.
+- `Load[T]` caller-type enforcement and no-token `ReadRawObject[T]`: explicit
+  `LANGUAGE_MAPPING_LIMITATION` entries.
+- Unsupported Texture2D payload formats and missing Effect/Model public graphs
+  remain explicit, never fabricated.
+
+## Package
 
 Version remains `0.1.0.dev0`.
 
 ```text
 wheel=cna_python-0.1.0.dev0-py3-none-any.whl
-wheel SHA-256=3be58735aa12a4558a93c7a6c6a4f31e804520f35fc38b534d81c1115ff3990d
-wheel entries=41
+wheel SHA-256=d75e033dcb7e47d8e30b26c05a1c49a4fd968289687891ff8db6ff2651349a7e
+wheel entries=45
 sdist=cna_python-0.1.0.dev0.tar.gz
-sdist SHA-256=9b4c47c91aff7645f779223743479507eddcb1e2b7a8f3e78ec5e1f17e66112f
-sdist entries=107
+sdist SHA-256=df3fcea75680aab05738b3eb73c7be79e4801f4391e85dfab9fc314bb860cef4
+sdist entries=115
 forbidden wheel entries=0
 forbidden sdist entries=0
 absolute developer path leaks=0
 private/bundled CNA native library=0
+Microsoft/proprietary fixture files=0
 ```
 
-The exact final wheel passed import and compile probes in a fresh venv. The
-maintained template source was not changed; maintained 60/600 runs and generated
-installed-wheel 60/600 runs all pass. Generated sources contain zero absolute
+The audited wheel contains all four Content implementation modules and
+TitleContainer. A fresh isolated venv passed import and compile probes. The
+generated final-wheel consumer passed exact 60/600 runs with zero absolute
 developer paths, sibling-source dependencies, or PYTHONPATH dependencies.
 
-## Content, Curve, and next milestone
+## Template canary
 
-Full XNB was not started. `OpenStream` remains deferred until a formal title-
-content path rule exists, and `ReadAsset` remains deferred until the complete
-reader/type-reader/shared-resource/external-reference architecture can be built.
+Template source changed: **yes**, only for the approved Content canary.
 
-The optional Curve family remained deferred.
+- Existing raw `Content/logo.png -> Texture2D.FromStream` canary: PASS.
+- Legal deterministic 126-byte `Content/logo.xnb -> ContentManager.Load ->
+  Texture2DReader -> CNA Texture2D -> SpriteBatch` canary: PASS.
+- XNB SHA-256:
+  `2557e9f7f7deebcf381f4ec433efb97636592c27a755fe5b9b7b291ae5083503`.
+- Maintained source 60/600: PASS/PASS.
+- Maintained final-wheel 60/600: PASS/PASS.
+- Generated final-wheel consumer 60/600: PASS/PASS.
+- No SpriteFont demo, Effect, Model, 3D, audio, or video was added.
 
-The next dependency-complete milestone is Content/XNB: implement the title-
-content path, `ContentReader`, reader manager/type readers, shared resources,
-external references, and LZX only when the full dependency chain requires it.
-That milestone can then make public SpriteFont loading real. Effects/models,
-audio/media, storage, touch, Texture3D/Cube content, and broad 3D remain deferred.
+## Remaining exact families
+
+The regenerated inventory contains 131 types:
+
+- Framework: Curve family and FrameworkDispatcher;
+- Audio;
+- Design converters;
+- GamerServicesComponent;
+- Graphics: Effect/stock-effect/Model graph, OcclusionQuery,
+  RenderTargetCube, Texture3D, and TextureCube;
+- Graphics.PackedVector;
+- Input.Touch;
+- Media;
+- Storage.
+
+The next dependency-complete architectural milestone is the Effect + Model
+asset/runtime graph: implement its complete public resource graph and native
+dependencies, then add exact private XNB readers through the now-stable Content
+resolver. This is selected by dependency architecture, not smallest type count.
+No follow-on family was started in this run.
 
 ## Reproduction commands
 
@@ -239,12 +321,12 @@ python3 tools/api_compat/test_verify.py
 python3 tools/api_compat/generate_stubs.py
 python3 tools/api_compat/verify.py --report --output docs/generated/api-compat-report.json --inventory
 python3 tools/api_compat/verify.py --leak-only
-python3 tools/api_compat/verify.py --check  # expected nonzero for genuine missing surface
+python3 tools/api_compat/verify.py --check  # expected nonzero only for 131 missing types
 python3 tools/run_behavior_corpus.py --output docs/generated/behavior-corpus-report.json
 python3 tools/generate_runtime_capabilities.py
-python3 tools/generate_milestone3_dependency_matrix.py
 python3 tools/audit_cna_abi.py --cna-root ../../cna --library /absolute/path/libcna_c_api.so --output docs/generated/cna-abi-report.json
 CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/native_ownership_stress.py --cycles 20
+CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/content_ownership_stress.py --cycles 20
 PYTHONPATH=/tmp/cna-python-build-tools python3 -m build --no-isolation
 python3 tools/audit_package.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --sdist dist/cna_python-0.1.0.dev0.tar.gz
 python3 tools/verify_consumer.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --template ../cna-python-template --library /absolute/path/libcna_c_api.so
