@@ -5,10 +5,10 @@
     "REFERENCE_MEMBERS": 2964,
     "EXPECTED_PYTHON_TYPES": 257,
     "EXPECTED_PYTHON_MEMBERS": 2887,
-    "TARGET_TYPES": 161,
-    "TARGET_MEMBERS": 1651,
-    "TOTAL_DIAGNOSTICS": 96,
-    "MISSING_TYPE": 96,
+    "TARGET_TYPES": 180,
+    "TARGET_MEMBERS": 1772,
+    "TOTAL_DIAGNOSTICS": 77,
+    "MISSING_TYPE": 77,
     "MISSING_MEMBER": 0,
     "UNEXPECTED_TYPE": 0,
     "UNEXPECTED_MEMBER": 0,
@@ -34,101 +34,6 @@
     "UNMEASURED_STRUCTURAL_CATEGORY": 0
   },
   "diagnostics": [
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.AudioCategory",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.AudioChannels",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.AudioEmitter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.AudioEngine",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.AudioListener",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.AudioStopOptions",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.Cue",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.InstancePlayLimitException",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.Microphone",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.MicrophoneState",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.NoAudioHardwareException",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.NoMicrophoneConnectedException",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.RendererDetail",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.SoundBank",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.SoundEffect",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.SoundEffectInstance",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.SoundState",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Audio.WaveBank",
-      "detail": "type is not exported"
-    },
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Curve",
@@ -516,6 +421,25 @@
     }
   ],
   "zeroDiagnosticTypes": [
+    "Microsoft.Xna.Framework.Audio.AudioCategory",
+    "Microsoft.Xna.Framework.Audio.AudioChannels",
+    "Microsoft.Xna.Framework.Audio.AudioEmitter",
+    "Microsoft.Xna.Framework.Audio.AudioEngine",
+    "Microsoft.Xna.Framework.Audio.AudioListener",
+    "Microsoft.Xna.Framework.Audio.AudioStopOptions",
+    "Microsoft.Xna.Framework.Audio.Cue",
+    "Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance",
+    "Microsoft.Xna.Framework.Audio.InstancePlayLimitException",
+    "Microsoft.Xna.Framework.Audio.Microphone",
+    "Microsoft.Xna.Framework.Audio.MicrophoneState",
+    "Microsoft.Xna.Framework.Audio.NoAudioHardwareException",
+    "Microsoft.Xna.Framework.Audio.NoMicrophoneConnectedException",
+    "Microsoft.Xna.Framework.Audio.RendererDetail",
+    "Microsoft.Xna.Framework.Audio.SoundBank",
+    "Microsoft.Xna.Framework.Audio.SoundEffect",
+    "Microsoft.Xna.Framework.Audio.SoundEffectInstance",
+    "Microsoft.Xna.Framework.Audio.SoundState",
+    "Microsoft.Xna.Framework.Audio.WaveBank",
     "Microsoft.Xna.Framework.BoundingBox",
     "Microsoft.Xna.Framework.BoundingFrustum",
     "Microsoft.Xna.Framework.BoundingSphere",
@@ -681,98 +605,98 @@
   "typeScoreboard": [
     {
       "type": "Microsoft.Xna.Framework.Audio.AudioCategory",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.AudioChannels",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.AudioEmitter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.AudioEngine",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.AudioListener",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.AudioStopOptions",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.Cue",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.InstancePlayLimitException",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.Microphone",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.MicrophoneState",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.NoAudioHardwareException",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.NoMicrophoneConnectedException",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.RendererDetail",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.SoundBank",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.SoundEffect",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.SoundEffectInstance",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.SoundState",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Audio.WaveBank",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.BoundingBox",
@@ -1972,7 +1896,7 @@
     },
     "Microsoft.Xna.Framework.Audio": {
       "types": 19,
-      "diagnostics": 19
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Content": {
       "types": 12,

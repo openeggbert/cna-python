@@ -21,6 +21,8 @@
 #include "CNA/C/runtime_graphics_manager.h"
 #include "CNA/C/effects.h"
 #include "CNA/C/texture_volume.h"
+#include "CNA/C/audio.h"
+#include "CNA/C/xact.h"
 
 #define TYPE(T) do { \
     printf("TYPE %s %zu %zu\n", #T, sizeof(T), alignof(T)); \
@@ -44,6 +46,8 @@ static CNA_Result begin_draw_callback(
     return CNA_RESULT_SUCCESS;
 }
 
+static void audio_event_callback(void* context) { (void)context; }
+
 int main(void) {
     printf("VALUE CNA_ABI_VERSION %u\n", (unsigned)CNA_ABI_VERSION);
     printf("VALUE POINTER_WIDTH %zu\n", sizeof(void *));
@@ -60,6 +64,8 @@ int main(void) {
     printf("VALUE CNA_GraphicsResourceDisposingCallback %zu\n", sizeof(CNA_GraphicsResourceDisposingCallback));
     printf("VALUE CNA_GraphicsDeviceEventCallback %zu\n", sizeof(CNA_GraphicsDeviceEventCallback));
     printf("VALUE CNA_PreparingDeviceSettingsMutatorEXT %zu\n", sizeof(CNA_PreparingDeviceSettingsMutatorEXT));
+    CNA_AudioEventCallback checked_audio_event = audio_event_callback;
+    printf("VALUE CNA_AudioEventCallback %zu\n", sizeof(checked_audio_event));
 
     TYPE(CNA_StringView); FIELD(CNA_StringView, data); FIELD(CNA_StringView, byte_length);
     TYPE(CNA_ErrorInfo); FIELD(CNA_ErrorInfo, struct_size); FIELD(CNA_ErrorInfo, struct_version); FIELD(CNA_ErrorInfo, result); FIELD(CNA_ErrorInfo, category); FIELD(CNA_ErrorInfo, message_byte_length);
@@ -72,6 +78,12 @@ int main(void) {
     TYPE(CNA_Vector2); FIELD(CNA_Vector2, x); FIELD(CNA_Vector2, y);
     TYPE(CNA_Vector3); FIELD(CNA_Vector3, x); FIELD(CNA_Vector3, y); FIELD(CNA_Vector3, z);
     TYPE(CNA_Vector4); FIELD(CNA_Vector4, x); FIELD(CNA_Vector4, y); FIELD(CNA_Vector4, z); FIELD(CNA_Vector4, w);
+    TYPE(CNA_AudioCapabilities); FIELD(CNA_AudioCapabilities, struct_size); FIELD(CNA_AudioCapabilities, struct_version); FIELD(CNA_AudioCapabilities, is_playback_available); FIELD(CNA_AudioCapabilities, reserved0); FIELD(CNA_AudioCapabilities, reserved1);
+    TYPE(CNA_SoundEffectCreateInfo); FIELD(CNA_SoundEffectCreateInfo, struct_size); FIELD(CNA_SoundEffectCreateInfo, struct_version); FIELD(CNA_SoundEffectCreateInfo, sample_rate); FIELD(CNA_SoundEffectCreateInfo, channels); FIELD(CNA_SoundEffectCreateInfo, reserved);
+    TYPE(CNA_SoundEffectInstanceInfo); FIELD(CNA_SoundEffectInstanceInfo, struct_size); FIELD(CNA_SoundEffectInstanceInfo, struct_version); FIELD(CNA_SoundEffectInstanceInfo, state); FIELD(CNA_SoundEffectInstanceInfo, is_looped); FIELD(CNA_SoundEffectInstanceInfo, reserved0); FIELD(CNA_SoundEffectInstanceInfo, volume); FIELD(CNA_SoundEffectInstanceInfo, pitch); FIELD(CNA_SoundEffectInstanceInfo, pan); FIELD(CNA_SoundEffectInstanceInfo, reserved1);
+    TYPE(CNA_AudioEmitter); FIELD(CNA_AudioEmitter, struct_size); FIELD(CNA_AudioEmitter, struct_version); FIELD(CNA_AudioEmitter, doppler_scale); FIELD(CNA_AudioEmitter, forward); FIELD(CNA_AudioEmitter, position); FIELD(CNA_AudioEmitter, up); FIELD(CNA_AudioEmitter, velocity);
+    TYPE(CNA_AudioListener); FIELD(CNA_AudioListener, struct_size); FIELD(CNA_AudioListener, struct_version); FIELD(CNA_AudioListener, forward); FIELD(CNA_AudioListener, position); FIELD(CNA_AudioListener, up); FIELD(CNA_AudioListener, velocity);
+    TYPE(CNA_CueInfo); FIELD(CNA_CueInfo, struct_size); FIELD(CNA_CueInfo, struct_version); FIELD(CNA_CueInfo, is_created); FIELD(CNA_CueInfo, is_disposed); FIELD(CNA_CueInfo, is_paused); FIELD(CNA_CueInfo, is_playing); FIELD(CNA_CueInfo, is_prepared); FIELD(CNA_CueInfo, is_preparing); FIELD(CNA_CueInfo, is_stopped); FIELD(CNA_CueInfo, is_stopping);
     TYPE(CNA_Quaternion); FIELD(CNA_Quaternion, x); FIELD(CNA_Quaternion, y); FIELD(CNA_Quaternion, z); FIELD(CNA_Quaternion, w);
     TYPE(CNA_Matrix); FIELD(CNA_Matrix, m11); FIELD(CNA_Matrix, m12); FIELD(CNA_Matrix, m13); FIELD(CNA_Matrix, m14); FIELD(CNA_Matrix, m21); FIELD(CNA_Matrix, m22); FIELD(CNA_Matrix, m23); FIELD(CNA_Matrix, m24); FIELD(CNA_Matrix, m31); FIELD(CNA_Matrix, m32); FIELD(CNA_Matrix, m33); FIELD(CNA_Matrix, m34); FIELD(CNA_Matrix, m41); FIELD(CNA_Matrix, m42); FIELD(CNA_Matrix, m43); FIELD(CNA_Matrix, m44);
     TYPE(CNA_Rectangle); FIELD(CNA_Rectangle, x); FIELD(CNA_Rectangle, y); FIELD(CNA_Rectangle, width); FIELD(CNA_Rectangle, height);

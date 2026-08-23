@@ -48,6 +48,9 @@ CNA_GameBeginDrawCallback = c.CFUNCTYPE(
 CNA_GameEventCallback = c.CFUNCTYPE(None, c.c_void_p)
 CNA_GraphicsResourceDisposingCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
 CNA_GraphicsDeviceEventCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
+# Audio events are observer-only ``void(void*)`` callbacks.  The canonical
+# dispatcher invokes dynamic/microphone callbacks on the thread which pumps it.
+CNA_AudioEventCallback = c.CFUNCTYPE(None, c.c_void_p)
 
 
 class CNA_GameCallbacks(c.Structure):
@@ -91,6 +94,57 @@ class CNA_Vector3(c.Structure):
 
 class CNA_Vector4(c.Structure):
     _fields_ = [("x", c.c_float), ("y", c.c_float), ("z", c.c_float), ("w", c.c_float)]
+
+
+class CNA_AudioCapabilities(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("is_playback_available", c.c_uint8), ("reserved0", c.c_uint8 * 3),
+        ("reserved1", c.c_uint32),
+    ]
+
+
+class CNA_SoundEffectCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("sample_rate", c.c_uint32), ("channels", c.c_uint32),
+        ("reserved", c.c_uint64),
+    ]
+
+
+class CNA_SoundEffectInstanceInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("state", c.c_uint32), ("is_looped", c.c_uint8),
+        ("reserved0", c.c_uint8 * 3), ("volume", c.c_float),
+        ("pitch", c.c_float), ("pan", c.c_float), ("reserved1", c.c_uint32),
+    ]
+
+
+class CNA_AudioEmitter(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("doppler_scale", c.c_float), ("forward", CNA_Vector3),
+        ("position", CNA_Vector3), ("up", CNA_Vector3), ("velocity", CNA_Vector3),
+    ]
+
+
+class CNA_AudioListener(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("forward", CNA_Vector3), ("position", CNA_Vector3),
+        ("up", CNA_Vector3), ("velocity", CNA_Vector3),
+    ]
+
+
+class CNA_CueInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("is_created", c.c_uint8), ("is_disposed", c.c_uint8),
+        ("is_paused", c.c_uint8), ("is_playing", c.c_uint8),
+        ("is_prepared", c.c_uint8), ("is_preparing", c.c_uint8),
+        ("is_stopped", c.c_uint8), ("is_stopping", c.c_uint8),
+    ]
 
 
 class CNA_Quaternion(c.Structure):

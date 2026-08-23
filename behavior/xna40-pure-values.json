@@ -114,6 +114,14 @@
     {"id": "content.disposed.behavior", "operation": "Content.DisposedBehavior", "args": [], "expected": ["Content", true]},
     {"id": "effect.parameter.enum.values", "operation": "Graphics.EffectEnumValues", "args": [], "expected": [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]},
     {"id": "model.collection.identity", "operation": "Model.CollectionIdentity", "args": [], "expected": [2, 1, "Root", true, true, true, 2, true, true, "Child", false, true]},
-    {"id": "model.bone.transform.copies", "operation": "Model.BoneTransformCopies", "args": [], "expected": [1.0, 3.0, 2.0, 99.0]}
+    {"id": "model.bone.transform.copies", "operation": "Model.BoneTransformCopies", "args": [], "expected": [1.0, 3.0, 2.0, 99.0]},
+    {"id": "audio.enum.values", "operation": "Audio.EnumValues", "args": [], "expected": [[1, 2], [0, 1], [0, 1, 2], [0, 1]]},
+    {"id": "audio.listener.emitter.defaults", "operation": "Audio.ListenerEmitterDefaults", "args": [], "expected": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 1.0]},
+    {"id": "audio.vector.copy.boundaries", "operation": "Audio.VectorCopyBoundaries", "args": [], "expected": [true, true]},
+    {"id": "audio.emitter.doppler.nan", "operation": "Audio.EmitterDopplerNaN", "args": [], "expected": [true, true]},
+    {"id": "audio.sample.duration", "operation": "Audio.SampleDuration", "args": [[0, 8000, 1], [10, 8000, 1], [88200, 44100, 1], [176400, 44100, 2]], "expected": [0, 1000, 1000000, 1000000]},
+    {"id": "audio.sample.size", "operation": "Audio.SampleSize", "args": [[1000000, 44100, 1], [1000000, 44100, 2], [100000, 8000, 1], [1, 8000, 1]], "expected": [88198, 176400, 1600, 0]},
+    {"id": "audio.renderer.default", "operation": "Audio.RendererDefault", "args": [], "expected": [null, null, 0, true, "Microsoft.Xna.Framework.Audio.RendererDetail"]},
+    {"id": "audio.category.default", "operation": "Audio.CategoryDefault", "args": [], "expected": ["", true, 0]}
   ]
 }

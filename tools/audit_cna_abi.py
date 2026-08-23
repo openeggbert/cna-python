@@ -23,6 +23,9 @@ TYPES = {
         abi.CNA_StringView, abi.CNA_ErrorInfo, abi.CNA_GameTime, abi.CNA_CallbackError,
         abi.CNA_GameCallbacks, abi.CNA_GameFrameHooks, abi.CNA_GameCreateInfo,
         abi.CNA_Color, abi.CNA_Vector2, abi.CNA_Vector3, abi.CNA_Vector4,
+        abi.CNA_AudioCapabilities, abi.CNA_SoundEffectCreateInfo,
+        abi.CNA_SoundEffectInstanceInfo, abi.CNA_AudioEmitter,
+        abi.CNA_AudioListener, abi.CNA_CueInfo,
         abi.CNA_Quaternion, abi.CNA_Matrix,
         abi.CNA_Rectangle, abi.CNA_Viewport, abi.CNA_DisplayMode,
         abi.CNA_GraphicsAdapterInfo, abi.CNA_GraphicsFormatSelection,
@@ -99,6 +102,7 @@ def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
         "VALUE:CNA_GraphicsResourceDisposingCallback": ctypes.sizeof(abi.CNA_GraphicsResourceDisposingCallback),
         "VALUE:CNA_GraphicsDeviceEventCallback": ctypes.sizeof(abi.CNA_GraphicsDeviceEventCallback),
         "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": ctypes.sizeof(abi.CNA_PreparingDeviceSettingsMutatorEXT),
+        "VALUE:CNA_AudioEventCallback": ctypes.sizeof(abi.CNA_AudioEventCallback),
     }
     for name, value in TYPES.items():
         result[f"SIZE:{name}"] = ctypes.sizeof(value)

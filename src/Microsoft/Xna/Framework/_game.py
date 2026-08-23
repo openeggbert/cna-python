@@ -588,6 +588,11 @@ class Game:
                     component.Dispose()
             self._components.Clear()
             self.Content.Dispose()
+            # Indexed microphones are runtime-owned facades rather than game
+            # child handles. Their registrations must still be released before
+            # the game invalidates the indexed device table.
+            from .Audio._microphone import _dispose_microphones_for_game
+            _dispose_microphones_for_game(self)
             entered_device = False
             try:
                 if (self._graphics_manager is not None and self._host is not None

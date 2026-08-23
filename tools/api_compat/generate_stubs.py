@@ -45,6 +45,13 @@ HEADERS = {
         "T = TypeVar(\"T\")",
         "TVertex = TypeVar(\"TVertex\", bound=\"IVertexType\")",
     ],
+    "Microsoft.Xna.Framework.Audio": [
+        "from datetime import timedelta",
+        "from enum import IntEnum",
+        "from typing import BinaryIO, ClassVar, Final, MutableSequence, Sequence, overload",
+        "from .. import Vector3",
+        "from .._language import Event",
+    ],
     "Microsoft.Xna.Framework.Input": [
         "from enum import IntEnum, IntFlag",
         "from typing import Any, Final, MutableSequence, Sequence, overload",
@@ -90,7 +97,8 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
         bases = "IntFlag" if expected.get("flags") else "IntEnum"
     elif expected.get("baseType") in targets:
         bases = projected_type_name(expected["baseType"])
-    elif expected.get("baseType") == "System.Exception":
+    elif (expected.get("baseType") == "System.Exception"
+          or rules.get("baseMappings", {}).get(expected.get("baseType")) == "Exception"):
         bases = "Exception"
     else:
         bases = ""
@@ -124,7 +132,10 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
             }])
             lines.extend(render_callable(name, signature))
         elif sample["kind"] == "property":
-            annotation = mapped_type(sample["type"], return_position=True)
+            annotation = rules.get("memberTypeMappings", {}).get(
+                f"{identity}.{sample['name']}",
+                mapped_type(sample["type"], return_position=True),
+            )
             if sample.get("static"):
                 wrapper = "ClassVar" if sample.get("set") else "Final"
                 lines.append(f"    {name}: {wrapper}[{annotation}]")

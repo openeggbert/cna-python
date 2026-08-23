@@ -2,35 +2,34 @@
 
 Date: 2026-08-23.
 
-`MILESTONE_5_COMPLETE=true`
+`MILESTONE_6_COMPLETE=true`
 
-Foundation Milestone 5 is complete. The public Effect + stock-effect + Model
-dependency closure is structurally complete, its native and Content/XNB paths
-are qualified against the exact CNA ABI-0.7 artifact, and the final wheel has
-passed both isolated consumers. No follow-on public XNA family was started.
+Foundation Milestone 6 is complete. All 19 XNA Audio types form one
+structurally complete, native-backed, callback-safe, ownership-ordered Audio and
+XACT subsystem. No Media, Storage, Design, Touch, PackedVector, Curve,
+GamerServices, OcclusionQuery, RenderTargetCube, or public FrameworkDispatcher
+work was started.
 
 ## Strict result
 
 ```text
-                                      M5 START  CONTINUATION  FINAL
-REFERENCE_TYPES                            257           257    257
-REFERENCE_MEMBERS                         2964          2964   2964
-EXPECTED_PYTHON_TYPES                      257           257    257
-EXPECTED_PYTHON_MEMBERS                   2887          2887   2887
-TARGET_TYPES                               126           161    161
-TARGET_MEMBERS                            1501          1643   1651
-TOTAL_DIAGNOSTICS                          131            96     96
-MISSING_TYPE                               131            96     96
-MISSING_MEMBER                               0             0      0
-COMPLETE_TYPES                             126           161    161
-PARTIAL_TYPES                                0             0      0
-MISSING_TYPES                              131            96     96
+                               M6 START  M6 FINAL
+REFERENCE_TYPES                      257       257
+REFERENCE_MEMBERS                   2964      2964
+EXPECTED_PYTHON_TYPES                257       257
+EXPECTED_PYTHON_MEMBERS             2887      2887
+TARGET_TYPES                         161       180
+TARGET_MEMBERS                      1651      1772
+TOTAL_DIAGNOSTICS                     96        77
+MISSING_TYPE                          96        77
+MISSING_MEMBER                         0         0
+COMPLETE_TYPES                       161       180
+PARTIAL_TYPES                          0         0
+MISSING_TYPES                         96        77
 ```
 
-The final 1,651 member count is the freshly regenerated authoritative mapping
-result; the continuation estimate of 1,643 was not forced. No new public type
-was added during the continuation. All 96 diagnostics are whole future types.
-The normal strict `--check` is nonzero only for those types.
+All 77 diagnostics are whole future types. Audio local diagnostics are zero,
+and normal strict `--check` is nonzero only for those absent types.
 
 ```text
 UNEXPECTED_TYPE=0
@@ -55,156 +54,172 @@ RAW_HANDLE_LEAK=0
 PUBLIC_NATIVE_FFI_LEAK=0
 ALLOWLIST_ENTRIES=0
 UNMEASURED_STRUCTURAL_CATEGORY=0
-ZERO_DIAGNOSTIC_TYPES=161
+ZERO_DIAGNOSTIC_TYPES=180
 ```
 
-## Dependency closure
+## Dependency closure and mapping
 
-The exact 35-type closure is:
+The exact 19 types are `AudioCategory`, `AudioChannels`, `AudioEmitter`,
+`AudioEngine`, `AudioListener`, `AudioStopOptions`, `Cue`,
+`DynamicSoundEffectInstance`, `InstancePlayLimitException`, `Microphone`,
+`MicrophoneState`, `NoAudioHardwareException`,
+`NoMicrophoneConnectedException`, `RendererDetail`, `SoundBank`, `SoundEffect`,
+`SoundEffectInstance`, `SoundState`, and `WaveBank`.
 
-- Effects: `Effect`, `EffectTechnique`, `EffectPass`, `EffectParameter`,
-  `EffectAnnotation`, their four collections, `EffectParameterClass`,
-  `EffectParameterType`, and `EffectMaterial`;
-- stock effects/interfaces: `BasicEffect`, `AlphaTestEffect`,
-  `DualTextureEffect`, `EnvironmentMapEffect`, `SkinnedEffect`,
-  `DirectionalLight`, `IEffectFog`, `IEffectLights`, and `IEffectMatrices`;
-- Model: `Model`, `ModelBone`, `ModelMesh`, `ModelMeshPart`, four collections,
-  and the four mapped collection enumerators;
-- required texture dependencies: `Texture3D` and `TextureCube`, required by
-  EffectParameter texture values and EnvironmentMapEffect.
+FrameworkDispatcher did not join. Audio metadata contains no dependency on the
+public type, while Game already runs CNA's one framework-dispatcher pump after a
+successful Update and skips it after a throwing Update. A second Python pump
+would duplicate callbacks.
 
-`OcclusionQuery`, `RenderTargetCube`, Curve, Touch, PackedVector, Audio, Media,
-Storage, Design, GamerServices, FrameworkDispatcher, and unrelated Graphics
-types were deliberately excluded.
+New contextual mappings are limited to nullable `Microphone.Default`, nullable
+default-struct strings (`AudioCategory.Name` and both RendererDetail strings),
+and `MutableSequence[int]` for the output buffer in Microphone.GetData.
+ExternalException maps to Python Exception for the three dedicated XNA Audio
+exceptions. No fake System support package was added.
 
-## Effect codecs and identity
+## Audio values and SoundEffect
 
-`Effect` is the sole owned native resource. Techniques, passes, parameters,
-annotations, directional lights, and collection handles are real native view
-identities. Children retain the Effect, release only their ABI-owned view
-handle, never destroy the Effect, and become invalid when the Effect is
-disposed. Repeat lookup and `CurrentTechnique` preserve stable public facade
-identity. Clone owns a distinct native Effect and independent reflection graph.
+- All five enums have exact identities. AudioListener and AudioEmitter have XNA
+  defaults, reference semantics, binary32 DopplerScale, and Vector3 copy
+  boundaries. RendererDetail has its exact default null strings, equality,
+  hash, copy, and type-name ToString behavior.
+- SoundEffect raw constructors accept copied PCM16, preserve format-first
+  seven-argument validation, alignment, loop, and range rules, and call
+  `cna_sound_effect_create_pcm16_range_ext`.
+- FromStream validates legal project-authored PCM16 RIFF/WAVE without
+  transcoding, then uses CNA's copied encoded-byte route. Mono/stereo at 8,
+  44.1, and 48 kHz, padded extra chunks, malformed/truncated chunks,
+  unsupported encoding, and stream exceptions are covered.
+- GetSampleDuration preserves XNA binary32 multiply/divide and TimeSpan
+  rounding. GetSampleSizeInBytes preserves binary32 `rate / 1000` followed by
+  binary64 multiplication. One second, 44.1-kHz mono is exactly 88,198 bytes.
+- MasterVolume, DistanceScale, DopplerScale, and SpeedOfSound use CNA's
+  process-global values and persist across Game recreation. XNA range, NaN,
+  infinity, signed-zero, and positive-epsilon rules are verified.
+- Play and CreateInstance use native routes. SoundEffect is owned, instances are
+  owned children which retain their effect, and both disposal orders, multiple
+  children, double disposal, context managers, shutdown, recreation, failure,
+  and wrong-thread refusal/retry are covered.
+- NULL audio accepts construction but produces no audible-output claim. Its
+  fire-and-forget Play returns false and native Duration reports zero; neither
+  behavior is hidden by Python state.
 
-The private codec layer implements the complete selected surface:
+Exception translation is narrow: legal SoundEffect creation result 6 becomes
+NoAudioHardwareException; CreateInstance result 3 becomes
+InstancePlayLimitException; Microphone.Start result 6 becomes
+NoMicrophoneConnectedException. Other CNA failures remain NativeError.
 
-| Value family | Getter | Setter | Array getter/setter |
-|---|---:|---:|---:|
-| Boolean, Int32, Single | yes | yes | yes |
-| UTF-8 String | yes | yes | not selected by XNA |
-| Vector2, Vector3, Vector4 | yes | yes | yes |
-| Quaternion | yes | yes | yes |
-| Matrix | yes | yes | yes |
-| Matrix transpose | yes | yes | yes |
-| Texture2D, Texture3D, TextureCube | yes | one native `SetValue` dispatch | not selected by XNA |
+## SoundEffectInstance and 3D
 
-Arrays use copied contiguous fixed-width storage; binary32, signed zero,
-NaN/Infinity, ordering, dimensions, count prefixes, heterogeneous/empty input,
-wrong types, disposed parents/textures, and wrong-device textures are covered.
-No ctypes object or native handle leaks through the public namespace. Texture
-getters return the retained existing facade and never create a duplicate owner.
+Volume, Pitch, Pan, IsLooped, State, Play/Pause/Resume, both Stop overloads,
+repeated Play, and Dispose call exact native routes. Defaults and validation are
+covered, including NaN, infinity, binary32 narrowing, and negative zero. Volume,
+Pitch, Pan, and IsLooped remain readable from their XNA caches after Dispose;
+State, setters, and transport fail. `Dispose(false)` still releases native
+ownership and does not rely on a Python finalizer.
 
-`EffectAnnotation` is read-only and implements native Boolean, Int32, Single,
-String, Vector2/3/4, and Matrix getters with metadata validation. Collection
-name/index lookup, repeat identity, UTF-8 copying, parent retention, and
-post-disposal invalidation are verified.
+Single-listener Apply3D is `VERIFIED_NATIVE`. The complete sequence overload
+calls the array ABI, but CNA ABI 0.7 explicitly rejects every listener count
+other than one. Multiple listeners are `UPSTREAM_CNA_BLOCKED` and raise
+NativeCapabilityError; there is no listener-zero fallback, averaging, or
+repeated single-listener approximation.
 
-## Stock effects
+## Dynamic audio and dispatcher
 
-| Family | Strict | Managed state/validation | Native create/state | Native Apply | Visible output |
-|---|---|---|---|---|---|
-| BasicEffect | complete | verified | verified | verified | not qualified on HEADLESS |
-| AlphaTestEffect | complete | verified | verified | verified | not qualified on HEADLESS |
-| DualTextureEffect | complete | verified | verified | verified | not qualified on HEADLESS |
-| EnvironmentMapEffect | complete | verified | verified | verified | not qualified on HEADLESS |
-| SkinnedEffect | complete | verified | verified | verified | not qualified on HEADLESS |
+DynamicSoundEffectInstance is the exact subclass and owns one ordinary native
+instance handle. SubmitBuffer accepts complete or offset/count byte sequences.
+Canonical CNA copies the bytes during the call, so bytes, bytearray, and
+memoryview inputs are not retained. Empty, invalid, odd-aligned, repeated,
+multiple-pending, drained, reentrant, and disposed paths are covered.
 
-All stock properties use the underlying CNA Effect state. Directional lights
-are stable native child views; BasicEffect reflection/property coherence and
-clone independence are verified. `EffectPass.Apply` uses the real reflected
-pass and is `VERIFIED_NATIVE`, not an upstream blocker.
+PendingBufferCount and sample helpers are native. BufferNeeded uses the exact
+`void (*)(void*)` ABI registration. The callback is strongly retained,
+owner-thread checked, exception-total at the C boundary, and unsubscribed before
+the handle or Game is destroyed. Duplicate/order/remove, self-removal,
+reentrant submit, exception short-circuit, later handlers, disposal in handler,
+shutdown, no callback after disposal, and throwing-Update pump suppression are
+verified. No Audio event loop and no second dispatcher exist.
 
-The legal project-authored conformance FXB (SHA-256
-`2e1fe1dd74d67f4395ae6db4451c1a19ee4478dfe7906f9d665a499e28d2a074`)
-reaches `cna_effect_create_compiled`. HEADLESS returns structured result 6, so
-the route and rollback are `VERIFIED_NATIVE` while compiled execution is
-`BACKEND_BLOCKED`. The fixture is not shipped.
+## Microphone
 
-## Texture3D and TextureCube
+Microphone.All is an identity-stable tuple of non-owning index facades and
+Default resolves into the same collection. The qualified NULL backend reports
+`All == ()` and `Default is None`; no pseudo-microphone or data is fabricated.
 
-Exact canonical routes are bound and used:
+Name, State, BufferDuration, SampleRate, IsHeadset, Start/Stop, both mutable
+GetData overloads, sample helpers, and BufferReady are complete over canonical
+index routes. Failed registration publishes no handle and cleanup occurs before
+Game destruction. With no physical capture device, enumeration is
+`VERIFIED_NATIVE` and real Start/GetData/BufferReady delivery is
+`HARDWARE_PENDING`.
+
+## XACT
+
+AudioEngine is the owned root. AudioCategory is a parent-owned, non-disposable
+value facade with stable repeated lookup identity and a privately released C
+facade. WaveBank and SoundBank are owned engine children; Cue is an owned
+SoundBank child retaining its engine dependencies. All constructors, public
+methods/events/properties, disposal shapes, invalidation, child-before-parent
+shutdown, and failed-output rollback are implemented.
+
+CNA's three-argument AudioEngine route accepts but explicitly ignores renderer
+id and look-ahead ticks; both are `UPSTREAM_CNA_BLOCKED`. No legal
+redistributable XGS/XSB/XWB fixture exists in the project/reference trees.
+Malformed settings and repeated bank failure routes are native and ownership-
+safe; successful category/cue acquisition and authored playback are
+`ASSET_PENDING`, not a CNA defect claim and not a fabricated graph.
+
+## Runtime capability inventory
+
+The generated inventory has 74 granular rows. Milestone 6 adds separate rows
+for SoundEffect, instances, both Apply3D shapes, dynamic streaming and callback,
+microphone enumeration/capture, AudioEngine, renderer/look-ahead, RendererDetail,
+AudioCategory, each bank/cue family, and authored playback. No selected Audio
+row is `UNIMPLEMENTED_CNA_PYTHON`.
+
+Key classifications:
+
+- `VERIFIED_NATIVE`: SoundEffect construction/commands, SoundEffectInstance,
+  single-listener Apply3D, DynamicSoundEffectInstance, BufferNeeded, microphone
+  enumeration, AudioEngine error/rollback route, WaveBank and SoundBank failure
+  routes;
+- `VERIFIED_MANAGED`: RendererDetail value behavior;
+- `UPSTREAM_CNA_BLOCKED`: multiple listeners, renderer selection, look-ahead;
+- `HARDWARE_PENDING`: physical microphone capture;
+- `ASSET_PENDING`: successful AudioCategory/Cue and authored XACT playback.
+
+## Behavior corpus
 
 ```text
-cna_texture3d_create/destroy/get_info/set_data/get_data
-cna_texturecube_create/destroy/get_info/set_data/get_data
+OBSERVATIONS: 111 -> 119
+ASSERTIONS: 496 -> 538
+FAILURES=0
+PROVENANCE=PURE_XNA_DERIVED
 ```
 
-Both implement exact Color codecs, mip/region/box/face validation, typed
-start/count, disposal, and device ownership. Unsupported formats are not
-reinterpreted.
+Audio groups cover enum identities, listener/emitter defaults, vector-copy
+boundaries, emitter NaN behavior, sample duration/size arithmetic,
+RendererDetail defaults, and AudioCategory defaults. NULL-audio results,
+microphone absence, playback timing, CNA result codes, and absent XACT assets
+are intentionally excluded from XNA golden behavior.
 
-- Texture3D implementation and ABI are complete; HEADLESS returns result 6 at
-  creation, so execution is `BACKEND_BLOCKED`. Twenty safe failed-create and
-  rollback cycles pass.
-- TextureCube create/info/dispose are `VERIFIED_NATIVE`; all six face contracts
-  are implemented. HEADLESS returns result 6 for Color transfer, so transfer
-  execution is `BACKEND_BLOCKED`. Twenty failed-transfer/dispose cycles pass.
-
-## Model XNB and draw
-
-The private general reader registry now contains `ModelReader` and
-`BasicEffectReader` plus the already real VertexDeclaration, VertexBuffer,
-IndexBuffer, value, and shared-resource readers. No reader is public and no
-asset-name condition exists.
-
-The deterministic legal Windows XNB v5 fixture is generated in tests and is
-not wheel data. It contains two named bones and a hierarchy, one named mesh,
-two tagged mesh parts, a bounding sphere, one real vertex declaration/buffer,
-one real index buffer, and one shared native BasicEffect. Both parts receive
-the same public buffer/effect facades, and ModelEffectCollection de-duplicates
-that Effect exactly once.
-
-Both uncompressed and LZX-compressed assets use the same reader table,
-ModelReader, shared-resource fixups, public graph constructors, and native
-resources. The compact Model payload uses one LZX frame; persistent multi-frame
-state is separately covered by the existing two-frame LZX qualification. An
-uncompressed external parent resolving to the compressed Model also passes.
+## ABI
 
 ```text
-UNCOMPRESSED_MODEL_XNB=PASS
-COMPRESSED_MODEL_XNB=PASS
-SHARED_BUFFER_IDENTITY=PASS
-SHARED_EFFECT_IDENTITY=PASS
-CACHE_IDENTITY=PASS
-UNLOAD_INVALIDATION=PASS
-RELOAD_NEW_GRAPH=PASS
-FAILURE_ROLLBACK=PASS
-MODEL_DRAW_NATIVE_DISPATCH=PASS
-MODEL_RENDERING_VISUALLY_VERIFIED=NO
-```
-
-The XNB-loaded draw path is Model -> Mesh/Parts -> shared buffers ->
-BasicEffect World/View/Projection -> real Technique/Pass ->
-`cna_effect_pass_apply` -> `cna_graphics_device_draw_indexed_primitives`.
-There is no Model renderer or custom parameter rewrite.
-
-Negative fixtures cover invalid root/parent/child/mesh-parent/shared-resource
-indices, missing Effect, wrong reader type, truncated vertex/index data, and
-injected buffer/Effect construction failure. Each failure rolls back, leaves
-the cache clean, and permits a later successful load and Game shutdown.
-
-## ABI and qualified runtime
-
-```text
-CONTINUATION_BOUND_FUNCTIONS: 214 -> 375
-MILESTONE_BOUND_FUNCTIONS: 188 -> 375
-CTYPES_SIGNATURE_MEASUREMENTS=375
-C_LAYOUT_MEASUREMENTS=653
-CTYPES_LAYOUT_MEASUREMENTS=653
+BOUND_FUNCTIONS: 375 -> 471
+CTYPES_SIGNATURE_MEASUREMENTS=471
+C_LAYOUT_MEASUREMENTS: 653 -> 708
+CTYPES_LAYOUT_MEASUREMENTS: 653 -> 708
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ABI=0.7.0 / 0x00000700
 ```
+
+The 96 used Audio/XACT imports have explicit argtypes/restype, pointer depth,
+width, signedness, ownership, and export checks. New callback and layout
+measurements cover CNA_AudioEventCallback, CNA_AudioCapabilities,
+CNA_SoundEffectCreateInfo, CNA_SoundEffectInstanceInfo, CNA_AudioEmitter,
+CNA_AudioListener, and CNA_CueInfo.
 
 Qualified artifact:
 
@@ -217,72 +232,46 @@ audio=NULL
 ```
 
 Current CNA HEAD was rechecked read-only at
-`1bb2145d99ed572dd4eb15009c34e2e5f410fcf0`; its C-API build remains blocked
-upstream at `CnaCApiCoreExt.cpp:250` by renderer identity `49 == 50`. CNA was
-not modified.
+`1bb2145d99ed572dd4eb15009c34e2e5f410fcf0`. Its C-API build remains blocked
+by the known renderer identity 49-versus-50 guard. CNA was not modified.
 
-## Behavior and ownership
-
-```text
-OBSERVATIONS: 108 -> 111
-ASSERTIONS: 465 -> 496
-FAILURES=0
-PROVENANCE=pinned XNA metadata and IL/algorithm analysis; not HEADLESS behavior
-```
-
-New platform-neutral groups cover Effect enums/defaults/validation, light
-identity/defaults, Model collection behavior, graph identity, and bone matrix
-copying. CNA pointer/result/draw behavior remains integration evidence.
+## Ownership stress
 
 ```text
-EFFECT_BASE_CYCLES=20
-EFFECT_CLONE_CYCLES=20
-EFFECT_PARAMETER_CYCLES=20
-EFFECT_PARENT_CHILD_CYCLES=20
-STOCK_EFFECT_CYCLES=20
-MODEL_DIRECT_GRAPH_CYCLES=20
-MODEL_XNB_CYCLES=20
-COMPRESSED_MODEL_CYCLES=20
-MODEL_DRAW_CYCLES=20
-MODEL_UNLOAD_RELOAD_CYCLES=20
-TEXTURE3D_FAILED_CREATE_CYCLES=20
-TEXTURECUBE_FAILED_TRANSFER_CYCLES=20
+SOUND_EFFECT_CYCLES=20
+INSTANCE_CYCLES=20
+DYNAMIC_INSTANCE_CYCLES=20
+DYNAMIC_CALLBACK_CYCLES=50
+MICROPHONE_REGISTRATION_ATTEMPT_CYCLES=20
+MICROPHONE_REGISTRATION_SUCCESS_CYCLES=0
+AUDIO_ENGINE_ATTEMPT_CYCLES=20
+AUDIO_ENGINE_SUCCESS_CYCLES=0
+FAILED_WAVEBANK_CYCLES=20
+FAILED_SOUNDBANK_CYCLES=20
+WRONG_THREAD_REFUSAL_CYCLES=1
+GAME_RECREATION_CYCLES=1
 NATIVE_CRASHES=0
 OBSERVED_UAF=0
 DOUBLE_FREE=0
 SANITIZER_STATUS=NOT_RUN
 ```
 
-The pre-existing general native and Content stress suites also pass at 20
-cycles. No allocator-level leak claim is made without sanitizers.
+Zero microphone/engine successes reflect the qualified hardware/asset boundary,
+not omitted attempts. The pre-existing native, Content, and Effect/Model stress
+suites also pass at 20 cycles with zero crashes or observed lifetime failures.
+No allocator-level leak claim is made without sanitizers.
 
-## Runtime capability inventory
-
-The 57-row inventory records these Milestone 5 capabilities separately:
-
-- `VERIFIED_NATIVE`: Effect reflection, typed parameters, annotations,
-  EffectPass.Apply, compiled create route, all five stock effects,
-  EffectMaterial, TextureCube creation/metadata, Model.Draw dispatch, Model XNB,
-  and compressed Model XNB;
-- `VERIFIED_MANAGED`: Model graph semantics;
-- `BACKEND_BLOCKED`: compiled Effect execution, stock-effect visible output,
-  Texture3D creation, TextureCube Color transfer, and Model visible output.
-
-There is no coarse “Effects blocked” classification. No Milestone 5 row remains
-`UNIMPLEMENTED_CNA_PYTHON`; unrelated `RenderTargetCube` remains explicitly
-deferred.
-
-## Final package and isolated consumers
+## Final package
 
 Version remains `0.1.0.dev0`.
 
 ```text
 WHEEL_FILENAME=cna_python-0.1.0.dev0-py3-none-any.whl
-WHEEL_SHA256=a0c4167e87afe34bff78d96878c4f5196bf203b77191cf9338155878cb91da33
-WHEEL_ENTRIES=49
+WHEEL_SHA256=ee908046e07b44a528e244c7fe3310f668205f4d862103dadff02e7dbe9ffccc
+WHEEL_ENTRIES=55
 SDIST_FILENAME=cna_python-0.1.0.dev0.tar.gz
-SDIST_SHA256=2f290dce01e90722de9497dc78978d5b980a0ae1dbdf7988947f2d9cca2e6ce6
-SDIST_ENTRIES=123
+SDIST_SHA256=f7f722662627432270770fc69f14f31fffb2659e5c5b647bca5e1a71c84d05c7
+SDIST_ENTRIES=133
 FORBIDDEN_WHEEL_ENTRIES=0
 FORBIDDEN_SDIST_ENTRIES=0
 ABSOLUTE_DEVELOPER_PATHS=0
@@ -290,43 +279,84 @@ BUNDLED_NATIVE_LIBRARIES=0
 MICROSOFT_OR_PROPRIETARY_CONTENT=0
 ```
 
-A fresh generated consumer installed that exact wheel with no editable install,
-source checkout import, sibling dependency, or `PYTHONPATH`. Import and compile
-probes pass; 60 and 600 frame runs pass.
+Audio contains no package-data WAV/XACT asset. Deterministic WAV bytes are
+created only by tests and source-distribution test code.
 
-The maintained template source was unchanged in Milestone 5. A byte-identical
-clean copy in `/tmp` installed the same exact wheel and passed import, compile,
-60 frames, and 600 frames. The generated exact-wheel consumer also passed
-60/600. No Effect, Model, shader, or 3D showcase was added.
+## Isolated consumers and template
 
-## Remaining inventory
+The exact final wheel above was installed with `--no-index --no-deps` into
+fresh venvs with no editable install, source checkout import, sibling runtime
+dependency, or PYTHONPATH.
 
-The 96 whole missing types are: Framework Curve/FrameworkDispatcher 7, Audio
-19, Design 13, GamerServices 1, unrelated Graphics 2 (`OcclusionQuery`,
-`RenderTargetCube`), PackedVector 19, Touch 8, Media 24, and Storage 3.
+```text
+ISOLATED_IMPORT_PROBE=PASS
+ISOLATED_AUDIO_IMPORT_PROBE=PASS
+ISOLATED_COMPILE_PROBE=PASS
+GENERATED_SMOKE_60=PASS
+GENERATED_STABILITY_600=PASS
+MAINTAINED_SMOKE_60=PASS
+MAINTAINED_STABILITY_600=PASS
+ABSOLUTE_DEVELOPER_PATHS=0
+SIBLING_SOURCE_DEPENDENCIES=0
+PYTHONPATH_SOURCE_DEPENDENCIES=0
+TEMPLATE_SOURCE_CHANGED=NO
+```
 
-No follow-on family is started. The next coherent architectural boundary should
-be the Audio runtime/content graph—SoundEffect/instances/dynamic streaming and
-AudioEngine/WaveBank/SoundBank/Cue, with microphone and FrameworkDispatcher
-only where authoritative dependencies require them—not whichever family has
-the fewest types.
+The maintained template remains the raw PNG plus Texture2D XNB 2D lifecycle
+canary. No WAV, microphone, XACT, Effect, Model, or Audio showcase was added.
+
+## Remaining exact inventory
+
+The regenerated 77 whole missing types are:
+
+- Framework (7): `Curve`, `CurveContinuity`, `CurveKey`,
+  `CurveKeyCollection`, `CurveLoopType`, `CurveTangent`,
+  `FrameworkDispatcher`;
+- Design (13): `BoundingBoxConverter`, `BoundingSphereConverter`,
+  `ColorConverter`, `MathTypeConverter`, `MatrixConverter`, `PlaneConverter`,
+  `PointConverter`, `QuaternionConverter`, `RayConverter`,
+  `RectangleConverter`, `Vector2Converter`, `Vector3Converter`,
+  `Vector4Converter`;
+- GamerServices (1): `GamerServicesComponent`;
+- Graphics (2): `OcclusionQuery`, `RenderTargetCube`;
+- PackedVector (19): `Alpha8`, `Bgr565`, `Bgra4444`, `Bgra5551`, `Byte4`,
+  `HalfSingle`, `HalfVector2`, `HalfVector4`, `IPackedVector`,
+  `IPackedVector<T>`, `NormalizedByte2`, `NormalizedByte4`,
+  `NormalizedShort2`, `NormalizedShort4`, `Rg32`, `Rgba1010102`, `Rgba64`,
+  `Short2`, `Short4`;
+- Touch (8): `GestureSample`, `GestureType`, `TouchCollection`,
+  `TouchCollection.Enumerator`, `TouchLocation`, `TouchLocationState`,
+  `TouchPanel`, `TouchPanelCapabilities`;
+- Media (24): `Album`, `AlbumCollection`, `Artist`, `ArtistCollection`, `Genre`,
+  `GenreCollection`, `MediaLibrary`, `MediaPlayer`, `MediaQueue`, `MediaSource`,
+  `MediaSourceType`, `MediaState`, `Picture`, `PictureAlbum`,
+  `PictureAlbumCollection`, `PictureCollection`, `Playlist`,
+  `PlaylistCollection`, `Song`, `SongCollection`, `Video`, `VideoPlayer`,
+  `VideoSoundtrackType`, `VisualizationData`;
+- Storage (3): `StorageContainer`, `StorageDevice`,
+  `StorageDeviceNotConnectedException`.
+
+The machine-readable and rendered inventories are in
+`docs/generated/missing-type-inventory.json` and `.md`. No next family was
+started.
 
 ## Reproduction
 
 ```bash
 python3 -m compileall -q src tests tools
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so CNA_PYTHON_COMPILED_EFFECT_FIXTURE=/absolute/path/CnaConformanceEffect.fxb python3 -m unittest discover -v
+CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so python3 -m unittest discover -v
 python3 tools/api_compat/test_verify.py
 python3 tools/api_compat/generate_stubs.py
 python3 tools/api_compat/verify.py --report --output docs/generated/api-compat-report.json --inventory
 python3 tools/api_compat/verify.py --leak-only
-python3 tools/api_compat/verify.py --check  # nonzero only for 96 absent types
+python3 tools/api_compat/verify.py --check  # nonzero only for 77 absent types
 python3 tools/run_behavior_corpus.py --output docs/generated/behavior-corpus-report.json
 python3 tools/generate_runtime_capabilities.py
 python3 tools/audit_cna_abi.py --cna-root /qualified/cna/source --library /absolute/path/libcna_c_api.so --output docs/generated/cna-abi-report.json
 CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/native_ownership_stress.py --cycles 20
 CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/content_ownership_stress.py --cycles 20
 CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/effect_model_ownership_stress.py --cycles 20
+CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/audio_ownership_stress.py --cycles 20 --callback-cycles 50
 PYTHONPATH=/tmp/cna-python-build-tools python3 -m build --no-isolation
 python3 tools/audit_package.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --sdist dist/cna_python-0.1.0.dev0.tar.gz
 python3 tools/verify_consumer.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --template ../cna-python-template --library /absolute/path/libcna_c_api.so

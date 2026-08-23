@@ -1,6 +1,6 @@
 # Missing XNA type inventory
 
-Missing types: **96**.
+Missing types: **77**.
 
 ## Microsoft.Xna.Framework
 
@@ -11,28 +11,6 @@ Missing types: **96**.
 - `CurveLoopType`
 - `CurveTangent`
 - `FrameworkDispatcher`
-
-## Microsoft.Xna.Framework.Audio
-
-- `AudioCategory`
-- `AudioChannels`
-- `AudioEmitter`
-- `AudioEngine`
-- `AudioListener`
-- `AudioStopOptions`
-- `Cue`
-- `DynamicSoundEffectInstance`
-- `InstancePlayLimitException`
-- `Microphone`
-- `MicrophoneState`
-- `NoAudioHardwareException`
-- `NoMicrophoneConnectedException`
-- `RendererDetail`
-- `SoundBank`
-- `SoundEffect`
-- `SoundEffectInstance`
-- `SoundState`
-- `WaveBank`
 
 ## Microsoft.Xna.Framework.Design
 

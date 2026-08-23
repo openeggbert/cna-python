@@ -4,8 +4,8 @@
   "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
   "category": "PURE_XNA_DERIVED",
   "summary": {
-    "OBSERVATIONS": 111,
-    "ASSERTIONS": 496,
+    "OBSERVATIONS": 119,
+    "ASSERTIONS": 538,
     "FAILURES": 0
   },
   "results": [
@@ -1763,6 +1763,170 @@
         3.0,
         2.0,
         99.0
+      ]
+    },
+    {
+      "id": "audio.enum.values",
+      "passed": true,
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "actual": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "audio.listener.emitter.defaults",
+      "passed": true,
+      "expected": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "actual": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "audio.vector.copy.boundaries",
+      "passed": true,
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ]
+    },
+    {
+      "id": "audio.emitter.doppler.nan",
+      "passed": true,
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ]
+    },
+    {
+      "id": "audio.sample.duration",
+      "passed": true,
+      "expected": [
+        0,
+        1000,
+        1000000,
+        1000000
+      ],
+      "actual": [
+        0,
+        1000,
+        1000000,
+        1000000
+      ]
+    },
+    {
+      "id": "audio.sample.size",
+      "passed": true,
+      "expected": [
+        88198,
+        176400,
+        1600,
+        0
+      ],
+      "actual": [
+        88198,
+        176400,
+        1600,
+        0
+      ]
+    },
+    {
+      "id": "audio.renderer.default",
+      "passed": true,
+      "expected": [
+        null,
+        null,
+        0,
+        true,
+        "Microsoft.Xna.Framework.Audio.RendererDetail"
+      ],
+      "actual": [
+        null,
+        null,
+        0,
+        true,
+        "Microsoft.Xna.Framework.Audio.RendererDetail"
+      ]
+    },
+    {
+      "id": "audio.category.default",
+      "passed": true,
+      "expected": [
+        "",
+        true,
+        0
+      ],
+      "actual": [
+        "",
+        true,
+        0
       ]
     }
   ]

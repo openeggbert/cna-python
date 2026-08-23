@@ -29,16 +29,24 @@ uncompressed plus LZX-compressed Model XNB graphs over shared buffers and
 BasicEffect. Model.Draw uses the ordinary pass and indexed-draw pipeline. See
 [`docs/effect-model-evidence.md`](docs/effect-model-evidence.md).
 
+Foundation Milestone 6 adds the complete 19-type Audio/XACT family: native
+SoundEffect and instances, dynamic copied-buffer streaming and owner-thread
+callbacks, real microphone enumeration, and the AudioEngine/category/bank/cue
+ownership graph. Multi-listener mixing remains an explicit CNA ABI-0.7 blocker;
+physical capture is hardware-pending and successful authored XACT playback is
+asset-pending. See [`docs/audio-xact-evidence.md`](docs/audio-xact-evidence.md).
+
 The maintained sibling starter completes 60- and 600-frame installed-wheel
 runs with both a raw PNG and a legal synthetic Texture2D XNB.
 
-This is not a complete XNA binding. The strict verifier exposes 161 of 257
+This is not a complete XNA binding. The strict verifier exposes 180 of 257
 reference types, all locally zero-diagnostic. Its full check intentionally
-remains red for 96 wholly missing future types; missing members and partial
+remains red for 77 wholly missing future types; missing members and partial
 types are zero. Every structural mismatch, native leak, allowlist, and
-unmeasured-category counter is zero. Audio, media, storage, touch, PackedVector,
-Curve, Design, and unrelated Graphics families remain future
-dependency-complete milestones. No native library is bundled in the wheel.
+unmeasured-category counter is zero. Media, storage, touch, PackedVector,
+Curve, Design, GamerServices, FrameworkDispatcher, and unrelated Graphics
+families remain future dependency-complete milestones. No native library is
+bundled in the wheel.
 
 ## Running
 
@@ -58,15 +66,17 @@ API is imported.
 
 | Platform/backend | Evidence |
 | --- | --- |
-| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/stock-effect state and Apply, Model XNB/draw command paths, ownership stress, and raw-PNG plus XNB 60/600 frames verified |
+| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/Model paths, SoundEffect/dynamic Audio routes, zero-device microphone enumeration, Audio/XACT ownership stress, and raw-PNG plus XNB 60/600 frames verified |
 | Linux windowed/GPU renderer | Not yet verified |
 | Windows | Not yet verified |
 | macOS | Not yet verified |
 | Android / iOS | Not verified |
 | Web / Pyodide | Not supported by the current native-library architecture |
 
-HEADLESS command completion is not visible GPU output. It also cannot prove OS
-window transitions, deterministic device loss, or physical input hardware.
+HEADLESS command completion is not visible GPU output. NULL audio does not prove
+audible playback or physical microphone capture, and no legal authored XACT
+bank fixture is available. The qualified host also cannot prove OS window
+transitions, deterministic device loss, or physical input hardware.
 Those distinctions are recorded in
 [`docs/generated/runtime-capabilities.md`](docs/generated/runtime-capabilities.md).
 

@@ -4,10 +4,19 @@ import json
 from pathlib import Path
 import unittest
 
-from verify import diagnose_broken_fixture
+from verify import diagnose_broken_fixture, expected_callable
 
 
 class BrokenFixtureTests(unittest.TestCase):
+    def test_audio_contextual_member_mappings_are_machine_measured(self) -> None:
+        get_data = expected_callable({
+            "kind": "method", "name": "GetData", "returnType": "System.Int32",
+            "genericParameters": [], "parameters": [{
+                "name": "buffer", "type": "System.Byte[]", "out": False,
+            }],
+        }, "GetData", "Microsoft.Xna.Framework.Audio.Microphone")
+        self.assertEqual(get_data.parameters[0].annotation, "MutableSequence[int]")
+
     def test_deliberately_broken_fixtures_cover_required_categories(self) -> None:
         fixtures = json.loads((Path(__file__).parent / "fixtures/broken.json").read_text())
         expected = {

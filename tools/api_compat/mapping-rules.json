@@ -28,8 +28,16 @@
   "typeMappings": {
     "System.Resources.ResourceManager": "object"
   },
+  "memberTypeMappings": {
+    "Microsoft.Xna.Framework.Audio.AudioCategory.Name": "str | None",
+    "Microsoft.Xna.Framework.Audio.Microphone.Default": "Microphone | None",
+    "Microsoft.Xna.Framework.Audio.Microphone.GetData.buffer": "MutableSequence[int]",
+    "Microsoft.Xna.Framework.Audio.RendererDetail.FriendlyName": "str | None",
+    "Microsoft.Xna.Framework.Audio.RendererDetail.RendererId": "str | None"
+  },
   "baseMappings": {
     "System.Attribute": "object",
+    "System.Runtime.InteropServices.ExternalException": "Exception",
     "System.IO.BinaryReader": "composition:_BinaryReader"
   },
   "languageMembers": [

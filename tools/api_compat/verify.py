@@ -38,6 +38,7 @@ CATEGORIES = (
 
 PACKAGES = (
     "Microsoft.Xna.Framework",
+    "Microsoft.Xna.Framework.Audio",
     "Microsoft.Xna.Framework.Graphics",
     "Microsoft.Xna.Framework.Input",
     "Microsoft.Xna.Framework.Content",
@@ -51,6 +52,7 @@ STUB_PATHS = {
 _RULE_DATA = json.loads(RULES.read_text())
 _TYPE_NAMES: dict[str, str] = _RULE_DATA.get("typeNames", {})
 _TYPE_MAPPINGS: dict[str, str] = _RULE_DATA.get("typeMappings", {})
+_MEMBER_TYPE_MAPPINGS: dict[str, str] = _RULE_DATA.get("memberTypeMappings", {})
 
 
 def projected_type_name(identity: str) -> str:
@@ -362,13 +364,18 @@ def _projected_generic_name(value: dict[str, Any]) -> str:
     return value["name"]
 
 
-def expected_callable(member: dict[str, Any], projected: str) -> ExpectedCallable:
+def expected_callable(member: dict[str, Any], projected: str,
+                      owner_identity: str | None = None) -> ExpectedCallable:
     generic_names = tuple(_projected_generic_name(value)
                           for value in member.get("genericParameters", ()))
     parameters = tuple(
         ExpectedParameter(
             parameter["name"] or "value",
-            mapped_type(parameter["type"], parameter_name=parameter["name"] or "value", typevars=generic_names),
+            _MEMBER_TYPE_MAPPINGS.get(
+                f"{owner_identity}.{member['name']}.{parameter['name'] or 'value'}",
+                mapped_type(parameter["type"], parameter_name=parameter["name"] or "value",
+                            typevars=generic_names),
+            ),
             bool(parameter.get("optional")),
         )
         for parameter in member.get("parameters", ()) if not parameter.get("out")
@@ -397,7 +404,7 @@ def expected_callables(owner: dict[str, Any], name: str,
                        members: list[dict[str, Any]]) -> list[ExpectedCallable]:
     result: list[ExpectedCallable] = []
     for member in members:
-        value = expected_callable(member, name)
+        value = expected_callable(member, name, owner["name"])
         if value not in result:
             result.append(value)
     if members[0]["kind"] == "constructor" and owner["kind"] == "struct":
@@ -821,6 +828,10 @@ def verify() -> dict[str, Any]:
                 if object not in target.__bases__ or stub.bases:
                     add(diagnostics, "BASE_MAPPING_MISMATCH", identity,
                         f"{base_name} must map to an implicit Python object base")
+            elif base_mapping == "Exception":
+                if not issubclass(target, Exception) or "Exception" not in stub.bases:
+                    add(diagnostics, "BASE_MAPPING_MISMATCH", identity,
+                        f"{base_name} must map to Python Exception")
             else:
                 add(diagnostics, "UNMEASURED_STRUCTURAL_CATEGORY", identity,
                     f"unknown formal base mapping {base_name} -> {base_mapping}")
@@ -901,13 +912,16 @@ def verify() -> dict[str, Any]:
                 if not shaped or can_get != bool(sample.get("get")) or can_set != bool(sample.get("set")):
                     add(diagnostics, "PROPERTY_MAPPING_MISMATCH", identity,
                         f"{name}: expected get={sample.get('get')} set={sample.get('set')} static={sample.get('static')}")
-                expected_type = mapped_type(sample["type"], return_position=True)
+                expected_type = _MEMBER_TYPE_MAPPINGS.get(
+                    f"{identity}.{sample['name']}",
+                    mapped_type(sample["type"], return_position=True),
+                )
                 if name == "__getitem__":
                     expected_indexers = [expected_callable({
                         "kind": "method", "name": "Item", "static": False,
                         "returnType": sample["type"], "parameters": sample.get("parameters", ()),
                         "genericParameters": [],
-                    }, name)]
+                    }, name, identity)]
                     declarations = stub.callables.get(name, [])
                     if not declarations:
                         add(diagnostics, "PROPERTY_MAPPING_MISMATCH", identity,

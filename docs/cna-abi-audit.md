@@ -31,21 +31,23 @@ metadata, templates, and wheel contents. The wheel contains no native library.
 `_cna_native.loader.FUNCTION_MANIFEST` is the exact selected import manifest.
 Every entry supplies `restype` and `argtypes`, including pointer depth and
 fixed-width signedness. In addition to the established Game, 2D graphics, input,
-SpriteFont, buffer, and title routes, Foundation Milestone 5 imports only the
-used Effect ownership/reflection/typed-value, stock-effect, DirectionalLight,
-Texture3D, and TextureCube routes. Model deliberately uses ordinary existing
-buffer/effect/indexed-draw calls rather than a special native renderer. This is
-not a claim that all CNA exports are bound.
+SpriteFont, buffer, title, Effect, stock-effect, Texture3D/Cube, and Model
+routes, Foundation Milestone 6 imports 96 used Audio/XACT routes. These cover
+SoundEffect, instances, single/multiple-listener 3D calls, dynamic streaming,
+microphones, one shared unsubscribe route, and the AudioEngine/category/bank/cue
+graph. Unused Audio capability, native-disposed, renderer-equality, and XACT
+observer routes are deliberately not imported. This is not a claim that all CNA
+exports are bound.
 
 The ABI probe compares `sizeof`, `_Alignof`, and every field offset for each
 ctypes structure used. ELF verification compares every imported symbol against
 the qualified artifact. Exact regenerated measurements are:
 
 ```text
-BOUND_FUNCTIONS=375
-CTYPES_SIGNATURE_MEASUREMENTS=375
-C_LAYOUT_MEASUREMENTS=653
-CTYPES_LAYOUT_MEASUREMENTS=653
+BOUND_FUNCTIONS=471
+CTYPES_SIGNATURE_MEASUREMENTS=471
+C_LAYOUT_MEASUREMENTS=708
+CTYPES_LAYOUT_MEASUREMENTS=708
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
@@ -55,6 +57,15 @@ signed dimensions/ticks as `int32_t`/`int64_t`, and opaque handles as
 `uint64_t`. Structures passed by value are distinguished from pointers to
 caller-owned output. Callback objects and message buffers stay alive for the
 full native registration/use lifetime.
+
+The new ABI measurements include `CNA_AudioEventCallback` and exact size,
+alignment, and offsets for `CNA_AudioCapabilities`,
+`CNA_SoundEffectCreateInfo`, `CNA_SoundEffectInstanceInfo`,
+`CNA_AudioEmitter`, `CNA_AudioListener`, and `CNA_CueInfo`. The callback is
+exactly `void (*)(void*)`; CNA documents dynamic delivery on the thread that
+advances the queue, which is the Game thread under the framework dispatcher.
+ctypes callbacks are strongly retained until `cna_audio_unsubscribe_ext`
+succeeds, and no Python exception crosses the C boundary.
 
 The qualified artifact predates CNA HEAD's rejection of bound vertex/index
 buffer destruction, so CNA-Python adds an explicit facade guard before calling
@@ -67,4 +78,8 @@ generated rendering documents HEADLESS limits, missing non-default Present,
 identityless resource events, the split dynamic-vertex offset/options routes,
 verified managed/native Content/XNB routes, erased-generic limitations, and the
 separate Effect/Model command paths, Texture3D/Cube HEADLESS boundaries, and
-the still-deferred unrelated RenderTargetCube family.
+granular Audio/XACT results. ABI 0.7 explicitly refuses multi-listener counts
+other than one and explicitly ignores AudioEngine renderer/look-ahead values;
+CNA-Python reports both instead of approximating them. Microphone capture is
+hardware-pending on the zero-device NULL backend, authored XACT success is
+asset-pending, and the unrelated RenderTargetCube family remains deferred.

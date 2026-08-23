@@ -32,6 +32,10 @@ from Microsoft.Xna.Framework.Content import (  # noqa: E402
     ContentTypeReaderOfT, ResourceContentManager,
 )
 from Microsoft.Xna.Framework.Content._content import _register_content_type_reader  # noqa: E402
+from Microsoft.Xna.Framework.Audio import (  # noqa: E402
+    AudioCategory, AudioChannels, AudioEmitter, AudioListener, AudioStopOptions,
+    MicrophoneState, RendererDetail, SoundEffect, SoundState,
+)
 
 
 def vector2(value): return Vector2(*value)
@@ -85,6 +89,35 @@ class _CorpusExternalReader(ContentTypeReaderOfT[_CorpusShared]):
 
 
 def observe(operation: str, args: list[object]) -> object:
+    if operation == "Audio.EnumValues":
+        return [[int(value) for value in enum] for enum in (
+            AudioChannels, AudioStopOptions, SoundState, MicrophoneState)]
+    if operation == "Audio.ListenerEmitterDefaults":
+        listener=AudioListener();emitter=AudioEmitter()
+        return [*listener.Position,*listener.Velocity,*listener.Forward,*listener.Up,
+                emitter.DopplerScale]
+    if operation == "Audio.VectorCopyBoundaries":
+        listener=AudioListener();source=Vector3(1,2,3);listener.Position=source;source.X=9
+        result=listener.Position;result.Y=8
+        return [listener.Position==Vector3(1,2,3),result is not listener.Position]
+    if operation == "Audio.EmitterDopplerNaN":
+        value=AudioEmitter();value.DopplerScale=math.nan
+        try:value.DopplerScale=-1.0
+        except ValueError:negative=True
+        else:negative=False
+        return [math.isnan(value.DopplerScale),negative]
+    if operation == "Audio.SampleDuration":
+        return [int(SoundEffect.GetSampleDuration(size,rate,AudioChannels(channels)).total_seconds()*1_000_000)
+                for size,rate,channels in args]
+    if operation == "Audio.SampleSize":
+        return [SoundEffect.GetSampleSizeInBytes(
+            __import__("datetime").timedelta(microseconds=microseconds),rate,AudioChannels(channels))
+            for microseconds,rate,channels in args]
+    if operation == "Audio.RendererDefault":
+        value=RendererDetail();copy=value.__copy__()
+        return [value.FriendlyName,value.RendererId,value.GetHashCode(),value==copy,value.ToString()]
+    if operation == "Audio.CategoryDefault":
+        value=AudioCategory();return [value.ToString(),value==AudioCategory(),value.GetHashCode()]
     if operation == "Content.SerializerDefaults":
         value=ContentSerializerAttribute()
         return [value.ElementName,value.FlattenContent,value.Optional,value.AllowNull,value.SharedResource,value.CollectionItemName,value.HasCollectionItemName]

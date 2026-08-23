@@ -66,23 +66,34 @@ def main() -> int:
         or name.endswith((".pyc", ".pyo", ".so", ".dll", ".dylib"))
         or "xna-probe" in name or "/tmp/" in name
     ))
+    all_names = wheel_names + sdist_names
+    bundled_native = sorted(name for name in all_names
+                            if name.lower().endswith((".so", ".dll", ".dylib")))
+    authored_audio = sorted(name for name in all_names if name.lower().endswith(
+        (".xgs", ".xsb", ".xwb", ".wav", ".wma", ".mp3", ".fxb")))
     print(f"WHEEL={wheel.name}")
     print(f"WHEEL_SHA256={sha256(wheel)}")
     print(f"WHEEL_FILES={len(wheel_names)}")
+    print(f"WHEEL_ENTRIES={len(wheel_names)}")
     print(f"SDIST={sdist.name}")
     print(f"SDIST_SHA256={sha256(sdist)}")
     print(f"SDIST_FILES={len(sdist_names)}")
+    print(f"SDIST_ENTRIES={len(sdist_names)}")
     for name, passed in required_checks.items():
         print(f"{name}={'PASS' if passed else 'FAIL'}")
     print(f"FORBIDDEN_WHEEL_ENTRIES={len(bad_wheel)}")
     print(f"FORBIDDEN_SDIST_ENTRIES={len(bad_sdist)}")
     print(f"ABSOLUTE_DEVELOPER_PATH_LEAKS={len(content_leaks)}")
+    print(f"ABSOLUTE_DEVELOPER_PATHS={len(content_leaks)}")
+    print(f"BUNDLED_NATIVE_LIBRARIES={len(bundled_native)}")
+    print(f"MICROSOFT_OR_PROPRIETARY_CONTENT={len(authored_audio)}")
     if bad_wheel or bad_sdist:
         for name in bad_wheel + bad_sdist:
             print(f"FORBIDDEN={name}")
     for name in content_leaks:
         print(f"DEVELOPER_PATH_LEAK={name}")
-    return 1 if bad_wheel or bad_sdist or content_leaks or not all(required_checks.values()) else 0
+    return 1 if (bad_wheel or bad_sdist or content_leaks or bundled_native
+                 or authored_audio or not all(required_checks.values())) else 0
 
 
 if __name__ == "__main__":

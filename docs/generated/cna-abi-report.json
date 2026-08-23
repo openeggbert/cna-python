@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 375,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 375,
-    "C_LAYOUT_MEASUREMENTS": 653,
-    "CTYPES_LAYOUT_MEASUREMENTS": 653,
+    "BOUND_FUNCTIONS": 471,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 471,
+    "C_LAYOUT_MEASUREMENTS": 708,
+    "CTYPES_LAYOUT_MEASUREMENTS": 708,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -54,6 +54,102 @@
     "cna_game_set_inactive_sleep_time_ticks",
     "cna_game_destroy",
     "cna_framework_dispatcher_update",
+    "cna_sound_effect_create_pcm16_range_ext",
+    "cna_sound_effect_create_from_encoded_ext",
+    "cna_sound_effect_get_duration_ticks",
+    "cna_sound_effect_get_name_size",
+    "cna_sound_effect_copy_name",
+    "cna_sound_effect_set_name",
+    "cna_sound_effect_create_instance",
+    "cna_sound_effect_destroy",
+    "cna_sound_effect_play",
+    "cna_sound_effect_play_with_settings",
+    "cna_sound_effect_get_master_volume",
+    "cna_sound_effect_set_master_volume",
+    "cna_sound_effect_get_distance_scale",
+    "cna_sound_effect_set_distance_scale",
+    "cna_sound_effect_get_doppler_scale",
+    "cna_sound_effect_set_doppler_scale",
+    "cna_sound_effect_get_speed_of_sound",
+    "cna_sound_effect_set_speed_of_sound",
+    "cna_sound_effect_instance_destroy",
+    "cna_sound_effect_instance_play",
+    "cna_sound_effect_instance_pause",
+    "cna_sound_effect_instance_resume",
+    "cna_sound_effect_instance_stop",
+    "cna_sound_effect_instance_get_info",
+    "cna_sound_effect_instance_set_volume",
+    "cna_sound_effect_instance_set_pitch",
+    "cna_sound_effect_instance_set_pan",
+    "cna_sound_effect_instance_set_is_looped",
+    "cna_sound_effect_instance_apply_3d",
+    "cna_sound_effect_instance_apply_3d_multi_ext",
+    "cna_dynamic_sound_effect_instance_create",
+    "cna_dynamic_sound_effect_instance_get_pending_buffer_count",
+    "cna_dynamic_sound_effect_instance_submit_buffer",
+    "cna_dynamic_sound_effect_instance_get_sample_duration_ticks",
+    "cna_dynamic_sound_effect_instance_get_sample_size_in_bytes",
+    "cna_dynamic_sound_effect_instance_subscribe_buffer_needed",
+    "cna_microphone_get_count",
+    "cna_microphone_get_default_index_ext",
+    "cna_microphone_get_name_size_at",
+    "cna_microphone_copy_name_at",
+    "cna_microphone_get_buffer_duration_ticks_at",
+    "cna_microphone_set_buffer_duration_ticks_at",
+    "cna_microphone_get_is_headset_at",
+    "cna_microphone_get_sample_rate_at",
+    "cna_microphone_get_state_at",
+    "cna_microphone_start_at",
+    "cna_microphone_stop_at",
+    "cna_microphone_get_data_at",
+    "cna_microphone_get_sample_duration_ticks_at",
+    "cna_microphone_get_sample_size_in_bytes_at",
+    "cna_microphone_subscribe_buffer_ready_at",
+    "cna_audio_unsubscribe_ext",
+    "cna_audio_engine_create",
+    "cna_audio_engine_create_with_renderer",
+    "cna_audio_engine_destroy",
+    "cna_audio_engine_update",
+    "cna_audio_engine_get_global_variable",
+    "cna_audio_engine_set_global_variable",
+    "cna_audio_engine_get_category",
+    "cna_audio_engine_get_renderer_count",
+    "cna_audio_engine_get_renderer_friendly_name_size",
+    "cna_audio_engine_copy_renderer_friendly_name",
+    "cna_audio_engine_get_renderer_id_size",
+    "cna_audio_engine_copy_renderer_id",
+    "cna_audio_engine_get_renderer_hash_code",
+    "cna_audio_category_destroy",
+    "cna_audio_category_get_name_size",
+    "cna_audio_category_copy_name",
+    "cna_audio_category_pause",
+    "cna_audio_category_resume",
+    "cna_audio_category_set_volume",
+    "cna_audio_category_stop",
+    "cna_audio_category_equals",
+    "cna_audio_category_get_hash_code",
+    "cna_wave_bank_create",
+    "cna_wave_bank_create_streaming",
+    "cna_wave_bank_destroy",
+    "cna_wave_bank_get_is_prepared",
+    "cna_wave_bank_get_is_in_use",
+    "cna_sound_bank_create",
+    "cna_sound_bank_destroy",
+    "cna_sound_bank_get_is_in_use",
+    "cna_sound_bank_get_cue",
+    "cna_sound_bank_play_cue",
+    "cna_sound_bank_play_cue_3d",
+    "cna_cue_destroy",
+    "cna_cue_get_info",
+    "cna_cue_get_name_size",
+    "cna_cue_copy_name",
+    "cna_cue_apply_3d",
+    "cna_cue_get_variable",
+    "cna_cue_set_variable",
+    "cna_cue_play",
+    "cna_cue_pause",
+    "cna_cue_resume",
+    "cna_cue_stop",
     "cna_graphics_device_manager_create",
     "cna_graphics_device_manager_set_graphics_profile",
     "cna_graphics_device_manager_set_preferred_depth_stencil_format",
@@ -847,6 +943,1027 @@
       ],
       "arity": 1,
       "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_sound_effect_create_pcm16_range_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SoundEffectCreateInfo>",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 9,
+      "ownership": "copies PCM; owned SoundEffect"
+    },
+    {
+      "symbol": "cna_sound_effect_create_from_encoded_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "copies encoded bytes; owned SoundEffect"
+    },
+    {
+      "symbol": "cna_sound_effect_get_duration_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sound_effect_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sound_effect_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sound_effect_set_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "copies name"
+    },
+    {
+      "symbol": "cna_sound_effect_create_instance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SoundEffectInstance child"
+    },
+    {
+      "symbol": "cna_sound_effect_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes SoundEffect"
+    },
+    {
+      "symbol": "cna_sound_effect_play",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SoundEffect"
+    },
+    {
+      "symbol": "cna_sound_effect_play_with_settings",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 5,
+      "ownership": "borrowed SoundEffect"
+    },
+    {
+      "symbol": "cna_sound_effect_get_master_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "process-global output"
+    },
+    {
+      "symbol": "cna_sound_effect_set_master_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "process-global setting"
+    },
+    {
+      "symbol": "cna_sound_effect_get_distance_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "process-global output"
+    },
+    {
+      "symbol": "cna_sound_effect_set_distance_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "process-global setting"
+    },
+    {
+      "symbol": "cna_sound_effect_get_doppler_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "process-global output"
+    },
+    {
+      "symbol": "cna_sound_effect_set_doppler_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "process-global setting"
+    },
+    {
+      "symbol": "cna_sound_effect_get_speed_of_sound",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "process-global output"
+    },
+    {
+      "symbol": "cna_sound_effect_set_speed_of_sound",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "process-global setting"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes SoundEffectInstance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_play",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_pause",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_resume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_stop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SoundEffectInstanceInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_set_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_set_pitch",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_set_pan",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_set_is_looped",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed instance"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_apply_3d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_AudioListener>",
+        "pointer<CNA_AudioEmitter>"
+      ],
+      "arity": 3,
+      "ownership": "copies listener/emitter"
+    },
+    {
+      "symbol": "cna_sound_effect_instance_apply_3d_multi_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_AudioListener>",
+        "c_ulong",
+        "pointer<CNA_AudioEmitter>"
+      ],
+      "arity": 4,
+      "ownership": "copies listeners/emitter; one listener only in ABI 0.7"
+    },
+    {
+      "symbol": "cna_dynamic_sound_effect_instance_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned dynamic instance child"
+    },
+    {
+      "symbol": "cna_dynamic_sound_effect_instance_get_pending_buffer_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_dynamic_sound_effect_instance_submit_buffer",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 5,
+      "ownership": "copies PCM buffer"
+    },
+    {
+      "symbol": "cna_dynamic_sound_effect_instance_get_sample_duration_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_long>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_dynamic_sound_effect_instance_get_sample_size_in_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_long",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_dynamic_sound_effect_instance_subscribe_buffer_needed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned callback registration"
+    },
+    {
+      "symbol": "cna_microphone_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_get_default_index_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_get_name_size_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_copy_name_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_get_buffer_duration_ticks_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_set_buffer_duration_ticks_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_long"
+      ],
+      "arity": 3,
+      "ownership": "borrowed microphone index"
+    },
+    {
+      "symbol": "cna_microphone_get_is_headset_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_get_sample_rate_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_get_state_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_start_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed microphone index"
+    },
+    {
+      "symbol": "cna_microphone_stop_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed microphone index"
+    },
+    {
+      "symbol": "cna_microphone_get_data_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_get_sample_duration_ticks_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "pointer<c_long>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_get_sample_size_in_bytes_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_long",
+        "pointer<c_int>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_microphone_subscribe_buffer_ready_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned callback registration"
+    },
+    {
+      "symbol": "cna_audio_unsubscribe_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes audio registration"
+    },
+    {
+      "symbol": "cna_audio_engine_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned AudioEngine child"
+    },
+    {
+      "symbol": "cna_audio_engine_create_with_renderer",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_long",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned AudioEngine child; renderer/look-ahead accepted but ignored"
+    },
+    {
+      "symbol": "cna_audio_engine_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes AudioEngine"
+    },
+    {
+      "symbol": "cna_audio_engine_update",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed AudioEngine"
+    },
+    {
+      "symbol": "cna_audio_engine_get_global_variable",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_engine_set_global_variable",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_float"
+      ],
+      "arity": 3,
+      "ownership": "borrowed AudioEngine"
+    },
+    {
+      "symbol": "cna_audio_engine_get_category",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned category C facade"
+    },
+    {
+      "symbol": "cna_audio_engine_get_renderer_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_engine_get_renderer_friendly_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_engine_copy_renderer_friendly_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_engine_get_renderer_id_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_engine_copy_renderer_id",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_engine_get_renderer_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_category_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes category C facade"
+    },
+    {
+      "symbol": "cna_audio_category_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_category_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_category_pause",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed category"
+    },
+    {
+      "symbol": "cna_audio_category_resume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed category"
+    },
+    {
+      "symbol": "cna_audio_category_set_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed category"
+    },
+    {
+      "symbol": "cna_audio_category_stop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed category"
+    },
+    {
+      "symbol": "cna_audio_category_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_audio_category_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_wave_bank_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned WaveBank child"
+    },
+    {
+      "symbol": "cna_wave_bank_create_streaming",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_int",
+        "c_short",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned streaming WaveBank child"
+    },
+    {
+      "symbol": "cna_wave_bank_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes WaveBank"
+    },
+    {
+      "symbol": "cna_wave_bank_get_is_prepared",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_wave_bank_get_is_in_use",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sound_bank_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned SoundBank child"
+    },
+    {
+      "symbol": "cna_sound_bank_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes SoundBank"
+    },
+    {
+      "symbol": "cna_sound_bank_get_is_in_use",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sound_bank_get_cue",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned Cue child"
+    },
+    {
+      "symbol": "cna_sound_bank_play_cue",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SoundBank"
+    },
+    {
+      "symbol": "cna_sound_bank_play_cue_3d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<CNA_AudioListener>",
+        "pointer<CNA_AudioEmitter>"
+      ],
+      "arity": 4,
+      "ownership": "copies listener/emitter"
+    },
+    {
+      "symbol": "cna_cue_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes Cue"
+    },
+    {
+      "symbol": "cna_cue_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CueInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_cue_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_cue_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_cue_apply_3d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_AudioListener>",
+        "pointer<CNA_AudioEmitter>"
+      ],
+      "arity": 3,
+      "ownership": "copies listener/emitter"
+    },
+    {
+      "symbol": "cna_cue_get_variable",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_cue_set_variable",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_float"
+      ],
+      "arity": 3,
+      "ownership": "borrowed Cue"
+    },
+    {
+      "symbol": "cna_cue_play",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed Cue"
+    },
+    {
+      "symbol": "cna_cue_pause",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed Cue"
+    },
+    {
+      "symbol": "cna_cue_resume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed Cue"
+    },
+    {
+      "symbol": "cna_cue_stop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed Cue"
     },
     {
       "symbol": "cna_graphics_device_manager_create",
@@ -4347,6 +5464,7 @@
     "VALUE:CNA_GraphicsResourceDisposingCallback": 8,
     "VALUE:CNA_GraphicsDeviceEventCallback": 8,
     "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
+    "VALUE:CNA_AudioEventCallback": 8,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "OFFSET:CNA_StringView:data": 0,
@@ -4419,6 +5537,60 @@
     "OFFSET:CNA_Vector4:y": 4,
     "OFFSET:CNA_Vector4:z": 8,
     "OFFSET:CNA_Vector4:w": 12,
+    "SIZE:CNA_AudioCapabilities": 16,
+    "ALIGN:CNA_AudioCapabilities": 4,
+    "OFFSET:CNA_AudioCapabilities:struct_size": 0,
+    "OFFSET:CNA_AudioCapabilities:struct_version": 4,
+    "OFFSET:CNA_AudioCapabilities:is_playback_available": 8,
+    "OFFSET:CNA_AudioCapabilities:reserved0": 9,
+    "OFFSET:CNA_AudioCapabilities:reserved1": 12,
+    "SIZE:CNA_SoundEffectCreateInfo": 24,
+    "ALIGN:CNA_SoundEffectCreateInfo": 8,
+    "OFFSET:CNA_SoundEffectCreateInfo:struct_size": 0,
+    "OFFSET:CNA_SoundEffectCreateInfo:struct_version": 4,
+    "OFFSET:CNA_SoundEffectCreateInfo:sample_rate": 8,
+    "OFFSET:CNA_SoundEffectCreateInfo:channels": 12,
+    "OFFSET:CNA_SoundEffectCreateInfo:reserved": 16,
+    "SIZE:CNA_SoundEffectInstanceInfo": 32,
+    "ALIGN:CNA_SoundEffectInstanceInfo": 4,
+    "OFFSET:CNA_SoundEffectInstanceInfo:struct_size": 0,
+    "OFFSET:CNA_SoundEffectInstanceInfo:struct_version": 4,
+    "OFFSET:CNA_SoundEffectInstanceInfo:state": 8,
+    "OFFSET:CNA_SoundEffectInstanceInfo:is_looped": 12,
+    "OFFSET:CNA_SoundEffectInstanceInfo:reserved0": 13,
+    "OFFSET:CNA_SoundEffectInstanceInfo:volume": 16,
+    "OFFSET:CNA_SoundEffectInstanceInfo:pitch": 20,
+    "OFFSET:CNA_SoundEffectInstanceInfo:pan": 24,
+    "OFFSET:CNA_SoundEffectInstanceInfo:reserved1": 28,
+    "SIZE:CNA_AudioEmitter": 60,
+    "ALIGN:CNA_AudioEmitter": 4,
+    "OFFSET:CNA_AudioEmitter:struct_size": 0,
+    "OFFSET:CNA_AudioEmitter:struct_version": 4,
+    "OFFSET:CNA_AudioEmitter:doppler_scale": 8,
+    "OFFSET:CNA_AudioEmitter:forward": 12,
+    "OFFSET:CNA_AudioEmitter:position": 24,
+    "OFFSET:CNA_AudioEmitter:up": 36,
+    "OFFSET:CNA_AudioEmitter:velocity": 48,
+    "SIZE:CNA_AudioListener": 56,
+    "ALIGN:CNA_AudioListener": 4,
+    "OFFSET:CNA_AudioListener:struct_size": 0,
+    "OFFSET:CNA_AudioListener:struct_version": 4,
+    "OFFSET:CNA_AudioListener:forward": 8,
+    "OFFSET:CNA_AudioListener:position": 20,
+    "OFFSET:CNA_AudioListener:up": 32,
+    "OFFSET:CNA_AudioListener:velocity": 44,
+    "SIZE:CNA_CueInfo": 16,
+    "ALIGN:CNA_CueInfo": 4,
+    "OFFSET:CNA_CueInfo:struct_size": 0,
+    "OFFSET:CNA_CueInfo:struct_version": 4,
+    "OFFSET:CNA_CueInfo:is_created": 8,
+    "OFFSET:CNA_CueInfo:is_disposed": 9,
+    "OFFSET:CNA_CueInfo:is_paused": 10,
+    "OFFSET:CNA_CueInfo:is_playing": 11,
+    "OFFSET:CNA_CueInfo:is_prepared": 12,
+    "OFFSET:CNA_CueInfo:is_preparing": 13,
+    "OFFSET:CNA_CueInfo:is_stopped": 14,
+    "OFFSET:CNA_CueInfo:is_stopping": 15,
     "SIZE:CNA_Quaternion": 16,
     "ALIGN:CNA_Quaternion": 4,
     "OFFSET:CNA_Quaternion:x": 0,
@@ -5002,6 +6174,7 @@
     "VALUE:CNA_GraphicsResourceDisposingCallback": 8,
     "VALUE:CNA_GraphicsDeviceEventCallback": 8,
     "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
+    "VALUE:CNA_AudioEventCallback": 8,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "SIZE:CNA_ErrorInfo": 24,
@@ -5024,6 +6197,18 @@
     "ALIGN:CNA_Vector3": 4,
     "SIZE:CNA_Vector4": 16,
     "ALIGN:CNA_Vector4": 4,
+    "SIZE:CNA_AudioCapabilities": 16,
+    "ALIGN:CNA_AudioCapabilities": 4,
+    "SIZE:CNA_SoundEffectCreateInfo": 24,
+    "ALIGN:CNA_SoundEffectCreateInfo": 8,
+    "SIZE:CNA_SoundEffectInstanceInfo": 32,
+    "ALIGN:CNA_SoundEffectInstanceInfo": 4,
+    "SIZE:CNA_AudioEmitter": 60,
+    "ALIGN:CNA_AudioEmitter": 4,
+    "SIZE:CNA_AudioListener": 56,
+    "ALIGN:CNA_AudioListener": 4,
+    "SIZE:CNA_CueInfo": 16,
+    "ALIGN:CNA_CueInfo": 4,
     "SIZE:CNA_Quaternion": 16,
     "ALIGN:CNA_Quaternion": 4,
     "SIZE:CNA_Matrix": 64,
@@ -5186,6 +6371,48 @@
     "OFFSET:CNA_Vector4:y": 4,
     "OFFSET:CNA_Vector4:z": 8,
     "OFFSET:CNA_Vector4:w": 12,
+    "OFFSET:CNA_AudioCapabilities:struct_size": 0,
+    "OFFSET:CNA_AudioCapabilities:struct_version": 4,
+    "OFFSET:CNA_AudioCapabilities:is_playback_available": 8,
+    "OFFSET:CNA_AudioCapabilities:reserved0": 9,
+    "OFFSET:CNA_AudioCapabilities:reserved1": 12,
+    "OFFSET:CNA_SoundEffectCreateInfo:struct_size": 0,
+    "OFFSET:CNA_SoundEffectCreateInfo:struct_version": 4,
+    "OFFSET:CNA_SoundEffectCreateInfo:sample_rate": 8,
+    "OFFSET:CNA_SoundEffectCreateInfo:channels": 12,
+    "OFFSET:CNA_SoundEffectCreateInfo:reserved": 16,
+    "OFFSET:CNA_SoundEffectInstanceInfo:struct_size": 0,
+    "OFFSET:CNA_SoundEffectInstanceInfo:struct_version": 4,
+    "OFFSET:CNA_SoundEffectInstanceInfo:state": 8,
+    "OFFSET:CNA_SoundEffectInstanceInfo:is_looped": 12,
+    "OFFSET:CNA_SoundEffectInstanceInfo:reserved0": 13,
+    "OFFSET:CNA_SoundEffectInstanceInfo:volume": 16,
+    "OFFSET:CNA_SoundEffectInstanceInfo:pitch": 20,
+    "OFFSET:CNA_SoundEffectInstanceInfo:pan": 24,
+    "OFFSET:CNA_SoundEffectInstanceInfo:reserved1": 28,
+    "OFFSET:CNA_AudioEmitter:struct_size": 0,
+    "OFFSET:CNA_AudioEmitter:struct_version": 4,
+    "OFFSET:CNA_AudioEmitter:doppler_scale": 8,
+    "OFFSET:CNA_AudioEmitter:forward": 12,
+    "OFFSET:CNA_AudioEmitter:position": 24,
+    "OFFSET:CNA_AudioEmitter:up": 36,
+    "OFFSET:CNA_AudioEmitter:velocity": 48,
+    "OFFSET:CNA_AudioListener:struct_size": 0,
+    "OFFSET:CNA_AudioListener:struct_version": 4,
+    "OFFSET:CNA_AudioListener:forward": 8,
+    "OFFSET:CNA_AudioListener:position": 20,
+    "OFFSET:CNA_AudioListener:up": 32,
+    "OFFSET:CNA_AudioListener:velocity": 44,
+    "OFFSET:CNA_CueInfo:struct_size": 0,
+    "OFFSET:CNA_CueInfo:struct_version": 4,
+    "OFFSET:CNA_CueInfo:is_created": 8,
+    "OFFSET:CNA_CueInfo:is_disposed": 9,
+    "OFFSET:CNA_CueInfo:is_paused": 10,
+    "OFFSET:CNA_CueInfo:is_playing": 11,
+    "OFFSET:CNA_CueInfo:is_prepared": 12,
+    "OFFSET:CNA_CueInfo:is_preparing": 13,
+    "OFFSET:CNA_CueInfo:is_stopped": 14,
+    "OFFSET:CNA_CueInfo:is_stopping": 15,
     "OFFSET:CNA_Quaternion:x": 0,
     "OFFSET:CNA_Quaternion:y": 4,
     "OFFSET:CNA_Quaternion:z": 8,

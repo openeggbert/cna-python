@@ -53,15 +53,25 @@ class _BoundEvent:
     def __iadd__(self, handler: Callable[..., object]) -> "_BoundEvent":
         if not callable(handler):
             raise TypeError("event handler must be callable")
-        self._descriptor._handlers_for(self._owner).append(handler)
+        handlers = self._descriptor._handlers_for(self._owner)
+        if not handlers:
+            subscribe = getattr(self._owner, "_event_subscribe", None)
+            if subscribe is not None:
+                subscribe(self._descriptor._name)
+        handlers.append(handler)
         return self
 
     def __isub__(self, handler: Callable[..., object]) -> "_BoundEvent":
         handlers = self._descriptor._handlers_for(self._owner)
         try:
-            handlers.remove(handler)
+            index = handlers.index(handler)
         except ValueError as error:
             raise ValueError("event handler is not subscribed") from error
+        if len(handlers) == 1:
+            unsubscribe = getattr(self._owner, "_event_unsubscribe", None)
+            if unsubscribe is not None:
+                unsubscribe(self._descriptor._name)
+        del handlers[index]
         return self
 
     def __call__(self, *args: object, **kwargs: object) -> None:
@@ -79,9 +89,16 @@ class Event:
 
     def __init__(self) -> None:
         self._handlers: WeakKeyDictionary[object, list[Callable[..., object]]] = WeakKeyDictionary()
+        self._name = ""
+
+    def __set_name__(self, owner: type, name: str) -> None:
+        self._name = name
 
     def _handlers_for(self, owner: object) -> list[Callable[..., object]]:
         return self._handlers.setdefault(owner, [])
+
+    def _clear_for(self, owner: object) -> None:
+        self._handlers.pop(owner, None)
 
     def __get__(self, instance: object | None, owner: type | None = None) -> object:
         if instance is None:

@@ -149,6 +149,17 @@ CNA boundary. Embedded NUL is rejected when the native contract rejects it.
 and documents the sub-microsecond precision loss when values originate in
 Python.
 
+XNA metadata predates nullable-reference annotations. A reference member whose
+documented runtime value is nullable therefore uses a contextual machine rule.
+`Microphone.Default` maps to `Microphone | None`, including the ordinary
+no-device result. The default values of the `AudioCategory` and
+`RendererDetail` structs contain null backing strings, so `AudioCategory.Name`,
+`RendererDetail.FriendlyName`, and `RendererDetail.RendererId` map to
+`str | None`. Likewise, the input-shaped `Byte[] buffer` spelling on
+`Microphone.GetData` is contextually mapped to `MutableSequence[int]` because
+the method writes captured bytes into the caller's array. These exceptions are
+encoded in `mapping-rules.json` and do not introduce support-framework types.
+
 `Stream` maps by capability. Binary readers require `read()` returning bytes;
 writers require `write(bytes)`. The binding neither closes a caller-owned
 stream nor seeks without the selected overload's contract. Byte buffers accept
