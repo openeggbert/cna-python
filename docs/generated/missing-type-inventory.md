@@ -1,6 +1,6 @@
 # Missing XNA type inventory
 
-Missing types: **206**.
+Missing types: **142**.
 
 ## Microsoft.Xna.Framework
 
@@ -10,20 +10,7 @@ Missing types: **206**.
 - `CurveKeyCollection`
 - `CurveLoopType`
 - `CurveTangent`
-- `DrawableGameComponent`
 - `FrameworkDispatcher`
-- `GameComponent`
-- `GameComponentCollection`
-- `GameComponentCollectionEventArgs`
-- `GameServiceContainer`
-- `GameWindow`
-- `GraphicsDeviceInformation`
-- `IDrawable`
-- `IGameComponent`
-- `IGraphicsDeviceManager`
-- `IUpdateable`
-- `LaunchParameters`
-- `PreparingDeviceSettingsEventArgs`
 - `TitleContainer`
 
 ## Microsoft.Xna.Framework.Audio
@@ -85,24 +72,8 @@ Missing types: **206**.
 
 - `AlphaTestEffect`
 - `BasicEffect`
-- `Blend`
-- `BlendFunction`
-- `BlendState`
-- `BufferUsage`
-- `ClearOptions`
-- `ColorWriteChannels`
-- `CompareFunction`
-- `CubeMapFace`
-- `CullMode`
-- `DepthStencilState`
-- `DeviceLostException`
-- `DeviceNotResetException`
 - `DirectionalLight`
-- `DisplayMode`
-- `DisplayModeCollection`
 - `DualTextureEffect`
-- `DynamicIndexBuffer`
-- `DynamicVertexBuffer`
 - `Effect`
 - `EffectAnnotation`
 - `EffectAnnotationCollection`
@@ -116,16 +87,9 @@ Missing types: **206**.
 - `EffectTechnique`
 - `EffectTechniqueCollection`
 - `EnvironmentMapEffect`
-- `FillMode`
-- `GraphicsAdapter`
-- `GraphicsDeviceStatus`
 - `IEffectFog`
 - `IEffectLights`
 - `IEffectMatrices`
-- `IGraphicsDeviceService`
-- `IVertexType`
-- `IndexBuffer`
-- `IndexElementSize`
 - `Model`
 - `ModelBone`
 - `ModelBoneCollection`
@@ -138,39 +102,11 @@ Missing types: **206**.
 - `ModelMeshPart`
 - `ModelMeshPartCollection`
 - `ModelMeshPartCollection+Enumerator`
-- `NoSuitableGraphicsDeviceException`
 - `OcclusionQuery`
-- `PresentInterval`
-- `PresentationParameters`
-- `PrimitiveType`
-- `RasterizerState`
-- `RenderTarget2D`
-- `RenderTargetBinding`
 - `RenderTargetCube`
-- `RenderTargetUsage`
-- `ResourceCreatedEventArgs`
-- `ResourceDestroyedEventArgs`
-- `SamplerState`
-- `SamplerStateCollection`
-- `SetDataOptions`
 - `SkinnedEffect`
-- `SpriteFont`
-- `StencilOperation`
 - `Texture3D`
-- `TextureAddressMode`
-- `TextureCollection`
 - `TextureCube`
-- `TextureFilter`
-- `VertexBuffer`
-- `VertexBufferBinding`
-- `VertexDeclaration`
-- `VertexElement`
-- `VertexElementFormat`
-- `VertexElementUsage`
-- `VertexPositionColor`
-- `VertexPositionColorTexture`
-- `VertexPositionNormalTexture`
-- `VertexPositionTexture`
 
 ## Microsoft.Xna.Framework.Graphics.PackedVector
 

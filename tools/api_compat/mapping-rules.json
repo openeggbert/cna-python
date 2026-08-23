@@ -14,6 +14,7 @@
     "op_Subtraction": "__sub__",
     "op_Multiply": "__mul__",
     "op_Division": "__truediv__"
+    ,"op_Implicit": "__init__"
   },
   "constructor": "__init__",
   "indexer": "__getitem__",
@@ -21,6 +22,6 @@
     "__copy__", "__deepcopy__", "__enter__", "__exit__", "__getitem__",
     "__setitem__", "__iter__", "__repr__", "__str__", "__hash__",
     "__eq__", "__ne__", "__add__", "__sub__", "__mul__", "__rmul__",
-    "__truediv__", "__neg__"
+    "__truediv__", "__neg__", "insert"
   ]
 }

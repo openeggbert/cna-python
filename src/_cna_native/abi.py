@@ -43,6 +43,12 @@ CNA_GameBeginDrawCallback = c.CFUNCTYPE(
     c.POINTER(c.c_uint8), c.POINTER(CNA_CallbackError)
 )
 
+# Observer-only game and window events carry no native sender or payload.  The
+# public facade supplies its stable Python sender when dispatching them.
+CNA_GameEventCallback = c.CFUNCTYPE(None, c.c_void_p)
+CNA_GraphicsResourceDisposingCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
+CNA_GraphicsDeviceEventCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
+
 
 class CNA_GameCallbacks(c.Structure):
     _fields_ = [
@@ -79,6 +85,14 @@ class CNA_Vector2(c.Structure):
     _fields_ = [("x", c.c_float), ("y", c.c_float)]
 
 
+class CNA_Vector3(c.Structure):
+    _fields_ = [("x", c.c_float), ("y", c.c_float), ("z", c.c_float)]
+
+
+class CNA_Vector4(c.Structure):
+    _fields_ = [("x", c.c_float), ("y", c.c_float), ("z", c.c_float), ("w", c.c_float)]
+
+
 class CNA_Rectangle(c.Structure):
     _fields_ = [("x", c.c_int32), ("y", c.c_int32), ("width", c.c_int32), ("height", c.c_int32)]
 
@@ -87,6 +101,285 @@ class CNA_Viewport(c.Structure):
     _fields_ = [
         ("x", c.c_int32), ("y", c.c_int32), ("width", c.c_int32), ("height", c.c_int32),
         ("min_depth", c.c_float), ("max_depth", c.c_float),
+    ]
+
+
+class CNA_DisplayMode(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("width", c.c_int32), ("height", c.c_int32),
+        ("aspect_ratio", c.c_float), ("format", c.c_uint32),
+    ]
+
+
+class CNA_GraphicsAdapterInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("adapter_index", c.c_uint32), ("is_default_adapter", c.c_uint8),
+        ("is_wide_screen", c.c_uint8), ("use_null_device", c.c_uint8),
+        ("use_reference_device", c.c_uint8), ("vendor_id", c.c_int32),
+        ("device_id", c.c_int32), ("revision", c.c_int32),
+        ("subsystem_id", c.c_int32), ("description_byte_length", c.c_uint64),
+        ("device_name_byte_length", c.c_uint64),
+    ]
+
+
+class CNA_GraphicsFormatSelection(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("exact_match", c.c_uint8), ("reserved", c.c_uint8 * 3),
+        ("format", c.c_uint32), ("depth_format", c.c_uint32),
+        ("multi_sample_count", c.c_int32),
+    ]
+
+
+class CNA_PresentationParameters(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("back_buffer_format", c.c_uint32), ("back_buffer_width", c.c_int32),
+        ("back_buffer_height", c.c_int32), ("depth_stencil_format", c.c_uint32),
+        ("multi_sample_count", c.c_int32), ("presentation_interval", c.c_uint32),
+        ("display_orientation", c.c_uint32), ("render_target_usage", c.c_uint32),
+        ("is_full_screen", c.c_uint8), ("headless_ext", c.c_uint8),
+        ("reserved", c.c_uint8 * 2),
+    ]
+
+
+class CNA_GraphicsDeviceInformation(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("adapter_index", c.c_int32), ("graphics_profile", c.c_uint32),
+        ("presentation_parameters", CNA_PresentationParameters),
+    ]
+
+
+CNA_PreparingDeviceSettingsMutatorEXT = c.CFUNCTYPE(
+    None, c.POINTER(CNA_GraphicsDeviceInformation), c.c_void_p
+)
+
+
+class CNA_BlendState(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("alpha_blend_function", c.c_uint32), ("alpha_destination_blend", c.c_uint32),
+        ("alpha_source_blend", c.c_uint32), ("color_blend_function", c.c_uint32),
+        ("color_destination_blend", c.c_uint32), ("color_source_blend", c.c_uint32),
+        ("color_write_channels", c.c_uint32), ("color_write_channels1", c.c_uint32),
+        ("color_write_channels2", c.c_uint32), ("color_write_channels3", c.c_uint32),
+        ("blend_factor", CNA_Color), ("multi_sample_mask", c.c_int32),
+    ]
+
+
+class CNA_DepthStencilState(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("depth_buffer_enable", c.c_uint8), ("depth_buffer_write_enable", c.c_uint8),
+        ("stencil_enable", c.c_uint8), ("two_sided_stencil_mode", c.c_uint8),
+        ("depth_buffer_function", c.c_uint32), ("stencil_function", c.c_uint32),
+        ("stencil_mask", c.c_int32), ("stencil_write_mask", c.c_int32),
+        ("reference_stencil", c.c_int32), ("stencil_fail", c.c_uint32),
+        ("stencil_depth_buffer_fail", c.c_uint32), ("stencil_pass", c.c_uint32),
+        ("counter_clockwise_stencil_function", c.c_uint32),
+        ("counter_clockwise_stencil_fail", c.c_uint32),
+        ("counter_clockwise_stencil_depth_buffer_fail", c.c_uint32),
+        ("counter_clockwise_stencil_pass", c.c_uint32), ("reserved", c.c_uint32),
+    ]
+
+
+class CNA_RasterizerState(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("cull_mode", c.c_uint32), ("fill_mode", c.c_uint32),
+        ("depth_bias", c.c_float), ("slope_scale_depth_bias", c.c_float),
+        ("multi_sample_anti_alias", c.c_uint8), ("scissor_test_enable", c.c_uint8),
+        ("reserved", c.c_uint8 * 2),
+    ]
+
+
+class CNA_SamplerState(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("address_u", c.c_uint32), ("address_v", c.c_uint32),
+        ("address_w", c.c_uint32), ("filter", c.c_uint32),
+        ("max_anisotropy", c.c_int32), ("max_mip_level", c.c_int32),
+        ("mip_map_level_of_detail_bias", c.c_float), ("reserved", c.c_uint32),
+    ]
+
+
+class CNA_TextureSlotInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("bound", c.c_uint8), ("reserved", c.c_uint8 * 7), ("texture", c.c_uint64),
+    ]
+
+
+class CNA_VertexElement(c.Structure):
+    _fields_ = [
+        ("offset", c.c_int32), ("format", c.c_uint32),
+        ("usage", c.c_uint32), ("usage_index", c.c_int32),
+    ]
+
+
+class CNA_VertexBufferCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("vertex_declaration", c.c_uint64), ("vertex_count", c.c_int32),
+        ("buffer_usage", c.c_uint32), ("dynamic", c.c_uint8),
+        ("reserved", c.c_uint8 * 7),
+    ]
+
+
+class CNA_VertexBufferInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("vertex_count", c.c_int32), ("buffer_usage", c.c_uint32),
+        ("dynamic", c.c_uint8), ("is_content_lost", c.c_uint8),
+        ("has_renderer", c.c_uint8), ("reserved0", c.c_uint8),
+        ("vertex_stride", c.c_int32), ("vertex_element_count", c.c_uint64),
+    ]
+
+
+class CNA_VertexBufferTransfer(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("vertex_type", c.c_uint32), ("options", c.c_uint32),
+        ("start_index", c.c_uint64), ("element_count", c.c_uint64),
+    ]
+
+
+class CNA_VertexPositionColor(c.Structure):
+    _fields_ = [("position", CNA_Vector3), ("color", CNA_Color)]
+
+
+class CNA_VertexPositionColorTexture(c.Structure):
+    _fields_ = [("position", CNA_Vector3), ("color", CNA_Color),
+                ("texture_coordinate", CNA_Vector2)]
+
+
+class CNA_VertexPositionNormalTexture(c.Structure):
+    _fields_ = [("position", CNA_Vector3), ("normal", CNA_Vector3),
+                ("texture_coordinate", CNA_Vector2)]
+
+
+class CNA_VertexPositionTexture(c.Structure):
+    _fields_ = [("position", CNA_Vector3), ("texture_coordinate", CNA_Vector2)]
+
+
+class CNA_VertexBufferBinding(c.Structure):
+    _fields_ = [
+        ("vertex_buffer", c.c_uint64), ("vertex_offset", c.c_int32),
+        ("instance_frequency", c.c_int32),
+    ]
+
+
+class CNA_IndexBufferCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("index_count", c.c_int32), ("index_element_size", c.c_uint32),
+        ("buffer_usage", c.c_uint32), ("dynamic", c.c_uint8),
+        ("reserved", c.c_uint8 * 3),
+    ]
+
+
+class CNA_IndexBufferInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("index_count", c.c_int32), ("index_element_size", c.c_uint32),
+        ("buffer_usage", c.c_uint32), ("dynamic", c.c_uint8),
+        ("is_content_lost", c.c_uint8), ("has_renderer", c.c_uint8),
+        ("reserved", c.c_uint8),
+    ]
+
+
+class CNA_IndexBufferTransfer(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("index_element_size", c.c_uint32), ("options", c.c_uint32),
+        ("start_index", c.c_uint64), ("element_count", c.c_uint64),
+    ]
+
+
+class CNA_RenderTarget2DCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("width", c.c_uint32), ("height", c.c_uint32), ("mip_map", c.c_uint8),
+        ("reserved0", c.c_uint8 * 3), ("format", c.c_uint32),
+        ("depth_format", c.c_uint32), ("multi_sample_count", c.c_int32),
+        ("usage", c.c_uint32), ("reserved1", c.c_uint32),
+    ]
+
+
+class CNA_RenderTargetInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("kind", c.c_uint32), ("width", c.c_uint32), ("height", c.c_uint32),
+        ("level_count", c.c_uint32), ("format", c.c_uint32),
+        ("depth_format", c.c_uint32), ("multi_sample_count", c.c_int32),
+        ("usage", c.c_uint32), ("is_content_lost", c.c_uint8),
+        ("renderer_available", c.c_uint8), ("reserved", c.c_uint8 * 2),
+    ]
+
+
+class CNA_RenderTargetBinding(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("render_target", c.c_uint64), ("array_slice", c.c_int32),
+        ("cube_map_face", c.c_uint32),
+    ]
+
+
+class CNA_BackBufferReadback(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("has_source_rectangle", c.c_uint8), ("reserved", c.c_uint8 * 3),
+        ("source_rectangle", CNA_Rectangle), ("start_index", c.c_uint64),
+        ("element_count", c.c_uint64),
+    ]
+
+
+class CNA_UserPrimitives(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("primitive_type", c.c_uint32), ("vertex_source", c.c_uint32),
+        ("vertex_data", c.c_void_p), ("vertex_declaration", c.c_uint64),
+        ("vertex_offset", c.c_int32), ("num_vertices", c.c_int32),
+        ("primitive_count", c.c_int32), ("reserved", c.c_uint32),
+    ]
+
+
+class CNA_UserIndices(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("index_element_size", c.c_uint32), ("index_offset", c.c_int32),
+        ("index_data", c.c_void_p),
+    ]
+
+
+class CNA_SpriteFontGlyph(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("glyph_bounds", CNA_Rectangle), ("cropping", CNA_Rectangle),
+        ("character", c.c_uint16), ("reserved", c.c_uint16),
+        ("kerning", CNA_Vector3),
+    ]
+
+
+class CNA_SpriteFontCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("texture", c.c_uint64), ("glyphs", c.POINTER(CNA_SpriteFontGlyph)),
+        ("glyph_count", c.c_uint64), ("line_spacing", c.c_int32),
+        ("spacing", c.c_float), ("default_character", c.c_uint16),
+        ("has_default_character", c.c_uint8), ("reserved", c.c_uint8 * 5),
+    ]
+
+
+class CNA_SpriteFontInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("character_count", c.c_uint64), ("line_spacing", c.c_int32),
+        ("spacing", c.c_float), ("default_character", c.c_uint16),
+        ("has_default_character", c.c_uint8), ("reserved", c.c_uint8 * 5),
     ]
 
 

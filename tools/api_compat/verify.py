@@ -259,7 +259,8 @@ _PRIMITIVES = {
     "System.SByte": "int", "System.Int16": "int", "System.UInt16": "int",
     "System.Int32": "int", "System.UInt32": "int", "System.Int64": "int",
     "System.UInt64": "int", "System.Single": "float", "System.Double": "float",
-    "System.String": "str", "System.Object": "object", "System.TimeSpan": "timedelta",
+    "System.String": "str", "System.Text.StringBuilder": "str", "System.Char": "str",
+    "System.Object": "object", "System.TimeSpan": "timedelta",
     "System.IServiceProvider": "object", "System.Type": "type", "System.EventArgs": "object",
     "System.Exception": "Exception", "System.IO.Stream": "BinaryIO",
 }
@@ -313,14 +314,28 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
             return f"Callable[[{mapped[0]}], None]"
         if owner.startswith("System.Collections.Generic.IEnumerable`1"):
             return f"Iterable[{mapped[0]}]"
+        if owner.startswith("System.Collections.Generic.IEnumerator`1"):
+            return f"Iterator[{mapped[0]}]"
+        if owner.startswith("System.Collections.ObjectModel.ReadOnlyCollection`1"):
+            return f"tuple[{mapped[0]}, ...]"
         if owner.startswith("System.Collections.Generic.IList`1"):
             return f"MutableSequence[{mapped[0]}]"
+        if owner.startswith("System.Collections.Generic.List`1"):
+            return f"list[{mapped[0]}]"
         return f"{owner.rsplit('.', 1)[-1].split('`', 1)[0]}[{', '.join(mapped)}]"
     return value.rsplit(".", 1)[-1].replace("+", ".").split("`", 1)[0]
 
 
+def _projected_generic_name(value: dict[str, Any]) -> str:
+    constraints = value.get("typeConstraints", ())
+    if constraints == ["Microsoft.Xna.Framework.Graphics.IVertexType"]:
+        return value["name"] + "Vertex"
+    return value["name"]
+
+
 def expected_callable(member: dict[str, Any], projected: str) -> ExpectedCallable:
-    generic_names = tuple(value["name"] for value in member.get("genericParameters", ()))
+    generic_names = tuple(_projected_generic_name(value)
+                          for value in member.get("genericParameters", ()))
     parameters = tuple(
         ExpectedParameter(
             parameter["name"] or "value",
@@ -597,11 +612,12 @@ def compare_generic_bounds(identity: str, name: str, members: list[dict[str, Any
         for parameter in member.get("genericParameters", ()):
             constraints = parameter.get("typeConstraints", ())
             expected_bound = mapped_type(constraints[0]) if len(constraints) == 1 else None
-            key = (parameter["name"], expected_bound)
+            projected_name = _projected_generic_name(parameter)
+            key = (projected_name, expected_bound)
             if key in measured:
                 continue
             measured.add(key)
-            declaration = typevars.get(parameter["name"])
+            declaration = typevars.get(projected_name)
             if declaration is not None and declaration.bound != expected_bound:
                 add(diagnostics, "GENERIC_MAPPING_MISMATCH", identity,
                     f"{name}: TypeVar {parameter['name']} bound {declaration.bound}, expected {expected_bound}")
@@ -646,10 +662,16 @@ def compare_interface_contract(identity: str, expected: dict[str, Any], target: 
             required = ("Equals", "__eq__")
         elif base == "System.IDisposable":
             required = ("Dispose", "__enter__", "__exit__")
+        elif base == "System.IServiceProvider":
+            required = ("GetService",)
+        elif base.startswith("System.Collections.Generic.IEnumerable`1"):
+            required = ("GetEnumerator", "__iter__")
         elif base == "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1":
             required = ("PackedValue",)
         elif base == "Microsoft.Xna.Framework.Graphics.IGraphicsResource":
             required = ("GraphicsDevice",)
+        elif base == "Microsoft.Xna.Framework.Graphics.IDynamicGraphicsResource":
+            required = ("IsContentLost", "ContentLost")
         elif base in reference_by_name:
             required = tuple(dict.fromkeys(
                 name for member in reference_by_name[base]["members"]
@@ -811,7 +833,7 @@ def verify() -> dict[str, Any]:
                         f"{name}: stub static={declaration.static}, expected static={sample.get('static')}")
             elif sample["kind"] == "property":
                 if name == "__getitem__" and callable(getattr(target, name, None)):
-                    shaped, can_get, can_set = True, True, False
+                    shaped, can_get, can_set = True, True, raw_member(target, "__setitem__") is not None
                 else:
                     shaped, can_get, can_set = is_property_shape(raw, bool(sample.get("static")))
                 if not shaped or can_get != bool(sample.get("get")) or can_set != bool(sample.get("set")):

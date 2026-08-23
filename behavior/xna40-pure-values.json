@@ -95,6 +95,12 @@
     {"id": "geometry.nonfinite.tangent", "operation": "Golden.GeometryEdges", "args": [], "expected": [0, true, 0, false, null, null]},
     {"id": "frustum.planes.corners.bits", "operation": "Golden.FrustumPlanesCorners", "args": [], "expected": ["80000000", "80000000", "3F800000", "C0800000", "00000000", "3F6C835F", "3EC3EF16", "BFF4EADB", "BF0D6289", "3ED413CB", "40800000", "40B0BB28", "C0848C5D", "C09FFFF8"]},
     {"id": "frustum.gjk.relations.bits", "operation": "Golden.FrustumRelations", "args": [], "expected": [1, 0, 1, 1, true, false, true, false, false, "41800000"]},
-    {"id": "float32.signed_zero", "operation": "Float32.NegativeZero", "args": [], "expected": true}
+    {"id": "float32.signed_zero", "operation": "Float32.NegativeZero", "args": [], "expected": true},
+    {"id": "graphics.surface_format.values", "operation": "Graphics.SurfaceFormatValues", "args": [], "expected": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]},
+    {"id": "graphics.viewport.project.bits", "operation": "Graphics.ViewportProject", "args": [], "expected": ["43CD0000", "43BE0000", "3EE147AE"]},
+    {"id": "graphics.viewport.roundtrip.bits", "operation": "Graphics.ViewportRoundTrip", "args": [], "expected": ["3E800000", "BF000000", "3ECCCCCC"]},
+    {"id": "graphics.presentation.defaults", "operation": "Graphics.PresentationDefaults", "args": [], "expected": [0, 0, 0, 0, 0, 0, 0, 0, 0, true, true]},
+    {"id": "graphics.state.defaults", "operation": "Graphics.StateDefaults", "args": [], "expected": [0, 1, 0, true, true, 3, 2, 0, true, 0, 4, 0]},
+    {"id": "graphics.vertex.strides", "operation": "Graphics.VertexStrides", "args": [], "expected": [16, 24, 32, 20]}
   ]
 }

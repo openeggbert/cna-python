@@ -2,10 +2,10 @@
 
 Date: 2026-08-23.
 
-Foundation Milestone 2 is complete. CNA-Python now has a fully measured
-stub/runtime structural verifier and a locally zero-diagnostic XNA-faithful
-math/value, geometry/intersection, and non-touch input foundation. Do not begin
-Content/XNB, effects/3D, audio/media, or touch from this handoff.
+Foundation Milestone 3 is complete. The selected Game object model and 2D
+graphics device/state/resource foundation is structurally complete except for
+the intentionally deferred Content/XNB gateway. Runtime claims remain separate
+from structural completeness in `docs/runtime-capabilities.json`.
 
 ## Strict before and after
 
@@ -15,19 +15,17 @@ REFERENCE_TYPES                          257    257
 REFERENCE_MEMBERS                       2964   2964
 EXPECTED_PYTHON_TYPES                    257    257
 EXPECTED_PYTHON_MEMBERS                 2887   2887
-TARGET_TYPES                              42     51
-TARGET_MEMBERS                           796   1003
-TOTAL_DIAGNOSTICS                        501    310
-MISSING_TYPE                             215    206
-MISSING_MEMBER                           223    104
-OVERLOAD_MAPPING_MISMATCH                 33      0
-UNMEASURED_STRUCTURAL_CATEGORY            30      0
-COMPLETE_TYPES                            11     41
-PARTIAL_TYPES                             31     10
-MISSING_TYPES                            215    206
+TARGET_TYPES                              51    115
+TARGET_MEMBERS                          1003   1465
+TOTAL_DIAGNOSTICS                        310    144
+MISSING_TYPE                             206    142
+MISSING_MEMBER                           104      2
+COMPLETE_TYPES                            41    114
+PARTIAL_TYPES                             10      1
+MISSING_TYPES                            206    142
 ```
 
-Final values for every other strict category are zero:
+Every final mismatch/safety category is zero:
 
 ```text
 UNEXPECTED_TYPE=0
@@ -40,6 +38,7 @@ PROPERTY_MAPPING_MISMATCH=0
 METHOD_SIGNATURE_MAPPING_MISMATCH=0
 PARAMETER_MAPPING_MISMATCH=0
 RETURN_MAPPING_MISMATCH=0
+OVERLOAD_MAPPING_MISMATCH=0
 GENERIC_MAPPING_MISMATCH=0
 ENUM_VALUE_MISMATCH=0
 FLAGS_MAPPING_MISMATCH=0
@@ -50,132 +49,85 @@ INTERNAL_TYPE_LEAK=0
 RAW_HANDLE_LEAK=0
 PUBLIC_NATIVE_FFI_LEAK=0
 ALLOWLIST_ENTRIES=0
+UNMEASURED_STRUCTURAL_CATEGORY=0
 ```
 
-The normal `--check` remains red only for real missing type/member surface.
-The `--leak-only` gate is green.
+The normal strict `--check` remains nonzero only for genuine missing surface.
+The leak-only gate passes.
 
-## Structural verifier
-
-`tools/api_compat/verify.py` uses deterministic AST inspection of shipped
-`.pyi` files for fields and mapped field types, properties and mutability,
-static/instance shape, methods and constructors, overload count, argument
-names/order/types/optionality, nullability, mapped return types, ref/out tuple
-returns, arrays/sequences, TypeVar identity/order/bounds, indexers, interfaces,
-events, enum/flags identity, operators, and Python copy/disposal rules.
-
-Runtime/stub consistency detects missing objects in either direction,
-method/static/class/property/event shape, property mutability, and exact runtime
-dispatcher arities. `tools/api_compat/generate_stubs.py` regenerates the four
-package stubs from pinned metadata. Seventeen deliberately broken fixtures
-cover the original regressions plus wrong field/parameter/return/interface,
-TypeVar/bound, nullable, ref/out, overload, and runtime/stub cases.
-
-## Complete types
-
-The 41 local-zero types are:
+The only partial type is:
 
 ```text
-Microsoft.Xna.Framework.BoundingBox
-Microsoft.Xna.Framework.BoundingFrustum
-Microsoft.Xna.Framework.BoundingSphere
-Microsoft.Xna.Framework.Color
-Microsoft.Xna.Framework.ContainmentType
-Microsoft.Xna.Framework.Content.ContentLoadException
-Microsoft.Xna.Framework.DisplayOrientation
-Microsoft.Xna.Framework.GameTime
-Microsoft.Xna.Framework.Graphics.DepthFormat
-Microsoft.Xna.Framework.Graphics.GraphicsProfile
-Microsoft.Xna.Framework.Graphics.SpriteEffects
-Microsoft.Xna.Framework.Graphics.SpriteSortMode
-Microsoft.Xna.Framework.Input.ButtonState
-Microsoft.Xna.Framework.Input.Buttons
-Microsoft.Xna.Framework.Input.GamePad
-Microsoft.Xna.Framework.Input.GamePadButtons
-Microsoft.Xna.Framework.Input.GamePadCapabilities
-Microsoft.Xna.Framework.Input.GamePadDPad
-Microsoft.Xna.Framework.Input.GamePadDeadZone
-Microsoft.Xna.Framework.Input.GamePadState
-Microsoft.Xna.Framework.Input.GamePadThumbSticks
-Microsoft.Xna.Framework.Input.GamePadTriggers
-Microsoft.Xna.Framework.Input.GamePadType
-Microsoft.Xna.Framework.Input.KeyState
-Microsoft.Xna.Framework.Input.Keyboard
-Microsoft.Xna.Framework.Input.KeyboardState
-Microsoft.Xna.Framework.Input.Keys
-Microsoft.Xna.Framework.Input.Mouse
-Microsoft.Xna.Framework.Input.MouseState
-Microsoft.Xna.Framework.MathHelper
-Microsoft.Xna.Framework.Matrix
-Microsoft.Xna.Framework.Plane
-Microsoft.Xna.Framework.PlaneIntersectionType
-Microsoft.Xna.Framework.PlayerIndex
-Microsoft.Xna.Framework.Point
-Microsoft.Xna.Framework.Quaternion
-Microsoft.Xna.Framework.Ray
-Microsoft.Xna.Framework.Rectangle
-Microsoft.Xna.Framework.Vector2
-Microsoft.Xna.Framework.Vector3
-Microsoft.Xna.Framework.Vector4
+Microsoft.Xna.Framework.Content.ContentManager=2
+    OpenStream(System.String)
+    ReadAsset(System.String,System.Action`1[System.IDisposable])
 ```
 
-Core completion includes exact binary32 intermediate narrowing and evaluation
-order, hashes/strings, fresh static values, copy boundaries, complete overloads,
-array/range transforms, singular/non-finite Matrix behavior, and all selected
-factories. Geometry includes all selected Plane/Ray/box/sphere/frustum
-containment and intersection routes, six-plane extraction, exact corner
-generation, and convex/GJK interactions.
+`ContentManager.ServiceProvider` is complete and uses the owning Game's stable,
+isolated service container.
 
-Non-touch input completion includes KeyboardState filtering/order/hash,
-MouseState five-button behavior and real WindowHandle/SetPosition routes,
-GamePad value semantics, analog button thresholds, GamePadCapabilities,
-GamePadType, dead-zone overloads, capabilities, and vibration. Classification:
+## Game foundation
 
-```text
-API_COMPLETE=YES
-NATIVE_ROUTE_VERIFIED=YES
-PHYSICAL_HARDWARE_NOT_VERIFIED=YES
-TOUCH_STARTED=NO
-```
+- `Game` local diagnostics: **0 / STRICT_COMPLETE**.
+- `IGameComponent`, `IUpdateable`, `IDrawable`, `GameComponent`,
+  `DrawableGameComponent`, `GameComponentCollection`, collection event args,
+  `GameServiceContainer`, `LaunchParameters`, and `GameWindow` are complete.
+- Component insertion/equal-order behavior, live Enabled/Visible checks,
+  snapshot traversal, traversal-time removal, self-removal, order mutation,
+  initialization, and collection events are **MANAGED_VERIFIED**.
+- Services are exactly keyed, reject duplicate/null registrations, preserve
+  provider identity, and are isolated per Game: **MANAGED_VERIFIED**.
+- `ResetElapsedTime` and `SuppressDraw` reach the active CNA Game lifecycle:
+  **NATIVE_VERIFIED**.
+- Activation/deactivation and window event infrastructure is real, but HEADLESS
+  produces no OS transition and no fake event: **BACKEND_BLOCKED** for delivery.
+- HEADLESS `GameWindow.Handle` is the real null handle, never a Python object id.
 
-## Remaining exact partial types
+## Graphics foundation
 
-Only ten implemented types remain partial:
+| Family | Structural status | Runtime qualification |
+|---|---|---|
+| `SurfaceFormat` and selected graphics enums | STRICT_COMPLETE | MANAGED_VERIFIED from XNA metadata |
+| `Viewport.Project` / `Unproject` | STRICT_COMPLETE | MANAGED_VERIFIED binary32 behavior |
+| `GraphicsResource` | STRICT_COMPLETE | NATIVE_VERIFIED disposal/name/tag; exactly-once event |
+| resource-created/destroyed event args | STRICT_COMPLETE | Event delivery UPSTREAM_CNA_BLOCKED by identityless ABI payloads |
+| adapters/display/presentation/device information | STRICT_COMPLETE | NATIVE_VERIFIED on the actual HEADLESS adapter |
+| blend/depth/rasterizer/sampler states and stock states | STRICT_COMPLETE | MANAGED defaults/freeze + NATIVE binding verified |
+| sampler/texture collections | STRICT_COMPLETE | NATIVE_VERIFIED durable per-device stage facades |
+| `Texture` / `Texture2D` | STRICT_COMPLETE | NATIVE metadata, transfers, PNG and JPEG verified |
+| vertex declarations and four built-in vertex codecs | STRICT_COMPLETE | MANAGED_VERIFIED deterministic layouts |
+| static/dynamic vertex/index buffers and bindings | STRICT_COMPLETE | NATIVE_VERIFIED ownership, transfer, binding and lifetime guards |
+| draw routes | STRICT_COMPLETE | Native dispatch verified; 3D draw output BACKEND_BLOCKED under HEADLESS |
+| instanced draw | STRICT_COMPLETE | Real route bound; HARDWARE_PENDING, never emulated |
+| `RenderTarget2D` and render-target binding | STRICT_COMPLETE | NATIVE command/lifetime verified; visible output HARDWARE_PENDING |
+| `RenderTargetCube` | missing/deferred with TextureCube family | UNIMPLEMENTED_CNA_PYTHON |
+| `GraphicsDevice` | STRICT_COMPLETE, local diagnostics 0 | Selected native state/binding/reset/present routes verified |
+| `GraphicsDeviceManager` | STRICT_COMPLETE, local diagnostics 0 | Native lifecycle and mutable preparing-settings callback verified |
+| `SpriteFont` / all selected `DrawString` overloads | STRICT_COMPLETE | Private legal glyph factory and native glyph submissions verified |
 
-```text
-Microsoft.Xna.Framework.Content.ContentManager=3
-Microsoft.Xna.Framework.Game=11
-Microsoft.Xna.Framework.Graphics.GraphicsDevice=49
-Microsoft.Xna.Framework.Graphics.GraphicsResource=2
-Microsoft.Xna.Framework.Graphics.SpriteBatch=6
-Microsoft.Xna.Framework.Graphics.SurfaceFormat=19
-Microsoft.Xna.Framework.Graphics.Texture=2
-Microsoft.Xna.Framework.Graphics.Texture2D=2
-Microsoft.Xna.Framework.Graphics.Viewport=2
-Microsoft.Xna.Framework.GraphicsDeviceManager=8
-```
+Important runtime qualifications:
 
-The generated missing inventory contains the exact 206 absent types. Use it,
-not stale prose, for the next family choice.
+- Default `Present()` reaches CNA. Rectangle/window Present has no ABI-0.7 route
+  and raises `NativeCapabilityError`: **UPSTREAM_CNA_BLOCKED**.
+- Resetting/Reset are real native transitions. Deterministic DeviceLost remains
+  **BACKEND_BLOCKED** on HEADLESS and is never fabricated.
+- `ResourceCreated`/`ResourceDestroyed` public infrastructure and argument types
+  exist, but stable identity/Tag delivery is **UPSTREAM_CNA_BLOCKED**.
+- ABI 0.7 cannot combine DynamicVertexBuffer raw destination offset with typed
+  streaming options in one call: that combination is **UPSTREAM_CNA_BLOCKED**.
+- Public SpriteFont loading is **FIXTURE_PENDING** on Content/XNB; runtime glyph
+  metrics, measurement, missing-character/default-character behavior, and
+  DrawString are implemented without rectangle fakes.
+- HEADLESS command success is not visible GPU-rendering evidence.
 
-## Behavior evidence
-
-The `PURE_XNA_DERIVED` corpus moved from 16 observations / 35 assertions to 92
-observations / 360 assertions, with zero failures. It covers MathHelper,
-Vector2/3/4, Quaternion, Matrix, Color, Point, Rectangle, Plane, Ray,
-BoundingBox, BoundingSphere, and BoundingFrustum. Exact-bit cases cover NaN,
-infinity, signed zero, scalar-division ordering, spline ULPs, quaternion and
-matrix transforms, singular inversion, mirrored decomposition, degenerate
-LookAt/shadow/Plane, hashes, tangent/near-parallel intersections, and frustum
-planes/corners/GJK. Provenance is pinned XNA metadata plus IL/algorithm and
-neutral golden-snapshot analysis; it is not a Windows capture or CNA output.
-
-## CNA and ABI evidence
+## ABI evidence
 
 Current CNA HEAD was rechecked read-only at
-`1bb2145d99ed572dd4eb15009c34e2e5f410fcf0`. Its C-API build still has the
-renderer identity assertion `49 == 50`; CNA was not modified. The qualified
-artifact remains:
+`1bb2145d99ed572dd4eb15009c34e2e5f410fcf0`. Its clean C-API build remains
+blocked by the upstream renderer identity assertion `49 == 50`; CNA was not
+modified. Its checkout has one unrelated pre-existing untracked discovery file.
+
+Qualified artifact:
 
 ```text
 CNA source revision=a09196a6477f69a7a57c8364f990658d31531a5b
@@ -184,83 +136,118 @@ platform=Linux x86-64
 renderer=HEADLESS
 audio=NULL
 library SHA-256=42e099146bf3b470f82fd963a516f8bdd7ff0406da8c37dd53747699117db086
-BOUND_FUNCTIONS=59
-CTYPES_SIGNATURE_MEASUREMENTS=59
-C_LAYOUT_MEASUREMENTS=210
-CTYPES_LAYOUT_MEASUREMENTS=210
+BOUND_FUNCTIONS=186
+CTYPES_SIGNATURE_MEASUREMENTS=186
+C_LAYOUT_MEASUREMENTS=526
+CTYPES_LAYOUT_MEASUREMENTS=526
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
 
-The four added imports are mouse window get/set, gamepad capabilities, and
-gamepad vibration. Canonical C headers and ELF exports are the authority.
+The binding uses only canonical ABI-0.7 C headers/symbols. It binds neither C++
+nor another language binding. The qualified older artifact permits destroying
+bound vertex/index buffers even though CNA HEAD rejects it; Python therefore
+guards disposal and unbinds retained resources before parent shutdown.
 
-## Ownership, callbacks, package, and template
+## Behavior corpus
 
-Ownership stress remains:
+```text
+OBSERVATIONS: 92 -> 98
+ASSERTIONS: 360 -> 413
+FAILURES: 0
+PROVENANCE: PURE_XNA_DERIVED metadata/IL/algorithm evidence
+```
+
+New groups are:
+
+```text
+graphics.surface_format.values
+graphics.viewport.project.bits
+graphics.viewport.roundtrip.bits
+graphics.presentation.defaults
+graphics.state.defaults
+graphics.vertex.strides
+```
+
+HEADLESS/backend observations are not encoded as XNA goldens.
+
+## Ownership stress
 
 ```text
 LIFECYCLE_CYCLES=20
 CHILD_RESOURCE_CYCLES=20
 EXPLICIT_DOUBLE_DISPOSE_CYCLES=10
 PARENT_BEFORE_CHILD_CYCLES=20
+BUFFER_FAMILY_CYCLES=20
+RENDER_TARGET_CYCLES=20
+SPRITE_FONT_CYCLES=20
+GRAPHICS_STATE_CYCLES=20
+CALLBACK_EXCEPTION_CYCLES=20
 CRASHES=0
 OBSERVED_UAF_OR_DOUBLE_FREE=0
 SANITIZER_STATUS=NOT_RUN
 ```
 
-Initialize, LoadContent, Update, Draw, and UnloadContent callback tests retain
-the original Python exception identity. Input snapshots acquire no native
-ownership and no finalizer calls CNA.
+Stress covers state/buffer/target/font resource families, child-before-parent,
+parent-before-child, double dispose, bound-dispose rejection, replacement,
+dynamic discard transfer, shutdown with live children, and handler exception.
+No allocator-leak claim is made without sanitizer evidence, and no interpreter
+finalizer calls CNA.
 
-Fresh artifacts:
+## Package and templates
+
+Version remains `0.1.0.dev0`.
 
 ```text
 wheel=cna_python-0.1.0.dev0-py3-none-any.whl
-wheel SHA-256=ee6a9167e2f8598d1b74635a4eb3fee3910dbeab83721106fa87ac795a0af44b
-wheel entries=36
+wheel SHA-256=3be58735aa12a4558a93c7a6c6a4f31e804520f35fc38b534d81c1115ff3990d
+wheel entries=41
 sdist=cna_python-0.1.0.dev0.tar.gz
-sdist SHA-256=cd3d6f47f42b328fafd3b5dd64afd9c8f5374bb3b05725f1df9cf121b3bd4310
-sdist entries=95
+sdist SHA-256=9b4c47c91aff7645f779223743479507eddcb1e2b7a8f3e78ec5e1f17e66112f
+sdist entries=107
 forbidden wheel entries=0
 forbidden sdist entries=0
 absolute developer path leaks=0
+private/bundled CNA native library=0
 ```
 
-The template source was not changed. Maintained 60/600 runs and isolated
-installed-wheel generated 60/600 runs all pass. The isolated gate also passes
-import/compile and reports zero absolute-path, sibling-source, and PYTHONPATH
-source dependencies.
+The exact final wheel passed import and compile probes in a fresh venv. The
+maintained template source was not changed; maintained 60/600 runs and generated
+installed-wheel 60/600 runs all pass. Generated sources contain zero absolute
+developer paths, sibling-source dependencies, or PYTHONPATH dependencies.
+
+## Content, Curve, and next milestone
+
+Full XNB was not started. `OpenStream` remains deferred until a formal title-
+content path rule exists, and `ReadAsset` remains deferred until the complete
+reader/type-reader/shared-resource/external-reference architecture can be built.
+
+The optional Curve family remained deferred.
+
+The next dependency-complete milestone is Content/XNB: implement the title-
+content path, `ContentReader`, reader manager/type readers, shared resources,
+external references, and LZX only when the full dependency chain requires it.
+That milestone can then make public SpriteFont loading real. Effects/models,
+audio/media, storage, touch, Texture3D/Cube content, and broad 3D remain deferred.
 
 ## Reproduction commands
 
 ```bash
 python3 -m compileall -q src tests tools
-python3 -m unittest discover -v
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so python3 -m unittest discover -v
+CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 -m unittest discover -v
 python3 tools/api_compat/test_verify.py
 python3 tools/api_compat/generate_stubs.py
 python3 tools/api_compat/verify.py --report --output docs/generated/api-compat-report.json --inventory
 python3 tools/api_compat/verify.py --leak-only
-python3 tools/api_compat/verify.py --check  # expected nonzero
+python3 tools/api_compat/verify.py --check  # expected nonzero for genuine missing surface
 python3 tools/run_behavior_corpus.py --output docs/generated/behavior-corpus-report.json
+python3 tools/generate_runtime_capabilities.py
+python3 tools/generate_milestone3_dependency_matrix.py
 python3 tools/audit_cna_abi.py --cna-root ../../cna --library /absolute/path/libcna_c_api.so --output docs/generated/cna-abi-report.json
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so python3 tools/native_ownership_stress.py --cycles 20
+CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/native_ownership_stress.py --cycles 20
 PYTHONPATH=/tmp/cna-python-build-tools python3 -m build --no-isolation
 python3 tools/audit_package.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --sdist dist/cna_python-0.1.0.dev0.tar.gz
 python3 tools/verify_consumer.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --template ../cna-python-template --library /absolute/path/libcna_c_api.so
 git diff --check
 git -C ../cna-python-template diff --check
 ```
-
-## Next dependency-complete milestone
-
-Use the ten-type partial scoreboard and 206-type generated inventory to choose
-one coherent family. The safest pure follow-on is the complete six-type Curve
-family; it was not started here and must not be split into shells. If the next
-milestone instead chooses native breadth, separately scope the remaining 2D
-graphics/device-state dependency set around GraphicsDevice/SpriteBatch/
-Texture/Viewport and preserve explicit native-capability errors for absent ABI
-routes. Do not start XNB as a one-off Texture loader; future Content requires
-the complete reader/manager/shared-resource/external-reference chain. Do not
-restore fake effects, buffers, or indexed drawing.

@@ -17,15 +17,20 @@ buffers; the selected slice has no measured requirement for a compiled Python
 extension.
 
 Public namespaces preserve XNA names. Private modules split math, geometry,
-game hosting, graphics resources, input, loader, ABI declarations, errors, and
-ownership. The loader accepts only an absolute `CNA_NATIVE_LIBRARY`, an absolute
+game hosting, component/services, display/presentation, graphics states,
+resources, vertices/buffers, render targets, input, loader, ABI declarations,
+errors, and ownership. The loader accepts only an absolute `CNA_NATIVE_LIBRARY`, an absolute
 `CNA_NATIVE_DIR`, or an intentionally packaged native asset. No current-working-
 directory search occurs and no native library is bundled in this milestone.
 
-The game handle, graphics manager, textures, and SpriteBatch are owned.
+The game handle owns the native lifecycle. Textures, SpriteBatch, SpriteFont,
+vertex declarations, vertex/index buffers, and render targets are owned;
 GraphicsDevice is borrowed and valid for native work only during an owner-thread
-lifecycle callback. Texture/SpriteBatch children are released before the game.
-No finalizer enters CNA during interpreter shutdown.
+lifecycle callback. State descriptors are managed XNA facades copied into CNA
+when bound. Device facades strongly retain bound resources, explicit buffer
+disposal is rejected while bound, shutdown unbinds first, and all remaining
+children are released before the game. No finalizer enters CNA during
+interpreter shutdown.
 
 Lifecycle callback objects are strongly retained by the game host. ctypes
 enters Python with the GIL. Every trampoline catches `BaseException`, records a
@@ -44,3 +49,8 @@ owner-thread pump rather than call user Python directly.
 The strict verifier consumes SHA-256-pinned XNA-derived neutral metadata. Its
 normal check is intentionally red while types are missing; unexpected/leak-only
 mode is the zero-tolerance public hygiene gate.
+
+Structural/API completeness is distinct from runtime capability. The
+machine-readable `docs/runtime-capabilities.json` classifies native, managed,
+upstream, backend, platform, fixture, hardware, and Python implementation
+status without turning HEADLESS command-path evidence into a rendering claim.

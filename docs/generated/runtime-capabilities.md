@@ -1,0 +1,38 @@
+# Runtime capability inventory
+
+Qualified boundary: CNA C ABI 0.7.0; Linux x86-64 HEADLESS, NULL audio.
+
+| Operation | Status | Evidence | Notes |
+|---|---|---|---|
+| Game.Components/services/traversal | VERIFIED_MANAGED | tests.test_game_graphics_foundation.GameObjectModelTests | Per-Game services and snapshot traversal with stable ordering. |
+| Game.ResetElapsedTime/SuppressDraw | VERIFIED_NATIVE | cna_game_reset_elapsed_time; cna_game_suppress_draw | Calls the active native Game lifecycle. |
+| Game activation/deactivation delivery | BACKEND_BLOCKED | cna_game_subscribe | Infrastructure is native; HEADLESS produces no fabricated transition. |
+| GameWindow properties and screen-device change | VERIFIED_NATIVE | runtime_window.h routes | HEADLESS reports its real null-window state. |
+| GameWindow resize/orientation events | BACKEND_BLOCKED | cna_game_window_subscribe | No HEADLESS window transition is fabricated. |
+| SurfaceFormat and graphics value enums | VERIFIED_MANAGED | behavior graphics.surface_format.values | Values follow XNA metadata, independently of CNA enum ordering. |
+| Viewport.Project/Unproject | VERIFIED_MANAGED | behavior graphics.viewport.* | Binary32 XNA operation ordering. |
+| GraphicsResource disposal event | VERIFIED_NATIVE | cna_graphics_resource_subscribe_disposing | Exactly-once event before native release; double Dispose is idempotent. |
+| GraphicsDevice.ResourceCreated/ResourceDestroyed | UPSTREAM_CNA_BLOCKED | graphics_device.h identityless event payloads | ABI 0.7 cannot reconstruct stable Python resource identity and Tag payload. |
+| Graphics adapter/display/presentation queries | VERIFIED_NATIVE | display.h routes and native integration | Durable adapter and display facades; one actual HEADLESS adapter. |
+| Blend/depth/rasterizer/sampler state binding | VERIFIED_NATIVE | graphics_state.h and native foundation test | XNA defaults and post-bind freeze are managed; descriptors are copied by CNA. |
+| SamplerStateCollection/TextureCollection | VERIFIED_NATIVE | graphics_device.h state/texture slot routes | Durable per-device stage facades; Reach exposes zero vertex-stage slots. |
+| Texture metadata and Color transfer | VERIFIED_NATIVE | texture.h and native tests | Format and level count are read from native resource information. |
+| Texture2D PNG/JPEG encoding | VERIFIED_NATIVE | cna_texture2d_*encoded* and native foundation test | Uses CNA encoders with writable-stream validation and rollback. |
+| Vertex declarations and built-in codecs | VERIFIED_MANAGED | graphics.vertex.strides; explicit struct.pack codecs | No reflection, pickle, JSON, or __dict__ layout inference. |
+| Vertex/Index buffer create, transfer, binding | VERIFIED_NATIVE | vertex_resources.h; index_resources.h; native foundation/stress | Owned handles; native binding borrows and bound disposal is rejected. |
+| DynamicVertexBuffer.SetData(offset, streaming options) | UPSTREAM_CNA_BLOCKED | vertex_resources.h transfer route separation | ABI 0.7 has typed streaming options and raw destination offsets, but no route combining both. |
+| DrawPrimitives/DrawIndexedPrimitives | BACKEND_BLOCKED | ABI dispatch observed CNA_RESULT_NOT_SUPPORTED on HEADLESS | Arguments and bindings reach the real CNA route; no visible 3D backend exists. |
+| DrawInstancedPrimitives | HARDWARE_PENDING | cna_graphics_device_draw_instanced_primitives | Real instancing route is bound; it is never emulated with repeated draws. |
+| DrawUserPrimitives/DrawUserIndexedPrimitives | BACKEND_BLOCKED | graphics_device.h user-array routes | Only explicit built-in vertex codecs and deterministic contiguous bytes are accepted. |
+| RenderTarget2D create/bind/query | VERIFIED_NATIVE | render_target.h and native foundation/stress | Command-path and lifetime verified under HEADLESS. |
+| RenderTarget visible output | HARDWARE_PENDING | HEADLESS renderer_available=false | No visual correctness claim is made from command-path evidence. |
+| RenderTargetCube | UNIMPLEMENTED_CNA_PYTHON | ABI route exists; TextureCube family deferred | The selected milestone completes the 2D render-target foundation only. |
+| GraphicsDevice.Present() | VERIFIED_NATIVE | cna_graphics_device_present and 60/600-frame consumers | HEADLESS command completion is not visible presentation evidence. |
+| GraphicsDevice.Present(rectangles, window) | UPSTREAM_CNA_BLOCKED | No ABI 0.7 route | Raises NativeCapabilityError after strict argument validation. |
+| GraphicsDevice.Reset events | VERIFIED_NATIVE | cna_graphics_device_reset* and event subscriptions | Resetting and Reset are delivered by actual native transitions. |
+| GraphicsDevice.DeviceLost | BACKEND_BLOCKED | event subscription exists | HEADLESS has no deterministic device-loss transition and none is fabricated. |
+| GraphicsDeviceManager lifecycle/preparing settings | VERIFIED_NATIVE | runtime_graphics_manager.h routes | Mutable preparation callback writes validated settings back to CNA. |
+| SpriteFont metrics and DrawString | VERIFIED_NATIVE | sprite_font.h plus SpriteBatch glyph submissions | Private glyph factory is used until Content/XNB can construct public assets. |
+| SpriteFont public Content loading | FIXTURE_PENDING | Content/XNB intentionally deferred | Synthetic legal atlas/metrics validate the runtime graph. |
+| ContentManager.OpenStream | UNIMPLEMENTED_CNA_PYTHON | No formal title-content path mapping selected | Arbitrary process-CWD semantics are not substituted. |
+| ContentManager.ReadAsset/XNB | UNIMPLEMENTED_CNA_PYTHON | Foundation Milestone 3 scope | Full XNB, readers, and LZX were not started. |

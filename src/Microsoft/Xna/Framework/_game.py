@@ -91,7 +91,8 @@ class _NativeGameHost:
         self.owner_thread = threading.get_ident()
         self._callback_buffers: list[c.Array[Any]] = []
         self._callbacks_keepalive: list[object] = []
-        self._title = b"CNA"
+        self._event_registrations: list[int] = []
+        self._title = game.Window.Title.encode("utf-8", errors="strict")
         self._callbacks = self._make_callbacks()
         self._hooks = self._make_hooks()
 
@@ -200,6 +201,33 @@ class _NativeGameHost:
             self.library.cna_game_set_is_mouse_visible(self.handle, self.game._is_mouse_visible),
             "cna_game_set_is_mouse_visible",
         )
+        self.game.LaunchParameters._attach_native(self.game)
+        self.game.Window._attach_native()
+        self._subscribe_events()
+
+    def _subscribe_events(self) -> None:
+        def register(operation: str, event: int, action) -> None:
+            @abi.CNA_GameEventCallback
+            def callback(context):
+                if self.pending_exception is not None:
+                    return
+                try:
+                    action()
+                except BaseException as error:
+                    self.pending_exception = error
+            self._callbacks_keepalive.append(callback)
+            output = c.c_uint64()
+            self.library.check(
+                getattr(self.library, operation)(self.handle, event, callback, None, c.byref(output)),
+                operation,
+            )
+            self._event_registrations.append(int(output.value))
+
+        register("cna_game_subscribe", 0, lambda: self.game.OnActivated(self.game, None))
+        register("cna_game_subscribe", 1, lambda: self.game.OnDeactivated(self.game, None))
+        register("cna_game_window_subscribe", 0, self.game.Window.OnClientSizeChanged)
+        register("cna_game_window_subscribe", 1, self.game.Window.OnOrientationChanged)
+        register("cna_game_window_subscribe", 2, self.game.Window.OnScreenDeviceNameChanged)
 
     def _finish_call(self, result: int, operation: str) -> None:
         if self.pending_exception is not None:
@@ -225,6 +253,14 @@ class _NativeGameHost:
         if self.handle == 0:
             return
         self._callback_buffers.clear()
+        first_unsubscribe_error: BaseException | None = None
+        for registration in reversed(self._event_registrations):
+            try:
+                self.library.check(self.library.cna_game_unsubscribe(registration),
+                                   "cna_game_unsubscribe")
+            except BaseException as error:
+                first_unsubscribe_error = first_unsubscribe_error or error
+        self._event_registrations.clear()
         result = self.library.cna_game_destroy(self.handle)
         if result in (0, 9):
             self.handle = 0
@@ -235,9 +271,13 @@ class _NativeGameHost:
         if result == 9 and self.pending_exception is None:
             return
         self._finish_call(result, "cna_game_destroy")
+        if first_unsubscribe_error is not None:
+            raise first_unsubscribe_error
 
 
 class Game:
+    Activated = Event()
+    Deactivated = Event()
     Exiting = Event()
     Disposed = Event()
 
@@ -253,8 +293,39 @@ class Game:
         self._target_elapsed_time = timedelta(microseconds=16667)
         self._inactive_sleep_time = timedelta(milliseconds=20)
         self._is_mouse_visible = False
+        self._initializing_components = False
+        self._initialized_components = False
+        self._window_supported_orientations = DisplayOrientation.Default
+        from ._game_objects import (
+            GameComponentCollection, GameServiceContainer, GameWindow, LaunchParameters,
+        )
+        self._components = GameComponentCollection()
+        self._services = GameServiceContainer()
+        self._launch_parameters = LaunchParameters()
+        self._window = GameWindow(self, self)
+        self._components.ComponentAdded += self._initialize_added_component
         from .Content import ContentManager
-        self._content = ContentManager(None)
+        self._content = ContentManager(self._services)
+
+    def _initialize_added_component(self, sender: object, args: object) -> None:
+        if self._initializing_components or self._initialized_components:
+            args.GameComponent.Initialize()
+
+    @property
+    def Components(self):
+        return self._components
+
+    @property
+    def Services(self):
+        return self._services
+
+    @property
+    def LaunchParameters(self):
+        return self._launch_parameters
+
+    @property
+    def Window(self):
+        return self._window
 
     def _register_native_child(self, child: object) -> None:
         self._native_children.append(weakref.ref(child))
@@ -381,6 +452,14 @@ class Game:
 
     def _end_native_callback(self) -> None:
         if self._graphics_manager is not None:
+            if (self._graphics_manager.GraphicsDevice._handle and
+                    (self._exit_requested or
+                     (self._host is not None and self._host.pending_exception is not None))):
+                try:
+                    self._graphics_manager.GraphicsDevice._unbind_python_resources_for_shutdown()
+                except BaseException as error:
+                    if self._host is not None and self._host.pending_exception is None:
+                        self._host.pending_exception = error
             self._graphics_manager._end_native_callback()
         self._in_native_callback = False
 
@@ -428,28 +507,97 @@ class Game:
 
     # These are canonical override hooks. CNA performs the surrounding framework
     # work; the base hook intentionally has no user action.
-    def Initialize(self) -> None: return None
+    def Initialize(self) -> None:
+        self._initializing_components = True
+        try:
+            for component in tuple(self._components):
+                component.Initialize()
+        finally:
+            self._initializing_components = False
+            self._initialized_components = True
     def LoadContent(self) -> None: return None
     def UnloadContent(self) -> None: return None
     def BeginRun(self) -> None: return None
     def EndRun(self) -> None: return None
-    def Update(self, gameTime: GameTime) -> None: return None
+    def Update(self, gameTime: GameTime) -> None:
+        from ._game_objects import IUpdateable
+        if not isinstance(gameTime, GameTime):
+            raise TypeError("gameTime must be GameTime")
+        updateables = [value for value in tuple(self._components)
+                       if isinstance(value, IUpdateable)]
+        updateables.sort(key=lambda value: value.UpdateOrder)
+        for value in updateables:
+            if value.Enabled:
+                value.Update(gameTime)
     def BeginDraw(self) -> bool: return True
-    def Draw(self, gameTime: GameTime) -> None: return None
+    def Draw(self, gameTime: GameTime) -> None:
+        from ._game_objects import IDrawable
+        if not isinstance(gameTime, GameTime):
+            raise TypeError("gameTime must be GameTime")
+        drawables = [value for value in tuple(self._components)
+                     if isinstance(value, IDrawable)]
+        drawables.sort(key=lambda value: value.DrawOrder)
+        for value in drawables:
+            if value.Visible:
+                value.Draw(gameTime)
     def EndDraw(self) -> None: return None
 
     def OnExiting(self, sender: object, args: object) -> None:
         self.Exiting(sender, args)
 
+    def OnActivated(self, sender: object, args: object) -> None:
+        self.Activated(sender, args)
+
+    def OnDeactivated(self, sender: object, args: object) -> None:
+        self.Deactivated(sender, args)
+
+    def ResetElapsedTime(self) -> None:
+        host = self._ensure_host()
+        host.library.check(host.library.cna_game_reset_elapsed_time(host.handle),
+                           "cna_game_reset_elapsed_time")
+
+    def SuppressDraw(self) -> None:
+        host = self._ensure_host()
+        host.library.check(host.library.cna_game_suppress_draw(host.handle),
+                           "cna_game_suppress_draw")
+
+    def ShowMissingRequirementMessage(self, exception: Exception) -> bool:
+        if not isinstance(exception, Exception):
+            raise TypeError("exception must be Exception")
+        # CNA 0.7 has no message-box route. Returning False is the XNA contract's
+        # truthful indication that no platform UI was shown.
+        return False
+
     def Dispose(self, *args: object) -> None:
         if len(args) > 1 or (args and type(args[0]) is not bool):
             raise TypeError("Dispose expects no arguments or a bool disposing value")
+        if args and not args[0]:
+            return
         if self._disposed:
             return
         first_error: BaseException | None = None
         try:
+            seen: set[int] = set()
+            for component in tuple(self._components):
+                if id(component) in seen:
+                    continue
+                seen.add(id(component))
+                if hasattr(component, "Dispose"):
+                    component.Dispose()
+            self._components.Clear()
             self.Content.Dispose()
-            self._dispose_native_children()
+            entered_device = False
+            try:
+                if (self._graphics_manager is not None and self._host is not None
+                        and self._host.handle):
+                    self._graphics_manager._begin_native_callback(self._host.handle)
+                    entered_device = self.GraphicsDevice._handle != 0
+                    if entered_device:
+                        self.GraphicsDevice._unbind_python_resources_for_shutdown()
+                self._dispose_native_children()
+            finally:
+                if entered_device:
+                    self._graphics_manager._end_native_callback()
         except BaseException as error:
             first_error = error
         if self._graphics_manager is not None:

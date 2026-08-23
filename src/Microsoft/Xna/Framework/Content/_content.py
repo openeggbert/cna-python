@@ -22,8 +22,15 @@ class ContentLoadException(Exception):
 
 class ContentManager:
     def __init__(self, serviceProvider: object, rootDirectory: str = "") -> None:
+        if serviceProvider is None:
+            raise TypeError("serviceProvider cannot be None")
         self._disposed = False
+        self._service_provider = serviceProvider
         self._root_directory = str(rootDirectory)
+
+    @property
+    def ServiceProvider(self) -> object:
+        return self._service_provider
 
     @property
     def RootDirectory(self) -> str:

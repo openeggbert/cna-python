@@ -22,6 +22,25 @@ implementation uses ordinary Python conventions.
 | indexer | `__getitem__` and, when writable, `__setitem__` |
 | event | same PascalCase descriptor using `+=` and `-=` |
 
+`System.Type` service keys map to Python runtime class objects. Service lookup
+is exact-keyed by that class, providers must be instances of it, and every
+`Game` owns an isolated `GameServiceContainer`; no process-global registry is
+part of the projection. CLR dictionary and collection base behavior maps to a
+dedicated mutable mapping or sequence facade when its public behavior matters.
+Their Python protocol members (`__getitem__`, `__setitem__`, iteration, length,
+and sequence `insert`) are language projections rather than additional XNA
+declared members.
+`List<T>` maps to `list[T]`, `ReadOnlyCollection<T>` maps to `tuple[T, ...]`;
+generic enumerable and enumerator results map to `Iterable[T]` and `Iterator[T]`
+respectively. An XNA implicit conversion into a value wrapper maps to that
+wrapper's constructor. Generic vertex-array methods use `TVertex`, bounded to
+`IVertexType`; this keeps their explicit codec/declaration constraint distinct
+from unconstrained `T` arrays.
+
+`System.Char` maps to a one-code-unit BMP `str`. `System.Text.StringBuilder`
+parameters map to their materialized immutable `str` value, so the String and
+StringBuilder overloads collapse without introducing a non-XNA mutable-string type.
+
 Python keywords receive a trailing underscore. This is the only routine public
 identifier rewrite: CLR `None` becomes `None_`. The verifier records this as a
 language rule, not an allowlist entry.

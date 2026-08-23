@@ -8,7 +8,8 @@ The authoritative checkout was inspected read-only at CNA revision
 used here are `uint32_t` results/enums, `uint8_t` Boolean, opaque generation-
 checked `uint64_t` handles, versioned structures, UTF-8 views, and C callbacks.
 
-Current CNA HEAD was not patched. A clean C-API build is blocked at
+Current CNA HEAD was not patched. Its checkout already contains an unrelated
+untracked test-discovery file. A clean C-API build remains blocked at
 `modules/c-api/src/CnaCApiCoreExt.cpp:250`: the compile-time renderer identity
 guard sees 49 C identities for 50 canonical renderer entries.
 
@@ -24,47 +25,44 @@ SHA-256: 42e099146bf3b470f82fd963a516f8bdd7ff0406da8c37dd53747699117db086
 ELF CNA exports: 2861
 ```
 
-The developer path used for this evidence is not present in package source,
-metadata, templates, or wheel contents. The public wheel contains no native
-library.
+The developer path used for this evidence is absent from package source,
+metadata, templates, and wheel contents. The wheel contains no native library.
 
 `_cna_native.loader.FUNCTION_MANIFEST` is the exact selected import manifest.
 Every entry supplies `restype` and `argtypes`, including pointer depth and
-fixed-width signedness. Current imports cover version/errors, lifecycle/frame
-hooks and timing properties, dispatcher, graphics manager/device, viewport/clear, Texture2D encoded
-decode and Color transfer, SpriteBatch scaled submission, keyboard, mouse, and
-gamepad. Foundation Milestone 2 added only four reviewed input imports:
-`cna_mouse_get_window_handle`, `cna_mouse_set_window_handle`,
-`cna_gamepad_get_capabilities`, and `cna_gamepad_set_vibration`. This is not a
-claim that all 2,861 exports are bound.
+fixed-width signedness. Foundation Milestone 3 expands the selected imports
+only for implemented Game/window events, adapters and presentation parameters,
+graphics states and collections, resource events and names, texture encoders,
+vertex declarations and vertex/index buffers, device bindings and draw routes,
+render targets, Reset/Present/lifecycle events, and SpriteFont metrics. This is
+not a claim that all CNA exports are bound.
 
-The ABI probe compares `sizeof`, `_Alignof`, and field offsets for every ctypes
-structure used. ELF verification compares every imported symbol against the
-qualified artifact. Exact reported measurements are regenerated into the audit
-report rather than inferred from another language binding.
-
-The current generated report records:
+The ABI probe compares `sizeof`, `_Alignof`, and every field offset for each
+ctypes structure used. ELF verification compares every imported symbol against
+the qualified artifact. Exact regenerated measurements are:
 
 ```text
-BOUND_FUNCTIONS=59
-CTYPES_SIGNATURE_MEASUREMENTS=59
-C_LAYOUT_MEASUREMENTS=210
-CTYPES_LAYOUT_MEASUREMENTS=210
+BOUND_FUNCTIONS=186
+CTYPES_SIGNATURE_MEASUREMENTS=186
+C_LAYOUT_MEASUREMENTS=526
+CTYPES_LAYOUT_MEASUREMENTS=526
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
 
 `CNA_Bool` is bound as `uint8_t`, results and selected enums as `uint32_t`,
 signed dimensions/ticks as `int32_t`/`int64_t`, and opaque handles as
-`uint64_t`. Structures passed by value (`CNA_Viewport`) are distinguished from
-pointers to caller-owned output. Callback objects and message buffers are kept
-alive for their full native registration/use lifetime.
+`uint64_t`. Structures passed by value are distinguished from pointers to
+caller-owned output. Callback objects and message buffers stay alive for the
+full native registration/use lifetime.
 
-All selected non-touch input members now have real CNA routes. A HEADLESS/NULL
-run verifies calls and state conversion but cannot verify a physical controller
-or operating-system window association. Surface still absent in Python (typed
-content/XNB, additional SpriteBatch states and overloads, effects, buffers,
-indexed drawing, audio/media/storage/touch) is an unimplemented binding
-milestone, not currently recorded as an upstream CNA defect. The separate
-current-CNA build blocker is the renderer-identity enumeration assertion
-described above.
+The qualified artifact predates CNA HEAD's rejection of bound vertex/index
+buffer destruction, so CNA-Python adds an explicit facade guard before calling
+its destroy route. Shutdown first unbinds every retained buffer/render target.
+No CNA call is made from an interpreter finalizer.
+
+Runtime support and blockers are not inferred from structural or ABI presence.
+The machine-readable classification is `docs/runtime-capabilities.json`; its
+generated rendering documents HEADLESS limits, missing non-default Present,
+identityless resource events, the split dynamic-vertex offset/options routes,
+and deferred Content/XNB and TextureCube/RenderTargetCube families.

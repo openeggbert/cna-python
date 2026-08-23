@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 59,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 59,
-    "C_LAYOUT_MEASUREMENTS": 210,
-    "CTYPES_LAYOUT_MEASUREMENTS": 210,
+    "BOUND_FUNCTIONS": 186,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 186,
+    "C_LAYOUT_MEASUREMENTS": 526,
+    "CTYPES_LAYOUT_MEASUREMENTS": 526,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -18,6 +18,29 @@
     "cna_game_run",
     "cna_game_run_one_frame",
     "cna_game_request_exit",
+    "cna_game_reset_elapsed_time",
+    "cna_game_suppress_draw",
+    "cna_game_subscribe",
+    "cna_game_unsubscribe",
+    "cna_game_launch_parameters_get_count",
+    "cna_game_launch_parameters_get_value_size",
+    "cna_game_launch_parameters_copy_value",
+    "cna_game_launch_parameters_get_key_size",
+    "cna_game_launch_parameters_copy_key",
+    "cna_game_launch_parameters_add",
+    "cna_game_set_window_title",
+    "cna_game_window_get_allow_user_resizing",
+    "cna_game_window_set_allow_user_resizing",
+    "cna_game_window_get_client_bounds",
+    "cna_game_window_get_current_orientation",
+    "cna_game_window_get_native_handle_ext",
+    "cna_game_window_get_screen_device_name_size",
+    "cna_game_window_copy_screen_device_name",
+    "cna_game_window_get_title_size",
+    "cna_game_window_copy_title",
+    "cna_game_window_begin_screen_device_change",
+    "cna_game_window_end_screen_device_change",
+    "cna_game_window_subscribe",
     "cna_game_get_is_active",
     "cna_game_get_is_mouse_visible",
     "cna_game_set_is_mouse_visible",
@@ -41,19 +64,123 @@
     "cna_graphics_device_manager_set_supported_orientations",
     "cna_graphics_device_manager_apply_changes",
     "cna_graphics_device_manager_toggle_full_screen",
+    "cna_graphics_device_manager_create_device",
+    "cna_graphics_device_manager_begin_draw",
+    "cna_graphics_device_manager_end_draw",
+    "cna_graphics_device_manager_dispose",
+    "cna_graphics_device_manager_subscribe",
+    "cna_graphics_device_manager_subscribe_preparing_device_settings_ext",
     "cna_graphics_device_manager_get_graphics_device",
     "cna_graphics_device_manager_destroy",
     "cna_game_get_graphics_device",
+    "cna_graphics_adapter_get_count",
+    "cna_graphics_adapter_get_info",
+    "cna_graphics_adapter_copy_description",
+    "cna_graphics_adapter_copy_device_name",
+    "cna_graphics_adapter_get_current_display_mode",
+    "cna_graphics_adapter_get_display_mode_count",
+    "cna_graphics_adapter_copy_display_modes",
+    "cna_graphics_adapter_set_device_preferences",
+    "cna_graphics_adapter_is_profile_supported",
+    "cna_graphics_adapter_query_render_target_format",
+    "cna_graphics_adapter_query_backbuffer_format",
+    "cna_graphics_device_get_presentation_parameters",
+    "cna_graphics_device_get_display_mode",
     "cna_viewport_get_title_safe_area",
     "cna_graphics_device_get_viewport",
     "cna_graphics_device_set_viewport",
+    "cna_graphics_device_get_blend_state",
+    "cna_graphics_device_set_blend_state",
+    "cna_graphics_device_get_depth_stencil_state",
+    "cna_graphics_device_set_depth_stencil_state",
+    "cna_graphics_device_get_rasterizer_state",
+    "cna_graphics_device_set_rasterizer_state",
+    "cna_graphics_device_get_sampler_state",
+    "cna_graphics_device_set_sampler_state",
+    "cna_graphics_device_get_texture",
+    "cna_graphics_device_set_texture",
+    "cna_graphics_device_unbind_texture",
+    "cna_graphics_device_get_status",
+    "cna_graphics_device_get_adapter_index",
+    "cna_graphics_device_get_graphics_profile",
+    "cna_graphics_device_get_scissor_rectangle",
+    "cna_graphics_device_set_scissor_rectangle",
+    "cna_graphics_device_get_blend_factor",
+    "cna_graphics_device_set_blend_factor",
+    "cna_graphics_device_get_multi_sample_mask",
+    "cna_graphics_device_set_multi_sample_mask",
+    "cna_graphics_device_get_reference_stencil",
+    "cna_graphics_device_set_reference_stencil",
+    "cna_graphics_device_clear_options",
+    "cna_graphics_device_present",
+    "cna_graphics_device_reset",
+    "cna_graphics_device_reset_with_parameters",
+    "cna_graphics_device_subscribe_event",
+    "cna_graphics_device_unsubscribe",
     "cna_graphics_device_clear_rgba",
     "cna_texture2d_create",
     "cna_texture2d_create_from_encoded_memory",
     "cna_texture2d_get_info",
+    "cna_texture2d_get_encoded_byte_count",
+    "cna_texture2d_copy_encoded",
     "cna_texture2d_set_data",
     "cna_texture2d_get_data",
     "cna_texture2d_destroy",
+    "cna_graphics_resource_get_name_byte_count",
+    "cna_graphics_resource_copy_name",
+    "cna_graphics_resource_set_name",
+    "cna_graphics_resource_get_string_byte_count",
+    "cna_graphics_resource_copy_string",
+    "cna_graphics_resource_subscribe_disposing",
+    "cna_vertex_declaration_create",
+    "cna_vertex_declaration_create_with_stride",
+    "cna_vertex_declaration_destroy",
+    "cna_vertex_declaration_get_stride",
+    "cna_vertex_declaration_copy_elements",
+    "cna_vertex_buffer_create",
+    "cna_vertex_buffer_destroy",
+    "cna_vertex_buffer_get_info",
+    "cna_vertex_buffer_copy_declaration_elements",
+    "cna_vertex_buffer_set_data",
+    "cna_vertex_buffer_get_data",
+    "cna_vertex_buffer_set_data_raw",
+    "cna_vertex_buffer_set_data_raw_at",
+    "cna_vertex_buffer_get_data_raw",
+    "cna_index_buffer_create",
+    "cna_index_buffer_destroy",
+    "cna_index_buffer_get_info",
+    "cna_index_buffer_set_data",
+    "cna_index_buffer_set_data_at",
+    "cna_index_buffer_get_data",
+    "cna_graphics_device_set_vertex_buffer",
+    "cna_graphics_device_set_vertex_buffer_offset",
+    "cna_graphics_device_set_vertex_buffers",
+    "cna_graphics_device_get_vertex_buffer_count",
+    "cna_graphics_device_copy_vertex_buffers",
+    "cna_graphics_device_set_index_buffer",
+    "cna_graphics_device_get_index_buffer",
+    "cna_graphics_device_get_backbuffer_data_window",
+    "cna_graphics_device_draw_primitives",
+    "cna_graphics_device_draw_indexed_primitives",
+    "cna_graphics_device_draw_instanced_primitives",
+    "cna_graphics_device_draw_user_primitives",
+    "cna_graphics_device_draw_user_indexed_primitives",
+    "cna_render_target2d_create",
+    "cna_render_target_get_info",
+    "cna_render_target_destroy",
+    "cna_graphics_device_set_render_target2d",
+    "cna_graphics_device_set_render_targets",
+    "cna_graphics_device_get_render_target_count",
+    "cna_graphics_device_copy_render_targets",
+    "cna_sprite_font_create",
+    "cna_sprite_font_get_info",
+    "cna_sprite_font_copy_characters",
+    "cna_sprite_font_copy_glyphs",
+    "cna_sprite_font_set_default_character",
+    "cna_sprite_font_set_line_spacing",
+    "cna_sprite_font_set_spacing",
+    "cna_sprite_font_measure_utf8",
+    "cna_sprite_font_destroy",
     "cna_sprite_batch_create",
     "cna_sprite_batch_begin",
     "cna_sprite_batch_submit_scaled_many",
@@ -152,6 +279,254 @@
       ],
       "arity": 1,
       "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_reset_elapsed_time",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_suppress_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_subscribe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_game_unsubscribe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes registration"
+    },
+    {
+      "symbol": "cna_game_launch_parameters_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_launch_parameters_get_value_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_launch_parameters_copy_value",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_launch_parameters_get_key_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_launch_parameters_copy_key",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_launch_parameters_add",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "CNA_StringView"
+      ],
+      "arity": 3,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_set_window_title",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_window_get_allow_user_resizing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_set_allow_user_resizing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_window_get_client_bounds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Rectangle>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_get_current_orientation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_get_native_handle_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_get_screen_device_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_copy_screen_device_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_get_title_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_copy_title",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_window_begin_screen_device_change",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_window_end_screen_device_change",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 4,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_window_subscribe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned registration"
     },
     {
       "symbol": "cna_game_get_is_active",
@@ -380,6 +755,68 @@
       "ownership": "borrowed manager"
     },
     {
+      "symbol": "cna_graphics_device_manager_create_device",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_begin_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_end_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_subscribe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_subscribe_preparing_device_settings_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned registration"
+    },
+    {
       "symbol": "cna_graphics_device_manager_get_graphics_device",
       "return": "c_uint",
       "parameters": [
@@ -407,6 +844,166 @@
       ],
       "arity": 2,
       "ownership": "callback-borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_adapter_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<CNA_GraphicsAdapterInfo>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_copy_description",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_copy_device_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_get_current_display_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<CNA_DisplayMode>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_get_display_mode_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_ubyte",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_copy_display_modes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_ubyte",
+        "c_uint",
+        "pointer<CNA_DisplayMode>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_set_device_preferences",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_ubyte",
+        "c_ubyte"
+      ],
+      "arity": 4,
+      "ownership": "borrowed adapter"
+    },
+    {
+      "symbol": "cna_graphics_adapter_is_profile_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_query_render_target_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "c_int",
+        "pointer<CNA_GraphicsFormatSelection>"
+      ],
+      "arity": 7,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_adapter_query_backbuffer_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "c_int",
+        "pointer<CNA_GraphicsFormatSelection>"
+      ],
+      "arity": 7,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_get_presentation_parameters",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PresentationParameters>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_get_display_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_DisplayMode>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
     },
     {
       "symbol": "cna_viewport_get_title_safe_area",
@@ -437,6 +1034,298 @@
       ],
       "arity": 2,
       "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_get_blend_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BlendState>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_blend_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BlendState>"
+      ],
+      "arity": 2,
+      "ownership": "copies descriptor"
+    },
+    {
+      "symbol": "cna_graphics_device_get_depth_stencil_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_DepthStencilState>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_depth_stencil_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_DepthStencilState>"
+      ],
+      "arity": 2,
+      "ownership": "copies descriptor"
+    },
+    {
+      "symbol": "cna_graphics_device_get_rasterizer_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RasterizerState>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_rasterizer_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RasterizerState>"
+      ],
+      "arity": 2,
+      "ownership": "copies descriptor"
+    },
+    {
+      "symbol": "cna_graphics_device_get_sampler_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "pointer<CNA_SamplerState>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_sampler_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "pointer<CNA_SamplerState>"
+      ],
+      "arity": 4,
+      "ownership": "copies descriptor"
+    },
+    {
+      "symbol": "cna_graphics_device_get_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "pointer<CNA_TextureSlotInfo>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "borrows texture"
+    },
+    {
+      "symbol": "cna_graphics_device_unbind_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrows device and texture"
+    },
+    {
+      "symbol": "cna_graphics_device_get_status",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_get_adapter_index",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_get_graphics_profile",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_get_scissor_rectangle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Rectangle>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_scissor_rectangle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_Rectangle"
+      ],
+      "arity": 2,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_get_blend_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Color>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_blend_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_Color"
+      ],
+      "arity": 2,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_get_multi_sample_mask",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_multi_sample_mask",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_get_reference_stencil",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_reference_stencil",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_clear_options",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "CNA_Color",
+        "c_float",
+        "c_int"
+      ],
+      "arity": 5,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_present",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_reset",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_reset_with_parameters",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PresentationParameters>",
+        "pointer<c_uint>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_subscribe_event",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_graphics_device_unsubscribe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes registration"
     },
     {
       "symbol": "cna_graphics_device_clear_rgba",
@@ -486,6 +1375,34 @@
       "ownership": "caller output"
     },
     {
+      "symbol": "cna_texture2d_get_encoded_byte_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_texture2d_copy_encoded",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "caller output"
+    },
+    {
       "symbol": "cna_texture2d_set_data",
       "return": "c_uint",
       "parameters": [
@@ -520,6 +1437,620 @@
       ],
       "arity": 1,
       "ownership": "consumes texture"
+    },
+    {
+      "symbol": "cna_graphics_resource_get_name_byte_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_resource_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_resource_set_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed resource"
+    },
+    {
+      "symbol": "cna_graphics_resource_get_string_byte_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_resource_copy_string",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_resource_subscribe_disposing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_vertex_declaration_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_VertexElement>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned declaration"
+    },
+    {
+      "symbol": "cna_vertex_declaration_create_with_stride",
+      "return": "c_uint",
+      "parameters": [
+        "c_int",
+        "pointer<CNA_VertexElement>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned declaration"
+    },
+    {
+      "symbol": "cna_vertex_declaration_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes declaration"
+    },
+    {
+      "symbol": "cna_vertex_declaration_get_stride",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_vertex_declaration_copy_elements",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexElement>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_vertex_buffer_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexBufferCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned vertex buffer"
+    },
+    {
+      "symbol": "cna_vertex_buffer_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes vertex buffer"
+    },
+    {
+      "symbol": "cna_vertex_buffer_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexBufferInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_vertex_buffer_copy_declaration_elements",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexElement>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_vertex_buffer_set_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexBufferTransfer>",
+        "c_void_p",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "copies typed vertices"
+    },
+    {
+      "symbol": "cna_vertex_buffer_get_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexBufferTransfer>",
+        "c_void_p",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_vertex_buffer_set_data_raw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_void_p",
+        "c_ulong",
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 5,
+      "ownership": "copies vertex bytes"
+    },
+    {
+      "symbol": "cna_vertex_buffer_set_data_raw_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_void_p",
+        "c_ulong",
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 6,
+      "ownership": "copies vertex bytes"
+    },
+    {
+      "symbol": "cna_vertex_buffer_get_data_raw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_void_p",
+        "c_ulong",
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 6,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_index_buffer_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_IndexBufferCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned index buffer"
+    },
+    {
+      "symbol": "cna_index_buffer_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes index buffer"
+    },
+    {
+      "symbol": "cna_index_buffer_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_IndexBufferInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_index_buffer_set_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_IndexBufferTransfer>",
+        "c_void_p",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "copies indices"
+    },
+    {
+      "symbol": "cna_index_buffer_set_data_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_IndexBufferTransfer>",
+        "c_void_p",
+        "c_ulong"
+      ],
+      "arity": 5,
+      "ownership": "copies indices"
+    },
+    {
+      "symbol": "cna_index_buffer_get_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_IndexBufferTransfer>",
+        "c_void_p",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_vertex_buffer",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrows binding"
+    },
+    {
+      "symbol": "cna_graphics_device_set_vertex_buffer_offset",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrows binding"
+    },
+    {
+      "symbol": "cna_graphics_device_set_vertex_buffers",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexBufferBinding>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrows bindings"
+    },
+    {
+      "symbol": "cna_graphics_device_get_vertex_buffer_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_copy_vertex_buffers",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VertexBufferBinding>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_index_buffer",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrows binding"
+    },
+    {
+      "symbol": "cna_graphics_device_get_index_buffer",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_get_backbuffer_data_window",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BackBufferReadback>",
+        "pointer<CNA_Color>",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_draw_primitives",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 4,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_draw_indexed_primitives",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 7,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_draw_instanced_primitives",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 8,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_draw_user_primitives",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_UserPrimitives>"
+      ],
+      "arity": 2,
+      "ownership": "reads caller vertices"
+    },
+    {
+      "symbol": "cna_graphics_device_draw_user_indexed_primitives",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_UserPrimitives>",
+        "pointer<CNA_UserIndices>"
+      ],
+      "arity": 3,
+      "ownership": "reads caller vertices and indices"
+    },
+    {
+      "symbol": "cna_render_target2d_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderTarget2DCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned render target"
+    },
+    {
+      "symbol": "cna_render_target_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderTargetInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_render_target_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes render target"
+    },
+    {
+      "symbol": "cna_graphics_device_set_render_target2d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrows render target"
+    },
+    {
+      "symbol": "cna_graphics_device_set_render_targets",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderTargetBinding>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrows render targets"
+    },
+    {
+      "symbol": "cna_graphics_device_get_render_target_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_copy_render_targets",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderTargetBinding>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sprite_font_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_SpriteFontCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned sprite font"
+    },
+    {
+      "symbol": "cna_sprite_font_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpriteFontInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sprite_font_copy_characters",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ushort>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sprite_font_copy_glyphs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpriteFontGlyph>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sprite_font_set_default_character",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte",
+        "c_ushort"
+      ],
+      "arity": 3,
+      "ownership": "borrowed font"
+    },
+    {
+      "symbol": "cna_sprite_font_set_line_spacing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed font"
+    },
+    {
+      "symbol": "cna_sprite_font_set_spacing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed font"
+    },
+    {
+      "symbol": "cna_sprite_font_measure_utf8",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<CNA_Vector2>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_sprite_font_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes sprite font"
     },
     {
       "symbol": "cna_sprite_batch_create",
@@ -681,6 +2212,10 @@
     "VALUE:CNA_TRUE": 1,
     "VALUE:CNA_GameLifecycleCallback": 8,
     "VALUE:CNA_GameBeginDrawCallback": 8,
+    "VALUE:CNA_GameEventCallback": 8,
+    "VALUE:CNA_GraphicsResourceDisposingCallback": 8,
+    "VALUE:CNA_GraphicsDeviceEventCallback": 8,
+    "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "OFFSET:CNA_StringView:data": 0,
@@ -742,6 +2277,17 @@
     "ALIGN:CNA_Vector2": 4,
     "OFFSET:CNA_Vector2:x": 0,
     "OFFSET:CNA_Vector2:y": 4,
+    "SIZE:CNA_Vector3": 12,
+    "ALIGN:CNA_Vector3": 4,
+    "OFFSET:CNA_Vector3:x": 0,
+    "OFFSET:CNA_Vector3:y": 4,
+    "OFFSET:CNA_Vector3:z": 8,
+    "SIZE:CNA_Vector4": 16,
+    "ALIGN:CNA_Vector4": 4,
+    "OFFSET:CNA_Vector4:x": 0,
+    "OFFSET:CNA_Vector4:y": 4,
+    "OFFSET:CNA_Vector4:z": 8,
+    "OFFSET:CNA_Vector4:w": 12,
     "SIZE:CNA_Rectangle": 16,
     "ALIGN:CNA_Rectangle": 4,
     "OFFSET:CNA_Rectangle:x": 0,
@@ -756,6 +2302,307 @@
     "OFFSET:CNA_Viewport:height": 12,
     "OFFSET:CNA_Viewport:min_depth": 16,
     "OFFSET:CNA_Viewport:max_depth": 20,
+    "SIZE:CNA_DisplayMode": 24,
+    "ALIGN:CNA_DisplayMode": 4,
+    "OFFSET:CNA_DisplayMode:struct_size": 0,
+    "OFFSET:CNA_DisplayMode:struct_version": 4,
+    "OFFSET:CNA_DisplayMode:width": 8,
+    "OFFSET:CNA_DisplayMode:height": 12,
+    "OFFSET:CNA_DisplayMode:aspect_ratio": 16,
+    "OFFSET:CNA_DisplayMode:format": 20,
+    "SIZE:CNA_GraphicsAdapterInfo": 48,
+    "ALIGN:CNA_GraphicsAdapterInfo": 8,
+    "OFFSET:CNA_GraphicsAdapterInfo:struct_size": 0,
+    "OFFSET:CNA_GraphicsAdapterInfo:struct_version": 4,
+    "OFFSET:CNA_GraphicsAdapterInfo:adapter_index": 8,
+    "OFFSET:CNA_GraphicsAdapterInfo:is_default_adapter": 12,
+    "OFFSET:CNA_GraphicsAdapterInfo:is_wide_screen": 13,
+    "OFFSET:CNA_GraphicsAdapterInfo:use_null_device": 14,
+    "OFFSET:CNA_GraphicsAdapterInfo:use_reference_device": 15,
+    "OFFSET:CNA_GraphicsAdapterInfo:vendor_id": 16,
+    "OFFSET:CNA_GraphicsAdapterInfo:device_id": 20,
+    "OFFSET:CNA_GraphicsAdapterInfo:revision": 24,
+    "OFFSET:CNA_GraphicsAdapterInfo:subsystem_id": 28,
+    "OFFSET:CNA_GraphicsAdapterInfo:description_byte_length": 32,
+    "OFFSET:CNA_GraphicsAdapterInfo:device_name_byte_length": 40,
+    "SIZE:CNA_GraphicsFormatSelection": 24,
+    "ALIGN:CNA_GraphicsFormatSelection": 4,
+    "OFFSET:CNA_GraphicsFormatSelection:struct_size": 0,
+    "OFFSET:CNA_GraphicsFormatSelection:struct_version": 4,
+    "OFFSET:CNA_GraphicsFormatSelection:exact_match": 8,
+    "OFFSET:CNA_GraphicsFormatSelection:reserved": 9,
+    "OFFSET:CNA_GraphicsFormatSelection:format": 12,
+    "OFFSET:CNA_GraphicsFormatSelection:depth_format": 16,
+    "OFFSET:CNA_GraphicsFormatSelection:multi_sample_count": 20,
+    "SIZE:CNA_PresentationParameters": 44,
+    "ALIGN:CNA_PresentationParameters": 4,
+    "OFFSET:CNA_PresentationParameters:struct_size": 0,
+    "OFFSET:CNA_PresentationParameters:struct_version": 4,
+    "OFFSET:CNA_PresentationParameters:back_buffer_format": 8,
+    "OFFSET:CNA_PresentationParameters:back_buffer_width": 12,
+    "OFFSET:CNA_PresentationParameters:back_buffer_height": 16,
+    "OFFSET:CNA_PresentationParameters:depth_stencil_format": 20,
+    "OFFSET:CNA_PresentationParameters:multi_sample_count": 24,
+    "OFFSET:CNA_PresentationParameters:presentation_interval": 28,
+    "OFFSET:CNA_PresentationParameters:display_orientation": 32,
+    "OFFSET:CNA_PresentationParameters:render_target_usage": 36,
+    "OFFSET:CNA_PresentationParameters:is_full_screen": 40,
+    "OFFSET:CNA_PresentationParameters:headless_ext": 41,
+    "OFFSET:CNA_PresentationParameters:reserved": 42,
+    "SIZE:CNA_GraphicsDeviceInformation": 60,
+    "ALIGN:CNA_GraphicsDeviceInformation": 4,
+    "OFFSET:CNA_GraphicsDeviceInformation:struct_size": 0,
+    "OFFSET:CNA_GraphicsDeviceInformation:struct_version": 4,
+    "OFFSET:CNA_GraphicsDeviceInformation:adapter_index": 8,
+    "OFFSET:CNA_GraphicsDeviceInformation:graphics_profile": 12,
+    "OFFSET:CNA_GraphicsDeviceInformation:presentation_parameters": 16,
+    "SIZE:CNA_BlendState": 56,
+    "ALIGN:CNA_BlendState": 4,
+    "OFFSET:CNA_BlendState:struct_size": 0,
+    "OFFSET:CNA_BlendState:struct_version": 4,
+    "OFFSET:CNA_BlendState:alpha_blend_function": 8,
+    "OFFSET:CNA_BlendState:alpha_destination_blend": 12,
+    "OFFSET:CNA_BlendState:alpha_source_blend": 16,
+    "OFFSET:CNA_BlendState:color_blend_function": 20,
+    "OFFSET:CNA_BlendState:color_destination_blend": 24,
+    "OFFSET:CNA_BlendState:color_source_blend": 28,
+    "OFFSET:CNA_BlendState:color_write_channels": 32,
+    "OFFSET:CNA_BlendState:color_write_channels1": 36,
+    "OFFSET:CNA_BlendState:color_write_channels2": 40,
+    "OFFSET:CNA_BlendState:color_write_channels3": 44,
+    "OFFSET:CNA_BlendState:blend_factor": 48,
+    "OFFSET:CNA_BlendState:multi_sample_mask": 52,
+    "SIZE:CNA_DepthStencilState": 64,
+    "ALIGN:CNA_DepthStencilState": 4,
+    "OFFSET:CNA_DepthStencilState:struct_size": 0,
+    "OFFSET:CNA_DepthStencilState:struct_version": 4,
+    "OFFSET:CNA_DepthStencilState:depth_buffer_enable": 8,
+    "OFFSET:CNA_DepthStencilState:depth_buffer_write_enable": 9,
+    "OFFSET:CNA_DepthStencilState:stencil_enable": 10,
+    "OFFSET:CNA_DepthStencilState:two_sided_stencil_mode": 11,
+    "OFFSET:CNA_DepthStencilState:depth_buffer_function": 12,
+    "OFFSET:CNA_DepthStencilState:stencil_function": 16,
+    "OFFSET:CNA_DepthStencilState:stencil_mask": 20,
+    "OFFSET:CNA_DepthStencilState:stencil_write_mask": 24,
+    "OFFSET:CNA_DepthStencilState:reference_stencil": 28,
+    "OFFSET:CNA_DepthStencilState:stencil_fail": 32,
+    "OFFSET:CNA_DepthStencilState:stencil_depth_buffer_fail": 36,
+    "OFFSET:CNA_DepthStencilState:stencil_pass": 40,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_function": 44,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_fail": 48,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_depth_buffer_fail": 52,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_pass": 56,
+    "OFFSET:CNA_DepthStencilState:reserved": 60,
+    "SIZE:CNA_RasterizerState": 28,
+    "ALIGN:CNA_RasterizerState": 4,
+    "OFFSET:CNA_RasterizerState:struct_size": 0,
+    "OFFSET:CNA_RasterizerState:struct_version": 4,
+    "OFFSET:CNA_RasterizerState:cull_mode": 8,
+    "OFFSET:CNA_RasterizerState:fill_mode": 12,
+    "OFFSET:CNA_RasterizerState:depth_bias": 16,
+    "OFFSET:CNA_RasterizerState:slope_scale_depth_bias": 20,
+    "OFFSET:CNA_RasterizerState:multi_sample_anti_alias": 24,
+    "OFFSET:CNA_RasterizerState:scissor_test_enable": 25,
+    "OFFSET:CNA_RasterizerState:reserved": 26,
+    "SIZE:CNA_SamplerState": 40,
+    "ALIGN:CNA_SamplerState": 4,
+    "OFFSET:CNA_SamplerState:struct_size": 0,
+    "OFFSET:CNA_SamplerState:struct_version": 4,
+    "OFFSET:CNA_SamplerState:address_u": 8,
+    "OFFSET:CNA_SamplerState:address_v": 12,
+    "OFFSET:CNA_SamplerState:address_w": 16,
+    "OFFSET:CNA_SamplerState:filter": 20,
+    "OFFSET:CNA_SamplerState:max_anisotropy": 24,
+    "OFFSET:CNA_SamplerState:max_mip_level": 28,
+    "OFFSET:CNA_SamplerState:mip_map_level_of_detail_bias": 32,
+    "OFFSET:CNA_SamplerState:reserved": 36,
+    "SIZE:CNA_TextureSlotInfo": 24,
+    "ALIGN:CNA_TextureSlotInfo": 8,
+    "OFFSET:CNA_TextureSlotInfo:struct_size": 0,
+    "OFFSET:CNA_TextureSlotInfo:struct_version": 4,
+    "OFFSET:CNA_TextureSlotInfo:bound": 8,
+    "OFFSET:CNA_TextureSlotInfo:reserved": 9,
+    "OFFSET:CNA_TextureSlotInfo:texture": 16,
+    "SIZE:CNA_VertexElement": 16,
+    "ALIGN:CNA_VertexElement": 4,
+    "OFFSET:CNA_VertexElement:offset": 0,
+    "OFFSET:CNA_VertexElement:format": 4,
+    "OFFSET:CNA_VertexElement:usage": 8,
+    "OFFSET:CNA_VertexElement:usage_index": 12,
+    "SIZE:CNA_VertexBufferCreateInfo": 32,
+    "ALIGN:CNA_VertexBufferCreateInfo": 8,
+    "OFFSET:CNA_VertexBufferCreateInfo:struct_size": 0,
+    "OFFSET:CNA_VertexBufferCreateInfo:struct_version": 4,
+    "OFFSET:CNA_VertexBufferCreateInfo:vertex_declaration": 8,
+    "OFFSET:CNA_VertexBufferCreateInfo:vertex_count": 16,
+    "OFFSET:CNA_VertexBufferCreateInfo:buffer_usage": 20,
+    "OFFSET:CNA_VertexBufferCreateInfo:dynamic": 24,
+    "OFFSET:CNA_VertexBufferCreateInfo:reserved": 25,
+    "SIZE:CNA_VertexBufferInfo": 32,
+    "ALIGN:CNA_VertexBufferInfo": 8,
+    "OFFSET:CNA_VertexBufferInfo:struct_size": 0,
+    "OFFSET:CNA_VertexBufferInfo:struct_version": 4,
+    "OFFSET:CNA_VertexBufferInfo:vertex_count": 8,
+    "OFFSET:CNA_VertexBufferInfo:buffer_usage": 12,
+    "OFFSET:CNA_VertexBufferInfo:dynamic": 16,
+    "OFFSET:CNA_VertexBufferInfo:is_content_lost": 17,
+    "OFFSET:CNA_VertexBufferInfo:has_renderer": 18,
+    "OFFSET:CNA_VertexBufferInfo:reserved0": 19,
+    "OFFSET:CNA_VertexBufferInfo:vertex_stride": 20,
+    "OFFSET:CNA_VertexBufferInfo:vertex_element_count": 24,
+    "SIZE:CNA_VertexBufferTransfer": 32,
+    "ALIGN:CNA_VertexBufferTransfer": 8,
+    "OFFSET:CNA_VertexBufferTransfer:struct_size": 0,
+    "OFFSET:CNA_VertexBufferTransfer:struct_version": 4,
+    "OFFSET:CNA_VertexBufferTransfer:vertex_type": 8,
+    "OFFSET:CNA_VertexBufferTransfer:options": 12,
+    "OFFSET:CNA_VertexBufferTransfer:start_index": 16,
+    "OFFSET:CNA_VertexBufferTransfer:element_count": 24,
+    "SIZE:CNA_VertexPositionColor": 16,
+    "ALIGN:CNA_VertexPositionColor": 4,
+    "OFFSET:CNA_VertexPositionColor:position": 0,
+    "OFFSET:CNA_VertexPositionColor:color": 12,
+    "SIZE:CNA_VertexPositionColorTexture": 24,
+    "ALIGN:CNA_VertexPositionColorTexture": 4,
+    "OFFSET:CNA_VertexPositionColorTexture:position": 0,
+    "OFFSET:CNA_VertexPositionColorTexture:color": 12,
+    "OFFSET:CNA_VertexPositionColorTexture:texture_coordinate": 16,
+    "SIZE:CNA_VertexPositionNormalTexture": 32,
+    "ALIGN:CNA_VertexPositionNormalTexture": 4,
+    "OFFSET:CNA_VertexPositionNormalTexture:position": 0,
+    "OFFSET:CNA_VertexPositionNormalTexture:normal": 12,
+    "OFFSET:CNA_VertexPositionNormalTexture:texture_coordinate": 24,
+    "SIZE:CNA_VertexPositionTexture": 20,
+    "ALIGN:CNA_VertexPositionTexture": 4,
+    "OFFSET:CNA_VertexPositionTexture:position": 0,
+    "OFFSET:CNA_VertexPositionTexture:texture_coordinate": 12,
+    "SIZE:CNA_VertexBufferBinding": 16,
+    "ALIGN:CNA_VertexBufferBinding": 8,
+    "OFFSET:CNA_VertexBufferBinding:vertex_buffer": 0,
+    "OFFSET:CNA_VertexBufferBinding:vertex_offset": 8,
+    "OFFSET:CNA_VertexBufferBinding:instance_frequency": 12,
+    "SIZE:CNA_IndexBufferCreateInfo": 24,
+    "ALIGN:CNA_IndexBufferCreateInfo": 4,
+    "OFFSET:CNA_IndexBufferCreateInfo:struct_size": 0,
+    "OFFSET:CNA_IndexBufferCreateInfo:struct_version": 4,
+    "OFFSET:CNA_IndexBufferCreateInfo:index_count": 8,
+    "OFFSET:CNA_IndexBufferCreateInfo:index_element_size": 12,
+    "OFFSET:CNA_IndexBufferCreateInfo:buffer_usage": 16,
+    "OFFSET:CNA_IndexBufferCreateInfo:dynamic": 20,
+    "OFFSET:CNA_IndexBufferCreateInfo:reserved": 21,
+    "SIZE:CNA_IndexBufferInfo": 24,
+    "ALIGN:CNA_IndexBufferInfo": 4,
+    "OFFSET:CNA_IndexBufferInfo:struct_size": 0,
+    "OFFSET:CNA_IndexBufferInfo:struct_version": 4,
+    "OFFSET:CNA_IndexBufferInfo:index_count": 8,
+    "OFFSET:CNA_IndexBufferInfo:index_element_size": 12,
+    "OFFSET:CNA_IndexBufferInfo:buffer_usage": 16,
+    "OFFSET:CNA_IndexBufferInfo:dynamic": 20,
+    "OFFSET:CNA_IndexBufferInfo:is_content_lost": 21,
+    "OFFSET:CNA_IndexBufferInfo:has_renderer": 22,
+    "OFFSET:CNA_IndexBufferInfo:reserved": 23,
+    "SIZE:CNA_IndexBufferTransfer": 32,
+    "ALIGN:CNA_IndexBufferTransfer": 8,
+    "OFFSET:CNA_IndexBufferTransfer:struct_size": 0,
+    "OFFSET:CNA_IndexBufferTransfer:struct_version": 4,
+    "OFFSET:CNA_IndexBufferTransfer:index_element_size": 8,
+    "OFFSET:CNA_IndexBufferTransfer:options": 12,
+    "OFFSET:CNA_IndexBufferTransfer:start_index": 16,
+    "OFFSET:CNA_IndexBufferTransfer:element_count": 24,
+    "SIZE:CNA_RenderTarget2DCreateInfo": 40,
+    "ALIGN:CNA_RenderTarget2DCreateInfo": 4,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:struct_size": 0,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:struct_version": 4,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:width": 8,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:height": 12,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:mip_map": 16,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:reserved0": 17,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:format": 20,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:depth_format": 24,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:multi_sample_count": 28,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:usage": 32,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:reserved1": 36,
+    "SIZE:CNA_RenderTargetInfo": 44,
+    "ALIGN:CNA_RenderTargetInfo": 4,
+    "OFFSET:CNA_RenderTargetInfo:struct_size": 0,
+    "OFFSET:CNA_RenderTargetInfo:struct_version": 4,
+    "OFFSET:CNA_RenderTargetInfo:kind": 8,
+    "OFFSET:CNA_RenderTargetInfo:width": 12,
+    "OFFSET:CNA_RenderTargetInfo:height": 16,
+    "OFFSET:CNA_RenderTargetInfo:level_count": 20,
+    "OFFSET:CNA_RenderTargetInfo:format": 24,
+    "OFFSET:CNA_RenderTargetInfo:depth_format": 28,
+    "OFFSET:CNA_RenderTargetInfo:multi_sample_count": 32,
+    "OFFSET:CNA_RenderTargetInfo:usage": 36,
+    "OFFSET:CNA_RenderTargetInfo:is_content_lost": 40,
+    "OFFSET:CNA_RenderTargetInfo:renderer_available": 41,
+    "OFFSET:CNA_RenderTargetInfo:reserved": 42,
+    "SIZE:CNA_RenderTargetBinding": 24,
+    "ALIGN:CNA_RenderTargetBinding": 8,
+    "OFFSET:CNA_RenderTargetBinding:struct_size": 0,
+    "OFFSET:CNA_RenderTargetBinding:struct_version": 4,
+    "OFFSET:CNA_RenderTargetBinding:render_target": 8,
+    "OFFSET:CNA_RenderTargetBinding:array_slice": 16,
+    "OFFSET:CNA_RenderTargetBinding:cube_map_face": 20,
+    "SIZE:CNA_BackBufferReadback": 48,
+    "ALIGN:CNA_BackBufferReadback": 8,
+    "OFFSET:CNA_BackBufferReadback:struct_size": 0,
+    "OFFSET:CNA_BackBufferReadback:struct_version": 4,
+    "OFFSET:CNA_BackBufferReadback:has_source_rectangle": 8,
+    "OFFSET:CNA_BackBufferReadback:reserved": 9,
+    "OFFSET:CNA_BackBufferReadback:source_rectangle": 12,
+    "OFFSET:CNA_BackBufferReadback:start_index": 32,
+    "OFFSET:CNA_BackBufferReadback:element_count": 40,
+    "SIZE:CNA_UserPrimitives": 48,
+    "ALIGN:CNA_UserPrimitives": 8,
+    "OFFSET:CNA_UserPrimitives:struct_size": 0,
+    "OFFSET:CNA_UserPrimitives:struct_version": 4,
+    "OFFSET:CNA_UserPrimitives:primitive_type": 8,
+    "OFFSET:CNA_UserPrimitives:vertex_source": 12,
+    "OFFSET:CNA_UserPrimitives:vertex_data": 16,
+    "OFFSET:CNA_UserPrimitives:vertex_declaration": 24,
+    "OFFSET:CNA_UserPrimitives:vertex_offset": 32,
+    "OFFSET:CNA_UserPrimitives:num_vertices": 36,
+    "OFFSET:CNA_UserPrimitives:primitive_count": 40,
+    "OFFSET:CNA_UserPrimitives:reserved": 44,
+    "SIZE:CNA_UserIndices": 24,
+    "ALIGN:CNA_UserIndices": 8,
+    "OFFSET:CNA_UserIndices:struct_size": 0,
+    "OFFSET:CNA_UserIndices:struct_version": 4,
+    "OFFSET:CNA_UserIndices:index_element_size": 8,
+    "OFFSET:CNA_UserIndices:index_offset": 12,
+    "OFFSET:CNA_UserIndices:index_data": 16,
+    "SIZE:CNA_SpriteFontGlyph": 56,
+    "ALIGN:CNA_SpriteFontGlyph": 4,
+    "OFFSET:CNA_SpriteFontGlyph:struct_size": 0,
+    "OFFSET:CNA_SpriteFontGlyph:struct_version": 4,
+    "OFFSET:CNA_SpriteFontGlyph:glyph_bounds": 8,
+    "OFFSET:CNA_SpriteFontGlyph:cropping": 24,
+    "OFFSET:CNA_SpriteFontGlyph:character": 40,
+    "OFFSET:CNA_SpriteFontGlyph:reserved": 42,
+    "OFFSET:CNA_SpriteFontGlyph:kerning": 44,
+    "SIZE:CNA_SpriteFontCreateInfo": 48,
+    "ALIGN:CNA_SpriteFontCreateInfo": 8,
+    "OFFSET:CNA_SpriteFontCreateInfo:struct_size": 0,
+    "OFFSET:CNA_SpriteFontCreateInfo:struct_version": 4,
+    "OFFSET:CNA_SpriteFontCreateInfo:texture": 8,
+    "OFFSET:CNA_SpriteFontCreateInfo:glyphs": 16,
+    "OFFSET:CNA_SpriteFontCreateInfo:glyph_count": 24,
+    "OFFSET:CNA_SpriteFontCreateInfo:line_spacing": 32,
+    "OFFSET:CNA_SpriteFontCreateInfo:spacing": 36,
+    "OFFSET:CNA_SpriteFontCreateInfo:default_character": 40,
+    "OFFSET:CNA_SpriteFontCreateInfo:has_default_character": 42,
+    "OFFSET:CNA_SpriteFontCreateInfo:reserved": 43,
+    "SIZE:CNA_SpriteFontInfo": 32,
+    "ALIGN:CNA_SpriteFontInfo": 8,
+    "OFFSET:CNA_SpriteFontInfo:struct_size": 0,
+    "OFFSET:CNA_SpriteFontInfo:struct_version": 4,
+    "OFFSET:CNA_SpriteFontInfo:character_count": 8,
+    "OFFSET:CNA_SpriteFontInfo:line_spacing": 16,
+    "OFFSET:CNA_SpriteFontInfo:spacing": 20,
+    "OFFSET:CNA_SpriteFontInfo:default_character": 24,
+    "OFFSET:CNA_SpriteFontInfo:has_default_character": 26,
+    "OFFSET:CNA_SpriteFontInfo:reserved": 27,
     "SIZE:CNA_Texture2DInfo": 24,
     "ALIGN:CNA_Texture2DInfo": 4,
     "OFFSET:CNA_Texture2DInfo:struct_size": 0,
@@ -893,6 +2740,10 @@
     "VALUE:CNA_TRUE": 1,
     "VALUE:CNA_GameLifecycleCallback": 8,
     "VALUE:CNA_GameBeginDrawCallback": 8,
+    "VALUE:CNA_GameEventCallback": 8,
+    "VALUE:CNA_GraphicsResourceDisposingCallback": 8,
+    "VALUE:CNA_GraphicsDeviceEventCallback": 8,
+    "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "SIZE:CNA_ErrorInfo": 24,
@@ -911,10 +2762,76 @@
     "ALIGN:CNA_Color": 1,
     "SIZE:CNA_Vector2": 8,
     "ALIGN:CNA_Vector2": 4,
+    "SIZE:CNA_Vector3": 12,
+    "ALIGN:CNA_Vector3": 4,
+    "SIZE:CNA_Vector4": 16,
+    "ALIGN:CNA_Vector4": 4,
     "SIZE:CNA_Rectangle": 16,
     "ALIGN:CNA_Rectangle": 4,
     "SIZE:CNA_Viewport": 24,
     "ALIGN:CNA_Viewport": 4,
+    "SIZE:CNA_DisplayMode": 24,
+    "ALIGN:CNA_DisplayMode": 4,
+    "SIZE:CNA_GraphicsAdapterInfo": 48,
+    "ALIGN:CNA_GraphicsAdapterInfo": 8,
+    "SIZE:CNA_GraphicsFormatSelection": 24,
+    "ALIGN:CNA_GraphicsFormatSelection": 4,
+    "SIZE:CNA_PresentationParameters": 44,
+    "ALIGN:CNA_PresentationParameters": 4,
+    "SIZE:CNA_GraphicsDeviceInformation": 60,
+    "ALIGN:CNA_GraphicsDeviceInformation": 4,
+    "SIZE:CNA_BlendState": 56,
+    "ALIGN:CNA_BlendState": 4,
+    "SIZE:CNA_DepthStencilState": 64,
+    "ALIGN:CNA_DepthStencilState": 4,
+    "SIZE:CNA_RasterizerState": 28,
+    "ALIGN:CNA_RasterizerState": 4,
+    "SIZE:CNA_SamplerState": 40,
+    "ALIGN:CNA_SamplerState": 4,
+    "SIZE:CNA_TextureSlotInfo": 24,
+    "ALIGN:CNA_TextureSlotInfo": 8,
+    "SIZE:CNA_VertexElement": 16,
+    "ALIGN:CNA_VertexElement": 4,
+    "SIZE:CNA_VertexBufferCreateInfo": 32,
+    "ALIGN:CNA_VertexBufferCreateInfo": 8,
+    "SIZE:CNA_VertexBufferInfo": 32,
+    "ALIGN:CNA_VertexBufferInfo": 8,
+    "SIZE:CNA_VertexBufferTransfer": 32,
+    "ALIGN:CNA_VertexBufferTransfer": 8,
+    "SIZE:CNA_VertexPositionColor": 16,
+    "ALIGN:CNA_VertexPositionColor": 4,
+    "SIZE:CNA_VertexPositionColorTexture": 24,
+    "ALIGN:CNA_VertexPositionColorTexture": 4,
+    "SIZE:CNA_VertexPositionNormalTexture": 32,
+    "ALIGN:CNA_VertexPositionNormalTexture": 4,
+    "SIZE:CNA_VertexPositionTexture": 20,
+    "ALIGN:CNA_VertexPositionTexture": 4,
+    "SIZE:CNA_VertexBufferBinding": 16,
+    "ALIGN:CNA_VertexBufferBinding": 8,
+    "SIZE:CNA_IndexBufferCreateInfo": 24,
+    "ALIGN:CNA_IndexBufferCreateInfo": 4,
+    "SIZE:CNA_IndexBufferInfo": 24,
+    "ALIGN:CNA_IndexBufferInfo": 4,
+    "SIZE:CNA_IndexBufferTransfer": 32,
+    "ALIGN:CNA_IndexBufferTransfer": 8,
+    "SIZE:CNA_RenderTarget2DCreateInfo": 40,
+    "ALIGN:CNA_RenderTarget2DCreateInfo": 4,
+    "SIZE:CNA_RenderTargetInfo": 44,
+    "ALIGN:CNA_RenderTargetInfo": 4,
+    "SIZE:CNA_RenderTargetBinding": 24,
+    "ALIGN:CNA_RenderTargetBinding": 8,
+    "SIZE:CNA_BackBufferReadback": 48,
+    "ALIGN:CNA_BackBufferReadback": 8,
+    "SIZE:CNA_UserPrimitives": 48,
+    "ALIGN:CNA_UserPrimitives": 8,
+    "SIZE:CNA_UserIndices": 24,
+    "ALIGN:CNA_UserIndices": 8,
+    "SIZE:CNA_SpriteFontGlyph": 56,
+    "ALIGN:CNA_SpriteFontGlyph": 4,
+    "SIZE:CNA_SpriteFontCreateInfo": 48,
+    "ALIGN:CNA_SpriteFontCreateInfo": 8,
+    "SIZE:CNA_SpriteFontInfo": 32,
+    "ALIGN:CNA_SpriteFontInfo": 8,
     "SIZE:CNA_Texture2DInfo": 24,
     "ALIGN:CNA_Texture2DInfo": 4,
     "SIZE:CNA_Texture2DCreateInfo": 24,
@@ -980,6 +2897,13 @@
     "OFFSET:CNA_Color:a": 3,
     "OFFSET:CNA_Vector2:x": 0,
     "OFFSET:CNA_Vector2:y": 4,
+    "OFFSET:CNA_Vector3:x": 0,
+    "OFFSET:CNA_Vector3:y": 4,
+    "OFFSET:CNA_Vector3:z": 8,
+    "OFFSET:CNA_Vector4:x": 0,
+    "OFFSET:CNA_Vector4:y": 4,
+    "OFFSET:CNA_Vector4:z": 8,
+    "OFFSET:CNA_Vector4:w": 12,
     "OFFSET:CNA_Rectangle:x": 0,
     "OFFSET:CNA_Rectangle:y": 4,
     "OFFSET:CNA_Rectangle:width": 8,
@@ -990,6 +2914,245 @@
     "OFFSET:CNA_Viewport:height": 12,
     "OFFSET:CNA_Viewport:min_depth": 16,
     "OFFSET:CNA_Viewport:max_depth": 20,
+    "OFFSET:CNA_DisplayMode:struct_size": 0,
+    "OFFSET:CNA_DisplayMode:struct_version": 4,
+    "OFFSET:CNA_DisplayMode:width": 8,
+    "OFFSET:CNA_DisplayMode:height": 12,
+    "OFFSET:CNA_DisplayMode:aspect_ratio": 16,
+    "OFFSET:CNA_DisplayMode:format": 20,
+    "OFFSET:CNA_GraphicsAdapterInfo:struct_size": 0,
+    "OFFSET:CNA_GraphicsAdapterInfo:struct_version": 4,
+    "OFFSET:CNA_GraphicsAdapterInfo:adapter_index": 8,
+    "OFFSET:CNA_GraphicsAdapterInfo:is_default_adapter": 12,
+    "OFFSET:CNA_GraphicsAdapterInfo:is_wide_screen": 13,
+    "OFFSET:CNA_GraphicsAdapterInfo:use_null_device": 14,
+    "OFFSET:CNA_GraphicsAdapterInfo:use_reference_device": 15,
+    "OFFSET:CNA_GraphicsAdapterInfo:vendor_id": 16,
+    "OFFSET:CNA_GraphicsAdapterInfo:device_id": 20,
+    "OFFSET:CNA_GraphicsAdapterInfo:revision": 24,
+    "OFFSET:CNA_GraphicsAdapterInfo:subsystem_id": 28,
+    "OFFSET:CNA_GraphicsAdapterInfo:description_byte_length": 32,
+    "OFFSET:CNA_GraphicsAdapterInfo:device_name_byte_length": 40,
+    "OFFSET:CNA_GraphicsFormatSelection:struct_size": 0,
+    "OFFSET:CNA_GraphicsFormatSelection:struct_version": 4,
+    "OFFSET:CNA_GraphicsFormatSelection:exact_match": 8,
+    "OFFSET:CNA_GraphicsFormatSelection:reserved": 9,
+    "OFFSET:CNA_GraphicsFormatSelection:format": 12,
+    "OFFSET:CNA_GraphicsFormatSelection:depth_format": 16,
+    "OFFSET:CNA_GraphicsFormatSelection:multi_sample_count": 20,
+    "OFFSET:CNA_PresentationParameters:struct_size": 0,
+    "OFFSET:CNA_PresentationParameters:struct_version": 4,
+    "OFFSET:CNA_PresentationParameters:back_buffer_format": 8,
+    "OFFSET:CNA_PresentationParameters:back_buffer_width": 12,
+    "OFFSET:CNA_PresentationParameters:back_buffer_height": 16,
+    "OFFSET:CNA_PresentationParameters:depth_stencil_format": 20,
+    "OFFSET:CNA_PresentationParameters:multi_sample_count": 24,
+    "OFFSET:CNA_PresentationParameters:presentation_interval": 28,
+    "OFFSET:CNA_PresentationParameters:display_orientation": 32,
+    "OFFSET:CNA_PresentationParameters:render_target_usage": 36,
+    "OFFSET:CNA_PresentationParameters:is_full_screen": 40,
+    "OFFSET:CNA_PresentationParameters:headless_ext": 41,
+    "OFFSET:CNA_PresentationParameters:reserved": 42,
+    "OFFSET:CNA_GraphicsDeviceInformation:struct_size": 0,
+    "OFFSET:CNA_GraphicsDeviceInformation:struct_version": 4,
+    "OFFSET:CNA_GraphicsDeviceInformation:adapter_index": 8,
+    "OFFSET:CNA_GraphicsDeviceInformation:graphics_profile": 12,
+    "OFFSET:CNA_GraphicsDeviceInformation:presentation_parameters": 16,
+    "OFFSET:CNA_BlendState:struct_size": 0,
+    "OFFSET:CNA_BlendState:struct_version": 4,
+    "OFFSET:CNA_BlendState:alpha_blend_function": 8,
+    "OFFSET:CNA_BlendState:alpha_destination_blend": 12,
+    "OFFSET:CNA_BlendState:alpha_source_blend": 16,
+    "OFFSET:CNA_BlendState:color_blend_function": 20,
+    "OFFSET:CNA_BlendState:color_destination_blend": 24,
+    "OFFSET:CNA_BlendState:color_source_blend": 28,
+    "OFFSET:CNA_BlendState:color_write_channels": 32,
+    "OFFSET:CNA_BlendState:color_write_channels1": 36,
+    "OFFSET:CNA_BlendState:color_write_channels2": 40,
+    "OFFSET:CNA_BlendState:color_write_channels3": 44,
+    "OFFSET:CNA_BlendState:blend_factor": 48,
+    "OFFSET:CNA_BlendState:multi_sample_mask": 52,
+    "OFFSET:CNA_DepthStencilState:struct_size": 0,
+    "OFFSET:CNA_DepthStencilState:struct_version": 4,
+    "OFFSET:CNA_DepthStencilState:depth_buffer_enable": 8,
+    "OFFSET:CNA_DepthStencilState:depth_buffer_write_enable": 9,
+    "OFFSET:CNA_DepthStencilState:stencil_enable": 10,
+    "OFFSET:CNA_DepthStencilState:two_sided_stencil_mode": 11,
+    "OFFSET:CNA_DepthStencilState:depth_buffer_function": 12,
+    "OFFSET:CNA_DepthStencilState:stencil_function": 16,
+    "OFFSET:CNA_DepthStencilState:stencil_mask": 20,
+    "OFFSET:CNA_DepthStencilState:stencil_write_mask": 24,
+    "OFFSET:CNA_DepthStencilState:reference_stencil": 28,
+    "OFFSET:CNA_DepthStencilState:stencil_fail": 32,
+    "OFFSET:CNA_DepthStencilState:stencil_depth_buffer_fail": 36,
+    "OFFSET:CNA_DepthStencilState:stencil_pass": 40,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_function": 44,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_fail": 48,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_depth_buffer_fail": 52,
+    "OFFSET:CNA_DepthStencilState:counter_clockwise_stencil_pass": 56,
+    "OFFSET:CNA_DepthStencilState:reserved": 60,
+    "OFFSET:CNA_RasterizerState:struct_size": 0,
+    "OFFSET:CNA_RasterizerState:struct_version": 4,
+    "OFFSET:CNA_RasterizerState:cull_mode": 8,
+    "OFFSET:CNA_RasterizerState:fill_mode": 12,
+    "OFFSET:CNA_RasterizerState:depth_bias": 16,
+    "OFFSET:CNA_RasterizerState:slope_scale_depth_bias": 20,
+    "OFFSET:CNA_RasterizerState:multi_sample_anti_alias": 24,
+    "OFFSET:CNA_RasterizerState:scissor_test_enable": 25,
+    "OFFSET:CNA_RasterizerState:reserved": 26,
+    "OFFSET:CNA_SamplerState:struct_size": 0,
+    "OFFSET:CNA_SamplerState:struct_version": 4,
+    "OFFSET:CNA_SamplerState:address_u": 8,
+    "OFFSET:CNA_SamplerState:address_v": 12,
+    "OFFSET:CNA_SamplerState:address_w": 16,
+    "OFFSET:CNA_SamplerState:filter": 20,
+    "OFFSET:CNA_SamplerState:max_anisotropy": 24,
+    "OFFSET:CNA_SamplerState:max_mip_level": 28,
+    "OFFSET:CNA_SamplerState:mip_map_level_of_detail_bias": 32,
+    "OFFSET:CNA_SamplerState:reserved": 36,
+    "OFFSET:CNA_TextureSlotInfo:struct_size": 0,
+    "OFFSET:CNA_TextureSlotInfo:struct_version": 4,
+    "OFFSET:CNA_TextureSlotInfo:bound": 8,
+    "OFFSET:CNA_TextureSlotInfo:reserved": 9,
+    "OFFSET:CNA_TextureSlotInfo:texture": 16,
+    "OFFSET:CNA_VertexElement:offset": 0,
+    "OFFSET:CNA_VertexElement:format": 4,
+    "OFFSET:CNA_VertexElement:usage": 8,
+    "OFFSET:CNA_VertexElement:usage_index": 12,
+    "OFFSET:CNA_VertexBufferCreateInfo:struct_size": 0,
+    "OFFSET:CNA_VertexBufferCreateInfo:struct_version": 4,
+    "OFFSET:CNA_VertexBufferCreateInfo:vertex_declaration": 8,
+    "OFFSET:CNA_VertexBufferCreateInfo:vertex_count": 16,
+    "OFFSET:CNA_VertexBufferCreateInfo:buffer_usage": 20,
+    "OFFSET:CNA_VertexBufferCreateInfo:dynamic": 24,
+    "OFFSET:CNA_VertexBufferCreateInfo:reserved": 25,
+    "OFFSET:CNA_VertexBufferInfo:struct_size": 0,
+    "OFFSET:CNA_VertexBufferInfo:struct_version": 4,
+    "OFFSET:CNA_VertexBufferInfo:vertex_count": 8,
+    "OFFSET:CNA_VertexBufferInfo:buffer_usage": 12,
+    "OFFSET:CNA_VertexBufferInfo:dynamic": 16,
+    "OFFSET:CNA_VertexBufferInfo:is_content_lost": 17,
+    "OFFSET:CNA_VertexBufferInfo:has_renderer": 18,
+    "OFFSET:CNA_VertexBufferInfo:reserved0": 19,
+    "OFFSET:CNA_VertexBufferInfo:vertex_stride": 20,
+    "OFFSET:CNA_VertexBufferInfo:vertex_element_count": 24,
+    "OFFSET:CNA_VertexBufferTransfer:struct_size": 0,
+    "OFFSET:CNA_VertexBufferTransfer:struct_version": 4,
+    "OFFSET:CNA_VertexBufferTransfer:vertex_type": 8,
+    "OFFSET:CNA_VertexBufferTransfer:options": 12,
+    "OFFSET:CNA_VertexBufferTransfer:start_index": 16,
+    "OFFSET:CNA_VertexBufferTransfer:element_count": 24,
+    "OFFSET:CNA_VertexPositionColor:position": 0,
+    "OFFSET:CNA_VertexPositionColor:color": 12,
+    "OFFSET:CNA_VertexPositionColorTexture:position": 0,
+    "OFFSET:CNA_VertexPositionColorTexture:color": 12,
+    "OFFSET:CNA_VertexPositionColorTexture:texture_coordinate": 16,
+    "OFFSET:CNA_VertexPositionNormalTexture:position": 0,
+    "OFFSET:CNA_VertexPositionNormalTexture:normal": 12,
+    "OFFSET:CNA_VertexPositionNormalTexture:texture_coordinate": 24,
+    "OFFSET:CNA_VertexPositionTexture:position": 0,
+    "OFFSET:CNA_VertexPositionTexture:texture_coordinate": 12,
+    "OFFSET:CNA_VertexBufferBinding:vertex_buffer": 0,
+    "OFFSET:CNA_VertexBufferBinding:vertex_offset": 8,
+    "OFFSET:CNA_VertexBufferBinding:instance_frequency": 12,
+    "OFFSET:CNA_IndexBufferCreateInfo:struct_size": 0,
+    "OFFSET:CNA_IndexBufferCreateInfo:struct_version": 4,
+    "OFFSET:CNA_IndexBufferCreateInfo:index_count": 8,
+    "OFFSET:CNA_IndexBufferCreateInfo:index_element_size": 12,
+    "OFFSET:CNA_IndexBufferCreateInfo:buffer_usage": 16,
+    "OFFSET:CNA_IndexBufferCreateInfo:dynamic": 20,
+    "OFFSET:CNA_IndexBufferCreateInfo:reserved": 21,
+    "OFFSET:CNA_IndexBufferInfo:struct_size": 0,
+    "OFFSET:CNA_IndexBufferInfo:struct_version": 4,
+    "OFFSET:CNA_IndexBufferInfo:index_count": 8,
+    "OFFSET:CNA_IndexBufferInfo:index_element_size": 12,
+    "OFFSET:CNA_IndexBufferInfo:buffer_usage": 16,
+    "OFFSET:CNA_IndexBufferInfo:dynamic": 20,
+    "OFFSET:CNA_IndexBufferInfo:is_content_lost": 21,
+    "OFFSET:CNA_IndexBufferInfo:has_renderer": 22,
+    "OFFSET:CNA_IndexBufferInfo:reserved": 23,
+    "OFFSET:CNA_IndexBufferTransfer:struct_size": 0,
+    "OFFSET:CNA_IndexBufferTransfer:struct_version": 4,
+    "OFFSET:CNA_IndexBufferTransfer:index_element_size": 8,
+    "OFFSET:CNA_IndexBufferTransfer:options": 12,
+    "OFFSET:CNA_IndexBufferTransfer:start_index": 16,
+    "OFFSET:CNA_IndexBufferTransfer:element_count": 24,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:struct_size": 0,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:struct_version": 4,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:width": 8,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:height": 12,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:mip_map": 16,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:reserved0": 17,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:format": 20,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:depth_format": 24,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:multi_sample_count": 28,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:usage": 32,
+    "OFFSET:CNA_RenderTarget2DCreateInfo:reserved1": 36,
+    "OFFSET:CNA_RenderTargetInfo:struct_size": 0,
+    "OFFSET:CNA_RenderTargetInfo:struct_version": 4,
+    "OFFSET:CNA_RenderTargetInfo:kind": 8,
+    "OFFSET:CNA_RenderTargetInfo:width": 12,
+    "OFFSET:CNA_RenderTargetInfo:height": 16,
+    "OFFSET:CNA_RenderTargetInfo:level_count": 20,
+    "OFFSET:CNA_RenderTargetInfo:format": 24,
+    "OFFSET:CNA_RenderTargetInfo:depth_format": 28,
+    "OFFSET:CNA_RenderTargetInfo:multi_sample_count": 32,
+    "OFFSET:CNA_RenderTargetInfo:usage": 36,
+    "OFFSET:CNA_RenderTargetInfo:is_content_lost": 40,
+    "OFFSET:CNA_RenderTargetInfo:renderer_available": 41,
+    "OFFSET:CNA_RenderTargetInfo:reserved": 42,
+    "OFFSET:CNA_RenderTargetBinding:struct_size": 0,
+    "OFFSET:CNA_RenderTargetBinding:struct_version": 4,
+    "OFFSET:CNA_RenderTargetBinding:render_target": 8,
+    "OFFSET:CNA_RenderTargetBinding:array_slice": 16,
+    "OFFSET:CNA_RenderTargetBinding:cube_map_face": 20,
+    "OFFSET:CNA_BackBufferReadback:struct_size": 0,
+    "OFFSET:CNA_BackBufferReadback:struct_version": 4,
+    "OFFSET:CNA_BackBufferReadback:has_source_rectangle": 8,
+    "OFFSET:CNA_BackBufferReadback:reserved": 9,
+    "OFFSET:CNA_BackBufferReadback:source_rectangle": 12,
+    "OFFSET:CNA_BackBufferReadback:start_index": 32,
+    "OFFSET:CNA_BackBufferReadback:element_count": 40,
+    "OFFSET:CNA_UserPrimitives:struct_size": 0,
+    "OFFSET:CNA_UserPrimitives:struct_version": 4,
+    "OFFSET:CNA_UserPrimitives:primitive_type": 8,
+    "OFFSET:CNA_UserPrimitives:vertex_source": 12,
+    "OFFSET:CNA_UserPrimitives:vertex_data": 16,
+    "OFFSET:CNA_UserPrimitives:vertex_declaration": 24,
+    "OFFSET:CNA_UserPrimitives:vertex_offset": 32,
+    "OFFSET:CNA_UserPrimitives:num_vertices": 36,
+    "OFFSET:CNA_UserPrimitives:primitive_count": 40,
+    "OFFSET:CNA_UserPrimitives:reserved": 44,
+    "OFFSET:CNA_UserIndices:struct_size": 0,
+    "OFFSET:CNA_UserIndices:struct_version": 4,
+    "OFFSET:CNA_UserIndices:index_element_size": 8,
+    "OFFSET:CNA_UserIndices:index_offset": 12,
+    "OFFSET:CNA_UserIndices:index_data": 16,
+    "OFFSET:CNA_SpriteFontGlyph:struct_size": 0,
+    "OFFSET:CNA_SpriteFontGlyph:struct_version": 4,
+    "OFFSET:CNA_SpriteFontGlyph:glyph_bounds": 8,
+    "OFFSET:CNA_SpriteFontGlyph:cropping": 24,
+    "OFFSET:CNA_SpriteFontGlyph:character": 40,
+    "OFFSET:CNA_SpriteFontGlyph:reserved": 42,
+    "OFFSET:CNA_SpriteFontGlyph:kerning": 44,
+    "OFFSET:CNA_SpriteFontCreateInfo:struct_size": 0,
+    "OFFSET:CNA_SpriteFontCreateInfo:struct_version": 4,
+    "OFFSET:CNA_SpriteFontCreateInfo:texture": 8,
+    "OFFSET:CNA_SpriteFontCreateInfo:glyphs": 16,
+    "OFFSET:CNA_SpriteFontCreateInfo:glyph_count": 24,
+    "OFFSET:CNA_SpriteFontCreateInfo:line_spacing": 32,
+    "OFFSET:CNA_SpriteFontCreateInfo:spacing": 36,
+    "OFFSET:CNA_SpriteFontCreateInfo:default_character": 40,
+    "OFFSET:CNA_SpriteFontCreateInfo:has_default_character": 42,
+    "OFFSET:CNA_SpriteFontCreateInfo:reserved": 43,
+    "OFFSET:CNA_SpriteFontInfo:struct_size": 0,
+    "OFFSET:CNA_SpriteFontInfo:struct_version": 4,
+    "OFFSET:CNA_SpriteFontInfo:character_count": 8,
+    "OFFSET:CNA_SpriteFontInfo:line_spacing": 16,
+    "OFFSET:CNA_SpriteFontInfo:spacing": 20,
+    "OFFSET:CNA_SpriteFontInfo:default_character": 24,
+    "OFFSET:CNA_SpriteFontInfo:has_default_character": 26,
+    "OFFSET:CNA_SpriteFontInfo:reserved": 27,
     "OFFSET:CNA_Texture2DInfo:struct_size": 0,
     "OFFSET:CNA_Texture2DInfo:struct_version": 4,
     "OFFSET:CNA_Texture2DInfo:width": 8,

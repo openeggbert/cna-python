@@ -12,8 +12,9 @@ from _cna_native.loader import get_library
 from _cna_native.ownership import NativeResource, Ownership
 
 from .._geometry import Color, Rectangle
-from .._math import Vector2
-from .._numeric import int32
+from .._math import Vector2, Vector3
+from .._language import Event
+from .._numeric import int32, uint32
 from ._device import GraphicsDevice, SpriteEffects, SpriteSortMode, SurfaceFormat
 
 
@@ -25,25 +26,104 @@ def _release(operation: str):
 
 
 class GraphicsResource:
-    __slots__ = ("_native", "_game", "_graphics_device", "_name", "_tag")
+    __slots__ = ("_native", "_game", "_graphics_device", "_name", "_tag",
+                 "_disposing_callback", "_disposing_registration", "_dispose_error",
+                 "_raise_dispose_event", "_native_dispose_event", "_managed_disposed",
+                 "__weakref__")
+    Disposing = Event()
 
-    def _init_resource(self, graphics_device: GraphicsDevice, handle: int, release) -> None:
-        self._game = graphics_device._game
+    def _init_resource(self, graphics_device: GraphicsDevice | None, handle: int, release,
+                       *, native_dispose_event: bool = True) -> None:
+        self._game = None if graphics_device is None else graphics_device._game
         self._graphics_device = graphics_device
         self._native = NativeResource(handle, Ownership.OWNED, release, self._game)
         self._name, self._tag = None, None
+        self._dispose_error = None
+        self._raise_dispose_event = True
+        self._native_dispose_event = native_dispose_event
+        self._managed_disposed = False
+        @abi.CNA_GraphicsResourceDisposingCallback
+        def callback(resource, context):
+            if not self._raise_dispose_event:
+                return
+            try:
+                self.Disposing(self, None)
+            except BaseException as error:
+                self._dispose_error = error
+        self._disposing_callback = callback
+        self._disposing_registration = 0
+        if native_dispose_event:
+            registration = c.c_uint64()
+            library = get_library()
+            library.check(
+                library.cna_graphics_resource_subscribe_disposing(
+                    handle, callback, None, c.byref(registration)
+                ),
+                "cna_graphics_resource_subscribe_disposing",
+            )
+            self._disposing_registration = int(registration.value)
+
+    def _init_managed_resource(self, graphics_device: GraphicsDevice | None = None) -> None:
+        self._game = None if graphics_device is None else graphics_device._game
+        self._graphics_device = graphics_device
+        self._native = None
+        self._name, self._tag = None, None
+        self._disposing_callback = None
+        self._disposing_registration = 0
+        self._dispose_error = None
+        self._raise_dispose_event = True
+        self._native_dispose_event = False
+        self._managed_disposed = False
 
     def _require_handle(self) -> int:
+        if self._native is None:
+            if self._managed_disposed:
+                raise RuntimeError(f"{type(self).__name__} is disposed")
+            raise NativeCapabilityError(type(self).__name__, 6, None,
+                                        "managed graphics-state descriptors have no native handle")
         return self._native._require_handle()
 
     @property
-    def IsDisposed(self) -> bool: return self._native.IsDisposed
+    def IsDisposed(self) -> bool:
+        return self._managed_disposed if self._native is None else self._native.IsDisposed
     @property
     def GraphicsDevice(self) -> GraphicsDevice: return self._graphics_device
     @property
-    def Name(self): return self._name
+    def Name(self):
+        if self._native is None:
+            return self._name
+        if self.IsDisposed:
+            return self._name
+        library = get_library()
+        count = c.c_uint64()
+        library.check(library.cna_graphics_resource_get_name_byte_count(
+            self._require_handle(), c.byref(count)), "cna_graphics_resource_get_name_byte_count")
+        if count.value == 0:
+            return ""
+        buffer = c.create_string_buffer(count.value)
+        written = c.c_uint64()
+        library.check(library.cna_graphics_resource_copy_name(
+            self._require_handle(), buffer, count.value, c.byref(written)),
+            "cna_graphics_resource_copy_name")
+        self._name = bytes(buffer.raw[:written.value]).decode("utf-8", errors="strict")
+        return self._name
     @Name.setter
-    def Name(self, value): self._name = value
+    def Name(self, value):
+        if not isinstance(value, str):
+            raise TypeError("Name must be str")
+        if "\0" in value:
+            raise ValueError("Name cannot contain NUL")
+        if self._native is None:
+            if self._managed_disposed:
+                raise RuntimeError(f"{type(self).__name__} is disposed")
+            self._name = value
+            return
+        encoded = value.encode("utf-8", errors="strict")
+        view = abi.CNA_StringView(encoded, len(encoded))
+        library = get_library()
+        library.check(library.cna_graphics_resource_set_name(self._require_handle(), view),
+                      "cna_graphics_resource_set_name")
+        self._name = value
     @property
     def Tag(self): return self._tag
     @Tag.setter
@@ -51,14 +131,110 @@ class GraphicsResource:
     def Dispose(self, *args: object) -> None:
         if len(args) > 1 or (args and type(args[0]) is not bool):
             raise TypeError("Dispose expects no arguments or a bool disposing value")
+        if self.IsDisposed:
+            return
+        self._before_dispose()
+        self._raise_dispose_event = not args or bool(args[0])
+        if self._native is None:
+            if self._raise_dispose_event:
+                self.Disposing(self, None)
+            self._managed_disposed = True
+            if self._game is not None:
+                self._game._unregister_native_child(self)
+            return
+        if self._raise_dispose_event and not self._native_dispose_event:
+            try:
+                self.Disposing(self, None)
+            except BaseException as error:
+                self._dispose_error = error
         self._native.Dispose()
+        first_error = self._dispose_error
+        self._dispose_error = None
+        # CNA consumes the owned registration as part of resource destruction.
+        # Calling unsubscribe after the native destroy would use an invalid handle.
+        self._disposing_registration = 0
+        if first_error is not None: raise first_error
+    def _before_dispose(self) -> None:
+        return None
+    def ToString(self) -> str:
+        if self._native is None:
+            return self._name or f"{type(self).__module__}.{type(self).__name__}"
+        if self.IsDisposed:
+            return self._name or f"{type(self).__module__}.{type(self).__name__}"
+        library = get_library()
+        count = c.c_uint64()
+        library.check(library.cna_graphics_resource_get_string_byte_count(
+            self._require_handle(), c.byref(count)), "cna_graphics_resource_get_string_byte_count")
+        if count.value == 0:
+            return ""
+        buffer = c.create_string_buffer(count.value)
+        written = c.c_uint64()
+        library.check(library.cna_graphics_resource_copy_string(
+            self._require_handle(), buffer, count.value, c.byref(written)),
+            "cna_graphics_resource_copy_string")
+        return bytes(buffer.raw[:written.value]).decode("utf-8", errors="strict")
+    __str__ = ToString
     def __enter__(self):
         self._require_handle(); return self
     def __exit__(self, exc_type, exc, traceback): self.Dispose()
 
 
+class ResourceCreatedEventArgs:
+    __slots__ = ("_resource",)
+
+    def __init__(self, resource: object, _token: object = None) -> None:
+        if _token is not ResourceCreatedEventArgs:
+            raise TypeError("ResourceCreatedEventArgs instances are supplied by GraphicsDevice")
+        self._resource = resource
+
+    @classmethod
+    def _create(cls, resource: object) -> "ResourceCreatedEventArgs":
+        return cls(resource, cls)
+
+    @property
+    def Resource(self) -> object:
+        return self._resource
+
+
+class ResourceDestroyedEventArgs:
+    __slots__ = ("_name", "_tag")
+
+    def __init__(self, name: str, tag: object, _token: object = None) -> None:
+        if _token is not ResourceDestroyedEventArgs:
+            raise TypeError("ResourceDestroyedEventArgs instances are supplied by GraphicsDevice")
+        if not isinstance(name, str):
+            raise TypeError("name must be str")
+        self._name, self._tag = name, tag
+
+    @classmethod
+    def _create(cls, name: str, tag: object) -> "ResourceDestroyedEventArgs":
+        return cls(name, tag, cls)
+
+    @property
+    def Name(self) -> str:
+        return self._name
+
+    @property
+    def Tag(self) -> object:
+        return self._tag
+
+
 class Texture(GraphicsResource):
     """Common owned texture resource state shared by Texture2D."""
+
+    def _before_dispose(self) -> None:
+        if self.GraphicsDevice is not None:
+            self.GraphicsDevice._unbind_texture_resource(self)
+
+    @property
+    def Format(self) -> SurfaceFormat:
+        self._require_handle()
+        return self._format
+
+    @property
+    def LevelCount(self) -> int:
+        self._require_handle()
+        return self._level_count
 
 
 class Texture2D(Texture):
@@ -193,6 +369,182 @@ class Texture2D(Texture):
             value = native[index]
             data[index] = Color(value.r, value.g, value.b, value.a)
 
+    def _save_encoded(self, stream: BinaryIO, width: int, height: int, image_format: int,
+                      operation: str) -> None:
+        if not hasattr(stream, "write"):
+            raise TypeError("stream must be a writable binary file-like object")
+        width, height = uint32(width, name="width"), uint32(height, name="height")
+        if width == 0 or height == 0:
+            raise ValueError("encoded dimensions must be positive")
+        library = get_library()
+        count = c.c_uint64()
+        handle = self._require_handle()
+        library.check(library.cna_texture2d_get_encoded_byte_count(
+            handle, image_format, width, height, c.byref(count)), operation)
+        native = (c.c_uint8 * count.value)()
+        written = c.c_uint64()
+        library.check(library.cna_texture2d_copy_encoded(
+            handle, image_format, width, height, native, count.value, c.byref(written)), operation)
+        payload = bytes(native[:written.value])
+        rollback = None
+        if all(hasattr(stream, name) for name in ("tell", "seek", "truncate")):
+            try:
+                rollback = stream.tell()
+            except Exception:
+                rollback = None
+        try:
+            result = stream.write(payload)
+            if result is not None and result != len(payload):
+                raise OSError(f"short stream write: {result} of {len(payload)} bytes")
+        except BaseException:
+            if rollback is not None:
+                try:
+                    stream.seek(rollback)
+                    stream.truncate(rollback)
+                except Exception:
+                    pass
+            raise
+
+    def SaveAsPng(self, stream: BinaryIO, width: int, height: int) -> None:
+        self._save_encoded(stream, width, height, 0, "cna_texture2d_copy_encoded(PNG)")
+
+    def SaveAsJpeg(self, stream: BinaryIO, width: int, height: int) -> None:
+        self._save_encoded(stream, width, height, 1, "cna_texture2d_copy_encoded(JPEG)")
+
+
+class SpriteFont:
+    """Content-owned bitmap font; constructed only through the private glyph factory."""
+
+    __slots__ = ("_native", "_texture", "_glyph_bounds", "_cropping", "_characters",
+                 "_kerning", "_character_index")
+
+    @classmethod
+    def _create(cls, texture: Texture2D, glyphBounds: Sequence[Rectangle],
+                cropping: Sequence[Rectangle], characters: Sequence[str],
+                lineSpacing: int, spacing: float, kerning: Sequence[Vector3],
+                defaultCharacter: str | None = None) -> "SpriteFont":
+        if not isinstance(texture, Texture2D): raise TypeError("texture must be Texture2D")
+        count = len(characters)
+        if not (len(glyphBounds) == len(cropping) == len(kerning) == count) or count == 0:
+            raise ValueError("SpriteFont glyph arrays must have one equal, nonzero length")
+        if not all(isinstance(value, Rectangle) for value in (*glyphBounds, *cropping)):
+            raise TypeError("glyphBounds and cropping must contain Rectangle values")
+        if not all(isinstance(value, Vector3) for value in kerning):
+            raise TypeError("kerning must contain Vector3 values")
+        values = tuple(cls._character(value, "character") for value in characters)
+        if len(set(values)) != len(values): raise ValueError("SpriteFont characters must be unique")
+        fallback = None if defaultCharacter is None else cls._character(defaultCharacter, "defaultCharacter")
+        if fallback is not None and fallback not in values:
+            raise ValueError("defaultCharacter must be present in characters")
+        line_spacing = int32(lineSpacing, name="lineSpacing")
+        spacing = float(spacing)
+        if not math.isfinite(spacing): raise ValueError("spacing must be finite")
+        native_glyphs = (abi.CNA_SpriteFontGlyph * count)()
+        for index, character in enumerate(values):
+            glyph = native_glyphs[index]
+            glyph.struct_size, glyph.struct_version = c.sizeof(glyph), 1
+            glyph.glyph_bounds = abi.CNA_Rectangle(*tuple(glyphBounds[index]))
+            glyph.cropping = abi.CNA_Rectangle(*tuple(cropping[index]))
+            glyph.character = ord(character)
+            glyph.kerning = abi.CNA_Vector3(*kerning[index])
+        info = abi.CNA_SpriteFontCreateInfo()
+        info.struct_size, info.struct_version = c.sizeof(info), 1
+        info.texture, info.glyphs, info.glyph_count = texture._require_handle(), native_glyphs, count
+        info.line_spacing, info.spacing = line_spacing, spacing
+        info.has_default_character = fallback is not None
+        info.default_character = 0 if fallback is None else ord(fallback)
+        output = c.c_uint64(); library = get_library()
+        library.check(library.cna_sprite_font_create(c.byref(info), c.byref(output)),
+                      "cna_sprite_font_create")
+        result = cls()
+        result._native = NativeResource(int(output.value), Ownership.OWNED,
+                                        _release("cna_sprite_font_destroy"), texture._game)
+        result._texture = texture
+        result._glyph_bounds = tuple(value.__copy__() for value in glyphBounds)
+        result._cropping = tuple(value.__copy__() for value in cropping)
+        result._characters = values
+        result._kerning = tuple(value.__copy__() for value in kerning)
+        result._character_index = {value: index for index, value in enumerate(values)}
+        return result
+
+    @staticmethod
+    def _character(value: object, name: str) -> str:
+        if not isinstance(value, str) or len(value) != 1 or ord(value) > 0xFFFF or 0xD800 <= ord(value) <= 0xDFFF:
+            raise ValueError(f"{name} must be one Unicode BMP character")
+        return value
+
+    def _require_handle(self) -> int:
+        native = getattr(self, "_native", None)
+        if native is None: raise TypeError("SpriteFont instances are provided by Content or the private glyph factory")
+        return native._require_handle()
+
+    def _info(self) -> abi.CNA_SpriteFontInfo:
+        value = abi.CNA_SpriteFontInfo(); value.struct_size, value.struct_version = c.sizeof(value), 1
+        library = get_library(); library.check(library.cna_sprite_font_get_info(
+            self._require_handle(), c.byref(value)), "cna_sprite_font_get_info")
+        return value
+
+    @property
+    def Characters(self) -> tuple[str, ...]: self._require_handle(); return self._characters
+    @property
+    def DefaultCharacter(self) -> str | None:
+        value = self._info(); return chr(value.default_character) if value.has_default_character else None
+    @DefaultCharacter.setter
+    def DefaultCharacter(self, value: str | None) -> None:
+        selected = None if value is None else self._character(value, "DefaultCharacter")
+        if selected is not None and selected not in self._character_index:
+            raise ValueError("DefaultCharacter must be present in Characters")
+        library = get_library(); library.check(library.cna_sprite_font_set_default_character(
+            self._require_handle(), selected is not None, 0 if selected is None else ord(selected)),
+            "cna_sprite_font_set_default_character")
+    @property
+    def LineSpacing(self) -> int: return int(self._info().line_spacing)
+    @LineSpacing.setter
+    def LineSpacing(self, value: int) -> None:
+        selected = int32(value, name="LineSpacing"); library = get_library()
+        library.check(library.cna_sprite_font_set_line_spacing(self._require_handle(), selected),
+                      "cna_sprite_font_set_line_spacing")
+    @property
+    def Spacing(self) -> float: return float(self._info().spacing)
+    @Spacing.setter
+    def Spacing(self, value: float) -> None:
+        selected = float(value)
+        if not math.isfinite(selected): raise ValueError("Spacing must be finite")
+        library = get_library(); library.check(library.cna_sprite_font_set_spacing(
+            self._require_handle(), selected), "cna_sprite_font_set_spacing")
+    def MeasureString(self, text: str) -> Vector2:
+        if not isinstance(text, str): raise TypeError("text must be str")
+        encoded = text.encode("utf-8", errors="strict")
+        output = abi.CNA_Vector2(); library = get_library()
+        library.check(library.cna_sprite_font_measure_utf8(
+            self._require_handle(), abi.CNA_StringView(encoded, len(encoded)), c.byref(output)),
+            "cna_sprite_font_measure_utf8")
+        return Vector2(output.x, output.y)
+
+    def _placements(self, text: str):
+        if not isinstance(text, str): raise TypeError("text must be str")
+        spacing, line_spacing = self.Spacing, self.LineSpacing
+        offset_x = offset_y = 0.0; first = True
+        for character in text:
+            if character == "\r": continue
+            if character == "\n":
+                offset_x = 0.0; offset_y += line_spacing; first = True; continue
+            index = self._character_index.get(character)
+            if index is None:
+                fallback = self.DefaultCharacter
+                index = None if fallback is None else self._character_index.get(fallback)
+            if index is None:
+                raise ValueError(f"character {character!r} is not present and no default is set")
+            kern, crop = self._kerning[index], self._cropping[index]
+            offset_x += max(kern.X, 0.0) if first else spacing + kern.X
+            first = False
+            yield self._glyph_bounds[index], Vector2(offset_x + crop.X, offset_y + crop.Y)
+            offset_x += kern.Y + kern.Z
+
+    def _dispose(self) -> None:
+        native = getattr(self, "_native", None)
+        if native is not None: native.Dispose()
+
 
 class SpriteBatch(GraphicsResource):
     __slots__ = ("_begun",)
@@ -205,7 +557,12 @@ class SpriteBatch(GraphicsResource):
         library.check(library.cna_sprite_batch_create(graphicsDevice._require_handle(), c.byref(output)),
                       "cna_sprite_batch_create")
         game = graphicsDevice._game
-        self._init_resource(graphicsDevice, int(output.value), _release("cna_sprite_batch_destroy"))
+        # ABI 0.7 does not classify SpriteBatch as a graphics-resource handle
+        # for the common subscription route.  It still has deterministic owned
+        # lifetime, so its inherited event is emitted synchronously immediately
+        # before the native destroy call.
+        self._init_resource(graphicsDevice, int(output.value), _release("cna_sprite_batch_destroy"),
+                            native_dispose_event=False)
         self._begun = False
 
     def _require_handle(self) -> int: return self._native._require_handle()
@@ -272,6 +629,26 @@ class SpriteBatch(GraphicsResource):
         library.check(library.cna_sprite_batch_submit_scaled_many(self._require_handle(), c.byref(command), 1),
                       "cna_sprite_batch_submit_scaled_many")
 
+    def DrawString(self, *args: object) -> None:
+        if not self._begun: raise RuntimeError("SpriteBatch.DrawString requires an active Begin/End interval")
+        if len(args) not in (4, 9): raise TypeError("no matching XNA SpriteBatch.DrawString overload")
+        font, text, position, color = args[:4]
+        if not isinstance(font, SpriteFont): raise TypeError("spriteFont must be SpriteFont")
+        font._require_handle()
+        if not isinstance(text, str): raise TypeError("text must be str")
+        if not isinstance(position, Vector2) or not isinstance(color, Color):
+            raise TypeError("position and color have the wrong XNA value type")
+        if len(args) == 4:
+            rotation, origin, scale, effects, depth = 0.0, Vector2.Zero, Vector2.One, SpriteEffects.None_, 0.0
+        else:
+            rotation, origin, scale, effects, depth = args[4:]
+            if isinstance(scale, (int, float)): scale = Vector2(scale)
+        if not isinstance(origin, Vector2) or not isinstance(scale, Vector2):
+            raise TypeError("origin and scale have the wrong XNA value type")
+        for source, anchor in font._placements(text):
+            self.Draw(font._texture, position, source, color, rotation,
+                      origin - anchor, scale, effects, depth)
+
     def End(self) -> None:
         if not self._begun:
             raise RuntimeError("SpriteBatch.End requires Begin")
@@ -285,7 +662,7 @@ class SpriteBatch(GraphicsResource):
         if len(args) > 1 or (args and type(args[0]) is not bool):
             raise TypeError("Dispose expects no arguments or a bool disposing value")
         self._begun = False
-        self._native.Dispose()
+        super().Dispose(*args)
 
     def __enter__(self):
         self._require_handle(); return self
@@ -298,5 +675,6 @@ Texture2D.__xna_arities__ = {
     "GetData": {1, 3, 5}, "Dispose": {0, 1},
 }
 SpriteBatch.__xna_arities__ = {
-    "Begin": {0, 2, 5, 6, 7}, "Draw": {3, 4, 8, 9}, "Dispose": {0, 1},
+    "Begin": {0, 2, 5, 6, 7}, "Draw": {3, 4, 8, 9}, "DrawString": {4, 9},
+    "Dispose": {0, 1},
 }

@@ -28,7 +28,7 @@ HEADERS = {
     "Microsoft.Xna.Framework": [
         "from datetime import timedelta",
         "from enum import IntEnum, IntFlag",
-        "from typing import Any, BinaryIO, Callable, ClassVar, Final, Iterable, MutableSequence, Sequence, TypeVar, overload",
+        "from typing import Any, BinaryIO, Callable, ClassVar, Final, Iterable, Iterator, MutableSequence, Sequence, TypeVar, overload",
         "from ._language import Event",
         "from .Content import ContentManager",
         "from .Graphics import GraphicsDevice, GraphicsProfile, DepthFormat, SurfaceFormat",
@@ -37,11 +37,12 @@ HEADERS = {
     ],
     "Microsoft.Xna.Framework.Graphics": [
         "from enum import IntEnum, IntFlag",
-        "from typing import Any, BinaryIO, Callable, ClassVar, Final, Iterable, MutableSequence, Sequence, TypeVar, overload",
+        "from typing import Any, BinaryIO, Callable, ClassVar, Final, Iterable, Iterator, MutableSequence, Sequence, TypeVar, overload",
         "from .. import Color, Matrix, Rectangle, Vector2, Vector3, Vector4",
         "from .._language import Event",
         "",
         "T = TypeVar(\"T\")",
+        "TVertex = TypeVar(\"TVertex\", bound=\"IVertexType\")",
     ],
     "Microsoft.Xna.Framework.Input": [
         "from enum import IntEnum, IntFlag",
@@ -142,6 +143,15 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
         for name, members in interface_groups.items():
             if raw_member(target, name) is not None and members[0]["kind"] in {"constructor", "method"}:
                 lines.extend(render_callable(name, expected_callables(interface, name, members)))
+        if interface_name.startswith("System.Collections.Generic.IEnumerable`1[") and raw_member(target, "__iter__") is not None:
+            argument = interface_name[interface_name.find("[") + 1:-1]
+            lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
+    for interface_name in expected.get("directInterfaces", ()):
+        if (interface_name.startswith("System.Collections.Generic.IEnumerable`1[")
+                and raw_member(target, "__iter__") is not None
+                and not any(line.lstrip().startswith("def __iter__") for line in lines)):
+            argument = interface_name[interface_name.find("[") + 1:-1]
+            lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
     if "System.IDisposable" in expected.get("directInterfaces", ()):
         if raw_member(target, "__enter__") is not None:
             lines.append(f"    def __enter__(self) -> {identity.rsplit('.', 1)[-1]}: ...")

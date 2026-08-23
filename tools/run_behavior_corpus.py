@@ -18,6 +18,12 @@ from Microsoft.Xna.Framework import (  # noqa: E402
     MathHelper, Matrix, Plane, Point, Quaternion, Ray, Rectangle, Vector2,
     Vector3, Vector4,
 )
+from Microsoft.Xna.Framework.Graphics import (  # noqa: E402
+    BlendState, DepthStencilState, PresentationParameters, RasterizerState,
+    SamplerState, SurfaceFormat, VertexPositionColor,
+    VertexPositionColorTexture, VertexPositionNormalTexture,
+    VertexPositionTexture, Viewport,
+)
 from Microsoft.Xna.Framework._numeric import f32  # noqa: E402
 
 
@@ -32,6 +38,23 @@ def float_from_bits(value): return struct.unpack('=f', struct.pack('=I', value))
 
 
 def observe(operation: str, args: list[object]) -> object:
+    if operation == "Graphics.SurfaceFormatValues":
+        return [int(value) for value in SurfaceFormat]
+    if operation == "Graphics.ViewportProject":
+        viewport=Viewport(10,20,640,480);viewport.MinDepth=0.2;viewport.MaxDepth=0.8
+        return hex_values(viewport.Project(Vector3(0.25,-0.5,0.4),Matrix.Identity,Matrix.Identity,Matrix.Identity))
+    if operation == "Graphics.ViewportRoundTrip":
+        viewport=Viewport(10,20,640,480);viewport.MinDepth=0.2;viewport.MaxDepth=0.8
+        source=Vector3(0.25,-0.5,0.4);projected=viewport.Project(source,Matrix.Identity,Matrix.Identity,Matrix.Identity)
+        return hex_values(viewport.Unproject(projected,Matrix.Identity,Matrix.Identity,Matrix.Identity))
+    if operation == "Graphics.PresentationDefaults":
+        value=PresentationParameters();clone=value.Clone()
+        return [value.BackBufferWidth,value.BackBufferHeight,int(value.BackBufferFormat),int(value.DepthStencilFormat),value.MultiSampleCount,int(value.DisplayOrientation),int(value.PresentationInterval),int(value.RenderTargetUsage),value.DeviceWindowHandle,value.IsFullScreen,clone is not value]
+    if operation == "Graphics.StateDefaults":
+        blend=BlendState();depth=DepthStencilState();raster=RasterizerState();sampler=SamplerState()
+        return [int(blend.ColorSourceBlend),int(blend.ColorDestinationBlend),int(blend.ColorBlendFunction),depth.DepthBufferEnable,depth.DepthBufferWriteEnable,int(depth.DepthBufferFunction),int(raster.CullMode),int(raster.FillMode),raster.MultiSampleAntiAlias,int(sampler.Filter),sampler.MaxAnisotropy,sampler.MaxMipLevel]
+    if operation == "Graphics.VertexStrides":
+        return [VertexPositionColor.VertexDeclaration.VertexStride,VertexPositionColorTexture.VertexDeclaration.VertexStride,VertexPositionNormalTexture.VertexDeclaration.VertexStride,VertexPositionTexture.VertexDeclaration.VertexStride]
     if operation == "Golden.Vector2NormalizeZero": return hex_values(Vector2.Normalize(Vector2.Zero))
     if operation == "Golden.Vector3NormalizeZero": return hex_values(Vector3.Normalize(Vector3.Zero))
     if operation == "Golden.Vector4NormalizeZero": return hex_values(Vector4.Normalize(Vector4.Zero))

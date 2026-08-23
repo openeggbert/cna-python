@@ -4,8 +4,8 @@
   "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
   "category": "PURE_XNA_DERIVED",
   "summary": {
-    "OBSERVATIONS": 92,
-    "ASSERTIONS": 360,
+    "OBSERVATIONS": 98,
+    "ASSERTIONS": 413,
     "FAILURES": 0
   },
   "results": [
@@ -1332,6 +1332,160 @@
       "passed": true,
       "expected": true,
       "actual": true
+    },
+    {
+      "id": "graphics.surface_format.values",
+      "passed": true,
+      "expected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "actual": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "id": "graphics.viewport.project.bits",
+      "passed": true,
+      "expected": [
+        "43CD0000",
+        "43BE0000",
+        "3EE147AE"
+      ],
+      "actual": [
+        "43CD0000",
+        "43BE0000",
+        "3EE147AE"
+      ]
+    },
+    {
+      "id": "graphics.viewport.roundtrip.bits",
+      "passed": true,
+      "expected": [
+        "3E800000",
+        "BF000000",
+        "3ECCCCCC"
+      ],
+      "actual": [
+        "3E800000",
+        "BF000000",
+        "3ECCCCCC"
+      ]
+    },
+    {
+      "id": "graphics.presentation.defaults",
+      "passed": true,
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      "actual": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "graphics.state.defaults",
+      "passed": true,
+      "expected": [
+        0,
+        1,
+        0,
+        true,
+        true,
+        3,
+        2,
+        0,
+        true,
+        0,
+        4,
+        0
+      ],
+      "actual": [
+        0,
+        1,
+        0,
+        true,
+        true,
+        3,
+        2,
+        0,
+        true,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "id": "graphics.vertex.strides",
+      "passed": true,
+      "expected": [
+        16,
+        24,
+        32,
+        20
+      ],
+      "actual": [
+        16,
+        24,
+        32,
+        20
+      ]
     }
   ]
 }

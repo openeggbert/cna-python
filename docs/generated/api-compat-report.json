@@ -5,11 +5,11 @@
     "REFERENCE_MEMBERS": 2964,
     "EXPECTED_PYTHON_TYPES": 257,
     "EXPECTED_PYTHON_MEMBERS": 2887,
-    "TARGET_TYPES": 51,
-    "TARGET_MEMBERS": 1003,
-    "TOTAL_DIAGNOSTICS": 310,
-    "MISSING_TYPE": 206,
-    "MISSING_MEMBER": 104,
+    "TARGET_TYPES": 115,
+    "TARGET_MEMBERS": 1465,
+    "TOTAL_DIAGNOSTICS": 144,
+    "MISSING_TYPE": 142,
+    "MISSING_MEMBER": 2,
     "UNEXPECTED_TYPE": 0,
     "UNEXPECTED_MEMBER": 0,
     "TYPE_KIND_MISMATCH": 0,
@@ -43,516 +43,6 @@
       "category": "MISSING_MEMBER",
       "type": "Microsoft.Xna.Framework.Content.ContentManager",
       "detail": "ReadAsset(System.String,System.Action`1[System.IDisposable])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Content.ContentManager",
-      "detail": "ServiceProvider()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "Activated()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "Components()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "Deactivated()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "LaunchParameters()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "OnActivated(System.Object,System.EventArgs)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "OnDeactivated(System.Object,System.EventArgs)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "ResetElapsedTime()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "Services()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "ShowMissingRequirementMessage(System.Exception)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "SuppressDraw()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "Window()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Adapter()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "BlendFactor()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "BlendState()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DepthStencilState()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DeviceLost()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DeviceReset()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DeviceResetting()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DisplayMode()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Disposing()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawIndexedPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawInstancedPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawUserIndexedPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,!!0[],System.Int32,System.Int32,System.Int16[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawUserIndexedPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,!!0[],System.Int32,System.Int32,System.Int16[],System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.VertexDeclaration)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawUserIndexedPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,!!0[],System.Int32,System.Int32,System.Int32[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawUserIndexedPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,!!0[],System.Int32,System.Int32,System.Int32[],System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.VertexDeclaration)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawUserPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,!!0[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "DrawUserPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType,!!0[],System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.VertexDeclaration)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "GetBackBufferData(!!0[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "GetBackBufferData(!!0[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "GetBackBufferData(System.Nullable`1[Microsoft.Xna.Framework.Rectangle],!!0[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "GetRenderTargets()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "GetVertexBuffers()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "GraphicsDeviceStatus()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "GraphicsProfile()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Indices()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "IsDisposed()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "MultiSampleMask()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Present()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Present(System.Nullable`1[Microsoft.Xna.Framework.Rectangle],System.Nullable`1[Microsoft.Xna.Framework.Rectangle],System.IntPtr)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "PresentationParameters()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "RasterizerState()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "ReferenceStencil()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Reset()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Reset(Microsoft.Xna.Framework.Graphics.PresentationParameters)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Reset(Microsoft.Xna.Framework.Graphics.PresentationParameters,Microsoft.Xna.Framework.Graphics.GraphicsAdapter)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "ResourceCreated()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "ResourceDestroyed()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "SamplerStates()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "ScissorRectangle()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "SetRenderTarget(Microsoft.Xna.Framework.Graphics.RenderTarget2D)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "SetRenderTarget(Microsoft.Xna.Framework.Graphics.RenderTargetCube,Microsoft.Xna.Framework.Graphics.CubeMapFace)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "SetRenderTargets(Microsoft.Xna.Framework.Graphics.RenderTargetBinding[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "SetVertexBuffer(Microsoft.Xna.Framework.Graphics.VertexBuffer)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "SetVertexBuffer(Microsoft.Xna.Framework.Graphics.VertexBuffer,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "SetVertexBuffers(Microsoft.Xna.Framework.Graphics.VertexBufferBinding[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Textures()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "VertexSamplerStates()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "VertexTextures()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsResource",
-      "detail": "Disposing()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsResource",
-      "detail": "ToString()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Alpha8()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Bgr565()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Bgra4444()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Bgra5551()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Dxt1()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Dxt3()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Dxt5()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "HalfSingle()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "HalfVector2()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "HalfVector4()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "HdrBlendable()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "NormalizedByte2()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "NormalizedByte4()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Rg32()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Rgba1010102()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Rgba64()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Single()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Vector2()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "detail": "Vector4()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture",
-      "detail": "Format()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture",
-      "detail": "LevelCount()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture2D",
-      "detail": "SaveAsJpeg(System.IO.Stream,System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture2D",
-      "detail": "SaveAsPng(System.IO.Stream,System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.Viewport",
-      "detail": "Project(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Graphics.Viewport",
-      "detail": "Unproject(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "CanResetDevice(Microsoft.Xna.Framework.GraphicsDeviceInformation)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "FindBestDevice(System.Boolean)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "OnDeviceCreated(System.Object,System.EventArgs)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "OnDeviceDisposing(System.Object,System.EventArgs)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "OnDeviceReset(System.Object,System.EventArgs)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "OnDeviceResetting(System.Object,System.EventArgs)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "OnPreparingDeviceSettings(System.Object,Microsoft.Xna.Framework.PreparingDeviceSettingsEventArgs)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "RankDevices(System.Collections.Generic.List`1[Microsoft.Xna.Framework.GraphicsDeviceInformation])"
     },
     {
       "category": "MISSING_TYPE",
@@ -796,37 +286,7 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.DrawableGameComponent",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.FrameworkDispatcher",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.GameComponent",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.GameComponentCollection",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.GameComponentCollectionEventArgs",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.GameServiceContainer",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.GameWindow",
       "detail": "type is not exported"
     },
     {
@@ -846,92 +306,12 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.Blend",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.BlendFunction",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.BlendState",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.BufferUsage",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.ClearOptions",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.ColorWriteChannels",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.CompareFunction",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.CubeMapFace",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.CullMode",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.DepthStencilState",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.DeviceLostException",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.DeviceNotResetException",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.DirectionalLight",
       "detail": "type is not exported"
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.DisplayMode",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.DisplayModeCollection",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.DualTextureEffect",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.DynamicIndexBuffer",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.DynamicVertexBuffer",
       "detail": "type is not exported"
     },
     {
@@ -1001,21 +381,6 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.FillMode",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsAdapter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDeviceStatus",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.IEffectFog",
       "detail": "type is not exported"
     },
@@ -1027,26 +392,6 @@
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.IEffectMatrices",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.IGraphicsDeviceService",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.IVertexType",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.IndexBuffer",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.IndexElementSize",
       "detail": "type is not exported"
     },
     {
@@ -1107,11 +452,6 @@
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.NoSuitableGraphicsDeviceException",
       "detail": "type is not exported"
     },
     {
@@ -1216,67 +556,7 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PresentInterval",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PresentationParameters",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.PrimitiveType",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.RasterizerState",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.RenderTarget2D",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.RenderTargetBinding",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.RenderTargetCube",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.RenderTargetUsage",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.ResourceCreatedEventArgs",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.ResourceDestroyedEventArgs",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.SamplerState",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.SamplerStateCollection",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.SetDataOptions",
       "detail": "type is not exported"
     },
     {
@@ -1286,112 +566,12 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteFont",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.StencilOperation",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.Texture3D",
       "detail": "type is not exported"
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.TextureAddressMode",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.TextureCollection",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Graphics.TextureCube",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.TextureFilter",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexBuffer",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexBufferBinding",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexDeclaration",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexElement",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexElementFormat",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexElementUsage",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexPositionColor",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexPositionColorTexture",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexPositionNormalTexture",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.VertexPositionTexture",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceInformation",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.IDrawable",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.IGameComponent",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.IGraphicsDeviceManager",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.IUpdateable",
       "detail": "type is not exported"
     },
     {
@@ -1432,11 +612,6 @@
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Input.Touch.TouchPanelCapabilities",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.LaunchParameters",
       "detail": "type is not exported"
     },
     {
@@ -1561,11 +736,6 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.PreparingDeviceSettingsEventArgs",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Storage.StorageContainer",
       "detail": "type is not exported"
     },
@@ -1593,11 +763,82 @@
     "Microsoft.Xna.Framework.ContainmentType",
     "Microsoft.Xna.Framework.Content.ContentLoadException",
     "Microsoft.Xna.Framework.DisplayOrientation",
+    "Microsoft.Xna.Framework.DrawableGameComponent",
+    "Microsoft.Xna.Framework.Game",
+    "Microsoft.Xna.Framework.GameComponent",
+    "Microsoft.Xna.Framework.GameComponentCollection",
+    "Microsoft.Xna.Framework.GameComponentCollectionEventArgs",
+    "Microsoft.Xna.Framework.GameServiceContainer",
     "Microsoft.Xna.Framework.GameTime",
+    "Microsoft.Xna.Framework.GameWindow",
+    "Microsoft.Xna.Framework.Graphics.Blend",
+    "Microsoft.Xna.Framework.Graphics.BlendFunction",
+    "Microsoft.Xna.Framework.Graphics.BlendState",
+    "Microsoft.Xna.Framework.Graphics.BufferUsage",
+    "Microsoft.Xna.Framework.Graphics.ClearOptions",
+    "Microsoft.Xna.Framework.Graphics.ColorWriteChannels",
+    "Microsoft.Xna.Framework.Graphics.CompareFunction",
+    "Microsoft.Xna.Framework.Graphics.CubeMapFace",
+    "Microsoft.Xna.Framework.Graphics.CullMode",
     "Microsoft.Xna.Framework.Graphics.DepthFormat",
+    "Microsoft.Xna.Framework.Graphics.DepthStencilState",
+    "Microsoft.Xna.Framework.Graphics.DeviceLostException",
+    "Microsoft.Xna.Framework.Graphics.DeviceNotResetException",
+    "Microsoft.Xna.Framework.Graphics.DisplayMode",
+    "Microsoft.Xna.Framework.Graphics.DisplayModeCollection",
+    "Microsoft.Xna.Framework.Graphics.DynamicIndexBuffer",
+    "Microsoft.Xna.Framework.Graphics.DynamicVertexBuffer",
+    "Microsoft.Xna.Framework.Graphics.FillMode",
+    "Microsoft.Xna.Framework.Graphics.GraphicsAdapter",
+    "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
+    "Microsoft.Xna.Framework.Graphics.GraphicsDeviceStatus",
     "Microsoft.Xna.Framework.Graphics.GraphicsProfile",
+    "Microsoft.Xna.Framework.Graphics.GraphicsResource",
+    "Microsoft.Xna.Framework.Graphics.IGraphicsDeviceService",
+    "Microsoft.Xna.Framework.Graphics.IVertexType",
+    "Microsoft.Xna.Framework.Graphics.IndexBuffer",
+    "Microsoft.Xna.Framework.Graphics.IndexElementSize",
+    "Microsoft.Xna.Framework.Graphics.NoSuitableGraphicsDeviceException",
+    "Microsoft.Xna.Framework.Graphics.PresentInterval",
+    "Microsoft.Xna.Framework.Graphics.PresentationParameters",
+    "Microsoft.Xna.Framework.Graphics.PrimitiveType",
+    "Microsoft.Xna.Framework.Graphics.RasterizerState",
+    "Microsoft.Xna.Framework.Graphics.RenderTarget2D",
+    "Microsoft.Xna.Framework.Graphics.RenderTargetBinding",
+    "Microsoft.Xna.Framework.Graphics.RenderTargetUsage",
+    "Microsoft.Xna.Framework.Graphics.ResourceCreatedEventArgs",
+    "Microsoft.Xna.Framework.Graphics.ResourceDestroyedEventArgs",
+    "Microsoft.Xna.Framework.Graphics.SamplerState",
+    "Microsoft.Xna.Framework.Graphics.SamplerStateCollection",
+    "Microsoft.Xna.Framework.Graphics.SetDataOptions",
+    "Microsoft.Xna.Framework.Graphics.SpriteBatch",
     "Microsoft.Xna.Framework.Graphics.SpriteEffects",
+    "Microsoft.Xna.Framework.Graphics.SpriteFont",
     "Microsoft.Xna.Framework.Graphics.SpriteSortMode",
+    "Microsoft.Xna.Framework.Graphics.StencilOperation",
+    "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
+    "Microsoft.Xna.Framework.Graphics.Texture",
+    "Microsoft.Xna.Framework.Graphics.Texture2D",
+    "Microsoft.Xna.Framework.Graphics.TextureAddressMode",
+    "Microsoft.Xna.Framework.Graphics.TextureCollection",
+    "Microsoft.Xna.Framework.Graphics.TextureFilter",
+    "Microsoft.Xna.Framework.Graphics.VertexBuffer",
+    "Microsoft.Xna.Framework.Graphics.VertexBufferBinding",
+    "Microsoft.Xna.Framework.Graphics.VertexDeclaration",
+    "Microsoft.Xna.Framework.Graphics.VertexElement",
+    "Microsoft.Xna.Framework.Graphics.VertexElementFormat",
+    "Microsoft.Xna.Framework.Graphics.VertexElementUsage",
+    "Microsoft.Xna.Framework.Graphics.VertexPositionColor",
+    "Microsoft.Xna.Framework.Graphics.VertexPositionColorTexture",
+    "Microsoft.Xna.Framework.Graphics.VertexPositionNormalTexture",
+    "Microsoft.Xna.Framework.Graphics.VertexPositionTexture",
+    "Microsoft.Xna.Framework.Graphics.Viewport",
+    "Microsoft.Xna.Framework.GraphicsDeviceInformation",
+    "Microsoft.Xna.Framework.GraphicsDeviceManager",
+    "Microsoft.Xna.Framework.IDrawable",
+    "Microsoft.Xna.Framework.IGameComponent",
+    "Microsoft.Xna.Framework.IGraphicsDeviceManager",
+    "Microsoft.Xna.Framework.IUpdateable",
     "Microsoft.Xna.Framework.Input.ButtonState",
     "Microsoft.Xna.Framework.Input.Buttons",
     "Microsoft.Xna.Framework.Input.GamePad",
@@ -1615,12 +856,14 @@
     "Microsoft.Xna.Framework.Input.Keys",
     "Microsoft.Xna.Framework.Input.Mouse",
     "Microsoft.Xna.Framework.Input.MouseState",
+    "Microsoft.Xna.Framework.LaunchParameters",
     "Microsoft.Xna.Framework.MathHelper",
     "Microsoft.Xna.Framework.Matrix",
     "Microsoft.Xna.Framework.Plane",
     "Microsoft.Xna.Framework.PlaneIntersectionType",
     "Microsoft.Xna.Framework.PlayerIndex",
     "Microsoft.Xna.Framework.Point",
+    "Microsoft.Xna.Framework.PreparingDeviceSettingsEventArgs",
     "Microsoft.Xna.Framework.Quaternion",
     "Microsoft.Xna.Framework.Ray",
     "Microsoft.Xna.Framework.Rectangle",
@@ -1757,7 +1000,7 @@
     {
       "type": "Microsoft.Xna.Framework.Content.ContentManager",
       "status": "partial",
-      "diagnostics": 3
+      "diagnostics": 2
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentReader",
@@ -1911,8 +1154,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.DrawableGameComponent",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.FrameworkDispatcher",
@@ -1921,28 +1164,28 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Game",
-      "status": "partial",
-      "diagnostics": 11
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GameComponent",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GameComponentCollection",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GameComponentCollectionEventArgs",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GameServiceContainer",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GameTime",
@@ -1951,8 +1194,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.GameWindow",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GamerServices.GamerServicesComponent",
@@ -1971,48 +1214,48 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Blend",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.BlendFunction",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.BlendState",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.BufferUsage",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.ClearOptions",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.ColorWriteChannels",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.CompareFunction",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.CubeMapFace",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.CullMode",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DepthFormat",
@@ -2021,18 +1264,18 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DepthStencilState",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DeviceLostException",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DeviceNotResetException",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DirectionalLight",
@@ -2041,13 +1284,13 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DisplayMode",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DisplayModeCollection",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DualTextureEffect",
@@ -2056,13 +1299,13 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DynamicIndexBuffer",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.DynamicVertexBuffer",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Effect",
@@ -2131,23 +1374,23 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.FillMode",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsAdapter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "status": "partial",
-      "diagnostics": 49
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsDeviceStatus",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsProfile",
@@ -2156,8 +1399,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsResource",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.IEffectFog",
@@ -2176,23 +1419,23 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.IGraphicsDeviceService",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.IVertexType",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.IndexBuffer",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.IndexElementSize",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Model",
@@ -2256,8 +1499,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.NoSuitableGraphicsDeviceException",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.OcclusionQuery",
@@ -2361,33 +1604,33 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PresentInterval",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PresentationParameters",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PrimitiveType",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.RasterizerState",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.RenderTarget2D",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.RenderTargetBinding",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.RenderTargetCube",
@@ -2396,33 +1639,33 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.RenderTargetUsage",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.ResourceCreatedEventArgs",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.ResourceDestroyedEventArgs",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SamplerState",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SamplerStateCollection",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SetDataOptions",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SkinnedEffect",
@@ -2431,8 +1674,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "status": "partial",
-      "diagnostics": 6
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SpriteEffects",
@@ -2441,8 +1684,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SpriteFont",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SpriteSortMode",
@@ -2451,23 +1694,23 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.StencilOperation",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SurfaceFormat",
-      "status": "partial",
-      "diagnostics": 19
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Texture",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Texture2D",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Texture3D",
@@ -2476,13 +1719,13 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.TextureAddressMode",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.TextureCollection",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.TextureCube",
@@ -2491,93 +1734,93 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.TextureFilter",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexBuffer",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexBufferBinding",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexDeclaration",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexElement",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexElementFormat",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexElementUsage",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexPositionColor",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexPositionColorTexture",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexPositionNormalTexture",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.VertexPositionTexture",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Viewport",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GraphicsDeviceInformation",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "status": "partial",
-      "diagnostics": 8
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.IDrawable",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.IGameComponent",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.IGraphicsDeviceManager",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.IUpdateable",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.ButtonState",
@@ -2706,8 +1949,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.LaunchParameters",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.MathHelper",
@@ -2861,8 +2104,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.PreparingDeviceSettingsEventArgs",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Quaternion",
@@ -2918,7 +2161,7 @@
   "familyScoreboard": {
     "Microsoft.Xna.Framework": {
       "types": 42,
-      "diagnostics": 40
+      "diagnostics": 8
     },
     "Microsoft.Xna.Framework.Audio": {
       "types": 19,
@@ -2926,7 +2169,7 @@
     },
     "Microsoft.Xna.Framework.Content": {
       "types": 12,
-      "diagnostics": 13
+      "diagnostics": 12
     },
     "Microsoft.Xna.Framework.Design": {
       "types": 13,
@@ -2938,7 +2181,7 @@
     },
     "Microsoft.Xna.Framework.Graphics": {
       "types": 99,
-      "diagnostics": 170
+      "diagnostics": 37
     },
     "Microsoft.Xna.Framework.Graphics.PackedVector": {
       "types": 19,
