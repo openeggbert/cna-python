@@ -4,8 +4,8 @@
   "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
   "category": "PURE_XNA_DERIVED",
   "summary": {
-    "OBSERVATIONS": 16,
-    "ASSERTIONS": 35,
+    "OBSERVATIONS": 92,
+    "ASSERTIONS": 360,
     "FAILURES": 0
   },
   "results": [
@@ -20,6 +20,42 @@
       "passed": true,
       "expected": 4.0,
       "actual": 4.0
+    },
+    {
+      "id": "math.barycentric",
+      "passed": true,
+      "expected": 3.5,
+      "actual": 3.5
+    },
+    {
+      "id": "math.catmullrom",
+      "passed": true,
+      "expected": 1.5,
+      "actual": 1.5
+    },
+    {
+      "id": "math.hermite",
+      "passed": true,
+      "expected": 1.0,
+      "actual": 1.0
+    },
+    {
+      "id": "math.smoothstep",
+      "passed": true,
+      "expected": 5.0,
+      "actual": 5.0
+    },
+    {
+      "id": "math.wrapangle",
+      "passed": true,
+      "expected": 1.0,
+      "actual": 1.0
+    },
+    {
+      "id": "math.to_degrees",
+      "passed": true,
+      "expected": 180.0,
+      "actual": 180.0
     },
     {
       "id": "vector2.add",
@@ -52,6 +88,42 @@
       ]
     },
     {
+      "id": "vector2.reflect",
+      "passed": true,
+      "expected": [
+        1.0,
+        1.0
+      ],
+      "actual": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "id": "vector2.barycentric",
+      "passed": true,
+      "expected": [
+        1.0,
+        1.0
+      ],
+      "actual": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "id": "vector2.transform",
+      "passed": true,
+      "expected": [
+        4.0,
+        6.0
+      ],
+      "actual": [
+        4.0,
+        6.0
+      ]
+    },
+    {
       "id": "vector2.zero.copy",
       "passed": true,
       "expected": true,
@@ -72,7 +144,157 @@
       ]
     },
     {
+      "id": "vector3.distance",
+      "passed": true,
+      "expected": 5.0,
+      "actual": 5.0
+    },
+    {
+      "id": "vector3.reflect",
+      "passed": true,
+      "expected": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        3.0
+      ]
+    },
+    {
+      "id": "vector3.transform_normal",
+      "passed": true,
+      "expected": [
+        2.0,
+        6.0,
+        12.0
+      ],
+      "actual": [
+        2.0,
+        6.0,
+        12.0
+      ]
+    },
+    {
+      "id": "vector3.smoothstep",
+      "passed": true,
+      "expected": [
+        5.0,
+        10.0,
+        15.0
+      ],
+      "actual": [
+        5.0,
+        10.0,
+        15.0
+      ]
+    },
+    {
+      "id": "vector4.dot",
+      "passed": true,
+      "expected": 20.0,
+      "actual": 20.0
+    },
+    {
+      "id": "vector4.hermite",
+      "passed": true,
+      "expected": [
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    {
+      "id": "vector4.transform",
+      "passed": true,
+      "expected": [
+        5.0,
+        7.0,
+        9.0,
+        1.0
+      ],
+      "actual": [
+        5.0,
+        7.0,
+        9.0,
+        1.0
+      ]
+    },
+    {
       "id": "quaternion.identity",
+      "passed": true,
+      "expected": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "actual": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "quaternion.yaw",
+      "passed": true,
+      "expected": [
+        0.0,
+        0.70710677,
+        0.0,
+        0.70710677
+      ],
+      "actual": [
+        0.0,
+        0.7071067690849304,
+        0.0,
+        0.7071067690849304
+      ]
+    },
+    {
+      "id": "quaternion.concatenate.identity",
+      "passed": true,
+      "expected": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "actual": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "quaternion.slerp",
+      "passed": true,
+      "expected": [
+        0.0,
+        0.38268343,
+        0.0,
+        0.9238795
+      ],
+      "actual": [
+        0.0,
+        0.3826834261417389,
+        0.0,
+        0.9238795042037964
+      ]
+    },
+    {
+      "id": "quaternion.from_matrix.identity",
       "passed": true,
       "expected": [
         0.0,
@@ -120,6 +342,148 @@
       ]
     },
     {
+      "id": "matrix.inverse.product",
+      "passed": true,
+      "expected": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "actual": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "matrix.inverse.singular",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "matrix.rotation.y",
+      "passed": true,
+      "expected": [
+        0.0,
+        -1.0,
+        1.0,
+        0.0
+      ],
+      "actual": [
+        -4.371138828673793e-08,
+        -1.0,
+        1.0,
+        -4.371138828673793e-08
+      ]
+    },
+    {
+      "id": "matrix.perspective.infinity",
+      "passed": true,
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ]
+    },
+    {
+      "id": "matrix.decompose",
+      "passed": true,
+      "expected": [
+        true,
+        2.0,
+        3.0,
+        4.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "actual": [
+        true,
+        2.0,
+        3.0,
+        4.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        5.0,
+        6.0,
+        7.0
+      ]
+    },
+    {
+      "id": "matrix.billboard",
+      "passed": true,
+      "expected": [
+        -1.0,
+        1.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "actual": [
+        -1.0,
+        1.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "matrix.orthographic",
+      "passed": true,
+      "expected": [
+        0.5,
+        1.0,
+        -0.1,
+        -0.1,
+        1.0
+      ],
+      "actual": [
+        0.5,
+        1.0,
+        -0.10000000149011612,
+        -0.10000000149011612,
+        1.0
+      ]
+    },
+    {
       "id": "color.clamp",
       "passed": true,
       "expected": [
@@ -152,6 +516,76 @@
       ]
     },
     {
+      "id": "color.packed",
+      "passed": true,
+      "expected": 67305985,
+      "actual": 67305985
+    },
+    {
+      "id": "color.lerp",
+      "passed": true,
+      "expected": [
+        50,
+        100,
+        25,
+        127
+      ],
+      "actual": [
+        50,
+        100,
+        25,
+        127
+      ]
+    },
+    {
+      "id": "color.multiply",
+      "passed": true,
+      "expected": [
+        25,
+        50,
+        12,
+        63
+      ],
+      "actual": [
+        25,
+        50,
+        12,
+        63
+      ]
+    },
+    {
+      "id": "color.nonpremultiplied",
+      "passed": true,
+      "expected": [
+        128,
+        64,
+        32,
+        128
+      ],
+      "actual": [
+        128,
+        64,
+        32,
+        128
+      ]
+    },
+    {
+      "id": "color.vector4",
+      "passed": true,
+      "expected": [
+        1.0,
+        0.5019608,
+        0.0,
+        0.2509804
+      ],
+      "actual": [
+        1.0,
+        0.501960813999176,
+        0.0,
+        0.250980406999588
+      ]
+    },
+    {
       "id": "rectangle.contains.inclusive_min",
       "passed": true,
       "expected": true,
@@ -164,10 +598,734 @@
       "actual": false
     },
     {
+      "id": "rectangle.intersect",
+      "passed": true,
+      "expected": [
+        5,
+        0,
+        5,
+        5
+      ],
+      "actual": [
+        5,
+        0,
+        5,
+        5
+      ]
+    },
+    {
+      "id": "rectangle.union",
+      "passed": true,
+      "expected": [
+        0,
+        -5,
+        15,
+        15
+      ],
+      "actual": [
+        0,
+        -5,
+        15,
+        15
+      ]
+    },
+    {
+      "id": "rectangle.inflate",
+      "passed": true,
+      "expected": [
+        1,
+        1,
+        6,
+        9
+      ],
+      "actual": [
+        1,
+        1,
+        6,
+        9
+      ]
+    },
+    {
+      "id": "rectangle.offset",
+      "passed": true,
+      "expected": [
+        1,
+        5,
+        4,
+        5
+      ],
+      "actual": [
+        1,
+        5,
+        4,
+        5
+      ]
+    },
+    {
       "id": "point.value_equality",
       "passed": true,
       "expected": true,
       "actual": true
+    },
+    {
+      "id": "point.zero.copy",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "plane.normalize",
+      "passed": true,
+      "expected": [
+        0.0,
+        1.0,
+        0.0,
+        -2.0
+      ],
+      "actual": [
+        0.0,
+        1.0,
+        0.0,
+        -2.0
+      ]
+    },
+    {
+      "id": "plane.dot.coordinate",
+      "passed": true,
+      "expected": 0.0,
+      "actual": 0.0
+    },
+    {
+      "id": "plane.box.back",
+      "passed": true,
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "id": "plane.sphere.tangent",
+      "passed": true,
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "id": "ray.box",
+      "passed": true,
+      "expected": 1.0,
+      "actual": 1.0
+    },
+    {
+      "id": "ray.sphere.tangent",
+      "passed": true,
+      "expected": 2.0,
+      "actual": 2.0
+    },
+    {
+      "id": "ray.plane.behind",
+      "passed": true,
+      "expected": null,
+      "actual": null
+    },
+    {
+      "id": "box.contains.point.edge",
+      "passed": true,
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "id": "box.contains.sphere",
+      "passed": true,
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "id": "box.merge",
+      "passed": true,
+      "expected": [
+        -1.0,
+        -1.0,
+        -1.0,
+        2.0,
+        3.0,
+        4.0
+      ],
+      "actual": [
+        -1.0,
+        -1.0,
+        -1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    {
+      "id": "sphere.contains.point.surface",
+      "passed": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "sphere.merge",
+      "passed": true,
+      "expected": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "actual": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ]
+    },
+    {
+      "id": "sphere.transform",
+      "passed": true,
+      "expected": [
+        5.0,
+        6.0,
+        7.0,
+        4.0
+      ],
+      "actual": [
+        5.0,
+        6.0,
+        7.0,
+        4.0
+      ]
+    },
+    {
+      "id": "frustum.contains.point",
+      "passed": true,
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "id": "frustum.disjoint.point",
+      "passed": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "frustum.contains.box",
+      "passed": true,
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "id": "frustum.disjoint.sphere",
+      "passed": true,
+      "expected": false,
+      "actual": false
+    },
+    {
+      "id": "frustum.ray.entry",
+      "passed": true,
+      "expected": 1.0,
+      "actual": 1.0
+    },
+    {
+      "id": "frustum.corners",
+      "passed": true,
+      "expected": [
+        8,
+        -1.0,
+        -9.99999713897705
+      ],
+      "actual": [
+        8,
+        -1.0,
+        -9.99999713897705
+      ]
+    },
+    {
+      "id": "vector2.normalize.zero.bits",
+      "passed": true,
+      "expected": [
+        "FFC00000",
+        "FFC00000"
+      ],
+      "actual": [
+        "FFC00000",
+        "FFC00000"
+      ]
+    },
+    {
+      "id": "vector3.normalize.zero.bits",
+      "passed": true,
+      "expected": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000"
+      ],
+      "actual": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000"
+      ]
+    },
+    {
+      "id": "vector4.normalize.zero.bits",
+      "passed": true,
+      "expected": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000"
+      ],
+      "actual": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000"
+      ]
+    },
+    {
+      "id": "vector.scalar.divide.bits",
+      "passed": true,
+      "expected": [
+        "3EDB6DB8",
+        "40155556",
+        "458099CA",
+        "3EAAAAAB"
+      ],
+      "actual": [
+        "3EDB6DB8",
+        "40155556",
+        "458099CA",
+        "3EAAAAAB"
+      ]
+    },
+    {
+      "id": "quaternion.zero.nonfinite.bits",
+      "passed": true,
+      "expected": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000"
+      ],
+      "actual": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000"
+      ]
+    },
+    {
+      "id": "quaternion.products.bits",
+      "passed": true,
+      "expected": [
+        "BE3F1A81",
+        "3EAC1068",
+        "3D8B8437",
+        "3F6BAF93",
+        "CE47A05E",
+        "CF03EDF7",
+        "4FC9C4DD",
+        "5011D115",
+        "BE3F1A81",
+        "3EAC1068",
+        "BD8B8437",
+        "3F6BAF93",
+        "4073BBE2",
+        "BF57A32E",
+        "40253083"
+      ],
+      "actual": [
+        "BE3F1A81",
+        "3EAC1068",
+        "3D8B8437",
+        "3F6BAF93",
+        "CE47A05E",
+        "CF03EDF7",
+        "4FC9C4DD",
+        "5011D115",
+        "BE3F1A81",
+        "3EAC1068",
+        "BD8B8437",
+        "3F6BAF93",
+        "4073BBE2",
+        "BF57A32E",
+        "40253083"
+      ]
+    },
+    {
+      "id": "matrix.vector.transforms.bits",
+      "passed": true,
+      "expected": [
+        "40FD03FE",
+        "00000000",
+        "4102775D",
+        "00000000",
+        "40E74122",
+        "4102775D",
+        "00000000",
+        "40E74122",
+        "3F800000"
+      ],
+      "actual": [
+        "40FD03FE",
+        "00000000",
+        "4102775D",
+        "00000000",
+        "40E74122",
+        "4102775D",
+        "00000000",
+        "40E74122",
+        "3F800000"
+      ]
+    },
+    {
+      "id": "color.nonfinite.extreme.bits",
+      "passed": true,
+      "expected": [
+        "00FF0080",
+        "FFFFFFFF"
+      ],
+      "actual": [
+        "00FF0080",
+        "FFFFFFFF"
+      ]
+    },
+    {
+      "id": "plane.transform.bits",
+      "passed": true,
+      "expected": [
+        "00000000",
+        "3F800000",
+        "00000000",
+        "C0E00000"
+      ],
+      "actual": [
+        "00000000",
+        "3F800000",
+        "00000000",
+        "C0E00000"
+      ]
+    },
+    {
+      "id": "value.nan.equality",
+      "passed": true,
+      "expected": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "actual": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "value.hash.codes",
+      "passed": true,
+      "expected": [
+        -1077936128,
+        -33554432,
+        3,
+        10
+      ],
+      "actual": [
+        -1077936128,
+        -33554432,
+        3,
+        10
+      ]
+    },
+    {
+      "id": "mathhelper.edge.bits",
+      "passed": true,
+      "expected": [
+        "40000000",
+        "BFC2E06C",
+        "C1218313",
+        "C1351EBA",
+        true
+      ],
+      "actual": [
+        "40000000",
+        "BFC2E06C",
+        "C1218313",
+        "C1351EBA",
+        true
+      ]
+    },
+    {
+      "id": "vector3.edge.bits",
+      "passed": true,
+      "expected": [
+        "40E00000",
+        "FFC00000",
+        "FFC00000",
+        "40000000",
+        "40000000",
+        "40000000"
+      ],
+      "actual": [
+        "40E00000",
+        "FFC00000",
+        "FFC00000",
+        "40000000",
+        "40000000",
+        "40000000"
+      ]
+    },
+    {
+      "id": "quaternion.edge.bits",
+      "passed": true,
+      "expected": [
+        "BD9A16EC",
+        "3E60D7E7",
+        "00000000",
+        "3F79023D",
+        "00000000",
+        "3F30464F",
+        "00000000",
+        "BF39A48F",
+        "00000000",
+        "3EAF904C",
+        "00000000",
+        "3F707ABB"
+      ],
+      "actual": [
+        "BD9A16EC",
+        "3E60D7E7",
+        "00000000",
+        "3F79023D",
+        "00000000",
+        "3F30464F",
+        "00000000",
+        "BF39A48F",
+        "00000000",
+        "3EAF904C",
+        "00000000",
+        "3F707ABB"
+      ]
+    },
+    {
+      "id": "matrix.edge.bits",
+      "passed": true,
+      "expected": [
+        "3D53E807",
+        "BF7FA83D",
+        "FFC00000",
+        "FFC00000",
+        true,
+        "40000000",
+        "40400000",
+        "C0800000",
+        "00000000",
+        "3F7E00AA",
+        "00000000",
+        "BDFF5579",
+        "40A00000",
+        "40C00000",
+        "40E00000",
+        "80000000",
+        "80000000",
+        "80000000"
+      ],
+      "actual": [
+        "3D53E807",
+        "BF7FA83D",
+        "FFC00000",
+        "FFC00000",
+        true,
+        "40000000",
+        "40400000",
+        "C0800000",
+        "00000000",
+        "3F7E00AA",
+        "00000000",
+        "BDFF5579",
+        "40A00000",
+        "40C00000",
+        "40E00000",
+        "80000000",
+        "80000000",
+        "80000000"
+      ]
+    },
+    {
+      "id": "matrix.degenerate.bits",
+      "passed": true,
+      "expected": [
+        "BF800000",
+        "40000000",
+        "BF800000",
+        true,
+        true,
+        "40000000",
+        "40800000",
+        "BF800000",
+        "C0800000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "00000000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "00000000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "00000000",
+        "7FC00000",
+        "7FC00000",
+        "7FC00000",
+        "3F800000"
+      ],
+      "actual": [
+        "BF800000",
+        "40000000",
+        "BF800000",
+        true,
+        true,
+        "40000000",
+        "40800000",
+        "BF800000",
+        "C0800000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "00000000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "00000000",
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "00000000",
+        "7FC00000",
+        "7FC00000",
+        "7FC00000",
+        "3F800000"
+      ]
+    },
+    {
+      "id": "plane.edge.bits",
+      "passed": true,
+      "expected": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "7FC00000",
+        "3F19999A",
+        "3F4CCCCC",
+        "00000000",
+        "40000000",
+        2
+      ],
+      "actual": [
+        "FFC00000",
+        "FFC00000",
+        "FFC00000",
+        "7FC00000",
+        "3F19999A",
+        "3F4CCCCC",
+        "00000000",
+        "40000000",
+        2
+      ]
+    },
+    {
+      "id": "geometry.nonfinite.tangent",
+      "passed": true,
+      "expected": [
+        0,
+        true,
+        0,
+        false,
+        null,
+        null
+      ],
+      "actual": [
+        0,
+        true,
+        0,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "frustum.planes.corners.bits",
+      "passed": true,
+      "expected": [
+        "80000000",
+        "80000000",
+        "3F800000",
+        "C0800000",
+        "00000000",
+        "3F6C835F",
+        "3EC3EF16",
+        "BFF4EADB",
+        "BF0D6289",
+        "3ED413CB",
+        "40800000",
+        "40B0BB28",
+        "C0848C5D",
+        "C09FFFF8"
+      ],
+      "actual": [
+        "80000000",
+        "80000000",
+        "3F800000",
+        "C0800000",
+        "00000000",
+        "3F6C835F",
+        "3EC3EF16",
+        "BFF4EADB",
+        "BF0D6289",
+        "3ED413CB",
+        "40800000",
+        "40B0BB28",
+        "C0848C5D",
+        "C09FFFF8"
+      ]
+    },
+    {
+      "id": "frustum.gjk.relations.bits",
+      "passed": true,
+      "expected": [
+        1,
+        0,
+        1,
+        1,
+        true,
+        false,
+        true,
+        false,
+        false,
+        "41800000"
+      ],
+      "actual": [
+        1,
+        0,
+        1,
+        1,
+        true,
+        false,
+        true,
+        false,
+        false,
+        "41800000"
+      ]
     },
     {
       "id": "float32.signed_zero",

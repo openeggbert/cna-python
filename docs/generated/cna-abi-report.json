@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 55,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 55,
-    "C_LAYOUT_MEASUREMENTS": 169,
-    "CTYPES_LAYOUT_MEASUREMENTS": 169,
+    "BOUND_FUNCTIONS": 59,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 59,
+    "C_LAYOUT_MEASUREMENTS": 210,
+    "CTYPES_LAYOUT_MEASUREMENTS": 210,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -62,8 +62,12 @@
     "cna_keyboard_get_state",
     "cna_keyboard_get_state_for_player",
     "cna_mouse_get_state",
+    "cna_mouse_get_window_handle",
+    "cna_mouse_set_window_handle",
     "cna_mouse_set_position",
-    "cna_gamepad_get_state_with_dead_zone"
+    "cna_gamepad_get_state_with_dead_zone",
+    "cna_gamepad_get_capabilities",
+    "cna_gamepad_set_vibration"
   ],
   "functionManifest": [
     {
@@ -598,6 +602,26 @@
       "ownership": "caller output"
     },
     {
+      "symbol": "cna_mouse_get_window_handle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_mouse_set_window_handle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
       "symbol": "cna_mouse_set_position",
       "return": "c_uint",
       "parameters": [
@@ -618,6 +642,30 @@
         "pointer<CNA_GamePadState>"
       ],
       "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_gamepad_get_capabilities",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<CNA_GamePadCapabilities>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_gamepad_set_vibration",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_float",
+        "c_float",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 5,
       "ownership": "caller output"
     }
   ],
@@ -792,7 +840,48 @@
     "OFFSET:CNA_GamePadState:packet_number": 12,
     "OFFSET:CNA_GamePadState:pressed_buttons": 16,
     "OFFSET:CNA_GamePadState:reserved1": 20,
-    "OFFSET:CNA_GamePadState:analog": 24
+    "OFFSET:CNA_GamePadState:analog": 24,
+    "SIZE:CNA_GamePadCapabilities": 48,
+    "ALIGN:CNA_GamePadCapabilities": 4,
+    "OFFSET:CNA_GamePadCapabilities:struct_size": 0,
+    "OFFSET:CNA_GamePadCapabilities:struct_version": 4,
+    "OFFSET:CNA_GamePadCapabilities:gamepad_type": 8,
+    "OFFSET:CNA_GamePadCapabilities:is_connected": 12,
+    "OFFSET:CNA_GamePadCapabilities:has_a_button": 13,
+    "OFFSET:CNA_GamePadCapabilities:has_b_button": 14,
+    "OFFSET:CNA_GamePadCapabilities:has_x_button": 15,
+    "OFFSET:CNA_GamePadCapabilities:has_y_button": 16,
+    "OFFSET:CNA_GamePadCapabilities:has_back_button": 17,
+    "OFFSET:CNA_GamePadCapabilities:has_start_button": 18,
+    "OFFSET:CNA_GamePadCapabilities:has_big_button": 19,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_up_button": 20,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_down_button": 21,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_left_button": 22,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_right_button": 23,
+    "OFFSET:CNA_GamePadCapabilities:has_left_shoulder_button": 24,
+    "OFFSET:CNA_GamePadCapabilities:has_right_shoulder_button": 25,
+    "OFFSET:CNA_GamePadCapabilities:has_left_stick_button": 26,
+    "OFFSET:CNA_GamePadCapabilities:has_right_stick_button": 27,
+    "OFFSET:CNA_GamePadCapabilities:has_left_x_thumb_stick": 28,
+    "OFFSET:CNA_GamePadCapabilities:has_left_y_thumb_stick": 29,
+    "OFFSET:CNA_GamePadCapabilities:has_right_x_thumb_stick": 30,
+    "OFFSET:CNA_GamePadCapabilities:has_right_y_thumb_stick": 31,
+    "OFFSET:CNA_GamePadCapabilities:has_left_trigger": 32,
+    "OFFSET:CNA_GamePadCapabilities:has_right_trigger": 33,
+    "OFFSET:CNA_GamePadCapabilities:has_left_vibration_motor": 34,
+    "OFFSET:CNA_GamePadCapabilities:has_right_vibration_motor": 35,
+    "OFFSET:CNA_GamePadCapabilities:has_voice_support": 36,
+    "OFFSET:CNA_GamePadCapabilities:has_light_bar_ext": 37,
+    "OFFSET:CNA_GamePadCapabilities:has_trigger_vibration_motors_ext": 38,
+    "OFFSET:CNA_GamePadCapabilities:has_misc1_ext": 39,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle1_ext": 40,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle2_ext": 41,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle3_ext": 42,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle4_ext": 43,
+    "OFFSET:CNA_GamePadCapabilities:has_touchpad_ext": 44,
+    "OFFSET:CNA_GamePadCapabilities:has_gyro_ext": 45,
+    "OFFSET:CNA_GamePadCapabilities:has_accelerometer_ext": 46,
+    "OFFSET:CNA_GamePadCapabilities:reserved": 47
   },
   "ctypes": {
     "VALUE:CNA_ABI_VERSION": 1792,
@@ -846,6 +935,8 @@
     "ALIGN:CNA_GamePadAnalogState": 4,
     "SIZE:CNA_GamePadState": 48,
     "ALIGN:CNA_GamePadState": 4,
+    "SIZE:CNA_GamePadCapabilities": 48,
+    "ALIGN:CNA_GamePadCapabilities": 4,
     "OFFSET:CNA_StringView:data": 0,
     "OFFSET:CNA_StringView:byte_length": 8,
     "OFFSET:CNA_ErrorInfo:struct_size": 0,
@@ -963,6 +1054,45 @@
     "OFFSET:CNA_GamePadState:packet_number": 12,
     "OFFSET:CNA_GamePadState:pressed_buttons": 16,
     "OFFSET:CNA_GamePadState:reserved1": 20,
-    "OFFSET:CNA_GamePadState:analog": 24
+    "OFFSET:CNA_GamePadState:analog": 24,
+    "OFFSET:CNA_GamePadCapabilities:struct_size": 0,
+    "OFFSET:CNA_GamePadCapabilities:struct_version": 4,
+    "OFFSET:CNA_GamePadCapabilities:gamepad_type": 8,
+    "OFFSET:CNA_GamePadCapabilities:is_connected": 12,
+    "OFFSET:CNA_GamePadCapabilities:has_a_button": 13,
+    "OFFSET:CNA_GamePadCapabilities:has_b_button": 14,
+    "OFFSET:CNA_GamePadCapabilities:has_x_button": 15,
+    "OFFSET:CNA_GamePadCapabilities:has_y_button": 16,
+    "OFFSET:CNA_GamePadCapabilities:has_back_button": 17,
+    "OFFSET:CNA_GamePadCapabilities:has_start_button": 18,
+    "OFFSET:CNA_GamePadCapabilities:has_big_button": 19,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_up_button": 20,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_down_button": 21,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_left_button": 22,
+    "OFFSET:CNA_GamePadCapabilities:has_dpad_right_button": 23,
+    "OFFSET:CNA_GamePadCapabilities:has_left_shoulder_button": 24,
+    "OFFSET:CNA_GamePadCapabilities:has_right_shoulder_button": 25,
+    "OFFSET:CNA_GamePadCapabilities:has_left_stick_button": 26,
+    "OFFSET:CNA_GamePadCapabilities:has_right_stick_button": 27,
+    "OFFSET:CNA_GamePadCapabilities:has_left_x_thumb_stick": 28,
+    "OFFSET:CNA_GamePadCapabilities:has_left_y_thumb_stick": 29,
+    "OFFSET:CNA_GamePadCapabilities:has_right_x_thumb_stick": 30,
+    "OFFSET:CNA_GamePadCapabilities:has_right_y_thumb_stick": 31,
+    "OFFSET:CNA_GamePadCapabilities:has_left_trigger": 32,
+    "OFFSET:CNA_GamePadCapabilities:has_right_trigger": 33,
+    "OFFSET:CNA_GamePadCapabilities:has_left_vibration_motor": 34,
+    "OFFSET:CNA_GamePadCapabilities:has_right_vibration_motor": 35,
+    "OFFSET:CNA_GamePadCapabilities:has_voice_support": 36,
+    "OFFSET:CNA_GamePadCapabilities:has_light_bar_ext": 37,
+    "OFFSET:CNA_GamePadCapabilities:has_trigger_vibration_motors_ext": 38,
+    "OFFSET:CNA_GamePadCapabilities:has_misc1_ext": 39,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle1_ext": 40,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle2_ext": 41,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle3_ext": 42,
+    "OFFSET:CNA_GamePadCapabilities:has_paddle4_ext": 43,
+    "OFFSET:CNA_GamePadCapabilities:has_touchpad_ext": 44,
+    "OFFSET:CNA_GamePadCapabilities:has_gyro_ext": 45,
+    "OFFSET:CNA_GamePadCapabilities:has_accelerometer_ext": 46,
+    "OFFSET:CNA_GamePadCapabilities:reserved": 47
   }
 }

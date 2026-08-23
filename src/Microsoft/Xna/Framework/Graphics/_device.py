@@ -11,7 +11,7 @@ from _cna_native.errors import NativeCapabilityError
 from _cna_native.loader import get_library
 
 from .._geometry import Color, Rectangle
-from .._math import Vector3
+from .._math import Vector3, Vector4
 from .._numeric import f32, int32
 
 
@@ -48,9 +48,15 @@ class SpriteEffects(IntFlag):
 class Viewport:
     __slots__ = ("_x", "_y", "_width", "_height", "_min_depth", "_max_depth")
 
-    def __init__(self, x: int | Rectangle = 0, y: int = 0, width: int = 0, height: int = 0) -> None:
-        if isinstance(x, Rectangle):
-            x, y, width, height = x.X, x.Y, x.Width, x.Height
+    def __init__(self, *args: object) -> None:
+        if not args:
+            x, y, width, height = 0, 0, 0, 0
+        elif len(args) == 1 and isinstance(args[0], Rectangle):
+            x, y, width, height = args[0].X, args[0].Y, args[0].Width, args[0].Height
+        elif len(args) == 4:
+            x, y, width, height = args
+        else:
+            raise TypeError("Viewport expects (), Rectangle, or x, y, width, height")
         self.X, self.Y, self.Width, self.Height = x, y, width, height
         self.MinDepth, self.MaxDepth = 0.0, 1.0
 
@@ -86,6 +92,11 @@ class Viewport:
     def __eq__(self, other: object) -> bool:
         return isinstance(other, Viewport) and tuple(self) == tuple(other)
     def __iter__(self): return iter((self.X, self.Y, self.Width, self.Height, self.MinDepth, self.MaxDepth))
+    def __copy__(self):
+        result = Viewport(self.X, self.Y, self.Width, self.Height)
+        result.MinDepth, result.MaxDepth = self.MinDepth, self.MaxDepth
+        return result
+    __deepcopy__ = lambda self, memo: self.__copy__()
     def ToString(self) -> str:
         return f"{{X:{self.X} Y:{self.Y} Width:{self.Width} Height:{self.Height} MinDepth:{self.MinDepth:g} MaxDepth:{self.MaxDepth:g}}}"
     __str__ = ToString
@@ -96,7 +107,16 @@ class GraphicsDevice:
 
     __slots__ = ("_game", "_handle", "_disposed")
 
-    def __init__(self, game: object) -> None:
+    def __init__(self, *args: object) -> None:
+        if len(args) == 1:
+            game = args[0]
+        elif len(args) == 3:
+            raise NativeCapabilityError(
+                "GraphicsDevice.__init__", 6, None,
+                "CNA ABI 0.7 exposes only the game-owned GraphicsDevice",
+            )
+        else:
+            raise TypeError("GraphicsDevice expects adapter, graphicsProfile, presentationParameters")
         self._game = game
         self._handle = 0
         self._disposed = False
@@ -133,6 +153,11 @@ class GraphicsDevice:
                       "cna_graphics_device_set_viewport")
 
     def Clear(self, *args: object) -> None:
+        if len(args) == 4 and isinstance(args[1], (Color, Vector4)):
+            raise NativeCapabilityError(
+                "GraphicsDevice.Clear(options,color,depth,stencil)", 6, None,
+                "the selected CNA ABI route exposes only Clear(Color)",
+            )
         if len(args) != 1 or not isinstance(args[0], Color):
             raise NativeCapabilityError("GraphicsDevice.Clear", 6, None,
                                         "only the XNA Clear(Color) overload is bound in this milestone")
@@ -142,6 +167,19 @@ class GraphicsDevice:
         library.check(library.cna_graphics_device_clear_rgba(self._require_handle(), *channels),
                       "cna_graphics_device_clear_rgba")
 
-    def Dispose(self) -> None:
+    def Dispose(self, *args: object) -> None:
+        if len(args) > 1 or (args and type(args[0]) is not bool):
+            raise TypeError("Dispose expects no arguments or a bool disposing value")
         raise NativeCapabilityError("GraphicsDevice.Dispose", 6, None,
                                     "CNA ABI 0.7 exposes only the game-owned GraphicsDevice")
+
+    def __enter__(self) -> "GraphicsDevice":
+        self._require_handle()
+        return self
+
+    def __exit__(self, exc_type, exc, traceback) -> None:
+        self.Dispose()
+
+
+Viewport.__xna_arities__ = {"__init__": {0, 1, 4}}
+GraphicsDevice.__xna_arities__ = {"__init__": {3}, "Clear": {1, 4}, "Dispose": {0, 1}}

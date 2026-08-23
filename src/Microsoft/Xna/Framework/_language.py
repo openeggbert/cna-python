@@ -20,6 +20,31 @@ class classproperty:
         raise AttributeError("static XNA value properties are read-only")
 
 
+class staticproperty:
+    """Mutable CLR static property, with assignment mediated by ``staticpropertymeta``."""
+
+    def __init__(self, getter: Callable[[type], Any], setter: Callable[[type, object], None]) -> None:
+        self.fget = getter
+        self.fset = setter
+
+    def __get__(self, instance: object, owner: type | None = None) -> Any:
+        return self.fget(owner if owner is not None else type(instance))
+
+    def __set__(self, instance: object, value: object) -> None:
+        self.fset(instance if isinstance(instance, type) else type(instance), value)
+
+
+class staticpropertymeta(type):
+    """Keeps class assignment from replacing a mutable static-property descriptor."""
+
+    def __setattr__(cls, name: str, value: object) -> None:
+        descriptor = cls.__dict__.get(name)
+        if isinstance(descriptor, staticproperty):
+            descriptor.__set__(cls, value)
+            return
+        super().__setattr__(name, value)
+
+
 class _BoundEvent:
     def __init__(self, owner: object, descriptor: "Event") -> None:
         self._owner = owner

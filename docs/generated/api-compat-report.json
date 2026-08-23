@@ -5,11 +5,11 @@
     "REFERENCE_MEMBERS": 2964,
     "EXPECTED_PYTHON_TYPES": 257,
     "EXPECTED_PYTHON_MEMBERS": 2887,
-    "TARGET_TYPES": 42,
-    "TARGET_MEMBERS": 796,
-    "TOTAL_DIAGNOSTICS": 501,
-    "MISSING_TYPE": 215,
-    "MISSING_MEMBER": 223,
+    "TARGET_TYPES": 51,
+    "TARGET_MEMBERS": 1003,
+    "TOTAL_DIAGNOSTICS": 310,
+    "MISSING_TYPE": 206,
+    "MISSING_MEMBER": 104,
     "UNEXPECTED_TYPE": 0,
     "UNEXPECTED_MEMBER": 0,
     "TYPE_KIND_MISMATCH": 0,
@@ -20,7 +20,7 @@
     "METHOD_SIGNATURE_MAPPING_MISMATCH": 0,
     "PARAMETER_MAPPING_MISMATCH": 0,
     "RETURN_MAPPING_MISMATCH": 0,
-    "OVERLOAD_MAPPING_MISMATCH": 33,
+    "OVERLOAD_MAPPING_MISMATCH": 0,
     "GENERIC_MAPPING_MISMATCH": 0,
     "ENUM_VALUE_MISMATCH": 0,
     "FLAGS_MAPPING_MISMATCH": 0,
@@ -31,7 +31,7 @@
     "RAW_HANDLE_LEAK": 0,
     "PUBLIC_NATIVE_FFI_LEAK": 0,
     "ALLOWLIST_ENTRIES": 0,
-    "UNMEASURED_STRUCTURAL_CATEGORY": 30
+    "UNMEASURED_STRUCTURAL_CATEGORY": 0
   },
   "diagnostics": [
     {
@@ -555,601 +555,6 @@
       "detail": "RankDevices(System.Collections.Generic.List`1[Microsoft.Xna.Framework.GraphicsDeviceInformation])"
     },
     {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePad",
-      "detail": "GetCapabilities(Microsoft.Xna.Framework.PlayerIndex)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePad",
-      "detail": "SetVibration(Microsoft.Xna.Framework.PlayerIndex,System.Single,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadButtons",
-      "detail": "Equals(System.Object)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadButtons",
-      "detail": "GetHashCode()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadButtons",
-      "detail": "ToString()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadDPad",
-      "detail": "Equals(System.Object)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadDPad",
-      "detail": "GetHashCode()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadDPad",
-      "detail": "ToString()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadState",
-      "detail": "GetHashCode()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadState",
-      "detail": "ToString()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
-      "detail": "Equals(System.Object)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
-      "detail": "GetHashCode()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
-      "detail": "ToString()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadTriggers",
-      "detail": "Equals(System.Object)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadTriggers",
-      "detail": "GetHashCode()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.GamePadTriggers",
-      "detail": "ToString()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Input.Mouse",
-      "detail": "WindowHandle()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Backward()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateBillboard(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Vector3&,System.Nullable`1[Microsoft.Xna.Framework.Vector3],Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateBillboard(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,System.Nullable`1[Microsoft.Xna.Framework.Vector3])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateConstrainedBillboard(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Vector3&,System.Nullable`1[Microsoft.Xna.Framework.Vector3],System.Nullable`1[Microsoft.Xna.Framework.Vector3],Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateConstrainedBillboard(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,System.Nullable`1[Microsoft.Xna.Framework.Vector3],System.Nullable`1[Microsoft.Xna.Framework.Vector3])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateFromAxisAngle(Microsoft.Xna.Framework.Vector3&,System.Single,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateFromAxisAngle(Microsoft.Xna.Framework.Vector3,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateFromYawPitchRoll(System.Single,System.Single,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateFromYawPitchRoll(System.Single,System.Single,System.Single,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateOrthographic(System.Single,System.Single,System.Single,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateOrthographic(System.Single,System.Single,System.Single,System.Single,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateOrthographicOffCenter(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateOrthographicOffCenter(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreatePerspective(System.Single,System.Single,System.Single,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreatePerspective(System.Single,System.Single,System.Single,System.Single,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreatePerspectiveOffCenter(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreatePerspectiveOffCenter(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateReflection(Microsoft.Xna.Framework.Plane&,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateReflection(Microsoft.Xna.Framework.Plane)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateShadow(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Plane&,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateShadow(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Plane)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateWorld(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "CreateWorld(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Decompose(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector3&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Determinant()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Down()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Forward()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Invert(Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Invert(Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Left()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Lerp(Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Matrix&,System.Single,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Lerp(Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Matrix,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M11()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M12()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M13()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M14()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M21()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M22()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M23()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M24()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M31()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M32()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M33()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M34()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M41()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M42()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M43()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "M44()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Right()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Transform(Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Matrix&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Transform(Microsoft.Xna.Framework.Matrix,Microsoft.Xna.Framework.Quaternion)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "Up()"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Quaternion",
-      "detail": "Concatenate(Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Quaternion&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Quaternion",
-      "detail": "Concatenate(Microsoft.Xna.Framework.Quaternion,Microsoft.Xna.Framework.Quaternion)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Quaternion",
-      "detail": "CreateFromRotationMatrix(Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Quaternion&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Quaternion",
-      "detail": "CreateFromRotationMatrix(Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2&,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector2&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector2&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Quaternion)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2[],Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector2[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2[],Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector2[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2[],System.Int32,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector2[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2[],System.Int32,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector2[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector2&,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector2&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector2[],Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector2[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector2[],System.Int32,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector2[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector3&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector3&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Quaternion)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3[],Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector3[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3[],Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector3[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3[],System.Int32,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector3[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3[],System.Int32,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector3[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector3&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector3[],Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector3[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "TransformNormal(Microsoft.Xna.Framework.Vector3[],System.Int32,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector3[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Barycentric(Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,System.Single,System.Single,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Barycentric(Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,System.Single,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "CatmullRom(Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,System.Single,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "CatmullRom(Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Hermite(Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Vector4&,System.Single,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Hermite(Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Vector4,System.Single)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2&,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Quaternion)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Quaternion)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4&,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector4&)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Matrix)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4,Microsoft.Xna.Framework.Quaternion)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4[],Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector4[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4[],Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector4[])"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4[],System.Int32,Microsoft.Xna.Framework.Matrix&,Microsoft.Xna.Framework.Vector4[],System.Int32,System.Int32)"
-    },
-    {
-      "category": "MISSING_MEMBER",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "Transform(Microsoft.Xna.Framework.Vector4[],System.Int32,Microsoft.Xna.Framework.Quaternion&,Microsoft.Xna.Framework.Vector4[],System.Int32,System.Int32)"
-    },
-    {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Audio.AudioCategory",
       "detail": "type is not exported"
@@ -1242,26 +647,6 @@
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Audio.WaveBank",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.BoundingBox",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.BoundingFrustum",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.BoundingSphere",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.ContainmentType",
       "detail": "type is not exported"
     },
     {
@@ -2011,16 +1396,6 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.GamePadCapabilities",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.GamePadType",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Input.Touch.GestureSample",
       "detail": "type is not exported"
     },
@@ -2186,22 +1561,7 @@
     },
     {
       "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Plane",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.PlaneIntersectionType",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.PreparingDeviceSettingsEventArgs",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Ray",
       "detail": "type is not exported"
     },
     {
@@ -2223,335 +1583,50 @@
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.TitleContainer",
       "detail": "type is not exported"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Color",
-      "detail": "__init__: expected arities [0, 1, 3, 4], got [1, 2, 3, 4]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Color",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Content.ContentManager",
-      "detail": "Dispose: expected arities [0, 1], got [0]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "Dispose: expected arities [0, 1], got [0]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.GameTime",
-      "detail": "__init__: expected arities [0, 2, 3], got [0, 1, 2, 3]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "Dispose: expected arities [0, 1], got [0]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "__init__: expected arities [3], got [1]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsResource",
-      "detail": "Dispose: expected arities [0, 1], got [0]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "Dispose: expected arities [1], got [0]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture2D",
-      "detail": "Dispose: expected arities [1], got [0]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture2D",
-      "detail": "__init__: expected arities [3, 5], got [3, 4, 5]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Graphics.Viewport",
-      "detail": "__init__: expected arities [0, 1, 4], got [0, 1, 2, 3, 4]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "Dispose: expected arities [1], got [0]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadButtons",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadDPad",
-      "detail": "__init__: expected arities [0, 4], got [0, 1, 2, 3, 4]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadDPad",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadState",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
-      "detail": "__init__: expected arities [0, 2], got [0, 1, 2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadTriggers",
-      "detail": "__init__: expected arities [0, 2], got [0, 1, 2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.GamePadTriggers",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.KeyboardState",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.MouseState",
-      "detail": "__init__: expected arities [0, 8], got [0, 1, 2, 3, 4, 5, 6, 7, 8]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Input.MouseState",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Point",
-      "detail": "__init__: expected arities [0, 2], got [0, 1, 2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Point",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Quaternion",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Rectangle",
-      "detail": "__init__: expected arities [0, 4], got [0, 1, 2, 3, 4]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Rectangle",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "OVERLOAD_MAPPING_MISMATCH",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "__ne__: expected arities [1], got [2]"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Color",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Content.ContentLoadException",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Content.ContentManager",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Game",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.GameTime",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Graphics.GraphicsResource",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Graphics.Texture2D",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Graphics.Viewport",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.GamePad",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.GamePadButtons",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.GamePadDPad",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.GamePadState",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.GamePadTriggers",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.Keyboard",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.KeyboardState",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.Mouse",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Input.MouseState",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.MathHelper",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Matrix",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Point",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Quaternion",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Rectangle",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Vector2",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Vector3",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
-    },
-    {
-      "category": "UNMEASURED_STRUCTURAL_CATEGORY",
-      "type": "Microsoft.Xna.Framework.Vector4",
-      "detail": "full interface, field-type, parameter-type, return-type, and generic mapping remains unmeasured"
     }
   ],
   "zeroDiagnosticTypes": [
+    "Microsoft.Xna.Framework.BoundingBox",
+    "Microsoft.Xna.Framework.BoundingFrustum",
+    "Microsoft.Xna.Framework.BoundingSphere",
+    "Microsoft.Xna.Framework.Color",
+    "Microsoft.Xna.Framework.ContainmentType",
+    "Microsoft.Xna.Framework.Content.ContentLoadException",
     "Microsoft.Xna.Framework.DisplayOrientation",
+    "Microsoft.Xna.Framework.GameTime",
     "Microsoft.Xna.Framework.Graphics.DepthFormat",
     "Microsoft.Xna.Framework.Graphics.GraphicsProfile",
     "Microsoft.Xna.Framework.Graphics.SpriteEffects",
     "Microsoft.Xna.Framework.Graphics.SpriteSortMode",
     "Microsoft.Xna.Framework.Input.ButtonState",
     "Microsoft.Xna.Framework.Input.Buttons",
+    "Microsoft.Xna.Framework.Input.GamePad",
+    "Microsoft.Xna.Framework.Input.GamePadButtons",
+    "Microsoft.Xna.Framework.Input.GamePadCapabilities",
+    "Microsoft.Xna.Framework.Input.GamePadDPad",
     "Microsoft.Xna.Framework.Input.GamePadDeadZone",
+    "Microsoft.Xna.Framework.Input.GamePadState",
+    "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
+    "Microsoft.Xna.Framework.Input.GamePadTriggers",
+    "Microsoft.Xna.Framework.Input.GamePadType",
     "Microsoft.Xna.Framework.Input.KeyState",
+    "Microsoft.Xna.Framework.Input.Keyboard",
+    "Microsoft.Xna.Framework.Input.KeyboardState",
     "Microsoft.Xna.Framework.Input.Keys",
-    "Microsoft.Xna.Framework.PlayerIndex"
+    "Microsoft.Xna.Framework.Input.Mouse",
+    "Microsoft.Xna.Framework.Input.MouseState",
+    "Microsoft.Xna.Framework.MathHelper",
+    "Microsoft.Xna.Framework.Matrix",
+    "Microsoft.Xna.Framework.Plane",
+    "Microsoft.Xna.Framework.PlaneIntersectionType",
+    "Microsoft.Xna.Framework.PlayerIndex",
+    "Microsoft.Xna.Framework.Point",
+    "Microsoft.Xna.Framework.Quaternion",
+    "Microsoft.Xna.Framework.Ray",
+    "Microsoft.Xna.Framework.Rectangle",
+    "Microsoft.Xna.Framework.Vector2",
+    "Microsoft.Xna.Framework.Vector3",
+    "Microsoft.Xna.Framework.Vector4"
   ],
   "typeScoreboard": [
     {
@@ -2651,38 +1726,38 @@
     },
     {
       "type": "Microsoft.Xna.Framework.BoundingBox",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.BoundingFrustum",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.BoundingSphere",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Color",
-      "status": "partial",
-      "diagnostics": 3
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.ContainmentType",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentLoadException",
-      "status": "partial",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentManager",
       "status": "partial",
-      "diagnostics": 5
+      "diagnostics": 3
     },
     {
       "type": "Microsoft.Xna.Framework.Content.ContentReader",
@@ -2847,7 +1922,7 @@
     {
       "type": "Microsoft.Xna.Framework.Game",
       "status": "partial",
-      "diagnostics": 13
+      "diagnostics": 11
     },
     {
       "type": "Microsoft.Xna.Framework.GameComponent",
@@ -2871,8 +1946,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.GameTime",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.GameWindow",
@@ -3067,7 +2142,7 @@
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsDevice",
       "status": "partial",
-      "diagnostics": 52
+      "diagnostics": 49
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsDeviceStatus",
@@ -3082,7 +2157,7 @@
     {
       "type": "Microsoft.Xna.Framework.Graphics.GraphicsResource",
       "status": "partial",
-      "diagnostics": 4
+      "diagnostics": 2
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.IEffectFog",
@@ -3357,7 +2432,7 @@
     {
       "type": "Microsoft.Xna.Framework.Graphics.SpriteBatch",
       "status": "partial",
-      "diagnostics": 8
+      "diagnostics": 6
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.SpriteEffects",
@@ -3387,12 +2462,12 @@
     {
       "type": "Microsoft.Xna.Framework.Graphics.Texture",
       "status": "partial",
-      "diagnostics": 3
+      "diagnostics": 2
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Texture2D",
       "status": "partial",
-      "diagnostics": 5
+      "diagnostics": 2
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.Texture3D",
@@ -3472,7 +2547,7 @@
     {
       "type": "Microsoft.Xna.Framework.Graphics.Viewport",
       "status": "partial",
-      "diagnostics": 4
+      "diagnostics": 2
     },
     {
       "type": "Microsoft.Xna.Framework.GraphicsDeviceInformation",
@@ -3482,7 +2557,7 @@
     {
       "type": "Microsoft.Xna.Framework.GraphicsDeviceManager",
       "status": "partial",
-      "diagnostics": 10
+      "diagnostics": 8
     },
     {
       "type": "Microsoft.Xna.Framework.IDrawable",
@@ -3516,23 +2591,23 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePad",
-      "status": "partial",
-      "diagnostics": 3
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadButtons",
-      "status": "partial",
-      "diagnostics": 5
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadCapabilities",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadDPad",
-      "status": "partial",
-      "diagnostics": 6
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadDeadZone",
@@ -3541,23 +2616,23 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadState",
-      "status": "partial",
-      "diagnostics": 4
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadThumbSticks",
-      "status": "partial",
-      "diagnostics": 6
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadTriggers",
-      "status": "partial",
-      "diagnostics": 6
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.GamePadType",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.KeyState",
@@ -3566,13 +2641,13 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Keyboard",
-      "status": "partial",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.KeyboardState",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Keys",
@@ -3581,13 +2656,13 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Mouse",
-      "status": "partial",
-      "diagnostics": 2
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.MouseState",
-      "status": "partial",
-      "diagnostics": 3
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.GestureSample",
@@ -3636,13 +2711,13 @@
     },
     {
       "type": "Microsoft.Xna.Framework.MathHelper",
-      "status": "partial",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Matrix",
-      "status": "partial",
-      "diagnostics": 54
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Media.Album",
@@ -3766,13 +2841,13 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Plane",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.PlaneIntersectionType",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.PlayerIndex",
@@ -3781,8 +2856,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Point",
-      "status": "partial",
-      "diagnostics": 3
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.PreparingDeviceSettingsEventArgs",
@@ -3791,18 +2866,18 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Quaternion",
-      "status": "partial",
-      "diagnostics": 6
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Ray",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Rectangle",
-      "status": "partial",
-      "diagnostics": 3
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Storage.StorageContainer",
@@ -3826,24 +2901,24 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Vector2",
-      "status": "partial",
-      "diagnostics": 14
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Vector3",
-      "status": "partial",
-      "diagnostics": 14
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Vector4",
-      "status": "partial",
-      "diagnostics": 24
+      "status": "complete",
+      "diagnostics": 0
     }
   ],
   "familyScoreboard": {
     "Microsoft.Xna.Framework": {
       "types": 42,
-      "diagnostics": 175
+      "diagnostics": 40
     },
     "Microsoft.Xna.Framework.Audio": {
       "types": 19,
@@ -3851,7 +2926,7 @@
     },
     "Microsoft.Xna.Framework.Content": {
       "types": 12,
-      "diagnostics": 16
+      "diagnostics": 13
     },
     "Microsoft.Xna.Framework.Design": {
       "types": 13,
@@ -3863,7 +2938,7 @@
     },
     "Microsoft.Xna.Framework.Graphics": {
       "types": 99,
-      "diagnostics": 183
+      "diagnostics": 170
     },
     "Microsoft.Xna.Framework.Graphics.PackedVector": {
       "types": 19,
@@ -3871,7 +2946,7 @@
     },
     "Microsoft.Xna.Framework.Input": {
       "types": 17,
-      "diagnostics": 40
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Input.Touch": {
       "types": 8,

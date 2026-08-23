@@ -48,7 +48,10 @@ class GraphicsResource:
     def Tag(self): return self._tag
     @Tag.setter
     def Tag(self, value): self._tag = value
-    def Dispose(self) -> None: self._native.Dispose()
+    def Dispose(self, *args: object) -> None:
+        if len(args) > 1 or (args and type(args[0]) is not bool):
+            raise TypeError("Dispose expects no arguments or a bool disposing value")
+        self._native.Dispose()
     def __enter__(self):
         self._require_handle(); return self
     def __exit__(self, exc_type, exc, traceback): self.Dispose()
@@ -61,8 +64,14 @@ class Texture(GraphicsResource):
 class Texture2D(Texture):
     __slots__ = ("_width", "_height", "_level_count", "_format")
 
-    def __init__(self, graphicsDevice: GraphicsDevice, width: int, height: int,
-                 mipMap: bool = False, format: SurfaceFormat = SurfaceFormat.Color) -> None:
+    def __init__(self, *args: object) -> None:
+        if len(args) == 3:
+            graphicsDevice, width, height = args
+            mipMap, format = False, SurfaceFormat.Color
+        elif len(args) == 5:
+            graphicsDevice, width, height, mipMap, format = args
+        else:
+            raise TypeError("Texture2D expects graphicsDevice, width, height[, mipMap, format]")
         if not isinstance(graphicsDevice, GraphicsDevice):
             raise TypeError("graphicsDevice must be a GraphicsDevice")
         width, height = int32(width, name="width"), int32(height, name="height")
@@ -206,8 +215,8 @@ class SpriteBatch(GraphicsResource):
             raise RuntimeError("SpriteBatch.Begin cannot be called twice without End")
         sort_mode = SpriteSortMode.Deferred
         if args:
-            if len(args) > 7:
-                raise TypeError("Begin received too many arguments")
+            if len(args) not in (2, 5, 6, 7):
+                raise TypeError("no matching XNA SpriteBatch.Begin overload")
             sort_mode = SpriteSortMode(args[0])
             if any(value is not None for value in args[1:]):
                 raise NativeCapabilityError("SpriteBatch.Begin", 6, None,
@@ -222,8 +231,8 @@ class SpriteBatch(GraphicsResource):
     def Draw(self, *args: object) -> None:
         if not self._begun:
             raise RuntimeError("SpriteBatch.Draw requires an active Begin/End interval")
-        if len(args) < 3:
-            raise TypeError("Draw expects at least texture, position, color")
+        if len(args) not in (3, 4, 8, 9):
+            raise TypeError("no matching XNA SpriteBatch.Draw overload")
         texture, position = args[0], args[1]
         if not isinstance(texture, Texture2D):
             raise TypeError("texture must be Texture2D")
@@ -272,10 +281,22 @@ class SpriteBatch(GraphicsResource):
         finally:
             self._begun = False
 
-    def Dispose(self) -> None:
+    def Dispose(self, *args: object) -> None:
+        if len(args) > 1 or (args and type(args[0]) is not bool):
+            raise TypeError("Dispose expects no arguments or a bool disposing value")
         self._begun = False
         self._native.Dispose()
 
     def __enter__(self):
         self._require_handle(); return self
     def __exit__(self, exc_type, exc, traceback): self.Dispose()
+
+
+GraphicsResource.__xna_arities__ = {"Dispose": {0, 1}}
+Texture2D.__xna_arities__ = {
+    "__init__": {3, 5}, "FromStream": {2, 5}, "SetData": {1, 3, 5},
+    "GetData": {1, 3, 5}, "Dispose": {0, 1},
+}
+SpriteBatch.__xna_arities__ = {
+    "Begin": {0, 2, 5, 6, 7}, "Draw": {3, 4, 8, 9}, "Dispose": {0, 1},
+}

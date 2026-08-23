@@ -27,6 +27,7 @@ TYPES = {
         abi.CNA_Texture2DDecodeInfo, abi.CNA_SpriteBatchBeginInfo,
         abi.CNA_SpriteScaledCommand, abi.CNA_KeyboardState, abi.CNA_MouseState,
         abi.CNA_GamePadAnalogState, abi.CNA_GamePadState,
+        abi.CNA_GamePadCapabilities,
     )
 }
 

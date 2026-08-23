@@ -1,13 +1,9 @@
 # Missing XNA type inventory
 
-Missing types: **215**.
+Missing types: **206**.
 
 ## Microsoft.Xna.Framework
 
-- `BoundingBox`
-- `BoundingFrustum`
-- `BoundingSphere`
-- `ContainmentType`
 - `Curve`
 - `CurveContinuity`
 - `CurveKey`
@@ -27,10 +23,7 @@ Missing types: **215**.
 - `IGraphicsDeviceManager`
 - `IUpdateable`
 - `LaunchParameters`
-- `Plane`
-- `PlaneIntersectionType`
 - `PreparingDeviceSettingsEventArgs`
-- `Ray`
 - `TitleContainer`
 
 ## Microsoft.Xna.Framework.Audio
@@ -200,11 +193,6 @@ Missing types: **215**.
 - `Rgba64`
 - `Short2`
 - `Short4`
-
-## Microsoft.Xna.Framework.Input
-
-- `GamePadCapabilities`
-- `GamePadType`
 
 ## Microsoft.Xna.Framework.Input.Touch
 

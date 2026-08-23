@@ -33,7 +33,10 @@ Every entry supplies `restype` and `argtypes`, including pointer depth and
 fixed-width signedness. Current imports cover version/errors, lifecycle/frame
 hooks and timing properties, dispatcher, graphics manager/device, viewport/clear, Texture2D encoded
 decode and Color transfer, SpriteBatch scaled submission, keyboard, mouse, and
-gamepad. This is not a claim that all 2,861 exports are bound.
+gamepad. Foundation Milestone 2 added only four reviewed input imports:
+`cna_mouse_get_window_handle`, `cna_mouse_set_window_handle`,
+`cna_gamepad_get_capabilities`, and `cna_gamepad_set_vibration`. This is not a
+claim that all 2,861 exports are bound.
 
 The ABI probe compares `sizeof`, `_Alignof`, and field offsets for every ctypes
 structure used. ELF verification compares every imported symbol against the
@@ -43,10 +46,10 @@ report rather than inferred from another language binding.
 The current generated report records:
 
 ```text
-BOUND_FUNCTIONS=55
-CTYPES_SIGNATURE_MEASUREMENTS=55
-C_LAYOUT_MEASUREMENTS=169
-CTYPES_LAYOUT_MEASUREMENTS=169
+BOUND_FUNCTIONS=59
+CTYPES_SIGNATURE_MEASUREMENTS=59
+C_LAYOUT_MEASUREMENTS=210
+CTYPES_LAYOUT_MEASUREMENTS=210
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
@@ -57,9 +60,11 @@ signed dimensions/ticks as `int32_t`/`int64_t`, and opaque handles as
 pointers to caller-owned output. Callback objects and message buffers are kept
 alive for their full native registration/use lifetime.
 
-No missing CNA operation blocks the implemented Python slice. Surface that is
-still absent in Python (typed content/XNB, additional SpriteBatch states and
-overloads, effects, buffers, indexed drawing, audio/media/storage) is an
-unimplemented binding milestone, not currently recorded as an upstream CNA
-defect. The separate current-CNA build blocker is the renderer-identity
-enumeration assertion described above.
+All selected non-touch input members now have real CNA routes. A HEADLESS/NULL
+run verifies calls and state conversion but cannot verify a physical controller
+or operating-system window association. Surface still absent in Python (typed
+content/XNB, additional SpriteBatch states and overloads, effects, buffers,
+indexed drawing, audio/media/storage/touch) is an unimplemented binding
+milestone, not currently recorded as an upstream CNA defect. The separate
+current-CNA build blocker is the renderer-identity enumeration assertion
+described above.

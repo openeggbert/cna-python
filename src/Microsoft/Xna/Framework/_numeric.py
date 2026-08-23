@@ -9,6 +9,8 @@ import struct
 def f32(value: object) -> float:
     """Narrow to IEEE-754 binary32 using round-to-nearest, ties-to-even."""
 
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise TypeError("Single values must be int or float, not bool or a coercible object")
     number = float(value)
     try:
         return struct.unpack("=f", struct.pack("=f", number))[0]
@@ -53,3 +55,24 @@ def uint32(value: object, *, name: str = "value") -> int:
     if value < 0 or value > 4_294_967_295:
         raise OverflowError(f"{name} is outside the UInt32 range")
     return value
+
+
+def wrap_int32(value: int) -> int:
+    value &= 0xFFFFFFFF
+    return value if value < 0x80000000 else value - 0x100000000
+
+
+def single_hash(value: object) -> int:
+    """Reproduce .NET Framework ``System.Single.GetHashCode``."""
+
+    bits = struct.unpack("=I", struct.pack("=f", f32(value)))[0]
+    if ((bits - 1) & 0x7FFFFFFF) >= 0x7F800000:
+        bits &= 0x7F800000
+    return wrap_int32(bits)
+
+
+def hash32_sum(*values: int) -> int:
+    result = 0
+    for value in values:
+        result = wrap_int32(result + value)
+    return result

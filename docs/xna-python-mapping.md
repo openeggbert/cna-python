@@ -18,7 +18,7 @@ implementation uses ordinary Python conventions.
 | nested type | attribute of the projected declaring type |
 | field | same name; mutable fixed-width fields narrow on assignment |
 | property | same PascalCase descriptor and mutability |
-| static property | read-only class descriptor, accessed without `()` |
+| static property | class descriptor, accessed without `()`; setter retained when XNA has one |
 | indexer | `__getitem__` and, when writable, `__setitem__` |
 | event | same PascalCase descriptor using `+=` and `-=` |
 
@@ -43,6 +43,14 @@ that family remain red. Runtime methods carrying `__xna_arities__` are checked
 against the same metadata so a permissive `*args` body cannot conceal a wrong
 overload set.
 
+The verifier parses stubs with `ast`; it does not use an implementation
+function's erased `inspect.signature()` as the overload authority. Read-only
+static properties use `Final[T]`, writable static properties use `ClassVar[T]`,
+and instance property setters are explicit in the stub. Stub callables are
+checked against the runtime object for existence and instance/static/class
+shape. Strict runtime members missing from the stub and stub members missing
+from runtime are both diagnostics.
+
 `ref` input values are ordinary copied inputs. `out T` is removed from the
 Python argument list and returned. A CLR `void M(ref A, out B)` therefore maps
 to `M(a: A) -> B`; multiple outputs return a tuple in declaration order. When
@@ -56,6 +64,14 @@ Arrays map to typed Python sequences on input and new lists on return. An
 in-place CLR array destination requires a mutable sequence and preserves its
 length/range checks. CLR collections map to dedicated collection projections,
 not arbitrary lists, when their behavior is public.
+
+Interface projection is measured behaviorally: every mapped interface member
+must be present in both runtime and stub, with `IEquatable<T>` and
+`IDisposable` additionally requiring the corresponding equality and
+context-manager language protocols. Generic TypeVar identity/order and
+representable bounds are measured from stubs. A CLR relation without a defined
+Python projection remains an unmeasured diagnostic; it is never silently
+treated as compatible.
 
 ## Operators and object protocol
 

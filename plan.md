@@ -1,6 +1,7 @@
 # CNA-Python implementation plan
 
-Status: real ABI-0.7 foundation and desktop 2D vertical slice implemented.
+Status: Foundation Milestone 2 complete: measured core value/geometry/input
+foundation over the real ABI-0.7 runtime.
 
 Date: 2026-08-23.
 
@@ -25,10 +26,15 @@ make it green.
 - [x] Implement one OWNED/BORROWED/PARENT_OWNED state model, idempotent
   `Dispose`, context managers, child-before-parent teardown, and no CNA calls
   from interpreter finalizers.
-- [x] Implement substantial binary32-aware MathHelper, Vector2/3/4,
-  Quaternion, Matrix, Color, Point, Rectangle, and GameTime behavior.
-- [x] Implement exact Keys plus coherent keyboard, mouse, and gamepad state
-  groups and real CNA polling.
+- [x] Complete MathHelper, Vector2/3/4, Quaternion, Matrix, Color, Point,
+  Rectangle, and GameTime to local structural zero with XNA binary32 operation
+  ordering, edge values, hashes, strings, overloads, and copy behavior.
+- [x] Complete ContainmentType, PlaneIntersectionType, Plane, Ray,
+  BoundingBox, BoundingSphere, and BoundingFrustum, including all selected
+  containment/intersection combinations and frustum convex/GJK routes.
+- [x] Complete the non-touch keyboard, mouse, and gamepad families, add
+  GamePadCapabilities/GamePadType, preserve real CNA polling, and bind real
+  mouse-window, capabilities, and vibration routes.
 - [x] Implement real Game callbacks, timing properties, exit, callback failure
   propagation, recreation, and shutdown.
 - [x] Implement real GraphicsDeviceManager, viewport get/set/title-safe-area,
@@ -39,6 +45,13 @@ make it green.
 - [x] Ship checked `.pyi` files and `py.typed` in the wheel.
 - [x] Add strict report/check/leak-only modes, deterministic scoreboards,
   missing-type inventories, and deliberately broken verifier fixtures.
+- [x] Make shipped `.pyi` files the measured overload/type/generic contract;
+  measure fields, properties, callables, nullability, ref/out, interfaces,
+  generics, language rules, and runtime/stub consistency. All structural
+  mismatch counters and `UNMEASURED_STRUCTURAL_CATEGORY` are zero.
+- [x] Expand the `PURE_XNA_DERIVED` core corpus from 16/35 to 92 observations /
+  360 scalar assertions, including exact binary32 golden bits, NaN/infinity,
+  singular/degenerate geometry, hashes, transforms, and frustum GJK cases.
 - [x] Replace the sibling template with a desktop-only real CNA starter and a
   deterministic parameterized generator.
 - [x] Build a wheel/sdist and verify a fresh installed-wheel generated consumer
@@ -46,37 +59,45 @@ make it green.
 
 ## Current measured boundary
 
-- Strict target: 42/257 types and 796 mapped runtime members.
-- Full strict check: intentionally red for missing and partial XNA surface.
+- Reference/expected projection: 257/2,964 CLR types/members and 257/2,887
+  mapped Python types/members.
+- Strict target: 51 types and 1,003 strict runtime members.
+- Diagnostics: 310 total = 206 missing types + 104 missing members. All other
+  categories, including overload and unmeasured structural categories, are
+  zero. The full strict check therefore remains intentionally red.
+- Type status: 41 complete, 10 partial, 206 missing. Every core math/value,
+  geometry/intersection, and non-touch input type selected for this milestone
+  is locally zero-diagnostic. Touch was not started.
 - Zero-tolerance gate: unexpected types/members, private/native leaks, raw
-  handles, and allowlist entries are all zero.
-- Structural audit limitation: full interface, field-type, parameter-type,
-  return-type, and generic comparison remains explicitly counted as unmeasured
-  for 30 implemented classes; it is not reported as silently green.
+  handles, public FFI leaks, and allowlist entries are all zero.
+- Native manifest: 59 exact ABI-0.7 functions, 59 ctypes signature
+  measurements, 210 C and 210 ctypes layout measurements, zero missing symbols
+  and zero ABI mismatch.
 - Native runtime evidence: Linux x86-64, CNA ABI 0.7.0, HEADLESS renderer, NULL
-  audio artifact. No GPU output, physical input, windowing, or audio claim.
+  audio artifact. Routes are verified; no GPU output, physical-controller,
+  window-system, sanitizer, or audio claim is made.
 
 ## Next dependency-complete milestones
 
-1. Complete stub-backed field/parameter/return/interface/generic verification,
-   then remove `UNMEASURED_STRUCTURAL_CATEGORY` diagnostics family by family.
-2. Complete the currently partial pure values before adding more shells:
-   Matrix/Quaternion/Vector overloads, Plane, Ray, bounds, frustum, containment,
-   and intersection behavior with a larger pinned corpus.
-3. Complete input contracts: capabilities, vibration, all equality/hash/string
-   behavior, mouse window association, and hardware-qualified observations.
-4. Complete the remaining GraphicsDevice/SpriteBatch overload dependencies and
+1. If continuing the pure foundation, implement Curve, CurveContinuity,
+   CurveKey, CurveKeyCollection, CurveLoopType, and CurveTangent as one complete
+   family. Do not expose a partial subset.
+2. Complete the remaining GraphicsDevice/SpriteBatch overload dependencies and
    graphics state value groups.
-5. Design and implement a coherent ContentManager/XNB reader slice using CNA's
+3. Design and implement a coherent ContentManager/XNB reader slice using CNA's
    real typed content and foreign-reader routes; keep `Load` explicit until
    then.
-6. Add effects/3D only as one complete chain: native effects and passes,
+4. Add effects/3D only as one complete chain: native effects and passes,
    vertex/index buffers, bindings, and indexed drawing. Never restore the fake
    cube path.
-7. Add audio/media/storage/touch in dependency order with owner-thread queues
+5. Add audio/media/storage/touch in dependency order with owner-thread queues
    for native callbacks that can originate on arbitrary threads.
-8. Qualify Linux windowed/GPU, then Windows and macOS independently. Do not
+6. Qualify Linux windowed/GPU, then Windows and macOS independently. Do not
    infer support from CNA or another binding.
+
+The optional Curve family was not started. It remains a coherent pure-value
+candidate, but it must not displace the next dependency-complete milestone or
+be split into partial shells.
 
 ## Invariants
 

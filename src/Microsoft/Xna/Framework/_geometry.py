@@ -6,7 +6,7 @@ import math
 
 from ._language import classproperty
 from ._math import MathHelper, Vector3, Vector4
-from ._numeric import f32, int32, uint32
+from ._numeric import f32, hash32_sum, int32, mul32, uint32
 
 
 def _byte(value: object) -> int:
@@ -27,6 +27,20 @@ def _normalized_byte(value: object) -> int:
     return round(scaled)
 
 
+def _pack_unorm(bitmask: float, value: object) -> int:
+    scaled = f32(f32(value) * f32(bitmask))
+    if math.isnan(scaled) or scaled <= 0:
+        return 0
+    if scaled >= bitmask:
+        return int(bitmask)
+    return round(scaled)
+
+
+def _truncating_divide(value: int, divisor: int) -> int:
+    result = abs(value) // divisor
+    return -result if value < 0 else result
+
+
 class _ColorProperty:
     def __init__(self, packed: int) -> None:
         self._packed = packed
@@ -38,20 +52,22 @@ class _ColorProperty:
 class Color:
     __slots__ = ("_packed_value",)
 
-    def __init__(self, r: int | float | Vector3 | Vector4, g: int | float | None = None,
-                 b: int | float | None = None, a: int | float = 255) -> None:
+    def __init__(self, *args: object) -> None:
         self._packed_value = 0
-        if isinstance(r, Vector4):
-            channels = tuple(_normalized_byte(value) for value in r)
-        elif isinstance(r, Vector3):
-            channels = (*(_normalized_byte(value) for value in r), 255)
+        if not args:
+            channels = (0, 0, 0, 0)
+        elif len(args) == 1 and isinstance(args[0], Vector4):
+            channels = tuple(_normalized_byte(value) for value in args[0])
+        elif len(args) == 1 and isinstance(args[0], Vector3):
+            channels = (*(_normalized_byte(value) for value in args[0]), 255)
+        elif len(args) in (3, 4) and all(type(value) is int for value in args):
+            values = tuple(int32(value) for value in (args if len(args) == 4 else (*args, 255)))
+            channels = tuple(_byte(value) for value in values)
+        elif len(args) in (3, 4) and all(type(value) is float for value in args):
+            values = args if len(args) == 4 else (*args, 1.0)
+            channels = tuple(_normalized_byte(value) for value in values)
         else:
-            if g is None or b is None:
-                raise TypeError("Color expects Vector3, Vector4, or r, g, b[, a]")
-            if any(isinstance(value, float) for value in (r, g, b, a)):
-                channels = tuple(_normalized_byte(value) for value in (r, g, b, a))
-            else:
-                channels = tuple(_byte(value) for value in (r, g, b, a))
+            raise TypeError("Color expects (), Vector3, Vector4, three/four Int32, or three/four Single values")
         self.R, self.G, self.B, self.A = channels
 
     @classmethod
@@ -104,13 +120,11 @@ class Color:
     def FromNonPremultiplied(*args: object) -> "Color":
         if len(args) == 1 and isinstance(args[0], Vector4):
             value = args[0]
-            alpha = _normalized_byte(value.W)
-            return Color(_byte(_normalized_byte(value.X) * alpha / 255),
-                         _byte(_normalized_byte(value.Y) * alpha / 255),
-                         _byte(_normalized_byte(value.Z) * alpha / 255), alpha)
-        if len(args) == 4:
-            r, g, b, a = (_byte(value) for value in args)
-            return Color(r * a // 255, g * a // 255, b * a // 255, a)
+            return Color(mul32(value.X,value.W),mul32(value.Y,value.W),mul32(value.Z,value.W),value.W)
+        if len(args) == 4 and all(type(value) is int for value in args):
+            r,g,b,a=(int32(value) for value in args)
+            return Color(_byte(_truncating_divide(r*a,255)),_byte(_truncating_divide(g*a,255)),
+                         _byte(_truncating_divide(b*a,255)),_byte(a))
         raise TypeError("FromNonPremultiplied expects Vector4 or r, g, b, a")
 
     def ToVector3(self) -> Vector3:
@@ -121,13 +135,16 @@ class Color:
 
     @staticmethod
     def Lerp(value1: "Color", value2: "Color", amount: float) -> "Color":
-        t = MathHelper.Clamp(amount, 0.0, 1.0)
-        return Color(*(_byte(a + (b - a) * t) for a, b in zip(value1, value2)))
+        if not isinstance(value1,Color) or not isinstance(value2,Color):raise TypeError("Lerp expects two Color values")
+        fraction=_pack_unorm(65536.0,amount)
+        return Color(*(a+(((b-a)*fraction)>>16) for a,b in zip(value1,value2)))
 
     @staticmethod
     def Multiply(value: "Color", scale: float) -> "Color":
-        factor = MathHelper.Clamp(scale, 0.0, 1.0)
-        return Color(*(_byte(channel * factor) for channel in value))
+        if not isinstance(value,Color):raise TypeError("value must be Color")
+        scaled=mul32(scale,65536.0)
+        fixed=0 if math.isnan(scaled) or scaled<=0 else 16777215 if scaled>=16777215 else int(scaled)
+        return Color(*(min(255,(channel*fixed)>>16) for channel in value))
 
     def __mul__(self, scale: float) -> "Color":
         return Color.Multiply(self, scale)
@@ -143,15 +160,14 @@ class Color:
     def __eq__(self, other: object) -> bool:
         return isinstance(other, Color) and self.PackedValue == other.PackedValue
 
-    def __hash__(self) -> int:
-        value = self.PackedValue
-        return value if value < 0x80000000 else value - 0x100000000
+    def __hash__(self) -> int: return self.GetHashCode()
 
     def Equals(self, other: object) -> bool:
         return self == other
 
     def GetHashCode(self) -> int:
-        return hash(self)
+        value=self.PackedValue
+        return value if value<0x80000000 else value-0x100000000
 
     def ToString(self) -> str:
         return f"{{R:{self.R} G:{self.G} B:{self.B} A:{self.A}}}"
@@ -316,7 +332,13 @@ Color.White = _ColorProperty(0xFFFFFFFF)
 class Point:
     __slots__ = ("_x", "_y")
 
-    def __init__(self, x: int = 0, y: int = 0) -> None:
+    def __init__(self, *args: object) -> None:
+        if not args:
+            x, y = 0, 0
+        elif len(args) == 2:
+            x, y = args
+        else:
+            raise TypeError("Point expects zero arguments or x, y")
         self.X, self.Y = x, y
 
     @property
@@ -332,9 +354,9 @@ class Point:
     def __copy__(self) -> "Point": return Point(self.X, self.Y)
     __deepcopy__ = lambda self, memo: self.__copy__()
     def __eq__(self, other: object) -> bool: return isinstance(other, Point) and self.X == other.X and self.Y == other.Y
-    def __hash__(self) -> int: return hash((self.X, self.Y))
+    def __hash__(self) -> int: return self.GetHashCode()
     def Equals(self, other: object) -> bool: return self == other
-    def GetHashCode(self) -> int: return hash(self)
+    def GetHashCode(self) -> int: return hash32_sum(self.X,self.Y)
     def ToString(self) -> str: return f"{{X:{self.X} Y:{self.Y}}}"
     __str__ = ToString
     def __repr__(self) -> str: return f"Point({self.X}, {self.Y})"
@@ -343,7 +365,13 @@ class Point:
 class Rectangle:
     __slots__ = ("_x", "_y", "_width", "_height")
 
-    def __init__(self, x: int = 0, y: int = 0, width: int = 0, height: int = 0) -> None:
+    def __init__(self, *args: object) -> None:
+        if not args:
+            x, y, width, height = 0, 0, 0, 0
+        elif len(args) == 4:
+            x, y, width, height = args
+        else:
+            raise TypeError("Rectangle expects zero arguments or x, y, width, height")
         self.X, self.Y, self.Width, self.Height = x, y, width, height
 
     def _component(name: str):
@@ -400,10 +428,15 @@ class Rectangle:
     def __copy__(self): return Rectangle(self.X, self.Y, self.Width, self.Height)
     __deepcopy__ = lambda self, memo: self.__copy__()
     def __eq__(self, other: object) -> bool: return isinstance(other, Rectangle) and tuple(self) == tuple(other)
-    def __hash__(self) -> int: return hash(tuple(self))
+    def __hash__(self) -> int: return self.GetHashCode()
     def __iter__(self): return iter((self.X, self.Y, self.Width, self.Height))
     def Equals(self, other: object) -> bool: return self == other
-    def GetHashCode(self) -> int: return hash(self)
+    def GetHashCode(self) -> int: return hash32_sum(self.X,self.Y,self.Width,self.Height)
     def ToString(self) -> str: return f"{{X:{self.X} Y:{self.Y} Width:{self.Width} Height:{self.Height}}}"
     __str__ = ToString
     def __repr__(self) -> str: return f"Rectangle({self.X}, {self.Y}, {self.Width}, {self.Height})"
+
+
+Color.__xna_arities__ = {"__init__": {0, 1, 3, 4}, "FromNonPremultiplied": {1, 4}}
+Point.__xna_arities__ = {"__init__": {0, 2}}
+Rectangle.__xna_arities__ = {"__init__": {0, 4}, "Offset": {1, 2}, "Contains": {1, 2}}

@@ -6,5 +6,14 @@
   {"name": "unexpected-type", "category": "UNEXPECTED_TYPE", "expected": {"types": []}, "target": {"types": ["Fake"]}},
   {"name": "native-type-leak", "category": "INTERNAL_TYPE_LEAK", "target": {"baseModule": "_cna_native.ownership"}},
   {"name": "ctypes-pointer-leak", "category": "RAW_HANDLE_LEAK", "target": {"annotation": "ctypes.c_void_p"}},
-  {"name": "wrong-language-mapping", "category": "LANGUAGE_MAPPING_MISMATCH", "expected": {"name": "None_"}, "target": {"name": "None"}}
+  {"name": "wrong-language-mapping", "category": "LANGUAGE_MAPPING_MISMATCH", "expected": {"name": "None_"}, "target": {"name": "None"}},
+  {"name": "wrong-field-type", "category": "FIELD_MAPPING_MISMATCH", "expected": {"fieldTypes": {"X": "float"}}, "target": {"fieldTypes": {"X": "int"}}},
+  {"name": "wrong-parameter-type", "category": "PARAMETER_MAPPING_MISMATCH", "expected": {"parameterTypes": {"Clamp": ["float", "float", "float"]}}, "target": {"parameterTypes": {"Clamp": ["float", "int", "float"]}}},
+  {"name": "wrong-return-type", "category": "RETURN_MAPPING_MISMATCH", "expected": {"returnTypes": {"Dot": "float"}}, "target": {"returnTypes": {"Dot": "int"}}},
+  {"name": "wrong-interface", "category": "INTERFACE_MAPPING_MISMATCH", "expected": {"interfaces": ["IEquatable[Vector2]"]}, "target": {"interfaces": []}},
+  {"name": "wrong-generic-typevar", "category": "GENERIC_MAPPING_MISMATCH", "expected": {"typeVars": ["T"]}, "target": {"typeVars": ["U"]}},
+  {"name": "wrong-generic-bound", "category": "GENERIC_MAPPING_MISMATCH", "expected": {"genericBounds": {"T": "VertexType"}}, "target": {"genericBounds": {"T": "object"}}},
+  {"name": "wrong-nullable", "category": "PARAMETER_MAPPING_MISMATCH", "expected": {"nullable": "Rectangle | None"}, "target": {"nullable": "Rectangle"}},
+  {"name": "wrong-ref-out-transform", "category": "RETURN_MAPPING_MISMATCH", "expected": {"refOut": "Vector3"}, "target": {"refOut": "None"}},
+  {"name": "runtime-stub-divergence", "category": "METHOD_SIGNATURE_MAPPING_MISMATCH", "expected": {"runtimeStub": {"Dot": "static"}}, "target": {"runtimeStub": {}}}
 ]

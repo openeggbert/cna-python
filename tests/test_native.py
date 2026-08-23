@@ -7,7 +7,7 @@ import unittest
 from _cna_native.errors import NativeError
 from Microsoft.Xna.Framework import Color, Game, GraphicsDeviceManager, PlayerIndex, Vector2
 from Microsoft.Xna.Framework.Graphics import SpriteBatch, SpriteEffects, Texture2D
-from Microsoft.Xna.Framework.Input import GamePad, Keyboard, Mouse
+from Microsoft.Xna.Framework.Input import GamePad, GamePadCapabilities, Keyboard, Mouse, MouseState
 
 
 NATIVE = os.environ.get("CNA_NATIVE_LIBRARY")
@@ -16,6 +16,27 @@ LOGO = Path(__file__).parent / "fixtures/logo.png"
 
 @unittest.skipUnless(NATIVE and Path(NATIVE).is_file(), "CNA_NATIVE_LIBRARY is not configured")
 class NativeSliceTests(unittest.TestCase):
+    def test_all_non_touch_input_routes_execute_against_cna(self) -> None:
+        class InputProbe(Game):
+            def __init__(self):
+                super().__init__(); self.manager = GraphicsDeviceManager(self)
+            def Update(self, gameTime):
+                self.keyboard = Keyboard.GetState()
+                self.player_keyboard = Keyboard.GetState(PlayerIndex.One)
+                self.mouse = Mouse.GetState()
+                handle = Mouse.WindowHandle
+                Mouse.WindowHandle = handle
+                Mouse.SetPosition(self.mouse.X, self.mouse.Y)
+                self.gamepad = GamePad.GetState(PlayerIndex.One)
+                self.capabilities = GamePad.GetCapabilities(PlayerIndex.One)
+                self.vibration_applied = GamePad.SetVibration(PlayerIndex.One, 0.0, 0.0)
+                self.Exit()
+        game = InputProbe()
+        game.Run(); game.Dispose()
+        self.assertIsInstance(game.mouse, MouseState)
+        self.assertIsInstance(game.capabilities, GamePadCapabilities)
+        self.assertIsInstance(game.vibration_applied, bool)
+
     def test_60_frame_lifecycle_graphics_png_sprite_and_input(self) -> None:
         class Probe(Game):
             def __init__(self):

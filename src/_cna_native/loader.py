@@ -73,8 +73,12 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_keyboard_get_state", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_KeyboardState)], "caller output"),
     ("cna_keyboard_get_state_for_player", c.c_uint32, [c.c_uint64, c.c_uint32, c.POINTER(abi.CNA_KeyboardState)], "caller output"),
     ("cna_mouse_get_state", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_MouseState)], "caller output"),
+    ("cna_mouse_get_window_handle", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_mouse_set_window_handle", c.c_uint32, [c.c_uint64, c.c_uint64], "borrowed game"),
     ("cna_mouse_set_position", c.c_uint32, [c.c_uint64, c.c_int32, c.c_int32], "borrowed game"),
     ("cna_gamepad_get_state_with_dead_zone", c.c_uint32, [c.c_uint64, c.c_uint32, c.c_uint32, c.POINTER(abi.CNA_GamePadState)], "caller output"),
+    ("cna_gamepad_get_capabilities", c.c_uint32, [c.c_uint64, c.c_uint32, c.POINTER(abi.CNA_GamePadCapabilities)], "caller output"),
+    ("cna_gamepad_set_vibration", c.c_uint32, [c.c_uint64, c.c_uint32, c.c_float, c.c_float, c.POINTER(c.c_uint8)], "caller output"),
 )
 
 

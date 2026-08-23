@@ -29,10 +29,20 @@ def _timedelta_from_ticks(value: int) -> timedelta:
 class GameTime:
     __slots__ = ("_total_game_time", "_elapsed_game_time", "_is_running_slowly")
 
-    def __init__(self, totalGameTime: timedelta = timedelta(), elapsedGameTime: timedelta = timedelta(),
-                 isRunningSlowly: bool = False) -> None:
+    def __init__(self, *args: object) -> None:
+        if not args:
+            totalGameTime, elapsedGameTime, isRunningSlowly = timedelta(), timedelta(), False
+        elif len(args) == 2:
+            totalGameTime, elapsedGameTime = args
+            isRunningSlowly = False
+        elif len(args) == 3:
+            totalGameTime, elapsedGameTime, isRunningSlowly = args
+        else:
+            raise TypeError("GameTime expects zero, two, or three arguments")
         if not isinstance(totalGameTime, timedelta) or not isinstance(elapsedGameTime, timedelta):
             raise TypeError("GameTime TimeSpan arguments map to datetime.timedelta")
+        if type(isRunningSlowly) is not bool:
+            raise TypeError("isRunningSlowly must be bool")
         self._total_game_time = totalGameTime
         self._elapsed_game_time = elapsedGameTime
         self._is_running_slowly = bool(isRunningSlowly)
@@ -431,7 +441,9 @@ class Game:
     def OnExiting(self, sender: object, args: object) -> None:
         self.Exiting(sender, args)
 
-    def Dispose(self) -> None:
+    def Dispose(self, *args: object) -> None:
+        if len(args) > 1 or (args and type(args[0]) is not bool):
+            raise TypeError("Dispose expects no arguments or a bool disposing value")
         if self._disposed:
             return
         first_error: BaseException | None = None
@@ -462,3 +474,7 @@ class Game:
 
     def __exit__(self, exc_type, exc, traceback) -> None:
         self.Dispose()
+
+
+GameTime.__xna_arities__ = {"__init__": {0, 2, 3}}
+Game.__xna_arities__ = {"Dispose": {0, 1}}

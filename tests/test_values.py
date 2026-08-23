@@ -7,13 +7,19 @@ import struct
 import unittest
 
 from Microsoft.Xna.Framework import (
-    Color, Game, GameTime, MathHelper, Matrix, Point, Quaternion, Rectangle,
-    Vector2, Vector3, Vector4,
+    Color, Game, GameTime, MathHelper, Matrix, Plane, Point, Quaternion,
+    Rectangle, Vector2, Vector3, Vector4,
 )
+from Microsoft.Xna.Framework._math import _cos32, _sin32, _sqrt32
+from Microsoft.Xna.Framework._numeric import add32, div32, f32 as narrow32, mul32
 
 
 def f32(value: float) -> float:
     return struct.unpack("=f", struct.pack("=f", value))[0]
+
+
+def bits(value: float) -> int:
+    return struct.unpack("=I", struct.pack("=f", value))[0]
 
 
 class Float32Tests(unittest.TestCase):
@@ -33,6 +39,28 @@ class Float32Tests(unittest.TestCase):
         self.assertEqual((Vector2(1, -1) / 0).Y, -math.inf)
         self.assertTrue(math.isnan((Vector2.Zero / 0).X))
 
+    def test_private_helpers_preserve_binary32_edges_and_order(self) -> None:
+        self.assertEqual(math.copysign(1.0, narrow32(0.0)), 1.0)
+        self.assertEqual(math.copysign(1.0, narrow32(-0.0)), -1.0)
+        self.assertTrue(math.isnan(narrow32(math.nan)))
+        self.assertEqual(narrow32(1e100), math.inf)
+        self.assertEqual(narrow32(-1e100), -math.inf)
+        self.assertEqual(narrow32(2.0**-149), 2.0**-149)
+        self.assertEqual(narrow32(2.0**-150), 0.0)
+        self.assertEqual(add32(add32(16_777_216.0, 1.0), -16_777_216.0), 0.0)
+        self.assertEqual(mul32(1.0000001192092896, 1.0000001192092896), f32(1.0000002384185933))
+        self.assertEqual(div32(1.0, 3.0), f32(1.0 / 3.0))
+        self.assertEqual(math.copysign(1.0, div32(0.0, -2.0)), -1.0)
+        self.assertEqual(_sqrt32(2.0), f32(math.sqrt(2.0)))
+        self.assertTrue(math.isnan(_sqrt32(-1.0)))
+        self.assertEqual(_sin32(MathHelper.PiOver2), f32(math.sin(f32(MathHelper.PiOver2))))
+        self.assertEqual(_cos32(MathHelper.Pi), f32(math.cos(f32(MathHelper.Pi))))
+
+    def test_nan_binary32_payload_survives_a_narrowing_round_trip(self) -> None:
+        value = struct.unpack("=f", struct.pack("=I", 0x7FC12345))[0]
+        bits = struct.unpack("=I", struct.pack("=f", narrow32(value)))[0]
+        self.assertEqual(bits & 0x003FFFFF, 0x00012345)
+
 
 class MathValueTests(unittest.TestCase):
     def test_static_value_properties_are_fresh(self) -> None:
@@ -50,6 +78,19 @@ class MathValueTests(unittest.TestCase):
         value.Normalize()
         self.assertEqual(value, Vector2(0.6, 0.8))
         self.assertEqual(Vector2.Normalize(Vector2(3, 4)), value)
+
+    def test_xna_binary32_golden_edges(self) -> None:
+        self.assertEqual(bits(MathHelper.CatmullRom(-10, -10, -10, -7, 0.3)), 0xC1218313)
+        self.assertEqual(bits(MathHelper.Hermite(-10, -10, -10, -10, 1.1)), 0xC1351EBA)
+        self.assertEqual(bits(MathHelper.WrapAngle(123456.789)), 0xBFC2E06C)
+        self.assertTrue(math.isnan(MathHelper.Hermite(1, math.inf, 2, 0, 0)))
+
+        minimum = Vector3.Min(Vector3(math.nan, 1, math.nan), Vector3(7, math.nan, math.nan))
+        self.assertEqual(minimum.X, 7.0)
+        self.assertTrue(math.isnan(minimum.Y))
+        self.assertTrue(math.isnan(minimum.Z))
+        self.assertEqual(Vector3(1, 2, 3).GetHashCode(), -1_077_936_128)
+        self.assertEqual(Matrix.Identity.GetHashCode(), -33_554_432)
 
     def test_copy_is_value_copy(self) -> None:
         original = Vector3(1, 2, 3)
@@ -69,6 +110,61 @@ class MathValueTests(unittest.TestCase):
         value = Quaternion.CreateFromAxisAngle(Vector3.UnitY, MathHelper.Pi)
         self.assertAlmostEqual(value.Y, 1.0, places=6)
         self.assertAlmostEqual(value.W, 0.0, places=6)
+
+    def test_quaternion_matrix_concatenation_and_nonfinite(self) -> None:
+        rotation = Matrix.CreateRotationY(0.7)
+        value = Quaternion.CreateFromRotationMatrix(rotation)
+        self.assertAlmostEqual(Matrix.CreateFromQuaternion(value).M11, rotation.M11, places=6)
+        first = Quaternion.CreateFromAxisAngle(Vector3.UnitX, 0.2)
+        second = Quaternion.CreateFromAxisAngle(Vector3.UnitY, 0.4)
+        self.assertEqual(Quaternion.Concatenate(first, second), second * first)
+        self.assertTrue(math.isnan(Quaternion.Normalize(Quaternion.Zero if hasattr(Quaternion, "Zero") else Quaternion()).X))
+
+    def test_matrix_complete_pure_contract(self) -> None:
+        value = Matrix.Identity
+        value.Right = Vector3(2, 3, 4)
+        value.Down = Vector3(5, 6, 7)
+        value.Forward = Vector3(8, 9, 10)
+        self.assertEqual(value.Right, Vector3(2, 3, 4))
+        self.assertEqual(value.Up, Vector3(-5, -6, -7))
+        self.assertEqual(value.Backward, Vector3(-8, -9, -10))
+
+        composed = Matrix.CreateScale(2, 3, 4) * Matrix.CreateRotationY(0.25) * Matrix.CreateTranslation(5, 6, 7)
+        inverse = Matrix.Invert(composed)
+        identity = composed * inverse
+        for actual, expected in zip(identity, Matrix.Identity):
+            self.assertAlmostEqual(actual, expected, places=5)
+        self.assertTrue(all(math.isnan(component) for component in Matrix.Invert(Matrix())))
+        succeeded, scale, rotation, translation = composed.Decompose()
+        self.assertTrue(succeeded)
+        self.assertEqual(scale, Vector3(2, 3, 4))
+        self.assertEqual(translation, Vector3(5, 6, 7))
+        self.assertEqual(Matrix.Transform(Matrix.Identity, rotation), Matrix.CreateFromQuaternion(rotation))
+        self.assertEqual(Matrix.Lerp(Matrix.Identity, Matrix.CreateScale(3), 0.5).M11, 2.0)
+        self.assertAlmostEqual(Matrix.CreateFromAxisAngle(Vector3.UnitY, 0.25).M11, Matrix.CreateRotationY(0.25).M11)
+        self.assertEqual(Matrix.CreateFromYawPitchRoll(0.25, 0, 0), Matrix.CreateRotationY(0.25))
+
+        infinite = Matrix.CreatePerspective(4, 3, 0.1, math.inf)
+        self.assertTrue(math.isnan(infinite.M33))
+        self.assertTrue(math.isnan(infinite.M43))
+        with self.assertRaises(ValueError):
+            Matrix.CreatePerspectiveFieldOfView(0, 1, 0.1, 100)
+        with self.assertRaises(ValueError):
+            Matrix.CreatePerspective(4, 3, 10, 5)
+
+        plane = Plane(Vector3.UnitY, -2)
+        reflected = Vector3.Transform(Vector3(1, 3, 4), Matrix.CreateReflection(plane))
+        self.assertEqual(reflected, Vector3(1, 1, 4))
+        shadow = Matrix.CreateShadow(Vector3.Down, Plane(Vector3.Up, 0))
+        self.assertEqual(Vector3.Transform(Vector3(2, 3, 4), shadow).Y, 0.0)
+
+    def test_transform_range_matches_xna_negative_edge_rules(self) -> None:
+        source = [Vector3.Zero]
+        destination = [Vector3.One]
+        self.assertIsNone(Vector3.Transform(source, 0, Matrix.Identity, destination, 0, -1))
+        self.assertEqual(destination, [Vector3.One])
+        with self.assertRaises(IndexError):
+            Vector3.Transform(source, -1, Matrix.Identity, destination, 0, 1)
 
 
 class IntegralAndColorTests(unittest.TestCase):

@@ -169,3 +169,28 @@ class CNA_GamePadState(c.Structure):
         ("packet_number", c.c_int32), ("pressed_buttons", c.c_uint32),
         ("reserved1", c.c_uint32), ("analog", CNA_GamePadAnalogState),
     ]
+
+
+class CNA_GamePadCapabilities(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("gamepad_type", c.c_uint32), ("is_connected", c.c_uint8),
+        ("has_a_button", c.c_uint8), ("has_b_button", c.c_uint8),
+        ("has_x_button", c.c_uint8), ("has_y_button", c.c_uint8),
+        ("has_back_button", c.c_uint8), ("has_start_button", c.c_uint8),
+        ("has_big_button", c.c_uint8), ("has_dpad_up_button", c.c_uint8),
+        ("has_dpad_down_button", c.c_uint8), ("has_dpad_left_button", c.c_uint8),
+        ("has_dpad_right_button", c.c_uint8), ("has_left_shoulder_button", c.c_uint8),
+        ("has_right_shoulder_button", c.c_uint8), ("has_left_stick_button", c.c_uint8),
+        ("has_right_stick_button", c.c_uint8), ("has_left_x_thumb_stick", c.c_uint8),
+        ("has_left_y_thumb_stick", c.c_uint8), ("has_right_x_thumb_stick", c.c_uint8),
+        ("has_right_y_thumb_stick", c.c_uint8), ("has_left_trigger", c.c_uint8),
+        ("has_right_trigger", c.c_uint8), ("has_left_vibration_motor", c.c_uint8),
+        ("has_right_vibration_motor", c.c_uint8), ("has_voice_support", c.c_uint8),
+        ("has_light_bar_ext", c.c_uint8), ("has_trigger_vibration_motors_ext", c.c_uint8),
+        ("has_misc1_ext", c.c_uint8), ("has_paddle1_ext", c.c_uint8),
+        ("has_paddle2_ext", c.c_uint8), ("has_paddle3_ext", c.c_uint8),
+        ("has_paddle4_ext", c.c_uint8), ("has_touchpad_ext", c.c_uint8),
+        ("has_gyro_ext", c.c_uint8), ("has_accelerometer_ext", c.c_uint8),
+        ("reserved", c.c_uint8 * 1),
+    ]

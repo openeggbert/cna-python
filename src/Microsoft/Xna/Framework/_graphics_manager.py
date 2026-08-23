@@ -5,6 +5,7 @@ from __future__ import annotations
 import ctypes as c
 
 from _cna_native.loader import get_library
+from _cna_native.errors import NativeCapabilityError
 
 from ._game import DisplayOrientation
 from ._language import Event
@@ -121,7 +122,30 @@ class GraphicsDeviceManager:
                       "cna_graphics_device_manager_toggle_full_screen")
         self._values["IsFullScreen"] = not self._values["IsFullScreen"]
 
-    def Dispose(self) -> None:
+    def CreateDevice(self) -> None:
+        if self._disposed:
+            raise RuntimeError("GraphicsDeviceManager is disposed")
+        self._game._ensure_host()
+
+    def BeginDraw(self) -> bool:
+        if self._disposed:
+            raise RuntimeError("GraphicsDeviceManager is disposed")
+        raise NativeCapabilityError(
+            "GraphicsDeviceManager.BeginDraw", 6, None,
+            "CNA ABI 0.7 owns BeginDraw inside the native Game lifecycle",
+        )
+
+    def EndDraw(self) -> None:
+        if self._disposed:
+            raise RuntimeError("GraphicsDeviceManager is disposed")
+        raise NativeCapabilityError(
+            "GraphicsDeviceManager.EndDraw", 6, None,
+            "CNA ABI 0.7 owns EndDraw inside the native Game lifecycle",
+        )
+
+    def Dispose(self, *args: object) -> None:
+        if len(args) > 1 or (args and type(args[0]) is not bool):
+            raise TypeError("Dispose expects no arguments or a bool disposing value")
         if self._disposed:
             return
         if self._handle:
@@ -132,3 +156,14 @@ class GraphicsDeviceManager:
         self._graphics_device._disposed = True
         self._disposed = True
         self.Disposed(self, None)
+
+    def __enter__(self) -> "GraphicsDeviceManager":
+        if self._disposed:
+            raise RuntimeError("GraphicsDeviceManager is disposed")
+        return self
+
+    def __exit__(self, exc_type, exc, traceback) -> None:
+        self.Dispose()
+
+
+GraphicsDeviceManager.__xna_arities__ = {"Dispose": {0, 1}}
