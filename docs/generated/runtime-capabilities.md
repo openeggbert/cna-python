@@ -26,7 +26,7 @@ Qualified boundary: CNA C ABI 0.7.0; Linux x86-64 HEADLESS, NULL audio.
 | DrawUserPrimitives/DrawUserIndexedPrimitives | BACKEND_BLOCKED | graphics_device.h user-array routes | Only explicit built-in vertex codecs and deterministic contiguous bytes are accepted. |
 | RenderTarget2D create/bind/query | VERIFIED_NATIVE | render_target.h and native foundation/stress | Command-path and lifetime verified under HEADLESS. |
 | RenderTarget visible output | HARDWARE_PENDING | HEADLESS renderer_available=false | No visual correctness claim is made from command-path evidence. |
-| RenderTargetCube | UNIMPLEMENTED_CNA_PYTHON | ABI route exists; TextureCube family deferred | The selected milestone completes the 2D render-target foundation only. |
+| RenderTargetCube | UNIMPLEMENTED_CNA_PYTHON | deliberately outside the Effect/Model dependency closure | TextureCube is implemented, but the unrelated RenderTargetCube public type remains deferred. |
 | GraphicsDevice.Present() | VERIFIED_NATIVE | cna_graphics_device_present and 60/600-frame consumers | HEADLESS command completion is not visible presentation evidence. |
 | GraphicsDevice.Present(rectangles, window) | UPSTREAM_CNA_BLOCKED | No ABI 0.7 route | Raises NativeCapabilityError after strict argument validation. |
 | GraphicsDevice.Reset events | VERIFIED_NATIVE | cna_graphics_device_reset* and event subscriptions | Resetting and Reset are delivered by actual native transitions. |
@@ -40,3 +40,24 @@ Qualified boundary: CNA C ABI 0.7.0; Linux x86-64 HEADLESS, NULL audio.
 | ResourceContentManager | VERIFIED_MANAGED | Mapping/GetObject adapter and stream ownership tests | No public System.Resources support package is introduced. |
 | Content Load[T] caller type enforcement | LANGUAGE_MAPPING_LIMITATION | docs/xna-python-mapping.md generic-erasure rule | The root reader determines runtime shape; Python cannot recover erased caller T, while reader-declared target shape remains validated. |
 | ContentReader.ReadRawObject[T] without reader token | LANGUAGE_MAPPING_LIMITATION | tests.test_content.ContentTests | No assignment-context, caller-bytecode, asset-name, or locals inference; explicit-reader overloads are functional. |
+| Effect reflection ownership graph | VERIFIED_NATIVE | native identity integration and effect-model ownership stress | Effect is the sole owner; parameter, annotation, technique, pass, light, and collection handles are stable owned views retained by and invalidated with the Effect. |
+| Effect typed parameters | VERIFIED_NATIVE | cna_effect_parameter_get/set_value*, native codec integration | Boolean, Int32, Single, String, Vector2/3/4, Quaternion, Matrix/transpose, all selected arrays, and Texture2D/Cube identities use copied typed storage. |
+| Effect annotations | VERIFIED_NATIVE | cna_effect_annotation_get_value_* integration | Read-only scalar, string, vector, and matrix codecs use real annotation views and metadata validation. |
+| EffectPass.Apply | VERIFIED_NATIVE | cna_effect_pass_apply; stock and Model-XNB draw tests | A real native pass identity is applied repeatedly; applying after parent disposal is rejected. |
+| Compiled Effect creation route | VERIFIED_NATIVE | cna_effect_create_compiled with project-authored legal conformance FXB SHA-256 2e1fe1dd74d67f4395ae6db4451c1a19ee4478dfe7906f9d665a499e28d2a074 | The byte buffer reaches CNA with exact ownership rollback; route verification is distinct from backend acceptance. |
+| Compiled Effect execution on HEADLESS | BACKEND_BLOCKED | qualified ABI-0.7 artifact returns structured result 6 for legal FXB | HEADLESS does not advertise compiled effects; no shader or visible output is fabricated. |
+| BasicEffect | VERIFIED_NATIVE | cna_basic_effect_* property/create routes and cna_effect_pass_apply | Native state, directional lights, clone isolation, texture retention, and Apply are verified; visible pixels are not. |
+| AlphaTestEffect | VERIFIED_NATIVE | cna_alpha_test_effect_* and cna_effect_pass_apply | Native properties, texture retention, clone/disposal route, and Apply are verified. |
+| DualTextureEffect | VERIFIED_NATIVE | cna_dual_texture_effect_* and cna_effect_pass_apply | Both native texture slots, managed identity retention, state, and Apply are verified. |
+| EnvironmentMapEffect | VERIFIED_NATIVE | cna_environment_map_effect_* and cna_effect_pass_apply | Texture2D/TextureCube identities, lights/fog/matrices, state, and Apply are verified. |
+| SkinnedEffect | VERIFIED_NATIVE | cna_skinned_effect_* and cna_effect_pass_apply | Exact 1..72 bone-transform transfer, weights, lights/fog/matrices, state, and Apply are verified. |
+| EffectMaterial | VERIFIED_NATIVE | cna_effect_material_create | The material owns a distinct native Effect cloned from its source. |
+| Stock-effect visible GPU output | BACKEND_BLOCKED | qualified renderer is HEADLESS | Creation, state mutation, pass application, and command dispatch pass; visible shader output is not qualified. |
+| Texture3D | BACKEND_BLOCKED | cna_texture3d_create/get_info/set_data/get_data ABI audit and 20 safe failure cycles | The complete Color codec and validation reach the exact ABI; HEADLESS returns structured result 6 at creation. |
+| TextureCube creation and metadata | VERIFIED_NATIVE | cna_texturecube_create/get_info and repeated lifecycle tests | All six faces and mip/rectangle contracts are implemented over the canonical ABI. |
+| TextureCube Color transfer on HEADLESS | BACKEND_BLOCKED | cna_texturecube_set_data returns structured result 6 in 20 rollback cycles | No storage is emulated or relabeled; create/info/dispose remain verified native. |
+| Model graph | VERIFIED_MANAGED | Model collection/identity behavior and direct graph stress | Bones, hierarchy, meshes, parts, effects, tags, transform copies, and deterministic invalidation are verified. |
+| Model.Draw command path | VERIFIED_NATIVE | XNB Model -> buffers -> BasicEffect -> native pass -> cna_graphics_device_draw_indexed_primitives | The ordinary indexed route accepts the command under HEADLESS; no special Model renderer or visible-output claim exists. |
+| Model visible GPU output | BACKEND_BLOCKED | qualified renderer is HEADLESS | MODEL_DRAW_NATIVE_DISPATCH passes, but rendered pixels cannot be qualified. |
+| Model XNB | VERIFIED_NATIVE | legal synthetic Windows XNB v5 graph integration | Two bones, one mesh, two parts, shared native buffers/BasicEffect, tags, cache, Unload/reload, external reference, and rollback are verified. |
+| Compressed Model XNB | VERIFIED_NATIVE | same legal Model payload through existing managed LZX framing | The same reader table, reader, public graph, shared native resources, draw, cache, Unload/reload, and rollback paths are used. |

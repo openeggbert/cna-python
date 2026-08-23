@@ -93,6 +93,15 @@ class CNA_Vector4(c.Structure):
     _fields_ = [("x", c.c_float), ("y", c.c_float), ("z", c.c_float), ("w", c.c_float)]
 
 
+class CNA_Quaternion(c.Structure):
+    _fields_ = [("x", c.c_float), ("y", c.c_float), ("z", c.c_float), ("w", c.c_float)]
+
+
+class CNA_Matrix(c.Structure):
+    _fields_ = [(f"m{row}{column}", c.c_float)
+                for row in range(1, 5) for column in range(1, 5)]
+
+
 class CNA_Rectangle(c.Structure):
     _fields_ = [("x", c.c_int32), ("y", c.c_int32), ("width", c.c_int32), ("height", c.c_int32)]
 
@@ -413,6 +422,97 @@ class CNA_Texture2DDecodeInfo(c.Structure):
         ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
         ("width", c.c_uint32), ("height", c.c_uint32), ("zoom", c.c_uint8),
         ("reserved", c.c_uint8 * 7),
+    ]
+
+
+class CNA_Texture3DCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("width", c.c_uint32), ("height", c.c_uint32), ("depth", c.c_uint32),
+        ("mip_map", c.c_uint8), ("reserved0", c.c_uint8 * 3),
+        ("format", c.c_uint32), ("reserved1", c.c_uint32),
+    ]
+
+
+class CNA_Texture3DInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("width", c.c_uint32), ("height", c.c_uint32), ("depth", c.c_uint32),
+        ("level_count", c.c_uint32), ("format", c.c_uint32),
+        ("reserved", c.c_uint32),
+    ]
+
+
+class CNA_Texture3DTransfer(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("level", c.c_int32), ("left", c.c_int32), ("top", c.c_int32),
+        ("right", c.c_int32), ("bottom", c.c_int32), ("front", c.c_int32),
+        ("back", c.c_int32), ("reserved", c.c_uint32),
+        ("start_index", c.c_uint64), ("element_count", c.c_uint64),
+    ]
+
+
+class CNA_TextureCubeCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("size", c.c_uint32), ("mip_map", c.c_uint8),
+        ("reserved0", c.c_uint8 * 3), ("format", c.c_uint32),
+        ("reserved1", c.c_uint32),
+    ]
+
+
+class CNA_TextureCubeInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("size", c.c_uint32), ("level_count", c.c_uint32),
+        ("format", c.c_uint32), ("reserved", c.c_uint32),
+    ]
+
+
+class CNA_TextureCubeTransfer(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("face", c.c_uint32), ("level", c.c_int32),
+        ("has_rectangle", c.c_uint8), ("reserved0", c.c_uint8 * 3),
+        ("rectangle", CNA_Rectangle), ("reserved1", c.c_uint32),
+        ("start_index", c.c_uint64), ("element_count", c.c_uint64),
+    ]
+
+
+class CNA_EffectParameterCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("name", CNA_StringView), ("semantic", CNA_StringView),
+        ("row_count", c.c_int32), ("column_count", c.c_int32),
+        ("parameter_class", c.c_uint32), ("parameter_type", c.c_uint32),
+    ]
+
+
+class CNA_EffectParameterInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("row_count", c.c_int32), ("column_count", c.c_int32),
+        ("parameter_class", c.c_uint32), ("parameter_type", c.c_uint32),
+    ]
+
+
+class CNA_EffectAnnotationCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("name", CNA_StringView), ("semantic", CNA_StringView),
+        ("row_count", c.c_int32), ("column_count", c.c_int32),
+        ("parameter_class", c.c_uint32), ("parameter_type", c.c_uint32),
+        ("data", c.POINTER(c.c_float)), ("data_count", c.c_uint64),
+        ("cached_string", CNA_StringView),
+    ]
+
+
+class CNA_EffectAnnotationInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("row_count", c.c_int32), ("column_count", c.c_int32),
+        ("parameter_class", c.c_uint32), ("parameter_type", c.c_uint32),
     ]
 
 

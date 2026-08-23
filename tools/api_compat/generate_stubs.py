@@ -149,11 +149,17 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
         for name, members in interface_groups.items():
             if raw_member(target, name) is not None and members[0]["kind"] in {"constructor", "method"}:
                 lines.extend(render_callable(name, expected_callables(interface, name, members)))
-        if interface_name.startswith("System.Collections.Generic.IEnumerable`1[") and raw_member(target, "__iter__") is not None:
+            elif raw_member(target, name) is not None and members[0]["kind"] == "property":
+                sample = members[0]
+                annotation = mapped_type(sample["type"], return_position=True)
+                lines.extend(("    @property", f"    def {name}(self) -> {annotation}: ..."))
+                if sample.get("set"):
+                    lines.extend((f"    @{name}.setter", f"    def {name}(self, value: {annotation}) -> None: ..."))
+        if interface_name.startswith(("System.Collections.Generic.IEnumerable`1[", "System.Collections.Generic.IEnumerator`1[")) and raw_member(target, "__iter__") is not None:
             argument = interface_name[interface_name.find("[") + 1:-1]
             lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
     for interface_name in expected.get("directInterfaces", ()):
-        if (interface_name.startswith("System.Collections.Generic.IEnumerable`1[")
+        if (interface_name.startswith(("System.Collections.Generic.IEnumerable`1[", "System.Collections.Generic.IEnumerator`1["))
                 and raw_member(target, "__iter__") is not None
                 and not any(line.lstrip().startswith("def __iter__") for line in lines)):
             argument = interface_name[interface_name.find("[") + 1:-1]

@@ -1,6 +1,6 @@
 # Missing XNA type inventory
 
-Missing types: **131**.
+Missing types: **96**.
 
 ## Microsoft.Xna.Framework
 
@@ -56,43 +56,8 @@ Missing types: **131**.
 
 ## Microsoft.Xna.Framework.Graphics
 
-- `AlphaTestEffect`
-- `BasicEffect`
-- `DirectionalLight`
-- `DualTextureEffect`
-- `Effect`
-- `EffectAnnotation`
-- `EffectAnnotationCollection`
-- `EffectMaterial`
-- `EffectParameter`
-- `EffectParameterClass`
-- `EffectParameterCollection`
-- `EffectParameterType`
-- `EffectPass`
-- `EffectPassCollection`
-- `EffectTechnique`
-- `EffectTechniqueCollection`
-- `EnvironmentMapEffect`
-- `IEffectFog`
-- `IEffectLights`
-- `IEffectMatrices`
-- `Model`
-- `ModelBone`
-- `ModelBoneCollection`
-- `ModelBoneCollection+Enumerator`
-- `ModelEffectCollection`
-- `ModelEffectCollection+Enumerator`
-- `ModelMesh`
-- `ModelMeshCollection`
-- `ModelMeshCollection+Enumerator`
-- `ModelMeshPart`
-- `ModelMeshPartCollection`
-- `ModelMeshPartCollection+Enumerator`
 - `OcclusionQuery`
 - `RenderTargetCube`
-- `SkinnedEffect`
-- `Texture3D`
-- `TextureCube`
 
 ## Microsoft.Xna.Framework.Graphics.PackedVector
 

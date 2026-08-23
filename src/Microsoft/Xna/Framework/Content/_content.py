@@ -552,6 +552,9 @@ class ContentReader(_BinaryReader):
         for index, resource in enumerate(resources):
             for fixup in tuple(self._shared_fixups[index]):
                 fixup(resource)
+        complete = getattr(root, "_content_fixups_complete", None)
+        if callable(complete):
+            complete()
         return root
 
 
@@ -723,6 +726,9 @@ class ContentManager:
 
     def Unload(self) -> None:
         self._ensure_open()
+        for disposable in tuple(self._disposable_assets):
+            prepare=getattr(disposable,"_content_before_unload",None)
+            if callable(prepare):prepare()
         disposables = tuple(reversed(self._disposable_assets))
         self._loaded_assets.clear()
         self._disposable_assets.clear()

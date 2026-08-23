@@ -30,12 +30,11 @@ metadata, templates, and wheel contents. The wheel contains no native library.
 
 `_cna_native.loader.FUNCTION_MANIFEST` is the exact selected import manifest.
 Every entry supplies `restype` and `argtypes`, including pointer depth and
-fixed-width signedness. Foundation Milestone 3 expands the selected imports
-only for implemented Game/window events, adapters and presentation parameters,
-graphics states and collections, resource events and names, texture encoders,
-vertex declarations and vertex/index buffers, device bindings and draw routes,
-render targets, Reset/Present/lifecycle events, SpriteFont metrics, and the two
-canonical title-location/title-read routes used by Content. This is
+fixed-width signedness. In addition to the established Game, 2D graphics, input,
+SpriteFont, buffer, and title routes, Foundation Milestone 5 imports only the
+used Effect ownership/reflection/typed-value, stock-effect, DirectionalLight,
+Texture3D, and TextureCube routes. Model deliberately uses ordinary existing
+buffer/effect/indexed-draw calls rather than a special native renderer. This is
 not a claim that all CNA exports are bound.
 
 The ABI probe compares `sizeof`, `_Alignof`, and every field offset for each
@@ -43,10 +42,10 @@ ctypes structure used. ELF verification compares every imported symbol against
 the qualified artifact. Exact regenerated measurements are:
 
 ```text
-BOUND_FUNCTIONS=188
-CTYPES_SIGNATURE_MEASUREMENTS=188
-C_LAYOUT_MEASUREMENTS=526
-CTYPES_LAYOUT_MEASUREMENTS=526
+BOUND_FUNCTIONS=375
+CTYPES_SIGNATURE_MEASUREMENTS=375
+C_LAYOUT_MEASUREMENTS=653
+CTYPES_LAYOUT_MEASUREMENTS=653
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
@@ -67,4 +66,5 @@ The machine-readable classification is `docs/runtime-capabilities.json`; its
 generated rendering documents HEADLESS limits, missing non-default Present,
 identityless resource events, the split dynamic-vertex offset/options routes,
 verified managed/native Content/XNB routes, erased-generic limitations, and the
-deferred TextureCube/RenderTargetCube family.
+separate Effect/Model command paths, Texture3D/Cube HEADLESS boundaries, and
+the still-deferred unrelated RenderTargetCube family.

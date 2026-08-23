@@ -22,16 +22,23 @@ rollback ownership, native Texture2D/SpriteFont/buffer graphs, and persistent
 multi-frame LZX decompression. See
 [`docs/content-xnb.md`](docs/content-xnb.md).
 
+Foundation Milestone 5 adds the complete Effect/stock-effect/Model dependency
+closure: real native reflection identities and typed parameter/annotation
+codecs, five native stock effects, Texture3D/TextureCube ABI routes, and legal
+uncompressed plus LZX-compressed Model XNB graphs over shared buffers and
+BasicEffect. Model.Draw uses the ordinary pass and indexed-draw pipeline. See
+[`docs/effect-model-evidence.md`](docs/effect-model-evidence.md).
+
 The maintained sibling starter completes 60- and 600-frame installed-wheel
 runs with both a raw PNG and a legal synthetic Texture2D XNB.
 
-This is not a complete XNA binding. The strict verifier exposes 126 of 257
+This is not a complete XNA binding. The strict verifier exposes 161 of 257
 reference types, all locally zero-diagnostic. Its full check intentionally
-remains red for 131 wholly missing future types; missing members and partial
+remains red for 96 wholly missing future types; missing members and partial
 types are zero. Every structural mismatch, native leak, allowlist, and
-unmeasured-category counter is zero. Effects/models, audio, media, storage,
-touch, Texture3D/Cube, and broad 3D content remain future dependency-complete
-milestones. No native library is bundled in the wheel.
+unmeasured-category counter is zero. Audio, media, storage, touch, PackedVector,
+Curve, Design, and unrelated Graphics families remain future
+dependency-complete milestones. No native library is bundled in the wheel.
 
 ## Running
 
@@ -51,7 +58,7 @@ API is imported.
 
 | Platform/backend | Evidence |
 | --- | --- |
-| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Content/native resource graphs, ownership stress, and raw-PNG plus XNB 60/600 frames verified |
+| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/stock-effect state and Apply, Model XNB/draw command paths, ownership stress, and raw-PNG plus XNB 60/600 frames verified |
 | Linux windowed/GPU renderer | Not yet verified |
 | Windows | Not yet verified |
 | macOS | Not yet verified |

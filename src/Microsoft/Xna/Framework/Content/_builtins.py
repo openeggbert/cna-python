@@ -244,11 +244,9 @@ class _VertexBufferReader(ContentTypeReader):
 
         if existingInstance is not None:
             raise ValueError("VertexBufferReader cannot deserialize into an existing buffer")
-        declaration_reader = input._reader_manager._get_identity_reader(
-            _PREFIX + "VertexDeclarationReader"
-        )
-        if declaration_reader is None:
-            raise input._failure("VertexBufferReader requires VertexDeclarationReader in the table")
+        # XNA creates this raw-value reader internally; it need not occupy a slot
+        # in the serialized reader table.
+        declaration_reader = _VertexDeclarationReader()
         declaration = input.ReadRawObject(declaration_reader)
         vertex_count = input.ReadUInt32()
         if vertex_count == 0 or vertex_count > 100_000_000:
@@ -300,6 +298,108 @@ class _IndexBufferReader(ContentTypeReader):
             raise
 
 
+class _BasicEffectReader(ContentTypeReader):
+    def __init__(self) -> None:
+        from ..Graphics import BasicEffect
+        super().__init__(BasicEffect)
+
+    def Read(self, input: ContentReader, existingInstance: object) -> object:
+        from ..Graphics import BasicEffect, Texture2D
+        if existingInstance is not None:
+            raise ValueError("BasicEffectReader cannot deserialize into an existing Effect")
+        effect=BasicEffect(input.ContentManager._graphics_device())
+        try:
+            texture=input.ReadExternalReference()
+            if texture is not None:
+                if not isinstance(texture,Texture2D):raise input._failure("BasicEffect external texture is not Texture2D")
+                effect.Texture=texture;effect.TextureEnabled=True
+            effect.DiffuseColor=input.ReadVector3();effect.EmissiveColor=input.ReadVector3()
+            effect.SpecularColor=input.ReadVector3();effect.SpecularPower=input.ReadSingle()
+            effect.Alpha=input.ReadSingle();effect.VertexColorEnabled=input.ReadBoolean()
+            return effect
+        except BaseException:
+            effect.Dispose();raise
+
+
+def _read_bone_reference(input: ContentReader, bone_count: int, context: str) -> int:
+    identity=input.ReadByte() if bone_count<255 else input.ReadUInt32()
+    if identity==0:return -1
+    index=identity-1
+    if index<0 or index>=bone_count:raise input._failure(f"{context} bone index {index} is outside {bone_count} bones")
+    return index
+
+
+class _ModelReader(ContentTypeReader):
+    def __init__(self) -> None:
+        from ..Graphics import Model
+        super().__init__(Model)
+
+    def Read(self, input: ContentReader, existingInstance: object) -> object:
+        from ..Graphics import (Effect, IndexBuffer, Model, ModelBone, ModelMesh,
+                                ModelMeshPart, VertexBuffer)
+        from .._intersections import BoundingSphere
+        if existingInstance is not None:raise ValueError("ModelReader cannot deserialize into an existing Model")
+        bone_count=input.ReadUInt32()
+        if bone_count>1_000_000:raise input._failure(f"implausible Model bone count {bone_count}")
+        bones=[]
+        for index in range(bone_count):
+            name=input.ReadObject()
+            if not isinstance(name,str):raise input._failure("Model bone name is not a String")
+            bones.append(ModelBone(name,index,input.ReadMatrix()))
+        encoded_parents=[];children=[];derived_parents=[-1]*bone_count
+        for parent_index in range(bone_count):
+            encoded_parents.append(_read_bone_reference(input,bone_count,"parent"))
+            child_count=input.ReadUInt32()
+            if child_count>bone_count:raise input._failure(f"bone {parent_index} has implausible child count {child_count}")
+            child_indices=[]
+            for _ in range(child_count):
+                child_index=_read_bone_reference(input,bone_count,"child")
+                if child_index<0:raise input._failure("a Model child reference cannot be null")
+                if child_index==parent_index:raise input._failure("a Model bone cannot be its own child")
+                if child_index in child_indices:raise input._failure("a Model bone child is duplicated")
+                if derived_parents[child_index]>=0:raise input._failure("a Model bone has more than one parent")
+                derived_parents[child_index]=parent_index;child_indices.append(child_index)
+            children.append(child_indices)
+        for index,(encoded,derived) in enumerate(zip(encoded_parents,derived_parents)):
+            if encoded!=derived:raise input._failure(f"bone {index} parent and child-list encodings disagree")
+        for parent_index,child_indices in enumerate(children):
+            for child_index in child_indices:bones[parent_index]._add_child(bones[child_index])
+        mesh_count=input.ReadInt32()
+        if mesh_count<0 or mesh_count>1_000_000:raise input._failure(f"invalid Model mesh count {mesh_count}")
+        meshes=[];device=input.ContentManager._graphics_device()
+        for _ in range(mesh_count):
+            name=input.ReadObject()
+            if not isinstance(name,str):raise input._failure("Model mesh name is not a String")
+            parent_index=_read_bone_reference(input,bone_count,"mesh parent")
+            center=input.ReadVector3();radius=input.ReadSingle()
+            try:sphere=BoundingSphere(center,radius)
+            except Exception as error:raise input._failure(f"invalid Model BoundingSphere: {error}") from error
+            tag=input.ReadObject();part_count=input.ReadInt32()
+            if part_count<0 or part_count>1_000_000:raise input._failure(f"invalid Model mesh-part count {part_count}")
+            parts=[]
+            for _ in range(part_count):
+                part=ModelMeshPart();part._offset=input.ReadInt32();part._num=input.ReadInt32();part._start=input.ReadInt32();part._primitive=input.ReadInt32();part._tag=input.ReadObject()
+                if min(part._offset,part._num,part._start,part._primitive)<0:raise input._failure("Model mesh-part ranges cannot be negative")
+                input.ReadSharedResource(lambda value,part=part:_assign_model_resource(input,part,"vertex",value,VertexBuffer))
+                input.ReadSharedResource(lambda value,part=part:_assign_model_resource(input,part,"index",value,IndexBuffer))
+                input.ReadSharedResource(lambda value,part=part:_assign_model_resource(input,part,"effect",value,Effect))
+                parts.append(part)
+            mesh=ModelMesh(name,None if parent_index<0 else bones[parent_index],parts,sphere=sphere);mesh._tag=tag;meshes.append(mesh)
+        root_index=_read_bone_reference(input,bone_count,"root");model_tag=input.ReadObject()
+        if bone_count==0:
+            if meshes or root_index>=0:raise input._failure("a Model with meshes or Root requires at least one bone")
+            root_index=0
+        elif root_index<0:raise input._failure("a Model with bones must have a Root")
+        return Model(bones,meshes,model_tag,root_index=root_index,graphics_device=device)
+
+
+def _assign_model_resource(input,part,kind,value,expected):
+    if not isinstance(value,expected):raise input._failure(f"Model shared {kind} resource is not {expected.__name__}")
+    if kind=="vertex":part._vertex_buffer=value
+    elif kind=="index":part._index_buffer=value
+    else:part._assign_effect(value,True)
+
+
 _SIMPLE_READERS: dict[str, tuple[type, Callable[[ContentReader], object]]] = {
     _PREFIX + "BooleanReader": (bool, lambda value: value.ReadBoolean()),
     _PREFIX + "ByteReader": (int, lambda value: value.ReadByte()),
@@ -339,6 +439,8 @@ _SPECIAL_READERS: dict[str, type[ContentTypeReader]] = {
     _PREFIX + "VertexDeclarationReader": _VertexDeclarationReader,
     _PREFIX + "VertexBufferReader": _VertexBufferReader,
     _PREFIX + "IndexBufferReader": _IndexBufferReader,
+    _PREFIX + "BasicEffectReader": _BasicEffectReader,
+    _PREFIX + "ModelReader": _ModelReader,
 }
 
 
@@ -389,4 +491,3 @@ def _create_builtin_reader(identity: str) -> ContentTypeReader | None:
     if kind == "NullableReader":
         return _NullableReader(element)
     return _CollectionReader(element, array=kind == "ArrayReader")
-

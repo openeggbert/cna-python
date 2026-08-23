@@ -20,7 +20,8 @@ from Microsoft.Xna.Framework import (  # noqa: E402
     Vector3, Vector4,
 )
 from Microsoft.Xna.Framework.Graphics import (  # noqa: E402
-    BlendState, DepthStencilState, PresentationParameters, RasterizerState,
+    BlendState, DepthStencilState, EffectParameterClass, EffectParameterType,
+    Model, ModelBone, ModelMesh, ModelMeshPart, PresentationParameters, RasterizerState,
     SamplerState, SurfaceFormat, VertexPositionColor,
     VertexPositionColorTexture, VertexPositionNormalTexture,
     VertexPositionTexture, Viewport,
@@ -138,6 +139,20 @@ def observe(operation: str, args: list[object]) -> object:
         return [int(blend.ColorSourceBlend),int(blend.ColorDestinationBlend),int(blend.ColorBlendFunction),depth.DepthBufferEnable,depth.DepthBufferWriteEnable,int(depth.DepthBufferFunction),int(raster.CullMode),int(raster.FillMode),raster.MultiSampleAntiAlias,int(sampler.Filter),sampler.MaxAnisotropy,sampler.MaxMipLevel]
     if operation == "Graphics.VertexStrides":
         return [VertexPositionColor.VertexDeclaration.VertexStride,VertexPositionColorTexture.VertexDeclaration.VertexStride,VertexPositionNormalTexture.VertexDeclaration.VertexStride,VertexPositionTexture.VertexDeclaration.VertexStride]
+    if operation == "Graphics.EffectEnumValues":
+        return [[int(value) for value in EffectParameterClass],[int(value) for value in EffectParameterType]]
+    if operation == "Model.CollectionIdentity":
+        root=ModelBone("Root",0);child=ModelBone("Child",1);root._add_child(child)
+        parts=[ModelMeshPart(),ModelMeshPart()];mesh=ModelMesh("Mesh",child,parts);model=Model([root,child],[mesh])
+        found,bone=model.Bones.TryGetValue("Child");missing,missing_bone=model.Bones.TryGetValue("Missing")
+        return [model.Bones.Count,model.Meshes.Count,model.Root.Name,child.Parent is root,
+                root.Children[0] is child,model.Meshes["Mesh"] is mesh,mesh.MeshParts.Count,
+                mesh.MeshParts[0] is parts[0],found,bone.Name,missing,missing_bone is None]
+    if operation == "Model.BoneTransformCopies":
+        root=ModelBone("Root",0,Matrix.CreateTranslation(1,0,0));child=ModelBone("Child",1,Matrix.CreateTranslation(2,0,0));root._add_child(child);model=Model([root,child],[])
+        absolute=[Matrix.Identity,Matrix.Identity];local=[Matrix.Identity,Matrix.Identity]
+        model.CopyAbsoluteBoneTransformsTo(absolute);model.CopyBoneTransformsTo(local);local[1].M41=99
+        return [absolute[0].M41,absolute[1].M41,child.Transform.M41,local[1].M41]
     if operation == "Golden.Vector2NormalizeZero": return hex_values(Vector2.Normalize(Vector2.Zero))
     if operation == "Golden.Vector3NormalizeZero": return hex_values(Vector3.Normalize(Vector3.Zero))
     if operation == "Golden.Vector4NormalizeZero": return hex_values(Vector4.Normalize(Vector4.Zero))

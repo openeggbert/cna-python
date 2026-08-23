@@ -54,7 +54,8 @@ class MappingTests(unittest.TestCase):
     def test_invented_scaffold_members_are_absent(self) -> None:
         self.assertFalse(hasattr(SpriteBatch, "DrawRect"))
         from Microsoft.Xna.Framework import Graphics
-        self.assertFalse(hasattr(Graphics, "BasicEffect"))
+        self.assertTrue(hasattr(Graphics, "BasicEffect"))
+        self.assertTrue(hasattr(Graphics.BasicEffect, "OnApply"))
 
 
 if __name__ == "__main__":

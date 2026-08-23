@@ -695,6 +695,8 @@ def compare_interface_contract(identity: str, expected: dict[str, Any], target: 
             required = ("GetService",)
         elif base.startswith("System.Collections.Generic.IEnumerable`1"):
             required = ("GetEnumerator", "__iter__")
+        elif base.startswith("System.Collections.Generic.IEnumerator`1"):
+            required = ("Current", "MoveNext", "Dispose", "__iter__")
         elif base == "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1":
             required = ("PackedValue",)
         elif base == "Microsoft.Xna.Framework.Graphics.IGraphicsResource":

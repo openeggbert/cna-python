@@ -19,7 +19,11 @@
   "constructor": "__init__",
   "indexer": "__getitem__",
   "typeNames": {
-    "Microsoft.Xna.Framework.Content.ContentTypeReader`1": "ContentTypeReaderOfT"
+    "Microsoft.Xna.Framework.Content.ContentTypeReader`1": "ContentTypeReaderOfT",
+    "Microsoft.Xna.Framework.Graphics.ModelBoneCollection+Enumerator": "ModelBoneCollectionEnumerator",
+    "Microsoft.Xna.Framework.Graphics.ModelEffectCollection+Enumerator": "ModelEffectCollectionEnumerator",
+    "Microsoft.Xna.Framework.Graphics.ModelMeshCollection+Enumerator": "ModelMeshCollectionEnumerator",
+    "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator": "ModelMeshPartCollectionEnumerator"
   },
   "typeMappings": {
     "System.Resources.ResourceManager": "object"

@@ -36,6 +36,15 @@ from ._vertices import (
     VertexPositionTexture,
 )
 from ._render_targets import RenderTarget2D, RenderTargetBinding
+from ._effects import (AlphaTestEffect, BasicEffect, DirectionalLight, DualTextureEffect,
+    Effect, EffectAnnotation, EffectAnnotationCollection, EffectMaterial, EffectParameter,
+    EffectParameterClass, EffectParameterCollection, EffectParameterType, EffectPass,
+    EffectPassCollection, EffectTechnique, EffectTechniqueCollection, EnvironmentMapEffect,
+    IEffectFog, IEffectLights, IEffectMatrices, SkinnedEffect)
+from ._model import (Model, ModelBone, ModelBoneCollection, ModelEffectCollection, ModelMesh,
+    ModelMeshCollection, ModelMeshPart, ModelMeshPartCollection, ModelBoneCollectionEnumerator,
+    ModelEffectCollectionEnumerator, ModelMeshCollectionEnumerator, ModelMeshPartCollectionEnumerator)
+from ._texture_volume import Texture3D, TextureCube
 
 __all__ = [
     "Blend", "BlendFunction", "BlendState", "BufferUsage", "ClearOptions", "ColorWriteChannels",
@@ -59,6 +68,15 @@ __all__ = [
     "VertexPositionColor", "VertexPositionColorTexture", "VertexPositionNormalTexture",
     "VertexPositionTexture",
     "Texture2D",
+    "Texture3D", "TextureCube", "Effect", "EffectAnnotation", "EffectAnnotationCollection",
+    "EffectMaterial", "EffectParameter", "EffectParameterClass", "EffectParameterCollection",
+    "EffectParameterType", "EffectPass", "EffectPassCollection", "EffectTechnique",
+    "EffectTechniqueCollection", "AlphaTestEffect", "BasicEffect", "DirectionalLight",
+    "DualTextureEffect", "EnvironmentMapEffect", "SkinnedEffect", "IEffectFog", "IEffectLights",
+    "IEffectMatrices", "Model", "ModelBone", "ModelBoneCollection", "ModelEffectCollection",
+    "ModelMesh", "ModelMeshCollection", "ModelMeshPart", "ModelMeshPartCollection",
+    "ModelBoneCollectionEnumerator", "ModelEffectCollectionEnumerator", "ModelMeshCollectionEnumerator",
+    "ModelMeshPartCollectionEnumerator",
     "Texture",
     "Viewport",
 ]

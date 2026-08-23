@@ -5,15 +5,17 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
+from unittest import mock
 
-from Microsoft.Xna.Framework import Color, Game, GraphicsDeviceManager, Vector2
-from Microsoft.Xna.Framework.Content import ResourceContentManager
+from Microsoft.Xna.Framework import Color, Game, GraphicsDeviceManager, Matrix, Vector2, Vector3
+from Microsoft.Xna.Framework.Content import ContentLoadException, ResourceContentManager
+from Microsoft.Xna.Framework.Content._content import _register_content_type_reader
 from Microsoft.Xna.Framework._title import _set_title_root_for_tests
 from Microsoft.Xna.Framework.Graphics import (
-    IndexBuffer, SpriteBatch, SpriteFont, Texture2D, VertexBuffer,
+    BasicEffect, IndexBuffer, Model, SpriteBatch, SpriteFont, Texture2D, VertexBuffer,
 )
 
-from .test_content import _compressed_xnb, _seven, _text, _xnb
+from .test_content import _compressed_xnb, _ExternalReader, _seven, _text, _xnb
 
 
 NATIVE = os.environ.get("CNA_NATIVE_LIBRARY")
@@ -85,6 +87,46 @@ def _index_xnb() -> bytes:
         [(PREFIX + "IndexBufferReader", 0)],
         _seven(1) + b"\x01" + struct.pack("<i", len(payload)) + payload,
     )
+
+
+def _model_xnb(*, root_reference: int = 1, parent_reference: int = 0,
+               child_reference: int = 2, vertex_reference: int = 1,
+               mesh_parent_reference: int = 2, index_reference: int = 2, effect_reference: int = 3,
+               truncate_vertex: bool = False, truncate_index: bool = False) -> bytes:
+    readers = [
+        (PREFIX + "ModelReader", 0),
+        (PREFIX + "StringReader", 0),
+        (PREFIX + "VertexBufferReader", 0),
+        (PREFIX + "IndexBufferReader", 0),
+        (PREFIX + "BasicEffectReader", 0),
+    ]
+    body=bytearray(_seven(1)+struct.pack("<I",2))
+    body.extend(_seven(2)+_text("Root")+struct.pack("<16f",*tuple(Matrix.Identity)))
+    child=Matrix.CreateTranslation(2,0,0)
+    body.extend(_seven(2)+_text("Child")+struct.pack("<16f",*tuple(child)))
+    body.extend(bytes((parent_reference,))+struct.pack("<I",1)+bytes((child_reference,)))
+    body.extend(b"\x01"+struct.pack("<I",0))
+    body.extend(struct.pack("<i",1)+_seven(2)+_text("Triangle")+bytes((mesh_parent_reference,)))
+    body.extend(struct.pack("<4f",0,0,0,2)+_seven(2)+_text("mesh-tag")+struct.pack("<i",2))
+    for part_index in range(2):
+        body.extend(struct.pack("<4i",0,3,0,1)+_seven(2)+_text(f"part-{part_index}"))
+        body.extend(_seven(vertex_reference)+_seven(index_reference)+_seven(effect_reference))
+    body.extend(bytes((root_reference,))+_seven(2)+_text("model-tag"))
+    vertices=struct.pack("<ii",12,1)+struct.pack("<4i",0,2,0,0)+struct.pack("<I9f",3,0,0,0,1,0,0,0,1,0)
+    if truncate_vertex:vertices=vertices[:-1]
+    body.extend(_seven(3)+vertices)
+    indices=b"\x01"+struct.pack("<i",6)+struct.pack("<3H",0,1,2)
+    if truncate_index:indices=indices[:-1]
+    body.extend(_seven(4)+indices)
+    body.extend(_seven(5)+_text("")+struct.pack("<11f",1,1,1,0,0,0,1,1,1,16,1)+b"\x00")
+    return _xnb(readers,bytes(body),shared_count=3)
+
+
+def _compressed_model_xnb() -> bytes:
+    # The complete legal graph is only 654 payload bytes, so one frame is the
+    # canonical compact representation. Persistent two-frame state is covered
+    # separately with a full 0x8000-byte first frame in test_content.
+    return _compressed_xnb(_model_xnb())
 
 
 @unittest.skipUnless(NATIVE and Path(NATIVE).is_file(), "CNA_NATIVE_LIBRARY is not configured")
@@ -184,6 +226,81 @@ class NativeContentTests(unittest.TestCase):
             self.assertTrue(font._native.IsDisposed)
             self.assertTrue(vertices.IsDisposed)
             self.assertTrue(indices.IsDisposed)
+
+    def test_model_xnb_uncompressed_compressed_shared_identity_draw_and_reload(self) -> None:
+        testcase=self;external_identity="CnaPython.ModelExternalReader"
+        assets={"model":_model_xnb(),"compressed/model":_compressed_model_xnb(),
+                "external/root":_xnb([(external_identity,0)],_seven(1)+_text("../compressed/model"))}
+        class Probe(Game):
+            def __init__(self):
+                super().__init__();self.manager=GraphicsDeviceManager(self);self.Content=ResourceContentManager(self.Services,assets);self.done=False
+            def _verify(self,name):
+                model=self.Content.Load(name);testcase.assertIsInstance(model,Model);testcase.assertIs(model,self.Content.Load(name))
+                testcase.assertEqual((model.Bones.Count,model.Meshes.Count),(2,1));testcase.assertEqual(model.Root.Name,"Root")
+                testcase.assertIs(model.Bones[1].Parent,model.Bones[0]);testcase.assertIs(model.Bones[0].Children[0],model.Bones[1])
+                mesh=model.Meshes["Triangle"];testcase.assertIs(mesh.ParentBone,model.Bones[1]);testcase.assertEqual(mesh.Tag,"mesh-tag")
+                testcase.assertEqual((mesh.BoundingSphere.Center,mesh.BoundingSphere.Radius),(Vector3.Zero,2.0));testcase.assertEqual(mesh.MeshParts.Count,2)
+                first,second=mesh.MeshParts[0],mesh.MeshParts[1];testcase.assertEqual((first.Tag,second.Tag),("part-0","part-1"))
+                testcase.assertIs(first.VertexBuffer,second.VertexBuffer);testcase.assertIs(first.IndexBuffer,second.IndexBuffer);testcase.assertIs(first.Effect,second.Effect)
+                testcase.assertIsInstance(first.Effect,BasicEffect);testcase.assertEqual(mesh.Effects.Count,1);testcase.assertIs(mesh.Effects[0],first.Effect)
+                model.Draw(Matrix.Identity,Matrix.Identity,Matrix.Identity)
+                return model,model.Root,mesh,first,first.Effect.CurrentTechnique.Passes[0]
+            def LoadContent(self):
+                old=[]
+                for name in ("model","compressed/model"):old.append(self._verify(name))
+                external=self.Content.Load("external/root");testcase.assertIs(external.shared,self.Content.Load("compressed/model"))
+                self.Content.Unload()
+                for model,bone,mesh,part,effect_pass in old:
+                    with testcase.assertRaises(RuntimeError):_ = model.Root
+                    with testcase.assertRaises(RuntimeError):_ = bone.Name
+                    with testcase.assertRaises(RuntimeError):_ = mesh.Name
+                    with testcase.assertRaises(RuntimeError):_ = part.Effect
+                    with testcase.assertRaises(RuntimeError):effect_pass.Apply()
+                reloaded=self._verify("model")[0];testcase.assertIsNot(reloaded,old[0][0]);self.done=True;self.Exit()
+        unregister=_register_content_type_reader(external_identity,_ExternalReader)
+        try:
+            game=Probe();game.Run();game.Dispose();self.assertTrue(game.done)
+        finally:unregister()
+
+    def test_model_xnb_malformed_graphs_roll_back_and_allow_later_success(self) -> None:
+        testcase=self
+        malformed={
+            "bad-root":_model_xnb(root_reference=3),
+            "bad-parent":_model_xnb(parent_reference=2),
+            "bad-child":_model_xnb(child_reference=3),
+            "bad-mesh-parent":_model_xnb(mesh_parent_reference=3),
+            "bad-buffer-ref":_model_xnb(vertex_reference=4),
+            "missing-effect":_model_xnb(effect_reference=0),
+            "wrong-effect":_model_xnb(effect_reference=1),
+            "truncated-vertex":_model_xnb(truncate_vertex=True),
+            "truncated-index":_model_xnb(truncate_index=True),
+        }
+        assets={**malformed,"valid":_model_xnb()}
+        class Probe(Game):
+            def __init__(self):
+                super().__init__();self.manager=GraphicsDeviceManager(self);self.Content=ResourceContentManager(self.Services,assets);self.done=False
+            def LoadContent(self):
+                for name in malformed:
+                    with testcase.assertRaises(ContentLoadException):self.Content.Load(name)
+                model=self.Content.Load("valid");testcase.assertEqual(model.Meshes.Count,1);model.Draw(Matrix.Identity,Matrix.Identity,Matrix.Identity)
+                self.done=True;self.Exit()
+        game=Probe();game.Run();game.Dispose();self.assertTrue(game.done)
+
+    def test_model_xnb_native_construction_failures_release_partial_graph(self) -> None:
+        testcase=self;assets={"buffer-failure":_model_xnb(),"effect-failure":_model_xnb(),"valid":_model_xnb()}
+        class Probe(Game):
+            def __init__(self):
+                super().__init__();self.manager=GraphicsDeviceManager(self);self.Content=ResourceContentManager(self.Services,assets);self.done=False
+            def LoadContent(self):
+                with mock.patch.object(VertexBuffer,"_set_raw_bytes",autospec=True,side_effect=RuntimeError("injected buffer failure")):
+                    with testcase.assertRaises(ContentLoadException):self.Content.Load("buffer-failure")
+                testcase.assertNotIn("buffer-failure",self.Content._loaded_assets)
+                with mock.patch.object(BasicEffect,"__init__",autospec=True,side_effect=RuntimeError("injected Effect failure")):
+                    with testcase.assertRaises(ContentLoadException):self.Content.Load("effect-failure")
+                testcase.assertNotIn("effect-failure",self.Content._loaded_assets)
+                model=self.Content.Load("valid");model.Draw(Matrix.Identity,Matrix.Identity,Matrix.Identity)
+                self.done=True;self.Exit()
+        game=Probe();game.Run();game.Dispose();self.assertTrue(game.done)
 
 
 if __name__ == "__main__":

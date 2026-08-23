@@ -1,8 +1,8 @@
 # CNA-Python implementation plan
 
-Status: Foundation Milestone 4 complete: general-purpose Content/XNB, title
-storage, shared/external object graphs, native resources, and managed LZX over
-the exact CNA C ABI 0.7 runtime.
+Status: Foundation Milestone 5 complete: implementation, native, Content/XNB,
+structural, behavior, ABI, ownership, package, isolated exact-wheel, and
+maintained/generated 60/600-frame gates are green.
 
 Date: 2026-08-23.
 
@@ -36,8 +36,8 @@ asset-name special case is an acceptable way to make it green.
   normalized external references, circularity rejection, cache identity,
   failed-load rollback, reverse Unload, and idempotent Dispose.
 - [x] Implement private primitive/value, collection, nullable, Texture2D,
-  SpriteFont, VertexDeclaration, VertexBuffer, and IndexBuffer readers. Effect
-  and Model readers remain absent until their public object graphs exist.
+  SpriteFont, VertexDeclaration, VertexBuffer, IndexBuffer, BasicEffect, and
+  Model readers over ordinary public/native resource construction.
 - [x] Implement XNA compressed-XNB framing and a persistent managed 64 KiB LZX
   decoder, including single/multi-frame, short/extended headers, exact output,
   malformed inputs, independent fixture comparison, and compressed native
@@ -53,36 +53,57 @@ asset-name special case is an acceptable way to make it green.
 
 - Reference/expected projection: 257/2,964 CLR types/members and 257/2,887
   mapped Python types/members.
-- Strict target: 126 types and 1,501 strict runtime members.
-- Diagnostics: 131 total, all whole missing types. Missing members and partial
+- Strict target: 161 types and 1,651 strict runtime members.
+- Diagnostics: 96 total, all whole missing types. Missing members and partial
   types are zero. Every mismatch, leak, allowlist, and unmeasured category is
   zero. The full strict check remains intentionally red only for future types.
-- Type status: 126 complete, 0 partial, 131 missing. Every public Content type
-  and TitleContainer has zero local diagnostics.
-- Native manifest: 188 exact ABI-0.7 functions, 188 signature measurements,
-  526 C and 526 ctypes layout measurements, zero missing symbols and zero ABI
+- Type status: 161 complete, 0 partial, 96 missing. Every selected Effect,
+  Model, Texture3D, and TextureCube type has zero local diagnostics.
+- Native manifest: 375 exact ABI-0.7 functions, 375 signature measurements,
+  653 C and 653 ctypes layout measurements, zero missing symbols and zero ABI
   mismatches.
-- Behavior evidence: 108 PURE_XNA_DERIVED observations, 465 assertions, zero
+- Behavior evidence: 111 PURE_XNA_DERIVED observations, 496 assertions, zero
   failures.
-- Runtime evidence: Linux x86-64, HEADLESS renderer, NULL audio. Content native
-  resources and 60/600-frame command paths are verified; no visible GPU,
-  physical input, OS window, allocator-sanitizer, or device-loss claim is
-  inferred from HEADLESS.
+- Runtime evidence: Linux x86-64, HEADLESS renderer, NULL audio. Effect state,
+  stock Apply, Model XNB and indexed dispatch, Content ownership, and 60/600
+  frame consumers are verified. No visible GPU, allocator-sanitizer, physical
+  input, OS window, or device-loss claim is inferred from HEADLESS.
 - Runtime capability details are sourced from `docs/runtime-capabilities.json`
   and rendered to `docs/generated/runtime-capabilities.md`.
 
+## Current Milestone 5 evidence
+
+- [x] Exact public Effect/Model dependency closure measured: 35 types,
+  including the four collection enumerator projections and Texture3D/Cube.
+- [x] Native ABI-0.7 Effect ownership/create/clone/apply/reflection routes
+  imported with explicit ctypes signatures; qualified artifact audit is green.
+- [x] Native stock-effect construction and effect apply are exercised against
+  HEADLESS, with parent disposal invalidation and repeated-cycle coverage.
+- [x] Model/Bone/Mesh/MeshPart graph and ordinary buffer/effect draw handoff
+  are projected with stable collection identity and matrix-copy behavior.
+- [x] Full selected typed EffectParameter getter/setter and read-only
+  EffectAnnotation codec surfaces use real native reflection identities.
+- [x] Texture3D/Cube exact ABI create/info/transfer/destruction routes are
+  audited; HEADLESS creation/storage result-6 boundaries are repeated safely.
+- [x] Dependency-complete uncompressed and compressed Model XNB readers use one
+  legal synthetic graph with shared real buffers/BasicEffect, cache,
+  Unload/reload, external-reference composition, rollback, and native draw.
+- [x] Dedicated 20-cycle Effect, clone, parameter, parent/child, stock-effect,
+  Model, compressed Model, draw, unload/reload, and volume-failure stress has
+  zero crashes, observed UAF, or double-free. Sanitizers were not run.
+- [x] Final package, isolated exact-wheel, and maintained/generated 60/600-frame
+  evidence is green; archive hashes and exact final-wheel results are recorded
+  in `NEXT.md` after the final reproducible build.
+
 ## Next dependency-complete architectural milestone
 
-The next coherent asset/runtime boundary is the Effect + Model graph: public
-Effect parameter/technique/pass types, stock effects, Model/Mesh/MeshPart, their
-graphics dependencies, and then their exact XNB readers. Content now provides
-the resolver and ownership extension points required for that graph, but no
-Effect or Model implementation was started here.
-
-Do not select the next work merely by smallest type count. Curve, touch,
-PackedVector, audio/media, storage, design, gamer services, Texture3D/Cube, and
-other families retain their own dependency-complete milestones. Windowed/GPU
-qualification is also independent runtime evidence, not structural API work.
+No follow-on family is started here. The next coherent boundary should be the
+Audio runtime/content graph: SoundEffect and instances, dynamic streaming,
+AudioEngine/WaveBank/SoundBank/Cue, microphone/capability boundaries, and
+FrameworkDispatcher only where authoritative dependencies require it. That
+choice is based on one ownership/playback/content architecture, not its type
+count; Media, Storage, Curve, Touch, PackedVector, Design, GamerServices,
+OcclusionQuery, and RenderTargetCube retain separate closures.
 
 ## Invariants
 
