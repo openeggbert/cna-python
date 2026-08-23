@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "profile": "XNA 4.0 Windows runtime",
+  "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
+  "category": "PURE_XNA_DERIVED",
+  "observations": [
+    {"id": "math.clamp.low", "operation": "MathHelper.Clamp", "args": [-2.0, 0.0, 1.0], "expected": 0.0},
+    {"id": "math.lerp", "operation": "MathHelper.Lerp", "args": [2.0, 10.0, 0.25], "expected": 4.0},
+    {"id": "vector2.add", "operation": "Vector2.Add", "args": [[1.25, -2.5], [3.5, 0.5]], "expected": [4.75, -2.0]},
+    {"id": "vector2.dot", "operation": "Vector2.Dot", "args": [[1.25, -2.5], [3.5, 0.5]], "expected": 3.125},
+    {"id": "vector2.normalize", "operation": "Vector2.Normalize", "args": [[3.0, 4.0]], "expected": [0.6000000238418579, 0.800000011920929]},
+    {"id": "vector2.zero.copy", "operation": "Vector2.ZeroFresh", "args": [], "expected": true},
+    {"id": "vector3.cross", "operation": "Vector3.Cross", "args": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]], "expected": [0.0, 0.0, 1.0]},
+    {"id": "quaternion.identity", "operation": "Quaternion.AxisAngleZero", "args": [], "expected": [0.0, 0.0, 0.0, 1.0]},
+    {"id": "matrix.translation", "operation": "Matrix.Translation", "args": [2.0, 3.0, 4.0], "expected": [2.0, 3.0, 4.0, 1.0]},
+    {"id": "matrix.multiply", "operation": "Matrix.MultiplyTranslations", "args": [], "expected": [5.0, 7.0, 9.0, 1.0]},
+    {"id": "color.clamp", "operation": "Color.Bytes", "args": [300, -2, 1, 999], "expected": [255, 0, 1, 255]},
+    {"id": "color.normalized.ties_even", "operation": "Color.Normalized", "args": [0.5, 0.5, 0.5, 0.5], "expected": [128, 128, 128, 128]},
+    {"id": "rectangle.contains.inclusive_min", "operation": "Rectangle.Contains", "args": [0, 0, 10, 20, 0, 0], "expected": true},
+    {"id": "rectangle.contains.exclusive_max", "operation": "Rectangle.Contains", "args": [0, 0, 10, 20, 10, 20], "expected": false},
+    {"id": "point.value_equality", "operation": "Point.Equal", "args": [4, -3, 4, -3], "expected": true},
+    {"id": "float32.signed_zero", "operation": "Float32.NegativeZero", "args": [], "expected": true}
+  ]
+}

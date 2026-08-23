@@ -1,40 +1,68 @@
 # CNA-Python
 
-> **Status: In progress - NOT YET FUNCTIONAL**
-
-
-CNA-Python exposes [CNA](https://github.com/openeggbert/cna) through Python
-packages matching XNA 4.0 namespaces.
+CNA-Python is a pre-alpha, measured Python projection of the XNA 4.0 API over
+the canonical CNA C ABI. It is no longer a simulated scaffold: the implemented
+game, graphics, texture, SpriteBatch, and input paths call a real exact ABI
+0.7.0 native runtime.
 
 ```text
 Python game
-    ↓
-Microsoft.Xna.Framework[.Graphics|.Input|.Content]
-    ↓
-_cna_native
-    ↓
-CNA stable C ABI
-    ↓
-CNA C++ Microsoft::Xna::Framework implementation
+    -> Microsoft.Xna.Framework.*
+    -> private _cna_native ctypes layer
+    -> CNA stable C ABI
+    -> CNA C++
 ```
 
-## Status
+The current dependency-complete vertical slice provides binary32-aware core
+values, deterministic events and disposal, a real `Game` lifecycle,
+`GraphicsDevice.Clear`, PNG/JPEG `Texture2D.FromStream`, Color texture transfer,
+scaled/rotated `SpriteBatch.Draw`, viewport access, and CNA-backed keyboard,
+mouse, and gamepad polling. The maintained sibling starter completes 60- and
+600-frame installed-wheel runs with a moving 128×128 PNG.
 
-**Early scaffold.** The compatibility package tree and first local values
-exist. Native execution waits for CNA's canonical C ABI.
+This is not a complete XNA binding. The strict verifier currently exposes 42 of
+257 reference types and intentionally fails its full check for missing surface.
+`ContentManager.Load` explicitly rejects XNB loads rather than fabricating an
+asset. Effects, 3D buffers/drawing, audio, media, storage, touch, and many other
+families remain future dependency-complete milestones. No native library is
+bundled in the wheel.
 
-```python
-from Microsoft.Xna.Framework import Color, Game, GameTime, Vector2
-from Microsoft.Xna.Framework.Graphics import *
+## Running
+
+Build or install `cna-python==0.1.0.dev0`, then select an exact CNA ABI 0.7.0
+library with an absolute path:
+
+```bash
+export CNA_NATIVE_LIBRARY=/absolute/path/to/libcna_c_api.so
+python3 -m unittest discover -v
 ```
 
-The underscore-prefixed `_cna_native` package is binding infrastructure, not
-application API. There is deliberately no `CNA.Framework` Python package;
-CNA-specific packages will be added only for real native `CNA::...` extensions.
+`CNA_NATIVE_DIR` may instead name an absolute directory containing the
+platform library name. Relative paths and ABI mismatches are rejected before
+the native API is imported.
 
-See [architecture](docs/architecture.md) and [plan](plan.md).
+## Measured platform status
+
+| Platform/backend | Evidence |
+| --- | --- |
+| Linux x86-64, HEADLESS renderer, NULL audio | Runtime verified for the selected 2D/input slice, ownership stress, and 60/600 frames |
+| Linux windowed/GPU renderer | Not yet verified |
+| Windows | Not yet verified |
+| macOS | Not yet verified |
+| Android / iOS | Not verified |
+| Web / Pyodide | Not supported by the current native-library architecture |
+
+HEADLESS input calls prove the CNA routes and state conversion, not the
+presence of physical devices. NULL audio is only an artifact qualification;
+this Python milestone binds no audio API.
+
+The normative language mapping is in
+[`docs/xna-python-mapping.md`](docs/xna-python-mapping.md), architecture and
+ownership in [`docs/architecture.md`](docs/architecture.md), ABI evidence in
+[`docs/cna-abi-audit.md`](docs/cna-abi-audit.md), and the tactical handoff in
+[`NEXT.md`](NEXT.md).
 
 ## License
 
 CNA-Python is licensed under the [Microsoft Public License](LICENSE), matching
-CNA.
+CNA. See [NOTICE.md](NOTICE.md).

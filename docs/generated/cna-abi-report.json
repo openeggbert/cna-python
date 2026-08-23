@@ -1,0 +1,968 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "BOUND_FUNCTIONS": 55,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 55,
+    "C_LAYOUT_MEASUREMENTS": 169,
+    "CTYPES_LAYOUT_MEASUREMENTS": 169,
+    "MISSING_SYMBOLS": 0,
+    "ABI_MISMATCHES": 0
+  },
+  "boundFunctions": [
+    "cna_get_abi_version",
+    "cna_error_get_last_info",
+    "cna_error_get_last_message_size",
+    "cna_error_copy_last_message",
+    "cna_game_create",
+    "cna_game_set_frame_hooks_ext",
+    "cna_game_run",
+    "cna_game_run_one_frame",
+    "cna_game_request_exit",
+    "cna_game_get_is_active",
+    "cna_game_get_is_mouse_visible",
+    "cna_game_set_is_mouse_visible",
+    "cna_game_get_is_fixed_time_step",
+    "cna_game_set_is_fixed_time_step",
+    "cna_game_get_target_elapsed_time_ticks",
+    "cna_game_set_target_elapsed_time_ticks",
+    "cna_game_get_inactive_sleep_time_ticks",
+    "cna_game_set_inactive_sleep_time_ticks",
+    "cna_game_destroy",
+    "cna_framework_dispatcher_update",
+    "cna_graphics_device_manager_create",
+    "cna_graphics_device_manager_set_graphics_profile",
+    "cna_graphics_device_manager_set_preferred_depth_stencil_format",
+    "cna_graphics_device_manager_set_preferred_back_buffer_format",
+    "cna_graphics_device_manager_set_preferred_back_buffer_width",
+    "cna_graphics_device_manager_set_preferred_back_buffer_height",
+    "cna_graphics_device_manager_set_is_full_screen",
+    "cna_graphics_device_manager_set_synchronize_with_vertical_retrace",
+    "cna_graphics_device_manager_set_prefer_multi_sampling",
+    "cna_graphics_device_manager_set_supported_orientations",
+    "cna_graphics_device_manager_apply_changes",
+    "cna_graphics_device_manager_toggle_full_screen",
+    "cna_graphics_device_manager_get_graphics_device",
+    "cna_graphics_device_manager_destroy",
+    "cna_game_get_graphics_device",
+    "cna_viewport_get_title_safe_area",
+    "cna_graphics_device_get_viewport",
+    "cna_graphics_device_set_viewport",
+    "cna_graphics_device_clear_rgba",
+    "cna_texture2d_create",
+    "cna_texture2d_create_from_encoded_memory",
+    "cna_texture2d_get_info",
+    "cna_texture2d_set_data",
+    "cna_texture2d_get_data",
+    "cna_texture2d_destroy",
+    "cna_sprite_batch_create",
+    "cna_sprite_batch_begin",
+    "cna_sprite_batch_submit_scaled_many",
+    "cna_sprite_batch_end",
+    "cna_sprite_batch_destroy",
+    "cna_keyboard_get_state",
+    "cna_keyboard_get_state_for_player",
+    "cna_mouse_get_state",
+    "cna_mouse_set_position",
+    "cna_gamepad_get_state_with_dead_zone"
+  ],
+  "functionManifest": [
+    {
+      "symbol": "cna_get_abi_version",
+      "return": "c_uint",
+      "parameters": [],
+      "arity": 0,
+      "ownership": "borrowed library"
+    },
+    {
+      "symbol": "cna_error_get_last_info",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ErrorInfo>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_error_get_last_message_size",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_error_copy_last_message",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GameCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned game"
+    },
+    {
+      "symbol": "cna_game_set_frame_hooks_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_GameFrameHooks>"
+      ],
+      "arity": 2,
+      "ownership": "copied callbacks"
+    },
+    {
+      "symbol": "cna_game_run",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_run_one_frame",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_request_exit",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_get_is_active",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_get_is_mouse_visible",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_set_is_mouse_visible",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_get_is_fixed_time_step",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_set_is_fixed_time_step",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_get_target_elapsed_time_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_set_target_elapsed_time_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_long"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_get_inactive_sleep_time_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_game_set_inactive_sleep_time_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_long"
+      ],
+      "arity": 2,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_game_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes game on release"
+    },
+    {
+      "symbol": "cna_framework_dispatcher_update",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_graphics_profile",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_preferred_depth_stencil_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_preferred_back_buffer_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_preferred_back_buffer_width",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_preferred_back_buffer_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_is_full_screen",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_synchronize_with_vertical_retrace",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_prefer_multi_sampling",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_set_supported_orientations",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_apply_changes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_toggle_full_screen",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed manager"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_get_graphics_device",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "callback-borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_manager_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes manager"
+    },
+    {
+      "symbol": "cna_game_get_graphics_device",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "callback-borrowed device"
+    },
+    {
+      "symbol": "cna_viewport_get_title_safe_area",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_Viewport",
+        "pointer<CNA_Rectangle>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_get_viewport",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Viewport>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_device_set_viewport",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_Viewport"
+      ],
+      "arity": 2,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_clear_rgba",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 5,
+      "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_texture2d_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Texture2DCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned texture"
+    },
+    {
+      "symbol": "cna_texture2d_create_from_encoded_memory",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<CNA_Texture2DDecodeInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned texture"
+    },
+    {
+      "symbol": "cna_texture2d_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Texture2DInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_texture2d_set_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<CNA_Texture2DTransfer>",
+        "c_void_p",
+        "c_ulong"
+      ],
+      "arity": 5,
+      "ownership": "copies elements"
+    },
+    {
+      "symbol": "cna_texture2d_get_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<CNA_Texture2DTransfer>",
+        "c_void_p",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_texture2d_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes texture"
+    },
+    {
+      "symbol": "cna_sprite_batch_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned sprite batch"
+    },
+    {
+      "symbol": "cna_sprite_batch_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpriteBatchBeginInfo>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed sprite batch"
+    },
+    {
+      "symbol": "cna_sprite_batch_submit_scaled_many",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpriteScaledCommand>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "copies commands"
+    },
+    {
+      "symbol": "cna_sprite_batch_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed sprite batch"
+    },
+    {
+      "symbol": "cna_sprite_batch_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes sprite batch"
+    },
+    {
+      "symbol": "cna_keyboard_get_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_KeyboardState>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_keyboard_get_state_for_player",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<CNA_KeyboardState>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_mouse_get_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_MouseState>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_mouse_set_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_gamepad_get_state_with_dead_zone",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint",
+        "pointer<CNA_GamePadState>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    }
+  ],
+  "missingSymbols": [],
+  "mismatches": [],
+  "c": {
+    "VALUE:CNA_ABI_VERSION": 1792,
+    "VALUE:POINTER_WIDTH": 8,
+    "VALUE:CNA_Bool": 1,
+    "VALUE:CNA_Result": 4,
+    "VALUE:CNA_Handle": 8,
+    "VALUE:CNA_FALSE": 0,
+    "VALUE:CNA_TRUE": 1,
+    "VALUE:CNA_GameLifecycleCallback": 8,
+    "VALUE:CNA_GameBeginDrawCallback": 8,
+    "SIZE:CNA_StringView": 16,
+    "ALIGN:CNA_StringView": 8,
+    "OFFSET:CNA_StringView:data": 0,
+    "OFFSET:CNA_StringView:byte_length": 8,
+    "SIZE:CNA_ErrorInfo": 24,
+    "ALIGN:CNA_ErrorInfo": 8,
+    "OFFSET:CNA_ErrorInfo:struct_size": 0,
+    "OFFSET:CNA_ErrorInfo:struct_version": 4,
+    "OFFSET:CNA_ErrorInfo:result": 8,
+    "OFFSET:CNA_ErrorInfo:category": 12,
+    "OFFSET:CNA_ErrorInfo:message_byte_length": 16,
+    "SIZE:CNA_GameTime": 24,
+    "ALIGN:CNA_GameTime": 8,
+    "OFFSET:CNA_GameTime:total_game_time_ticks": 0,
+    "OFFSET:CNA_GameTime:elapsed_game_time_ticks": 8,
+    "OFFSET:CNA_GameTime:is_running_slowly": 16,
+    "OFFSET:CNA_GameTime:reserved": 17,
+    "SIZE:CNA_CallbackError": 24,
+    "ALIGN:CNA_CallbackError": 8,
+    "OFFSET:CNA_CallbackError:struct_size": 0,
+    "OFFSET:CNA_CallbackError:struct_version": 4,
+    "OFFSET:CNA_CallbackError:message": 8,
+    "SIZE:CNA_GameCallbacks": 56,
+    "ALIGN:CNA_GameCallbacks": 8,
+    "OFFSET:CNA_GameCallbacks:struct_size": 0,
+    "OFFSET:CNA_GameCallbacks:struct_version": 4,
+    "OFFSET:CNA_GameCallbacks:load_content": 8,
+    "OFFSET:CNA_GameCallbacks:update": 16,
+    "OFFSET:CNA_GameCallbacks:draw": 24,
+    "OFFSET:CNA_GameCallbacks:unload_content": 32,
+    "OFFSET:CNA_GameCallbacks:exiting": 40,
+    "OFFSET:CNA_GameCallbacks:context": 48,
+    "SIZE:CNA_GameFrameHooks": 56,
+    "ALIGN:CNA_GameFrameHooks": 8,
+    "OFFSET:CNA_GameFrameHooks:struct_size": 0,
+    "OFFSET:CNA_GameFrameHooks:struct_version": 4,
+    "OFFSET:CNA_GameFrameHooks:initialize": 8,
+    "OFFSET:CNA_GameFrameHooks:begin_run": 16,
+    "OFFSET:CNA_GameFrameHooks:end_run": 24,
+    "OFFSET:CNA_GameFrameHooks:begin_draw": 32,
+    "OFFSET:CNA_GameFrameHooks:end_draw": 40,
+    "OFFSET:CNA_GameFrameHooks:context": 48,
+    "SIZE:CNA_GameCreateInfo": 48,
+    "ALIGN:CNA_GameCreateInfo": 8,
+    "OFFSET:CNA_GameCreateInfo:struct_size": 0,
+    "OFFSET:CNA_GameCreateInfo:struct_version": 4,
+    "OFFSET:CNA_GameCreateInfo:is_fixed_time_step": 8,
+    "OFFSET:CNA_GameCreateInfo:reserved": 9,
+    "OFFSET:CNA_GameCreateInfo:target_elapsed_time_ticks": 16,
+    "OFFSET:CNA_GameCreateInfo:window_title": 24,
+    "OFFSET:CNA_GameCreateInfo:callbacks": 40,
+    "SIZE:CNA_Color": 4,
+    "ALIGN:CNA_Color": 1,
+    "OFFSET:CNA_Color:r": 0,
+    "OFFSET:CNA_Color:g": 1,
+    "OFFSET:CNA_Color:b": 2,
+    "OFFSET:CNA_Color:a": 3,
+    "SIZE:CNA_Vector2": 8,
+    "ALIGN:CNA_Vector2": 4,
+    "OFFSET:CNA_Vector2:x": 0,
+    "OFFSET:CNA_Vector2:y": 4,
+    "SIZE:CNA_Rectangle": 16,
+    "ALIGN:CNA_Rectangle": 4,
+    "OFFSET:CNA_Rectangle:x": 0,
+    "OFFSET:CNA_Rectangle:y": 4,
+    "OFFSET:CNA_Rectangle:width": 8,
+    "OFFSET:CNA_Rectangle:height": 12,
+    "SIZE:CNA_Viewport": 24,
+    "ALIGN:CNA_Viewport": 4,
+    "OFFSET:CNA_Viewport:x": 0,
+    "OFFSET:CNA_Viewport:y": 4,
+    "OFFSET:CNA_Viewport:width": 8,
+    "OFFSET:CNA_Viewport:height": 12,
+    "OFFSET:CNA_Viewport:min_depth": 16,
+    "OFFSET:CNA_Viewport:max_depth": 20,
+    "SIZE:CNA_Texture2DInfo": 24,
+    "ALIGN:CNA_Texture2DInfo": 4,
+    "OFFSET:CNA_Texture2DInfo:struct_size": 0,
+    "OFFSET:CNA_Texture2DInfo:struct_version": 4,
+    "OFFSET:CNA_Texture2DInfo:width": 8,
+    "OFFSET:CNA_Texture2DInfo:height": 12,
+    "OFFSET:CNA_Texture2DInfo:level_count": 16,
+    "OFFSET:CNA_Texture2DInfo:format": 20,
+    "SIZE:CNA_Texture2DCreateInfo": 24,
+    "ALIGN:CNA_Texture2DCreateInfo": 4,
+    "OFFSET:CNA_Texture2DCreateInfo:struct_size": 0,
+    "OFFSET:CNA_Texture2DCreateInfo:struct_version": 4,
+    "OFFSET:CNA_Texture2DCreateInfo:width": 8,
+    "OFFSET:CNA_Texture2DCreateInfo:height": 12,
+    "OFFSET:CNA_Texture2DCreateInfo:mip_map": 16,
+    "OFFSET:CNA_Texture2DCreateInfo:reserved": 17,
+    "OFFSET:CNA_Texture2DCreateInfo:format": 20,
+    "SIZE:CNA_Texture2DTransfer": 48,
+    "ALIGN:CNA_Texture2DTransfer": 8,
+    "OFFSET:CNA_Texture2DTransfer:struct_size": 0,
+    "OFFSET:CNA_Texture2DTransfer:struct_version": 4,
+    "OFFSET:CNA_Texture2DTransfer:level": 8,
+    "OFFSET:CNA_Texture2DTransfer:has_rectangle": 12,
+    "OFFSET:CNA_Texture2DTransfer:reserved": 13,
+    "OFFSET:CNA_Texture2DTransfer:rectangle": 16,
+    "OFFSET:CNA_Texture2DTransfer:start_index": 32,
+    "OFFSET:CNA_Texture2DTransfer:element_count": 40,
+    "SIZE:CNA_Texture2DDecodeInfo": 24,
+    "ALIGN:CNA_Texture2DDecodeInfo": 4,
+    "OFFSET:CNA_Texture2DDecodeInfo:struct_size": 0,
+    "OFFSET:CNA_Texture2DDecodeInfo:struct_version": 4,
+    "OFFSET:CNA_Texture2DDecodeInfo:width": 8,
+    "OFFSET:CNA_Texture2DDecodeInfo:height": 12,
+    "OFFSET:CNA_Texture2DDecodeInfo:zoom": 16,
+    "OFFSET:CNA_Texture2DDecodeInfo:reserved": 17,
+    "SIZE:CNA_SpriteBatchBeginInfo": 16,
+    "ALIGN:CNA_SpriteBatchBeginInfo": 4,
+    "OFFSET:CNA_SpriteBatchBeginInfo:struct_size": 0,
+    "OFFSET:CNA_SpriteBatchBeginInfo:struct_version": 4,
+    "OFFSET:CNA_SpriteBatchBeginInfo:sort_mode": 8,
+    "OFFSET:CNA_SpriteBatchBeginInfo:reserved": 12,
+    "SIZE:CNA_SpriteScaledCommand": 72,
+    "ALIGN:CNA_SpriteScaledCommand": 8,
+    "OFFSET:CNA_SpriteScaledCommand:struct_size": 0,
+    "OFFSET:CNA_SpriteScaledCommand:struct_version": 4,
+    "OFFSET:CNA_SpriteScaledCommand:texture": 8,
+    "OFFSET:CNA_SpriteScaledCommand:position": 16,
+    "OFFSET:CNA_SpriteScaledCommand:source": 24,
+    "OFFSET:CNA_SpriteScaledCommand:color": 40,
+    "OFFSET:CNA_SpriteScaledCommand:rotation": 44,
+    "OFFSET:CNA_SpriteScaledCommand:origin": 48,
+    "OFFSET:CNA_SpriteScaledCommand:scale": 56,
+    "OFFSET:CNA_SpriteScaledCommand:effects": 64,
+    "OFFSET:CNA_SpriteScaledCommand:layer_depth": 68,
+    "SIZE:CNA_KeyboardState": 40,
+    "ALIGN:CNA_KeyboardState": 8,
+    "OFFSET:CNA_KeyboardState:struct_size": 0,
+    "OFFSET:CNA_KeyboardState:struct_version": 4,
+    "OFFSET:CNA_KeyboardState:pressed_key_words": 8,
+    "SIZE:CNA_MouseState": 32,
+    "ALIGN:CNA_MouseState": 4,
+    "OFFSET:CNA_MouseState:struct_size": 0,
+    "OFFSET:CNA_MouseState:struct_version": 4,
+    "OFFSET:CNA_MouseState:x": 8,
+    "OFFSET:CNA_MouseState:y": 12,
+    "OFFSET:CNA_MouseState:scroll_wheel": 16,
+    "OFFSET:CNA_MouseState:horizontal_scroll_wheel": 20,
+    "OFFSET:CNA_MouseState:pressed_buttons": 24,
+    "OFFSET:CNA_MouseState:reserved": 28,
+    "SIZE:CNA_GamePadAnalogState": 24,
+    "ALIGN:CNA_GamePadAnalogState": 4,
+    "OFFSET:CNA_GamePadAnalogState:left_thumb_stick": 0,
+    "OFFSET:CNA_GamePadAnalogState:right_thumb_stick": 8,
+    "OFFSET:CNA_GamePadAnalogState:left_trigger": 16,
+    "OFFSET:CNA_GamePadAnalogState:right_trigger": 20,
+    "SIZE:CNA_GamePadState": 48,
+    "ALIGN:CNA_GamePadState": 4,
+    "OFFSET:CNA_GamePadState:struct_size": 0,
+    "OFFSET:CNA_GamePadState:struct_version": 4,
+    "OFFSET:CNA_GamePadState:is_connected": 8,
+    "OFFSET:CNA_GamePadState:reserved0": 9,
+    "OFFSET:CNA_GamePadState:packet_number": 12,
+    "OFFSET:CNA_GamePadState:pressed_buttons": 16,
+    "OFFSET:CNA_GamePadState:reserved1": 20,
+    "OFFSET:CNA_GamePadState:analog": 24
+  },
+  "ctypes": {
+    "VALUE:CNA_ABI_VERSION": 1792,
+    "VALUE:POINTER_WIDTH": 8,
+    "VALUE:CNA_Bool": 1,
+    "VALUE:CNA_Result": 4,
+    "VALUE:CNA_Handle": 8,
+    "VALUE:CNA_FALSE": 0,
+    "VALUE:CNA_TRUE": 1,
+    "VALUE:CNA_GameLifecycleCallback": 8,
+    "VALUE:CNA_GameBeginDrawCallback": 8,
+    "SIZE:CNA_StringView": 16,
+    "ALIGN:CNA_StringView": 8,
+    "SIZE:CNA_ErrorInfo": 24,
+    "ALIGN:CNA_ErrorInfo": 8,
+    "SIZE:CNA_GameTime": 24,
+    "ALIGN:CNA_GameTime": 8,
+    "SIZE:CNA_CallbackError": 24,
+    "ALIGN:CNA_CallbackError": 8,
+    "SIZE:CNA_GameCallbacks": 56,
+    "ALIGN:CNA_GameCallbacks": 8,
+    "SIZE:CNA_GameFrameHooks": 56,
+    "ALIGN:CNA_GameFrameHooks": 8,
+    "SIZE:CNA_GameCreateInfo": 48,
+    "ALIGN:CNA_GameCreateInfo": 8,
+    "SIZE:CNA_Color": 4,
+    "ALIGN:CNA_Color": 1,
+    "SIZE:CNA_Vector2": 8,
+    "ALIGN:CNA_Vector2": 4,
+    "SIZE:CNA_Rectangle": 16,
+    "ALIGN:CNA_Rectangle": 4,
+    "SIZE:CNA_Viewport": 24,
+    "ALIGN:CNA_Viewport": 4,
+    "SIZE:CNA_Texture2DInfo": 24,
+    "ALIGN:CNA_Texture2DInfo": 4,
+    "SIZE:CNA_Texture2DCreateInfo": 24,
+    "ALIGN:CNA_Texture2DCreateInfo": 4,
+    "SIZE:CNA_Texture2DTransfer": 48,
+    "ALIGN:CNA_Texture2DTransfer": 8,
+    "SIZE:CNA_Texture2DDecodeInfo": 24,
+    "ALIGN:CNA_Texture2DDecodeInfo": 4,
+    "SIZE:CNA_SpriteBatchBeginInfo": 16,
+    "ALIGN:CNA_SpriteBatchBeginInfo": 4,
+    "SIZE:CNA_SpriteScaledCommand": 72,
+    "ALIGN:CNA_SpriteScaledCommand": 8,
+    "SIZE:CNA_KeyboardState": 40,
+    "ALIGN:CNA_KeyboardState": 8,
+    "SIZE:CNA_MouseState": 32,
+    "ALIGN:CNA_MouseState": 4,
+    "SIZE:CNA_GamePadAnalogState": 24,
+    "ALIGN:CNA_GamePadAnalogState": 4,
+    "SIZE:CNA_GamePadState": 48,
+    "ALIGN:CNA_GamePadState": 4,
+    "OFFSET:CNA_StringView:data": 0,
+    "OFFSET:CNA_StringView:byte_length": 8,
+    "OFFSET:CNA_ErrorInfo:struct_size": 0,
+    "OFFSET:CNA_ErrorInfo:struct_version": 4,
+    "OFFSET:CNA_ErrorInfo:result": 8,
+    "OFFSET:CNA_ErrorInfo:category": 12,
+    "OFFSET:CNA_ErrorInfo:message_byte_length": 16,
+    "OFFSET:CNA_GameTime:total_game_time_ticks": 0,
+    "OFFSET:CNA_GameTime:elapsed_game_time_ticks": 8,
+    "OFFSET:CNA_GameTime:is_running_slowly": 16,
+    "OFFSET:CNA_GameTime:reserved": 17,
+    "OFFSET:CNA_CallbackError:struct_size": 0,
+    "OFFSET:CNA_CallbackError:struct_version": 4,
+    "OFFSET:CNA_CallbackError:message": 8,
+    "OFFSET:CNA_GameCallbacks:struct_size": 0,
+    "OFFSET:CNA_GameCallbacks:struct_version": 4,
+    "OFFSET:CNA_GameCallbacks:load_content": 8,
+    "OFFSET:CNA_GameCallbacks:update": 16,
+    "OFFSET:CNA_GameCallbacks:draw": 24,
+    "OFFSET:CNA_GameCallbacks:unload_content": 32,
+    "OFFSET:CNA_GameCallbacks:exiting": 40,
+    "OFFSET:CNA_GameCallbacks:context": 48,
+    "OFFSET:CNA_GameFrameHooks:struct_size": 0,
+    "OFFSET:CNA_GameFrameHooks:struct_version": 4,
+    "OFFSET:CNA_GameFrameHooks:initialize": 8,
+    "OFFSET:CNA_GameFrameHooks:begin_run": 16,
+    "OFFSET:CNA_GameFrameHooks:end_run": 24,
+    "OFFSET:CNA_GameFrameHooks:begin_draw": 32,
+    "OFFSET:CNA_GameFrameHooks:end_draw": 40,
+    "OFFSET:CNA_GameFrameHooks:context": 48,
+    "OFFSET:CNA_GameCreateInfo:struct_size": 0,
+    "OFFSET:CNA_GameCreateInfo:struct_version": 4,
+    "OFFSET:CNA_GameCreateInfo:is_fixed_time_step": 8,
+    "OFFSET:CNA_GameCreateInfo:reserved": 9,
+    "OFFSET:CNA_GameCreateInfo:target_elapsed_time_ticks": 16,
+    "OFFSET:CNA_GameCreateInfo:window_title": 24,
+    "OFFSET:CNA_GameCreateInfo:callbacks": 40,
+    "OFFSET:CNA_Color:r": 0,
+    "OFFSET:CNA_Color:g": 1,
+    "OFFSET:CNA_Color:b": 2,
+    "OFFSET:CNA_Color:a": 3,
+    "OFFSET:CNA_Vector2:x": 0,
+    "OFFSET:CNA_Vector2:y": 4,
+    "OFFSET:CNA_Rectangle:x": 0,
+    "OFFSET:CNA_Rectangle:y": 4,
+    "OFFSET:CNA_Rectangle:width": 8,
+    "OFFSET:CNA_Rectangle:height": 12,
+    "OFFSET:CNA_Viewport:x": 0,
+    "OFFSET:CNA_Viewport:y": 4,
+    "OFFSET:CNA_Viewport:width": 8,
+    "OFFSET:CNA_Viewport:height": 12,
+    "OFFSET:CNA_Viewport:min_depth": 16,
+    "OFFSET:CNA_Viewport:max_depth": 20,
+    "OFFSET:CNA_Texture2DInfo:struct_size": 0,
+    "OFFSET:CNA_Texture2DInfo:struct_version": 4,
+    "OFFSET:CNA_Texture2DInfo:width": 8,
+    "OFFSET:CNA_Texture2DInfo:height": 12,
+    "OFFSET:CNA_Texture2DInfo:level_count": 16,
+    "OFFSET:CNA_Texture2DInfo:format": 20,
+    "OFFSET:CNA_Texture2DCreateInfo:struct_size": 0,
+    "OFFSET:CNA_Texture2DCreateInfo:struct_version": 4,
+    "OFFSET:CNA_Texture2DCreateInfo:width": 8,
+    "OFFSET:CNA_Texture2DCreateInfo:height": 12,
+    "OFFSET:CNA_Texture2DCreateInfo:mip_map": 16,
+    "OFFSET:CNA_Texture2DCreateInfo:reserved": 17,
+    "OFFSET:CNA_Texture2DCreateInfo:format": 20,
+    "OFFSET:CNA_Texture2DTransfer:struct_size": 0,
+    "OFFSET:CNA_Texture2DTransfer:struct_version": 4,
+    "OFFSET:CNA_Texture2DTransfer:level": 8,
+    "OFFSET:CNA_Texture2DTransfer:has_rectangle": 12,
+    "OFFSET:CNA_Texture2DTransfer:reserved": 13,
+    "OFFSET:CNA_Texture2DTransfer:rectangle": 16,
+    "OFFSET:CNA_Texture2DTransfer:start_index": 32,
+    "OFFSET:CNA_Texture2DTransfer:element_count": 40,
+    "OFFSET:CNA_Texture2DDecodeInfo:struct_size": 0,
+    "OFFSET:CNA_Texture2DDecodeInfo:struct_version": 4,
+    "OFFSET:CNA_Texture2DDecodeInfo:width": 8,
+    "OFFSET:CNA_Texture2DDecodeInfo:height": 12,
+    "OFFSET:CNA_Texture2DDecodeInfo:zoom": 16,
+    "OFFSET:CNA_Texture2DDecodeInfo:reserved": 17,
+    "OFFSET:CNA_SpriteBatchBeginInfo:struct_size": 0,
+    "OFFSET:CNA_SpriteBatchBeginInfo:struct_version": 4,
+    "OFFSET:CNA_SpriteBatchBeginInfo:sort_mode": 8,
+    "OFFSET:CNA_SpriteBatchBeginInfo:reserved": 12,
+    "OFFSET:CNA_SpriteScaledCommand:struct_size": 0,
+    "OFFSET:CNA_SpriteScaledCommand:struct_version": 4,
+    "OFFSET:CNA_SpriteScaledCommand:texture": 8,
+    "OFFSET:CNA_SpriteScaledCommand:position": 16,
+    "OFFSET:CNA_SpriteScaledCommand:source": 24,
+    "OFFSET:CNA_SpriteScaledCommand:color": 40,
+    "OFFSET:CNA_SpriteScaledCommand:rotation": 44,
+    "OFFSET:CNA_SpriteScaledCommand:origin": 48,
+    "OFFSET:CNA_SpriteScaledCommand:scale": 56,
+    "OFFSET:CNA_SpriteScaledCommand:effects": 64,
+    "OFFSET:CNA_SpriteScaledCommand:layer_depth": 68,
+    "OFFSET:CNA_KeyboardState:struct_size": 0,
+    "OFFSET:CNA_KeyboardState:struct_version": 4,
+    "OFFSET:CNA_KeyboardState:pressed_key_words": 8,
+    "OFFSET:CNA_MouseState:struct_size": 0,
+    "OFFSET:CNA_MouseState:struct_version": 4,
+    "OFFSET:CNA_MouseState:x": 8,
+    "OFFSET:CNA_MouseState:y": 12,
+    "OFFSET:CNA_MouseState:scroll_wheel": 16,
+    "OFFSET:CNA_MouseState:horizontal_scroll_wheel": 20,
+    "OFFSET:CNA_MouseState:pressed_buttons": 24,
+    "OFFSET:CNA_MouseState:reserved": 28,
+    "OFFSET:CNA_GamePadAnalogState:left_thumb_stick": 0,
+    "OFFSET:CNA_GamePadAnalogState:right_thumb_stick": 8,
+    "OFFSET:CNA_GamePadAnalogState:left_trigger": 16,
+    "OFFSET:CNA_GamePadAnalogState:right_trigger": 20,
+    "OFFSET:CNA_GamePadState:struct_size": 0,
+    "OFFSET:CNA_GamePadState:struct_version": 4,
+    "OFFSET:CNA_GamePadState:is_connected": 8,
+    "OFFSET:CNA_GamePadState:reserved0": 9,
+    "OFFSET:CNA_GamePadState:packet_number": 12,
+    "OFFSET:CNA_GamePadState:pressed_buttons": 16,
+    "OFFSET:CNA_GamePadState:reserved1": 20,
+    "OFFSET:CNA_GamePadState:analog": 24
+  }
+}

@@ -1,10 +1,24 @@
-"""Private implementation boundary for CNA's stable C ABI."""
+"""Private CNA C ABI implementation package.
 
+Nothing in this package is part of ``Microsoft.Xna.Framework`` public API.
+"""
 
-class NativeUnavailableError(RuntimeError):
-    """Raised while the CNA native ABI is unavailable."""
+from .errors import (
+    NativeAbiMismatchError,
+    NativeCapabilityError,
+    NativeError,
+    NativeLibraryError,
+    NativeUnavailableError,
+)
+from .loader import EXPECTED_ABI, get_library, require_available
 
-
-def require_available() -> None:
-    """Fail explicitly instead of pretending that a native runtime exists."""
-    raise NativeUnavailableError("CNA native C ABI is not available yet")
+__all__ = [
+    "EXPECTED_ABI",
+    "NativeAbiMismatchError",
+    "NativeCapabilityError",
+    "NativeError",
+    "NativeLibraryError",
+    "NativeUnavailableError",
+    "get_library",
+    "require_available",
+]

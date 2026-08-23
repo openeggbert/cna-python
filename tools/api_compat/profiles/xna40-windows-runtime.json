@@ -1,0 +1,26 @@
+{
+  "name": "XNA 4.0 Windows runtime",
+  "referenceAssemblies": [
+    "Microsoft.Xna.Framework.dll",
+    "Microsoft.Xna.Framework.Game.dll",
+    "Microsoft.Xna.Framework.Graphics.dll",
+    "Microsoft.Xna.Framework.Storage.dll",
+    "Microsoft.Xna.Framework.Video.dll",
+    "Microsoft.Xna.Framework.Input.Touch.dll",
+    "Microsoft.Xna.Framework.Xact.dll"
+  ],
+  "referenceSha256": {
+    "Microsoft.Xna.Framework.dll": "38e7093f52d7474bbc6256906519781a1210d7da50a1c667b52716fcf49ca130",
+    "Microsoft.Xna.Framework.Game.dll": "b5dffdd8125abef2a4507ba4e1d2f11062143f0a63d48fe4f298b95ad746a1f0",
+    "Microsoft.Xna.Framework.Graphics.dll": "560080fc39021c611ca9d076dcebed312faf6d7d1413c2dc523683ea635e9f55",
+    "Microsoft.Xna.Framework.Storage.dll": "798f678e9ae3d9afc3bed66c30123bc9634fb923b6d200188344b618e608cbb8",
+    "Microsoft.Xna.Framework.Video.dll": "17538b1ca9d48a993e2cd88c96b436df08e7abb4aec5d4758eb21feb580d6e06",
+    "Microsoft.Xna.Framework.Input.Touch.dll": "b0585224c18022c3661057ae79544644c10f33f1dc529678364f3d6b25151c25",
+    "Microsoft.Xna.Framework.Xact.dll": "a14d5364dca7cf49fb90639e87ba04d52b59a700dc9198efa5707ce8eae28f0a"
+  },
+  "referenceTypes": 257,
+  "referenceMembers": 2964,
+  "expectedPythonTypes": 257,
+  "expectedPythonMembers": 2887,
+  "allowlist": []
+}

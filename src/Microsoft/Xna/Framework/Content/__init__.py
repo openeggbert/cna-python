@@ -1,9 +1,8 @@
-from ..Graphics import Texture2D
+"""Microsoft.Xna.Framework.Content strict namespace."""
 
-class ContentManager:
-    def __init__(self, serviceProvider, rootDirectory="Content"):
-        self.RootDirectory = rootDirectory
-    
-    def Load(self, assetName):
-        # Placeholder for returning a texture or other asset
-        return Texture2D(None, 256, 256)
+from ._content import ContentLoadException, ContentManager
+
+__all__ = ["ContentLoadException", "ContentManager"]
+
+for _name in __all__:
+    globals()[_name].__module__ = __name__

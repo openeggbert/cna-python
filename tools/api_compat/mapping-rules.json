@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "keywordSuffix": "_",
+  "keywords": ["None"],
+  "omit": [
+    {"kind": "field", "name": "value__", "ownerKind": "enum"},
+    {"kind": "method", "name": "Finalize"}
+  ],
+  "operators": {
+    "op_UnaryNegation": "__neg__",
+    "op_Equality": "__eq__",
+    "op_Inequality": "__ne__",
+    "op_Addition": "__add__",
+    "op_Subtraction": "__sub__",
+    "op_Multiply": "__mul__",
+    "op_Division": "__truediv__"
+  },
+  "constructor": "__init__",
+  "indexer": "__getitem__",
+  "languageMembers": [
+    "__copy__", "__deepcopy__", "__enter__", "__exit__", "__getitem__",
+    "__setitem__", "__iter__", "__repr__", "__str__", "__hash__",
+    "__eq__", "__ne__", "__add__", "__sub__", "__mul__", "__rmul__",
+    "__truediv__", "__neg__"
+  ]
+}

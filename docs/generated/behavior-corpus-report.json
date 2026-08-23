@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "profile": "XNA 4.0 Windows runtime",
+  "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
+  "category": "PURE_XNA_DERIVED",
+  "summary": {
+    "OBSERVATIONS": 16,
+    "ASSERTIONS": 35,
+    "FAILURES": 0
+  },
+  "results": [
+    {
+      "id": "math.clamp.low",
+      "passed": true,
+      "expected": 0.0,
+      "actual": 0.0
+    },
+    {
+      "id": "math.lerp",
+      "passed": true,
+      "expected": 4.0,
+      "actual": 4.0
+    },
+    {
+      "id": "vector2.add",
+      "passed": true,
+      "expected": [
+        4.75,
+        -2.0
+      ],
+      "actual": [
+        4.75,
+        -2.0
+      ]
+    },
+    {
+      "id": "vector2.dot",
+      "passed": true,
+      "expected": 3.125,
+      "actual": 3.125
+    },
+    {
+      "id": "vector2.normalize",
+      "passed": true,
+      "expected": [
+        0.6000000238418579,
+        0.800000011920929
+      ],
+      "actual": [
+        0.6000000238418579,
+        0.800000011920929
+      ]
+    },
+    {
+      "id": "vector2.zero.copy",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "vector3.cross",
+      "passed": true,
+      "expected": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "actual": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "quaternion.identity",
+      "passed": true,
+      "expected": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "actual": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "matrix.translation",
+      "passed": true,
+      "expected": [
+        2.0,
+        3.0,
+        4.0,
+        1.0
+      ],
+      "actual": [
+        2.0,
+        3.0,
+        4.0,
+        1.0
+      ]
+    },
+    {
+      "id": "matrix.multiply",
+      "passed": true,
+      "expected": [
+        5.0,
+        7.0,
+        9.0,
+        1.0
+      ],
+      "actual": [
+        5.0,
+        7.0,
+        9.0,
+        1.0
+      ]
+    },
+    {
+      "id": "color.clamp",
+      "passed": true,
+      "expected": [
+        255,
+        0,
+        1,
+        255
+      ],
+      "actual": [
+        255,
+        0,
+        1,
+        255
+      ]
+    },
+    {
+      "id": "color.normalized.ties_even",
+      "passed": true,
+      "expected": [
+        128,
+        128,
+        128,
+        128
+      ],
+      "actual": [
+        128,
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "rectangle.contains.inclusive_min",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "rectangle.contains.exclusive_max",
+      "passed": true,
+      "expected": false,
+      "actual": false
+    },
+    {
+      "id": "point.value_equality",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "float32.signed_zero",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    }
+  ]
+}

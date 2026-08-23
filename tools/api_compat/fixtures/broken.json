@@ -1,0 +1,10 @@
+[
+  {"name": "missing-member", "category": "MISSING_MEMBER", "expected": {"members": ["Run"]}, "target": {"members": []}},
+  {"name": "wrong-property-mutability", "category": "PROPERTY_MAPPING_MISMATCH", "expected": {"properties": {"Value": "get"}}, "target": {"properties": {"Value": "get,set"}}},
+  {"name": "wrong-enum-value", "category": "ENUM_VALUE_MISMATCH", "expected": {"enum": {"A": 1}}, "target": {"enum": {"A": 2}}},
+  {"name": "wrong-overload", "category": "OVERLOAD_MAPPING_MISMATCH", "expected": {"arities": {"Draw": [3, 4]}}, "target": {"arities": {"Draw": [3]}}},
+  {"name": "unexpected-type", "category": "UNEXPECTED_TYPE", "expected": {"types": []}, "target": {"types": ["Fake"]}},
+  {"name": "native-type-leak", "category": "INTERNAL_TYPE_LEAK", "target": {"baseModule": "_cna_native.ownership"}},
+  {"name": "ctypes-pointer-leak", "category": "RAW_HANDLE_LEAK", "target": {"annotation": "ctypes.c_void_p"}},
+  {"name": "wrong-language-mapping", "category": "LANGUAGE_MAPPING_MISMATCH", "expected": {"name": "None_"}, "target": {"name": "None"}}
+]

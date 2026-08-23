@@ -1,0 +1,8 @@
+include LICENSE NOTICE.md README.md plan.md pyproject.toml
+exclude NEXT.md
+recursive-include behavior *.json
+recursive-include docs *.md *.json
+recursive-include tools *.py *.c *.json
+recursive-include tests *.py *.png
+global-exclude *.py[cod]
+global-exclude __pycache__
