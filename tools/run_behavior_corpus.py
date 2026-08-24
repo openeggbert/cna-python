@@ -51,6 +51,9 @@ from Microsoft.Xna.Framework.Input.Touch import (  # noqa: E402
     GestureSample, GestureType, TouchCollection, TouchLocation,
     TouchLocationState,
 )
+from Microsoft.Xna.Framework.Media import (  # noqa: E402
+    MediaSourceType, MediaState, VideoSoundtrackType, VisualizationData,
+)
 
 
 def vector2(value): return Vector2(*value)
@@ -149,6 +152,23 @@ class _CorpusExternalReader(ContentTypeReaderOfT[_CorpusShared]):
 
 
 def observe(operation: str, args: list[object]) -> object:
+    if operation == "Media.StateValues": return [int(value) for value in MediaState]
+    if operation == "Media.SourceValues": return [int(value) for value in MediaSourceType]
+    if operation == "Media.SoundtrackValues": return [int(value) for value in VideoSoundtrackType]
+    if operation.startswith("Media.Visualization"):
+        value = VisualizationData()
+        if operation == "Media.VisualizationCounts": return [len(value.Frequencies), len(value.Samples)]
+        if operation == "Media.VisualizationIdentity": return [value.Frequencies is value.Frequencies, value.Samples is value.Samples]
+        if operation == "Media.VisualizationDefaults": return [all(item == 0.0 for item in value.Frequencies), all(item == 0.0 for item in value.Samples)]
+        if operation.endswith("Bounds"):
+            target = value.Frequencies if "Frequency" in operation else value.Samples
+            try: target[256]
+            except IndexError: return True
+            return False
+        target = value.Frequencies if "Frequency" in operation else value.Samples
+        try: target[0] = 1.0
+        except TypeError: return True
+        return False
     if operation == "Touch.GestureValues":
         sample = GestureSample()
         return [[int(value) for value in GestureType], int(GestureType.Tap | GestureType.PinchComplete),
@@ -558,7 +578,8 @@ def main() -> int:
         "profile": corpus["profile"],
         "provenance": corpus["provenance"],
         "category": corpus["category"],
-        "summary": {"OBSERVATIONS": len(results), "ASSERTIONS": assertions, "FAILURES": failures},
+        "summary": {"OBSERVATIONS": len(results), "ASSERTIONS": assertions, "FAILURES": failures,
+                    "MEDIA_PURE_XNA_DERIVED": sum(item.get("group") == "Media" for item in corpus["observations"])},
         "results": results,
     }
     if args.output:

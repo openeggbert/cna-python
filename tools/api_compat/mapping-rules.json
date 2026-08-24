@@ -39,6 +39,8 @@
     "System.IO.FileMode": "str",
     "System.IO.FileAccess": "str",
     "System.IO.FileShare": "frozenset[str]",
+    "System.Uri": "str",
+    "System.DateTime": "datetime",
     "System.Runtime.Serialization.SerializationInfo": "object",
     "System.Runtime.Serialization.StreamingContext": "object"
   },
@@ -50,6 +52,18 @@
     "Microsoft.Xna.Framework.Audio.RendererDetail.RendererId": "str | None",
     "Microsoft.Xna.Framework.CurveKeyCollection.CopyTo.array": "MutableSequence[CurveKey]",
     "Microsoft.Xna.Framework.Input.Touch.TouchCollection.CopyTo.array": "MutableSequence[TouchLocation]"
+    ,"Microsoft.Xna.Framework.Media.Album.Artist": "Artist | None"
+    ,"Microsoft.Xna.Framework.Media.Album.Genre": "Genre | None"
+    ,"Microsoft.Xna.Framework.Media.MediaLibrary.RootPictureAlbum": "PictureAlbum | None"
+    ,"Microsoft.Xna.Framework.Media.MediaLibrary.GetPictureFromToken.return": "Picture | None"
+    ,"Microsoft.Xna.Framework.Media.MediaQueue.ActiveSong": "Song | None"
+    ,"Microsoft.Xna.Framework.Media.Picture.Album": "PictureAlbum | None"
+    ,"Microsoft.Xna.Framework.Media.PictureAlbum.Parent": "PictureAlbum | None"
+    ,"Microsoft.Xna.Framework.Media.Song.Artist": "Artist | None"
+    ,"Microsoft.Xna.Framework.Media.Song.Album": "Album | None"
+    ,"Microsoft.Xna.Framework.Media.Song.Genre": "Genre | None"
+    ,"Microsoft.Xna.Framework.Media.VideoPlayer.Video": "Video | None"
+    ,"Microsoft.Xna.Framework.Media.VideoPlayer.GetTexture.return": "Texture2D | None"
   },
   "baseMappings": {
     "System.Attribute": "object",

@@ -175,7 +175,11 @@ reject `None`. CLR strings map to Python `str` and use strict UTF-8 only at the
 CNA boundary. Embedded NUL is rejected when the native contract rejects it.
 `TimeSpan` maps to `datetime.timedelta`; conversion uses 100-nanosecond ticks
 and documents the sub-microsecond precision loss when values originate in
-Python.
+Python. `System.Uri` maps to an unmodified Python `str`; URI syntax and scheme
+support are validated by the XNA/CNA operation that consumes it, rather than by
+a fabricated public `System.Uri` class. `System.DateTime` maps to
+`datetime.datetime`. CNA Media picture timestamps are Unix-epoch ticks and are
+projected as timezone-aware UTC values.
 
 XNA metadata predates nullable-reference annotations. A reference member whose
 documented runtime value is nullable therefore uses a contextual machine rule.
@@ -187,6 +191,12 @@ no-device result. The default values of the `AudioCategory` and
 `Microphone.GetData` is contextually mapped to `MutableSequence[int]` because
 the method writes captured bytes into the caller's array. These exceptions are
 encoded in `mapping-rules.json` and do not introduce support-framework types.
+Media's metadata also predates nullable annotations. The formal nullable set is
+`Album.Artist`, `Album.Genre`, `Song.Artist`, `Song.Album`, `Song.Genre`,
+`Picture.Album`, `PictureAlbum.Parent`, `MediaLibrary.RootPictureAlbum`,
+`MediaLibrary.GetPictureFromToken`'s result, `MediaQueue.ActiveSong`,
+`VideoPlayer.Video`, and `VideoPlayer.GetTexture`'s result. Each maps to
+`T | None`; all other selected Media references remain non-null.
 
 `Stream` maps by capability. Binary readers require `read()` returning bytes;
 writers require `write(bytes)`. The binding neither closes a caller-owned

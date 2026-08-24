@@ -25,6 +25,10 @@
 #include "CNA/C/audio.h"
 #include "CNA/C/xact.h"
 #include "CNA/C/storage.h"
+#include "CNA/C/media.h"
+#include "CNA/C/media_library.h"
+#include "CNA/C/media_player.h"
+#include "CNA/C/video.h"
 
 #define TYPE(T) do { \
     printf("TYPE %s %zu %zu\n", #T, sizeof(T), alignof(T)); \
@@ -49,6 +53,7 @@ static CNA_Result begin_draw_callback(
 }
 
 static void audio_event_callback(void* context) { (void)context; }
+static void media_player_event_callback(void* context) { (void)context; }
 
 int main(void) {
     printf("VALUE CNA_ABI_VERSION %u\n", (unsigned)CNA_ABI_VERSION);
@@ -69,6 +74,20 @@ int main(void) {
     CNA_AudioEventCallback checked_audio_event = audio_event_callback;
     printf("VALUE CNA_AudioEventCallback %zu\n", sizeof(checked_audio_event));
     printf("VALUE CNA_StorageCompletionCallback %zu\n", sizeof(CNA_StorageCompletionCallback));
+    CNA_MediaPlayerEventCallback checked_media_event = media_player_event_callback;
+    printf("VALUE CNA_MediaPlayerEventCallback %zu\n", sizeof(checked_media_event));
+    printf("VALUE CNA_MediaState %zu\n", sizeof(CNA_MediaState));
+    printf("VALUE CNA_MediaSourceType %zu\n", sizeof(CNA_MediaSourceType));
+    printf("VALUE CNA_VideoSoundtrackType %zu\n", sizeof(CNA_VideoSoundtrackType));
+    printf("VALUE CNA_VISUALIZATION_DATA_SIZE %u\n", (unsigned)CNA_VISUALIZATION_DATA_SIZE);
+    printf("VALUE CNA_MEDIA_STATE_STOPPED %u\n", (unsigned)CNA_MEDIA_STATE_STOPPED);
+    printf("VALUE CNA_MEDIA_STATE_PLAYING %u\n", (unsigned)CNA_MEDIA_STATE_PLAYING);
+    printf("VALUE CNA_MEDIA_STATE_PAUSED %u\n", (unsigned)CNA_MEDIA_STATE_PAUSED);
+    printf("VALUE CNA_MEDIA_SOURCE_TYPE_LOCAL_DEVICE %u\n", (unsigned)CNA_MEDIA_SOURCE_TYPE_LOCAL_DEVICE);
+    printf("VALUE CNA_MEDIA_SOURCE_TYPE_WINDOWS_MEDIA_CONNECT %u\n", (unsigned)CNA_MEDIA_SOURCE_TYPE_WINDOWS_MEDIA_CONNECT);
+    printf("VALUE CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC %u\n", (unsigned)CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC);
+    printf("VALUE CNA_VIDEO_SOUNDTRACK_TYPE_DIALOG %u\n", (unsigned)CNA_VIDEO_SOUNDTRACK_TYPE_DIALOG);
+    printf("VALUE CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC_AND_DIALOG %u\n", (unsigned)CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC_AND_DIALOG);
 
     TYPE(CNA_StringView); FIELD(CNA_StringView, data); FIELD(CNA_StringView, byte_length);
     TYPE(CNA_ErrorInfo); FIELD(CNA_ErrorInfo, struct_size); FIELD(CNA_ErrorInfo, struct_version); FIELD(CNA_ErrorInfo, result); FIELD(CNA_ErrorInfo, category); FIELD(CNA_ErrorInfo, message_byte_length);
@@ -87,6 +106,7 @@ int main(void) {
     TYPE(CNA_AudioEmitter); FIELD(CNA_AudioEmitter, struct_size); FIELD(CNA_AudioEmitter, struct_version); FIELD(CNA_AudioEmitter, doppler_scale); FIELD(CNA_AudioEmitter, forward); FIELD(CNA_AudioEmitter, position); FIELD(CNA_AudioEmitter, up); FIELD(CNA_AudioEmitter, velocity);
     TYPE(CNA_AudioListener); FIELD(CNA_AudioListener, struct_size); FIELD(CNA_AudioListener, struct_version); FIELD(CNA_AudioListener, forward); FIELD(CNA_AudioListener, position); FIELD(CNA_AudioListener, up); FIELD(CNA_AudioListener, velocity);
     TYPE(CNA_CueInfo); FIELD(CNA_CueInfo, struct_size); FIELD(CNA_CueInfo, struct_version); FIELD(CNA_CueInfo, is_created); FIELD(CNA_CueInfo, is_disposed); FIELD(CNA_CueInfo, is_paused); FIELD(CNA_CueInfo, is_playing); FIELD(CNA_CueInfo, is_prepared); FIELD(CNA_CueInfo, is_preparing); FIELD(CNA_CueInfo, is_stopped); FIELD(CNA_CueInfo, is_stopping);
+    TYPE(CNA_VisualizationData); FIELD(CNA_VisualizationData, struct_size); FIELD(CNA_VisualizationData, struct_version); FIELD(CNA_VisualizationData, frequencies); FIELD(CNA_VisualizationData, samples);
     TYPE(CNA_Quaternion); FIELD(CNA_Quaternion, x); FIELD(CNA_Quaternion, y); FIELD(CNA_Quaternion, z); FIELD(CNA_Quaternion, w);
     TYPE(CNA_Matrix); FIELD(CNA_Matrix, m11); FIELD(CNA_Matrix, m12); FIELD(CNA_Matrix, m13); FIELD(CNA_Matrix, m14); FIELD(CNA_Matrix, m21); FIELD(CNA_Matrix, m22); FIELD(CNA_Matrix, m23); FIELD(CNA_Matrix, m24); FIELD(CNA_Matrix, m31); FIELD(CNA_Matrix, m32); FIELD(CNA_Matrix, m33); FIELD(CNA_Matrix, m34); FIELD(CNA_Matrix, m41); FIELD(CNA_Matrix, m42); FIELD(CNA_Matrix, m43); FIELD(CNA_Matrix, m44);
     TYPE(CNA_Rectangle); FIELD(CNA_Rectangle, x); FIELD(CNA_Rectangle, y); FIELD(CNA_Rectangle, width); FIELD(CNA_Rectangle, height);

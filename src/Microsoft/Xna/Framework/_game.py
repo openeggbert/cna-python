@@ -123,6 +123,10 @@ class _NativeGameHost:
             elif name in ("Initialize", "LoadContent", "BeginRun", "BeginDraw", "EndDraw", "EndRun", "UnloadContent"):
                 getattr(self.game, name)()
             else:
+                if name == "Draw":
+                    from .Media._player import _update_media_game
+                    _update_media_game(self.game)
+                    self._drain_dispatch_callbacks()
                 getattr(self.game, name)(self._time(time_pointer))
             return 0
         except BaseException as error:
@@ -216,6 +220,8 @@ class _NativeGameHost:
         # dispatcher host is ready.
         from .Storage._storage import StorageDevice
         StorageDevice._attach_game(self.game)
+        from .Media._runtime import _attach_media_game
+        _attach_media_game(self.game)
 
     def _subscribe_events(self) -> None:
         def register(operation: str, event: int, action) -> None:
@@ -291,6 +297,11 @@ class _NativeGameHost:
         try:
             from .Input.Touch._touch import _detach_touch_game
             _detach_touch_game(self.game)
+        except BaseException as error:
+            first_unsubscribe_error = first_unsubscribe_error or error
+        try:
+            from .Media._runtime import _detach_media_game
+            _detach_media_game(self.game)
         except BaseException as error:
             first_unsubscribe_error = first_unsubscribe_error or error
         result = self.library.cna_game_destroy(self.handle)

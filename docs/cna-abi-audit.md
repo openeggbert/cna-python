@@ -33,12 +33,13 @@ metadata, templates, and wheel contents. The wheel contains no native library.
 Every entry supplies `restype` and `argtypes`, including pointer depth and
 fixed-width signedness. In addition to the established Game, 2D graphics, input,
 SpriteFont, buffer, title, Effect, stock-effect, Texture3D/Cube, and Model
-routes, Foundation Milestone 6 imports 96 used Audio/XACT routes and Foundation
+routes, Foundation Milestone 6 imports 96 used Audio/XACT routes, Foundation
 Milestone 8 imports 71 used dispatcher, GamerServices, query, cube target,
-Touch, and Storage routes. These cover
+Touch, and Storage routes, and Foundation Milestone 9 imports 202 used
+Media/Video routes. These cover
 SoundEffect, instances, single/multiple-listener 3D calls, dynamic streaming,
 microphones, one shared unsubscribe route, and the AudioEngine/category/bank/cue
-graph, plus the complete selected non-Media runtime closure. Unused Audio capability, native-disposed, renderer-equality, and XACT
+graph, plus the complete selected runtime closure. Unused Audio capability, native-disposed, renderer-equality, and XACT
 observer routes are deliberately not imported. This is not a claim that all CNA
 exports are bound.
 
@@ -47,10 +48,10 @@ ctypes structure used. ELF verification compares every imported symbol against
 the qualified artifact. Exact regenerated measurements are:
 
 ```text
-BOUND_FUNCTIONS=542
-CTYPES_SIGNATURE_MEASUREMENTS=542
-C_LAYOUT_MEASUREMENTS=756
-CTYPES_LAYOUT_MEASUREMENTS=756
+BOUND_FUNCTIONS=744
+CTYPES_SIGNATURE_MEASUREMENTS=744
+C_LAYOUT_MEASUREMENTS=775
+CTYPES_LAYOUT_MEASUREMENTS=775
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
@@ -77,6 +78,14 @@ every field offset. Storage completion, DeviceChanged, and Disposing callbacks
 are exactly `void (*)(void*)`; no Python exception or user handler executes
 through their C frame.
 
+Milestone 9 measures `CNA_MediaPlayerEventCallback` as exactly
+`void (*)(void*)`, all three Media enum widths and values, and
+`CNA_VisualizationData`. The visualization structure is 2,056 bytes, aligned
+to 4 bytes: `struct_size` offset 0, `struct_version` offset 4,
+`frequencies[256]` offset 8, and `samples[256]` offset 1,032. Media callbacks
+remain strongly rooted until native unsubscription succeeds; their trampoline
+catches `BaseException` and queues generation-checked owner-thread work.
+
 The qualified artifact predates CNA HEAD's rejection of bound vertex/index
 buffer destruction, so CNA-Python adds an explicit facade guard before calling
 its destroy route. Shutdown first unbinds every retained buffer/render target.
@@ -89,7 +98,8 @@ identityless resource events, the split dynamic-vertex offset/options routes,
 verified managed/native Content/XNB routes, erased-generic limitations, and the
 separate Effect/Model command paths, Texture3D/Cube HEADLESS boundaries, and
 granular Audio/XACT, Touch, Storage, GamerServices, query, and cube-target
-results. ABI 0.7 explicitly refuses multi-listener counts
+results, plus Media catalog, playback, visualization, content, decode, and
+frame-identity boundaries. ABI 0.7 explicitly refuses multi-listener counts
 other than one and explicitly ignores AudioEngine renderer/look-ahead values;
 CNA-Python reports both instead of approximating them. Storage FileShare flags
 reach the C ABI but are ignored by CNA's current StorageContainer

@@ -63,6 +63,13 @@ HEADERS = {
         "from typing import Callable, ClassVar, Final, Iterator, MutableSequence, Sequence, overload",
         "from ... import DisplayOrientation, Vector2",
     ],
+    "Microsoft.Xna.Framework.Media": [
+        "from datetime import datetime, timedelta",
+        "from enum import IntEnum",
+        "from typing import BinaryIO, ClassVar, Iterator, MutableSequence, overload",
+        "from .._language import Event",
+        "from ..Graphics import Texture2D",
+    ],
     "Microsoft.Xna.Framework.GamerServices": [
         "from .. import Game, GameComponent, GameTime",
     ],

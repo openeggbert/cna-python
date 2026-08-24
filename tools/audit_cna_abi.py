@@ -26,6 +26,7 @@ TYPES = {
         abi.CNA_AudioCapabilities, abi.CNA_SoundEffectCreateInfo,
         abi.CNA_SoundEffectInstanceInfo, abi.CNA_AudioEmitter,
         abi.CNA_AudioListener, abi.CNA_CueInfo,
+        abi.CNA_VisualizationData,
         abi.CNA_Quaternion, abi.CNA_Matrix,
         abi.CNA_Rectangle, abi.CNA_Viewport, abi.CNA_DisplayMode,
         abi.CNA_GraphicsAdapterInfo, abi.CNA_GraphicsFormatSelection,
@@ -107,6 +108,19 @@ def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
         "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": ctypes.sizeof(abi.CNA_PreparingDeviceSettingsMutatorEXT),
         "VALUE:CNA_AudioEventCallback": ctypes.sizeof(abi.CNA_AudioEventCallback),
         "VALUE:CNA_StorageCompletionCallback": ctypes.sizeof(abi.CNA_StorageCompletionCallback),
+        "VALUE:CNA_MediaPlayerEventCallback": ctypes.sizeof(abi.CNA_MediaPlayerEventCallback),
+        "VALUE:CNA_MediaState": ctypes.sizeof(ctypes.c_uint32),
+        "VALUE:CNA_MediaSourceType": ctypes.sizeof(ctypes.c_uint32),
+        "VALUE:CNA_VideoSoundtrackType": ctypes.sizeof(ctypes.c_uint32),
+        "VALUE:CNA_VISUALIZATION_DATA_SIZE": 256,
+        "VALUE:CNA_MEDIA_STATE_STOPPED": 0,
+        "VALUE:CNA_MEDIA_STATE_PLAYING": 1,
+        "VALUE:CNA_MEDIA_STATE_PAUSED": 2,
+        "VALUE:CNA_MEDIA_SOURCE_TYPE_LOCAL_DEVICE": 0,
+        "VALUE:CNA_MEDIA_SOURCE_TYPE_WINDOWS_MEDIA_CONNECT": 4,
+        "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC": 0,
+        "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_DIALOG": 1,
+        "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC_AND_DIALOG": 2,
     }
     for name, value in TYPES.items():
         result[f"SIZE:{name}"] = ctypes.sizeof(value)

@@ -44,6 +44,7 @@ PACKAGES = (
     "Microsoft.Xna.Framework.Graphics.PackedVector",
     "Microsoft.Xna.Framework.Input",
     "Microsoft.Xna.Framework.Input.Touch",
+    "Microsoft.Xna.Framework.Media",
     "Microsoft.Xna.Framework.Content",
     "Microsoft.Xna.Framework.GamerServices",
     "Microsoft.Xna.Framework.Storage",
@@ -401,7 +402,11 @@ def expected_callable(member: dict[str, Any], projected: str,
         return_type = "None"
         shape = "instance"
     else:
-        primary = mapped_type(member.get("returnType"), return_position=True, typevars=generic_names)
+        primary = _MEMBER_TYPE_MAPPINGS.get(
+            f"{owner_identity}.{member['name']}.return",
+            mapped_type(member.get("returnType"), return_position=True,
+                        typevars=generic_names),
+        )
         values = ([] if primary == "None" else [primary]) + outputs
         return_type = values[0] if len(values) == 1 else f"tuple[{', '.join(values)}]" if values else "None"
         if member["name"].startswith("op_"):

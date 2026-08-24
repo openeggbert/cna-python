@@ -1,30 +1,5 @@
 {
   "profile": "XNA 4.0 Windows runtime",
-  "missingTypeCount": 24,
-  "types": [
-    "Microsoft.Xna.Framework.Media.Album",
-    "Microsoft.Xna.Framework.Media.AlbumCollection",
-    "Microsoft.Xna.Framework.Media.Artist",
-    "Microsoft.Xna.Framework.Media.ArtistCollection",
-    "Microsoft.Xna.Framework.Media.Genre",
-    "Microsoft.Xna.Framework.Media.GenreCollection",
-    "Microsoft.Xna.Framework.Media.MediaLibrary",
-    "Microsoft.Xna.Framework.Media.MediaPlayer",
-    "Microsoft.Xna.Framework.Media.MediaQueue",
-    "Microsoft.Xna.Framework.Media.MediaSource",
-    "Microsoft.Xna.Framework.Media.MediaSourceType",
-    "Microsoft.Xna.Framework.Media.MediaState",
-    "Microsoft.Xna.Framework.Media.Picture",
-    "Microsoft.Xna.Framework.Media.PictureAlbum",
-    "Microsoft.Xna.Framework.Media.PictureAlbumCollection",
-    "Microsoft.Xna.Framework.Media.PictureCollection",
-    "Microsoft.Xna.Framework.Media.Playlist",
-    "Microsoft.Xna.Framework.Media.PlaylistCollection",
-    "Microsoft.Xna.Framework.Media.Song",
-    "Microsoft.Xna.Framework.Media.SongCollection",
-    "Microsoft.Xna.Framework.Media.Video",
-    "Microsoft.Xna.Framework.Media.VideoPlayer",
-    "Microsoft.Xna.Framework.Media.VideoSoundtrackType",
-    "Microsoft.Xna.Framework.Media.VisualizationData"
-  ]
+  "missingTypeCount": 0,
+  "types": []
 }

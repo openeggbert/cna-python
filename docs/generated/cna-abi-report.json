@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 542,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 542,
-    "C_LAYOUT_MEASUREMENTS": 756,
-    "CTYPES_LAYOUT_MEASUREMENTS": 756,
+    "BOUND_FUNCTIONS": 744,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 744,
+    "C_LAYOUT_MEASUREMENTS": 775,
+    "CTYPES_LAYOUT_MEASUREMENTS": 775,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -550,7 +550,209 @@
     "cna_storage_stream_get_can_write",
     "cna_storage_stream_get_can_seek",
     "cna_storage_stream_flush",
-    "cna_storage_stream_close"
+    "cna_storage_stream_close",
+    "cna_media_source_get_available_count",
+    "cna_media_source_get_type_at",
+    "cna_media_source_get_name_size_at",
+    "cna_media_source_copy_name_at",
+    "cna_song_create_from_uri",
+    "cna_song_get_name_size",
+    "cna_song_copy_name",
+    "cna_song_get_duration",
+    "cna_song_get_is_protected",
+    "cna_song_get_is_rated",
+    "cna_song_get_play_count",
+    "cna_song_get_rating",
+    "cna_song_get_track_number",
+    "cna_song_get_is_disposed",
+    "cna_song_dispose",
+    "cna_song_destroy",
+    "cna_song_equals",
+    "cna_song_get_hash_code",
+    "cna_song_get_album",
+    "cna_song_get_artist",
+    "cna_song_get_genre",
+    "cna_media_player_get_game_has_control",
+    "cna_media_player_get_is_muted",
+    "cna_media_player_set_is_muted",
+    "cna_media_player_get_is_repeating",
+    "cna_media_player_set_is_repeating",
+    "cna_media_player_get_is_shuffled",
+    "cna_media_player_set_is_shuffled",
+    "cna_media_player_get_play_position_ticks",
+    "cna_media_player_get_state",
+    "cna_media_player_get_volume",
+    "cna_media_player_set_volume",
+    "cna_media_player_get_is_visualization_enabled",
+    "cna_media_player_set_is_visualization_enabled",
+    "cna_media_player_get_visualization_data",
+    "cna_media_player_get_queue",
+    "cna_media_player_play_song",
+    "cna_media_player_play_songs",
+    "cna_media_player_play_songs_from",
+    "cna_media_player_move_next",
+    "cna_media_player_move_previous",
+    "cna_media_player_pause",
+    "cna_media_player_resume",
+    "cna_media_player_stop",
+    "cna_media_player_update_ext",
+    "cna_media_player_program_exit_ext",
+    "cna_media_player_subscribe_active_song_changed_ext",
+    "cna_media_player_subscribe_media_state_changed_ext",
+    "cna_media_player_unsubscribe_ext",
+    "cna_media_player_raise_active_song_changed_ext",
+    "cna_media_player_raise_media_state_changed_ext",
+    "cna_media_queue_get_count",
+    "cna_media_queue_get_active_song_index",
+    "cna_media_queue_set_active_song_index",
+    "cna_media_queue_get_active_song",
+    "cna_media_queue_get_at",
+    "cna_media_queue_destroy",
+    "cna_media_library_create",
+    "cna_media_library_create_from_source",
+    "cna_media_library_get_is_disposed",
+    "cna_media_library_dispose",
+    "cna_media_library_destroy",
+    "cna_media_library_get_media_source_type",
+    "cna_media_library_get_media_source_name_size",
+    "cna_media_library_copy_media_source_name",
+    "cna_media_library_get_songs",
+    "cna_media_library_get_albums",
+    "cna_media_library_get_artists",
+    "cna_media_library_get_genres",
+    "cna_media_library_get_playlists",
+    "cna_media_library_get_pictures",
+    "cna_media_library_get_saved_pictures",
+    "cna_media_library_get_root_picture_album",
+    "cna_media_library_get_picture_from_token",
+    "cna_media_library_save_picture",
+    "cna_album_get_name_size",
+    "cna_album_copy_name",
+    "cna_album_get_is_disposed",
+    "cna_album_dispose",
+    "cna_album_destroy",
+    "cna_album_get_hash_code",
+    "cna_album_equals",
+    "cna_album_get_songs",
+    "cna_album_get_artist",
+    "cna_album_get_genre",
+    "cna_album_get_duration",
+    "cna_album_get_has_art",
+    "cna_album_get_art_size",
+    "cna_album_copy_art",
+    "cna_album_get_thumbnail_size",
+    "cna_album_copy_thumbnail",
+    "cna_artist_get_name_size",
+    "cna_artist_copy_name",
+    "cna_artist_get_is_disposed",
+    "cna_artist_dispose",
+    "cna_artist_destroy",
+    "cna_artist_get_hash_code",
+    "cna_artist_equals",
+    "cna_artist_get_songs",
+    "cna_artist_get_albums",
+    "cna_genre_get_name_size",
+    "cna_genre_copy_name",
+    "cna_genre_get_is_disposed",
+    "cna_genre_dispose",
+    "cna_genre_destroy",
+    "cna_genre_get_hash_code",
+    "cna_genre_equals",
+    "cna_genre_get_songs",
+    "cna_genre_get_albums",
+    "cna_playlist_get_name_size",
+    "cna_playlist_copy_name",
+    "cna_playlist_get_is_disposed",
+    "cna_playlist_dispose",
+    "cna_playlist_destroy",
+    "cna_playlist_get_hash_code",
+    "cna_playlist_equals",
+    "cna_playlist_get_songs",
+    "cna_playlist_get_duration",
+    "cna_picture_get_name_size",
+    "cna_picture_copy_name",
+    "cna_picture_get_album",
+    "cna_picture_get_date_unix_ticks",
+    "cna_picture_get_width",
+    "cna_picture_get_height",
+    "cna_picture_get_image_size",
+    "cna_picture_copy_image",
+    "cna_picture_get_thumbnail_size",
+    "cna_picture_copy_thumbnail",
+    "cna_picture_get_is_disposed",
+    "cna_picture_dispose",
+    "cna_picture_destroy",
+    "cna_picture_equals",
+    "cna_picture_get_hash_code",
+    "cna_picture_album_get_name_size",
+    "cna_picture_album_copy_name",
+    "cna_picture_album_get_parent",
+    "cna_picture_album_get_albums",
+    "cna_picture_album_get_pictures",
+    "cna_picture_album_get_is_disposed",
+    "cna_picture_album_dispose",
+    "cna_picture_album_destroy",
+    "cna_picture_album_equals",
+    "cna_picture_album_get_hash_code",
+    "cna_video_create_with_metadata",
+    "cna_video_get_width",
+    "cna_video_get_height",
+    "cna_video_get_frames_per_second",
+    "cna_video_get_duration",
+    "cna_video_get_soundtrack_type",
+    "cna_video_destroy",
+    "cna_video_player_create",
+    "cna_video_player_get_is_disposed",
+    "cna_video_player_get_is_looped",
+    "cna_video_player_set_is_looped",
+    "cna_video_player_get_is_muted",
+    "cna_video_player_set_is_muted",
+    "cna_video_player_get_play_position_ticks",
+    "cna_video_player_get_state",
+    "cna_video_player_get_volume",
+    "cna_video_player_set_volume",
+    "cna_video_player_get_texture",
+    "cna_video_player_play",
+    "cna_video_player_stop",
+    "cna_video_player_pause",
+    "cna_video_player_resume",
+    "cna_video_player_dispose",
+    "cna_video_player_destroy",
+    "cna_song_collection_get_count",
+    "cna_song_collection_get_at",
+    "cna_song_collection_get_is_disposed",
+    "cna_song_collection_dispose",
+    "cna_song_collection_destroy",
+    "cna_album_collection_get_count",
+    "cna_album_collection_get_at",
+    "cna_album_collection_get_is_disposed",
+    "cna_album_collection_dispose",
+    "cna_album_collection_destroy",
+    "cna_artist_collection_get_count",
+    "cna_artist_collection_get_at",
+    "cna_artist_collection_get_is_disposed",
+    "cna_artist_collection_dispose",
+    "cna_artist_collection_destroy",
+    "cna_genre_collection_get_count",
+    "cna_genre_collection_get_at",
+    "cna_genre_collection_get_is_disposed",
+    "cna_genre_collection_dispose",
+    "cna_genre_collection_destroy",
+    "cna_playlist_collection_get_count",
+    "cna_playlist_collection_get_at",
+    "cna_playlist_collection_get_is_disposed",
+    "cna_playlist_collection_dispose",
+    "cna_playlist_collection_destroy",
+    "cna_picture_collection_get_count",
+    "cna_picture_collection_get_at",
+    "cna_picture_collection_get_is_disposed",
+    "cna_picture_collection_dispose",
+    "cna_picture_collection_destroy",
+    "cna_picture_album_collection_get_count",
+    "cna_picture_album_collection_get_at",
+    "cna_picture_album_collection_get_is_disposed",
+    "cna_picture_album_collection_dispose",
+    "cna_picture_album_collection_destroy"
   ],
   "functionManifest": [
     {
@@ -6259,6 +6461,2050 @@
       ],
       "arity": 1,
       "ownership": "consumes StorageStream"
+    },
+    {
+      "symbol": "cna_media_source_get_available_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_source_get_type_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_uint>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_source_get_name_size_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_source_copy_name_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_create_from_uri",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned Song"
+    },
+    {
+      "symbol": "cna_song_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_duration",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_is_protected",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_is_rated",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_play_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_rating",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_track_number",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_song_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys Song handle"
+    },
+    {
+      "symbol": "cna_song_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_get_album",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable Album"
+    },
+    {
+      "symbol": "cna_song_get_artist",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable Artist"
+    },
+    {
+      "symbol": "cna_song_get_genre",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable Genre"
+    },
+    {
+      "symbol": "cna_media_player_get_game_has_control",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_get_is_muted",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_set_is_muted",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_get_is_repeating",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_set_is_repeating",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_get_is_shuffled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_set_is_shuffled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_get_play_position_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_get_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_get_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_set_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_get_is_visualization_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_set_is_visualization_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_get_visualization_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VisualizationData>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_player_get_queue",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned queue view"
+    },
+    {
+      "symbol": "cna_media_player_play_song",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_play_songs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_play_songs_from",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_move_next",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_move_previous",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_pause",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_resume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_stop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_update_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_program_exit_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_subscribe_active_song_changed_ext",
+      "return": "c_uint",
+      "parameters": [
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_media_player_subscribe_media_state_changed_ext",
+      "return": "c_uint",
+      "parameters": [
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_media_player_unsubscribe_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes registration"
+    },
+    {
+      "symbol": "cna_media_player_raise_active_song_changed_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_player_raise_media_state_changed_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_queue_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_queue_get_active_song_index",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_queue_set_active_song_index",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_media_queue_get_active_song",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable Song"
+    },
+    {
+      "symbol": "cna_media_queue_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned Song"
+    },
+    {
+      "symbol": "cna_media_queue_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys queue view"
+    },
+    {
+      "symbol": "cna_media_library_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned MediaLibrary"
+    },
+    {
+      "symbol": "cna_media_library_create_from_source",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned MediaLibrary"
+    },
+    {
+      "symbol": "cna_media_library_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_library_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_media_library_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys MediaLibrary"
+    },
+    {
+      "symbol": "cna_media_library_get_media_source_type",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_library_get_media_source_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_library_copy_media_source_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_media_library_get_songs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SongCollection"
+    },
+    {
+      "symbol": "cna_media_library_get_albums",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned AlbumCollection"
+    },
+    {
+      "symbol": "cna_media_library_get_artists",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned ArtistCollection"
+    },
+    {
+      "symbol": "cna_media_library_get_genres",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned GenreCollection"
+    },
+    {
+      "symbol": "cna_media_library_get_playlists",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned PlaylistCollection"
+    },
+    {
+      "symbol": "cna_media_library_get_pictures",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned PictureCollection"
+    },
+    {
+      "symbol": "cna_media_library_get_saved_pictures",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned PictureCollection"
+    },
+    {
+      "symbol": "cna_media_library_get_root_picture_album",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable PictureAlbum"
+    },
+    {
+      "symbol": "cna_media_library_get_picture_from_token",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 4,
+      "ownership": "owned nullable Picture"
+    },
+    {
+      "symbol": "cna_media_library_save_picture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "copies bytes; owned Picture"
+    },
+    {
+      "symbol": "cna_album_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_album_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys Album handle"
+    },
+    {
+      "symbol": "cna_album_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_get_songs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SongCollection"
+    },
+    {
+      "symbol": "cna_album_get_artist",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable Artist"
+    },
+    {
+      "symbol": "cna_album_get_genre",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable Genre"
+    },
+    {
+      "symbol": "cna_album_get_duration",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_get_has_art",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_get_art_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_copy_art",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_get_thumbnail_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_copy_thumbnail",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_artist_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys Artist handle"
+    },
+    {
+      "symbol": "cna_artist_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_get_songs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SongCollection"
+    },
+    {
+      "symbol": "cna_artist_get_albums",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned AlbumCollection"
+    },
+    {
+      "symbol": "cna_genre_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_genre_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_genre_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_genre_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_genre_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys Genre handle"
+    },
+    {
+      "symbol": "cna_genre_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_genre_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_genre_get_songs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SongCollection"
+    },
+    {
+      "symbol": "cna_genre_get_albums",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned AlbumCollection"
+    },
+    {
+      "symbol": "cna_playlist_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_playlist_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_playlist_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_playlist_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_playlist_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys Playlist handle"
+    },
+    {
+      "symbol": "cna_playlist_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_playlist_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_playlist_get_songs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SongCollection"
+    },
+    {
+      "symbol": "cna_playlist_get_duration",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_album",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable PictureAlbum"
+    },
+    {
+      "symbol": "cna_picture_get_date_unix_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_width",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_image_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_copy_image",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_thumbnail_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_copy_thumbnail",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_picture_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys Picture handle"
+    },
+    {
+      "symbol": "cna_picture_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_album_get_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_album_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_album_get_parent",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "owned nullable PictureAlbum"
+    },
+    {
+      "symbol": "cna_picture_album_get_albums",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned PictureAlbumCollection"
+    },
+    {
+      "symbol": "cna_picture_album_get_pictures",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned PictureCollection"
+    },
+    {
+      "symbol": "cna_picture_album_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_album_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks disposed"
+    },
+    {
+      "symbol": "cna_picture_album_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys PictureAlbum handle"
+    },
+    {
+      "symbol": "cna_picture_album_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_album_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_create_with_metadata",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_float",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 8,
+      "ownership": "owned Video"
+    },
+    {
+      "symbol": "cna_video_get_width",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_get_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_get_frames_per_second",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_get_duration",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_get_soundtrack_type",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys Video"
+    },
+    {
+      "symbol": "cna_video_player_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned VideoPlayer"
+    },
+    {
+      "symbol": "cna_video_player_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_player_get_is_looped",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_player_set_is_looped",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_video_player_get_is_muted",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_player_set_is_muted",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_video_player_get_play_position_ticks",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_player_get_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_player_get_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_video_player_set_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_video_player_get_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed transient texture"
+    },
+    {
+      "symbol": "cna_video_player_play",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "retains Video"
+    },
+    {
+      "symbol": "cna_video_player_stop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_video_player_pause",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_video_player_resume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed handle"
+    },
+    {
+      "symbol": "cna_video_player_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "marks player disposed"
+    },
+    {
+      "symbol": "cna_video_player_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys VideoPlayer"
+    },
+    {
+      "symbol": "cna_song_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_collection_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned song item"
+    },
+    {
+      "symbol": "cna_song_collection_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_song_collection_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "empties collection"
+    },
+    {
+      "symbol": "cna_song_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys collection handle"
+    },
+    {
+      "symbol": "cna_album_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_collection_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned album item"
+    },
+    {
+      "symbol": "cna_album_collection_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_album_collection_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "empties collection"
+    },
+    {
+      "symbol": "cna_album_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys collection handle"
+    },
+    {
+      "symbol": "cna_artist_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_collection_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned artist item"
+    },
+    {
+      "symbol": "cna_artist_collection_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_artist_collection_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "empties collection"
+    },
+    {
+      "symbol": "cna_artist_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys collection handle"
+    },
+    {
+      "symbol": "cna_genre_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_genre_collection_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned genre item"
+    },
+    {
+      "symbol": "cna_genre_collection_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_genre_collection_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "empties collection"
+    },
+    {
+      "symbol": "cna_genre_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys collection handle"
+    },
+    {
+      "symbol": "cna_playlist_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_playlist_collection_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned playlist item"
+    },
+    {
+      "symbol": "cna_playlist_collection_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_playlist_collection_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "empties collection"
+    },
+    {
+      "symbol": "cna_playlist_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys collection handle"
+    },
+    {
+      "symbol": "cna_picture_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_collection_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned picture item"
+    },
+    {
+      "symbol": "cna_picture_collection_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_collection_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "empties collection"
+    },
+    {
+      "symbol": "cna_picture_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys collection handle"
+    },
+    {
+      "symbol": "cna_picture_album_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_album_collection_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned picture_album item"
+    },
+    {
+      "symbol": "cna_picture_album_collection_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_picture_album_collection_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "empties collection"
+    },
+    {
+      "symbol": "cna_picture_album_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "destroys collection handle"
     }
   ],
   "missingSymbols": [],
@@ -6279,6 +8525,19 @@
     "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
     "VALUE:CNA_AudioEventCallback": 8,
     "VALUE:CNA_StorageCompletionCallback": 8,
+    "VALUE:CNA_MediaPlayerEventCallback": 8,
+    "VALUE:CNA_MediaState": 4,
+    "VALUE:CNA_MediaSourceType": 4,
+    "VALUE:CNA_VideoSoundtrackType": 4,
+    "VALUE:CNA_VISUALIZATION_DATA_SIZE": 256,
+    "VALUE:CNA_MEDIA_STATE_STOPPED": 0,
+    "VALUE:CNA_MEDIA_STATE_PLAYING": 1,
+    "VALUE:CNA_MEDIA_STATE_PAUSED": 2,
+    "VALUE:CNA_MEDIA_SOURCE_TYPE_LOCAL_DEVICE": 0,
+    "VALUE:CNA_MEDIA_SOURCE_TYPE_WINDOWS_MEDIA_CONNECT": 4,
+    "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC": 0,
+    "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_DIALOG": 1,
+    "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC_AND_DIALOG": 2,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "OFFSET:CNA_StringView:data": 0,
@@ -6405,6 +8664,12 @@
     "OFFSET:CNA_CueInfo:is_preparing": 13,
     "OFFSET:CNA_CueInfo:is_stopped": 14,
     "OFFSET:CNA_CueInfo:is_stopping": 15,
+    "SIZE:CNA_VisualizationData": 2056,
+    "ALIGN:CNA_VisualizationData": 4,
+    "OFFSET:CNA_VisualizationData:struct_size": 0,
+    "OFFSET:CNA_VisualizationData:struct_version": 4,
+    "OFFSET:CNA_VisualizationData:frequencies": 8,
+    "OFFSET:CNA_VisualizationData:samples": 1032,
     "SIZE:CNA_Quaternion": 16,
     "ALIGN:CNA_Quaternion": 4,
     "OFFSET:CNA_Quaternion:x": 0,
@@ -7037,6 +9302,19 @@
     "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
     "VALUE:CNA_AudioEventCallback": 8,
     "VALUE:CNA_StorageCompletionCallback": 8,
+    "VALUE:CNA_MediaPlayerEventCallback": 8,
+    "VALUE:CNA_MediaState": 4,
+    "VALUE:CNA_MediaSourceType": 4,
+    "VALUE:CNA_VideoSoundtrackType": 4,
+    "VALUE:CNA_VISUALIZATION_DATA_SIZE": 256,
+    "VALUE:CNA_MEDIA_STATE_STOPPED": 0,
+    "VALUE:CNA_MEDIA_STATE_PLAYING": 1,
+    "VALUE:CNA_MEDIA_STATE_PAUSED": 2,
+    "VALUE:CNA_MEDIA_SOURCE_TYPE_LOCAL_DEVICE": 0,
+    "VALUE:CNA_MEDIA_SOURCE_TYPE_WINDOWS_MEDIA_CONNECT": 4,
+    "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC": 0,
+    "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_DIALOG": 1,
+    "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC_AND_DIALOG": 2,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "SIZE:CNA_ErrorInfo": 24,
@@ -7071,6 +9349,8 @@
     "ALIGN:CNA_AudioListener": 4,
     "SIZE:CNA_CueInfo": 16,
     "ALIGN:CNA_CueInfo": 4,
+    "SIZE:CNA_VisualizationData": 2056,
+    "ALIGN:CNA_VisualizationData": 4,
     "SIZE:CNA_Quaternion": 16,
     "ALIGN:CNA_Quaternion": 4,
     "SIZE:CNA_Matrix": 64,
@@ -7285,6 +9565,10 @@
     "OFFSET:CNA_CueInfo:is_preparing": 13,
     "OFFSET:CNA_CueInfo:is_stopped": 14,
     "OFFSET:CNA_CueInfo:is_stopping": 15,
+    "OFFSET:CNA_VisualizationData:struct_size": 0,
+    "OFFSET:CNA_VisualizationData:struct_version": 4,
+    "OFFSET:CNA_VisualizationData:frequencies": 8,
+    "OFFSET:CNA_VisualizationData:samples": 1032,
     "OFFSET:CNA_Quaternion:x": 0,
     "OFFSET:CNA_Quaternion:y": 4,
     "OFFSET:CNA_Quaternion:z": 8,

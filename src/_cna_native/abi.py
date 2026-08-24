@@ -52,6 +52,16 @@ CNA_GraphicsDeviceEventCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
 # dispatcher invokes dynamic/microphone callbacks on the thread which pumps it.
 CNA_AudioEventCallback = c.CFUNCTYPE(None, c.c_void_p)
 CNA_StorageCompletionCallback = c.CFUNCTYPE(None, c.c_void_p)
+# MediaPlayer callbacks are process-global observer notifications.  The native
+# trampoline receives only the copied registration context.
+CNA_MediaPlayerEventCallback = c.CFUNCTYPE(None, c.c_void_p)
+
+
+class CNA_VisualizationData(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("frequencies", c.c_float * 256), ("samples", c.c_float * 256),
+    ]
 
 
 class CNA_GameCallbacks(c.Structure):

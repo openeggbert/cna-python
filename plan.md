@@ -1,9 +1,10 @@
 # CNA-Python implementation plan
 
-Status: Foundation Milestone 8 complete. Every selected non-Media runtime
-family is dependency-complete and honestly qualified; only Media/Video remains.
+Status: Foundation Milestone 9 complete. The selected XNA 4.0 Windows runtime
+projection is structurally complete; the repository is now in maintenance and
+runtime/platform qualification mode.
 
-Date: 2026-08-23.
+Date: 2026-08-24.
 
 This is the normative current-state plan. Missing XNA surface stays visible in
 the strict verifier; no allowlist, fake backend state, fabricated asset, or
@@ -34,6 +35,10 @@ asset-name special case is an acceptable way to make it green.
 - [x] Complete FrameworkDispatcher, GamerServicesComponent, OcclusionQuery,
   RenderTargetCube, all eight Touch types, and all three Storage types with
   real ABI routes, one dispatcher, exact ownership, and formal BCL mappings.
+- [x] Complete all 24 Media/Video types with native catalog collections and
+  identity, MediaLibrary/provider ownership, Song, synchronized process-global
+  MediaPlayer and generation-scoped MediaQueue/events, VisualizationData,
+  private Video XNB loading, VideoPlayer, and a non-owning GetTexture policy.
 - [x] Refresh structural, behavior, runtime-capability, ABI, ownership, package,
   and isolated installed-wheel evidence.
 
@@ -41,17 +46,16 @@ asset-name special case is an acceptable way to make it green.
 
 - Reference/expected projection: 257/2,964 CLR types/members and 257/2,887
   mapped Python types/members.
-- Strict target: 233 types and 2,174 strict runtime members.
-- Diagnostics: 24 total, all whole missing Media types. Missing members and partial
-  types are zero. Every mismatch, leak, allowlist, and unmeasured category is
-  zero. The full strict check remains intentionally red only for future types.
-- Type status: 233 complete, 0 partial, 24 missing. Every Milestone 8 type has
-  zero local diagnostics.
-- Native manifest: 542 exact ABI-0.7 functions, 542 signature measurements,
-  756 C and 756 ctypes layout measurements, zero missing symbols and zero ABI
+- Strict target: 257 types and 2,423 strict runtime members.
+- Diagnostics: zero. Missing members, missing types, and partial types are zero;
+  every mismatch, leak, allowlist, and unmeasured category is zero. Normal and
+  leak-only strict checks pass.
+- Type status: 257 complete, 0 partial, 0 missing.
+- Native manifest: 744 exact ABI-0.7 functions, 744 signature measurements,
+  775 C and 775 ctypes layout measurements, zero missing symbols and zero ABI
   mismatches.
-- Behavior evidence: 171 PURE_XNA_DERIVED observations, 986 assertions, zero
-  failures.
+- Behavior evidence: 181 PURE_XNA_DERIVED observations, 1,004 assertions, zero
+  failures, including 10 Media observations.
 - Runtime evidence: Linux x86-64, HEADLESS renderer, NULL audio. Native
   SoundEffect construction/instance/3D routes, copied dynamic queues,
   BufferNeeded dispatch, zero-device microphone enumeration, and XACT failure
@@ -81,11 +85,32 @@ asset-name special case is an acceptable way to make it green.
   with zero crash, observed UAF, or double-free. See
   `docs/milestone8-evidence.md` and `NEXT.md`.
 
-## Dependency boundary after Milestone 8
+## Foundation Milestone 9 evidence
 
-No Media family was started. The exact remaining 24 whole types are all Media;
-that final milestone retains its distinct process-global queue, callback, and
-video-frame ownership architecture.
+- [x] All exact 24 Media types and 204 mapped XNA contract members are present;
+  collection protocol projections yield 2,423 measured target members.
+- [x] MediaLibrary and its seven collections use the real CNA provider graph,
+  stable facade identity, native ordering, explicit disposal, and Game-
+  generation teardown without filesystem catalog substitution.
+- [x] MediaPlayer uses one synchronized process-global manager, one queue facade
+  per Game generation, real transport, and native events delivered through the
+  existing owner-thread FrameworkDispatcher queue.
+- [x] VisualizationData's 2,056-byte C/ctypes shape and native route are exact;
+  public buffers are immutable tuples and no data is synthesized.
+- [x] Video uses the ordinary Content/XNB cache/rollback/Unload architecture;
+  VideoPlayer has operation-specific disposed behavior and never owns CNA's
+  transient frame texture.
+- [x] Media/Video stress passes all required 20-cycle groups and 50 callback
+  deliveries with zero crash, observed UAF, or double-free. See
+  `docs/media-video-evidence.md`.
+
+## Post-zero boundary
+
+There is no remaining selected-profile family. Large feature implementation is
+stopped. Current work is maintenance, runtime/platform qualification, upstream
+CNA blocker reconciliation, packaging/release qualification, and real-game
+compatibility testing. Net, wider GamerServices/Avatar, Content Pipeline, Xbox,
+and Windows Phone remain unopened future-profile decisions.
 
 ## Invariants
 

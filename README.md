@@ -53,15 +53,23 @@ mapping and XNA path containment. Hardware and platform gaps remain explicit;
 no input, selector UI, content-loss transition, or device-change event is
 fabricated. See [`docs/milestone8-evidence.md`](docs/milestone8-evidence.md).
 
+Foundation Milestone 9 completes the final selected Media/Video family: seven
+native read-only collections, the provider-backed catalog graph, native Song
+construction, synchronized process-global MediaPlayer/MediaQueue state and
+owner-thread events, exact VisualizationData, private Video XNB loading, and
+owned VideoPlayer control. Platform catalogs, real visualization output, video
+decode, and CNA's transient frame-identity gap remain explicitly classified.
+See [`docs/media-video-evidence.md`](docs/media-video-evidence.md).
+
 The maintained sibling starter completes 60- and 600-frame installed-wheel
 runs with both a raw PNG and a legal synthetic Texture2D XNB.
 
-This is not a complete XNA binding. The strict verifier exposes 233 of 257
-reference types, all locally zero-diagnostic. Its full check intentionally
-remains red for 24 wholly missing Media types; missing members and
-partial types are zero. Every structural mismatch, native leak, allowlist, and
-unmeasured-category counter is zero. Media/Video is the sole remaining
-dependency-complete milestone. No native library is bundled in the wheel.
+The selected XNA 4.0 Windows runtime Python projection is structurally
+complete: all 257 reference types are present with 2,423 strict runtime members,
+zero diagnostics, zero missing/partial types, and zero mismatch, leak,
+allowlist, or unmeasured counters. This is not a claim that every XNA profile,
+platform, renderer, audio backend, media provider, or decoder is qualified. No
+native library is bundled in the wheel.
 
 ## Running
 
@@ -81,7 +89,7 @@ API is imported.
 
 | Platform/backend | Evidence |
 | --- | --- |
-| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/Model and Audio paths, query/cube targets, empty Touch, Storage ownership/callback routes, and raw-PNG plus XNB 60/600 frames verified |
+| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/Model, Audio, Media catalog/player/queue/event, Video metadata/player-control, query/cube, empty Touch, Storage ownership/callback routes, and raw-PNG plus XNB 60/600-frame paths verified |
 | Linux windowed/GPU renderer | Not yet verified |
 | Windows | Not yet verified |
 | macOS | Not yet verified |
@@ -91,7 +99,10 @@ API is imported.
 HEADLESS command completion is not visible GPU output. NULL audio does not prove
 audible playback or physical microphone capture, and no legal authored XACT
 bank fixture is available. The qualified host also cannot prove OS window
-transitions, deterministic device loss, or physical input hardware.
+transitions, deterministic device loss, physical input hardware, populated
+music catalogs, decoded visualization output, or decoded video frames. CNA's
+borrowed VideoPlayer frame route also cannot prove XNA-compatible stable frame
+identity.
 Those distinctions are recorded in
 [`docs/generated/runtime-capabilities.md`](docs/generated/runtime-capabilities.md).
 

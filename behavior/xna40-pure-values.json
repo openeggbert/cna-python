@@ -174,6 +174,16 @@
     {"id": "touch.gesture.values", "operation": "Touch.GestureValues", "args": [], "expected": [[1, 2, 4, 8, 16, 32, 64, 128, 256, 512], 513, 0, 0.0, [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]},
     {"id": "touch.location.value", "operation": "Touch.LocationValue", "args": [], "expected": [true, false, -2112880633, "{Position:{X:8 Y:9}}", true, 7, 2, [2.5, -3.0], false, -1, 0, [0.0, 0.0]]},
     {"id": "touch.collection.value", "operation": "Touch.CollectionValue", "args": [], "expected": [0, false, 2, true, true, 1, true, true, 2, [0, 1, 2], [true, true, true, true, true]]},
-    {"id": "touch.enumerator.value", "operation": "Touch.EnumeratorValue", "args": [], "expected": [true, true, 1, true, 2, false, true, [1, 2]]}
+    {"id": "touch.enumerator.value", "operation": "Touch.EnumeratorValue", "args": [], "expected": [true, true, 1, true, 2, false, true, [1, 2]]},
+    {"id": "media.state.values", "group": "Media", "operation": "Media.StateValues", "args": [], "expected": [0, 1, 2]},
+    {"id": "media.source.values", "group": "Media", "operation": "Media.SourceValues", "args": [], "expected": [0, 4]},
+    {"id": "media.video.soundtrack.values", "group": "Media", "operation": "Media.SoundtrackValues", "args": [], "expected": [0, 1, 2]},
+    {"id": "media.visualization.counts", "group": "Media", "operation": "Media.VisualizationCounts", "args": [], "expected": [256, 256]},
+    {"id": "media.visualization.identity", "group": "Media", "operation": "Media.VisualizationIdentity", "args": [], "expected": [true, true]},
+    {"id": "media.visualization.defaults", "group": "Media", "operation": "Media.VisualizationDefaults", "args": [], "expected": [true, true]},
+    {"id": "media.visualization.frequency.bounds", "group": "Media", "operation": "Media.VisualizationFrequencyBounds", "args": [], "expected": true},
+    {"id": "media.visualization.sample.bounds", "group": "Media", "operation": "Media.VisualizationSampleBounds", "args": [], "expected": true},
+    {"id": "media.visualization.frequency.readonly", "group": "Media", "operation": "Media.VisualizationFrequencyReadonly", "args": [], "expected": true},
+    {"id": "media.visualization.sample.readonly", "group": "Media", "operation": "Media.VisualizationSampleReadonly", "args": [], "expected": true}
   ]
 }

@@ -56,6 +56,27 @@ class BrokenFixtureTests(unittest.TestCase):
         self.assertEqual(mapped_type("System.Runtime.Serialization.StreamingContext"),
                          "object")
 
+    def test_media_bcl_and_nullable_mappings_are_formal(self) -> None:
+        self.assertEqual(mapped_type("System.Uri"), "str")
+        self.assertEqual(mapped_type("System.DateTime"), "datetime")
+        from_uri = expected_callable({
+            "kind": "method", "name": "FromUri", "returnType":
+            "Microsoft.Xna.Framework.Media.Song", "static": True,
+            "genericParameters": [], "parameters": [
+                {"name": "name", "type": "System.String", "out": False},
+                {"name": "uri", "type": "System.Uri", "out": False},
+            ],
+        }, "FromUri", "Microsoft.Xna.Framework.Media.Song")
+        self.assertEqual(from_uri.parameters[1].annotation, "str")
+        picture = expected_callable({
+            "kind": "method", "name": "GetPictureFromToken", "returnType":
+            "Microsoft.Xna.Framework.Media.Picture", "static": False,
+            "genericParameters": [], "parameters": [
+                {"name": "token", "type": "System.String", "out": False},
+            ],
+        }, "GetPictureFromToken", "Microsoft.Xna.Framework.Media.MediaLibrary")
+        self.assertEqual(picture.return_type, "Picture | None")
+
     def test_touch_nested_enumerator_and_copy_target_are_formal(self) -> None:
         identity = "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator"
         self.assertEqual(projected_type_name(identity), "TouchCollection.Enumerator")

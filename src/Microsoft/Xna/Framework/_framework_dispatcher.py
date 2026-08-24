@@ -27,6 +27,8 @@ class FrameworkDispatcher:
             )
         result = host.library.cna_framework_dispatcher_update(host.handle)
         try:
+            from .Media._player import _update_media_game
+            _update_media_game(game)
             host._drain_dispatch_callbacks()
         except BaseException as error:
             if host.pending_exception is None:

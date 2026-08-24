@@ -4,9 +4,10 @@
   "provenance": "Pinned XNA reference metadata and IL/algorithm analysis; not a Linux CNA runtime capture",
   "category": "PURE_XNA_DERIVED",
   "summary": {
-    "OBSERVATIONS": 171,
-    "ASSERTIONS": 986,
-    "FAILURES": 0
+    "OBSERVATIONS": 181,
+    "ASSERTIONS": 1004,
+    "FAILURES": 0,
+    "MEDIA_PURE_XNA_DERIVED": 10
   },
   "results": [
     {
@@ -3488,6 +3489,106 @@
           2
         ]
       ]
+    },
+    {
+      "id": "media.state.values",
+      "passed": true,
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "actual": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "media.source.values",
+      "passed": true,
+      "expected": [
+        0,
+        4
+      ],
+      "actual": [
+        0,
+        4
+      ]
+    },
+    {
+      "id": "media.video.soundtrack.values",
+      "passed": true,
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "actual": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "media.visualization.counts",
+      "passed": true,
+      "expected": [
+        256,
+        256
+      ],
+      "actual": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "media.visualization.identity",
+      "passed": true,
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ]
+    },
+    {
+      "id": "media.visualization.defaults",
+      "passed": true,
+      "expected": [
+        true,
+        true
+      ],
+      "actual": [
+        true,
+        true
+      ]
+    },
+    {
+      "id": "media.visualization.frequency.bounds",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "media.visualization.sample.bounds",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "media.visualization.frequency.readonly",
+      "passed": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "media.visualization.sample.readonly",
+      "passed": true,
+      "expected": true,
+      "actual": true
     }
   ]
 }

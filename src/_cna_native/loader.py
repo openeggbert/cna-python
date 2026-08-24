@@ -10,6 +10,7 @@ from threading import RLock
 
 from . import abi
 from .errors import NativeAbiMismatchError, NativeError, NativeLibraryError, NativeUnavailableError
+from .media_manifest import MEDIA_FUNCTION_MANIFEST
 
 EXPECTED_ABI = 0x00000700
 
@@ -568,6 +569,8 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_storage_stream_flush", c.c_uint32, [c.c_uint64], "borrowed StorageStream"),
     ("cna_storage_stream_close", c.c_uint32, [c.c_uint64], "consumes StorageStream"),
 )
+
+FUNCTION_MANIFEST += MEDIA_FUNCTION_MANIFEST
 
 
 def _resolve() -> Path:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import timedelta
+from pathlib import PurePosixPath
 import re
 import struct
 from typing import Callable
@@ -40,6 +41,43 @@ class _TimeSpanReader(ContentTypeReader):
             return timedelta(microseconds=ticks // 10)
         except OverflowError as error:
             raise input._failure(f"TimeSpan value {ticks} ticks is outside datetime.timedelta") from error
+
+
+class _VideoReader(ContentTypeReader):
+    def __init__(self) -> None:
+        from ..Media import Video
+        super().__init__(Video)
+
+    def Read(self, input: ContentReader, existingInstance: object) -> object:
+        from ..Media import Video, VideoSoundtrackType
+        if existingInstance is not None:
+            raise ValueError("VideoReader cannot deserialize into an existing Video")
+        file_name = input.ReadObject()
+        duration_milliseconds = input.ReadObject()
+        width = input.ReadObject()
+        height = input.ReadObject()
+        frames_per_second = input.ReadObject()
+        soundtrack = input.ReadObject()
+        if not isinstance(file_name, str):
+            raise input._failure("Video file reference is null or not a String")
+        if not all(type(value) is int for value in (duration_milliseconds, width, height, soundtrack)):
+            raise input._failure("Video integer metadata has an invalid runtime type")
+        if type(frames_per_second) is not float:
+            raise input._failure("Video frame rate has an invalid runtime type")
+        try:
+            soundtrack_type = VideoSoundtrackType(soundtrack)
+        except ValueError as error:
+            raise input._failure("Video soundtrack identity is undefined") from error
+        file_path = PurePosixPath(file_name.replace("\\", "/"))
+        if file_path.is_absolute() or ".." in file_path.parts:
+            raise input._failure("Video file reference escapes the content root")
+        parent = PurePosixPath(input.AssetName.replace("\\", "/")).parent
+        relative = parent / file_path if str(parent) != "." else file_path
+        root = input.ContentManager.RootDirectory.replace("\\", "/").strip("/")
+        resolved = str(PurePosixPath(root) / relative) if root else str(relative)
+        device = input.ContentManager._graphics_device()
+        return Video._create(device._require_handle(), resolved, duration_milliseconds,
+                             width, height, frames_per_second, soundtrack_type)
 
 
 class _CollectionReader(ContentTypeReader):
@@ -441,6 +479,7 @@ _SPECIAL_READERS: dict[str, type[ContentTypeReader]] = {
     _PREFIX + "IndexBufferReader": _IndexBufferReader,
     _PREFIX + "BasicEffectReader": _BasicEffectReader,
     _PREFIX + "ModelReader": _ModelReader,
+    _PREFIX + "VideoReader": _VideoReader,
 }
 
 

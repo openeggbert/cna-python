@@ -91,9 +91,32 @@ private C handle is released before its engine. Microphones are stable,
 non-owning index facades invalidated with their Game. No Audio finalizer enters
 CNA, and every explicit failed creation leaves its output handle unpublished.
 
-The strict verifier consumes SHA-256-pinned XNA-derived neutral metadata. Its
-normal check is intentionally red while types are missing; unexpected/leak-only
-mode is the zero-tolerance public hygiene gate.
+Media has synchronized process state because XNA `MediaPlayer` is static. It
+separates CNA process-global scalars from the current Game generation, event
+registrations, one stable `MediaQueue` facade, identity domains, and queued
+weak-generation work. Teardown unregisters callbacks, invokes native program
+exit, destroys the queue, releases players before videos and catalog children
+before their provider root, then permits Game destruction. Stale Media facades
+reject native work deterministically.
+
+`MediaLibrary`, its catalog objects, all seven collection handles, `Song`,
+`Video`, and `VideoPlayer` are `OWNED`; the Video GraphicsDevice is `BORROWED`;
+the native frame texture is `PARENT_OWNED`; `MediaPlayer` is `PROCESS_GLOBAL`;
+`MediaQueue` is a process-global/current-generation view; `MediaSource` and
+`VisualizationData` are managed generation/value facades. Provider-domain
+native equality canonicalizes catalog identity, and queue access reuses the
+exact Song facade supplied to Play. No second owner is created.
+
+The private `VideoReader` uses the existing ContentManager reader table, cache,
+path normalization, LZX framing, transactional recording, rollback, and
+Unload. A player retains its selected content Video. CNA's frame texture is
+borrowed only until the next player call and has no stable XNA frame generation:
+null maps to `None`; a nonzero frame raises `NativeCapabilityError` and is never
+wrapped or destroyed.
+
+The strict verifier consumes SHA-256-pinned XNA-derived neutral metadata. The
+selected XNA 4.0 Windows runtime projection is structurally complete at 257
+types; normal and leak-only checks are both zero-tolerance green gates.
 
 Structural/API completeness is distinct from runtime capability. The
 machine-readable `docs/runtime-capabilities.json` classifies native, managed,
