@@ -45,16 +45,23 @@ TypeConverter protocol. This milestone adds no CNA imports. See
 [`docs/packed-vector-evidence.md`](docs/packed-vector-evidence.md), and
 [`docs/design-evidence.md`](docs/design-evidence.md).
 
+Foundation Milestone 8 completes every remaining non-Media runtime family:
+the explicit single FrameworkDispatcher boundary, the GamerServices component,
+native OcclusionQuery and RenderTargetCube lifecycle/binding, all eight Touch
+types, and native Storage selectors/containers/streams with formal async/BCL
+mapping and XNA path containment. Hardware and platform gaps remain explicit;
+no input, selector UI, content-loss transition, or device-change event is
+fabricated. See [`docs/milestone8-evidence.md`](docs/milestone8-evidence.md).
+
 The maintained sibling starter completes 60- and 600-frame installed-wheel
 runs with both a raw PNG and a legal synthetic Texture2D XNB.
 
-This is not a complete XNA binding. The strict verifier exposes 218 of 257
+This is not a complete XNA binding. The strict verifier exposes 233 of 257
 reference types, all locally zero-diagnostic. Its full check intentionally
-remains red for 39 wholly missing runtime/platform types; missing members and
+remains red for 24 wholly missing Media types; missing members and
 partial types are zero. Every structural mismatch, native leak, allowlist, and
-unmeasured-category counter is zero. Media, Storage, Touch, GamerServices,
-FrameworkDispatcher, OcclusionQuery, and RenderTargetCube remain future
-dependency-complete milestones. No native library is bundled in the wheel.
+unmeasured-category counter is zero. Media/Video is the sole remaining
+dependency-complete milestone. No native library is bundled in the wheel.
 
 ## Running
 
@@ -74,7 +81,7 @@ API is imported.
 
 | Platform/backend | Evidence |
 | --- | --- |
-| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/Model paths, SoundEffect/dynamic Audio routes, zero-device microphone enumeration, Audio/XACT ownership stress, and raw-PNG plus XNB 60/600 frames verified |
+| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/Model and Audio paths, query/cube targets, empty Touch, Storage ownership/callback routes, and raw-PNG plus XNB 60/600 frames verified |
 | Linux windowed/GPU renderer | Not yet verified |
 | Windows | Not yet verified |
 | macOS | Not yet verified |

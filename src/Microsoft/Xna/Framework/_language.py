@@ -42,6 +42,10 @@ class staticpropertymeta(type):
         if isinstance(descriptor, staticproperty):
             descriptor.__set__(cls, value)
             return
+        if (descriptor is not None and descriptor.__class__.__name__ == "Event"
+                and getattr(descriptor, "_static", False)
+                and isinstance(value, _BoundEvent)):
+            return
         super().__setattr__(name, value)
 
 
@@ -87,9 +91,10 @@ class Event:
     handlers run in subscription order, and exceptions propagate immediately.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, *, static: bool = False) -> None:
         self._handlers: WeakKeyDictionary[object, list[Callable[..., object]]] = WeakKeyDictionary()
         self._name = ""
+        self._static = static
 
     def __set_name__(self, owner: type, name: str) -> None:
         self._name = name
@@ -102,7 +107,7 @@ class Event:
 
     def __get__(self, instance: object | None, owner: type | None = None) -> object:
         if instance is None:
-            return self
+            return _BoundEvent(owner, self) if self._static and owner is not None else self
         return _BoundEvent(instance, self)
 
     def __set__(self, instance: object, value: object) -> None:

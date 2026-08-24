@@ -47,6 +47,10 @@ from Microsoft.Xna.Framework.Design import (  # noqa: E402
     QuaternionConverter, RayConverter, RectangleConverter, Vector2Converter,
     Vector3Converter, Vector4Converter,
 )
+from Microsoft.Xna.Framework.Input.Touch import (  # noqa: E402
+    GestureSample, GestureType, TouchCollection, TouchLocation,
+    TouchLocationState,
+)
 
 
 def vector2(value): return Vector2(*value)
@@ -145,6 +149,56 @@ class _CorpusExternalReader(ContentTypeReaderOfT[_CorpusShared]):
 
 
 def observe(operation: str, args: list[object]) -> object:
+    if operation == "Touch.GestureValues":
+        sample = GestureSample()
+        return [[int(value) for value in GestureType], int(GestureType.Tap | GestureType.PinchComplete),
+                int(sample.GestureType), sample.Timestamp.total_seconds(),
+                list(sample.Position), list(sample.Position2), list(sample.Delta), list(sample.Delta2)]
+    if operation == "Touch.LocationValue":
+        value = TouchLocation(7, TouchLocationState.Moved, Vector2(8, 9),
+                              TouchLocationState.Pressed, Vector2(2.5, -3))
+        other = TouchLocation(7, TouchLocationState.Released, Vector2(8, 9),
+                              TouchLocationState.Moved, Vector2(2.5, -3))
+        found, previous = value.TryGetPreviousLocation()
+        missing, sentinel = TouchLocation(
+            4, TouchLocationState.Pressed, Vector2.One).TryGetPreviousLocation()
+        return [value.Equals(other), value == other, value.GetHashCode(), value.ToString(),
+                found, previous.Id, int(previous.State), list(previous.Position),
+                missing, sentinel.Id, int(sentinel.State), list(sentinel.Position)]
+    if operation == "Touch.CollectionValue":
+        first = TouchLocation(1, TouchLocationState.Pressed, Vector2(1, 2))
+        second = TouchLocation(2, TouchLocationState.Moved, Vector2(3, 4))
+        default, values = TouchCollection(), TouchCollection([first, second])
+        destination = [TouchLocation(), TouchLocation(), TouchLocation()]
+        values.CopyTo(destination, 1)
+        readonly = []
+        for action in (lambda: values.Add(first), lambda: values.Clear(),
+                       lambda: values.Insert(0, first), lambda: values.RemoveAt(0),
+                       lambda: values.Remove(first)):
+            try: action()
+            except TypeError: readonly.append(True)
+            else: readonly.append(False)
+        found, located = values.FindById(2)
+        return [default.Count, default.IsConnected, values.Count, values.IsConnected,
+                values.IsReadOnly, values.IndexOf(second), values.Contains(first),
+                found, located.Id, [item.Id for item in destination], readonly]
+    if operation == "Touch.EnumeratorValue":
+        values = TouchCollection([
+            TouchLocation(1, TouchLocationState.Pressed, Vector2(1, 2)),
+            TouchLocation(2, TouchLocationState.Moved, Vector2(3, 4)),
+        ])
+        enumerator = values.GetEnumerator()
+        before = False
+        try: _ = enumerator.Current
+        except IndexError: before = True
+        first = enumerator.MoveNext(); first_id = enumerator.Current.Id
+        second = enumerator.MoveNext(); second_id = enumerator.Current.Id
+        ended = enumerator.MoveNext(); after = False
+        try: _ = enumerator.Current
+        except IndexError: after = True
+        enumerator.Dispose()
+        return [before, first, first_id, second, second_id, ended, after,
+                [item.Id for item in values]]
     if operation == "Packed.Format":
         packed_type, ordinary_args, boundary_args, clamp_args, identity = _PACKED_CORPUS[args[0]]
         ordinary = packed_type(*ordinary_args)

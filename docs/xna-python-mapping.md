@@ -194,6 +194,38 @@ stream nor seeks without the selected overload's contract. Byte buffers accept
 bytes-like inputs for immutable native copies and mutable buffers/sequences for
 outputs. Native pointers never escape.
 
+Storage's BCL support types are language mappings, not additional public CLR
+packages. `System.IAsyncResult` maps to an opaque `object` token whose private
+runtime implementation exposes the observable `AsyncState`,
+`CompletedSynchronously`, and `IsCompleted` values. `System.AsyncCallback` maps
+to `Callable[[object], None]`; the callback receives the identical token later
+accepted by the matching `End` method. Tokens retain arbitrary Python state and
+record operation, owning device, Game generation, completion, and one-shot End
+provenance. Forged tokens, cross-operation/device/generation use, and a second
+End are rejected without exposing native handles.
+
+The three file option enums use compact Python-native values:
+
+| CLR type | Python value |
+| --- | --- |
+| `System.IO.FileMode` | one of `"create_new"`, `"create"`, `"open"`, `"open_or_create"`, `"truncate"`, `"append"` |
+| `System.IO.FileAccess` | one of `"read"`, `"write"`, `"read_write"` |
+| `System.IO.FileShare` | a `frozenset[str]` containing zero or more of `"read"`, `"write"`, `"delete"`, `"inheritable"` |
+
+These spellings map exactly to the CLR enum values and reject unknown strings,
+wrong container types, and undefined flag bits. `System.IntPtr` is a bounded
+signed 64-bit Python `int` for this ABI. Protected exception serialization
+arguments (`SerializationInfo`, `StreamingContext`) map to `object` only so the
+metadata shape remains expressible; invoking that constructor is rejected and
+does not create .NET serialization infrastructure. No public `System`,
+`System.IO`, or `System.Runtime.Serialization` package is projected.
+
+Storage streams are private binary stream facades over owned CNA stream handles.
+They expose only capabilities measured from the native stream: read/write,
+seek/tell, truncate, flush, close, `closed`, and context management. Close is
+idempotent and releases the native handle exactly once. A container closes its
+live streams before native disposal and destruction.
+
 `ContentReader` uses private composition/inheritance with `_BinaryReader` for the
 selected `System.IO.BinaryReader` behavior. `_BinaryReader` is not a public CLR/XNA
 projection and never appears in stubs. The verifier encodes this as the formal

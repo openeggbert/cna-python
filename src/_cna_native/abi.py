@@ -51,6 +51,7 @@ CNA_GraphicsDeviceEventCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
 # Audio events are observer-only ``void(void*)`` callbacks.  The canonical
 # dispatcher invokes dynamic/microphone callbacks on the thread which pumps it.
 CNA_AudioEventCallback = c.CFUNCTYPE(None, c.c_void_p)
+CNA_StorageCompletionCallback = c.CFUNCTYPE(None, c.c_void_p)
 
 
 class CNA_GameCallbacks(c.Structure):
@@ -372,6 +373,16 @@ class CNA_RenderTarget2DCreateInfo(c.Structure):
     ]
 
 
+class CNA_RenderTargetCubeCreateInfo(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("size", c.c_uint32), ("mip_map", c.c_uint8),
+        ("reserved", c.c_uint8 * 3), ("format", c.c_uint32),
+        ("depth_format", c.c_uint32), ("multi_sample_count", c.c_int32),
+        ("usage", c.c_uint32),
+    ]
+
+
 class CNA_RenderTargetInfo(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
@@ -531,6 +542,40 @@ class CNA_TextureCubeTransfer(c.Structure):
         ("has_rectangle", c.c_uint8), ("reserved0", c.c_uint8 * 3),
         ("rectangle", CNA_Rectangle), ("reserved1", c.c_uint32),
         ("start_index", c.c_uint64), ("element_count", c.c_uint64),
+    ]
+
+
+class CNA_TouchLocation(c.Structure):
+    _fields_ = [
+        ("id", c.c_int32), ("state", c.c_uint32), ("position", CNA_Vector2),
+        ("previous_state", c.c_uint32), ("previous_position", CNA_Vector2),
+        ("pressure", c.c_float),
+    ]
+
+
+class CNA_TouchCapabilities(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("is_connected", c.c_uint8), ("reserved", c.c_uint8 * 3),
+        ("maximum_touch_count", c.c_uint32),
+    ]
+
+
+class CNA_TouchState(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("is_connected", c.c_uint8), ("reserved", c.c_uint8 * 3),
+        ("touch_count", c.c_uint32), ("touches", CNA_TouchLocation * 8),
+    ]
+
+
+class CNA_GestureSample(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("gesture_type", c.c_uint32), ("finger_id_ext", c.c_int32),
+        ("finger_id2_ext", c.c_int32), ("reserved", c.c_uint32),
+        ("timestamp_ticks", c.c_int64), ("position", CNA_Vector2),
+        ("position2", CNA_Vector2), ("delta", CNA_Vector2), ("delta2", CNA_Vector2),
     ]
 
 

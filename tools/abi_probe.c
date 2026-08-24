@@ -11,6 +11,7 @@
 #include "CNA/C/texture.h"
 #include "CNA/C/input.h"
 #include "CNA/C/input_gamepad.h"
+#include "CNA/C/input_touch.h"
 #include "CNA/C/display.h"
 #include "CNA/C/graphics_state.h"
 #include "CNA/C/graphics_resource.h"
@@ -23,6 +24,7 @@
 #include "CNA/C/texture_volume.h"
 #include "CNA/C/audio.h"
 #include "CNA/C/xact.h"
+#include "CNA/C/storage.h"
 
 #define TYPE(T) do { \
     printf("TYPE %s %zu %zu\n", #T, sizeof(T), alignof(T)); \
@@ -66,6 +68,7 @@ int main(void) {
     printf("VALUE CNA_PreparingDeviceSettingsMutatorEXT %zu\n", sizeof(CNA_PreparingDeviceSettingsMutatorEXT));
     CNA_AudioEventCallback checked_audio_event = audio_event_callback;
     printf("VALUE CNA_AudioEventCallback %zu\n", sizeof(checked_audio_event));
+    printf("VALUE CNA_StorageCompletionCallback %zu\n", sizeof(CNA_StorageCompletionCallback));
 
     TYPE(CNA_StringView); FIELD(CNA_StringView, data); FIELD(CNA_StringView, byte_length);
     TYPE(CNA_ErrorInfo); FIELD(CNA_ErrorInfo, struct_size); FIELD(CNA_ErrorInfo, struct_version); FIELD(CNA_ErrorInfo, result); FIELD(CNA_ErrorInfo, category); FIELD(CNA_ErrorInfo, message_byte_length);
@@ -111,6 +114,7 @@ int main(void) {
     TYPE(CNA_IndexBufferInfo); FIELD(CNA_IndexBufferInfo, struct_size); FIELD(CNA_IndexBufferInfo, struct_version); FIELD(CNA_IndexBufferInfo, index_count); FIELD(CNA_IndexBufferInfo, index_element_size); FIELD(CNA_IndexBufferInfo, buffer_usage); FIELD(CNA_IndexBufferInfo, dynamic); FIELD(CNA_IndexBufferInfo, is_content_lost); FIELD(CNA_IndexBufferInfo, has_renderer); FIELD(CNA_IndexBufferInfo, reserved);
     TYPE(CNA_IndexBufferTransfer); FIELD(CNA_IndexBufferTransfer, struct_size); FIELD(CNA_IndexBufferTransfer, struct_version); FIELD(CNA_IndexBufferTransfer, index_element_size); FIELD(CNA_IndexBufferTransfer, options); FIELD(CNA_IndexBufferTransfer, start_index); FIELD(CNA_IndexBufferTransfer, element_count);
     TYPE(CNA_RenderTarget2DCreateInfo); FIELD(CNA_RenderTarget2DCreateInfo, struct_size); FIELD(CNA_RenderTarget2DCreateInfo, struct_version); FIELD(CNA_RenderTarget2DCreateInfo, width); FIELD(CNA_RenderTarget2DCreateInfo, height); FIELD(CNA_RenderTarget2DCreateInfo, mip_map); FIELD(CNA_RenderTarget2DCreateInfo, reserved0); FIELD(CNA_RenderTarget2DCreateInfo, format); FIELD(CNA_RenderTarget2DCreateInfo, depth_format); FIELD(CNA_RenderTarget2DCreateInfo, multi_sample_count); FIELD(CNA_RenderTarget2DCreateInfo, usage); FIELD(CNA_RenderTarget2DCreateInfo, reserved1);
+    TYPE(CNA_RenderTargetCubeCreateInfo); FIELD(CNA_RenderTargetCubeCreateInfo, struct_size); FIELD(CNA_RenderTargetCubeCreateInfo, struct_version); FIELD(CNA_RenderTargetCubeCreateInfo, size); FIELD(CNA_RenderTargetCubeCreateInfo, mip_map); FIELD(CNA_RenderTargetCubeCreateInfo, reserved); FIELD(CNA_RenderTargetCubeCreateInfo, format); FIELD(CNA_RenderTargetCubeCreateInfo, depth_format); FIELD(CNA_RenderTargetCubeCreateInfo, multi_sample_count); FIELD(CNA_RenderTargetCubeCreateInfo, usage);
     TYPE(CNA_RenderTargetInfo); FIELD(CNA_RenderTargetInfo, struct_size); FIELD(CNA_RenderTargetInfo, struct_version); FIELD(CNA_RenderTargetInfo, kind); FIELD(CNA_RenderTargetInfo, width); FIELD(CNA_RenderTargetInfo, height); FIELD(CNA_RenderTargetInfo, level_count); FIELD(CNA_RenderTargetInfo, format); FIELD(CNA_RenderTargetInfo, depth_format); FIELD(CNA_RenderTargetInfo, multi_sample_count); FIELD(CNA_RenderTargetInfo, usage); FIELD(CNA_RenderTargetInfo, is_content_lost); FIELD(CNA_RenderTargetInfo, renderer_available); FIELD(CNA_RenderTargetInfo, reserved);
     TYPE(CNA_RenderTargetBinding); FIELD(CNA_RenderTargetBinding, struct_size); FIELD(CNA_RenderTargetBinding, struct_version); FIELD(CNA_RenderTargetBinding, render_target); FIELD(CNA_RenderTargetBinding, array_slice); FIELD(CNA_RenderTargetBinding, cube_map_face);
     TYPE(CNA_BackBufferReadback); FIELD(CNA_BackBufferReadback, struct_size); FIELD(CNA_BackBufferReadback, struct_version); FIELD(CNA_BackBufferReadback, has_source_rectangle); FIELD(CNA_BackBufferReadback, reserved); FIELD(CNA_BackBufferReadback, source_rectangle); FIELD(CNA_BackBufferReadback, start_index); FIELD(CNA_BackBufferReadback, element_count);
@@ -140,5 +144,9 @@ int main(void) {
     TYPE(CNA_GamePadAnalogState); FIELD(CNA_GamePadAnalogState, left_thumb_stick); FIELD(CNA_GamePadAnalogState, right_thumb_stick); FIELD(CNA_GamePadAnalogState, left_trigger); FIELD(CNA_GamePadAnalogState, right_trigger);
     TYPE(CNA_GamePadState); FIELD(CNA_GamePadState, struct_size); FIELD(CNA_GamePadState, struct_version); FIELD(CNA_GamePadState, is_connected); FIELD(CNA_GamePadState, reserved0); FIELD(CNA_GamePadState, packet_number); FIELD(CNA_GamePadState, pressed_buttons); FIELD(CNA_GamePadState, reserved1); FIELD(CNA_GamePadState, analog);
     TYPE(CNA_GamePadCapabilities); FIELD(CNA_GamePadCapabilities, struct_size); FIELD(CNA_GamePadCapabilities, struct_version); FIELD(CNA_GamePadCapabilities, gamepad_type); FIELD(CNA_GamePadCapabilities, is_connected); FIELD(CNA_GamePadCapabilities, has_a_button); FIELD(CNA_GamePadCapabilities, has_b_button); FIELD(CNA_GamePadCapabilities, has_x_button); FIELD(CNA_GamePadCapabilities, has_y_button); FIELD(CNA_GamePadCapabilities, has_back_button); FIELD(CNA_GamePadCapabilities, has_start_button); FIELD(CNA_GamePadCapabilities, has_big_button); FIELD(CNA_GamePadCapabilities, has_dpad_up_button); FIELD(CNA_GamePadCapabilities, has_dpad_down_button); FIELD(CNA_GamePadCapabilities, has_dpad_left_button); FIELD(CNA_GamePadCapabilities, has_dpad_right_button); FIELD(CNA_GamePadCapabilities, has_left_shoulder_button); FIELD(CNA_GamePadCapabilities, has_right_shoulder_button); FIELD(CNA_GamePadCapabilities, has_left_stick_button); FIELD(CNA_GamePadCapabilities, has_right_stick_button); FIELD(CNA_GamePadCapabilities, has_left_x_thumb_stick); FIELD(CNA_GamePadCapabilities, has_left_y_thumb_stick); FIELD(CNA_GamePadCapabilities, has_right_x_thumb_stick); FIELD(CNA_GamePadCapabilities, has_right_y_thumb_stick); FIELD(CNA_GamePadCapabilities, has_left_trigger); FIELD(CNA_GamePadCapabilities, has_right_trigger); FIELD(CNA_GamePadCapabilities, has_left_vibration_motor); FIELD(CNA_GamePadCapabilities, has_right_vibration_motor); FIELD(CNA_GamePadCapabilities, has_voice_support); FIELD(CNA_GamePadCapabilities, has_light_bar_ext); FIELD(CNA_GamePadCapabilities, has_trigger_vibration_motors_ext); FIELD(CNA_GamePadCapabilities, has_misc1_ext); FIELD(CNA_GamePadCapabilities, has_paddle1_ext); FIELD(CNA_GamePadCapabilities, has_paddle2_ext); FIELD(CNA_GamePadCapabilities, has_paddle3_ext); FIELD(CNA_GamePadCapabilities, has_paddle4_ext); FIELD(CNA_GamePadCapabilities, has_touchpad_ext); FIELD(CNA_GamePadCapabilities, has_gyro_ext); FIELD(CNA_GamePadCapabilities, has_accelerometer_ext); FIELD(CNA_GamePadCapabilities, reserved);
+    TYPE(CNA_TouchLocation); FIELD(CNA_TouchLocation, id); FIELD(CNA_TouchLocation, state); FIELD(CNA_TouchLocation, position); FIELD(CNA_TouchLocation, previous_state); FIELD(CNA_TouchLocation, previous_position); FIELD(CNA_TouchLocation, pressure);
+    TYPE(CNA_TouchCapabilities); FIELD(CNA_TouchCapabilities, struct_size); FIELD(CNA_TouchCapabilities, struct_version); FIELD(CNA_TouchCapabilities, is_connected); FIELD(CNA_TouchCapabilities, reserved); FIELD(CNA_TouchCapabilities, maximum_touch_count);
+    TYPE(CNA_TouchState); FIELD(CNA_TouchState, struct_size); FIELD(CNA_TouchState, struct_version); FIELD(CNA_TouchState, is_connected); FIELD(CNA_TouchState, reserved); FIELD(CNA_TouchState, touch_count); FIELD(CNA_TouchState, touches);
+    TYPE(CNA_GestureSample); FIELD(CNA_GestureSample, struct_size); FIELD(CNA_GestureSample, struct_version); FIELD(CNA_GestureSample, gesture_type); FIELD(CNA_GestureSample, finger_id_ext); FIELD(CNA_GestureSample, finger_id2_ext); FIELD(CNA_GestureSample, reserved); FIELD(CNA_GestureSample, timestamp_ticks); FIELD(CNA_GestureSample, position); FIELD(CNA_GestureSample, position2); FIELD(CNA_GestureSample, delta); FIELD(CNA_GestureSample, delta2);
     return 0;
 }

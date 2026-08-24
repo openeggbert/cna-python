@@ -1,19 +1,7 @@
 {
   "profile": "XNA 4.0 Windows runtime",
-  "missingTypeCount": 39,
+  "missingTypeCount": 24,
   "types": [
-    "Microsoft.Xna.Framework.FrameworkDispatcher",
-    "Microsoft.Xna.Framework.GamerServices.GamerServicesComponent",
-    "Microsoft.Xna.Framework.Graphics.OcclusionQuery",
-    "Microsoft.Xna.Framework.Graphics.RenderTargetCube",
-    "Microsoft.Xna.Framework.Input.Touch.GestureSample",
-    "Microsoft.Xna.Framework.Input.Touch.GestureType",
-    "Microsoft.Xna.Framework.Input.Touch.TouchCollection",
-    "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator",
-    "Microsoft.Xna.Framework.Input.Touch.TouchLocation",
-    "Microsoft.Xna.Framework.Input.Touch.TouchLocationState",
-    "Microsoft.Xna.Framework.Input.Touch.TouchPanel",
-    "Microsoft.Xna.Framework.Input.Touch.TouchPanelCapabilities",
     "Microsoft.Xna.Framework.Media.Album",
     "Microsoft.Xna.Framework.Media.AlbumCollection",
     "Microsoft.Xna.Framework.Media.Artist",
@@ -37,9 +25,6 @@
     "Microsoft.Xna.Framework.Media.Video",
     "Microsoft.Xna.Framework.Media.VideoPlayer",
     "Microsoft.Xna.Framework.Media.VideoSoundtrackType",
-    "Microsoft.Xna.Framework.Media.VisualizationData",
-    "Microsoft.Xna.Framework.Storage.StorageContainer",
-    "Microsoft.Xna.Framework.Storage.StorageDevice",
-    "Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException"
+    "Microsoft.Xna.Framework.Media.VisualizationData"
   ]
 }

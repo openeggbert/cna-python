@@ -21,7 +21,8 @@ ABI: 0.7.0 (0x00000700), exact match required
 Platform: Linux x86-64
 Renderer/platform: HEADLESS
 Audio: NULL
-SHA-256: 42e099146bf3b470f82fd963a516f8bdd7ff0406da8c37dd53747699117db086
+Sharp Runtime source revision: 625476d5b5fff5fa89f392c3c9af8638ff237692
+SHA-256: c62949d23d3745964f5e557a06665875621ed4cb6e2930e3f282afd5911f2dcb
 ELF CNA exports: 2861
 ```
 
@@ -32,10 +33,12 @@ metadata, templates, and wheel contents. The wheel contains no native library.
 Every entry supplies `restype` and `argtypes`, including pointer depth and
 fixed-width signedness. In addition to the established Game, 2D graphics, input,
 SpriteFont, buffer, title, Effect, stock-effect, Texture3D/Cube, and Model
-routes, Foundation Milestone 6 imports 96 used Audio/XACT routes. These cover
+routes, Foundation Milestone 6 imports 96 used Audio/XACT routes and Foundation
+Milestone 8 imports 71 used dispatcher, GamerServices, query, cube target,
+Touch, and Storage routes. These cover
 SoundEffect, instances, single/multiple-listener 3D calls, dynamic streaming,
 microphones, one shared unsubscribe route, and the AudioEngine/category/bank/cue
-graph. Unused Audio capability, native-disposed, renderer-equality, and XACT
+graph, plus the complete selected non-Media runtime closure. Unused Audio capability, native-disposed, renderer-equality, and XACT
 observer routes are deliberately not imported. This is not a claim that all CNA
 exports are bound.
 
@@ -44,10 +47,10 @@ ctypes structure used. ELF verification compares every imported symbol against
 the qualified artifact. Exact regenerated measurements are:
 
 ```text
-BOUND_FUNCTIONS=471
-CTYPES_SIGNATURE_MEASUREMENTS=471
-C_LAYOUT_MEASUREMENTS=708
-CTYPES_LAYOUT_MEASUREMENTS=708
+BOUND_FUNCTIONS=542
+CTYPES_SIGNATURE_MEASUREMENTS=542
+C_LAYOUT_MEASUREMENTS=756
+CTYPES_LAYOUT_MEASUREMENTS=756
 MISSING_SYMBOLS=0
 ABI_MISMATCHES=0
 ```
@@ -58,7 +61,7 @@ signed dimensions/ticks as `int32_t`/`int64_t`, and opaque handles as
 caller-owned output. Callback objects and message buffers stay alive for the
 full native registration/use lifetime.
 
-The new ABI measurements include `CNA_AudioEventCallback` and exact size,
+The ABI measurements include `CNA_AudioEventCallback` and exact size,
 alignment, and offsets for `CNA_AudioCapabilities`,
 `CNA_SoundEffectCreateInfo`, `CNA_SoundEffectInstanceInfo`,
 `CNA_AudioEmitter`, `CNA_AudioListener`, and `CNA_CueInfo`. The callback is
@@ -66,6 +69,13 @@ exactly `void (*)(void*)`; CNA documents dynamic delivery on the thread that
 advances the queue, which is the Game thread under the framework dispatcher.
 ctypes callbacks are strongly retained until `cna_audio_unsubscribe_ext`
 succeeds, and no Python exception crosses the C boundary.
+
+Milestone 8 additionally measures `CNA_StorageCompletionCallback`,
+`CNA_RenderTargetCubeCreateInfo`, `CNA_TouchLocation`,
+`CNA_TouchCapabilities`, `CNA_TouchState`, and `CNA_GestureSample`, including
+every field offset. Storage completion, DeviceChanged, and Disposing callbacks
+are exactly `void (*)(void*)`; no Python exception or user handler executes
+through their C frame.
 
 The qualified artifact predates CNA HEAD's rejection of bound vertex/index
 buffer destruction, so CNA-Python adds an explicit facade guard before calling
@@ -78,8 +88,13 @@ generated rendering documents HEADLESS limits, missing non-default Present,
 identityless resource events, the split dynamic-vertex offset/options routes,
 verified managed/native Content/XNB routes, erased-generic limitations, and the
 separate Effect/Model command paths, Texture3D/Cube HEADLESS boundaries, and
-granular Audio/XACT results. ABI 0.7 explicitly refuses multi-listener counts
+granular Audio/XACT, Touch, Storage, GamerServices, query, and cube-target
+results. ABI 0.7 explicitly refuses multi-listener counts
 other than one and explicitly ignores AudioEngine renderer/look-ahead values;
-CNA-Python reports both instead of approximating them. Microphone capture is
+CNA-Python reports both instead of approximating them. Storage FileShare flags
+reach the C ABI but are ignored by CNA's current StorageContainer
+implementation, and the native child-path routines do not fully enforce XNA
+containment; both differences are recorded precisely. Microphone capture is
 hardware-pending on the zero-device NULL backend, authored XACT success is
-asset-pending, and the unrelated RenderTargetCube family remains deferred.
+asset-pending, physical touch is hardware-pending, and actual storage-device or
+positive gesture transitions are platform-pending.

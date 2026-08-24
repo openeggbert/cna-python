@@ -432,7 +432,7 @@ class Mouse:
     def GetState() -> MouseState: ...
     @staticmethod
     def SetPosition(x: int, y: int) -> None: ...
-    WindowHandle: ClassVar[IntPtr]
+    WindowHandle: ClassVar[int]
 
 class MouseState:
     @overload

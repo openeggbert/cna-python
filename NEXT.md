@@ -2,35 +2,36 @@
 
 Date: 2026-08-23.
 
-`MILESTONE_7_COMPLETE=true`
+`MILESTONE_8_COMPLETE=true`
 
-Foundation Milestone 7 is complete. The entire remaining managed/value layer—
-Curve (6), PackedVector (19), and Design (13)—is structurally complete and
-behavior-qualified. No Media, Storage, Touch, GamerServices,
-FrameworkDispatcher, OcclusionQuery, or RenderTargetCube work was started. CNA
-was not modified and the native ABI surface did not grow.
+Foundation Milestone 8 is complete. All fifteen selected non-Media runtime
+types are complete, use real CNA ABI 0.7 routes wherever native behavior is
+required, and retain explicit capability classifications where CNA, the
+qualified backend, hardware, or platform cannot provide an XNA behavior. No
+Media type was started and CNA was not modified.
+
+The detailed implementation evidence is in `docs/milestone8-evidence.md`.
 
 ## Strict result
 
 ```text
-                               M7 START  M7 FINAL
+                               M8 START  M8 FINAL
 REFERENCE_TYPES                      257       257
 REFERENCE_MEMBERS                   2964      2964
 EXPECTED_PYTHON_TYPES                257       257
 EXPECTED_PYTHON_MEMBERS             2887      2887
-TARGET_TYPES                         180       218
-TARGET_MEMBERS                      1772      2061
-TOTAL_DIAGNOSTICS                     77        39
-MISSING_TYPE                          77        39
+TARGET_TYPES                         218       233
+TARGET_MEMBERS                      2061      2174
+TOTAL_DIAGNOSTICS                     39        24
+MISSING_TYPE                          39        24
 MISSING_MEMBER                         0         0
-COMPLETE_TYPES                       180       218
+COMPLETE_TYPES                       218       233
 PARTIAL_TYPES                          0         0
-MISSING_TYPES                         77        39
+MISSING_TYPES                         39        24
 ```
 
-All 39 diagnostics are whole future runtime/platform types. Every one of the
-38 Milestone 7 types reports `status=complete`, `diagnostics=0`. Normal strict
-`--check` is nonzero only because those 39 types remain absent.
+Every Milestone 8 type has zero local diagnostics. Normal strict `--check`
+exits nonzero solely for the 24 whole missing Media types; leak-only passes.
 
 ```text
 UNEXPECTED_TYPE=0
@@ -55,223 +56,311 @@ RAW_HANDLE_LEAK=0
 PUBLIC_NATIVE_FFI_LEAK=0
 ALLOWLIST_ENTRIES=0
 UNMEASURED_STRUCTURAL_CATEGORY=0
-ZERO_DIAGNOSTIC_TYPES=218
+ZERO_DIAGNOSTIC_TYPES=233
 ```
 
-## Curve
+## FrameworkDispatcher
 
-The complete six types are `Curve`, `CurveContinuity`, `CurveKey`,
-`CurveKeyCollection`, `CurveLoopType`, and `CurveTangent`.
+- Public `FrameworkDispatcher.Update()` invokes exactly one
+  `cna_framework_dispatcher_update` on the current live Game generation.
+- The existing Game loop is unchanged: a successful `Game.Update` is followed
+  by its one automatic native pump; a throwing update has no automatic
+  post-failure pump. An explicit call is one additional pump and is not
+  suppressed just because Game also pumps.
+- Native callbacks first terminate inside their ctypes trampoline. User work
+  converges on the Game owner's single queue, and a stored exception is
+  re-raised only after native control returns. Storage, Audio, Touch,
+  GamerServices, and future families do not own parallel dispatchers.
+- Reentrant explicit calls therefore remain ordinary explicit native calls;
+  no hidden coalescing or second automatic pump exists.
+- CNA ABI 0.7 requires a valid Game handle although XNA permits process-level
+  dispatcher use without a live Game. Python raises an explicit
+  `NativeCapabilityError`; it does not silently no-op or invent a dispatcher.
+  This scenario is `UPSTREAM_CNA_BLOCKED`.
 
-- CurveKey stores all scalar values as binary32. CompareTo sorts only by
-  Position and preserves the reference NaN branch behavior. Equality, hash,
-  operators, Clone, shallow copy, and deep copy are implemented.
-- CurveKeyCollection is a complete mutable collection. It maintains ascending
-  Position order, inserts a new equal-position key after existing equals, and
-  permits duplicate/equal objects. Index/replacement, Add, Remove, RemoveAt,
-  Clear, Contains, IndexOf, CopyTo, Clone, Count, IsReadOnly, and iteration are
-  covered. Collection Clone is independent but shallow in key references,
-  matching XNA; Curve.Clone follows the same rule.
-- Evaluate covers empty, singleton, exact-key, between-key cubic Hermite, Step,
-  duplicate-position, and zero-range behavior. Segment fraction uses the XNA
-  double intermediate followed by binary32 narrowing; Hermite terms and
-  accumulation preserve binary32 operation order.
-- PreLoop/PostLoop implement Constant, Cycle, CycleOffset, Oscillate, and Linear.
-  Tests include both sides, exact multiples, negative cycles, parity, duplicate
-  positions, and zero total range.
-- ComputeTangent/ComputeTangents implement Flat, Linear, and Smooth for first,
-  middle, last, singleton, non-uniform, and duplicate-position cases.
+## GamerServices
 
-Focused tests: 10 methods. `PURE_XNA_DERIVED` corpus observations: 10, with
-exact binary32 bit strings. See `docs/curve-evidence.md`.
+- `GamerServicesComponent(Game)` is a normal `GameComponent` and participates
+  in the existing Components ordering, one-initialize-per-Game-lifecycle, and
+  inherited Enabled/Update behavior.
+- Initialize copies the owning Game window handle to CNA, initializes the
+  native GamerServices dispatcher, then calls the base lifecycle. Update calls
+  the native dispatcher and then the base hook, matching the selected XNA IL.
+- Construction, collection integration, initialize/update, disabled update,
+  initialization and update failure boundaries, shutdown, and Game recreation
+  are covered. Twenty lifecycle cycles pass.
+- Gamer, Guide UI, Avatar, achievements, leaderboards, networking, and other
+  GamerServices public types are outside the selected profile and were not
+  fabricated. The selected component lifecycle is `VERIFIED_NATIVE`; the
+  broader ecosystem is `BACKEND_BLOCKED` for this projection.
 
-## PackedVector
+## OcclusionQuery
 
-The non-generic CLR identity remains public `IPackedVector`. The colliding
-`IPackedVector<TPacked>` identity is formally and machine-readably rewritten as
-`IPackedVectorOfT[TPacked]`. The two are distinct runtime classes; the generic
-TypeVar/base relation is measured, and there is no alias, allowlist, or
-synthetic XNA identity.
+- `OcclusionQuery` is an owned `GraphicsResource` tied to one GraphicsDevice
+  generation. Begin, End, IsComplete, and PixelCount use the canonical
+  `cna_occlusion_query_*` routes; Python does not emulate pixel counts.
+- The exact XNA state machine covers new, active, submitted, completion
+  queried, reusable second cycle, Begin twice, End without Begin, PixelCount
+  before completion, reuse before querying completion, and disposed access.
+- The qualified HEADLESS renderer creates a real query, completes it, and
+  returns its deterministic native count. That backend value is runtime
+  evidence, not an XNA golden value. Status is `VERIFIED_NATIVE`.
+- Explicit/context disposal, double disposal, wrong-thread refusal with later
+  owner-thread retry, device invalidation, child-before-Game shutdown, strong
+  Game ownership, and recreation pass twenty two-cycle stress iterations.
 
-All seventeen concrete types are complete: `Alpha8`, `Bgr565`, `Bgra4444`,
-`Bgra5551`, `Byte4`, `HalfSingle`, `HalfVector2`, `HalfVector4`,
-`NormalizedByte2`, `NormalizedByte4`, `NormalizedShort2`, `NormalizedShort4`,
-`Rg32`, `Rgba1010102`, `Rgba64`, `Short2`, and `Short4`.
+## RenderTargetCube
 
-Exact PackedValue storage:
+- The type inherits `TextureCube` and preserves both selected constructors.
+  Size, mip-map selection, preferred SurfaceFormat, DepthFormat, MSAA count,
+  and RenderTargetUsage all reach `cna_render_target_cube_create`; no argument
+  is forced or dropped.
+- Native result information supplies IsContentLost, DepthStencilFormat,
+  MultiSampleCount, and RenderTargetUsage. The existing TextureCube ownership
+  and codec foundation is reused.
+- `GraphicsDevice.SetRenderTarget(cube, face)`, SetRenderTargets,
+  GetRenderTargets, RenderTargetBinding.RenderTarget/CubeMapFace, all six
+  CubeMapFace values, and backbuffer restoration use the ordinary CNA binding
+  route. There is no cube-only renderer.
+- ContentLost subscription/removal semantics are complete. ABI 0.7 can query
+  current content-loss state but exposes no loss-transition callback, so no
+  event is synthesized. Current state is `VERIFIED_NATIVE`; real event delivery
+  is `UPSTREAM_CNA_BLOCKED`.
+- CNA can abort the process if a currently bound render target is destroyed.
+  Python detects the retained binding before native destruction, raises an
+  accurate capability/native error, preserves the owned handle, and permits a
+  legal owner-thread retry after explicit backbuffer restoration. It never
+  restores the backbuffer silently. The unsafe CNA behavior is
+  `UPSTREAM_CNA_BLOCKED`; twenty guarded/retry cycles have zero crashes.
 
-- UInt8: Alpha8;
-- UInt16: Bgr565, Bgra4444, Bgra5551, HalfSingle, NormalizedByte2;
-- UInt32: Byte4, HalfVector2, NormalizedByte4, NormalizedShort2, Rg32,
-  Rgba1010102, Short2;
-- UInt64: HalfVector4, NormalizedShort4, Rgba64, Short4.
+## Touch
 
-Negative, Boolean, and oversized assignments are rejected. Every struct has
-the selected constructors/conversions, PackedValue, interface mutation,
-fresh-vector unpacking, Equals/hash/hex ToString/operators, and shallow/deep
-value-copy behavior.
+All eight types are complete: `GestureSample`, `GestureType`,
+`TouchCollection`, `TouchCollection.Enumerator`, `TouchLocation`,
+`TouchLocationState`, `TouchPanel`, and `TouchPanelCapabilities`.
 
-Packing is exact-bit, not approximate-vector compatibility. Binary32
-intermediates, clamping, nearest-even rounding, masks/shifts, BGR/RGBA/alpha
-positions, byte/short lane order, signed normalization, reserved signed minima,
-and sign extension are verified. NaN follows the XNA zero path; infinities
-saturate.
+- GestureType has the exact ten XNA flag bits. GestureSample preserves type,
+  timestamp as `datetime.timedelta`, both positions, and both deltas.
+- TouchLocation implements both constructors, previous-location sentinel,
+  ToString, hash, copies, and XNA's observable distinction between `Equals`
+  and `==`.
+- TouchCollection preserves the XNA fixed-capacity, read-only IList behavior,
+  connected flag, value-copy boundaries, indexing, FindById, IndexOf,
+  Contains, CopyTo, and enumeration. Mutators remain present and reject as XNA
+  does; it is not reduced to a plain mutable list.
+- The nested CLR type projects only as `TouchCollection.Enumerator`; there is
+  no top-level Enumerator. MoveNext, Current before/after range, Dispose,
+  iterator protocol, and struct-like enumerator copy behavior are covered.
+- TouchPanel capability, state, gesture, window, display, and configuration
+  properties use canonical CNA routes. EnabledGestures validates exact bits
+  and preserves XNA's process-static enabled precondition. DisplayOrientation
+  accepts only the four exact defined identities. WindowHandle uses the
+  bounded IntPtr-to-int mapping and is cleared before its Game generation is
+  destroyed.
+- ReadGesture when no gesture is available uses the real native invalid-state
+  result; it never returns a fabricated default GestureSample. HEADLESS's
+  disconnected, zero-touch, empty-gesture state is honest native evidence.
+  Physical input is `HARDWARE_PENDING`; positive gesture recognition is
+  `PLATFORM_PENDING`.
 
-XNA half conversion is explicit and historical, not IEEE binary16:
+## Storage language mapping
+
+The formal rules are recorded in `docs/xna-python-mapping.md`,
+`tools/api_compat/mapping-rules.json`, and six passing verifier self-tests:
 
 ```text
-0x0000 -> +0
-0x8000 -> -0
-0x0001 -> smallest subnormal
-0x7C00 -> 65536
-0x7FFF -> 131008
-Infinity / NaN input -> signed 0x7FFF saturation
+System.IAsyncResult -> private opaque token, publicly object
+System.AsyncCallback -> Callable[[object], None]
+FileMode             -> canonical snake-case str
+FileAccess           -> canonical snake-case str
+FileShare            -> frozenset[str] flags; empty means None
+System.IO.Stream     -> private binary stream facade by native capability
 ```
 
-Subnormal/normal boundaries, maximum finite, overflow, both infinities, NaN,
-signed zero, and tie cases are covered. Python `struct.pack("e")` is not used.
+No fake public `System`, `System.IO`, or threading package exists, and no
+mapping support object changes the XNA type count.
 
-Focused tests: 10 methods. `PURE_XNA_DERIVED` corpus observations: 17, one per
-concrete type; each records zero, ordinary, boundary, clamp, round-trip,
-PackedValue identity, and equality. HalfSingle adds dedicated subnormal,
-non-finite, and exponent-31 assertions. See `docs/packed-vector-evidence.md`.
+## Storage Begin/End and callbacks
 
-## Design
+- All four BeginShowSelector overloads and EndShowSelector are implemented,
+  as are BeginOpenContainer and EndOpenContainer.
+- Each opaque token retains user state, operation kind, native result
+  ownership, originating device when applicable, Game host/generation,
+  completion, and one-End state. Wrong End method, wrong device, double End,
+  forged/foreign token, unrelated operation, failed Begin, and expired
+  generation are rejected without leaking a native pointer.
+- CNA 0.7 completes these fake-async operations synchronously. Its completion
+  trampoline is required to fire exactly once before native return; the user
+  callback then receives the exact token consumed by End. Callback exceptions
+  cannot cross C. Off-owner event callbacks enter the shared
+  FrameworkDispatcher queue; there is no Storage dispatcher.
 
-All thirteen types are complete: `MathTypeConverter`, `BoundingBoxConverter`,
-`BoundingSphereConverter`, `ColorConverter`, `MatrixConverter`, `PlaneConverter`,
-`PointConverter`, `QuaternionConverter`, `RayConverter`, `RectangleConverter`,
-`Vector2Converter`, `Vector3Converter`, and `Vector4Converter`.
+## Storage filesystem, streams, containment, and events
 
-Formal projection:
+- FreeSpace, TotalSpace, IsConnected, selector/device ownership,
+  DeleteContainer, all container CRUD, both name-enumeration overloads, all
+  three OpenFile overloads, and stream operations use canonical CNA Storage
+  routes. Python never substitutes `os` or `pathlib` filesystem work.
+- The stream facade exposes only supported read, write, seek/tell, length,
+  truncate, flush, close/closed, capability, and context-manager operations.
+  The native stream is released exactly once.
+- Containment validation precedes CNA: empty/NUL names, Unix absolute paths,
+  Windows drives, mixed-separator escape, lexical `..`, resolved escape, and
+  symlink escape are rejected. This deliberately closes CNA 0.7's traversal
+  mismatch while leaving actual I/O native.
+- CNA wildcard routes supply `*`, `?`, extension matching, native case/order,
+  and empty results; nested separators and invalid patterns are validated at
+  the mapped boundary rather than silently adopting Python glob behavior.
+- FileShare flags reach the exact ABI, but CNA's current StorageContainer does
+  not enforce sharing locks. This is documented as `UPSTREAM_CNA_BLOCKED`.
+- Ownership is Game -> retained StorageDevice lease -> StorageContainer ->
+  native stream. Reverse-order release, failed Begin/open rollback,
+  parent/child order, open-stream container disposal, double close/Dispose,
+  shutdown, and recreation are stress-qualified.
+- StorageContainer.Disposing uses the real native callback, is exactly once,
+  and handles duplicate handlers, self-removal, reentrancy, and double Dispose.
+  DeviceChanged has one strong native subscription and shared owner-thread
+  delivery. Registration is `VERIFIED_NATIVE`; a real OS attach/remove event is
+  `PLATFORM_PENDING` and is never fabricated.
+- CNA deterministically selects its configured storage root without presenting
+  UI. The storage operation is `VERIFIED_NATIVE`; selector UI is
+  `PLATFORM_PENDING`.
+- `StorageDeviceNotConnectedException` implements (), (message), and (message,
+  innerException); invalid/disconnected device state maps precisely while
+  unrelated I/O errors remain their real categories.
 
-```text
-System.Type                      -> type
-CultureInfo                      -> explicit culture-name str; None=invariant
-IDictionary                      -> ordered Mapping[str, object]
-PropertyDescriptorCollection     -> immutable ordered snapshot Mapping
-InstanceDescriptor               -> (callable, immutable argument tuple)
-ExpandableObjectConverter        -> private _MathTypeConverterBase flattening
-ITypeDescriptorContext           -> omitted: selected XNA IL does not observe it
-Attribute[] GetProperties filter -> omitted: fixed descriptor set ignores it
-```
-
-No public System.ComponentModel package or support type exists. Context and
-attribute omissions are verifier rules. Mapping duplicate keys are
-unrepresentable; Python resolves them before the converter sees a mapping.
-
-String parsing support:
-
-| Converter | Parse string | Format string | Descriptor tuple |
-| --- | --- | --- | --- |
-| MathTypeConverter | capability only; no concrete target | yes | yes |
-| Point, Color, Quaternion, Vector2/3/4 | yes | yes | yes |
-| BoundingBox/Sphere, Matrix, Plane, Ray, Rectangle | no | yes | yes |
-
-Color uses byte-domain R/G/B/A with no named-color grammar. Unsupported input
-converters reject strings, but formatting falls back to the exact XNA value
-ToString shape.
-
-Culture is deterministic and thread-safe: invariant/root/en-US use decimal `.`
-and list `,`; de-DE uses decimal `,` and list `;`. Legacy seven-significant-
-digit Single formatting, exponent thresholds, NaN/infinity tokens, signed zero,
-whitespace, overflow, wrong culture, and list/decimal separator interaction are
-covered without process-global locale mutation.
-
-Exact property order:
-
-```text
-Point/Vector2       X, Y
-Vector3             X, Y, Z
-Vector4/Quaternion  X, Y, Z, W
-Rectangle           X, Y, Width, Height
-Color               R, G, B, A
-BoundingBox         Min, Max
-BoundingSphere      Center, Radius
-Plane               Normal, D
-Ray                 Position, Direction
-Matrix              Translation, M11..M44
-```
-
-Nested values are snapshots. CreateInstance uses explicit typed required-key
-lookups, rejects missing/None/wrong values, ignores unrelated extras, and copies
-nested values. Matrix consumes only the sixteen scalar M fields so Translation
-is not applied twice. Every descriptor is executable as `callable(*arguments)`
-and reconstructs an XNA-equal value without reflection.
-
-Focused tests: 10 methods. `PURE_XNA_DERIVED` corpus observations: 21. See
-`docs/design-evidence.md` and the formal protocol in
-`docs/xna-python-mapping.md`.
-
-## Behavior
+## Behavior corpus
 
 ```text
-                         M7 START  M7 FINAL
-OBSERVATIONS                   119       167
-ASSERTIONS                     538       925
+                         M8 START  M8 FINAL
+OBSERVATIONS                   167       171
+ASSERTIONS                     925       986
 FAILURES                         0         0
 
-CURVE_OBSERVATIONS=10
-PACKEDVECTOR_OBSERVATIONS=17
-DESIGN_OBSERVATIONS=21
+TOUCH_NEW_OBSERVATIONS=4
 PROVENANCE=PURE_XNA_DERIVED
 ```
 
-The expected results come from pinned XNA metadata plus IL/reference algorithm
-analysis, not CNA output. The generated report is
-`docs/generated/behavior-corpus-report.json`.
+The new groups cover GestureType bits, GestureSample values, TouchLocation
+equality/previous-location behavior, TouchCollection, and enumerator
+boundaries. HEADLESS query counts, absent touch hardware, storage selector
+results, CNA errors, and platform events are intentionally excluded from XNA
+golden data. The generated report remains green at 171/986.
 
-## ABI and native regression
-
-Milestone 7 adds no native function or layout:
+## ABI
 
 ```text
-BOUND_FUNCTIONS=471
-CTYPES_SIGNATURE_MEASUREMENTS=471
-C_LAYOUT_MEASUREMENTS=708
-CTYPES_LAYOUT_MEASUREMENTS=708
-MISSING_SYMBOLS=0
-ABI_MISMATCHES=0
+                               M8 START  M8 FINAL
+BOUND_FUNCTIONS                       471       542
+CTYPES_SIGNATURE_MEASUREMENTS         471       542
+C_LAYOUT_MEASUREMENTS                 708       756
+CTYPES_LAYOUT_MEASUREMENTS            708       756
+MISSING_SYMBOLS                         0         0
+ABI_MISMATCHES                          0         0
 ABI=0.7.0 / 0x00000700
 ```
+
+All new enums, structures, fixed-width fields, callback prototypes, pointer
+depths, argtypes, restypes, ownership, and result lifetimes are measured
+against canonical C headers. Only used FrameworkDispatcher, GamerServices,
+OcclusionQuery, RenderTargetCube/binding, Touch, and Storage routes were added.
+No Media function, C++ ABI, ctypes default signature, raw handle, or public FFI
+surface was introduced.
 
 Qualified artifact:
 
 ```text
-CNA artifact source revision=a09196a6477f69a7a57c8364f990658d31531a5b
-library SHA-256=42e099146bf3b470f82fd963a516f8bdd7ff0406da8c37dd53747699117db086
+CNA revision=a09196a6477f69a7a57c8364f990658d31531a5b
+Sharp Runtime revision=625476d5b5fff5fa89f392c3c9af8638ff237692
+library SHA256=c62949d23d3745964f5e557a06665875621ed4cb6e2930e3f282afd5911f2dcb
 platform=Linux x86-64
 renderer=HEADLESS
 audio=NULL
 ```
 
-Current CNA HEAD was inspected read-only at
-`1bb2145d99ed572dd4eb15009c34e2e5f410fcf0`; it was not changed. The full
-native, Content, Effect/Model, and Audio ownership stress suites pass at 20
-cycles (dynamic Audio callbacks: 50) with zero crashes, observed UAF, or
-double-free. Sanitizers were not run.
+CNA's unrelated static-archive aggregation target failed after this exact
+shared library had successfully linked because its generated `link.txt` was
+absent. The shared artifact itself passes every 542-function/756-layout ABI
+measurement. CNA remained read-only.
+
+## Ownership and native stress
+
+```text
+FRAMEWORK_DISPATCHER_CYCLES=20
+GAMERSERVICES_INITIALIZE_CYCLES=20
+GAMERSERVICES_COMPONENT_CYCLES=20
+OCCLUSION_QUERY_CYCLES=20
+RENDERTARGET_CUBE_CYCLES=20
+RENDERTARGET_CUBE_FAILURE_CYCLES=20
+TOUCH_STATE_CYCLES=20
+TOUCH_GESTURE_EMPTY_CYCLES=20
+STORAGE_DEVICE_CYCLES=20
+STORAGE_CONTAINER_CYCLES=20
+STORAGE_STREAM_CYCLES=20
+STORAGE_CALLBACK_CYCLES=50
+STORAGE_FAILURE_CYCLES=21
+WRONG_THREAD_REFUSAL_CYCLES=2
+GAME_RECREATION_CYCLES=20
+NATIVE_CRASHES=0
+OBSERVED_UAF=0
+DOUBLE_FREE=0
+SANITIZER_STATUS=NOT_RUN
+```
+
+All earlier native Game/Graphics, Content, Effect/Model, and Audio ownership
+stress suites also pass at their required cycle counts. The Game runtime root
+strongly retains native children until legal reverse-order destruction, so an
+unreachable Python wrapper cannot strand a CNA handle past its device/Game
+generation.
+
+## Runtime capabilities
+
+The inventory has 96 granular rows:
+
+```text
+VERIFIED_NATIVE=53
+VERIFIED_MANAGED=10
+UPSTREAM_CNA_BLOCKED=10
+BACKEND_BLOCKED=11
+HARDWARE_PENDING=4
+PLATFORM_PENDING=3
+ASSET_PENDING=3
+LANGUAGE_MAPPING_LIMITATION=2
+UNIMPLEMENTED_CNA_PYTHON_FOR_M8=0
+```
+
+Milestone 8's blockers/pending rows are kept separate: dispatcher without
+Game, ContentLost transitions, bound-target CNA destruction, FileShare
+enforcement, broader GamerServices, physical Touch, positive gestures,
+selector UI, and real DeviceChanged transitions. See
+`docs/runtime-capabilities.json` for operation-level evidence.
 
 ## Tests and package
 
 ```text
 COMPILEALL=PASS
-UNITTESTS=128 total, 126 pass, 2 optional-fixture skips
-VERIFIER_SELF_TESTS=4 PASS
-FOCUSED_M7_TEST_METHODS=30 PASS
+UNITTESTS=133 total, 131 pass, 2 optional-fixture skips
+VERIFIER_SELF_TESTS=6 PASS
+FOCUSED_M8_TEST_METHODS=5 PASS
 STRICT_REPORT=PASS
 LEAK_ONLY=PASS
-STRICT_CHECK=EXPECTED_NONZERO_ONLY_FOR_39_MISSING_TYPES
+STRICT_CHECK=EXPECTED_NONZERO_ONLY_FOR_MEDIA_24
+BEHAVIOR=171 observations / 986 assertions / 0 failures
+RUNTIME_CAPABILITY_GENERATOR=96 PASS
+ABI_AUDIT=542 signatures / 756 layouts / 0 mismatches
 ```
 
 Version remains `0.1.0.dev0`. Final artifacts:
 
 ```text
 WHEEL_FILENAME=cna_python-0.1.0.dev0-py3-none-any.whl
-WHEEL_SHA256=2c7fea1c11dd402e67464e1f52adc83e7c866a3069723263019aa38683217439
-WHEEL_ENTRIES=62
+WHEEL_SHA256=228274ac77ca5286750adb396eb559e4f30132fdc8c39fb5a74acac0c296ed27
+WHEEL_FILES=73
+WHEEL_ENTRIES=73
 SDIST_FILENAME=cna_python-0.1.0.dev0.tar.gz
-SDIST_SHA256=0c59da88d41a2150de4bd1a6d76495be79e63027802fdbc3c59abceafa8c33a2
-SDIST_ENTRIES=148
+SDIST_SHA256=fec2e15775d46947315107eee5fe6d3a8d5d3b4edd59560569a123d44ffbbd7e
+SDIST_FILES=165
+SDIST_ENTRIES=165
 FORBIDDEN_WHEEL_ENTRIES=0
 FORBIDDEN_SDIST_ENTRIES=0
 ABSOLUTE_DEVELOPER_PATHS=0
@@ -279,72 +368,60 @@ BUNDLED_NATIVE_LIBRARIES=0
 MICROSOFT_OR_PROPRIETARY_CONTENT=0
 ```
 
-The wheel contains `_curve.py`, both Design modules and stub, and both
-PackedVector modules and stub. It contains no native library.
+The exact final wheel passes fresh-venv import and compile probes. The generated
+consumer passes 60/600 real CNA frames with zero developer paths, sibling
+source dependencies, or PYTHONPATH source dependencies.
 
-The exact final wheel above was installed with `--no-index --no-deps` into
-fresh venvs with no editable install, source import, sibling runtime dependency,
-or PYTHONPATH:
+The maintained template source was not changed. Its exact-wheel import,
+compile, 60-frame, and 600-frame gates pass with `PYTHONPATH` unset. In this
+sandbox its unchanged tree was copied to a writable temporary directory for
+the native XNB run because Sharp Runtime currently opens a read-only content
+file with read-write access; no template source or asset bytes changed.
 
 ```text
-ISOLATED_IMPORT_PROBE=PASS
-ISOLATED_COMPILE_PROBE=PASS
-GENERATED_SMOKE_60=PASS
-GENERATED_STABILITY_600=PASS
-MAINTAINED_SMOKE_60=PASS
-MAINTAINED_STABILITY_600=PASS
-ABSOLUTE_DEVELOPER_PATHS=0
-SIBLING_SOURCE_DEPENDENCIES=0
-PYTHONPATH_SOURCE_DEPENDENCIES=0
 TEMPLATE_SOURCE_CHANGED=NO
+MAINTAINED_IMPORT=PASS
+MAINTAINED_COMPILE=PASS
+MAINTAINED_60=PASS
+MAINTAINED_600=PASS
+GENERATED_IMPORT=PASS
+GENERATED_COMPILE=PASS
+GENERATED_60=PASS
+GENERATED_600=PASS
+PYTHONPATH=UNSET
 ```
 
-The maintained template remains the raw PNG plus Texture2D XNB 2D lifecycle
-canary. No Curve, PackedVector, or Design demo was added.
+## Remaining boundary
 
-## Remaining exact inventory
+The regenerated missing inventory is exactly:
 
-The regenerated 39 whole missing runtime/platform types are:
-
-- Framework (1): `FrameworkDispatcher`;
-- GamerServices (1): `GamerServicesComponent`;
-- Graphics (2): `OcclusionQuery`, `RenderTargetCube`;
-- Touch (8): `GestureSample`, `GestureType`, `TouchCollection`,
-  `TouchCollection.Enumerator`, `TouchLocation`, `TouchLocationState`,
-  `TouchPanel`, `TouchPanelCapabilities`;
-- Storage (3): `StorageContainer`, `StorageDevice`,
-  `StorageDeviceNotConnectedException`;
-- Media (24): `Album`, `AlbumCollection`, `Artist`, `ArtistCollection`, `Genre`,
-  `GenreCollection`, `MediaLibrary`, `MediaPlayer`, `MediaQueue`, `MediaSource`,
-  `MediaSourceType`, `MediaState`, `Picture`, `PictureAlbum`,
-  `PictureAlbumCollection`, `PictureCollection`, `Playlist`,
-  `PlaylistCollection`, `Song`, `SongCollection`, `Video`, `VideoPlayer`,
-  `VideoSoundtrackType`, `VisualizationData`.
-
-The authoritative inventory is in
-`docs/generated/missing-type-inventory.json` and `.md`. Milestone 7 stops here;
-no next runtime family has been started.
-
-## Reproduction
-
-```bash
-python3 -m compileall -q src tests tools
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so python3 -m unittest discover -v
-python3 tools/api_compat/test_verify.py
-python3 tools/api_compat/generate_stubs.py
-python3 tools/api_compat/verify.py --report --output docs/generated/api-compat-report.json --inventory
-python3 tools/api_compat/verify.py --leak-only
-python3 tools/api_compat/verify.py --check  # nonzero only for 39 absent types
-python3 tools/run_behavior_corpus.py --output docs/generated/behavior-corpus-report.json
-python3 tools/generate_runtime_capabilities.py
-python3 tools/audit_cna_abi.py --cna-root /qualified/cna/source --library /absolute/path/libcna_c_api.so --output docs/generated/cna-abi-report.json
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/native_ownership_stress.py --cycles 20
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/content_ownership_stress.py --cycles 20
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/effect_model_ownership_stress.py --cycles 20
-CNA_NATIVE_LIBRARY=/absolute/path/libcna_c_api.so PYTHONPATH=src python3 tools/audio_ownership_stress.py --cycles 20 --callback-cycles 50
-PYTHONPATH=/tmp/cna-python-build-tools python3 -m build --no-isolation
-python3 tools/audit_package.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --sdist dist/cna_python-0.1.0.dev0.tar.gz
-python3 tools/verify_consumer.py --wheel dist/cna_python-0.1.0.dev0-py3-none-any.whl --template ../cna-python-template --library /absolute/path/libcna_c_api.so
-git diff --check
-git -C ../cna-python-template diff --check
+```text
+Microsoft.Xna.Framework.Media.Album
+Microsoft.Xna.Framework.Media.AlbumCollection
+Microsoft.Xna.Framework.Media.Artist
+Microsoft.Xna.Framework.Media.ArtistCollection
+Microsoft.Xna.Framework.Media.Genre
+Microsoft.Xna.Framework.Media.GenreCollection
+Microsoft.Xna.Framework.Media.MediaLibrary
+Microsoft.Xna.Framework.Media.MediaPlayer
+Microsoft.Xna.Framework.Media.MediaQueue
+Microsoft.Xna.Framework.Media.MediaSource
+Microsoft.Xna.Framework.Media.MediaSourceType
+Microsoft.Xna.Framework.Media.MediaState
+Microsoft.Xna.Framework.Media.Picture
+Microsoft.Xna.Framework.Media.PictureAlbum
+Microsoft.Xna.Framework.Media.PictureAlbumCollection
+Microsoft.Xna.Framework.Media.PictureCollection
+Microsoft.Xna.Framework.Media.Playlist
+Microsoft.Xna.Framework.Media.PlaylistCollection
+Microsoft.Xna.Framework.Media.Song
+Microsoft.Xna.Framework.Media.SongCollection
+Microsoft.Xna.Framework.Media.Video
+Microsoft.Xna.Framework.Media.VideoPlayer
+Microsoft.Xna.Framework.Media.VideoSoundtrackType
+Microsoft.Xna.Framework.Media.VisualizationData
 ```
+
+That is `Media=24`, with no non-Media remainder. Foundation Milestone 8 stops
+here deliberately; Media/Video retains its separate process-global queue,
+callback, and video-frame ownership architecture.

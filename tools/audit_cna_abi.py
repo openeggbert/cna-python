@@ -39,7 +39,8 @@ TYPES = {
         abi.CNA_VertexBufferBinding,
         abi.CNA_IndexBufferCreateInfo, abi.CNA_IndexBufferInfo,
         abi.CNA_IndexBufferTransfer, abi.CNA_RenderTarget2DCreateInfo,
-        abi.CNA_RenderTargetInfo, abi.CNA_RenderTargetBinding,
+        abi.CNA_RenderTargetCubeCreateInfo, abi.CNA_RenderTargetInfo,
+        abi.CNA_RenderTargetBinding,
         abi.CNA_BackBufferReadback, abi.CNA_UserPrimitives, abi.CNA_UserIndices,
         abi.CNA_SpriteFontGlyph, abi.CNA_SpriteFontCreateInfo,
         abi.CNA_SpriteFontInfo,
@@ -53,6 +54,8 @@ TYPES = {
         abi.CNA_SpriteScaledCommand, abi.CNA_KeyboardState, abi.CNA_MouseState,
         abi.CNA_GamePadAnalogState, abi.CNA_GamePadState,
         abi.CNA_GamePadCapabilities,
+        abi.CNA_TouchLocation, abi.CNA_TouchCapabilities, abi.CNA_TouchState,
+        abi.CNA_GestureSample,
     )
 }
 
@@ -103,6 +106,7 @@ def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
         "VALUE:CNA_GraphicsDeviceEventCallback": ctypes.sizeof(abi.CNA_GraphicsDeviceEventCallback),
         "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": ctypes.sizeof(abi.CNA_PreparingDeviceSettingsMutatorEXT),
         "VALUE:CNA_AudioEventCallback": ctypes.sizeof(abi.CNA_AudioEventCallback),
+        "VALUE:CNA_StorageCompletionCallback": ctypes.sizeof(abi.CNA_StorageCompletionCallback),
     }
     for name, value in TYPES.items():
         result[f"SIZE:{name}"] = ctypes.sizeof(value)

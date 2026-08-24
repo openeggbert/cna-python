@@ -25,13 +25,22 @@
     "Microsoft.Xna.Framework.Graphics.ModelEffectCollection+Enumerator": "ModelEffectCollectionEnumerator",
     "Microsoft.Xna.Framework.Graphics.ModelMeshCollection+Enumerator": "ModelMeshCollectionEnumerator",
     "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator": "ModelMeshPartCollectionEnumerator"
+    ,"Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator": "TouchCollection.Enumerator"
   },
   "typeMappings": {
     "System.ComponentModel.ITypeDescriptorContext": "object",
     "System.ComponentModel.PropertyDescriptorCollection": "Mapping[str, object]",
     "System.Globalization.CultureInfo": "str | None",
     "System.Collections.IDictionary": "Mapping[str, object]",
-    "System.Resources.ResourceManager": "object"
+    "System.Resources.ResourceManager": "object",
+    "System.IntPtr": "int",
+    "System.IAsyncResult": "object",
+    "System.AsyncCallback": "Callable[[object], None]",
+    "System.IO.FileMode": "str",
+    "System.IO.FileAccess": "str",
+    "System.IO.FileShare": "frozenset[str]",
+    "System.Runtime.Serialization.SerializationInfo": "object",
+    "System.Runtime.Serialization.StreamingContext": "object"
   },
   "memberTypeMappings": {
     "Microsoft.Xna.Framework.Audio.AudioCategory.Name": "str | None",
@@ -39,7 +48,8 @@
     "Microsoft.Xna.Framework.Audio.Microphone.GetData.buffer": "MutableSequence[int]",
     "Microsoft.Xna.Framework.Audio.RendererDetail.FriendlyName": "str | None",
     "Microsoft.Xna.Framework.Audio.RendererDetail.RendererId": "str | None",
-    "Microsoft.Xna.Framework.CurveKeyCollection.CopyTo.array": "MutableSequence[CurveKey]"
+    "Microsoft.Xna.Framework.CurveKeyCollection.CopyTo.array": "MutableSequence[CurveKey]",
+    "Microsoft.Xna.Framework.Input.Touch.TouchCollection.CopyTo.array": "MutableSequence[TouchLocation]"
   },
   "baseMappings": {
     "System.Attribute": "object",
@@ -62,6 +72,6 @@
     "__copy__", "__deepcopy__", "__enter__", "__exit__", "__getitem__",
     "__setitem__", "__iter__", "__repr__", "__str__", "__hash__",
     "__eq__", "__ne__", "__add__", "__sub__", "__mul__", "__rmul__",
-    "__truediv__", "__neg__", "__len__", "insert"
+    "__truediv__", "__neg__", "__len__", "__next__", "insert"
   ]
 }

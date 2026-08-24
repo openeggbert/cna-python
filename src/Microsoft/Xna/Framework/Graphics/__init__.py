@@ -35,7 +35,8 @@ from ._vertices import (
     VertexPositionColor, VertexPositionColorTexture, VertexPositionNormalTexture,
     VertexPositionTexture,
 )
-from ._render_targets import RenderTarget2D, RenderTargetBinding
+from ._render_targets import RenderTarget2D, RenderTargetBinding, RenderTargetCube
+from ._queries import OcclusionQuery
 from ._effects import (AlphaTestEffect, BasicEffect, DirectionalLight, DualTextureEffect,
     Effect, EffectAnnotation, EffectAnnotationCollection, EffectMaterial, EffectParameter,
     EffectParameterClass, EffectParameterCollection, EffectParameterType, EffectPass,
@@ -54,7 +55,7 @@ __all__ = [
     "GraphicsProfile",
     "GraphicsDeviceStatus", "IndexElementSize", "PresentInterval", "PrimitiveType",
     "DynamicIndexBuffer", "DynamicVertexBuffer", "IndexBuffer", "IVertexType",
-    "RasterizerState", "RenderTarget2D", "RenderTargetBinding", "RenderTargetUsage",
+    "OcclusionQuery", "RasterizerState", "RenderTarget2D", "RenderTargetBinding", "RenderTargetCube", "RenderTargetUsage",
     "SamplerState", "SamplerStateCollection",
     "SetDataOptions", "StencilOperation",
     "GraphicsResource", "NoSuitableGraphicsDeviceException", "PresentationParameters",

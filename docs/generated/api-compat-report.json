@@ -5,10 +5,10 @@
     "REFERENCE_MEMBERS": 2964,
     "EXPECTED_PYTHON_TYPES": 257,
     "EXPECTED_PYTHON_MEMBERS": 2887,
-    "TARGET_TYPES": 218,
-    "TARGET_MEMBERS": 2061,
-    "TOTAL_DIAGNOSTICS": 39,
-    "MISSING_TYPE": 39,
+    "TARGET_TYPES": 233,
+    "TARGET_MEMBERS": 2174,
+    "TOTAL_DIAGNOSTICS": 24,
+    "MISSING_TYPE": 24,
     "MISSING_MEMBER": 0,
     "UNEXPECTED_TYPE": 0,
     "UNEXPECTED_MEMBER": 0,
@@ -34,66 +34,6 @@
     "UNMEASURED_STRUCTURAL_CATEGORY": 0
   },
   "diagnostics": [
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.FrameworkDispatcher",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.GamerServices.GamerServicesComponent",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.OcclusionQuery",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Graphics.RenderTargetCube",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.GestureSample",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.GestureType",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.TouchCollection",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.TouchLocation",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.TouchLocationState",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.TouchPanel",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Input.Touch.TouchPanelCapabilities",
-      "detail": "type is not exported"
-    },
     {
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Media.Album",
@@ -213,21 +153,6 @@
       "category": "MISSING_TYPE",
       "type": "Microsoft.Xna.Framework.Media.VisualizationData",
       "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Storage.StorageContainer",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Storage.StorageDevice",
-      "detail": "type is not exported"
-    },
-    {
-      "category": "MISSING_TYPE",
-      "type": "Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException",
-      "detail": "type is not exported"
     }
   ],
   "zeroDiagnosticTypes": [
@@ -288,6 +213,7 @@
     "Microsoft.Xna.Framework.Design.Vector4Converter",
     "Microsoft.Xna.Framework.DisplayOrientation",
     "Microsoft.Xna.Framework.DrawableGameComponent",
+    "Microsoft.Xna.Framework.FrameworkDispatcher",
     "Microsoft.Xna.Framework.Game",
     "Microsoft.Xna.Framework.GameComponent",
     "Microsoft.Xna.Framework.GameComponentCollection",
@@ -295,6 +221,7 @@
     "Microsoft.Xna.Framework.GameServiceContainer",
     "Microsoft.Xna.Framework.GameTime",
     "Microsoft.Xna.Framework.GameWindow",
+    "Microsoft.Xna.Framework.GamerServices.GamerServicesComponent",
     "Microsoft.Xna.Framework.Graphics.AlphaTestEffect",
     "Microsoft.Xna.Framework.Graphics.BasicEffect",
     "Microsoft.Xna.Framework.Graphics.Blend",
@@ -355,6 +282,7 @@
     "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection",
     "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator",
     "Microsoft.Xna.Framework.Graphics.NoSuitableGraphicsDeviceException",
+    "Microsoft.Xna.Framework.Graphics.OcclusionQuery",
     "Microsoft.Xna.Framework.Graphics.PackedVector.Alpha8",
     "Microsoft.Xna.Framework.Graphics.PackedVector.Bgr565",
     "Microsoft.Xna.Framework.Graphics.PackedVector.Bgra4444",
@@ -380,6 +308,7 @@
     "Microsoft.Xna.Framework.Graphics.RasterizerState",
     "Microsoft.Xna.Framework.Graphics.RenderTarget2D",
     "Microsoft.Xna.Framework.Graphics.RenderTargetBinding",
+    "Microsoft.Xna.Framework.Graphics.RenderTargetCube",
     "Microsoft.Xna.Framework.Graphics.RenderTargetUsage",
     "Microsoft.Xna.Framework.Graphics.ResourceCreatedEventArgs",
     "Microsoft.Xna.Framework.Graphics.ResourceDestroyedEventArgs",
@@ -434,6 +363,14 @@
     "Microsoft.Xna.Framework.Input.Keys",
     "Microsoft.Xna.Framework.Input.Mouse",
     "Microsoft.Xna.Framework.Input.MouseState",
+    "Microsoft.Xna.Framework.Input.Touch.GestureSample",
+    "Microsoft.Xna.Framework.Input.Touch.GestureType",
+    "Microsoft.Xna.Framework.Input.Touch.TouchCollection",
+    "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator",
+    "Microsoft.Xna.Framework.Input.Touch.TouchLocation",
+    "Microsoft.Xna.Framework.Input.Touch.TouchLocationState",
+    "Microsoft.Xna.Framework.Input.Touch.TouchPanel",
+    "Microsoft.Xna.Framework.Input.Touch.TouchPanelCapabilities",
     "Microsoft.Xna.Framework.LaunchParameters",
     "Microsoft.Xna.Framework.MathHelper",
     "Microsoft.Xna.Framework.Matrix",
@@ -445,6 +382,9 @@
     "Microsoft.Xna.Framework.Quaternion",
     "Microsoft.Xna.Framework.Ray",
     "Microsoft.Xna.Framework.Rectangle",
+    "Microsoft.Xna.Framework.Storage.StorageContainer",
+    "Microsoft.Xna.Framework.Storage.StorageDevice",
+    "Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException",
     "Microsoft.Xna.Framework.TitleContainer",
     "Microsoft.Xna.Framework.Vector2",
     "Microsoft.Xna.Framework.Vector3",
@@ -738,8 +678,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.FrameworkDispatcher",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Game",
@@ -778,8 +718,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.GamerServices.GamerServicesComponent",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.AlphaTestEffect",
@@ -1083,8 +1023,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.OcclusionQuery",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.PackedVector.Alpha8",
@@ -1213,8 +1153,8 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.RenderTargetCube",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Graphics.RenderTargetUsage",
@@ -1488,43 +1428,43 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.GestureSample",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.GestureType",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.TouchCollection",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.TouchLocation",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.TouchLocationState",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.TouchPanel",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Input.Touch.TouchPanelCapabilities",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.LaunchParameters",
@@ -1703,18 +1643,18 @@
     },
     {
       "type": "Microsoft.Xna.Framework.Storage.StorageContainer",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Storage.StorageDevice",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException",
-      "status": "missing",
-      "diagnostics": 1
+      "status": "complete",
+      "diagnostics": 0
     },
     {
       "type": "Microsoft.Xna.Framework.TitleContainer",
@@ -1740,7 +1680,7 @@
   "familyScoreboard": {
     "Microsoft.Xna.Framework": {
       "types": 42,
-      "diagnostics": 1
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Audio": {
       "types": 19,
@@ -1756,11 +1696,11 @@
     },
     "Microsoft.Xna.Framework.GamerServices": {
       "types": 1,
-      "diagnostics": 1
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Graphics": {
       "types": 99,
-      "diagnostics": 2
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Graphics.PackedVector": {
       "types": 19,
@@ -1772,7 +1712,7 @@
     },
     "Microsoft.Xna.Framework.Input.Touch": {
       "types": 8,
-      "diagnostics": 8
+      "diagnostics": 0
     },
     "Microsoft.Xna.Framework.Media": {
       "types": 24,
@@ -1780,7 +1720,7 @@
     },
     "Microsoft.Xna.Framework.Storage": {
       "types": 3,
-      "diagnostics": 3
+      "diagnostics": 0
     }
   }
 }

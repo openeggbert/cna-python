@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 471,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 471,
-    "C_LAYOUT_MEASUREMENTS": 708,
-    "CTYPES_LAYOUT_MEASUREMENTS": 708,
+    "BOUND_FUNCTIONS": 542,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 542,
+    "C_LAYOUT_MEASUREMENTS": 756,
+    "CTYPES_LAYOUT_MEASUREMENTS": 756,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -479,7 +479,78 @@
     "cna_mouse_set_position",
     "cna_gamepad_get_state_with_dead_zone",
     "cna_gamepad_get_capabilities",
-    "cna_gamepad_set_vibration"
+    "cna_gamepad_set_vibration",
+    "cna_render_target_cube_create",
+    "cna_graphics_device_set_render_target_cube",
+    "cna_occlusion_query_create",
+    "cna_occlusion_query_begin",
+    "cna_occlusion_query_end",
+    "cna_occlusion_query_get_is_complete",
+    "cna_occlusion_query_get_pixel_count",
+    "cna_occlusion_query_has_renderer",
+    "cna_occlusion_query_destroy",
+    "cna_gamer_services_dispatcher_set_window_handle",
+    "cna_gamer_services_dispatcher_initialize",
+    "cna_gamer_services_dispatcher_update",
+    "cna_touch_get_capabilities",
+    "cna_touch_get_state",
+    "cna_touch_panel_get_display_width",
+    "cna_touch_panel_set_display_width",
+    "cna_touch_panel_get_display_height",
+    "cna_touch_panel_set_display_height",
+    "cna_touch_panel_get_display_orientation",
+    "cna_touch_panel_set_display_orientation",
+    "cna_touch_panel_get_enabled_gestures",
+    "cna_touch_panel_set_enabled_gestures",
+    "cna_touch_panel_get_is_gesture_available",
+    "cna_touch_panel_get_window_handle",
+    "cna_touch_panel_set_window_handle",
+    "cna_touch_panel_read_gesture",
+    "cna_storage_device_show_selector",
+    "cna_storage_get_root_size_ext",
+    "cna_storage_copy_root_ext",
+    "cna_storage_device_show_selector_for_player",
+    "cna_storage_device_show_selector_with_space",
+    "cna_storage_device_show_selector_for_player_with_space",
+    "cna_storage_device_get_free_space",
+    "cna_storage_device_get_is_connected",
+    "cna_storage_device_get_total_space",
+    "cna_storage_device_delete_container",
+    "cna_storage_device_subscribe_device_changed",
+    "cna_storage_device_unsubscribe_device_changed",
+    "cna_storage_device_destroy",
+    "cna_storage_container_open",
+    "cna_storage_container_get_display_name_size",
+    "cna_storage_container_copy_display_name",
+    "cna_storage_container_get_is_disposed",
+    "cna_storage_container_dispose",
+    "cna_storage_container_subscribe_disposing",
+    "cna_storage_container_unsubscribe_disposing",
+    "cna_storage_container_create_directory",
+    "cna_storage_container_directory_exists",
+    "cna_storage_container_delete_directory",
+    "cna_storage_container_file_exists",
+    "cna_storage_container_delete_file",
+    "cna_storage_container_get_directory_name_count",
+    "cna_storage_container_copy_directory_name",
+    "cna_storage_container_get_file_name_count",
+    "cna_storage_container_copy_file_name",
+    "cna_storage_container_create_file",
+    "cna_storage_container_open_file",
+    "cna_storage_container_open_file_access",
+    "cna_storage_container_open_file_share",
+    "cna_storage_container_destroy",
+    "cna_storage_stream_read",
+    "cna_storage_stream_write",
+    "cna_storage_stream_seek",
+    "cna_storage_stream_get_position",
+    "cna_storage_stream_get_length",
+    "cna_storage_stream_set_length",
+    "cna_storage_stream_get_can_read",
+    "cna_storage_stream_get_can_write",
+    "cna_storage_stream_get_can_seek",
+    "cna_storage_stream_flush",
+    "cna_storage_stream_close"
   ],
   "functionManifest": [
     {
@@ -5446,6 +5517,748 @@
       ],
       "arity": 5,
       "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_render_target_cube_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderTargetCubeCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned cube render target"
+    },
+    {
+      "symbol": "cna_graphics_device_set_render_target_cube",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 3,
+      "ownership": "borrows cube render target"
+    },
+    {
+      "symbol": "cna_occlusion_query_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned OcclusionQuery"
+    },
+    {
+      "symbol": "cna_occlusion_query_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed OcclusionQuery"
+    },
+    {
+      "symbol": "cna_occlusion_query_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed OcclusionQuery"
+    },
+    {
+      "symbol": "cna_occlusion_query_get_is_complete",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_occlusion_query_get_pixel_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_occlusion_query_has_renderer",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_occlusion_query_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes OcclusionQuery"
+    },
+    {
+      "symbol": "cna_gamer_services_dispatcher_set_window_handle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "process dispatcher setting"
+    },
+    {
+      "symbol": "cna_gamer_services_dispatcher_initialize",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed game"
+    },
+    {
+      "symbol": "cna_gamer_services_dispatcher_update",
+      "return": "c_uint",
+      "parameters": [],
+      "arity": 0,
+      "ownership": "process dispatcher update"
+    },
+    {
+      "symbol": "cna_touch_get_capabilities",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_TouchCapabilities>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_get_state",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_TouchState>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_panel_get_display_width",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_panel_set_display_width",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "process touch setting"
+    },
+    {
+      "symbol": "cna_touch_panel_get_display_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_panel_set_display_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "process touch setting"
+    },
+    {
+      "symbol": "cna_touch_panel_get_display_orientation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_panel_set_display_orientation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "process touch setting"
+    },
+    {
+      "symbol": "cna_touch_panel_get_enabled_gestures",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_panel_set_enabled_gestures",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "process touch setting"
+    },
+    {
+      "symbol": "cna_touch_panel_get_is_gesture_available",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_panel_get_window_handle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_touch_panel_set_window_handle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "process touch setting"
+    },
+    {
+      "symbol": "cna_touch_panel_read_gesture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_GestureSample>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_device_show_selector",
+      "return": "c_uint",
+      "parameters": [
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned StorageDevice"
+    },
+    {
+      "symbol": "cna_storage_get_root_size_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_copy_root_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_device_show_selector_for_player",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned StorageDevice"
+    },
+    {
+      "symbol": "cna_storage_device_show_selector_with_space",
+      "return": "c_uint",
+      "parameters": [
+        "c_int",
+        "c_int",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned StorageDevice"
+    },
+    {
+      "symbol": "cna_storage_device_show_selector_for_player_with_space",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_int",
+        "c_int",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "owned StorageDevice"
+    },
+    {
+      "symbol": "cna_storage_device_get_free_space",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_device_get_is_connected",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_device_get_total_space",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_device_delete_container",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed StorageDevice"
+    },
+    {
+      "symbol": "cna_storage_device_subscribe_device_changed",
+      "return": "c_uint",
+      "parameters": [
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_storage_device_unsubscribe_device_changed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes registration"
+    },
+    {
+      "symbol": "cna_storage_device_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes StorageDevice"
+    },
+    {
+      "symbol": "cna_storage_container_open",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned StorageContainer"
+    },
+    {
+      "symbol": "cna_storage_container_get_display_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_copy_display_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_get_is_disposed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_dispose",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed StorageContainer"
+    },
+    {
+      "symbol": "cna_storage_container_subscribe_disposing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_storage_container_unsubscribe_disposing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes registration"
+    },
+    {
+      "symbol": "cna_storage_container_create_directory",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed StorageContainer"
+    },
+    {
+      "symbol": "cna_storage_container_directory_exists",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_delete_directory",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed StorageContainer"
+    },
+    {
+      "symbol": "cna_storage_container_file_exists",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_delete_file",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed StorageContainer"
+    },
+    {
+      "symbol": "cna_storage_container_get_directory_name_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_copy_directory_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_get_file_name_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_copy_file_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_container_create_file",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned StorageStream"
+    },
+    {
+      "symbol": "cna_storage_container_open_file",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned StorageStream"
+    },
+    {
+      "symbol": "cna_storage_container_open_file_access",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_uint",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned StorageStream"
+    },
+    {
+      "symbol": "cna_storage_container_open_file_share",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "owned StorageStream"
+    },
+    {
+      "symbol": "cna_storage_container_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes StorageContainer"
+    },
+    {
+      "symbol": "cna_storage_stream_read",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_stream_write",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "copies bytes"
+    },
+    {
+      "symbol": "cna_storage_stream_seek",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_long",
+        "c_uint",
+        "pointer<c_long>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_stream_get_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_stream_get_length",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_long>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_stream_set_length",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_long"
+      ],
+      "arity": 2,
+      "ownership": "borrowed StorageStream"
+    },
+    {
+      "symbol": "cna_storage_stream_get_can_read",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_stream_get_can_write",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_stream_get_can_seek",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_storage_stream_flush",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed StorageStream"
+    },
+    {
+      "symbol": "cna_storage_stream_close",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes StorageStream"
     }
   ],
   "missingSymbols": [],
@@ -5465,6 +6278,7 @@
     "VALUE:CNA_GraphicsDeviceEventCallback": 8,
     "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
     "VALUE:CNA_AudioEventCallback": 8,
+    "VALUE:CNA_StorageCompletionCallback": 8,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "OFFSET:CNA_StringView:data": 0,
@@ -5849,6 +6663,17 @@
     "OFFSET:CNA_RenderTarget2DCreateInfo:multi_sample_count": 28,
     "OFFSET:CNA_RenderTarget2DCreateInfo:usage": 32,
     "OFFSET:CNA_RenderTarget2DCreateInfo:reserved1": 36,
+    "SIZE:CNA_RenderTargetCubeCreateInfo": 32,
+    "ALIGN:CNA_RenderTargetCubeCreateInfo": 4,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:struct_size": 0,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:struct_version": 4,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:size": 8,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:mip_map": 12,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:reserved": 13,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:format": 16,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:depth_format": 20,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:multi_sample_count": 24,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:usage": 28,
     "SIZE:CNA_RenderTargetInfo": 44,
     "ALIGN:CNA_RenderTargetInfo": 4,
     "OFFSET:CNA_RenderTargetInfo:struct_size": 0,
@@ -6158,7 +6983,43 @@
     "OFFSET:CNA_GamePadCapabilities:has_touchpad_ext": 44,
     "OFFSET:CNA_GamePadCapabilities:has_gyro_ext": 45,
     "OFFSET:CNA_GamePadCapabilities:has_accelerometer_ext": 46,
-    "OFFSET:CNA_GamePadCapabilities:reserved": 47
+    "OFFSET:CNA_GamePadCapabilities:reserved": 47,
+    "SIZE:CNA_TouchLocation": 32,
+    "ALIGN:CNA_TouchLocation": 4,
+    "OFFSET:CNA_TouchLocation:id": 0,
+    "OFFSET:CNA_TouchLocation:state": 4,
+    "OFFSET:CNA_TouchLocation:position": 8,
+    "OFFSET:CNA_TouchLocation:previous_state": 16,
+    "OFFSET:CNA_TouchLocation:previous_position": 20,
+    "OFFSET:CNA_TouchLocation:pressure": 28,
+    "SIZE:CNA_TouchCapabilities": 16,
+    "ALIGN:CNA_TouchCapabilities": 4,
+    "OFFSET:CNA_TouchCapabilities:struct_size": 0,
+    "OFFSET:CNA_TouchCapabilities:struct_version": 4,
+    "OFFSET:CNA_TouchCapabilities:is_connected": 8,
+    "OFFSET:CNA_TouchCapabilities:reserved": 9,
+    "OFFSET:CNA_TouchCapabilities:maximum_touch_count": 12,
+    "SIZE:CNA_TouchState": 272,
+    "ALIGN:CNA_TouchState": 4,
+    "OFFSET:CNA_TouchState:struct_size": 0,
+    "OFFSET:CNA_TouchState:struct_version": 4,
+    "OFFSET:CNA_TouchState:is_connected": 8,
+    "OFFSET:CNA_TouchState:reserved": 9,
+    "OFFSET:CNA_TouchState:touch_count": 12,
+    "OFFSET:CNA_TouchState:touches": 16,
+    "SIZE:CNA_GestureSample": 64,
+    "ALIGN:CNA_GestureSample": 8,
+    "OFFSET:CNA_GestureSample:struct_size": 0,
+    "OFFSET:CNA_GestureSample:struct_version": 4,
+    "OFFSET:CNA_GestureSample:gesture_type": 8,
+    "OFFSET:CNA_GestureSample:finger_id_ext": 12,
+    "OFFSET:CNA_GestureSample:finger_id2_ext": 16,
+    "OFFSET:CNA_GestureSample:reserved": 20,
+    "OFFSET:CNA_GestureSample:timestamp_ticks": 24,
+    "OFFSET:CNA_GestureSample:position": 32,
+    "OFFSET:CNA_GestureSample:position2": 40,
+    "OFFSET:CNA_GestureSample:delta": 48,
+    "OFFSET:CNA_GestureSample:delta2": 56
   },
   "ctypes": {
     "VALUE:CNA_ABI_VERSION": 1792,
@@ -6175,6 +7036,7 @@
     "VALUE:CNA_GraphicsDeviceEventCallback": 8,
     "VALUE:CNA_PreparingDeviceSettingsMutatorEXT": 8,
     "VALUE:CNA_AudioEventCallback": 8,
+    "VALUE:CNA_StorageCompletionCallback": 8,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "SIZE:CNA_ErrorInfo": 24,
@@ -6263,6 +7125,8 @@
     "ALIGN:CNA_IndexBufferTransfer": 8,
     "SIZE:CNA_RenderTarget2DCreateInfo": 40,
     "ALIGN:CNA_RenderTarget2DCreateInfo": 4,
+    "SIZE:CNA_RenderTargetCubeCreateInfo": 32,
+    "ALIGN:CNA_RenderTargetCubeCreateInfo": 4,
     "SIZE:CNA_RenderTargetInfo": 44,
     "ALIGN:CNA_RenderTargetInfo": 4,
     "SIZE:CNA_RenderTargetBinding": 24,
@@ -6321,6 +7185,14 @@
     "ALIGN:CNA_GamePadState": 4,
     "SIZE:CNA_GamePadCapabilities": 48,
     "ALIGN:CNA_GamePadCapabilities": 4,
+    "SIZE:CNA_TouchLocation": 32,
+    "ALIGN:CNA_TouchLocation": 4,
+    "SIZE:CNA_TouchCapabilities": 16,
+    "ALIGN:CNA_TouchCapabilities": 4,
+    "SIZE:CNA_TouchState": 272,
+    "ALIGN:CNA_TouchState": 4,
+    "SIZE:CNA_GestureSample": 64,
+    "ALIGN:CNA_GestureSample": 8,
     "OFFSET:CNA_StringView:data": 0,
     "OFFSET:CNA_StringView:byte_length": 8,
     "OFFSET:CNA_ErrorInfo:struct_size": 0,
@@ -6617,6 +7489,15 @@
     "OFFSET:CNA_RenderTarget2DCreateInfo:multi_sample_count": 28,
     "OFFSET:CNA_RenderTarget2DCreateInfo:usage": 32,
     "OFFSET:CNA_RenderTarget2DCreateInfo:reserved1": 36,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:struct_size": 0,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:struct_version": 4,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:size": 8,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:mip_map": 12,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:reserved": 13,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:format": 16,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:depth_format": 20,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:multi_sample_count": 24,
+    "OFFSET:CNA_RenderTargetCubeCreateInfo:usage": 28,
     "OFFSET:CNA_RenderTargetInfo:struct_size": 0,
     "OFFSET:CNA_RenderTargetInfo:struct_version": 4,
     "OFFSET:CNA_RenderTargetInfo:kind": 8,
@@ -6868,6 +7749,34 @@
     "OFFSET:CNA_GamePadCapabilities:has_touchpad_ext": 44,
     "OFFSET:CNA_GamePadCapabilities:has_gyro_ext": 45,
     "OFFSET:CNA_GamePadCapabilities:has_accelerometer_ext": 46,
-    "OFFSET:CNA_GamePadCapabilities:reserved": 47
+    "OFFSET:CNA_GamePadCapabilities:reserved": 47,
+    "OFFSET:CNA_TouchLocation:id": 0,
+    "OFFSET:CNA_TouchLocation:state": 4,
+    "OFFSET:CNA_TouchLocation:position": 8,
+    "OFFSET:CNA_TouchLocation:previous_state": 16,
+    "OFFSET:CNA_TouchLocation:previous_position": 20,
+    "OFFSET:CNA_TouchLocation:pressure": 28,
+    "OFFSET:CNA_TouchCapabilities:struct_size": 0,
+    "OFFSET:CNA_TouchCapabilities:struct_version": 4,
+    "OFFSET:CNA_TouchCapabilities:is_connected": 8,
+    "OFFSET:CNA_TouchCapabilities:reserved": 9,
+    "OFFSET:CNA_TouchCapabilities:maximum_touch_count": 12,
+    "OFFSET:CNA_TouchState:struct_size": 0,
+    "OFFSET:CNA_TouchState:struct_version": 4,
+    "OFFSET:CNA_TouchState:is_connected": 8,
+    "OFFSET:CNA_TouchState:reserved": 9,
+    "OFFSET:CNA_TouchState:touch_count": 12,
+    "OFFSET:CNA_TouchState:touches": 16,
+    "OFFSET:CNA_GestureSample:struct_size": 0,
+    "OFFSET:CNA_GestureSample:struct_version": 4,
+    "OFFSET:CNA_GestureSample:gesture_type": 8,
+    "OFFSET:CNA_GestureSample:finger_id_ext": 12,
+    "OFFSET:CNA_GestureSample:finger_id2_ext": 16,
+    "OFFSET:CNA_GestureSample:reserved": 20,
+    "OFFSET:CNA_GestureSample:timestamp_ticks": 24,
+    "OFFSET:CNA_GestureSample:position": 32,
+    "OFFSET:CNA_GestureSample:position2": 40,
+    "OFFSET:CNA_GestureSample:delta": 48,
+    "OFFSET:CNA_GestureSample:delta2": 56
   }
 }

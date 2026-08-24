@@ -4,6 +4,10 @@ Qualified boundary: CNA C ABI 0.7.0; Linux x86-64 HEADLESS, NULL audio.
 
 | Operation | Status | Evidence | Notes |
 |---|---|---|---|
+| FrameworkDispatcher explicit Update | VERIFIED_NATIVE | cna_framework_dispatcher_update; Milestone-8 dispatcher tests | One explicit call adds one pump to the existing single automatic post-Update pump and re-raises contained callback failures after native return. |
+| FrameworkDispatcher Update without a live Game | UPSTREAM_CNA_BLOCKED | runtime.h cna_framework_dispatcher_update(CNA_Handle game) | XNA permits a process-level call, but ABI 0.7 requires a valid Game; Python reports the capability failure and never silently no-ops. |
+| GamerServicesComponent lifecycle | VERIFIED_NATIVE | cna_gamer_services_dispatcher_set_window_handle/initialize/update | The normal GameComponent initialization/update order uses the Game window and current native generation. |
+| Broader GamerServices ecosystem | BACKEND_BLOCKED | selected 257-type profile ends at GamerServicesComponent | No Gamer, Guide, Avatar, achievement, leaderboard, or networking facade is fabricated. |
 | Game.Components/services/traversal | VERIFIED_MANAGED | tests.test_game_graphics_foundation.GameObjectModelTests | Per-Game services and snapshot traversal with stable ordering. |
 | Game.ResetElapsedTime/SuppressDraw | VERIFIED_NATIVE | cna_game_reset_elapsed_time; cna_game_suppress_draw | Calls the active native Game lifecycle. |
 | Game activation/deactivation delivery | BACKEND_BLOCKED | cna_game_subscribe | Infrastructure is native; HEADLESS produces no fabricated transition. |
@@ -26,7 +30,11 @@ Qualified boundary: CNA C ABI 0.7.0; Linux x86-64 HEADLESS, NULL audio.
 | DrawUserPrimitives/DrawUserIndexedPrimitives | BACKEND_BLOCKED | graphics_device.h user-array routes | Only explicit built-in vertex codecs and deterministic contiguous bytes are accepted. |
 | RenderTarget2D create/bind/query | VERIFIED_NATIVE | render_target.h and native foundation/stress | Command-path and lifetime verified under HEADLESS. |
 | RenderTarget visible output | HARDWARE_PENDING | HEADLESS renderer_available=false | No visual correctness claim is made from command-path evidence. |
-| RenderTargetCube | UNIMPLEMENTED_CNA_PYTHON | deliberately outside the Effect/Model dependency closure | TextureCube is implemented, but the unrelated RenderTargetCube public type remains deferred. |
+| OcclusionQuery | VERIFIED_NATIVE | complete cna_occlusion_query_* ABI; 20 HEADLESS create/state/dispose cycles | The real native query state and pixel count are used; Begin/End validation and owned GraphicsResource teardown are exercised without fabricating a result. |
+| RenderTargetCube create/bind/query | VERIFIED_NATIVE | cna_render_target_cube_create; ordinary render-target binding routes; Milestone-8 native tests | Both constructors preserve format/depth/MSAA/usage, all six faces round-trip through GetRenderTargets, and the type retains TextureCube ownership. |
+| RenderTargetCube current content-loss state | VERIFIED_NATIVE | cna_render_target_get_info.is_content_lost | The current state is queried from CNA; HEADLESS reports its real state. |
+| RenderTargetCube ContentLost delivery | UPSTREAM_CNA_BLOCKED | ABI 0.7 has no dynamic resource-loss transition callback | Subscription behavior is complete, but Python does not synthesize resource-loss events. |
+| Bound render-target disposal | UPSTREAM_CNA_BLOCKED | qualified CNA 0.7 abort-path audit and crash-isolated guard test | Python rejects disposal before entering the native abort path, preserves the handle for legal retry, and does not silently restore the backbuffer. |
 | GraphicsDevice.Present() | VERIFIED_NATIVE | cna_graphics_device_present and 60/600-frame consumers | HEADLESS command completion is not visible presentation evidence. |
 | GraphicsDevice.Present(rectangles, window) | UPSTREAM_CNA_BLOCKED | No ABI 0.7 route | Raises NativeCapabilityError after strict argument validation. |
 | GraphicsDevice.Reset events | VERIFIED_NATIVE | cna_graphics_device_reset* and event subscriptions | Resetting and Reset are delivered by actual native transitions. |
@@ -78,3 +86,17 @@ Qualified boundary: CNA C ABI 0.7.0; Linux x86-64 HEADLESS, NULL audio.
 | SoundBank | VERIFIED_NATIVE | cna_sound_bank_create failed-create route; Audio ownership stress | Construction failure, rollback, ownership, and disposal are verified through CNA. Successful authored-bank loading remains asset-pending. |
 | Cue | ASSET_PENDING | complete cna_cue_* ABI and SoundBank-owned lifecycle implementation | The full facade and ownership path are present, but normal acquisition and method execution require a legal authored SoundBank fixture. |
 | Authored XACT playback | ASSET_PENDING | repository/reference fixture audit found no legal redistributable XGS/XSB/XWB set | No asset is fabricated and the absence of a legal fixture is not classified as a CNA defect. |
+| Touch value types and TouchCollection | VERIFIED_MANAGED | behavior touch.*; tests.test_milestone8.Milestone8ManagedTests | Exact flags, value copies, XNA equality distinction, read-only collection, and nested Enumerator boundaries are exercised. |
+| Touch capabilities and state | VERIFIED_NATIVE | cna_touch_get_capabilities/state on exact HEADLESS ABI 0.7 | The qualified runtime honestly reports no connected physical panel and an empty snapshot. |
+| TouchPanel static configuration | VERIFIED_NATIVE | cna_touch_panel_get/set_* round trips | Gestures, window IntPtr, display orientation, width, and height use the current Game generation with XNA validation. |
+| Physical touch input | HARDWARE_PENDING | HEADLESS has no physical touch source | An empty native state is not treated as hardware qualification and no touches are fabricated. |
+| Touch gesture recognition | PLATFORM_PENDING | real gesture availability/read routes; qualified queue is empty | The no-gesture exception path is verified; positive recognition requires a platform event source. |
+| Storage selector operation | VERIFIED_NATIVE | all four cna_storage_device_show_selector* routes | CNA completes synchronously and deterministically returns its configured device; Python reports that timing and does not claim UI was shown. |
+| Storage selector UI | PLATFORM_PENDING | CNA 0.7 selector implementation has no OS UI | No selector interface is fabricated. |
+| Storage async Begin/End mapping | VERIFIED_NATIVE | opaque one-shot result provenance and callback tests | Same-token callbacks, state retention, operation/device/generation checks, double-End rejection, and exception containment are verified. |
+| Storage filesystem and streams | VERIFIED_NATIVE | cna_storage_container_* and cna_storage_stream_* integration/stress | Directory/file/pattern operations and capability-based read/write/seek/flush/close use CNA exclusively with exact ownership. |
+| Storage path containment | VERIFIED_MANAGED | lexical/resolved containment tests before CNA dispatch | Absolute, drive, mixed-separator, NUL, lexical .., and symlink escapes are rejected, closing CNA 0.7's traversal mismatch. |
+| Storage FileShare enforcement | UPSTREAM_CNA_BLOCKED | canonical CNA StorageContainer OpenFile implementation | ABI 0.7 accepts the exact flag value but its native storage implementation does not enforce sharing locks. |
+| StorageContainer.Disposing | VERIFIED_NATIVE | cna_storage_container_subscribe_disposing and exactly-once lifecycle tests | The real native callback is observed before Python handler delivery; double Dispose is idempotent and self-removal is safe. |
+| StorageDevice.DeviceChanged registration | VERIFIED_NATIVE | cna_storage_device_subscribe/unsubscribe_device_changed | Registration lifetime and shared dispatcher queue delivery are bound without exposing a callback through ctypes. |
+| Real storage-device transitions | PLATFORM_PENDING | qualified host exposes no deterministic attach/remove transition | No DeviceChanged event is fabricated. |

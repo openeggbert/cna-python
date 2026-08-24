@@ -43,7 +43,10 @@ PACKAGES = (
     "Microsoft.Xna.Framework.Graphics",
     "Microsoft.Xna.Framework.Graphics.PackedVector",
     "Microsoft.Xna.Framework.Input",
+    "Microsoft.Xna.Framework.Input.Touch",
     "Microsoft.Xna.Framework.Content",
+    "Microsoft.Xna.Framework.GamerServices",
+    "Microsoft.Xna.Framework.Storage",
 )
 
 STUB_PATHS = {
@@ -164,7 +167,7 @@ def _annotation(node: ast.expr | None) -> str:
     if isinstance(node, ast.Name):
         return node.id
     if isinstance(node, ast.Attribute):
-        return node.attr
+        return _decorator_name(node).replace("typing.", "")
     if isinstance(node, ast.BinOp) and isinstance(node.op, ast.BitOr):
         values = sorted({_annotation(node.left), _annotation(node.right)}, key=lambda value: (value == "None", value))
         return " | ".join(values)
@@ -229,10 +232,8 @@ def parse_stubs() -> tuple[dict[str, StubType], dict[str, TypeVarDeclaration]]:
             positional = tuple(_annotation(argument) for argument in value.args[1:])
             keywords = {keyword.arg: _annotation(keyword.value) for keyword in value.keywords if keyword.arg}
             typevars[target.id] = TypeVarDeclaration(target.id, keywords.get("bound"), positional)
-        for node in tree.body:
-            if not isinstance(node, ast.ClassDef) or node.name.startswith("_"):
-                continue
-            declaration = StubType(node.name, tuple(_annotation(base) for base in node.bases))
+        def parse_class(node: ast.ClassDef, qualified_name: str) -> None:
+            declaration = StubType(qualified_name, tuple(_annotation(base) for base in node.bases))
             class_typevars: set[str] = set()
             for base in declaration.bases:
                 if base.startswith("Generic[") and base.endswith("]"):
@@ -279,7 +280,13 @@ def parse_stubs() -> tuple[dict[str, StubType], dict[str, TypeVarDeclaration]]:
                     ),
                 )
                 declaration.callables.setdefault(member.name, []).append(callable_value)
-            result[projected_type_identity(package, node.name)] = declaration
+            result[projected_type_identity(package, qualified_name)] = declaration
+            for nested in node.body:
+                if isinstance(nested, ast.ClassDef) and not nested.name.startswith("_"):
+                    parse_class(nested, f"{qualified_name}.{nested.name}")
+        for node in tree.body:
+            if isinstance(node, ast.ClassDef) and not node.name.startswith("_"):
+                parse_class(node, node.name)
     return result, typevars
 
 
@@ -490,6 +497,25 @@ def target_types() -> tuple[dict[str, type], list[dict[str, str]]]:
                 continue
             seen_objects[id(value)] = identity
             result[identity] = value
+        for identity, mapped in _TYPE_NAMES.items():
+            if identity.rsplit(".", 1)[0] != package_name or "." not in mapped:
+                continue
+            parts = mapped.split(".")
+            value = package
+            try:
+                for part in parts:
+                    value = getattr(value, part)
+            except AttributeError:
+                continue
+            if not isinstance(value, type):
+                continue
+            previous = seen_objects.get(id(value))
+            if previous is not None and previous != identity:
+                diagnostics.append({"category": "UNEXPECTED_TYPE", "type": identity,
+                                    "detail": f"duplicate public alias of {previous}"})
+                continue
+            seen_objects[id(value)] = identity
+            result[identity] = value
     return result, diagnostics
 
 
@@ -693,6 +719,14 @@ def compare_language_contract(identity: str, expected: dict[str, Any], target: t
         if missing_runtime or missing_stub:
             add(diagnostics, "LANGUAGE_MAPPING_MISMATCH", identity,
                 f"value-copy protocol: runtime missing {missing_runtime}, stub missing {missing_stub}")
+    if identity == "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator":
+        missing_runtime = [name for name in ("__iter__", "__next__")
+                           if raw_member(target, name) is None]
+        missing_stub = [name for name in ("__iter__", "__next__")
+                        if not _stub_has_member(stub, name, stubs)]
+        if missing_runtime or missing_stub:
+            add(diagnostics, "LANGUAGE_MAPPING_MISMATCH", identity,
+                f"iterator protocol: runtime missing {missing_runtime}, stub missing {missing_stub}")
 
 
 def _stub_has_member(stub: StubType, name: str, stubs: dict[str, StubType], seen: set[str] | None = None) -> bool:
@@ -730,6 +764,10 @@ def compare_interface_contract(identity: str, expected: dict[str, Any], target: 
             required = ("CompareTo",)
         elif base.startswith("System.Collections.Generic.IEnumerator`1"):
             required = ("Current", "MoveNext", "Dispose", "__iter__")
+        elif base.startswith("System.Collections.Generic.IList`1"):
+            required = ("Count", "IsReadOnly", "Add", "Clear", "Contains", "CopyTo",
+                        "Remove", "IndexOf", "Insert", "RemoveAt", "GetEnumerator",
+                        "__getitem__", "__setitem__", "__iter__", "__len__")
         elif base == "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1":
             required = ("PackedValue",)
             generic = _split_generic(interface)
@@ -904,6 +942,11 @@ def verify() -> dict[str, Any]:
                 if name is not None:
                     expected_public_names.add(name)
         actual_names = actual_member_names(target)
+        nested_prefix = projected_type_name(identity) + "."
+        expected_public_names.update(
+            mapped[len(nested_prefix):] for mapped in _TYPE_NAMES.values()
+            if mapped.startswith(nested_prefix) and "." not in mapped[len(nested_prefix):]
+        )
         target_member_count += len(actual_names)
         for name in sorted(actual_names - expected_public_names - set(rules["languageMembers"])):
             add(diagnostics, "UNEXPECTED_MEMBER", identity, name)

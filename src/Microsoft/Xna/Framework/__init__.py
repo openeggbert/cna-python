@@ -18,13 +18,14 @@ from ._intersections import (
 )
 from ._math import MathHelper, Matrix, Quaternion, Vector2, Vector3, Vector4
 from ._title import TitleContainer
+from ._framework_dispatcher import FrameworkDispatcher
 
 __all__ = [
     "BoundingBox", "BoundingFrustum", "BoundingSphere", "Color", "ContainmentType",
     "Curve", "CurveContinuity", "CurveKey", "CurveKeyCollection", "CurveLoopType", "CurveTangent",
     "DisplayOrientation", "DrawableGameComponent", "Game", "GameComponent",
     "GameComponentCollection", "GameComponentCollectionEventArgs", "GameServiceContainer",
-    "GameTime", "GameWindow", "GraphicsDeviceInformation", "GraphicsDeviceManager",
+    "FrameworkDispatcher", "GameTime", "GameWindow", "GraphicsDeviceInformation", "GraphicsDeviceManager",
     "IDrawable", "IGameComponent", "IGraphicsDeviceManager",
     "IUpdateable", "LaunchParameters", "MathHelper",
     "Matrix", "Plane", "PlaneIntersectionType", "PlayerIndex", "Point",

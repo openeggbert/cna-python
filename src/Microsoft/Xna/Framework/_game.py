@@ -7,11 +7,10 @@ from datetime import timedelta
 from enum import IntEnum, IntFlag
 import threading
 from typing import Any
-import weakref
 
 from _cna_native import abi
 from _cna_native.loader import get_library
-from _cna_native.runtime_context import set_current_game
+from _cna_native.runtime_context import register_live_game, set_current_game, unregister_live_game
 
 from ._language import Event
 
@@ -92,6 +91,8 @@ class _NativeGameHost:
         self._callback_buffers: list[c.Array[Any]] = []
         self._callbacks_keepalive: list[object] = []
         self._event_registrations: list[int] = []
+        self._dispatch_lock = threading.RLock()
+        self._dispatch_callbacks: list[object] = []
         self._title = game.Window.Title.encode("utf-8", errors="strict")
         self._callbacks = self._make_callbacks()
         self._hooks = self._make_hooks()
@@ -116,6 +117,7 @@ class _NativeGameHost:
             if threading.get_ident() != self.owner_thread:
                 raise RuntimeError(f"CNA invoked {name} on a non-owner thread")
             self.game._begin_native_callback(self.handle)
+            self._drain_dispatch_callbacks()
             if name == "OnExiting":
                 self.game.OnExiting(self.game, None)
             elif name in ("Initialize", "LoadContent", "BeginRun", "BeginDraw", "EndDraw", "EndRun", "UnloadContent"):
@@ -189,6 +191,7 @@ class _NativeGameHost:
         output = c.c_uint64()
         self.library.check(self.library.cna_game_create(c.byref(info), c.byref(output)), "cna_game_create")
         self.handle = int(output.value)
+        register_live_game(self.game)
         from ._title import _configure_native_title_root
         _configure_native_title_root(self)
         self.library.check(self.library.cna_game_set_frame_hooks_ext(self.handle, c.byref(self._hooks)),
@@ -205,7 +208,14 @@ class _NativeGameHost:
         )
         self.game.LaunchParameters._attach_native(self.game)
         self.game.Window._attach_native()
+        from .Input.Touch._touch import _attach_touch_game
+        _attach_touch_game(self.game)
         self._subscribe_events()
+        # Static Storage handlers may be installed before a native Game exists.
+        # Attach their process registration only after the shared owner-thread
+        # dispatcher host is ready.
+        from .Storage._storage import StorageDevice
+        StorageDevice._attach_game(self.game)
 
     def _subscribe_events(self) -> None:
         def register(operation: str, event: int, action) -> None:
@@ -238,6 +248,21 @@ class _NativeGameHost:
             raise error
         self.library.check(result, operation)
 
+    def _queue_dispatch_callback(self, callback) -> None:
+        with self._dispatch_lock:
+            self._dispatch_callbacks.append(callback)
+
+    def _drain_dispatch_callbacks(self) -> None:
+        if threading.get_ident() != self.owner_thread:
+            raise RuntimeError("framework callbacks may only be delivered on the Game owner thread")
+        while True:
+            with self._dispatch_lock:
+                if not self._dispatch_callbacks:
+                    return
+                callbacks, self._dispatch_callbacks = self._dispatch_callbacks, []
+            for callback in callbacks:
+                callback()
+
     def run(self) -> None:
         self._callback_buffers.clear()
         result = self.library.cna_game_run(self.handle)
@@ -263,9 +288,15 @@ class _NativeGameHost:
             except BaseException as error:
                 first_unsubscribe_error = first_unsubscribe_error or error
         self._event_registrations.clear()
+        try:
+            from .Input.Touch._touch import _detach_touch_game
+            _detach_touch_game(self.game)
+        except BaseException as error:
+            first_unsubscribe_error = first_unsubscribe_error or error
         result = self.library.cna_game_destroy(self.handle)
         if result in (0, 9):
             self.handle = 0
+            unregister_live_game(self.game)
         # CNA retains the earlier callback failure through destruction. The
         # original Python exception was already re-raised by Run; do not emit a
         # second, less accurate NativeError. A new shutdown callback exception
@@ -284,7 +315,10 @@ class Game:
     Disposed = Event()
 
     def __init__(self) -> None:
-        self._native_children: list[weakref.ReferenceType[object]] = []
+        # The native Game is the ownership root. Keep children strongly alive
+        # until explicit release or generation teardown so an unreachable
+        # Python wrapper cannot strand a CNA handle past its parent.
+        self._native_children: list[object] = []
         self._disposed = False
         self._host: _NativeGameHost | None = None
         self._graphics_manager: object | None = None
@@ -330,17 +364,17 @@ class Game:
         return self._window
 
     def _register_native_child(self, child: object) -> None:
-        self._native_children.append(weakref.ref(child))
+        if all(value is not child for value in self._native_children):
+            self._native_children.append(child)
 
     def _unregister_native_child(self, child: object) -> None:
-        self._native_children = [reference for reference in self._native_children
-                                 if reference() not in (None, child)]
+        self._native_children = [value for value in self._native_children
+                                 if value is not child]
 
     def _dispose_native_children(self) -> None:
         first_error: BaseException | None = None
-        for reference in reversed(self._native_children):
-            child = reference()
-            if child is None or child.IsDisposed:
+        for child in reversed(tuple(self._native_children)):
+            if child.IsDisposed:
                 continue
             try:
                 child.Dispose()
@@ -470,12 +504,19 @@ class Game:
             raise RuntimeError("Game is disposed")
         if self._host is None:
             host = _NativeGameHost(self)
-            host.create()
             self._host = host
-            if self._graphics_manager is not None:
-                self._graphics_manager._create_native(host)
-            if self._exit_requested:
-                host.request_exit()
+            try:
+                host.create()
+                if self._graphics_manager is not None:
+                    self._graphics_manager._create_native(host)
+                if self._exit_requested:
+                    host.request_exit()
+            except BaseException:
+                try:
+                    host.destroy()
+                finally:
+                    self._host = None
+                raise
         return self._host
 
     def Run(self) -> None:

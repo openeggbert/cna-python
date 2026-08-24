@@ -414,6 +414,13 @@ class GraphicsDevice:
             collection._textures = [None if value is texture else value
                                     for value in collection._textures]
 
+    def _ensure_render_target_unbound_for_dispose(self, target) -> None:
+        if any(value.RenderTarget is target for value in self._render_target_bindings):
+            raise NativeCapabilityError(
+                f"{type(target).__name__}.Dispose", 6, None,
+                "CNA ABI 0.7 cannot safely destroy a currently bound render target; bind the backbuffer first",
+            )
+
     @property
     def IsDisposed(self) -> bool: return self._disposed
 
@@ -710,10 +717,27 @@ class GraphicsDevice:
         return list(result)
 
     def SetRenderTarget(self, renderTarget, *args: object) -> None:
-        from ._render_targets import RenderTarget2D, RenderTargetBinding
+        from ._render_targets import RenderTarget2D, RenderTargetBinding, RenderTargetCube
         if args:
-            raise NativeCapabilityError("GraphicsDevice.SetRenderTarget(RenderTargetCube)", 6, None,
-                                        "TextureCube/RenderTargetCube is outside the selected 2D foundation")
+            if len(args) != 1 or (renderTarget is not None and
+                                  not isinstance(renderTarget, RenderTargetCube)):
+                raise TypeError("cube render targets require RenderTargetCube and CubeMapFace")
+            if renderTarget is None:
+                library = get_library(); library.check(
+                    library.cna_graphics_device_set_render_targets(
+                        self._require_handle(), None, 0),
+                    "cna_graphics_device_set_render_targets")
+                self._render_target_bindings = []
+                return
+            try: face = CubeMapFace(args[0])
+            except (TypeError, ValueError) as error: raise ValueError("cubeMapFace is invalid") from error
+            if renderTarget.IsDisposed: raise RuntimeError("RenderTargetCube is disposed")
+            if renderTarget.GraphicsDevice is not self: raise ValueError("RenderTargetCube belongs to another GraphicsDevice")
+            library = get_library(); library.check(library.cna_graphics_device_set_render_target_cube(
+                self._require_handle(), renderTarget._require_handle(), int(face)),
+                "cna_graphics_device_set_render_target_cube")
+            self._render_target_bindings = [RenderTargetBinding(renderTarget, face)]
+            return
         if renderTarget is not None and not isinstance(renderTarget, RenderTarget2D):
             raise TypeError("renderTarget must be RenderTarget2D or None")
         if renderTarget is not None:
@@ -741,7 +765,7 @@ class GraphicsDevice:
         self._render_target_bindings = list(values)
 
     def GetRenderTargets(self):
-        from ._render_targets import RenderTargetBinding
+        from ._render_targets import RenderTargetBinding, RenderTargetCube
         count = c.c_uint64(); library = get_library()
         library.check(library.cna_graphics_device_get_render_target_count(
             self._require_handle(), c.byref(count)), "cna_graphics_device_get_render_target_count")
@@ -759,7 +783,10 @@ class GraphicsDevice:
             if target is None:
                 raise NativeCapabilityError("GraphicsDevice.GetRenderTargets", 6, None,
                                             "a native binding has no stable Python resource identity")
-            result.append(RenderTargetBinding(target))
+            if isinstance(target, RenderTargetCube):
+                result.append(RenderTargetBinding(target, CubeMapFace(value.cube_map_face)))
+            else:
+                result.append(RenderTargetBinding(target))
         self._render_target_bindings = result
         return list(result)
 

@@ -57,6 +57,20 @@ HEADERS = {
         "from typing import Any, Final, MutableSequence, Sequence, overload",
         "from .. import PlayerIndex, Vector2",
     ],
+    "Microsoft.Xna.Framework.Input.Touch": [
+        "from datetime import timedelta",
+        "from enum import IntEnum, IntFlag",
+        "from typing import Callable, ClassVar, Final, Iterator, MutableSequence, Sequence, overload",
+        "from ... import DisplayOrientation, Vector2",
+    ],
+    "Microsoft.Xna.Framework.GamerServices": [
+        "from .. import Game, GameComponent, GameTime",
+    ],
+    "Microsoft.Xna.Framework.Storage": [
+        "from typing import BinaryIO, Callable, Final, overload",
+        "from .. import PlayerIndex",
+        "from .._language import Event",
+    ],
     "Microsoft.Xna.Framework.Content": [
         "from typing import Any, BinaryIO, Callable, Final, Generic, TypeVar, overload",
         "from .._language import Event",
@@ -100,7 +114,7 @@ def render_callable(name: str, signatures) -> list[str]:
 
 
 def render_type(expected: dict, targets: dict[str, type], rules: dict,
-                reference_by_name: dict[str, dict]) -> list[str]:
+                reference_by_name: dict[str, dict], *, name_override: str | None = None) -> list[str]:
     identity = expected["name"]
     target = targets[identity]
     if expected["kind"] == "enum":
@@ -112,7 +126,7 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
         bases = "Exception"
     else:
         bases = ""
-    type_name = projected_type_name(identity)
+    type_name = name_override or projected_type_name(identity)
     generic_names = tuple(value["name"] for value in expected.get("genericParameters", ()))
     base_items = [bases] if bases else []
     if identity == "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1":
@@ -199,6 +213,17 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
                 lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
             if raw_member(target, "__len__") is not None:
                 lines.append("    def __len__(self) -> int: ...")
+        if interface_name.startswith("System.Collections.Generic.IList`1["):
+            argument = interface_name[interface_name.find("[") + 1:-1]
+            if raw_member(target, "__setitem__") is not None:
+                lines.append(f"    def __setitem__(self, index: int, value: {mapped_type(argument)}) -> None: ...")
+            if raw_member(target, "__iter__") is not None:
+                lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
+            if raw_member(target, "__len__") is not None:
+                lines.append("    def __len__(self) -> int: ...")
+    if (identity == "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator"
+            and raw_member(target, "__next__") is not None):
+        lines.append("    def __next__(self) -> TouchLocation: ...")
     if "System.IDisposable" in expected.get("directInterfaces", ()):
         if raw_member(target, "__enter__") is not None:
             lines.append(f"    def __enter__(self) -> {type_name}: ...")
@@ -229,8 +254,19 @@ def main() -> int:
             by_package[package].append(expected)
     for package, values in by_package.items():
         lines = [*HEADERS[package], ""]
+        nested = {value["name"].split("+", 1)[0]: value for value in values
+                  if "+" in value["name"] and "." in projected_type_name(value["name"])}
         for expected in values:
-            lines.extend(render_type(expected, targets, rules, reference_by_name))
+            if "+" in expected["name"] and "." in projected_type_name(expected["name"]):
+                continue
+            rendered = render_type(expected, targets, rules, reference_by_name)
+            child = nested.get(expected["name"])
+            if child is not None:
+                rendered.extend("    " + value for value in render_type(
+                    child, targets, rules, reference_by_name,
+                    name_override=projected_type_name(child["name"]).rsplit(".", 1)[-1],
+                ))
+            lines.extend(rendered)
             lines.append("")
         STUB_PATHS[package].write_text("\n".join(lines).rstrip() + "\n")
         print(f"WROTE={STUB_PATHS[package].relative_to(ROOT)}")

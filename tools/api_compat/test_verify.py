@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 
 from verify import (
-    diagnose_broken_fixture, expected_callable, projected_type_identity,
+    diagnose_broken_fixture, expected_callable, mapped_type, projected_type_identity,
     projected_type_name,
 )
 
@@ -42,6 +42,33 @@ class BrokenFixtureTests(unittest.TestCase):
             }],
         }, "GetData", "Microsoft.Xna.Framework.Audio.Microphone")
         self.assertEqual(get_data.parameters[0].annotation, "MutableSequence[int]")
+
+    def test_storage_bcl_types_have_no_public_system_projection(self) -> None:
+        self.assertEqual(mapped_type("System.IAsyncResult"), "object")
+        self.assertEqual(mapped_type("System.AsyncCallback"),
+                         "Callable[[object], None]")
+        self.assertEqual(mapped_type("System.IO.FileMode"), "str")
+        self.assertEqual(mapped_type("System.IO.FileAccess"), "str")
+        self.assertEqual(mapped_type("System.IO.FileShare"), "frozenset[str]")
+        self.assertEqual(mapped_type("System.IntPtr"), "int")
+        self.assertEqual(mapped_type("System.Runtime.Serialization.SerializationInfo"),
+                         "object")
+        self.assertEqual(mapped_type("System.Runtime.Serialization.StreamingContext"),
+                         "object")
+
+    def test_touch_nested_enumerator_and_copy_target_are_formal(self) -> None:
+        identity = "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator"
+        self.assertEqual(projected_type_name(identity), "TouchCollection.Enumerator")
+        copy_to = expected_callable({
+            "kind": "method", "name": "CopyTo", "returnType": "System.Void",
+            "genericParameters": [], "parameters": [
+                {"name": "array", "type":
+                 "Microsoft.Xna.Framework.Input.Touch.TouchLocation[]", "out": False},
+                {"name": "arrayIndex", "type": "System.Int32", "out": False},
+            ],
+        }, "CopyTo", "Microsoft.Xna.Framework.Input.Touch.TouchCollection")
+        self.assertEqual(copy_to.parameters[0].annotation,
+                         "MutableSequence[TouchLocation]")
 
     def test_deliberately_broken_fixtures_cover_required_categories(self) -> None:
         fixtures = json.loads((Path(__file__).parent / "fixtures/broken.json").read_text())
