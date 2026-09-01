@@ -592,7 +592,7 @@ class SpriteBatch(GraphicsResource):
         library.check(library.cna_sprite_batch_create(graphicsDevice._require_handle(), c.byref(output)),
                       "cna_sprite_batch_create")
         game = graphicsDevice._game
-        # ABI 0.7 does not classify SpriteBatch as a graphics-resource handle
+        # CNA does not classify SpriteBatch as a graphics-resource handle
         # for the common subscription route.  It still has deterministic owned
         # lifetime, so its inherited event is emitted synchronously immediately
         # before the native destroy call.
@@ -611,8 +611,12 @@ class SpriteBatch(GraphicsResource):
                 raise TypeError("no matching XNA SpriteBatch.Begin overload")
             sort_mode = SpriteSortMode(args[0])
             if any(value is not None for value in args[1:]):
-                raise NativeCapabilityError("SpriteBatch.Begin", 6, None,
-                                            "ABI 0.7 Python slice currently binds only default states/effect/transform")
+                raise NativeCapabilityError(
+                    "SpriteBatch.Begin", 6, None,
+                    "CNA's begin route carries only a sort mode and its state field is "
+                    "reserved and must be zero, so the interval always uses AlphaBlend, "
+                    "LinearClamp, DepthStencilState.None, CullCounterClockwise, the identity "
+                    "transform and no custom effect")
         info = abi.CNA_SpriteBatchBeginInfo()
         info.struct_size, info.struct_version, info.sort_mode = c.sizeof(info), 1, int(sort_mode)
         library = get_library()

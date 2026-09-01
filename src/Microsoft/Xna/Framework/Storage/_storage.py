@@ -1,4 +1,4 @@
-"""Ownership-safe XNA storage projection over CNA ABI 0.7."""
+"""Ownership-safe XNA storage projection over the CNA storage routes."""
 
 from __future__ import annotations
 

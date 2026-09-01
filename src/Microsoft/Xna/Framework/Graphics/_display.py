@@ -165,7 +165,7 @@ class GraphicsAdapter(metaclass=staticpropertymeta):
         self._info()
         raise NativeCapabilityError(
             "GraphicsAdapter.MonitorHandle", 6, None,
-            "CNA ABI 0.7 deliberately does not expose native monitor handles",
+            "CNA deliberately does not expose native monitor handles",
         )
     @property
     def SupportedDisplayModes(self) -> DisplayModeCollection: return self._supported_modes

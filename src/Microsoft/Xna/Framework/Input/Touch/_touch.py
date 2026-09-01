@@ -1,4 +1,4 @@
-"""XNA touch values plus the canonical CNA ABI-0.7 touch panel."""
+"""XNA touch values plus the canonical CNA touch panel."""
 
 from __future__ import annotations
 

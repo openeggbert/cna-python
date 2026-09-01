@@ -1,4 +1,4 @@
-"""Native ABI-0.7 Texture3D and TextureCube resources (Color codec)."""
+"""Native Texture3D and TextureCube resources (Color codec)."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from ._resources import Texture, _release
 def _color_array(data: Sequence[Color]):
     if not isinstance(data, Sequence) or not all(isinstance(value, Color) for value in data):
         raise NativeCapabilityError("volume texture data transfer", 6, None,
-                                    "ABI 0.7 exposes only Color element arrays")
+                                    "CNA's volume-texture transfer exposes only Color element arrays")
     return (abi.CNA_Color * len(data))(*(abi.CNA_Color(*tuple(value)) for value in data))
 
 

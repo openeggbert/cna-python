@@ -17,7 +17,8 @@ class FrameworkDispatcher:
         except RuntimeError as error:
             raise NativeCapabilityError(
                 "FrameworkDispatcher.Update", 6, None,
-                "CNA ABI 0.7 requires a live Game handle although XNA permits a process dispatcher update",
+                "CNA's dispatcher route takes a Game handle, so it has nothing to pump without one, "
+                "although XNA permits a process-level update",
             ) from error
         host = game._host
         if host is None or host.handle == 0:

@@ -178,7 +178,7 @@ class _Texture2DReader(ContentTypeReader):
         if format_ is not SurfaceFormat.Color:
             raise input._failure(
                 f"Texture2D SurfaceFormat.{format_.name} cannot be uploaded faithfully through "
-                "CNA ABI 0.7's currently bound texture transfer route"
+                "CNA's currently bound texture transfer route"
             )
         texture = Texture2D(
             input.ContentManager._graphics_device(), width, height, mip_count > 1, format_

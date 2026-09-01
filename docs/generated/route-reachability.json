@@ -1,0 +1,2702 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "BOUND_ROUTES": 765,
+    "DIRECT_CALL_SITE": 671,
+    "OBSERVED_CALLED_AT_RUNTIME": 506,
+    "REACHED_BY_NAME_TEMPLATE": 15,
+    "ADMITTED_WITH_REASON": 37,
+    "UNJUSTIFIED_BOUND_WITHOUT_CALL_SITE": 0,
+    "STALE_ADMISSIONS": 0
+  },
+  "unreached": [],
+  "staleAdmissions": [],
+  "reachedByTemplate": {
+    "cna_game_get_is_mouse_visible": "src/Microsoft/Xna/Framework/_game.py:417 (family 'cna_game_get_*')",
+    "cna_game_get_is_fixed_time_step": "src/Microsoft/Xna/Framework/_game.py:417 (family 'cna_game_get_*')",
+    "cna_game_get_target_elapsed_time_ticks": "src/Microsoft/Xna/Framework/_game.py:417 (family 'cna_game_get_*')",
+    "cna_game_get_inactive_sleep_time_ticks": "src/Microsoft/Xna/Framework/_game.py:417 (family 'cna_game_get_*')",
+    "cna_game_get_graphics_device": "src/Microsoft/Xna/Framework/_game.py:417 (family 'cna_game_get_*')",
+    "cna_effect_annotation_get_value_boolean": "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:172 (family 'cna_effect_annotation_get_value_*')",
+    "cna_effect_annotation_get_value_int32": "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:172 (family 'cna_effect_annotation_get_value_*')",
+    "cna_effect_annotation_get_value_single": "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:172 (family 'cna_effect_annotation_get_value_*')",
+    "cna_effect_annotation_get_value_vector2": "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:172 (family 'cna_effect_annotation_get_value_*')",
+    "cna_effect_annotation_get_value_vector3": "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:172 (family 'cna_effect_annotation_get_value_*')",
+    "cna_effect_annotation_get_value_vector4": "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:172 (family 'cna_effect_annotation_get_value_*')",
+    "cna_storage_container_get_directory_name_count": "src/Microsoft/Xna/Framework/Storage/_storage.py:501 (family 'cna_storage_container_get_*')",
+    "cna_storage_container_copy_directory_name": "src/Microsoft/Xna/Framework/Storage/_storage.py:502 (family 'cna_storage_container_copy_*')",
+    "cna_storage_container_get_file_name_count": "src/Microsoft/Xna/Framework/Storage/_storage.py:501 (family 'cna_storage_container_get_*')",
+    "cna_storage_container_copy_file_name": "src/Microsoft/Xna/Framework/Storage/_storage.py:502 (family 'cna_storage_container_copy_*')"
+  },
+  "observedAtRuntime": [
+    "cna_album_collection_destroy",
+    "cna_album_collection_get_count",
+    "cna_alpha_test_effect_create",
+    "cna_alpha_test_effect_get_alpha_function",
+    "cna_alpha_test_effect_get_reference_alpha",
+    "cna_alpha_test_effect_get_texture",
+    "cna_alpha_test_effect_set_alpha",
+    "cna_alpha_test_effect_set_alpha_function",
+    "cna_alpha_test_effect_set_diffuse_color",
+    "cna_alpha_test_effect_set_reference_alpha",
+    "cna_alpha_test_effect_set_texture",
+    "cna_alpha_test_effect_set_vertex_color_enabled",
+    "cna_artist_collection_destroy",
+    "cna_artist_collection_get_count",
+    "cna_audio_engine_create",
+    "cna_audio_engine_create_with_renderer",
+    "cna_audio_unsubscribe_ext",
+    "cna_basic_effect_create",
+    "cna_basic_effect_get_alpha",
+    "cna_basic_effect_get_prefer_per_pixel_lighting",
+    "cna_basic_effect_get_texture",
+    "cna_basic_effect_get_texture_enabled",
+    "cna_basic_effect_get_vertex_color_enabled",
+    "cna_basic_effect_set_alpha",
+    "cna_basic_effect_set_diffuse_color",
+    "cna_basic_effect_set_emissive_color",
+    "cna_basic_effect_set_prefer_per_pixel_lighting",
+    "cna_basic_effect_set_specular_color",
+    "cna_basic_effect_set_specular_power",
+    "cna_basic_effect_set_texture",
+    "cna_basic_effect_set_texture_enabled",
+    "cna_basic_effect_set_vertex_color_enabled",
+    "cna_directional_light_destroy",
+    "cna_directional_light_get_diffuse_color",
+    "cna_directional_light_get_direction",
+    "cna_directional_light_get_enabled",
+    "cna_directional_light_get_specular_color",
+    "cna_directional_light_set_diffuse_color",
+    "cna_directional_light_set_direction",
+    "cna_directional_light_set_enabled",
+    "cna_directional_light_set_specular_color",
+    "cna_dual_texture_effect_create",
+    "cna_dual_texture_effect_get_texture",
+    "cna_dual_texture_effect_get_vertex_color_enabled",
+    "cna_dual_texture_effect_set_alpha",
+    "cna_dual_texture_effect_set_diffuse_color",
+    "cna_dual_texture_effect_set_texture",
+    "cna_dual_texture_effect_set_vertex_color_enabled",
+    "cna_dynamic_sound_effect_instance_create",
+    "cna_dynamic_sound_effect_instance_get_pending_buffer_count",
+    "cna_dynamic_sound_effect_instance_get_sample_duration_ticks",
+    "cna_dynamic_sound_effect_instance_get_sample_size_in_bytes",
+    "cna_dynamic_sound_effect_instance_submit_buffer",
+    "cna_dynamic_sound_effect_instance_subscribe_buffer_needed",
+    "cna_effect_annotation_collection_add",
+    "cna_effect_annotation_collection_destroy",
+    "cna_effect_annotation_collection_get_at",
+    "cna_effect_annotation_collection_get_count",
+    "cna_effect_annotation_copy_name",
+    "cna_effect_annotation_copy_semantic",
+    "cna_effect_annotation_copy_value_string",
+    "cna_effect_annotation_create",
+    "cna_effect_annotation_destroy",
+    "cna_effect_annotation_get_info",
+    "cna_effect_annotation_get_name_byte_count",
+    "cna_effect_annotation_get_semantic_byte_count",
+    "cna_effect_annotation_get_value_boolean",
+    "cna_effect_annotation_get_value_int32",
+    "cna_effect_annotation_get_value_matrix",
+    "cna_effect_annotation_get_value_single",
+    "cna_effect_annotation_get_value_string_byte_count",
+    "cna_effect_annotation_get_value_vector2",
+    "cna_effect_annotation_get_value_vector3",
+    "cna_effect_annotation_get_value_vector4",
+    "cna_effect_apply",
+    "cna_effect_clone",
+    "cna_effect_create_empty",
+    "cna_effect_destroy",
+    "cna_effect_fog_get_color",
+    "cna_effect_fog_get_enabled",
+    "cna_effect_fog_get_end",
+    "cna_effect_fog_get_start",
+    "cna_effect_fog_set_color",
+    "cna_effect_fog_set_enabled",
+    "cna_effect_fog_set_end",
+    "cna_effect_fog_set_start",
+    "cna_effect_get_current_technique",
+    "cna_effect_get_parameters",
+    "cna_effect_get_techniques",
+    "cna_effect_lights_enable_default",
+    "cna_effect_lights_get_directional_light",
+    "cna_effect_lights_set_ambient_color",
+    "cna_effect_lights_set_enabled",
+    "cna_effect_matrices_get_projection",
+    "cna_effect_matrices_get_view",
+    "cna_effect_matrices_get_world",
+    "cna_effect_matrices_set_projection",
+    "cna_effect_matrices_set_view",
+    "cna_effect_matrices_set_world",
+    "cna_effect_parameter_collection_add_create",
+    "cna_effect_parameter_collection_destroy",
+    "cna_effect_parameter_collection_find_name",
+    "cna_effect_parameter_collection_find_semantic",
+    "cna_effect_parameter_collection_get_at",
+    "cna_effect_parameter_collection_get_count",
+    "cna_effect_parameter_copy_name",
+    "cna_effect_parameter_copy_semantic",
+    "cna_effect_parameter_copy_value_string",
+    "cna_effect_parameter_destroy",
+    "cna_effect_parameter_get_annotations",
+    "cna_effect_parameter_get_elements",
+    "cna_effect_parameter_get_info",
+    "cna_effect_parameter_get_name_byte_count",
+    "cna_effect_parameter_get_semantic_byte_count",
+    "cna_effect_parameter_get_structure_members",
+    "cna_effect_parameter_get_value",
+    "cna_effect_parameter_get_value_string_byte_count",
+    "cna_effect_parameter_get_value_texture",
+    "cna_effect_parameter_get_values",
+    "cna_effect_parameter_set_value",
+    "cna_effect_parameter_set_value_string",
+    "cna_effect_parameter_set_value_texture",
+    "cna_effect_parameter_set_values",
+    "cna_effect_pass_apply",
+    "cna_effect_pass_collection_destroy",
+    "cna_effect_pass_collection_get_at",
+    "cna_effect_pass_collection_get_count",
+    "cna_effect_pass_copy_name",
+    "cna_effect_pass_destroy",
+    "cna_effect_pass_get_name_byte_count",
+    "cna_effect_technique_collection_destroy",
+    "cna_effect_technique_collection_get_at",
+    "cna_effect_technique_collection_get_count",
+    "cna_effect_technique_copy_name",
+    "cna_effect_technique_destroy",
+    "cna_effect_technique_get_name_byte_count",
+    "cna_effect_technique_get_passes",
+    "cna_environment_map_effect_create",
+    "cna_environment_map_effect_get_amount",
+    "cna_environment_map_effect_get_environment_map",
+    "cna_environment_map_effect_get_fresnel_factor",
+    "cna_environment_map_effect_get_specular",
+    "cna_environment_map_effect_get_texture",
+    "cna_environment_map_effect_set_alpha",
+    "cna_environment_map_effect_set_amount",
+    "cna_environment_map_effect_set_diffuse_color",
+    "cna_environment_map_effect_set_emissive_color",
+    "cna_environment_map_effect_set_environment_map",
+    "cna_environment_map_effect_set_fresnel_factor",
+    "cna_environment_map_effect_set_specular",
+    "cna_environment_map_effect_set_texture",
+    "cna_error_copy_last_message",
+    "cna_error_get_last_info",
+    "cna_error_get_last_message_size",
+    "cna_framework_dispatcher_update",
+    "cna_game_create",
+    "cna_game_destroy",
+    "cna_game_launch_parameters_copy_key",
+    "cna_game_launch_parameters_copy_value",
+    "cna_game_launch_parameters_get_count",
+    "cna_game_launch_parameters_get_key_size",
+    "cna_game_launch_parameters_get_value_size",
+    "cna_game_request_exit",
+    "cna_game_run",
+    "cna_game_set_frame_hooks_ext",
+    "cna_game_set_inactive_sleep_time_ticks",
+    "cna_game_set_is_mouse_visible",
+    "cna_game_set_window_title",
+    "cna_game_subscribe",
+    "cna_game_unsubscribe",
+    "cna_game_window_get_native_handle_ext",
+    "cna_game_window_subscribe",
+    "cna_gamepad_get_capabilities",
+    "cna_gamepad_get_state_with_dead_zone",
+    "cna_gamepad_set_vibration",
+    "cna_gamer_services_dispatcher_initialize",
+    "cna_gamer_services_dispatcher_set_window_handle",
+    "cna_genre_collection_destroy",
+    "cna_genre_collection_get_count",
+    "cna_graphics_adapter_get_info",
+    "cna_graphics_device_clear_rgba",
+    "cna_graphics_device_copy_render_targets",
+    "cna_graphics_device_copy_vertex_buffers",
+    "cna_graphics_device_create",
+    "cna_graphics_device_destroy",
+    "cna_graphics_device_draw_indexed_primitives",
+    "cna_graphics_device_draw_primitives",
+    "cna_graphics_device_draw_user_indexed_primitives",
+    "cna_graphics_device_draw_user_primitives",
+    "cna_graphics_device_get_adapter_index",
+    "cna_graphics_device_get_backbuffer_data_window",
+    "cna_graphics_device_get_blend_state",
+    "cna_graphics_device_get_graphics_profile",
+    "cna_graphics_device_get_index_buffer",
+    "cna_graphics_device_get_presentation_parameters",
+    "cna_graphics_device_get_render_target_count",
+    "cna_graphics_device_get_texture",
+    "cna_graphics_device_get_vertex_buffer_count",
+    "cna_graphics_device_get_viewport",
+    "cna_graphics_device_manager_create",
+    "cna_graphics_device_manager_destroy",
+    "cna_graphics_device_manager_dispose",
+    "cna_graphics_device_manager_get_graphics_device",
+    "cna_graphics_device_manager_set_graphics_profile",
+    "cna_graphics_device_manager_set_is_full_screen",
+    "cna_graphics_device_manager_set_prefer_multi_sampling",
+    "cna_graphics_device_manager_set_preferred_back_buffer_format",
+    "cna_graphics_device_manager_set_preferred_back_buffer_height",
+    "cna_graphics_device_manager_set_preferred_back_buffer_width",
+    "cna_graphics_device_manager_set_preferred_depth_stencil_format",
+    "cna_graphics_device_manager_set_supported_orientations",
+    "cna_graphics_device_manager_set_synchronize_with_vertical_retrace",
+    "cna_graphics_device_manager_subscribe",
+    "cna_graphics_device_manager_subscribe_preparing_device_settings_ext",
+    "cna_graphics_device_reset",
+    "cna_graphics_device_set_blend_state",
+    "cna_graphics_device_set_depth_stencil_state",
+    "cna_graphics_device_set_index_buffer",
+    "cna_graphics_device_set_rasterizer_state",
+    "cna_graphics_device_set_render_target2d",
+    "cna_graphics_device_set_render_target_cube",
+    "cna_graphics_device_set_render_targets",
+    "cna_graphics_device_set_texture",
+    "cna_graphics_device_set_vertex_buffer",
+    "cna_graphics_device_set_vertex_buffers",
+    "cna_graphics_device_set_viewport",
+    "cna_graphics_device_subscribe_event",
+    "cna_graphics_device_unbind_texture",
+    "cna_graphics_device_unsubscribe",
+    "cna_graphics_renderer_copy_available_ext",
+    "cna_graphics_renderer_copy_current_name",
+    "cna_graphics_renderer_get_active_ext",
+    "cna_graphics_renderer_get_automatic_fallback_ext",
+    "cna_graphics_renderer_get_available_count_ext",
+    "cna_graphics_renderer_get_current_name_size",
+    "cna_graphics_renderer_get_current_type",
+    "cna_graphics_renderer_get_fallback_count_ext",
+    "cna_graphics_renderer_get_is_available_ext",
+    "cna_graphics_renderer_get_is_latched_ext",
+    "cna_graphics_renderer_get_selected_ext",
+    "cna_graphics_renderer_try_parse_name_ext",
+    "cna_graphics_resource_subscribe_disposing",
+    "cna_index_buffer_create",
+    "cna_index_buffer_destroy",
+    "cna_index_buffer_get_data",
+    "cna_index_buffer_set_data",
+    "cna_keyboard_get_state",
+    "cna_keyboard_get_state_for_player",
+    "cna_media_library_copy_media_source_name",
+    "cna_media_library_create_from_source",
+    "cna_media_library_destroy",
+    "cna_media_library_dispose",
+    "cna_media_library_get_albums",
+    "cna_media_library_get_artists",
+    "cna_media_library_get_genres",
+    "cna_media_library_get_is_disposed",
+    "cna_media_library_get_media_source_name_size",
+    "cna_media_library_get_media_source_type",
+    "cna_media_library_get_pictures",
+    "cna_media_library_get_playlists",
+    "cna_media_library_get_root_picture_album",
+    "cna_media_library_get_songs",
+    "cna_media_player_get_is_muted",
+    "cna_media_player_get_is_repeating",
+    "cna_media_player_get_is_visualization_enabled",
+    "cna_media_player_get_queue",
+    "cna_media_player_get_state",
+    "cna_media_player_get_visualization_data",
+    "cna_media_player_get_volume",
+    "cna_media_player_play_song",
+    "cna_media_player_program_exit_ext",
+    "cna_media_player_raise_active_song_changed_ext",
+    "cna_media_player_set_is_muted",
+    "cna_media_player_set_is_repeating",
+    "cna_media_player_set_is_shuffled",
+    "cna_media_player_set_is_visualization_enabled",
+    "cna_media_player_set_volume",
+    "cna_media_player_stop",
+    "cna_media_player_subscribe_active_song_changed_ext",
+    "cna_media_player_subscribe_media_state_changed_ext",
+    "cna_media_player_unsubscribe_ext",
+    "cna_media_player_update_ext",
+    "cna_media_queue_destroy",
+    "cna_media_queue_get_active_song",
+    "cna_media_queue_get_active_song_index",
+    "cna_media_queue_get_at",
+    "cna_media_queue_get_count",
+    "cna_media_source_copy_name_at",
+    "cna_media_source_get_available_count",
+    "cna_media_source_get_name_size_at",
+    "cna_media_source_get_type_at",
+    "cna_microphone_copy_name_at",
+    "cna_microphone_get_buffer_duration_ticks_at",
+    "cna_microphone_get_count",
+    "cna_microphone_get_data_at",
+    "cna_microphone_get_default_index_ext",
+    "cna_microphone_get_name_size_at",
+    "cna_microphone_get_sample_rate_at",
+    "cna_microphone_get_sample_size_in_bytes_at",
+    "cna_microphone_get_state_at",
+    "cna_microphone_set_buffer_duration_ticks_at",
+    "cna_microphone_start_at",
+    "cna_microphone_stop_at",
+    "cna_mouse_get_state",
+    "cna_mouse_get_window_handle",
+    "cna_mouse_set_position",
+    "cna_mouse_set_window_handle",
+    "cna_occlusion_query_begin",
+    "cna_occlusion_query_create",
+    "cna_occlusion_query_destroy",
+    "cna_occlusion_query_end",
+    "cna_occlusion_query_get_is_complete",
+    "cna_occlusion_query_get_pixel_count",
+    "cna_occlusion_query_has_renderer",
+    "cna_picture_album_copy_name",
+    "cna_picture_album_destroy",
+    "cna_picture_album_equals",
+    "cna_picture_album_get_name_size",
+    "cna_picture_album_get_pictures",
+    "cna_picture_collection_destroy",
+    "cna_picture_collection_dispose",
+    "cna_picture_collection_get_at",
+    "cna_picture_collection_get_count",
+    "cna_picture_collection_get_is_disposed",
+    "cna_picture_copy_name",
+    "cna_picture_destroy",
+    "cna_picture_dispose",
+    "cna_picture_equals",
+    "cna_picture_get_album",
+    "cna_picture_get_height",
+    "cna_picture_get_is_disposed",
+    "cna_picture_get_name_size",
+    "cna_picture_get_width",
+    "cna_playlist_collection_destroy",
+    "cna_playlist_collection_get_count",
+    "cna_render_target2d_create",
+    "cna_render_target_cube_create",
+    "cna_render_target_destroy",
+    "cna_render_target_get_info",
+    "cna_render_target_subscribe_content_lost",
+    "cna_render_target_unsubscribe_content_lost",
+    "cna_skinned_effect_copy_bone_transforms",
+    "cna_skinned_effect_create",
+    "cna_skinned_effect_set_alpha",
+    "cna_skinned_effect_set_bone_transforms",
+    "cna_skinned_effect_set_diffuse_color",
+    "cna_skinned_effect_set_emissive_color",
+    "cna_skinned_effect_set_prefer_per_pixel_lighting",
+    "cna_skinned_effect_set_specular_color",
+    "cna_skinned_effect_set_specular_power",
+    "cna_skinned_effect_set_texture",
+    "cna_skinned_effect_set_weights_per_vertex",
+    "cna_song_collection_destroy",
+    "cna_song_collection_dispose",
+    "cna_song_collection_get_count",
+    "cna_song_collection_get_is_disposed",
+    "cna_song_copy_name",
+    "cna_song_create_from_uri",
+    "cna_song_destroy",
+    "cna_song_dispose",
+    "cna_song_equals",
+    "cna_song_get_album",
+    "cna_song_get_artist",
+    "cna_song_get_duration",
+    "cna_song_get_genre",
+    "cna_song_get_is_disposed",
+    "cna_song_get_is_protected",
+    "cna_song_get_is_rated",
+    "cna_song_get_name_size",
+    "cna_song_get_play_count",
+    "cna_song_get_rating",
+    "cna_song_get_track_number",
+    "cna_sound_effect_copy_name",
+    "cna_sound_effect_create_from_encoded_ext",
+    "cna_sound_effect_create_instance",
+    "cna_sound_effect_create_pcm16_range_ext",
+    "cna_sound_effect_destroy",
+    "cna_sound_effect_get_distance_scale",
+    "cna_sound_effect_get_doppler_scale",
+    "cna_sound_effect_get_duration_ticks",
+    "cna_sound_effect_get_master_volume",
+    "cna_sound_effect_get_name_size",
+    "cna_sound_effect_get_speed_of_sound",
+    "cna_sound_effect_instance_apply_3d",
+    "cna_sound_effect_instance_apply_3d_multi_ext",
+    "cna_sound_effect_instance_destroy",
+    "cna_sound_effect_instance_get_info",
+    "cna_sound_effect_instance_pause",
+    "cna_sound_effect_instance_play",
+    "cna_sound_effect_instance_resume",
+    "cna_sound_effect_instance_set_is_looped",
+    "cna_sound_effect_instance_set_pan",
+    "cna_sound_effect_instance_set_pitch",
+    "cna_sound_effect_instance_set_volume",
+    "cna_sound_effect_instance_stop",
+    "cna_sound_effect_play",
+    "cna_sound_effect_play_with_settings",
+    "cna_sound_effect_set_distance_scale",
+    "cna_sound_effect_set_doppler_scale",
+    "cna_sound_effect_set_master_volume",
+    "cna_sound_effect_set_name",
+    "cna_sound_effect_set_speed_of_sound",
+    "cna_sprite_batch_begin",
+    "cna_sprite_batch_create",
+    "cna_sprite_batch_destroy",
+    "cna_sprite_batch_end",
+    "cna_sprite_batch_submit_many",
+    "cna_sprite_batch_submit_scaled_many",
+    "cna_sprite_font_create",
+    "cna_sprite_font_destroy",
+    "cna_sprite_font_get_info",
+    "cna_sprite_font_measure_utf8",
+    "cna_storage_container_copy_display_name",
+    "cna_storage_container_copy_file_name",
+    "cna_storage_container_create_directory",
+    "cna_storage_container_create_file",
+    "cna_storage_container_destroy",
+    "cna_storage_container_dispose",
+    "cna_storage_container_get_display_name_size",
+    "cna_storage_container_get_file_name_count",
+    "cna_storage_container_get_is_disposed",
+    "cna_storage_container_open",
+    "cna_storage_container_open_file_share",
+    "cna_storage_container_subscribe_disposing",
+    "cna_storage_container_unsubscribe_disposing",
+    "cna_storage_copy_root_ext",
+    "cna_storage_device_delete_container",
+    "cna_storage_device_destroy",
+    "cna_storage_device_get_free_space",
+    "cna_storage_device_get_is_connected",
+    "cna_storage_device_get_total_space",
+    "cna_storage_device_show_selector",
+    "cna_storage_get_root_size_ext",
+    "cna_storage_stream_close",
+    "cna_storage_stream_flush",
+    "cna_storage_stream_get_can_read",
+    "cna_storage_stream_get_length",
+    "cna_storage_stream_get_position",
+    "cna_storage_stream_read",
+    "cna_storage_stream_write",
+    "cna_texture2d_copy_encoded",
+    "cna_texture2d_create",
+    "cna_texture2d_create_from_encoded_memory",
+    "cna_texture2d_destroy",
+    "cna_texture2d_get_data",
+    "cna_texture2d_get_encoded_byte_count",
+    "cna_texture2d_get_info",
+    "cna_texture2d_set_data",
+    "cna_texture3d_create",
+    "cna_texture3d_destroy",
+    "cna_texture3d_get_data",
+    "cna_texture3d_get_info",
+    "cna_texture3d_set_data",
+    "cna_texturecube_create",
+    "cna_texturecube_destroy",
+    "cna_texturecube_get_data",
+    "cna_texturecube_get_info",
+    "cna_texturecube_set_data",
+    "cna_title_container_read_ext",
+    "cna_title_location_set_path_ext",
+    "cna_touch_get_capabilities",
+    "cna_touch_get_state",
+    "cna_touch_panel_get_display_height",
+    "cna_touch_panel_get_display_orientation",
+    "cna_touch_panel_get_display_width",
+    "cna_touch_panel_get_enabled_gestures",
+    "cna_touch_panel_get_is_gesture_available",
+    "cna_touch_panel_get_window_handle",
+    "cna_touch_panel_read_gesture",
+    "cna_touch_panel_set_display_height",
+    "cna_touch_panel_set_display_orientation",
+    "cna_touch_panel_set_display_width",
+    "cna_touch_panel_set_enabled_gestures",
+    "cna_touch_panel_set_window_handle",
+    "cna_vertex_buffer_create",
+    "cna_vertex_buffer_destroy",
+    "cna_vertex_buffer_get_data_raw",
+    "cna_vertex_buffer_get_info",
+    "cna_vertex_buffer_set_data_raw",
+    "cna_vertex_buffer_set_data_raw_at_with_options",
+    "cna_vertex_buffer_set_data_raw_with_options",
+    "cna_vertex_declaration_create",
+    "cna_vertex_declaration_destroy",
+    "cna_video_create_with_metadata",
+    "cna_video_destroy",
+    "cna_video_get_duration",
+    "cna_video_get_frames_per_second",
+    "cna_video_get_height",
+    "cna_video_get_soundtrack_type",
+    "cna_video_get_width",
+    "cna_video_player_create",
+    "cna_video_player_destroy",
+    "cna_video_player_dispose",
+    "cna_video_player_get_frame_ext",
+    "cna_video_player_get_is_looped",
+    "cna_video_player_get_is_muted",
+    "cna_video_player_get_state",
+    "cna_video_player_get_volume",
+    "cna_video_player_pause",
+    "cna_video_player_play",
+    "cna_video_player_resume",
+    "cna_video_player_set_is_looped",
+    "cna_video_player_set_is_muted",
+    "cna_video_player_set_volume",
+    "cna_video_player_stop",
+    "cna_viewport_get_title_safe_area"
+  ],
+  "admitted": {
+    "cna_basic_effect_get_diffuse_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_basic_effect_get_emissive_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_basic_effect_get_specular_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_basic_effect_get_specular_power": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_alpha_test_effect_get_diffuse_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_alpha_test_effect_get_alpha": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_alpha_test_effect_get_vertex_color_enabled": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_dual_texture_effect_get_diffuse_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_dual_texture_effect_get_alpha": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_environment_map_effect_get_diffuse_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_environment_map_effect_get_emissive_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_environment_map_effect_get_alpha": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_skinned_effect_get_diffuse_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_skinned_effect_get_emissive_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_skinned_effect_get_specular_color": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_skinned_effect_get_specular_power": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_skinned_effect_get_alpha": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_skinned_effect_get_prefer_per_pixel_lighting": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_skinned_effect_get_texture": "A stock-effect property getter. Its name is assembled from literals by a property factory that is passed to _stock_property by reference, so the assembly is statically real but not statically followable here. Reading the property calls it; the suite only writes these.",
+    "cna_album_get_name_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_album_copy_name": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_album_get_art_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_album_copy_art": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_album_get_thumbnail_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_album_copy_thumbnail": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_artist_get_name_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_artist_copy_name": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_genre_get_name_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_genre_copy_name": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_playlist_get_name_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_playlist_copy_name": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_picture_get_image_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_picture_copy_image": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_picture_get_thumbnail_size": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_picture_copy_thumbnail": "A catalog text or image accessor whose name is built in two steps from a class's literal _stem. It is reached whenever a catalog item exists; this host's music catalog is empty and picture bytes are platform-pending, so no test can reach one.",
+    "cna_get_abi_version": "Called by the loader's own bootstrap through a name held in a variable, before any recording wrapper exists to observe it.",
+    "cna_video_player_get_texture": "Superseded in the facade by the frame descriptor that carries the decode generation. Retained for the ownership stress tool, which exercises the bare borrowed-handle route directly."
+  },
+  "consumers": {
+    "cna_get_abi_version": [],
+    "cna_error_get_last_info": [
+      "src/_cna_native/loader.py:739"
+    ],
+    "cna_error_get_last_message_size": [
+      "src/_cna_native/loader.py:742"
+    ],
+    "cna_error_copy_last_message": [
+      "src/_cna_native/loader.py:746"
+    ],
+    "cna_game_create": [
+      "src/Microsoft/Xna/Framework/_game.py:196"
+    ],
+    "cna_game_set_frame_hooks_ext": [
+      "src/Microsoft/Xna/Framework/_game.py:201"
+    ],
+    "cna_game_run": [
+      "src/Microsoft/Xna/Framework/_game.py:274"
+    ],
+    "cna_game_run_one_frame": [
+      "src/Microsoft/Xna/Framework/_game.py:279"
+    ],
+    "cna_game_request_exit": [
+      "src/Microsoft/Xna/Framework/_game.py:283"
+    ],
+    "cna_game_reset_elapsed_time": [
+      "src/Microsoft/Xna/Framework/_game.py:610"
+    ],
+    "cna_game_suppress_draw": [
+      "src/Microsoft/Xna/Framework/_game.py:615"
+    ],
+    "cna_game_subscribe": [
+      "src/Microsoft/Xna/Framework/_game.py:244"
+    ],
+    "cna_game_unsubscribe": [
+      "src/Microsoft/Xna/Framework/_game.py:292",
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:258"
+    ],
+    "cna_game_launch_parameters_get_count": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:428"
+    ],
+    "cna_game_launch_parameters_get_value_size": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:442"
+    ],
+    "cna_game_launch_parameters_copy_value": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:443"
+    ],
+    "cna_game_launch_parameters_get_key_size": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:435"
+    ],
+    "cna_game_launch_parameters_copy_key": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:436"
+    ],
+    "cna_game_launch_parameters_add": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:398"
+    ],
+    "cna_game_set_window_title": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:484"
+    ],
+    "cna_title_location_set_path_ext": [
+      "src/Microsoft/Xna/Framework/_title.py:143"
+    ],
+    "cna_title_container_read_ext": [
+      "src/Microsoft/Xna/Framework/_title.py:99"
+    ],
+    "cna_game_window_get_allow_user_resizing": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:505"
+    ],
+    "cna_game_window_set_allow_user_resizing": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:515"
+    ],
+    "cna_game_window_get_client_bounds": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:525"
+    ],
+    "cna_game_window_get_current_orientation": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:536"
+    ],
+    "cna_game_window_get_native_handle_ext": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:495"
+    ],
+    "cna_game_window_get_screen_device_name_size": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:547"
+    ],
+    "cna_game_window_copy_screen_device_name": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:548"
+    ],
+    "cna_game_window_get_title_size": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:473"
+    ],
+    "cna_game_window_copy_title": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:474"
+    ],
+    "cna_game_window_begin_screen_device_change": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:556"
+    ],
+    "cna_game_window_end_screen_device_change": [
+      "src/Microsoft/Xna/Framework/_game_objects.py:572"
+    ],
+    "cna_game_window_subscribe": [
+      "src/Microsoft/Xna/Framework/_game.py:246"
+    ],
+    "cna_game_get_is_active": [
+      "src/Microsoft/Xna/Framework/_game.py:409"
+    ],
+    "cna_game_get_is_mouse_visible": [],
+    "cna_game_set_is_mouse_visible": [
+      "src/Microsoft/Xna/Framework/_game.py:210"
+    ],
+    "cna_game_get_is_fixed_time_step": [],
+    "cna_game_set_is_fixed_time_step": [
+      "src/Microsoft/Xna/Framework/_game.py:437"
+    ],
+    "cna_game_get_target_elapsed_time_ticks": [],
+    "cna_game_set_target_elapsed_time_ticks": [
+      "src/Microsoft/Xna/Framework/_game.py:462"
+    ],
+    "cna_game_get_inactive_sleep_time_ticks": [],
+    "cna_game_set_inactive_sleep_time_ticks": [
+      "src/Microsoft/Xna/Framework/_game.py:204"
+    ],
+    "cna_game_destroy": [
+      "src/Microsoft/Xna/Framework/_game.py:307"
+    ],
+    "cna_framework_dispatcher_update": [
+      "src/Microsoft/Xna/Framework/_framework_dispatcher.py:29"
+    ],
+    "cna_graphics_renderer_get_selected_ext": [
+      "src/_cna_native/runtime_identity.py:74",
+      "src/cna/extensions/graphics.py:164"
+    ],
+    "cna_graphics_renderer_get_active_ext": [
+      "src/_cna_native/runtime_identity.py:85",
+      "src/cna/extensions/graphics.py:180"
+    ],
+    "cna_graphics_renderer_get_is_latched_ext": [
+      "src/_cna_native/runtime_identity.py:78",
+      "src/cna/extensions/graphics.py:213"
+    ],
+    "cna_graphics_renderer_get_current_name_size": [
+      "src/_cna_native/runtime_identity.py:58",
+      "src/cna/extensions/graphics.py:198"
+    ],
+    "cna_graphics_renderer_copy_current_name": [
+      "src/_cna_native/runtime_identity.py:64",
+      "src/cna/extensions/graphics.py:204"
+    ],
+    "cna_graphics_renderer_get_current_type": [
+      "src/cna/extensions/graphics.py:189"
+    ],
+    "cna_graphics_renderer_get_available_count_ext": [
+      "src/cna/extensions/graphics.py:140"
+    ],
+    "cna_graphics_renderer_copy_available_ext": [
+      "src/cna/extensions/graphics.py:146"
+    ],
+    "cna_graphics_renderer_get_is_available_ext": [
+      "src/cna/extensions/graphics.py:155"
+    ],
+    "cna_graphics_renderer_try_parse_name_ext": [
+      "src/cna/extensions/graphics.py:229"
+    ],
+    "cna_graphics_renderer_set_preferred_ext": [
+      "src/cna/extensions/graphics.py:248"
+    ],
+    "cna_graphics_renderer_set_preferred_by_name_ext": [
+      "src/cna/extensions/graphics.py:244"
+    ],
+    "cna_graphics_renderer_set_fallback_chain_ext": [
+      "src/cna/extensions/graphics.py:257"
+    ],
+    "cna_graphics_renderer_set_automatic_fallback_ext": [
+      "src/cna/extensions/graphics.py:275"
+    ],
+    "cna_graphics_renderer_get_automatic_fallback_ext": [
+      "src/cna/extensions/graphics.py:265"
+    ],
+    "cna_graphics_renderer_get_fallback_count_ext": [
+      "src/cna/extensions/graphics.py:318"
+    ],
+    "cna_graphics_renderer_get_fallback_at_ext": [
+      "src/cna/extensions/graphics.py:324"
+    ],
+    "cna_graphics_renderer_fallback_get_message_size_ext": [
+      "src/cna/extensions/graphics.py:282"
+    ],
+    "cna_graphics_renderer_fallback_copy_message_ext": [
+      "src/cna/extensions/graphics.py:288"
+    ],
+    "cna_graphics_renderer_fallback_reason_get_name_size_ext": [
+      "src/cna/extensions/graphics.py:297"
+    ],
+    "cna_graphics_renderer_fallback_reason_copy_name_ext": [
+      "src/cna/extensions/graphics.py:303"
+    ],
+    "cna_sound_effect_create_pcm16_range_ext": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:230"
+    ],
+    "cna_sound_effect_create_from_encoded_ext": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:263"
+    ],
+    "cna_sound_effect_get_duration_ticks": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:290"
+    ],
+    "cna_sound_effect_get_name_size": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:278"
+    ],
+    "cna_sound_effect_copy_name": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:278"
+    ],
+    "cna_sound_effect_set_name": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:283"
+    ],
+    "cna_sound_effect_create_instance": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:344"
+    ],
+    "cna_sound_effect_destroy": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:241"
+    ],
+    "cna_sound_effect_play": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:359"
+    ],
+    "cna_sound_effect_play_with_settings": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:369"
+    ],
+    "cna_sound_effect_get_master_volume": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:313"
+    ],
+    "cna_sound_effect_set_master_volume": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:314"
+    ],
+    "cna_sound_effect_get_distance_scale": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:337"
+    ],
+    "cna_sound_effect_set_distance_scale": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:333"
+    ],
+    "cna_sound_effect_get_doppler_scale": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:321"
+    ],
+    "cna_sound_effect_set_doppler_scale": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:322"
+    ],
+    "cna_sound_effect_get_speed_of_sound": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:317"
+    ],
+    "cna_sound_effect_set_speed_of_sound": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:318"
+    ],
+    "cna_sound_effect_instance_destroy": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:412"
+    ],
+    "cna_sound_effect_instance_play": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:481"
+    ],
+    "cna_sound_effect_instance_pause": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:486"
+    ],
+    "cna_sound_effect_instance_resume": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:490"
+    ],
+    "cna_sound_effect_instance_stop": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:497"
+    ],
+    "cna_sound_effect_instance_get_info": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:434"
+    ],
+    "cna_sound_effect_instance_set_volume": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:442"
+    ],
+    "cna_sound_effect_instance_set_pitch": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:447"
+    ],
+    "cna_sound_effect_instance_set_pan": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:452"
+    ],
+    "cna_sound_effect_instance_set_is_looped": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:472"
+    ],
+    "cna_sound_effect_instance_apply_3d": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:512"
+    ],
+    "cna_sound_effect_instance_apply_3d_multi_ext": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:529"
+    ],
+    "cna_dynamic_sound_effect_instance_create": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:555"
+    ],
+    "cna_dynamic_sound_effect_instance_get_pending_buffer_count": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:582"
+    ],
+    "cna_dynamic_sound_effect_instance_submit_buffer": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:595"
+    ],
+    "cna_dynamic_sound_effect_instance_get_sample_duration_ticks": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:603"
+    ],
+    "cna_dynamic_sound_effect_instance_get_sample_size_in_bytes": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:610"
+    ],
+    "cna_dynamic_sound_effect_instance_subscribe_buffer_needed": [
+      "src/Microsoft/Xna/Framework/Audio/_sound.py:567"
+    ],
+    "cna_microphone_get_count": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:64"
+    ],
+    "cna_microphone_get_default_index_ext": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:83"
+    ],
+    "cna_microphone_get_name_size_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:68"
+    ],
+    "cna_microphone_copy_name_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:69"
+    ],
+    "cna_microphone_get_buffer_duration_ticks_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:107"
+    ],
+    "cna_microphone_set_buffer_duration_ticks_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:114"
+    ],
+    "cna_microphone_get_is_headset_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:127"
+    ],
+    "cna_microphone_get_sample_rate_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:120"
+    ],
+    "cna_microphone_get_state_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:100"
+    ],
+    "cna_microphone_start_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:134"
+    ],
+    "cna_microphone_stop_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:145"
+    ],
+    "cna_microphone_get_data_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:163"
+    ],
+    "cna_microphone_get_sample_duration_ticks_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:178"
+    ],
+    "cna_microphone_get_sample_size_in_bytes_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:185"
+    ],
+    "cna_microphone_subscribe_buffer_ready_at": [
+      "src/Microsoft/Xna/Framework/Audio/_microphone.py:95"
+    ],
+    "cna_audio_unsubscribe_ext": [
+      "src/Microsoft/Xna/Framework/Audio/_common.py:199"
+    ],
+    "cna_audio_engine_create": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:169"
+    ],
+    "cna_audio_engine_create_with_renderer": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:174"
+    ],
+    "cna_audio_engine_destroy": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:182"
+    ],
+    "cna_audio_engine_update": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:244"
+    ],
+    "cna_audio_engine_get_global_variable": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:235"
+    ],
+    "cna_audio_engine_set_global_variable": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:240"
+    ],
+    "cna_audio_engine_get_category": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:225"
+    ],
+    "cna_audio_engine_get_renderer_count": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:200"
+    ],
+    "cna_audio_engine_get_renderer_friendly_name_size": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:206"
+    ],
+    "cna_audio_engine_copy_renderer_friendly_name": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:207"
+    ],
+    "cna_audio_engine_get_renderer_id_size": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:209"
+    ],
+    "cna_audio_engine_copy_renderer_id": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:210"
+    ],
+    "cna_audio_engine_get_renderer_hash_code": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:212"
+    ],
+    "cna_audio_category_destroy": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:82"
+    ],
+    "cna_audio_category_get_name_size": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:113"
+    ],
+    "cna_audio_category_copy_name": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:114"
+    ],
+    "cna_audio_category_pause": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:121"
+    ],
+    "cna_audio_category_resume": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:124"
+    ],
+    "cna_audio_category_set_volume": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:118"
+    ],
+    "cna_audio_category_stop": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:129"
+    ],
+    "cna_audio_category_equals": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:137"
+    ],
+    "cna_audio_category_get_hash_code": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:143"
+    ],
+    "cna_wave_bank_create": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:303"
+    ],
+    "cna_wave_bank_create_streaming": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:311"
+    ],
+    "cna_wave_bank_destroy": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:294"
+    ],
+    "cna_wave_bank_get_is_prepared": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:323"
+    ],
+    "cna_wave_bank_get_is_in_use": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:321"
+    ],
+    "cna_sound_bank_create": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:332"
+    ],
+    "cna_sound_bank_destroy": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:327"
+    ],
+    "cna_sound_bank_get_is_in_use": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:339"
+    ],
+    "cna_sound_bank_get_cue": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:343"
+    ],
+    "cna_sound_bank_play_cue": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:350"
+    ],
+    "cna_sound_bank_play_cue_3d": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:354"
+    ],
+    "cna_cue_destroy": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:370"
+    ],
+    "cna_cue_get_info": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:379"
+    ],
+    "cna_cue_get_name_size": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:384"
+    ],
+    "cna_cue_copy_name": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:384"
+    ],
+    "cna_cue_apply_3d": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:410"
+    ],
+    "cna_cue_get_variable": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:415"
+    ],
+    "cna_cue_set_variable": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:420"
+    ],
+    "cna_cue_play": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:399"
+    ],
+    "cna_cue_pause": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:400"
+    ],
+    "cna_cue_resume": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:401"
+    ],
+    "cna_cue_stop": [
+      "src/Microsoft/Xna/Framework/Audio/_xact.py:406"
+    ],
+    "cna_graphics_device_manager_create": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:205"
+    ],
+    "cna_graphics_device_manager_set_graphics_profile": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:137"
+    ],
+    "cna_graphics_device_manager_set_preferred_depth_stencil_format": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:138"
+    ],
+    "cna_graphics_device_manager_set_preferred_back_buffer_format": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:139"
+    ],
+    "cna_graphics_device_manager_set_preferred_back_buffer_width": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:140"
+    ],
+    "cna_graphics_device_manager_set_preferred_back_buffer_height": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:141"
+    ],
+    "cna_graphics_device_manager_set_is_full_screen": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:142"
+    ],
+    "cna_graphics_device_manager_set_synchronize_with_vertical_retrace": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:143"
+    ],
+    "cna_graphics_device_manager_set_prefer_multi_sampling": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:144"
+    ],
+    "cna_graphics_device_manager_set_supported_orientations": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:145"
+    ],
+    "cna_graphics_device_manager_apply_changes": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:281"
+    ],
+    "cna_graphics_device_manager_toggle_full_screen": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:288"
+    ],
+    "cna_graphics_device_manager_create_device": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:297"
+    ],
+    "cna_graphics_device_manager_begin_draw": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:305"
+    ],
+    "cna_graphics_device_manager_end_draw": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:314"
+    ],
+    "cna_graphics_device_manager_dispose": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:367"
+    ],
+    "cna_graphics_device_manager_subscribe": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:230"
+    ],
+    "cna_graphics_device_manager_subscribe_preparing_device_settings_ext": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:248"
+    ],
+    "cna_graphics_device_manager_get_graphics_device": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:270"
+    ],
+    "cna_graphics_device_manager_destroy": [
+      "src/Microsoft/Xna/Framework/_graphics_manager.py:376"
+    ],
+    "cna_game_get_graphics_device": [],
+    "cna_graphics_adapter_get_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:130"
+    ],
+    "cna_graphics_adapter_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:105"
+    ],
+    "cna_graphics_adapter_copy_description": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:197"
+    ],
+    "cna_graphics_adapter_copy_device_name": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:194"
+    ],
+    "cna_graphics_adapter_get_current_display_mode": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:176"
+    ],
+    "cna_graphics_adapter_get_display_mode_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:68"
+    ],
+    "cna_graphics_adapter_copy_display_modes": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:76"
+    ],
+    "cna_graphics_adapter_set_device_preferences": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:140"
+    ],
+    "cna_graphics_adapter_is_profile_supported": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:201"
+    ],
+    "cna_graphics_adapter_query_render_target_format": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:221"
+    ],
+    "cna_graphics_adapter_query_backbuffer_format": [
+      "src/Microsoft/Xna/Framework/Graphics/_display.py:218"
+    ],
+    "cna_graphics_device_get_presentation_parameters": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:490"
+    ],
+    "cna_graphics_device_get_display_mode": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:467"
+    ],
+    "cna_viewport_get_title_safe_area": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:212"
+    ],
+    "cna_graphics_device_get_viewport": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:602"
+    ],
+    "cna_graphics_device_set_viewport": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:613"
+    ],
+    "cna_graphics_device_get_blend_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:539"
+    ],
+    "cna_graphics_device_set_blend_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:549"
+    ],
+    "cna_graphics_device_get_depth_stencil_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:557"
+    ],
+    "cna_graphics_device_set_depth_stencil_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:567"
+    ],
+    "cna_graphics_device_get_rasterizer_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:575"
+    ],
+    "cna_graphics_device_set_rasterizer_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:585"
+    ],
+    "cna_graphics_device_get_sampler_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_states.py:372"
+    ],
+    "cna_graphics_device_set_sampler_state": [
+      "src/Microsoft/Xna/Framework/Graphics/_states.py:387"
+    ],
+    "cna_graphics_device_get_texture": [
+      "src/Microsoft/Xna/Framework/Graphics/_states.py:405"
+    ],
+    "cna_graphics_device_set_texture": [
+      "src/Microsoft/Xna/Framework/Graphics/_states.py:428"
+    ],
+    "cna_graphics_device_unbind_texture": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:409"
+    ],
+    "cna_graphics_device_get_status": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:474"
+    ],
+    "cna_graphics_device_get_adapter_index": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:458"
+    ],
+    "cna_graphics_device_get_graphics_profile": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:481"
+    ],
+    "cna_graphics_device_get_scissor_rectangle": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:499"
+    ],
+    "cna_graphics_device_set_scissor_rectangle": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:506"
+    ],
+    "cna_graphics_device_get_blend_factor": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:513"
+    ],
+    "cna_graphics_device_set_blend_factor": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:520"
+    ],
+    "cna_graphics_device_get_multi_sample_mask": [
+      "resolved from constants"
+    ],
+    "cna_graphics_device_set_multi_sample_mask": [
+      "resolved from constants"
+    ],
+    "cna_graphics_device_get_reference_stencil": [
+      "resolved from constants"
+    ],
+    "cna_graphics_device_set_reference_stencil": [
+      "resolved from constants"
+    ],
+    "cna_graphics_device_clear_options": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:623"
+    ],
+    "cna_graphics_device_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:338"
+    ],
+    "cna_graphics_device_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:949"
+    ],
+    "cna_graphics_device_present": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:646"
+    ],
+    "cna_graphics_device_reset": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:652"
+    ],
+    "cna_graphics_device_reset_with_parameters": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:663"
+    ],
+    "cna_graphics_device_subscribe_event": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:367"
+    ],
+    "cna_graphics_device_unsubscribe": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:382"
+    ],
+    "cna_graphics_device_clear_rgba": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:633"
+    ],
+    "cna_texture2d_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:268"
+    ],
+    "cna_texture2d_create_from_encoded_memory": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:351"
+    ],
+    "cna_texture2d_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:312"
+    ],
+    "cna_texture2d_get_encoded_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:417"
+    ],
+    "cna_texture2d_copy_encoded": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:421"
+    ],
+    "cna_texture2d_set_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:389"
+    ],
+    "cna_texture2d_get_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:400"
+    ],
+    "cna_texture2d_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:270"
+    ],
+    "cna_texture3d_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:43"
+    ],
+    "cna_texture3d_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:44"
+    ],
+    "cna_texture3d_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:52"
+    ],
+    "cna_texture3d_set_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:82"
+    ],
+    "cna_texture3d_get_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:88"
+    ],
+    "cna_texturecube_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:104"
+    ],
+    "cna_texturecube_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:105"
+    ],
+    "cna_texturecube_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:113"
+    ],
+    "cna_texturecube_set_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:144"
+    ],
+    "cna_texturecube_get_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:150"
+    ],
+    "cna_effect_create_empty": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:313"
+    ],
+    "cna_effect_create_compiled": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:312"
+    ],
+    "cna_effect_clone": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:310"
+    ],
+    "cna_effect_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:316"
+    ],
+    "cna_effect_apply": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:340"
+    ],
+    "cna_effect_get_parameters": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:317"
+    ],
+    "cna_effect_get_techniques": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:318"
+    ],
+    "cna_effect_get_current_technique": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:325"
+    ],
+    "cna_effect_set_current_technique": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:338"
+    ],
+    "cna_effect_technique_collection_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:320"
+    ],
+    "cna_effect_technique_collection_get_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:319"
+    ],
+    "cna_effect_technique_collection_get_at": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:323"
+    ],
+    "cna_effect_technique_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:230"
+    ],
+    "cna_effect_technique_get_name_byte_count": [
+      "resolved from constants"
+    ],
+    "cna_effect_technique_copy_name": [
+      "resolved from constants"
+    ],
+    "cna_effect_technique_get_passes": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:233"
+    ],
+    "cna_effect_pass_collection_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:235"
+    ],
+    "cna_effect_pass_collection_get_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:234"
+    ],
+    "cna_effect_pass_collection_get_at": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:238"
+    ],
+    "cna_effect_pass_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:216"
+    ],
+    "cna_effect_pass_get_name_byte_count": [
+      "resolved from constants"
+    ],
+    "cna_effect_pass_copy_name": [
+      "resolved from constants"
+    ],
+    "cna_effect_pass_apply": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:226"
+    ],
+    "cna_effect_parameter_collection_add_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:276"
+    ],
+    "cna_effect_parameter_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:48"
+    ],
+    "cna_effect_parameter_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:131"
+    ],
+    "cna_effect_parameter_get_name_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:133"
+    ],
+    "cna_effect_parameter_copy_name": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:133"
+    ],
+    "cna_effect_parameter_get_semantic_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:134"
+    ],
+    "cna_effect_parameter_copy_semantic": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:134"
+    ],
+    "cna_effect_parameter_get_elements": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:146"
+    ],
+    "cna_effect_parameter_get_structure_members": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:147"
+    ],
+    "cna_effect_parameter_get_annotations": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:148"
+    ],
+    "cna_effect_parameter_get_value": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:74"
+    ],
+    "cna_effect_parameter_get_values": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:89"
+    ],
+    "cna_effect_parameter_set_value": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:99"
+    ],
+    "cna_effect_parameter_set_values": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:109"
+    ],
+    "cna_effect_parameter_get_value_string_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:124"
+    ],
+    "cna_effect_parameter_copy_value_string": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:125"
+    ],
+    "cna_effect_parameter_set_value_string": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:118"
+    ],
+    "cna_effect_parameter_get_value_texture": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:178"
+    ],
+    "cna_effect_parameter_set_value_texture": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:175"
+    ],
+    "cna_effect_parameter_collection_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:255"
+    ],
+    "cna_effect_parameter_collection_get_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:254"
+    ],
+    "cna_effect_parameter_collection_get_at": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:258"
+    ],
+    "cna_effect_parameter_collection_find_name": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:255"
+    ],
+    "cna_effect_parameter_collection_find_semantic": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:208"
+    ],
+    "cna_effect_annotation_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:295"
+    ],
+    "cna_effect_annotation_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:48"
+    ],
+    "cna_effect_annotation_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:100"
+    ],
+    "cna_effect_annotation_get_name_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:102"
+    ],
+    "cna_effect_annotation_copy_name": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:102"
+    ],
+    "cna_effect_annotation_get_semantic_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:103"
+    ],
+    "cna_effect_annotation_copy_semantic": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:103"
+    ],
+    "cna_effect_annotation_get_value_boolean": [],
+    "cna_effect_annotation_get_value_int32": [],
+    "cna_effect_annotation_get_value_single": [],
+    "cna_effect_annotation_get_value_string_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:179"
+    ],
+    "cna_effect_annotation_copy_value_string": [
+      "src/Microsoft/Xna/Framework/Graphics/_effect_codec.py:180"
+    ],
+    "cna_effect_annotation_get_value_vector2": [],
+    "cna_effect_annotation_get_value_vector3": [],
+    "cna_effect_annotation_get_value_vector4": [],
+    "cna_effect_annotation_get_value_matrix": [
+      "resolved from constants"
+    ],
+    "cna_effect_annotation_collection_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:263"
+    ],
+    "cna_effect_annotation_collection_get_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:262"
+    ],
+    "cna_effect_annotation_collection_add": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:298"
+    ],
+    "cna_effect_annotation_collection_get_at": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:266"
+    ],
+    "cna_effect_annotation_collection_find": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:263"
+    ],
+    "cna_effect_pass_get_annotations": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:223"
+    ],
+    "cna_effect_technique_get_annotations": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:245"
+    ],
+    "cna_basic_effect_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:451"
+    ],
+    "cna_alpha_test_effect_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:481"
+    ],
+    "cna_dual_texture_effect_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:484"
+    ],
+    "cna_environment_map_effect_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:487"
+    ],
+    "cna_skinned_effect_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:493"
+    ],
+    "cna_effect_material_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:507"
+    ],
+    "cna_effect_matrices_get_world": [
+      "resolved from constants"
+    ],
+    "cna_effect_matrices_set_world": [
+      "resolved from constants"
+    ],
+    "cna_effect_matrices_get_view": [
+      "resolved from constants"
+    ],
+    "cna_effect_matrices_set_view": [
+      "resolved from constants"
+    ],
+    "cna_effect_matrices_get_projection": [
+      "resolved from constants"
+    ],
+    "cna_effect_matrices_set_projection": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_get_color": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_set_color": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_get_enabled": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_set_enabled": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_get_start": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_set_start": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_get_end": [
+      "resolved from constants"
+    ],
+    "cna_effect_fog_set_end": [
+      "resolved from constants"
+    ],
+    "cna_effect_lights_get_ambient_color": [
+      "resolved from constants"
+    ],
+    "cna_effect_lights_set_ambient_color": [
+      "resolved from constants"
+    ],
+    "cna_effect_lights_get_directional_light": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:59"
+    ],
+    "cna_effect_lights_get_enabled": [
+      "resolved from constants"
+    ],
+    "cna_effect_lights_set_enabled": [
+      "resolved from constants"
+    ],
+    "cna_effect_lights_enable_default": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:462"
+    ],
+    "cna_directional_light_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:60"
+    ],
+    "cna_directional_light_get_diffuse_color": [
+      "resolved from constants"
+    ],
+    "cna_directional_light_set_diffuse_color": [
+      "resolved from constants"
+    ],
+    "cna_directional_light_get_direction": [
+      "resolved from constants"
+    ],
+    "cna_directional_light_set_direction": [
+      "resolved from constants"
+    ],
+    "cna_directional_light_get_specular_color": [
+      "resolved from constants"
+    ],
+    "cna_directional_light_set_specular_color": [
+      "resolved from constants"
+    ],
+    "cna_directional_light_get_enabled": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:78"
+    ],
+    "cna_directional_light_set_enabled": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:82"
+    ],
+    "cna_basic_effect_get_vertex_color_enabled": [],
+    "cna_basic_effect_set_vertex_color_enabled": [],
+    "cna_basic_effect_get_prefer_per_pixel_lighting": [],
+    "cna_basic_effect_set_prefer_per_pixel_lighting": [],
+    "cna_basic_effect_get_diffuse_color": [],
+    "cna_basic_effect_set_diffuse_color": [],
+    "cna_basic_effect_get_emissive_color": [],
+    "cna_basic_effect_set_emissive_color": [],
+    "cna_basic_effect_get_specular_color": [],
+    "cna_basic_effect_set_specular_color": [],
+    "cna_basic_effect_get_specular_power": [],
+    "cna_basic_effect_set_specular_power": [],
+    "cna_basic_effect_get_alpha": [],
+    "cna_basic_effect_set_alpha": [],
+    "cna_basic_effect_get_texture_enabled": [],
+    "cna_basic_effect_set_texture_enabled": [],
+    "cna_basic_effect_get_texture": [],
+    "cna_basic_effect_set_texture": [],
+    "cna_alpha_test_effect_get_diffuse_color": [],
+    "cna_alpha_test_effect_set_diffuse_color": [],
+    "cna_alpha_test_effect_get_alpha": [],
+    "cna_alpha_test_effect_set_alpha": [],
+    "cna_alpha_test_effect_get_texture": [],
+    "cna_alpha_test_effect_set_texture": [],
+    "cna_alpha_test_effect_get_vertex_color_enabled": [],
+    "cna_alpha_test_effect_set_vertex_color_enabled": [],
+    "cna_alpha_test_effect_get_alpha_function": [
+      "resolved from constants"
+    ],
+    "cna_alpha_test_effect_set_alpha_function": [
+      "resolved from constants"
+    ],
+    "cna_alpha_test_effect_get_reference_alpha": [
+      "resolved from constants"
+    ],
+    "cna_alpha_test_effect_set_reference_alpha": [
+      "resolved from constants"
+    ],
+    "cna_dual_texture_effect_get_diffuse_color": [],
+    "cna_dual_texture_effect_set_diffuse_color": [],
+    "cna_dual_texture_effect_get_alpha": [],
+    "cna_dual_texture_effect_set_alpha": [],
+    "cna_dual_texture_effect_get_texture": [
+      "resolved from constants"
+    ],
+    "cna_dual_texture_effect_set_texture": [
+      "resolved from constants"
+    ],
+    "cna_dual_texture_effect_get_vertex_color_enabled": [],
+    "cna_dual_texture_effect_set_vertex_color_enabled": [],
+    "cna_environment_map_effect_get_diffuse_color": [],
+    "cna_environment_map_effect_set_diffuse_color": [],
+    "cna_environment_map_effect_get_emissive_color": [],
+    "cna_environment_map_effect_set_emissive_color": [],
+    "cna_environment_map_effect_get_alpha": [],
+    "cna_environment_map_effect_set_alpha": [],
+    "cna_environment_map_effect_get_texture": [],
+    "cna_environment_map_effect_set_texture": [],
+    "cna_environment_map_effect_get_environment_map": [
+      "resolved from constants"
+    ],
+    "cna_environment_map_effect_set_environment_map": [
+      "resolved from constants"
+    ],
+    "cna_environment_map_effect_get_amount": [
+      "resolved from constants"
+    ],
+    "cna_environment_map_effect_set_amount": [
+      "resolved from constants"
+    ],
+    "cna_environment_map_effect_get_specular": [
+      "resolved from constants"
+    ],
+    "cna_environment_map_effect_set_specular": [
+      "resolved from constants"
+    ],
+    "cna_environment_map_effect_get_fresnel_factor": [
+      "resolved from constants"
+    ],
+    "cna_environment_map_effect_set_fresnel_factor": [
+      "resolved from constants"
+    ],
+    "cna_skinned_effect_get_diffuse_color": [],
+    "cna_skinned_effect_set_diffuse_color": [],
+    "cna_skinned_effect_get_emissive_color": [],
+    "cna_skinned_effect_set_emissive_color": [],
+    "cna_skinned_effect_get_specular_color": [],
+    "cna_skinned_effect_set_specular_color": [],
+    "cna_skinned_effect_get_specular_power": [],
+    "cna_skinned_effect_set_specular_power": [],
+    "cna_skinned_effect_get_alpha": [],
+    "cna_skinned_effect_set_alpha": [],
+    "cna_skinned_effect_get_prefer_per_pixel_lighting": [],
+    "cna_skinned_effect_set_prefer_per_pixel_lighting": [],
+    "cna_skinned_effect_get_texture": [],
+    "cna_skinned_effect_set_texture": [],
+    "cna_skinned_effect_get_weights_per_vertex": [
+      "resolved from constants"
+    ],
+    "cna_skinned_effect_set_weights_per_vertex": [
+      "resolved from constants"
+    ],
+    "cna_skinned_effect_set_bone_transforms": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:499"
+    ],
+    "cna_skinned_effect_copy_bone_transforms": [
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:503"
+    ],
+    "cna_graphics_resource_get_name_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:106"
+    ],
+    "cna_graphics_resource_copy_name": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:112"
+    ],
+    "cna_graphics_resource_set_name": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:131"
+    ],
+    "cna_graphics_resource_get_string_byte_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:173"
+    ],
+    "cna_graphics_resource_copy_string": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:179"
+    ],
+    "cna_graphics_resource_subscribe_disposing": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:62"
+    ],
+    "cna_vertex_declaration_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:108"
+    ],
+    "cna_vertex_declaration_create_with_stride": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:111"
+    ],
+    "cna_vertex_declaration_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:119"
+    ],
+    "cna_vertex_buffer_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:294"
+    ],
+    "cna_vertex_buffer_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:295"
+    ],
+    "cna_vertex_buffer_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:356"
+    ],
+    "cna_vertex_buffer_set_data_raw": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:320"
+    ],
+    "cna_vertex_buffer_set_data_raw_at": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:320"
+    ],
+    "cna_vertex_buffer_set_data_raw_with_options": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:368"
+    ],
+    "cna_vertex_buffer_set_data_raw_at_with_options": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:369"
+    ],
+    "cna_vertex_buffer_get_data_raw": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:339"
+    ],
+    "cna_index_buffer_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:393"
+    ],
+    "cna_index_buffer_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:394"
+    ],
+    "cna_index_buffer_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:458"
+    ],
+    "cna_index_buffer_set_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:422"
+    ],
+    "cna_index_buffer_set_data_at": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:422"
+    ],
+    "cna_index_buffer_get_data": [
+      "src/Microsoft/Xna/Framework/Graphics/_vertices.py:443"
+    ],
+    "cna_graphics_device_set_vertex_buffer": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:703"
+    ],
+    "cna_graphics_device_set_vertex_buffer_offset": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:703"
+    ],
+    "cna_graphics_device_set_vertex_buffers": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:415"
+    ],
+    "cna_graphics_device_get_vertex_buffer_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:727"
+    ],
+    "cna_graphics_device_copy_vertex_buffers": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:732"
+    ],
+    "cna_graphics_device_set_index_buffer": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:416"
+    ],
+    "cna_graphics_device_get_index_buffer": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:670"
+    ],
+    "cna_graphics_device_get_backbuffer_data_window": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:926"
+    ],
+    "cna_graphics_device_draw_primitives": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:829"
+    ],
+    "cna_graphics_device_draw_indexed_primitives": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:839"
+    ],
+    "cna_graphics_device_draw_instanced_primitives": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:849"
+    ],
+    "cna_graphics_device_draw_user_primitives": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:886"
+    ],
+    "cna_graphics_device_draw_user_indexed_primitives": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:908"
+    ],
+    "cna_render_target2d_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:97"
+    ],
+    "cna_render_target_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:109"
+    ],
+    "cna_render_target_subscribe_content_lost": [
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:43"
+    ],
+    "cna_render_target_unsubscribe_content_lost": [
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:56"
+    ],
+    "cna_render_target_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:100"
+    ],
+    "cna_graphics_device_set_render_target2d": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:774"
+    ],
+    "cna_graphics_device_set_render_targets": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:417"
+    ],
+    "cna_graphics_device_get_render_target_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:798"
+    ],
+    "cna_graphics_device_copy_render_targets": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:803"
+    ],
+    "cna_sprite_font_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:492"
+    ],
+    "cna_sprite_font_get_info": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:518"
+    ],
+    "cna_sprite_font_set_default_character": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:532"
+    ],
+    "cna_sprite_font_set_line_spacing": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:540"
+    ],
+    "cna_sprite_font_set_spacing": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:548"
+    ],
+    "cna_sprite_font_measure_utf8": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:554"
+    ],
+    "cna_sprite_font_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:496"
+    ],
+    "cna_sprite_batch_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:592"
+    ],
+    "cna_sprite_batch_begin": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:623"
+    ],
+    "cna_sprite_batch_submit_many": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:692"
+    ],
+    "cna_sprite_batch_submit_scaled_many": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:708"
+    ],
+    "cna_sprite_batch_end": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:736"
+    ],
+    "cna_sprite_batch_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:599"
+    ],
+    "cna_keyboard_get_state": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:283"
+    ],
+    "cna_keyboard_get_state_for_player": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:286"
+    ],
+    "cna_mouse_get_state": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:371"
+    ],
+    "cna_mouse_get_window_handle": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:345"
+    ],
+    "cna_mouse_set_window_handle": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:356"
+    ],
+    "cna_mouse_set_position": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:378"
+    ],
+    "cna_gamepad_get_state_with_dead_zone": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:701"
+    ],
+    "cna_gamepad_get_capabilities": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:707"
+    ],
+    "cna_gamepad_set_vibration": [
+      "src/Microsoft/Xna/Framework/Input/_input.py:712"
+    ],
+    "cna_render_target_cube_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:171"
+    ],
+    "cna_graphics_device_set_render_target_cube": [
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:764"
+    ],
+    "cna_occlusion_query_create": [
+      "src/Microsoft/Xna/Framework/Graphics/_queries.py:20"
+    ],
+    "cna_occlusion_query_begin": [
+      "src/Microsoft/Xna/Framework/Graphics/_queries.py:32"
+    ],
+    "cna_occlusion_query_end": [
+      "src/Microsoft/Xna/Framework/Graphics/_queries.py:39"
+    ],
+    "cna_occlusion_query_get_is_complete": [
+      "src/Microsoft/Xna/Framework/Graphics/_queries.py:54"
+    ],
+    "cna_occlusion_query_get_pixel_count": [
+      "src/Microsoft/Xna/Framework/Graphics/_queries.py:63"
+    ],
+    "cna_occlusion_query_has_renderer": [
+      "src/Microsoft/Xna/Framework/Graphics/_queries.py:49"
+    ],
+    "cna_occlusion_query_destroy": [
+      "src/Microsoft/Xna/Framework/Graphics/_queries.py:22"
+    ],
+    "cna_gamer_services_dispatcher_set_window_handle": [
+      "src/Microsoft/Xna/Framework/GamerServices/_component.py:18"
+    ],
+    "cna_gamer_services_dispatcher_initialize": [
+      "src/Microsoft/Xna/Framework/GamerServices/_component.py:22"
+    ],
+    "cna_gamer_services_dispatcher_update": [
+      "src/Microsoft/Xna/Framework/GamerServices/_component.py:30"
+    ],
+    "cna_touch_get_capabilities": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:359"
+    ],
+    "cna_touch_get_state": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:365"
+    ],
+    "cna_touch_panel_get_display_width": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:339"
+    ],
+    "cna_touch_panel_set_display_width": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:341"
+    ],
+    "cna_touch_panel_get_display_height": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:343"
+    ],
+    "cna_touch_panel_set_display_height": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:345"
+    ],
+    "cna_touch_panel_get_display_orientation": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:329"
+    ],
+    "cna_touch_panel_set_display_orientation": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:336"
+    ],
+    "cna_touch_panel_get_enabled_gestures": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:299"
+    ],
+    "cna_touch_panel_set_enabled_gestures": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:306"
+    ],
+    "cna_touch_panel_get_is_gesture_available": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:314"
+    ],
+    "cna_touch_panel_get_window_handle": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:320"
+    ],
+    "cna_touch_panel_set_window_handle": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:325"
+    ],
+    "cna_touch_panel_read_gesture": [
+      "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:374"
+    ],
+    "cna_storage_device_show_selector": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:217"
+    ],
+    "cna_storage_get_root_size_ext": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:117"
+    ],
+    "cna_storage_copy_root_ext": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:119"
+    ],
+    "cna_storage_device_show_selector_for_player": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:221"
+    ],
+    "cna_storage_device_show_selector_with_space": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:228"
+    ],
+    "cna_storage_device_show_selector_for_player_with_space": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:234"
+    ],
+    "cna_storage_device_get_free_space": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:278"
+    ],
+    "cna_storage_device_get_is_connected": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:282"
+    ],
+    "cna_storage_device_get_total_space": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:284"
+    ],
+    "cna_storage_device_delete_container": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:322"
+    ],
+    "cna_storage_device_subscribe_device_changed": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:191"
+    ],
+    "cna_storage_device_unsubscribe_device_changed": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:204"
+    ],
+    "cna_storage_device_destroy": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:238"
+    ],
+    "cna_storage_container_open": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:299"
+    ],
+    "cna_storage_container_get_display_name_size": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:523"
+    ],
+    "cna_storage_container_copy_display_name": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:526"
+    ],
+    "cna_storage_container_get_is_disposed": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:537"
+    ],
+    "cna_storage_container_dispose": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:554"
+    ],
+    "cna_storage_container_subscribe_disposing": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:423"
+    ],
+    "cna_storage_container_unsubscribe_disposing": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:430"
+    ],
+    "cna_storage_container_create_directory": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:470"
+    ],
+    "cna_storage_container_directory_exists": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:468"
+    ],
+    "cna_storage_container_delete_directory": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:471"
+    ],
+    "cna_storage_container_file_exists": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:469"
+    ],
+    "cna_storage_container_delete_file": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:472"
+    ],
+    "cna_storage_container_get_directory_name_count": [],
+    "cna_storage_container_copy_directory_name": [],
+    "cna_storage_container_get_file_name_count": [],
+    "cna_storage_container_copy_file_name": [],
+    "cna_storage_container_create_file": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:479"
+    ],
+    "cna_storage_container_open_file": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:487"
+    ],
+    "cna_storage_container_open_file_access": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:489"
+    ],
+    "cna_storage_container_open_file_share": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:492"
+    ],
+    "cna_storage_container_destroy": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:290"
+    ],
+    "cna_storage_stream_read": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:375"
+    ],
+    "cna_storage_stream_write": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:386"
+    ],
+    "cna_storage_stream_seek": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:364"
+    ],
+    "cna_storage_stream_get_position": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:358"
+    ],
+    "cna_storage_stream_get_length": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:368"
+    ],
+    "cna_storage_stream_set_length": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:391"
+    ],
+    "cna_storage_stream_get_can_read": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:353"
+    ],
+    "cna_storage_stream_get_can_write": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:354"
+    ],
+    "cna_storage_stream_get_can_seek": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:355"
+    ],
+    "cna_storage_stream_flush": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:394"
+    ],
+    "cna_storage_stream_close": [
+      "src/Microsoft/Xna/Framework/Storage/_storage.py:398"
+    ],
+    "cna_media_source_get_available_count": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:67"
+    ],
+    "cna_media_source_get_type_at": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:72"
+    ],
+    "cna_media_source_get_name_size_at": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:75"
+    ],
+    "cna_media_source_copy_name_at": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:80"
+    ],
+    "cna_song_create_from_uri": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:283"
+    ],
+    "cna_song_get_name_size": [],
+    "cna_song_copy_name": [],
+    "cna_song_get_duration": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:294"
+    ],
+    "cna_song_get_is_protected": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:296"
+    ],
+    "cna_song_get_is_rated": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:298"
+    ],
+    "cna_song_get_play_count": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:300"
+    ],
+    "cna_song_get_rating": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:302"
+    ],
+    "cna_song_get_track_number": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:304"
+    ],
+    "cna_song_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_song_dispose": [
+      "resolved from constants"
+    ],
+    "cna_song_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:275",
+      "src/Microsoft/Xna/Framework/Media/_player.py:67",
+      "resolved from constants"
+    ],
+    "cna_song_equals": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:275",
+      "src/Microsoft/Xna/Framework/Media/_player.py:64"
+    ],
+    "cna_song_get_hash_code": [
+      "resolved from constants"
+    ],
+    "cna_song_get_album": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:290"
+    ],
+    "cna_song_get_artist": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:288"
+    ],
+    "cna_song_get_genre": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:292"
+    ],
+    "cna_media_player_get_game_has_control": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:205"
+    ],
+    "cna_media_player_get_is_muted": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:207"
+    ],
+    "cna_media_player_set_is_muted": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:208"
+    ],
+    "cna_media_player_get_is_repeating": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:209"
+    ],
+    "cna_media_player_set_is_repeating": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:210"
+    ],
+    "cna_media_player_get_is_shuffled": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:211"
+    ],
+    "cna_media_player_set_is_shuffled": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:212"
+    ],
+    "cna_media_player_get_play_position_ticks": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:199"
+    ],
+    "cna_media_player_get_state": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:191"
+    ],
+    "cna_media_player_get_volume": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:221"
+    ],
+    "cna_media_player_set_volume": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:235"
+    ],
+    "cna_media_player_get_is_visualization_enabled": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:214"
+    ],
+    "cna_media_player_set_is_visualization_enabled": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:215"
+    ],
+    "cna_media_player_get_visualization_data": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:167"
+    ],
+    "cna_media_player_get_queue": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:178"
+    ],
+    "cna_media_player_play_song": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:120"
+    ],
+    "cna_media_player_play_songs": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:133"
+    ],
+    "cna_media_player_play_songs_from": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:139"
+    ],
+    "cna_media_player_move_next": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:155"
+    ],
+    "cna_media_player_move_previous": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:157"
+    ],
+    "cna_media_player_pause": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:149"
+    ],
+    "cna_media_player_resume": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:151"
+    ],
+    "cna_media_player_stop": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:153"
+    ],
+    "cna_media_player_update_ext": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:255"
+    ],
+    "cna_media_player_program_exit_ext": [
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:133"
+    ],
+    "cna_media_player_subscribe_active_song_changed_ext": [
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:110"
+    ],
+    "cna_media_player_subscribe_media_state_changed_ext": [
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:112"
+    ],
+    "cna_media_player_unsubscribe_ext": [
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:75"
+    ],
+    "cna_media_player_raise_active_song_changed_ext": [],
+    "cna_media_queue_get_count": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:38"
+    ],
+    "cna_media_queue_get_active_song_index": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:46"
+    ],
+    "cna_media_queue_set_active_song_index": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:54"
+    ],
+    "cna_media_queue_get_active_song": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:75"
+    ],
+    "cna_media_queue_get_at": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:85"
+    ],
+    "cna_media_queue_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_player.py:32"
+    ],
+    "cna_media_library_create": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:405"
+    ],
+    "cna_media_library_create_from_source": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:411"
+    ],
+    "cna_media_library_get_is_disposed": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:424"
+    ],
+    "cna_media_library_dispose": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:419"
+    ],
+    "cna_media_library_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:399"
+    ],
+    "cna_media_library_get_media_source_type": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:433"
+    ],
+    "cna_media_library_get_media_source_name_size": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:436"
+    ],
+    "cna_media_library_copy_media_source_name": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:441"
+    ],
+    "cna_media_library_get_songs": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:459"
+    ],
+    "cna_media_library_get_albums": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:461"
+    ],
+    "cna_media_library_get_artists": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:463"
+    ],
+    "cna_media_library_get_genres": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:465"
+    ],
+    "cna_media_library_get_playlists": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:467"
+    ],
+    "cna_media_library_get_pictures": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:469"
+    ],
+    "cna_media_library_get_saved_pictures": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:471"
+    ],
+    "cna_media_library_get_root_picture_album": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:478"
+    ],
+    "cna_media_library_get_picture_from_token": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:487"
+    ],
+    "cna_media_library_save_picture": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:510"
+    ],
+    "cna_album_get_name_size": [],
+    "cna_album_copy_name": [],
+    "cna_album_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_album_dispose": [
+      "resolved from constants"
+    ],
+    "cna_album_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:234",
+      "resolved from constants"
+    ],
+    "cna_album_get_hash_code": [
+      "resolved from constants"
+    ],
+    "cna_album_equals": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:234"
+    ],
+    "cna_album_get_songs": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:241"
+    ],
+    "cna_album_get_artist": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:237"
+    ],
+    "cna_album_get_genre": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:239"
+    ],
+    "cna_album_get_duration": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:243"
+    ],
+    "cna_album_get_has_art": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:245"
+    ],
+    "cna_album_get_art_size": [],
+    "cna_album_copy_art": [],
+    "cna_album_get_thumbnail_size": [],
+    "cna_album_copy_thumbnail": [],
+    "cna_artist_get_name_size": [],
+    "cna_artist_copy_name": [],
+    "cna_artist_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_artist_dispose": [
+      "resolved from constants"
+    ],
+    "cna_artist_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:251",
+      "resolved from constants"
+    ],
+    "cna_artist_get_hash_code": [
+      "resolved from constants"
+    ],
+    "cna_artist_equals": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:251"
+    ],
+    "cna_artist_get_songs": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:253"
+    ],
+    "cna_artist_get_albums": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:255"
+    ],
+    "cna_genre_get_name_size": [],
+    "cna_genre_copy_name": [],
+    "cna_genre_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_genre_dispose": [
+      "resolved from constants"
+    ],
+    "cna_genre_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:259",
+      "resolved from constants"
+    ],
+    "cna_genre_get_hash_code": [
+      "resolved from constants"
+    ],
+    "cna_genre_equals": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:259"
+    ],
+    "cna_genre_get_songs": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:261"
+    ],
+    "cna_genre_get_albums": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:263"
+    ],
+    "cna_playlist_get_name_size": [],
+    "cna_playlist_copy_name": [],
+    "cna_playlist_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_playlist_dispose": [
+      "resolved from constants"
+    ],
+    "cna_playlist_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:267",
+      "resolved from constants"
+    ],
+    "cna_playlist_get_hash_code": [
+      "resolved from constants"
+    ],
+    "cna_playlist_equals": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:267"
+    ],
+    "cna_playlist_get_songs": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:269"
+    ],
+    "cna_playlist_get_duration": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:271"
+    ],
+    "cna_picture_get_name_size": [],
+    "cna_picture_copy_name": [],
+    "cna_picture_get_album": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:310"
+    ],
+    "cna_picture_get_date_unix_ticks": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:313"
+    ],
+    "cna_picture_get_width": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:316"
+    ],
+    "cna_picture_get_height": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:318"
+    ],
+    "cna_picture_get_image_size": [],
+    "cna_picture_copy_image": [],
+    "cna_picture_get_thumbnail_size": [],
+    "cna_picture_copy_thumbnail": [],
+    "cna_picture_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_picture_dispose": [
+      "resolved from constants"
+    ],
+    "cna_picture_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:308",
+      "resolved from constants"
+    ],
+    "cna_picture_equals": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:308"
+    ],
+    "cna_picture_get_hash_code": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_get_name_size": [],
+    "cna_picture_album_copy_name": [],
+    "cna_picture_album_get_parent": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:326"
+    ],
+    "cna_picture_album_get_albums": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:328"
+    ],
+    "cna_picture_album_get_pictures": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:330"
+    ],
+    "cna_picture_album_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_dispose": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:324",
+      "resolved from constants"
+    ],
+    "cna_picture_album_equals": [
+      "src/Microsoft/Xna/Framework/Media/_catalog.py:324"
+    ],
+    "cna_picture_album_get_hash_code": [
+      "resolved from constants"
+    ],
+    "cna_video_create_with_metadata": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:30"
+    ],
+    "cna_video_get_width": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:48"
+    ],
+    "cna_video_get_height": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:50"
+    ],
+    "cna_video_get_frames_per_second": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:53"
+    ],
+    "cna_video_get_duration": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:45"
+    ],
+    "cna_video_get_soundtrack_type": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:56"
+    ],
+    "cna_video_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:18"
+    ],
+    "cna_video_player_create": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:78"
+    ],
+    "cna_video_player_get_is_disposed": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:117"
+    ],
+    "cna_video_player_get_is_looped": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:88"
+    ],
+    "cna_video_player_set_is_looped": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:148"
+    ],
+    "cna_video_player_get_is_muted": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:89"
+    ],
+    "cna_video_player_set_is_muted": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:161"
+    ],
+    "cna_video_player_get_play_position_ticks": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:135"
+    ],
+    "cna_video_player_get_state": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:127"
+    ],
+    "cna_video_player_get_volume": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:90"
+    ],
+    "cna_video_player_set_volume": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:175"
+    ],
+    "cna_video_player_get_texture": [],
+    "cna_video_player_get_frame_ext": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:206"
+    ],
+    "cna_video_player_play": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:186"
+    ],
+    "cna_video_player_stop": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:197"
+    ],
+    "cna_video_player_pause": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:195"
+    ],
+    "cna_video_player_resume": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:196"
+    ],
+    "cna_video_player_dispose": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:235"
+    ],
+    "cna_video_player_destroy": [
+      "src/Microsoft/Xna/Framework/Media/_video.py:73"
+    ],
+    "cna_song_collection_get_count": [
+      "resolved from constants"
+    ],
+    "cna_song_collection_get_at": [
+      "resolved from constants"
+    ],
+    "cna_song_collection_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_song_collection_dispose": [
+      "resolved from constants"
+    ],
+    "cna_song_collection_destroy": [
+      "resolved from constants"
+    ],
+    "cna_album_collection_get_count": [
+      "resolved from constants"
+    ],
+    "cna_album_collection_get_at": [
+      "resolved from constants"
+    ],
+    "cna_album_collection_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_album_collection_dispose": [
+      "resolved from constants"
+    ],
+    "cna_album_collection_destroy": [
+      "resolved from constants"
+    ],
+    "cna_artist_collection_get_count": [
+      "resolved from constants"
+    ],
+    "cna_artist_collection_get_at": [
+      "resolved from constants"
+    ],
+    "cna_artist_collection_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_artist_collection_dispose": [
+      "resolved from constants"
+    ],
+    "cna_artist_collection_destroy": [
+      "resolved from constants"
+    ],
+    "cna_genre_collection_get_count": [
+      "resolved from constants"
+    ],
+    "cna_genre_collection_get_at": [
+      "resolved from constants"
+    ],
+    "cna_genre_collection_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_genre_collection_dispose": [
+      "resolved from constants"
+    ],
+    "cna_genre_collection_destroy": [
+      "resolved from constants"
+    ],
+    "cna_playlist_collection_get_count": [
+      "resolved from constants"
+    ],
+    "cna_playlist_collection_get_at": [
+      "resolved from constants"
+    ],
+    "cna_playlist_collection_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_playlist_collection_dispose": [
+      "resolved from constants"
+    ],
+    "cna_playlist_collection_destroy": [
+      "resolved from constants"
+    ],
+    "cna_picture_collection_get_count": [
+      "resolved from constants"
+    ],
+    "cna_picture_collection_get_at": [
+      "resolved from constants"
+    ],
+    "cna_picture_collection_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_picture_collection_dispose": [
+      "resolved from constants"
+    ],
+    "cna_picture_collection_destroy": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_collection_get_count": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_collection_get_at": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_collection_get_is_disposed": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_collection_dispose": [
+      "resolved from constants"
+    ],
+    "cna_picture_album_collection_destroy": [
+      "resolved from constants"
+    ]
+  }
+}

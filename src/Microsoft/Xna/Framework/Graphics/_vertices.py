@@ -437,7 +437,7 @@ class IndexBuffer(GraphicsResource):
         if offset:
             raise NativeCapabilityError(
                 "IndexBuffer.GetData(offset)", 6, None,
-                "ABI 0.7 has no index-buffer readback route with a native byte offset",
+                "CNA has no index-buffer readback route carrying a native byte offset",
             )
         required = c.c_uint64(); library = get_library()
         library.check(library.cna_index_buffer_get_data(self._require_handle(), c.byref(transfer), native, len(native), c.byref(required)), "cna_index_buffer_get_data")

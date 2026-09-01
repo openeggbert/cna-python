@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 773,
+    "BOUND_ROUTES": 765,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,7 +12,7 @@
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 108,
-    "STATUS_BOUND": 773,
+    "STATUS_BOUND": 765,
     "STATUS_ACTIONABLE_LOCAL": 0,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
@@ -20,7 +20,7 @@
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 3280,
+    "STATUS_DELIBERATE_NON_BINDING": 3288,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -21837,10 +21837,10 @@
       "route": "cna_media_player_raise_media_state_changed_ext",
       "header": "media_player.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_media_player_resume",
@@ -32205,19 +32205,19 @@
       "route": "cna_sprite_font_copy_characters",
       "header": "sprite_font.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_sprite_font_copy_glyphs",
       "header": "sprite_font.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_sprite_font_create",
@@ -35670,10 +35670,10 @@
       "route": "cna_vertex_buffer_copy_declaration_elements",
       "header": "vertex_resources.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_vertex_buffer_copy_type_name",
@@ -35706,10 +35706,10 @@
       "route": "cna_vertex_buffer_get_data",
       "header": "vertex_resources.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_vertex_buffer_get_data_raw",
@@ -35742,10 +35742,10 @@
       "route": "cna_vertex_buffer_set_data",
       "header": "vertex_resources.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_vertex_buffer_set_data_raw",
@@ -35805,10 +35805,10 @@
       "route": "cna_vertex_declaration_copy_elements",
       "header": "vertex_resources.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_vertex_declaration_copy_type_name",
@@ -35859,10 +35859,10 @@
       "route": "cna_vertex_declaration_get_stride",
       "header": "vertex_resources.h",
       "purpose": "XNA_BACKING",
-      "status": "BOUND",
-      "reason": "imported: the selected 257-type XNA projection reaches this route",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "rule": "xna-backing-families",
-      "bound": true
+      "bound": false
     },
     {
       "route": "cna_vertex_declaration_get_type_name_byte_count",

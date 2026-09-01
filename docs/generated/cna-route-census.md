@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=773
+BOUND_ROUTES=765
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -15,7 +15,7 @@ PURPOSE_MANAGED_BY_DESIGN=566
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=108
-STATUS_BOUND=773
+STATUS_BOUND=765
 STATUS_ACTIONABLE_LOCAL=0
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
@@ -23,7 +23,7 @@ STATUS_BLOCKED_PLATFORM=0
 STATUS_BLOCKED_HARDWARE=0
 STATUS_BLOCKED_FIXTURE=0
 STATUS_LANGUAGE_MAPPING_LIMITATION=0
-STATUS_DELIBERATE_NON_BINDING=3280
+STATUS_DELIBERATE_NON_BINDING=3288
 STATUS_UNREVIEWED=0
 ```
 
@@ -32,9 +32,9 @@ STATUS_UNREVIEWED=0
 | Purpose | Status | Routes |
 |---|---|---:|
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 1770 |
-| XNA_BACKING | BOUND | 735 |
+| XNA_BACKING | BOUND | 727 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 549 |
-| XNA_BACKING | DELIBERATE_NON_BINDING | 438 |
+| XNA_BACKING | DELIBERATE_NON_BINDING | 446 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 108 |
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 |
@@ -47,9 +47,9 @@ STATUS_UNREVIEWED=0
 | Purpose | Status | Routes | Reason |
 |---|---|---:|---|
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 838 | CNA's modern engine layer is outside the selected XNA profile and outside the selected extension profile; opening it is a separate product decision, and it must never leak into Microsoft.Xna.Framework. |
-| XNA_BACKING | BOUND | 727 | imported: the selected 257-type XNA projection reaches this route |
+| XNA_BACKING | BOUND | 719 | imported: the selected 257-type XNA projection reaches this route |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 447 | XNA value types are implemented natively in Python against pinned XNA-derived behaviour; a per-operation C call would add a boundary crossing without adding behaviour. |
-| XNA_BACKING | DELIBERATE_NON_BINDING | 438 | In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer. |
+| XNA_BACKING | DELIBERATE_NON_BINDING | 446 | In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 271 | CNA-native compiled content is extension-owned; the strict XNA ContentManager stays managed XNB and must not silently prefer another format. |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 239 | The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 213 | The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it. |

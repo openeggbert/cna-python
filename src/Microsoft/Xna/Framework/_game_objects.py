@@ -406,7 +406,7 @@ class LaunchParameters(_StringDictionary):
         if self._game is not None and self._game._host is not None and self._game._host.handle:
             raise NativeCapabilityError(
                 "LaunchParameters.Remove", 6, None,
-                "CNA ABI 0.7 has no launch-parameter removal route after native game creation",
+                "CNA has no launch-parameter removal route after native game creation",
             )
         del self._values[key]
 

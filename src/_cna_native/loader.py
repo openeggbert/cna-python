@@ -502,14 +502,9 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_vertex_declaration_create", c.c_uint32, [c.POINTER(abi.CNA_VertexElement), c.c_uint64, c.POINTER(c.c_uint64)], "owned declaration"),
     ("cna_vertex_declaration_create_with_stride", c.c_uint32, [c.c_int32, c.POINTER(abi.CNA_VertexElement), c.c_uint64, c.POINTER(c.c_uint64)], "owned declaration"),
     ("cna_vertex_declaration_destroy", c.c_uint32, [c.c_uint64], "consumes declaration"),
-    ("cna_vertex_declaration_get_stride", c.c_uint32, [c.c_uint64, c.POINTER(c.c_int32)], "caller output"),
-    ("cna_vertex_declaration_copy_elements", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_VertexElement), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     ("cna_vertex_buffer_create", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_VertexBufferCreateInfo), c.POINTER(c.c_uint64)], "owned vertex buffer"),
     ("cna_vertex_buffer_destroy", c.c_uint32, [c.c_uint64], "consumes vertex buffer"),
     ("cna_vertex_buffer_get_info", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_VertexBufferInfo)], "caller output"),
-    ("cna_vertex_buffer_copy_declaration_elements", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_VertexElement), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
-    ("cna_vertex_buffer_set_data", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_VertexBufferTransfer), c.c_void_p, c.c_uint64], "copies typed vertices"),
-    ("cna_vertex_buffer_get_data", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_VertexBufferTransfer), c.c_void_p, c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     ("cna_vertex_buffer_set_data_raw", c.c_uint32, [c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32], "copies vertex bytes"),
     ("cna_vertex_buffer_set_data_raw_at", c.c_uint32, [c.c_uint64, c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32], "copies vertex bytes"),
     ("cna_vertex_buffer_set_data_raw_with_options", c.c_uint32, [c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32, c.c_uint32], "copies vertex bytes with a streaming hint"),
@@ -545,8 +540,6 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_graphics_device_copy_render_targets", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_RenderTargetBinding), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     ("cna_sprite_font_create", c.c_uint32, [c.POINTER(abi.CNA_SpriteFontCreateInfo), c.POINTER(c.c_uint64)], "owned sprite font"),
     ("cna_sprite_font_get_info", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SpriteFontInfo)], "caller output"),
-    ("cna_sprite_font_copy_characters", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint16), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
-    ("cna_sprite_font_copy_glyphs", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SpriteFontGlyph), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     ("cna_sprite_font_set_default_character", c.c_uint32, [c.c_uint64, c.c_uint8, c.c_uint16], "borrowed font"),
     ("cna_sprite_font_set_line_spacing", c.c_uint32, [c.c_uint64, c.c_int32], "borrowed font"),
     ("cna_sprite_font_set_spacing", c.c_uint32, [c.c_uint64, c.c_float], "borrowed font"),
@@ -676,6 +669,39 @@ def _resolve() -> Path:
     )
 
 
+#: Routes actually called during this process, recorded only when
+#: ``CNA_PYTHON_ROUTE_LOG`` names a file to append them to.  Reachability analysis
+#: uses this as evidence that a route with no statically resolvable call site is
+#: genuinely invoked, rather than admitting it on trust.
+_CALLED_ROUTES: set[str] = set()
+
+
+def _route_recorder():
+    destination = os.environ.get("CNA_PYTHON_ROUTE_LOG")
+    if not destination:
+        return None
+    import atexit
+
+    def flush() -> None:
+        try:
+            with open(destination, "a", encoding="utf-8") as handle:
+                for name in sorted(_CALLED_ROUTES):
+                    handle.write(name + "\n")
+        except OSError:
+            pass
+
+    if not _CALLED_ROUTES:
+        atexit.register(flush)
+
+    def wrap(symbol: str, function):
+        def recorded(*arguments):
+            _CALLED_ROUTES.add(symbol)
+            return function(*arguments)
+        return recorded
+
+    return wrap
+
+
 class NativeLibrary:
     def __init__(self, path: Path) -> None:
         self.path = path
@@ -694,6 +720,7 @@ class NativeLibrary:
         if not abi_is_supported(actual):
             raise NativeAbiMismatchError(QUALIFIED_ABI, actual, str(path))
         self.abi_version = actual
+        recorder = _route_recorder()
         for symbol, restype, argtypes, _ownership in FUNCTION_MANIFEST[1:]:
             try:
                 function = getattr(self._cdll, symbol)
@@ -703,7 +730,7 @@ class NativeLibrary:
                 ) from error
             function.restype = restype
             function.argtypes = argtypes
-            setattr(self, symbol, function)
+            setattr(self, symbol, function if recorder is None else recorder(symbol, function))
 
     def _last_error(self) -> tuple[int | None, str]:
         info = abi.CNA_ErrorInfo()

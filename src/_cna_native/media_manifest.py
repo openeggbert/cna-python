@@ -79,8 +79,9 @@ MEDIA_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = tup
     _e("cna_media_player_subscribe_active_song_changed_ext", [abi.CNA_MediaPlayerEventCallback, c.c_void_p, PH], "owned registration"),
     _e("cna_media_player_subscribe_media_state_changed_ext", [abi.CNA_MediaPlayerEventCallback, c.c_void_p, PH], "owned registration"),
     _e("cna_media_player_unsubscribe_ext", [H], "consumes registration"),
+    # No production caller by design: the re-entrancy tests use this to synthesize
+    # one event delivery and observe the handler-snapshot contract.
     _e("cna_media_player_raise_active_song_changed_ext", [H]),
-    _e("cna_media_player_raise_media_state_changed_ext", [H]),
     _e("cna_media_queue_get_count", [H, PI], "caller output"),
     _e("cna_media_queue_get_active_song_index", [H, PI], "caller output"),
     _e("cna_media_queue_set_active_song_index", [H, I]),
@@ -188,6 +189,9 @@ MEDIA_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = tup
     _e("cna_video_player_get_state", [H, PU], "caller output"),
     _e("cna_video_player_get_volume", [H, PF], "caller output"),
     _e("cna_video_player_set_volume", [H, F]),
+    # Superseded for the facade by the frame descriptor below, which carries the
+    # decode generation; retained for the ownership stress tool, which exercises the
+    # bare borrowed-handle route directly.
     _e("cna_video_player_get_texture", [H, PH, PB], "borrowed transient texture"),
     _e("cna_video_player_get_frame_ext", [H, c.POINTER(abi.CNA_VideoFrameEXT)],
        "caller output; borrowed frame texture plus its monotonic decode generation"),

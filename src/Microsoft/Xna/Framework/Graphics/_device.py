@@ -444,7 +444,8 @@ class GraphicsDevice:
         if any(value.RenderTarget is target for value in self._render_target_bindings):
             raise NativeCapabilityError(
                 f"{type(target).__name__}.Dispose", 6, None,
-                "CNA ABI 0.7 cannot safely destroy a currently bound render target; bind the backbuffer first",
+                "a currently bound render target cannot be destroyed; the runtime refuses it as well, "
+                "so bind the backbuffer first and dispose the target afterwards",
             )
 
     @property
@@ -640,7 +641,8 @@ class GraphicsDevice:
             if destination is not None and not isinstance(destination, Rectangle): raise TypeError("destinationRectangle must be Rectangle or None")
             if not isinstance(handle, int) or isinstance(handle, bool): raise TypeError("overrideWindowHandle must be int")
             raise NativeCapabilityError("GraphicsDevice.Present", 6, None,
-                                        "CNA ABI 0.7 has no rectangle/window-targeted Present route")
+                                        "CNA's Present route takes only the device, with no source or destination "
+                                        "rectangle and no target window")
         library = get_library(); library.check(library.cna_graphics_device_present(
             self._require_handle()), "cna_graphics_device_present")
 
