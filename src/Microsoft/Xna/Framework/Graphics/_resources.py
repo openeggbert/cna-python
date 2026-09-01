@@ -271,6 +271,34 @@ class Texture2D(Texture):
         self._read_info()
 
     @classmethod
+    def _borrow_frame(cls, graphicsDevice: GraphicsDevice, handle: int,
+                      validate) -> "Texture2D":
+        """Wraps a frame texture the runtime owns and lends for a bounded time.
+
+        The wrapper never destroys the handle and never registers a native event
+        on it: a frame texture is handed out again on every read, so a per-frame
+        subscription or ownership claim would be wrong on both counts.  ``validate``
+        runs before every native use and refuses once the borrow has expired.
+        """
+        self = cls.__new__(cls)
+        self._game = None if graphicsDevice is None else graphicsDevice._game
+        self._graphics_device = graphicsDevice
+        # Parent is deliberately omitted: the borrow is per frame, so registering
+        # it as a child of the owning generation would accumulate one entry per
+        # read for the life of the game.
+        self._native = NativeResource(handle, Ownership.BORROWED, None)
+        self._native.set_use_validator(validate)
+        self._name, self._tag = None, None
+        self._dispose_error = None
+        self._raise_dispose_event = True
+        self._native_dispose_event = False
+        self._managed_disposed = False
+        self._disposing_callback = None
+        self._disposing_registration = 0
+        self._read_info()
+        return self
+
+    @classmethod
     def _from_handle(cls, graphicsDevice: GraphicsDevice, handle: int) -> "Texture2D":
         self = cls.__new__(cls)
         self._init_resource(graphicsDevice, handle, _release("cna_texture2d_destroy"))

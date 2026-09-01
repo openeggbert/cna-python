@@ -189,6 +189,8 @@ MEDIA_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = tup
     _e("cna_video_player_get_volume", [H, PF], "caller output"),
     _e("cna_video_player_set_volume", [H, F]),
     _e("cna_video_player_get_texture", [H, PH, PB], "borrowed transient texture"),
+    _e("cna_video_player_get_frame_ext", [H, c.POINTER(abi.CNA_VideoFrameEXT)],
+       "caller output; borrowed frame texture plus its monotonic decode generation"),
     _e("cna_video_player_play", [H, H], "retains Video"),
     _e("cna_video_player_stop", [H]),
     _e("cna_video_player_pause", [H]),

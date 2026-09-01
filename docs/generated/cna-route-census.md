@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=751
+BOUND_ROUTES=752
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -15,8 +15,8 @@ PURPOSE_MANAGED_BY_DESIGN=566
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=108
-STATUS_BOUND=751
-STATUS_ACTIONABLE_LOCAL=21
+STATUS_BOUND=752
+STATUS_ACTIONABLE_LOCAL=20
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
@@ -32,7 +32,7 @@ STATUS_UNREVIEWED=0
 | Purpose | Status | Routes |
 |---|---|---:|
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 1770 |
-| XNA_BACKING | BOUND | 729 |
+| XNA_BACKING | BOUND | 730 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 549 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 439 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
@@ -40,7 +40,7 @@ STATUS_UNREVIEWED=0
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 16 |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 |
-| XNA_BACKING | ACTIONABLE_LOCAL | 5 |
+| XNA_BACKING | ACTIONABLE_LOCAL | 4 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 |
 
@@ -72,4 +72,4 @@ STATUS_UNREVIEWED=0
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | XNA_BACKING | ACTIONABLE_LOCAL | 2 | RenderTarget2D/Cube ContentLost is XNA public surface and CNA now has the subscription; delivery only happens on renderers that can lose a device. |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 | A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API. |
-| XNA_BACKING | ACTIONABLE_LOCAL | 1 | Frame generation is what XNA's two alternating frame textures need for change detection; selected for the VideoPlayer.GetTexture projection. |
+| XNA_BACKING | BOUND | 1 | imported: the selected profile reaches this route |

@@ -64,6 +64,25 @@ class CNA_VisualizationData(c.Structure):
     ]
 
 
+class CNA_VideoFrameEXT(c.Structure):
+    """Borrowed view of the frame a VideoPlayer currently holds.
+
+    ``generation`` is monotonic for the player's lifetime and changes only when a
+    frame is actually decoded, which is what makes change detection possible; the
+    texture itself stays borrowed until the next call on that player.
+    """
+
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("texture", c.c_uint64), ("generation", c.c_uint64),
+        ("presentation_time", c.c_double),
+        ("available", c.c_uint8), ("reserved", c.c_uint8 * 3),
+    ]
+
+
+CNA_VIDEO_FRAME_EXT_STRUCT_VERSION = 1
+
+
 class CNA_GameCallbacks(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),

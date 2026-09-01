@@ -21,7 +21,7 @@ class NativeResource:
     """
 
     __slots__ = ("_handle", "_ownership", "_release", "_parent_ref", "_disposed",
-                 "_retained", "_before_release", "__weakref__")
+                 "_retained", "_before_release", "_use_validator", "__weakref__")
 
     def __init__(self, handle: int, ownership: Ownership, release: Callable[[int], None] | None,
                  parent: object | None = None) -> None:
@@ -34,6 +34,7 @@ class NativeResource:
         self._disposed = False
         self._retained: list[object] = []
         self._before_release: Callable[[], None] | None = None
+        self._use_validator: Callable[[], None] | None = None
         if parent is not None and hasattr(parent, "_register_native_child"):
             parent._register_native_child(self)
 
@@ -48,6 +49,16 @@ class NativeResource:
         is rooted here instead.
         """
         self._retained.append(value)
+
+    def set_use_validator(self, hook: Callable[[], None]) -> None:
+        """Registers a check that must pass before every native use of this handle.
+
+        A borrowed handle can be valid for less than its wrapper's lifetime.  The
+        validator runs at the single point every native call goes through, so a
+        wrapper whose borrow has expired refuses with an accurate reason instead of
+        reaching CNA with a handle it will reject generically.
+        """
+        self._use_validator = hook
 
     def set_before_release(self, hook: Callable[[], None]) -> None:
         """Registers the owning facade's teardown so every release path runs it.
@@ -68,6 +79,8 @@ class NativeResource:
     def _require_handle(self) -> int:
         if self._disposed:
             raise RuntimeError(f"{type(self).__name__} is disposed")
+        if self._use_validator is not None:
+            self._use_validator()
         if self._parent_ref is not None:
             parent = self._parent_ref()
             if parent is None or getattr(parent, "_disposed", False):

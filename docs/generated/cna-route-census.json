@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 751,
+    "BOUND_ROUTES": 752,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,8 +12,8 @@
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 108,
-    "STATUS_BOUND": 751,
-    "STATUS_ACTIONABLE_LOCAL": 21,
+    "STATUS_BOUND": 752,
+    "STATUS_ACTIONABLE_LOCAL": 20,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -36255,10 +36255,10 @@
       "route": "cna_video_player_get_frame_ext",
       "header": "video.h",
       "purpose": "XNA_BACKING",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Frame generation is what XNA's two alternating frame textures need for change detection; selected for the VideoPlayer.GetTexture projection.",
+      "status": "BOUND",
+      "reason": "imported: the selected profile reaches this route",
       "rule": "video-frame-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_video_player_get_is_disposed",

@@ -7,6 +7,10 @@ value back through the setter that wrote it.
 
 from __future__ import annotations
 
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
 import unittest
 
 from Microsoft.Xna.Framework import Color, Game, GraphicsDeviceManager, Vector3
@@ -179,3 +183,106 @@ class RuntimeIdentityTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def _ffmpeg() -> str | None:
+    return shutil.which("ffmpeg")
+
+
+def _generate_clip(destination: Path) -> bool:
+    """Writes a 320x180, 24 fps, exactly 1.5 s clip, or reports that it could not.
+
+    The clip is generated at test time and never committed: the repository ships
+    no encoded media, and CNA refuses to play a video whose declared metadata
+    disagrees with the file, so the fixture must match the asset exactly.
+    """
+    tool = _ffmpeg()
+    if tool is None:
+        return False
+    for codec in ("mpeg4", "libx264", "libvpx"):
+        command = [tool, "-y", "-loglevel", "error", "-f", "lavfi",
+                   "-i", "color=c=red:s=320x180:r=24", "-frames:v", "36",
+                   "-c:v", codec, "-pix_fmt", "yuv420p", str(destination)]
+        try:
+            if subprocess.run(command, capture_output=True).returncode == 0 and destination.exists():
+                return True
+        except OSError:
+            return False
+    return False
+
+
+@unittest.skipUnless(NATIVE, "no CNA native library is configured")
+@unittest.skipUnless(_ffmpeg(), "ffmpeg is not available to generate a legal video fixture")
+class VideoDecodeTests(unittest.TestCase):
+    """Real decode through the ordinary XNA content path.
+
+    CNA opens the video file itself and resolves a relative path against the
+    process working directory rather than the title location, so a title-relative
+    reference decoded nowhere except when the two happened to coincide, and the
+    player silently stayed stopped.  The reference is now resolved against the
+    title before CNA sees it.
+    """
+
+    def test_content_video_decodes_and_lends_a_frame_texture(self) -> None:
+        from tests.test_media import _video_xnb
+        from Microsoft.Xna.Framework._title import _set_title_root_for_tests
+        from Microsoft.Xna.Framework.Media import MediaState, VideoPlayer
+
+        case = self
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "Content").mkdir()
+            if not _generate_clip(root / "Content" / "authored-video.ogv"):
+                self.skipTest("no usable video encoder produced the fixture")
+            (root / "Content" / "clip.xnb").write_bytes(_video_xnb())
+            _set_title_root_for_tests(root)
+            observed: dict[str, object] = {}
+
+            class Probe(Game):
+                def __init__(self) -> None:
+                    super().__init__()
+                    self.manager = GraphicsDeviceManager(self)
+                    self.Content.RootDirectory = "Content"
+                    self.frames = 0
+                    self.player = None
+                    self.previous = None
+
+                def LoadContent(self) -> None:
+                    self.video = self.Content.Load("clip")
+                    self.player = VideoPlayer()
+                    # Before Play there is no current Video to read a frame from.
+                    with case.assertRaises(RuntimeError):
+                        self.player.GetTexture()
+                    self.player.Play(self.video)
+
+                def Update(self, gameTime) -> None:
+                    self.frames += 1
+                    observed.setdefault("state", self.player.State)
+                    texture = self.player.GetTexture()
+                    if texture is not None:
+                        observed["size"] = (texture.Width, texture.Height)
+                        if self.previous is not None and self.previous is not texture:
+                            # The runtime decodes into a single texture and replaces it on
+                            # the next call, so the earlier borrow must refuse rather than
+                            # read freed memory.
+                            with case.assertRaises(RuntimeError):
+                                _ = self.previous.Format
+                            observed["expired"] = True
+                        self.previous = texture
+                    if self.frames >= 4:
+                        self.player.Dispose()
+                        self.Exit()
+
+                def Draw(self, gameTime) -> None:
+                    self.GraphicsDevice.Clear(Color.Black)
+
+            game = Probe()
+            try:
+                game.Run()
+            finally:
+                game.Dispose()
+                _set_title_root_for_tests(None)
+
+        self.assertEqual(observed.get("state"), MediaState.Playing)
+        self.assertEqual(observed.get("size"), (320, 180))
+        self.assertTrue(observed.get("expired"), "an expired frame borrow was not refused")

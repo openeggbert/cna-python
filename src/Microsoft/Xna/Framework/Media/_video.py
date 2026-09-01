@@ -6,6 +6,7 @@ import ctypes as c
 import math
 from datetime import timedelta
 
+from _cna_native import abi
 from _cna_native.errors import NativeCapabilityError
 
 from .._numeric import f32
@@ -79,6 +80,10 @@ class VideoPlayer(_NativeHandle):
         self._init_handle(int(output.value), generation, _IdentityDomain())
         self._video: Video | None = None
         self._disposed = False
+        # Any call on a player replaces the frame texture it lent out, so an
+        # outstanding borrow is tracked by a counter rather than by hope.
+        self._borrow_epoch = 0
+        self._frame_generation = -1
         try:
             self._is_looped = self._native_bool("cna_video_player_get_is_looped")
             self._is_muted = self._native_bool("cna_video_player_get_is_muted")
@@ -184,6 +189,7 @@ class VideoPlayer(_NativeHandle):
 
     def _operation(self, operation: str) -> None:
         library, handle = self._open_handle(operation)
+        self._borrow_epoch += 1
         library.check(getattr(library, operation)(handle), operation)
 
     def Pause(self) -> None: self._operation("cna_video_player_pause")
@@ -194,17 +200,33 @@ class VideoPlayer(_NativeHandle):
         library, handle = self._open_handle("VideoPlayer.GetTexture")
         if self._video is None:
             raise RuntimeError("VideoPlayer has no current Video")
-        output, present = c.c_uint64(), c.c_uint8()
-        library.check(library.cna_video_player_get_texture(
-            handle, c.byref(output), c.byref(present)), "cna_video_player_get_texture")
-        if not present.value:
+        frame = abi.CNA_VideoFrameEXT()
+        frame.struct_size = c.sizeof(frame)
+        frame.struct_version = abi.CNA_VIDEO_FRAME_EXT_STRUCT_VERSION
+        library.check(library.cna_video_player_get_frame_ext(handle, c.byref(frame)),
+                      "cna_video_player_get_frame_ext")
+        if not frame.available or not frame.texture:
+            # Asking before playback has produced a frame is an ordinary answer.
             return None
-        raise NativeCapabilityError(
-            "cna_video_player_get_texture", 6, None,
-            "CNA ABI 0.7 returns a VideoPlayer-owned frame handle valid only until the next "
-            "player operation; it was neither wrapped nor destroyed because Python Texture2D "
-            "requires stable XNA resource identity",
-        )
+        from ..Graphics import Texture2D
+        borrow = self._borrow_epoch = self._borrow_epoch + 1
+        generation = int(frame.generation)
+        player = self
+
+        def validate() -> None:
+            if player._disposed:
+                raise RuntimeError("the VideoPlayer that lent this frame is disposed")
+            if player._borrow_epoch != borrow:
+                raise RuntimeError(
+                    "this video frame expired: the runtime decodes into a single texture "
+                    "and replaces it on the next call to its player, so a frame must be "
+                    "drawn or copied before the player is used again")
+            if player._frame_generation != generation:
+                raise RuntimeError("this video frame expired: the player has decoded a newer frame")
+
+        self._frame_generation = generation
+        game, _host, _library, _game_handle, _generation = _active("VideoPlayer.GetTexture")
+        return Texture2D._borrow_frame(game.GraphicsDevice, int(frame.texture), validate)
 
     def Dispose(self) -> None:
         if self._disposed:

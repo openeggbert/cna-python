@@ -75,8 +75,19 @@ class _VideoReader(ContentTypeReader):
         relative = parent / file_path if str(parent) != "." else file_path
         root = input.ContentManager.RootDirectory.replace("\\", "/").strip("/")
         resolved = str(PurePosixPath(root) / relative) if root else str(relative)
+        # CNA opens the video file itself and resolves a relative path against the
+        # process working directory, not the title location, so a title-relative
+        # path silently fails to decode wherever the two differ. XNA resolves the
+        # reference against the title, so the title-relative path is resolved here
+        # -- with the same containment check every other title read uses -- and CNA
+        # is handed a path it can open.
+        from .._title import _safe_title_path
+        try:
+            absolute = _safe_title_path(resolved)
+        except ValueError as error:
+            raise input._failure("Video file reference escapes the content root") from error
         device = input.ContentManager._graphics_device()
-        return Video._create(device._require_handle(), resolved, duration_milliseconds,
+        return Video._create(device._require_handle(), str(absolute), duration_milliseconds,
                              width, height, frames_per_second, soundtrack_type)
 
 
