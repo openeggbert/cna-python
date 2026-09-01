@@ -255,7 +255,7 @@ the title root is the application module directory (with deterministic embedded
 Python fallbacks), never the process working directory. Relative `.`/`..` and mixed
 separators are normalized, but absolute paths, drive paths, NULs, lexical escapes,
 and symlink escapes are rejected. During a running `Game`, the same root is configured
-through CNA's ABI-0.7 title-location route and bytes are read through CNA title storage.
+through CNA's title-location route and bytes are read through CNA title storage.
 
 `ContentManager.Load[T]` returns the object selected by the XNB root reader. Python
 cannot recover the caller's erased method-level `T`, so caller-requested wrong-type

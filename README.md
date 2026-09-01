@@ -1,8 +1,8 @@
 # CNA-Python
 
 CNA-Python is a pre-alpha, measured Python projection of the XNA 4.0 API over
-the canonical CNA C ABI. It is a real exact-ABI-0.7 runtime binding, not a
-simulated scaffold.
+the canonical CNA C ABI. It is a real exact-ABI runtime binding against one
+qualified CNA generation, not a simulated scaffold.
 
 ```text
 Python game
@@ -32,9 +32,9 @@ BasicEffect. Model.Draw uses the ordinary pass and indexed-draw pipeline. See
 Foundation Milestone 6 adds the complete 19-type Audio/XACT family: native
 SoundEffect and instances, dynamic copied-buffer streaming and owner-thread
 callbacks, real microphone enumeration, and the AudioEngine/category/bank/cue
-ownership graph. Multi-listener mixing remains an explicit CNA ABI-0.7 blocker;
-physical capture is hardware-pending and successful authored XACT playback is
-asset-pending. See [`docs/audio-xact-evidence.md`](docs/audio-xact-evidence.md).
+ownership graph. Multi-listener mixing now reaches the real route; physical
+capture remains hardware-blocked and successful authored XACT playback remains
+fixture-blocked. See [`docs/audio-xact-evidence.md`](docs/audio-xact-evidence.md).
 
 Foundation Milestone 7 completes the remaining managed/value layer: all six
 Curve types with XNA binary32 Hermite, loop, tangent, ordering, and clone
@@ -73,7 +73,7 @@ native library is bundled in the wheel.
 
 ## Running
 
-Build or install `cna-python==0.1.0.dev0`, then select an exact CNA ABI 0.7.0
+Build or install `cna-python==0.1.0.dev0`, then select a CNA `0.21.x` C ABI
 library with an absolute path:
 
 ```bash
@@ -87,22 +87,25 @@ API is imported.
 
 ## Measured platform status
 
+Two artifacts are qualified, and every runtime claim names the one that produced
+it. A result measured where nothing rasterizes is a command-path result, not a
+rendering result.
+
 | Platform/backend | Evidence |
 | --- | --- |
-| Linux x86-64, HEADLESS renderer, NULL audio | Native lifecycle, Effect/Model, Audio, Media catalog/player/queue/event, Video metadata/player-control, query/cube, empty Touch, Storage ownership/callback routes, and raw-PNG plus XNB 60/600-frame paths verified |
-| Linux windowed/GPU renderer | Not yet verified |
+| Linux x86-64, HEADLESS renderer, SDL3 mixer | Native lifecycle, Effect/Model, Audio state machine, Media catalog/player/queue/events, Video decode and frame identity, query/cube, Touch, Storage, and raw-PNG plus XNB 60/600-frame paths verified |
+| Linux x86-64, OPENGLES3 renderer, SDL3 mixer | The above, plus rendered pixels for Clear, all four draw paths, instanced draws, SpriteBatch, RenderTarget2D/Cube, Texture3D, TextureCube and Model.Draw, plus real window resize delivery |
 | Windows | Not yet verified |
 | macOS | Not yet verified |
 | Android / iOS | Not verified |
 | Web / Pyodide | Not supported by the current native-library architecture |
 
-HEADLESS command completion is not visible GPU output. NULL audio does not prove
-audible playback or physical microphone capture, and no legal authored XACT
-bank fixture is available. The qualified host also cannot prove OS window
-transitions, deterministic device loss, physical input hardware, populated
-music catalogs, decoded visualization output, or decoded video frames. CNA's
-borrowed VideoPlayer frame route also cannot prove XNA-compatible stable frame
-identity.
+What these artifacts still cannot prove: audible output and physical microphone
+capture (the audio device is deterministic and silent by design), authored XACT
+playback (no legal bank fixture), compiled-effect execution (the device reports
+it can execute shader source, but no legal compiled fixture exists), device loss
+and ContentLost delivery (no renderer here can lose a device), physical input
+hardware, populated music catalogs, and picture bytes.
 Those distinctions are recorded in
 [`docs/generated/runtime-capabilities.md`](docs/generated/runtime-capabilities.md).
 

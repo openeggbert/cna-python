@@ -1,5 +1,12 @@
 # Foundation Milestone 5: Effect and Model evidence
 
+> **Historical record.** This documents the state at its milestone, measured against
+> the CNA `0.7.0` generation on a non-windowed backend with a null audio device. It is
+> kept as written. The current boundary is CNA `0.21.0`; for what holds now see
+> [`cna-abi-audit.md`](cna-abi-audit.md) and
+> [`generated/runtime-capabilities.md`](generated/runtime-capabilities.md), which
+> supersede every runtime claim below.
+
 Date: 2026-08-23. Status: complete on the qualified Linux x86-64 HEADLESS ABI-0.7 runtime. This is command-path and ownership evidence, not visible 3D rendering evidence.
 
 ## Public dependency closure

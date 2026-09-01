@@ -4,17 +4,28 @@ The only execution architecture is:
 
 ```text
 Python game
-  -> Microsoft.Xna.Framework.* public projection
+  -> Microsoft.Xna.Framework.* public projection      (the selected XNA 4.0 profile)
+  -> cna.extensions.*                                 (CNA-only capabilities, optional)
   -> private _cna_native ctypes implementation
-  -> CNA canonical stable C ABI 0.7.0
+  -> CNA canonical stable C ABI 0.21.0
   -> CNA C++
 ```
 
 The binding does not link the CNA C++ ABI, pybind11, .NET, Java, Node, Rust, or
-another language binding. ctypes was selected because ABI 0.7 uses fixed-width
+another language binding. ctypes was selected because the C ABI uses fixed-width
 POD structures, C callbacks, opaque `uint64_t` handles, and caller-owned UTF-8
 buffers; the selected slice has no measured requirement for a compiled Python
 extension.
+
+One ABI generation is supported at a time. CNA's contract makes a `0.x` minor a
+compatibility generation, so the loader accepts any patch inside the qualified
+minor and rejects every other minor and major rather than pretending one ctypes
+manifest can be truthful for two generations permitted to differ incompatibly.
+
+`Microsoft.Xna.Framework` is the selected XNA 4.0 Windows projection and nothing
+else: a member CNA offers but XNA never had does not belong there, because a
+name in that namespace is a claim about XNA. CNA-only capabilities live under
+`cna.extensions`, which the XNA namespace never imports and does not depend on.
 
 Public namespaces preserve XNA names. Private modules split math, geometry,
 game hosting, component/services, display/presentation, graphics states,
@@ -34,6 +45,15 @@ native children are strongly retained by the Game ownership root and released
 before the game. This prevents a dropped Python wrapper from stranding its CNA
 handle beyond the owning generation. No finalizer enters CNA during
 interpreter shutdown.
+
+A ctypes callback handed to CNA is rooted on the **owning native handle**, not on
+the public facade that created it. CNA keeps the trampoline pointer until
+unregistration or resource destruction, and the facade and its closure form a
+reference cycle the collector may reclaim first, so rooting it on the facade is a
+use-after-free waiting for the next event rather than a leak. For the same
+reason the owning handle carries the facade's teardown as a pre-release hook:
+shutdown releases handles through the owning generation, which would otherwise
+free a handle while the views it owns are still live.
 
 Lifecycle callback objects are strongly retained by the game host. ctypes
 enters Python with the GIL. Every trampoline catches `BaseException`, records a
@@ -55,11 +75,12 @@ user code is never knowingly run on an uncontrolled audio thread.
 
 The public `FrameworkDispatcher.Update()` is an explicit second operation, not
 another automatic mechanism: it resolves the unique live owner-thread Game
-generation, invokes the same ABI-0.7 dispatcher route exactly once, drains the
+generation, invokes the same dispatcher route exactly once, drains the
 shared owner queue, and re-raises a contained callback exception after native
-control returns. CNA 0.7 requires a live Game handle for this route, unlike XNA's
-process dispatcher; calls with no selectable live Game report that upstream CNA
-limitation instead of silently doing nothing or fabricating a dispatcher.
+control returns. CNA's dispatcher route takes a Game handle, unlike XNA's process
+dispatcher, so it has nothing to pump without one; calls with no selectable live
+Game report that limitation instead of silently doing nothing or fabricating a
+dispatcher.
 
 `GamerServicesComponent` is an ordinary `GameComponent` using the Game-owned
 window and generation for the three canonical dispatcher routes. No broader
@@ -74,14 +95,17 @@ reported honestly, while no user callback runs inside the ctypes completion
 trampoline. DeviceChanged and other off-frame callbacks enqueue into the same
 FrameworkDispatcher owner queue; there is no Storage dispatcher. Storage paths
 are normalized and checked lexically and after resolution before CNA is called,
-closing CNA 0.7's container traversal gap at the XNA semantic boundary.
+closing CNA's container traversal gap at the XNA semantic boundary.
 
 `RenderTargetCube` reuses `TextureCube` ownership and ordinary render-target
-bindings. A Python binding retains each bound target. Because CNA 0.7 can abort
-while destroying a currently bound render target, disposal detects that state,
-raises a native-capability error, and preserves the owned handle for a later
-legal owner-thread retry. It never silently restores the backbuffer. Game
-shutdown explicitly unbinds first.
+bindings. A Python binding retains each bound target. Disposal of a bound target
+is refused, the owned handle is preserved for a later legal owner-thread retry,
+and the backbuffer is never silently restored. The historical generation aborted
+the process here; the current one refuses cleanly with `INVALID_STATE`, and the
+Python guard is kept as defence in depth rather than removed. Game shutdown
+explicitly unbinds first. Both render-target kinds carry a real native
+ContentLost subscription, released before their handle; CNA raises it only on
+renderer families that can lose a device, and none is synthesized elsewhere.
 
 SoundEffect owns its native resource and weakly tracks its owned instance
 children; each instance strongly retains the effect it depends on. AudioEngine
@@ -109,10 +133,17 @@ exact Song facade supplied to Play. No second owner is created.
 
 The private `VideoReader` uses the existing ContentManager reader table, cache,
 path normalization, LZX framing, transactional recording, rollback, and
-Unload. A player retains its selected content Video. CNA's frame texture is
-borrowed only until the next player call and has no stable XNA frame generation:
-null maps to `None`; a nonzero frame raises `NativeCapabilityError` and is never
-wrapped or destroyed.
+Unload. It resolves the content-relative file reference against the title
+location before CNA sees it, because CNA opens the file itself and resolves a
+relative path against the process working directory.
+
+A player retains its selected content Video. `GetTexture` returns a real
+`Texture2D` that borrows the runtime's frame: never owned, never destroyed,
+carrying no per-frame native subscription, and not registered as a child of the
+owning generation, which would accumulate one entry per read. CNA decodes into a
+single texture and replaces it on the next call, so the wrapper validates the
+decode generation before every native use and refuses with the reason the borrow
+ended. No frame maps to `None`.
 
 The strict verifier consumes SHA-256-pinned XNA-derived neutral metadata. The
 selected XNA 4.0 Windows runtime projection is structurally complete at 257
@@ -120,5 +151,14 @@ types; normal and leak-only checks are both zero-tolerance green gates.
 
 Structural/API completeness is distinct from runtime capability. The
 machine-readable `docs/runtime-capabilities.json` classifies native, managed,
-upstream, backend, platform, asset, hardware, and Python implementation
-status without turning HEADLESS command-path evidence into a rendering claim.
+upstream, renderer, platform, fixture and hardware status per qualified
+artifact, so command-path evidence from a backend that does not rasterize is
+never presented as a rendering claim, and a rendering result is never
+generalised to a backend that cannot produce it.
+
+Four gates answer four different questions and none substitutes for another: the
+strict verifier asks whether the XNA namespace is exactly the selected
+projection; the extension gate asks whether CNA-only surface stays out of it and
+keeps its own promises; the ABI and prototype gates ask whether the native
+boundary is what the headers declare; and the reachability gate asks whether
+every bound route is actually called.

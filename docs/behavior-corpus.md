@@ -43,9 +43,9 @@ Milestone 8 contributes four Touch observations covering exact gesture bits,
 default `GestureSample`, the deliberate XNA distinction between
 `TouchLocation.Equals` and `operator ==`, previous-location sentinels,
 read-only collection/copy behavior, and nested enumerator boundaries. Empty
-HEADLESS input and CNA result codes remain runtime evidence rather than XNA
+Native input and CNA result codes remain runtime evidence rather than XNA
 golden observations.
 
 Native lifecycle/graphics/input tests are separately labelled
-`NATIVE_CNA_RUNTIME`. HEADLESS route execution is not physical-device evidence;
+`NATIVE_CNA_RUNTIME`. Route execution is not physical-device evidence;
 future `PLATFORM/HARDWARE` observations must come from qualified hardware.

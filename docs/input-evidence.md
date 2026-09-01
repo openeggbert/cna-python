@@ -1,5 +1,12 @@
 # Non-touch input evidence
 
+> **Historical record.** This documents the state at its milestone, measured against
+> the CNA `0.7.0` generation on a non-windowed backend with a null audio device. It is
+> kept as written. The current boundary is CNA `0.21.0`; for what holds now see
+> [`cna-abi-audit.md`](cna-abi-audit.md) and
+> [`generated/runtime-capabilities.md`](generated/runtime-capabilities.md), which
+> supersede every runtime claim below.
+
 The keyboard, mouse, and gamepad families are structurally local-zero. Touch
 was explicitly not started.
 
