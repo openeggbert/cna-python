@@ -105,6 +105,13 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_game_set_inactive_sleep_time_ticks", c.c_uint32, [c.c_uint64, c.c_int64], "borrowed game"),
     ("cna_game_destroy", c.c_uint32, [c.c_uint64], "consumes game on release"),
     ("cna_framework_dispatcher_update", c.c_uint32, [c.c_uint64], "borrowed game"),
+    # Renderer identity. Runtime capability evidence must name the renderer that
+    # actually ran, so a measurement is never attributed to the wrong backend.
+    ("cna_graphics_renderer_get_selected_ext", c.c_uint32, [c.POINTER(c.c_uint32)], "caller output"),
+    ("cna_graphics_renderer_get_active_ext", c.c_uint32, [c.POINTER(c.c_uint32)], "caller output"),
+    ("cna_graphics_renderer_get_is_latched_ext", c.c_uint32, [c.POINTER(c.c_uint8)], "caller output"),
+    ("cna_graphics_renderer_get_current_name_size", c.c_uint32, [c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_graphics_renderer_copy_current_name", c.c_uint32, [c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     # XNA Audio + XACT.  Every callback is the canonical
     # ``void(void*)`` observer and every submitted PCM buffer is copied.
     ("cna_sound_effect_create_pcm16_range_ext", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SoundEffectCreateInfo), c.POINTER(c.c_uint8), c.c_uint64, c.c_int32, c.c_int32, c.c_int32, c.c_int32, c.POINTER(c.c_uint64)], "copies PCM; owned SoundEffect"),
@@ -486,6 +493,8 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_vertex_buffer_get_data", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_VertexBufferTransfer), c.c_void_p, c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     ("cna_vertex_buffer_set_data_raw", c.c_uint32, [c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32], "copies vertex bytes"),
     ("cna_vertex_buffer_set_data_raw_at", c.c_uint32, [c.c_uint64, c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32], "copies vertex bytes"),
+    ("cna_vertex_buffer_set_data_raw_with_options", c.c_uint32, [c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32, c.c_uint32], "copies vertex bytes with a streaming hint"),
+    ("cna_vertex_buffer_set_data_raw_at_with_options", c.c_uint32, [c.c_uint64, c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32, c.c_uint32], "copies vertex bytes into a buffer window with a streaming hint"),
     ("cna_vertex_buffer_get_data_raw", c.c_uint32, [c.c_uint64, c.c_uint64, c.c_void_p, c.c_uint64, c.c_uint64, c.c_uint32], "caller output"),
     ("cna_index_buffer_create", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_IndexBufferCreateInfo), c.POINTER(c.c_uint64)], "owned index buffer"),
     ("cna_index_buffer_destroy", c.c_uint32, [c.c_uint64], "consumes index buffer"),

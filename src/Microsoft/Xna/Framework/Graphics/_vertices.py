@@ -358,26 +358,23 @@ class DynamicVertexBuffer(VertexBuffer):
     def SetData(self, *args: object) -> None:
         if len(args) in (4, 6):
             *base, options = args
-            data, _, count, offset, stride, payload, options = self._transfer(tuple(base), options)
-            if options != SetDataOptions.None_:
-                if offset:
-                    raise NativeCapabilityError(
-                        "DynamicVertexBuffer.SetData(offset, options)", 6, None,
-                        "ABI 0.7 has no route combining raw destination offset and streaming options",
-                    )
-                # _transfer has already validated the exact window; construct the same window.
-                start = int(base[1]) if len(base) == 3 else int(base[2])
-                selected = data[start:start + count]
-                native = _native_vertex_array(selected, self._vertex_kind)
-                transfer = abi.CNA_VertexBufferTransfer()
-                transfer.struct_size, transfer.struct_version = c.sizeof(transfer), 1
-                transfer.vertex_type, transfer.options = self._vertex_kind._vertex_type, int(options)
-                transfer.start_index, transfer.element_count = 0, count
-                library = get_library(); library.check(library.cna_vertex_buffer_set_data(
-                    self._require_handle(), c.byref(transfer), native, len(native)),
-                    "cna_vertex_buffer_set_data")
-                return
-            return super().SetData(*base)
+            _, _, count, offset, stride, payload, options = self._transfer(tuple(base), options)
+            if options == SetDataOptions.None_:
+                return super().SetData(*base)
+            # The options-carrying raw uploads take the same destination offset as the
+            # plain raw family, so the offset and the streaming hint reach CNA together.
+            native = (c.c_uint8 * len(payload)).from_buffer_copy(payload) if payload else None
+            library = get_library()
+            operation = ("cna_vertex_buffer_set_data_raw_with_options" if offset == 0
+                         else "cna_vertex_buffer_set_data_raw_at_with_options")
+            if offset == 0:
+                result = library.cna_vertex_buffer_set_data_raw_with_options(
+                    self._require_handle(), native, len(payload), count, stride, int(options))
+            else:
+                result = library.cna_vertex_buffer_set_data_raw_at_with_options(
+                    self._require_handle(), offset, native, len(payload), count, stride, int(options))
+            library.check(result, operation)
+            return
         return super().SetData(*args)
 
 

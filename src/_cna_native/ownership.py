@@ -20,7 +20,8 @@ class NativeResource:
     dynamic library. Explicit ``Dispose`` and context management are primary.
     """
 
-    __slots__ = ("_handle", "_ownership", "_release", "_parent_ref", "_disposed", "__weakref__")
+    __slots__ = ("_handle", "_ownership", "_release", "_parent_ref", "_disposed",
+                 "_retained", "_before_release", "__weakref__")
 
     def __init__(self, handle: int, ownership: Ownership, release: Callable[[int], None] | None,
                  parent: object | None = None) -> None:
@@ -31,8 +32,34 @@ class NativeResource:
         self._release = release
         self._parent_ref = weakref.ref(parent) if parent is not None else None
         self._disposed = False
+        self._retained: list[object] = []
+        self._before_release: Callable[[], None] | None = None
         if parent is not None and hasattr(parent, "_register_native_child"):
             parent._register_native_child(self)
+
+    def retain_for_registration(self, value: object) -> None:
+        """Roots one object for exactly as long as this handle's registrations live.
+
+        A ctypes callback handed to CNA stays caller-owned until unregistration or
+        resource destruction.  Rooting it only on the public facade is not enough:
+        the facade and its closure form a cycle that the collector may reclaim while
+        CNA still holds the raw trampoline pointer, so the next native event would
+        call freed memory.  The owning handle outlives the facade, so the callback
+        is rooted here instead.
+        """
+        self._retained.append(value)
+
+    def set_before_release(self, hook: Callable[[], None]) -> None:
+        """Registers the owning facade's teardown so every release path runs it.
+
+        A facade may own further native views that must be released before its own
+        handle.  Its ``Dispose`` does that, but shutdown releases the handle through
+        this object, which the owning generation retains rather than the facade.
+        Without the hook that path would free the handle while its views were still
+        live, and the runtime would refuse to destroy the game.  The hook must be
+        idempotent, because both paths may reach it.
+        """
+        self._before_release = hook
 
     @property
     def IsDisposed(self) -> bool:
@@ -50,10 +77,15 @@ class NativeResource:
     def Dispose(self) -> None:
         if self._disposed:
             return
+        if self._before_release is not None:
+            self._before_release()
         if self._ownership is Ownership.OWNED and self._release is not None:
             self._release(self._handle)
         self._disposed = True
         self._handle = 0
+        # The native registrations died with the handle, so nothing rooted for them
+        # can still be reached from C.
+        self._retained.clear()
         parent = self._parent_ref() if self._parent_ref is not None else None
         if parent is not None and hasattr(parent, "_unregister_native_child"):
             parent._unregister_native_child(self)

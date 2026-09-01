@@ -3,6 +3,8 @@ from __future__ import annotations
 import copy
 import io
 import math
+import os
+from pathlib import Path
 import unittest
 
 from Microsoft.Xna.Framework import (
@@ -132,6 +134,9 @@ class GameObjectModelTests(unittest.TestCase):
         with self.assertRaises(TypeError): ResourceCreatedEventArgs(resource)
 
 
+@unittest.skipUnless(os.environ.get("CNA_NATIVE_LIBRARY")
+                     and Path(os.environ["CNA_NATIVE_LIBRARY"]).is_file(),
+                     "CNA_NATIVE_LIBRARY is not configured")
 class NativeGraphicsFoundationTests(unittest.TestCase):
     def test_owned_buffers_bindings_targets_encoding_and_sprite_font(self):
         testcase = self

@@ -37,6 +37,9 @@ class GraphicsResource:
         self._game = None if graphics_device is None else graphics_device._game
         self._graphics_device = graphics_device
         self._native = NativeResource(handle, Ownership.OWNED, release, self._game)
+        # Shutdown releases this handle through the owning generation rather than
+        # through the facade, so the facade's own teardown is registered here too.
+        self._native.set_before_release(self._before_dispose)
         self._name, self._tag = None, None
         self._dispose_error = None
         self._raise_dispose_event = True
@@ -62,6 +65,10 @@ class GraphicsResource:
                 "cna_graphics_resource_subscribe_disposing",
             )
             self._disposing_registration = int(registration.value)
+            # CNA keeps the trampoline pointer until unregistration or resource
+            # destruction, and the owning handle outlives this facade, so the
+            # callback is rooted there rather than only here.
+            self._native.retain_for_registration(callback)
 
     def _init_managed_resource(self, graphics_device: GraphicsDevice | None = None) -> None:
         self._game = None if graphics_device is None else graphics_device._game
