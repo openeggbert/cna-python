@@ -175,10 +175,19 @@ class Milestone8NativeTests(unittest.TestCase):
                     query.Begin()
                 testcase.assertFalse(query.IsComplete)
                 query.End()
-                testcase.assertTrue(query.IsComplete)
+                # XNA's occlusion query is asynchronous: End submits it and IsComplete
+                # reports when the GPU has answered.  A non-windowed backend can answer
+                # at once and a real renderer takes a bounded number of polls; both are
+                # the same contract, so the test waits rather than assuming either.
+                def wait_for(pending, limit=100_000):
+                    for _ in range(limit):
+                        if pending.IsComplete:
+                            return True
+                    return False
+                testcase.assertTrue(wait_for(query))
                 testcase.assertGreaterEqual(query.PixelCount, 0)
                 query.Begin(); query.End()
-                testcase.assertTrue(query.IsComplete)
+                testcase.assertTrue(wait_for(query))
                 query.Dispose(); query.Dispose()
                 with testcase.assertRaises(RuntimeError):
                     _ = query.IsComplete
