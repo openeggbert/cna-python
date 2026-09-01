@@ -1240,16 +1240,16 @@
       "src/Microsoft/Xna/Framework/Graphics/_device.py:338"
     ],
     "cna_graphics_device_destroy": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:949"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:951"
     ],
     "cna_graphics_device_present": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:646"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:648"
     ],
     "cna_graphics_device_reset": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:652"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:654"
     ],
     "cna_graphics_device_reset_with_parameters": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:663"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:665"
     ],
     "cna_graphics_device_subscribe_event": [
       "src/Microsoft/Xna/Framework/Graphics/_device.py:367"
@@ -1258,7 +1258,7 @@
       "src/Microsoft/Xna/Framework/Graphics/_device.py:382"
     ],
     "cna_graphics_device_clear_rgba": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:633"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:635"
     ],
     "cna_texture2d_create": [
       "src/Microsoft/Xna/Framework/Graphics/_resources.py:268"
@@ -1795,43 +1795,43 @@
       "src/Microsoft/Xna/Framework/Graphics/_vertices.py:443"
     ],
     "cna_graphics_device_set_vertex_buffer": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:703"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:705"
     ],
     "cna_graphics_device_set_vertex_buffer_offset": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:703"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:705"
     ],
     "cna_graphics_device_set_vertex_buffers": [
       "src/Microsoft/Xna/Framework/Graphics/_device.py:415"
     ],
     "cna_graphics_device_get_vertex_buffer_count": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:727"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:729"
     ],
     "cna_graphics_device_copy_vertex_buffers": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:732"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:734"
     ],
     "cna_graphics_device_set_index_buffer": [
       "src/Microsoft/Xna/Framework/Graphics/_device.py:416"
     ],
     "cna_graphics_device_get_index_buffer": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:670"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:672"
     ],
     "cna_graphics_device_get_backbuffer_data_window": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:926"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:928"
     ],
     "cna_graphics_device_draw_primitives": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:829"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:831"
     ],
     "cna_graphics_device_draw_indexed_primitives": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:839"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:841"
     ],
     "cna_graphics_device_draw_instanced_primitives": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:849"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:851"
     ],
     "cna_graphics_device_draw_user_primitives": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:886"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:888"
     ],
     "cna_graphics_device_draw_user_indexed_primitives": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:908"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:910"
     ],
     "cna_render_target2d_create": [
       "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:97"
@@ -1849,16 +1849,16 @@
       "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:100"
     ],
     "cna_graphics_device_set_render_target2d": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:774"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:776"
     ],
     "cna_graphics_device_set_render_targets": [
       "src/Microsoft/Xna/Framework/Graphics/_device.py:417"
     ],
     "cna_graphics_device_get_render_target_count": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:798"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:800"
     ],
     "cna_graphics_device_copy_render_targets": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:803"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:805"
     ],
     "cna_sprite_font_create": [
       "src/Microsoft/Xna/Framework/Graphics/_resources.py:492"
@@ -1930,7 +1930,7 @@
       "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:171"
     ],
     "cna_graphics_device_set_render_target_cube": [
-      "src/Microsoft/Xna/Framework/Graphics/_device.py:764"
+      "src/Microsoft/Xna/Framework/Graphics/_device.py:766"
     ],
     "cna_occlusion_query_create": [
       "src/Microsoft/Xna/Framework/Graphics/_queries.py:20"
