@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 756,
+    "BOUND_ROUTES": 772,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,8 +12,8 @@
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 108,
-    "STATUS_BOUND": 756,
-    "STATUS_ACTIONABLE_LOCAL": 16,
+    "STATUS_BOUND": 772,
+    "STATUS_ACTIONABLE_LOCAL": 0,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -16959,10 +16959,10 @@
       "route": "cna_graphics_renderer_copy_available_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_copy_current_name",
@@ -16977,37 +16977,37 @@
       "route": "cna_graphics_renderer_fallback_copy_message_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_fallback_get_message_size_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_fallback_reason_copy_name_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_fallback_reason_get_name_size_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_get_active_ext",
@@ -17022,19 +17022,19 @@
       "route": "cna_graphics_renderer_get_automatic_fallback_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_get_available_count_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_get_current_name_size",
@@ -17049,37 +17049,37 @@
       "route": "cna_graphics_renderer_get_current_type",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_get_fallback_at_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_get_fallback_count_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_get_is_available_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_get_is_latched_ext",
@@ -17112,46 +17112,46 @@
       "route": "cna_graphics_renderer_set_automatic_fallback_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_set_fallback_chain_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_set_preferred_by_name_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_set_preferred_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_renderer_try_parse_name_ext",
       "header": "core_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "status": "BOUND",
+      "reason": "imported: runtime capability evidence names the backend that produced it",
       "rule": "renderer-identity",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_resource_copy_name",

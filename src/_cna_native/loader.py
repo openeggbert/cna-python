@@ -112,6 +112,23 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_graphics_renderer_get_is_latched_ext", c.c_uint32, [c.POINTER(c.c_uint8)], "caller output"),
     ("cna_graphics_renderer_get_current_name_size", c.c_uint32, [c.POINTER(c.c_uint64)], "caller output"),
     ("cna_graphics_renderer_copy_current_name", c.c_uint32, [c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
+    # Renderer selection and fallback reporting, consumed by cna.extensions.graphics.
+    ("cna_graphics_renderer_get_current_type", c.c_uint32, [c.POINTER(c.c_uint32)], "caller output"),
+    ("cna_graphics_renderer_get_available_count_ext", c.c_uint32, [c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_graphics_renderer_copy_available_ext", c.c_uint32, [c.POINTER(c.c_uint32), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_graphics_renderer_get_is_available_ext", c.c_uint32, [c.c_uint32, c.POINTER(c.c_uint8)], "caller output"),
+    ("cna_graphics_renderer_try_parse_name_ext", c.c_uint32, [abi.CNA_StringView, c.POINTER(c.c_uint32), c.POINTER(c.c_uint8)], "caller output"),
+    ("cna_graphics_renderer_set_preferred_ext", c.c_uint32, [c.c_uint32], "process-wide selection"),
+    ("cna_graphics_renderer_set_preferred_by_name_ext", c.c_uint32, [abi.CNA_StringView], "process-wide selection"),
+    ("cna_graphics_renderer_set_fallback_chain_ext", c.c_uint32, [c.POINTER(c.c_uint32), c.c_uint64], "copies the chain; process-wide selection"),
+    ("cna_graphics_renderer_set_automatic_fallback_ext", c.c_uint32, [c.c_uint8], "process-wide selection"),
+    ("cna_graphics_renderer_get_automatic_fallback_ext", c.c_uint32, [c.POINTER(c.c_uint8)], "caller output"),
+    ("cna_graphics_renderer_get_fallback_count_ext", c.c_uint32, [c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_graphics_renderer_get_fallback_at_ext", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_GraphicsRendererFallbackRecord)], "caller output"),
+    ("cna_graphics_renderer_fallback_get_message_size_ext", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_graphics_renderer_fallback_copy_message_ext", c.c_uint32, [c.c_uint64, c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_graphics_renderer_fallback_reason_get_name_size_ext", c.c_uint32, [c.c_uint32, c.POINTER(c.c_uint64)], "caller output"),
+    ("cna_graphics_renderer_fallback_reason_copy_name_ext", c.c_uint32, [c.c_uint32, c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
     # XNA Audio + XACT.  Every callback is the canonical
     # ``void(void*)`` observer and every submitted PCM buffer is copied.
     ("cna_sound_effect_create_pcm16_range_ext", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SoundEffectCreateInfo), c.POINTER(c.c_uint8), c.c_uint64, c.c_int32, c.c_int32, c.c_int32, c.c_int32, c.POINTER(c.c_uint64)], "copies PCM; owned SoundEffect"),

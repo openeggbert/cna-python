@@ -49,6 +49,15 @@ CNA_GameEventCallback = c.CFUNCTYPE(None, c.c_void_p)
 CNA_GraphicsResourceDisposingCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
 CNA_GraphicsDeviceEventCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
 CNA_RenderTargetContentLostCallback = c.CFUNCTYPE(None, c.c_uint64, c.c_void_p)
+
+
+class CNA_GraphicsRendererFallbackRecord(c.Structure):
+    """One renderer identity that was tried and passed over, and why."""
+
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("type", c.c_uint32), ("reason", c.c_uint32),
+    ]
 # Audio events are observer-only ``void(void*)`` callbacks.  The canonical
 # dispatcher invokes dynamic/microphone callbacks on the thread which pumps it.
 CNA_AudioEventCallback = c.CFUNCTYPE(None, c.c_void_p)

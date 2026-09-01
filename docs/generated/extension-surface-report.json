@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "EXTENSION_MODULES": 3,
+    "PUBLIC_EXTENSION_NAMES": 16,
+    "PUBLIC_CTYPES_LEAK": 0,
+    "PRIVATE_NATIVE_LEAK": 0,
+    "UNDOCUMENTED_PUBLIC": 0,
+    "XNA_NAMESPACE_CONTAMINATION": 0,
+    "EXTENSION_SURFACE_DIAGNOSTICS": 0
+  },
+  "modules": [
+    "cna",
+    "cna.extensions",
+    "cna.extensions.graphics"
+  ],
+  "signatures": {
+    "cna.extensions.graphics.Renderer": "class",
+    "cna.extensions.graphics.FallbackReason": "class",
+    "cna.extensions.graphics.FallbackRecord": "class",
+    "cna.extensions.graphics.available_renderers": "() -> 'tuple[Renderer, ...]'",
+    "cna.extensions.graphics.is_renderer_available": "(renderer: 'Renderer | int') -> 'bool'",
+    "cna.extensions.graphics.selected_renderer": "() -> 'Renderer'",
+    "cna.extensions.graphics.active_renderer": "() -> 'Renderer | None'",
+    "cna.extensions.graphics.current_renderer": "() -> 'Renderer'",
+    "cna.extensions.graphics.current_renderer_name": "() -> 'str'",
+    "cna.extensions.graphics.is_selection_latched": "() -> 'bool'",
+    "cna.extensions.graphics.parse_renderer_name": "(name: 'str') -> 'Renderer | None'",
+    "cna.extensions.graphics.prefer_renderer": "(renderer: 'Renderer | int | str') -> 'None'",
+    "cna.extensions.graphics.set_fallback_chain": "(renderers: 'Iterable[Renderer | int]') -> 'None'",
+    "cna.extensions.graphics.automatic_fallback": "() -> 'bool'",
+    "cna.extensions.graphics.set_automatic_fallback": "(enabled: 'bool') -> 'None'",
+    "cna.extensions.graphics.fallback_history": "() -> 'tuple[FallbackRecord, ...]'"
+  },
+  "ctypesLeaks": [],
+  "privateNativeLeaks": [],
+  "undocumented": [],
+  "xnaContamination": []
+}
