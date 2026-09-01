@@ -13,9 +13,12 @@ import tempfile
 from pathlib import Path
 import unittest
 
-from Microsoft.Xna.Framework import Color, Game, GraphicsDeviceManager, Vector3
+from Microsoft.Xna.Framework import (
+    Color, Game, GraphicsDeviceManager, Vector3, Vector4,
+)
 from Microsoft.Xna.Framework.Graphics import (
-    AlphaTestEffect, BasicEffect, BufferUsage, DualTextureEffect, DynamicIndexBuffer,
+    AlphaTestEffect, BasicEffect, BufferUsage, ClearOptions, DualTextureEffect,
+    DynamicIndexBuffer,
     DynamicVertexBuffer, EnvironmentMapEffect, IndexBuffer, IndexElementSize,
     OcclusionQuery, RenderTarget2D, RenderTargetCube, SetDataOptions, SkinnedEffect,
     SpriteBatch,
@@ -396,3 +399,45 @@ class OwnedGraphicsDeviceTests(unittest.TestCase):
             GraphicsDevice(None, GraphicsProfile.Reach, PresentationParameters())
         with self.assertRaises(TypeError):
             GraphicsDevice(object(), GraphicsProfile.Reach, None)
+
+
+@unittest.skipUnless(NATIVE, "no CNA native library is configured")
+class ClearOverloadTests(unittest.TestCase):
+    """Both XNA Clear overloads reach a real route.
+
+    The wrong-argument path used to report a missing capability, which said the
+    overload was unbound when it was not. It is a caller type error.
+    """
+
+    def test_both_overloads_clear_and_bad_arguments_are_a_type_error(self) -> None:
+        case = self
+        observed: dict[str, object] = {}
+
+        class Probe(Game):
+            def __init__(self) -> None:
+                super().__init__()
+                self.manager = GraphicsDeviceManager(self)
+
+            def Update(self, gameTime) -> None:
+                device = self.GraphicsDevice
+                device.Clear(Color(1, 2, 3, 255))
+                device.Clear(ClearOptions.Target, Color(4, 5, 6, 255), 1.0, 0)
+                device.Clear(ClearOptions.Target, Vector4(0.0, 0.0, 0.0, 1.0), 1.0, 0)
+                observed["cleared"] = True
+                with case.assertRaises(TypeError):
+                    device.Clear("not a colour")
+                with case.assertRaises(TypeError):
+                    device.Clear(ClearOptions.Target, "not a colour", 1.0, 0)
+                observed["rejected"] = True
+                self.Exit()
+
+            def Draw(self, gameTime) -> None:
+                self.GraphicsDevice.Clear(Color.Black)
+
+        game = Probe()
+        try:
+            game.Run()
+        finally:
+            game.Dispose()
+        self.assertTrue(observed.get("cleared"))
+        self.assertTrue(observed.get("rejected"))

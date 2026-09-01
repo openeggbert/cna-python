@@ -624,9 +624,11 @@ class GraphicsDevice:
                 self._require_handle(), int(options), abi.CNA_Color(*tuple(color)), depth, stencil),
                 "cna_graphics_device_clear_options")
             return
+        # Both XNA overloads are bound. Reaching here means the arguments match
+        # neither, which is a caller type error rather than a missing capability.
         if len(args) != 1 or not isinstance(args[0], Color):
-            raise NativeCapabilityError("GraphicsDevice.Clear", 6, None,
-                                        "only the XNA Clear(Color) overload is bound in this milestone")
+            raise TypeError(
+                "Clear expects a Color, or ClearOptions, Color or Vector4, depth and stencil")
         color = args[0]
         channels = tuple(f32(channel / 255.0) for channel in color)
         library = get_library()
