@@ -173,9 +173,12 @@ class AudioNativeTests(unittest.TestCase):
                 instance.Volume = 0.5; instance.Pitch = -0.5; instance.Pan = -0.0
                 instance.IsLooped = True
                 instance.Apply3D(AudioListener(), AudioEmitter())
+                # CNA accepts any positive listener count; the nearest listener decides.
+                instance.Apply3D([AudioListener()], AudioEmitter())
+                instance.Apply3D([AudioListener(), AudioListener()], AudioEmitter())
                 with case.assertRaises(NativeCapabilityError) as caught:
-                    instance.Apply3D([AudioListener(), AudioListener()], AudioEmitter())
-                case.assertEqual(caught.exception.result, 6)
+                    instance.Apply3D([], AudioEmitter())
+                case.assertEqual(caught.exception.result, 1)
                 instance.Play(); instance.Play(); instance.Pause(); instance.Resume(); instance.Stop(False); instance.Stop()
                 instance.Dispose(); instance.Dispose()
                 case.assertEqual((instance.Volume, instance.Pitch, instance.IsLooped), (0.5, -0.5, True))
@@ -226,10 +229,17 @@ class AudioNativeTests(unittest.TestCase):
                 with case.assertRaises(ValueError): SoundEffect.DopplerScale = -1.0
                 SoundEffect.MasterVolume, SoundEffect.DistanceScale = originals[:2]
                 SoundEffect.DopplerScale, SoundEffect.SpeedOfSound = originals[2:]
+                # The enumerated set is whatever the qualified audio backend reports on
+                # this host; the contract under test is identity, membership and defaulting,
+                # never a host-specific device count.
                 first = Microphone.All
                 case.assertIs(first, Microphone.All)
-                case.assertEqual(len(first), 0)
-                case.assertIsNone(Microphone.Default)
+                case.assertTrue(all(isinstance(value, Microphone) for value in first))
+                default = Microphone.Default
+                if len(first) == 0:
+                    case.assertIsNone(default)
+                else:
+                    case.assertTrue(default is None or default in list(first))
                 self.Exit()
         game = Probe()
         try: game.Run()

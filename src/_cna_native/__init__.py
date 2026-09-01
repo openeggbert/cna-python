@@ -10,10 +10,11 @@ from .errors import (
     NativeLibraryError,
     NativeUnavailableError,
 )
-from .loader import EXPECTED_ABI, get_library, require_available
+from .loader import EXPECTED_ABI, QUALIFIED_ABI, get_library, require_available
 
 __all__ = [
     "EXPECTED_ABI",
+    "QUALIFIED_ABI",
     "NativeAbiMismatchError",
     "NativeCapabilityError",
     "NativeError",

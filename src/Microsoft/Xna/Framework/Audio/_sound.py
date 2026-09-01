@@ -497,24 +497,39 @@ class SoundEffectInstance:
             library.cna_sound_effect_instance_stop(self._require_handle(), immediate),
             "cna_sound_effect_instance_stop")
 
+    def _apply_3d_unpositioned(self, overload: str, result: int) -> None:
+        """Reports CNA's aim-before-you-play refusal, which XNA does not impose."""
+        raise NativeCapabilityError(
+            overload, result, 3,
+            "CNA refuses Apply3D on an instance that is playing and was never positioned, "
+            "because playback fixes the choice between 3D and pan on the first play; "
+            "position the instance before playing it, or stop it, position it, and play again")
+
     def Apply3D(self, listeners: object, emitter: AudioEmitter) -> None:
         native_emitter = _native_emitter(emitter); library = get_library(); handle = self._require_handle()
         if isinstance(listeners, AudioListener):
             native_listener = _native_listener(listeners)
-            library.check(library.cna_sound_effect_instance_apply_3d(
-                handle, c.byref(native_listener), c.byref(native_emitter)),
-                "cna_sound_effect_instance_apply_3d")
+            result = library.cna_sound_effect_instance_apply_3d(
+                handle, c.byref(native_listener), c.byref(native_emitter))
+            if result == 3 and not self.IsDisposed:
+                self._apply_3d_unpositioned("SoundEffectInstance.Apply3D(listener)", result)
+            library.check(result, "cna_sound_effect_instance_apply_3d")
             return
         if not isinstance(listeners, Sequence) or isinstance(listeners, (str, bytes, bytearray)):
             raise TypeError("listeners must be AudioListener or a sequence of AudioListener")
         native_values = [_native_listener(value) for value in listeners]
+        if not native_values:
+            # CNA refuses a zero count rather than guessing; XNA reaches XACT with
+            # zero listeners and surfaces whatever it returns, which is not established.
+            raise NativeCapabilityError(
+                "SoundEffectInstance.Apply3D(listeners)", 1, 1,
+                "CNA refuses an empty listener array and XNA's zero-listener XACT outcome "
+                "is not established")
         array = (abi.CNA_AudioListener * len(native_values))(*native_values)
         result = library.cna_sound_effect_instance_apply_3d_multi_ext(
             handle, array, len(native_values), c.byref(native_emitter))
-        if result == 6:
-            raise NativeCapabilityError(
-                "SoundEffectInstance.Apply3D(listeners)", 6, 6,
-                "CNA ABI 0.7 supports exactly one listener and cannot mix multiple listeners")
+        if result == 3 and not self.IsDisposed:
+            self._apply_3d_unpositioned("SoundEffectInstance.Apply3D(listeners)", result)
         library.check(result, "cna_sound_effect_instance_apply_3d_multi_ext")
 
     def Dispose(self, *args: object) -> None:

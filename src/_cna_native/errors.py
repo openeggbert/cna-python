@@ -33,11 +33,21 @@ class NativeAbiMismatchError(NativeLibraryError):
         self.expected = expected
         self.actual = actual
         self.path = path
+        def _text(version: int) -> str:
+            return f"{version >> 16}.{(version >> 8) & 0xff}.{version & 0xff}"
+
         super().__init__(
-            f"CNA C ABI mismatch for {path}: expected 0x{expected:08x} (0.7.0), "
-            f"got 0x{actual:08x} ({actual >> 16}.{(actual >> 8) & 0xff}.{actual & 0xff})"
+            f"CNA C ABI mismatch for {path}: this build supports the "
+            f"{expected >> 16}.{(expected >> 8) & 0xff}.x generation "
+            f"(qualified at {_text(expected)}), got 0x{actual:08x} ({_text(actual)}). "
+            "CNA 0.x is experimental and an incompatible change increments the minor, "
+            "so a different minor is a different contract"
         )
 
 
 class NativeCapabilityError(NativeError):
-    """An XNA overload is structurally present but ABI 0.7 cannot execute it."""
+    """An XNA overload is structurally present but the qualified CNA runtime cannot execute it.
+
+    The message must name the measured reason on the current runtime, never a
+    historical ABI generation.
+    """

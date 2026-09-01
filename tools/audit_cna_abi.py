@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from _cna_native import abi
-from _cna_native.loader import EXPECTED_ABI, FUNCTION_MANIFEST
+from _cna_native.loader import FUNCTION_MANIFEST, QUALIFIED_ABI
 
 
 TYPES = {
@@ -93,7 +93,7 @@ def c_measurements(cna_root: Path) -> dict[str, int]:
 
 def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
     result = {
-        "VALUE:CNA_ABI_VERSION": EXPECTED_ABI,
+        "VALUE:CNA_ABI_VERSION": QUALIFIED_ABI,
         "VALUE:POINTER_WIDTH": ctypes.sizeof(ctypes.c_void_p),
         "VALUE:CNA_Bool": ctypes.sizeof(ctypes.c_uint8),
         "VALUE:CNA_Result": ctypes.sizeof(ctypes.c_uint32),

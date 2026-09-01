@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 from _cna_native.errors import NativeAbiMismatchError, NativeLibraryError, NativeUnavailableError
-from _cna_native.loader import _reset_for_tests, get_library
+from _cna_native.loader import QUALIFIED_ABI, _reset_for_tests, get_library
 
 
 @contextmanager
@@ -52,15 +52,33 @@ class LoaderTests(unittest.TestCase):
         subprocess.run(["cc", "-shared", "-fPIC", str(source), "-o", str(library)], check=True)
         return str(library)
 
-    def test_wrong_abi_is_rejected_before_symbol_import(self) -> None:
-        path = self._build_library(0x00000800)
+    def test_superseded_abi_generation_is_rejected(self) -> None:
+        """The historical 0.7.0 generation is a different contract, not a subset."""
+        path = self._build_library(0x00000700)
         with native_environment(CNA_NATIVE_LIBRARY=path):
             with self.assertRaises(NativeAbiMismatchError) as caught:
                 get_library()
-        self.assertEqual(caught.exception.actual, 0x00000800)
+        self.assertEqual(caught.exception.actual, 0x00000700)
+
+    def test_later_abi_minor_is_rejected(self) -> None:
+        """A later minor may change a contract incompatibly, so it is not assumed."""
+        later = QUALIFIED_ABI + (1 << 8)
+        path = self._build_library(later)
+        with native_environment(CNA_NATIVE_LIBRARY=path):
+            with self.assertRaises(NativeAbiMismatchError) as caught:
+                get_library()
+        self.assertEqual(caught.exception.actual, later)
+
+    def test_different_major_is_rejected(self) -> None:
+        path = self._build_library(0x00011500)
+        with native_environment(CNA_NATIVE_LIBRARY=path):
+            with self.assertRaises(NativeAbiMismatchError) as caught:
+                get_library()
+        self.assertEqual(caught.exception.actual, 0x00011500)
 
     def test_missing_symbol_names_exact_import(self) -> None:
-        path = self._build_library(0x00000700)
+        """A patch inside the supported minor is accepted, then audited symbol by symbol."""
+        path = self._build_library(QUALIFIED_ABI + 3)
         with native_environment(CNA_NATIVE_LIBRARY=path):
             with self.assertRaisesRegex(NativeLibraryError, "cna_error_get_last_info"):
                 get_library()

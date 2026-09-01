@@ -1,4 +1,17 @@
-"""Deterministic dynamic loader for the exact CNA 0.7.0 C ABI."""
+"""Deterministic dynamic loader for the qualified CNA C ABI generation.
+
+CNA's own contract (`docs/c-api/ABI_VERSIONING.md`) states that ABI `0.x` is
+experimental, that a consumer "must reject a different major and may require a
+minimum minor", and that within `0.x` **an incompatible change requires a
+minor-version increment**.  A minor therefore names one compatibility
+generation, and a patch inside it cannot change a contract.
+
+CNA-Python supports exactly one generation: the one it qualifies against.  It is
+not multiplexed across generations, because a single ctypes manifest cannot be
+truthful for two `0.x` minors that are permitted to differ incompatibly, and
+because no artifact of the historical `0.7.0` generation still exists to test
+against.  Accepting a different minor would be an unverified claim.
+"""
 
 from __future__ import annotations
 
@@ -12,7 +25,33 @@ from . import abi
 from .errors import NativeAbiMismatchError, NativeError, NativeLibraryError, NativeUnavailableError
 from .media_manifest import MEDIA_FUNCTION_MANIFEST
 
-EXPECTED_ABI = 0x00000700
+SUPPORTED_ABI_MAJOR = 0
+SUPPORTED_ABI_MINOR = 21
+
+#: The exact encoded ABI this binding is qualified against.  Patch releases
+#: inside :data:`SUPPORTED_ABI_MINOR` are accepted; a different minor is not.
+QUALIFIED_ABI = (
+    (SUPPORTED_ABI_MAJOR & 0xFFFF) << 16 | (SUPPORTED_ABI_MINOR & 0xFF) << 8 | 0
+)
+
+#: Retained for callers that import the historical name.
+EXPECTED_ABI = QUALIFIED_ABI
+
+
+def decode_abi(version: int) -> tuple[int, int, int]:
+    """Splits an encoded CNA ABI version into ``(major, minor, patch)``."""
+    return (version >> 16) & 0xFFFF, (version >> 8) & 0xFF, version & 0xFF
+
+
+def format_abi(version: int) -> str:
+    major, minor, patch = decode_abi(version)
+    return f"{major}.{minor}.{patch}"
+
+
+def abi_is_supported(version: int) -> bool:
+    """Reports whether an encoded ABI version is the supported generation."""
+    major, minor, _patch = decode_abi(version)
+    return major == SUPPORTED_ABI_MAJOR and minor == SUPPORTED_ABI_MINOR
 
 _NAMES = {
     "win32": ("cna_c_api.dll",),
@@ -66,7 +105,7 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_game_set_inactive_sleep_time_ticks", c.c_uint32, [c.c_uint64, c.c_int64], "borrowed game"),
     ("cna_game_destroy", c.c_uint32, [c.c_uint64], "consumes game on release"),
     ("cna_framework_dispatcher_update", c.c_uint32, [c.c_uint64], "borrowed game"),
-    # XNA Audio + XACT (ABI 0.7).  Every callback is the canonical
+    # XNA Audio + XACT.  Every callback is the canonical
     # ``void(void*)`` observer and every submitted PCM buffer is copied.
     ("cna_sound_effect_create_pcm16_range_ext", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SoundEffectCreateInfo), c.POINTER(c.c_uint8), c.c_uint64, c.c_int32, c.c_int32, c.c_int32, c.c_int32, c.POINTER(c.c_uint64)], "copies PCM; owned SoundEffect"),
     ("cna_sound_effect_create_from_encoded_ext", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8), c.c_uint64, c.POINTER(c.c_uint64)], "copies encoded bytes; owned SoundEffect"),
@@ -97,7 +136,7 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_sound_effect_instance_set_pan", c.c_uint32, [c.c_uint64, c.c_float], "borrowed instance"),
     ("cna_sound_effect_instance_set_is_looped", c.c_uint32, [c.c_uint64, c.c_uint8], "borrowed instance"),
     ("cna_sound_effect_instance_apply_3d", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_AudioListener), c.POINTER(abi.CNA_AudioEmitter)], "copies listener/emitter"),
-    ("cna_sound_effect_instance_apply_3d_multi_ext", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_AudioListener), c.c_uint64, c.POINTER(abi.CNA_AudioEmitter)], "copies listeners/emitter; one listener only in ABI 0.7"),
+    ("cna_sound_effect_instance_apply_3d_multi_ext", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_AudioListener), c.c_uint64, c.POINTER(abi.CNA_AudioEmitter)], "copies listeners/emitter; any positive listener count since ABI 0.9"),
     ("cna_dynamic_sound_effect_instance_create", c.c_uint32, [c.c_uint64, c.c_int32, c.c_uint32, c.POINTER(c.c_uint64)], "owned dynamic instance child"),
     ("cna_dynamic_sound_effect_instance_get_pending_buffer_count", c.c_uint32, [c.c_uint64, c.POINTER(c.c_int32)], "caller output"),
     ("cna_dynamic_sound_effect_instance_submit_buffer", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8), c.c_uint64, c.c_int32, c.c_int32], "copies PCM buffer"),
@@ -248,7 +287,7 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_texturecube_get_info", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_TextureCubeInfo)], "caller output"),
     ("cna_texturecube_set_data", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_TextureCubeTransfer), c.POINTER(abi.CNA_Color), c.c_uint64], "copies Color texels"),
     ("cna_texturecube_get_data", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_TextureCubeTransfer), c.POINTER(abi.CNA_Color), c.c_uint64, c.POINTER(c.c_uint64)], "caller output"),
-    # ABI 0.7 Effect ownership/execution routes.  Reflection views are added
+    # Effect ownership/execution routes.  Reflection views are added
     # only when consumed by the Python projection; stock effects use the
     # canonical owned Effect handle and generic apply route.
     ("cna_effect_create_empty", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)], "owned Effect"),
@@ -600,7 +639,8 @@ def _resolve() -> Path:
         if candidate.is_file():
             return candidate
     raise NativeUnavailableError(
-        "CNA native library is not configured; set CNA_NATIVE_LIBRARY to the absolute ABI-0.7.0 library file "
+        "CNA native library is not configured; set CNA_NATIVE_LIBRARY to the absolute "
+        f"CNA {SUPPORTED_ABI_MAJOR}.{SUPPORTED_ABI_MINOR}.x C ABI library file "
         "or CNA_NATIVE_DIR to its absolute directory"
     )
 
@@ -620,13 +660,16 @@ class NativeLibrary:
         version_function.restype, version_function.argtypes = version_restype, version_argtypes
         setattr(self, version_symbol, version_function)
         actual = int(version_function())
-        if actual != EXPECTED_ABI:
-            raise NativeAbiMismatchError(EXPECTED_ABI, actual, str(path))
+        if not abi_is_supported(actual):
+            raise NativeAbiMismatchError(QUALIFIED_ABI, actual, str(path))
+        self.abi_version = actual
         for symbol, restype, argtypes, _ownership in FUNCTION_MANIFEST[1:]:
             try:
                 function = getattr(self._cdll, symbol)
             except AttributeError as error:
-                raise NativeLibraryError(f"CNA ABI 0.7.0 library {path} is missing required symbol {symbol}") from error
+                raise NativeLibraryError(
+                    f"CNA ABI {format_abi(actual)} library {path} is missing required symbol {symbol}"
+                ) from error
             function.restype = restype
             function.argtypes = argtypes
             setattr(self, symbol, function)
