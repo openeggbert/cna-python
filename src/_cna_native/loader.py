@@ -554,6 +554,7 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ("cna_sprite_font_destroy", c.c_uint32, [c.c_uint64], "consumes sprite font"),
     ("cna_sprite_batch_create", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)], "owned sprite batch"),
     ("cna_sprite_batch_begin", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SpriteBatchBeginInfo)], "borrowed sprite batch"),
+    ("cna_sprite_batch_submit_many", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SpriteCommand), c.c_uint64], "copies destination-rectangle commands"),
     ("cna_sprite_batch_submit_scaled_many", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_SpriteScaledCommand), c.c_uint64], "copies commands"),
     ("cna_sprite_batch_end", c.c_uint32, [c.c_uint64], "borrowed sprite batch"),
     ("cna_sprite_batch_destroy", c.c_uint32, [c.c_uint64], "consumes sprite batch"),

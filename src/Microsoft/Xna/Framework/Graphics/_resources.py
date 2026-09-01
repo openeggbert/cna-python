@@ -628,27 +628,67 @@ class SpriteBatch(GraphicsResource):
         texture, position = args[0], args[1]
         if not isinstance(texture, Texture2D):
             raise TypeError("texture must be Texture2D")
+        destination = None
         if isinstance(position, Rectangle):
-            raise NativeCapabilityError("SpriteBatch.Draw(Rectangle)", 6, None,
-                                        "destination-rectangle overloads are not bound in this Python slice")
-        if not isinstance(position, Vector2):
-            raise TypeError("position must be Vector2")
-        if len(args) == 3:
-            source, color, rotation, origin, scale, effects, depth = None, args[2], 0.0, Vector2.Zero, 1.0, SpriteEffects.None_, 0.0
-        elif len(args) == 4:
-            source, color, rotation, origin, scale, effects, depth = args[2], args[3], 0.0, Vector2.Zero, 1.0, SpriteEffects.None_, 0.0
-        elif len(args) == 9:
-            source, color, rotation, origin, scale, effects, depth = args[2:]
+            # The destination-rectangle overloads take no scale argument, which is
+            # what separates their arities from the position ones.
+            destination, position = position, None
+            if len(args) == 3:
+                source, color, rotation, origin, effects, depth = (
+                    None, args[2], 0.0, Vector2.Zero, SpriteEffects.None_, 0.0)
+            elif len(args) == 4:
+                source, color, rotation, origin, effects, depth = (
+                    args[2], args[3], 0.0, Vector2.Zero, SpriteEffects.None_, 0.0)
+            elif len(args) == 8:
+                source, color, rotation, origin, effects, depth = args[2:]
+            else:
+                raise TypeError("no matching XNA SpriteBatch.Draw overload")
+            if source is not None and not isinstance(source, Rectangle):
+                raise TypeError("sourceRectangle must be Rectangle or None")
         else:
-            raise TypeError("no matching XNA SpriteBatch.Draw overload")
-        if source is not None and not isinstance(source, Rectangle):
-            raise TypeError("sourceRectangle must be Rectangle or None")
+            if not isinstance(position, Vector2):
+                raise TypeError("position must be Vector2")
+            if len(args) == 3:
+                source, color, rotation, origin, scale, effects, depth = None, args[2], 0.0, Vector2.Zero, 1.0, SpriteEffects.None_, 0.0
+            elif len(args) == 4:
+                source, color, rotation, origin, scale, effects, depth = args[2], args[3], 0.0, Vector2.Zero, 1.0, SpriteEffects.None_, 0.0
+            elif len(args) == 9:
+                source, color, rotation, origin, scale, effects, depth = args[2:]
+            else:
+                raise TypeError("no matching XNA SpriteBatch.Draw overload")
+            if source is not None and not isinstance(source, Rectangle):
+                raise TypeError("sourceRectangle must be Rectangle or None")
+            if isinstance(scale, (int, float)):
+                scale = Vector2(scale)
+            if not isinstance(scale, Vector2):
+                raise TypeError("scale must be Single or Vector2")
         if not isinstance(color, Color) or not isinstance(origin, Vector2):
             raise TypeError("color and origin have the wrong XNA value type")
-        if isinstance(scale, (int, float)):
-            scale = Vector2(scale)
-        if not isinstance(scale, Vector2):
-            raise TypeError("scale must be Single or Vector2")
+        library = get_library()
+        if destination is not None:
+            # A destination rectangle is its own native command rather than a
+            # derived scale: with a position the origin is measured in source
+            # pixels and the scale applies after that offset, so the two shapes
+            # are not interchangeable and converting between them would repeat
+            # arithmetic the runtime already does.
+            if not all(math.isfinite(value) for value in (float(rotation), *origin, float(depth))):
+                raise ValueError("SpriteBatch transform values must be finite")
+            command = abi.CNA_SpriteCommand()
+            command.struct_size, command.struct_version = c.sizeof(command), 1
+            command.texture = texture._require_handle()
+            command.destination = abi.CNA_Rectangle(*tuple(destination))
+            # Unlike the position command, this one has no "zero size means the
+            # whole texture" rule, so an absent source rectangle is spelled out.
+            command.source = abi.CNA_Rectangle(*(
+                tuple(source) if source is not None
+                else (0, 0, texture.Width, texture.Height)))
+            command.color = abi.CNA_Color(*tuple(color))
+            command.rotation, command.origin = rotation, abi.CNA_Vector2(*origin)
+            command.effects, command.layer_depth = int(SpriteEffects(effects)), depth
+            library.check(library.cna_sprite_batch_submit_many(
+                self._require_handle(), c.byref(command), 1),
+                "cna_sprite_batch_submit_many")
+            return
         values = (*position, float(rotation), *origin, *scale, float(depth))
         if not all(math.isfinite(value) for value in values):
             raise ValueError("SpriteBatch transform values must be finite")

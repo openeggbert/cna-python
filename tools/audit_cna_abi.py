@@ -52,7 +52,7 @@ TYPES = {
         abi.CNA_EffectParameterCreateInfo, abi.CNA_EffectParameterInfo,
         abi.CNA_EffectAnnotationCreateInfo, abi.CNA_EffectAnnotationInfo,
         abi.CNA_SpriteBatchBeginInfo,
-        abi.CNA_SpriteScaledCommand, abi.CNA_KeyboardState, abi.CNA_MouseState,
+        abi.CNA_SpriteCommand, abi.CNA_SpriteScaledCommand, abi.CNA_KeyboardState, abi.CNA_MouseState,
         abi.CNA_GamePadAnalogState, abi.CNA_GamePadState,
         abi.CNA_GamePadCapabilities,
         abi.CNA_TouchLocation, abi.CNA_TouchCapabilities, abi.CNA_TouchState,

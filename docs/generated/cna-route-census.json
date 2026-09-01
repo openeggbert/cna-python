@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 772,
+    "BOUND_ROUTES": 773,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,7 +12,7 @@
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 108,
-    "STATUS_BOUND": 772,
+    "STATUS_BOUND": 773,
     "STATUS_ACTIONABLE_LOCAL": 0,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
@@ -20,7 +20,7 @@
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 3281,
+    "STATUS_DELIBERATE_NON_BINDING": 3280,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -32178,10 +32178,10 @@
       "route": "cna_sprite_batch_submit_many",
       "header": "graphics.h",
       "purpose": "XNA_BACKING",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
+      "status": "BOUND",
+      "reason": "imported: the selected 257-type XNA projection reaches this route",
       "rule": "xna-backing-families",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_sprite_batch_submit_scaled_many",

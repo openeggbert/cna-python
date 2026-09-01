@@ -1,4 +1,8 @@
-"""Reviewed ctypes layouts for the bound CNA ABI-0.7 runtime/2D slice."""
+"""Reviewed ctypes layouts for the bound CNA runtime/2D slice.
+
+Every structure here is measured against the canonical C declaration by
+``tools/audit_cna_abi.py``: size, alignment and every used field offset.
+"""
 
 from __future__ import annotations
 
@@ -58,6 +62,8 @@ class CNA_GraphicsRendererFallbackRecord(c.Structure):
         ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
         ("type", c.c_uint32), ("reason", c.c_uint32),
     ]
+
+
 # Audio events are observer-only ``void(void*)`` callbacks.  The canonical
 # dispatcher invokes dynamic/microphone callbacks on the thread which pumps it.
 CNA_AudioEventCallback = c.CFUNCTYPE(None, c.c_void_p)
@@ -658,6 +664,22 @@ class CNA_SpriteBatchBeginInfo(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
         ("sort_mode", c.c_uint32), ("reserved", c.c_uint32),
+    ]
+
+
+class CNA_SpriteCommand(c.Structure):
+    """One textured quad placed by a destination rectangle.
+
+    Deliberately distinct from :class:`CNA_SpriteScaledCommand`: with a position
+    the origin is measured in source-texture pixels and the scale applies after
+    that offset, which a caller cannot reproduce by computing a rectangle.
+    """
+
+    _fields_ = [
+        ("struct_size", c.c_uint32), ("struct_version", c.c_uint32),
+        ("texture", c.c_uint64), ("destination", CNA_Rectangle), ("source", CNA_Rectangle),
+        ("color", CNA_Color), ("rotation", c.c_float), ("origin", CNA_Vector2),
+        ("effects", c.c_uint32), ("layer_depth", c.c_float),
     ]
 
 
