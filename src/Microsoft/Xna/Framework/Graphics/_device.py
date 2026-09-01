@@ -273,10 +273,17 @@ class Viewport:
 
 
 class GraphicsDevice:
-    """Borrowed game-owned device, valid only during a native lifecycle callback."""
+    """A device this binding either borrows from a Game or owns outright.
+
+    A Game's device is borrowed and its handle is valid only inside a native
+    lifecycle callback; it is not the caller's to destroy. A device built through
+    XNA's public constructor is owned, keeps its handle for its whole lifetime,
+    and is released by its own Dispose. Resources on an owned device belong to
+    that device rather than to a game, and are released with it.
+    """
 
     __slots__ = (
-        "_game", "_handle", "_disposed", "_adapter_cache", "_blend_state",
+        "_game", "_handle", "_owned", "_disposed", "_adapter_cache", "_blend_state",
         "_depth_stencil_state", "_rasterizer_state", "_sampler_states",
         "_vertex_sampler_states", "_textures", "_vertex_textures",
         "_device_event_callbacks", "_device_event_registrations", "_vertex_bindings",
@@ -290,17 +297,16 @@ class GraphicsDevice:
     DeviceResetting = Event()
 
     def __init__(self, *args: object) -> None:
+        owned_arguments = None
         if len(args) == 1:
             game = args[0]
         elif len(args) == 3:
-            raise NativeCapabilityError(
-                "GraphicsDevice.__init__", 6, None,
-                "CNA ABI 0.7 exposes only the game-owned GraphicsDevice",
-            )
+            game, owned_arguments = None, args
         else:
             raise TypeError("GraphicsDevice expects adapter, graphicsProfile, presentationParameters")
         self._game = game
         self._handle = 0
+        self._owned = owned_arguments is not None
         self._disposed = False
         self._adapter_cache = {}
         self._blend_state = self._depth_stencil_state = self._rasterizer_state = None
@@ -314,6 +320,26 @@ class GraphicsDevice:
         self._vertex_bindings = []
         self._index_buffer = None
         self._render_target_bindings = []
+        if owned_arguments is not None:
+            self._create_owned(*owned_arguments)
+
+    def _create_owned(self, adapter: object, graphicsProfile: object,
+                      presentationParameters: object) -> None:
+        from ._display import GraphicsAdapter, PresentationParameters
+        if not isinstance(adapter, GraphicsAdapter):
+            raise TypeError("adapter must be a GraphicsAdapter")
+        if not isinstance(presentationParameters, PresentationParameters):
+            raise TypeError("presentationParameters must be a PresentationParameters")
+        profile = GraphicsProfile(graphicsProfile)
+        index = adapter._index
+        parameters = presentationParameters._native_value()
+        output = c.c_uint64()
+        library = get_library()
+        library.check(library.cna_graphics_device_create(
+            index, int(profile), c.byref(parameters), c.byref(output)),
+            "cna_graphics_device_create")
+        self._handle = int(output.value)
+        self._subscribe_device_events()
 
     def _enter_native_callback(self, handle: int) -> None:
         self._handle = handle
@@ -904,8 +930,22 @@ class GraphicsDevice:
     def Dispose(self, *args: object) -> None:
         if len(args) > 1 or (args and type(args[0]) is not bool):
             raise TypeError("Dispose expects no arguments or a bool disposing value")
-        raise NativeCapabilityError("GraphicsDevice.Dispose", 6, None,
-                                    "CNA ABI 0.7 exposes only the game-owned GraphicsDevice")
+        if not self._owned:
+            # A Game's device is borrowed for the duration of a callback and is
+            # released with its Game; the runtime refuses to destroy it here too.
+            raise NativeCapabilityError(
+                "GraphicsDevice.Dispose", 6, None,
+                "a Game's GraphicsDevice is borrowed and is released with its Game; "
+                "only a device built through the public constructor is the caller's to dispose")
+        if self._disposed:
+            return
+        handle, self._handle = self._handle, 0
+        self._disposed = True
+        if handle:
+            library = get_library()
+            self._release_device_events(emit_disposing=False)
+            library.check(library.cna_graphics_device_destroy(handle),
+                          "cna_graphics_device_destroy")
 
     def __enter__(self) -> "GraphicsDevice":
         self._require_handle()

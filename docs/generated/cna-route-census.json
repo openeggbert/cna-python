@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 752,
+    "BOUND_ROUTES": 756,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,8 +12,8 @@
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 108,
-    "STATUS_BOUND": 752,
-    "STATUS_ACTIONABLE_LOCAL": 20,
+    "STATUS_BOUND": 756,
+    "STATUS_ACTIONABLE_LOCAL": 16,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -15780,19 +15780,19 @@
       "route": "cna_graphics_device_create",
       "header": "graphics_device.h",
       "purpose": "XNA_BACKING",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "XNA's GraphicsDevice constructor and Dispose are public; CNA now has an owned device rather than only the Game's borrowed one.",
+      "status": "BOUND",
+      "reason": "imported: the selected profile reaches this route",
       "rule": "owned-graphics-device",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_device_destroy",
       "header": "graphics_device.h",
       "purpose": "XNA_BACKING",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "XNA's GraphicsDevice constructor and Dispose are public; CNA now has an owned device rather than only the Game's borrowed one.",
+      "status": "BOUND",
+      "reason": "imported: the selected profile reaches this route",
       "rule": "owned-graphics-device",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_device_dispose",
@@ -29496,19 +29496,19 @@
       "route": "cna_render_target_subscribe_content_lost",
       "header": "render_target.h",
       "purpose": "XNA_BACKING",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "RenderTarget2D/Cube ContentLost is XNA public surface and CNA now has the subscription; delivery only happens on renderers that can lose a device.",
+      "status": "BOUND",
+      "reason": "imported: the selected profile reaches this route",
       "rule": "render-target-content-lost",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_unsubscribe_content_lost",
       "header": "render_target.h",
       "purpose": "XNA_BACKING",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "RenderTarget2D/Cube ContentLost is XNA public surface and CNA now has the subscription; delivery only happens on renderers that can lose a device.",
+      "status": "BOUND",
+      "reason": "imported: the selected profile reaches this route",
       "rule": "render-target-content-lost",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_usage_preserves_contents",

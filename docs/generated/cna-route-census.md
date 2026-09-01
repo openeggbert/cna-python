@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=752
+BOUND_ROUTES=756
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -15,8 +15,8 @@ PURPOSE_MANAGED_BY_DESIGN=566
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=108
-STATUS_BOUND=752
-STATUS_ACTIONABLE_LOCAL=20
+STATUS_BOUND=756
+STATUS_ACTIONABLE_LOCAL=16
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
@@ -32,7 +32,7 @@ STATUS_UNREVIEWED=0
 | Purpose | Status | Routes |
 |---|---|---:|
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 1770 |
-| XNA_BACKING | BOUND | 730 |
+| XNA_BACKING | BOUND | 734 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 549 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 439 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
@@ -40,7 +40,6 @@ STATUS_UNREVIEWED=0
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 16 |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 |
-| XNA_BACKING | ACTIONABLE_LOCAL | 4 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 |
 
@@ -66,10 +65,8 @@ STATUS_UNREVIEWED=0
 | MANAGED_BY_DESIGN | BOUND | 17 | imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 16 | Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it. |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 12 | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
+| XNA_BACKING | BOUND | 5 | imported: the selected profile reaches this route |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: runtime capability evidence names the backend that produced it |
 | XNA_BACKING | BOUND | 3 | imported: GamerServicesComponent is the one selected member of this family |
-| XNA_BACKING | ACTIONABLE_LOCAL | 2 | XNA's GraphicsDevice constructor and Dispose are public; CNA now has an owned device rather than only the Game's borrowed one. |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
-| XNA_BACKING | ACTIONABLE_LOCAL | 2 | RenderTarget2D/Cube ContentLost is XNA public surface and CNA now has the subscription; delivery only happens on renderers that can lose a device. |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 | A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API. |
-| XNA_BACKING | BOUND | 1 | imported: the selected profile reaches this route |

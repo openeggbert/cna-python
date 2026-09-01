@@ -17,10 +17,12 @@ from Microsoft.Xna.Framework import Color, Game, GraphicsDeviceManager, Vector3
 from Microsoft.Xna.Framework.Graphics import (
     AlphaTestEffect, BasicEffect, BufferUsage, DualTextureEffect, DynamicIndexBuffer,
     DynamicVertexBuffer, EnvironmentMapEffect, IndexBuffer, IndexElementSize,
-    OcclusionQuery, RenderTarget2D, SetDataOptions, SkinnedEffect, SpriteBatch,
+    OcclusionQuery, RenderTarget2D, RenderTargetCube, SetDataOptions, SkinnedEffect,
+    SpriteBatch,
+    GraphicsDevice, GraphicsProfile, PresentationParameters,
     SurfaceFormat, Texture2D, TextureCube, VertexBuffer, VertexPositionColor,
 )
-from _cna_native.errors import NativeUnavailableError
+from _cna_native.errors import NativeCapabilityError, NativeUnavailableError
 from _cna_native.runtime_identity import runtime_identity
 
 
@@ -286,3 +288,111 @@ class VideoDecodeTests(unittest.TestCase):
         self.assertEqual(observed.get("state"), MediaState.Playing)
         self.assertEqual(observed.get("size"), (320, 180))
         self.assertTrue(observed.get("expired"), "an expired frame borrow was not refused")
+
+
+@unittest.skipUnless(NATIVE, "no CNA native library is configured")
+class RenderTargetContentLostTests(unittest.TestCase):
+    """ContentLost is a real native subscription rather than an inert event.
+
+    CNA raises it only when a renderer reports that it lost and recreated its
+    device. The renderer families that can do that are not the ones available
+    here, so this asserts the subscription contract and asserts that nothing is
+    delivered rather than pretending a loss occurred.
+    """
+
+    def test_subscription_is_native_and_released_before_the_handle(self) -> None:
+        case = self
+        raised: list[object] = []
+
+        class Probe(Game):
+            def __init__(self) -> None:
+                super().__init__()
+                self.manager = GraphicsDeviceManager(self)
+
+            def Update(self, gameTime) -> None:
+                device = self.GraphicsDevice
+                target = RenderTarget2D(device, 8, 8)
+                target.ContentLost += lambda sender, args: raised.append(sender)
+                case.assertNotEqual(target._content_lost_registration, 0,
+                                    "no native ContentLost registration was created")
+                case.assertFalse(target.IsContentLost)
+                target.Dispose()
+                case.assertEqual(target._content_lost_registration, 0,
+                                 "the registration outlived the render target")
+                # A dropped, never-disposed target must release its registration
+                # through the owning generation rather than strand it.
+                RenderTarget2D(device, 8, 8).ContentLost += lambda sender, args: raised.append(sender)
+                self.Exit()
+
+            def Draw(self, gameTime) -> None:
+                self.GraphicsDevice.Clear(Color.Black)
+
+        game = Probe()
+        try:
+            game.Run()
+        finally:
+            game.Dispose()
+        self.assertEqual(raised, [], "a ContentLost event was delivered without a device loss")
+
+
+@unittest.skipUnless(NATIVE, "no CNA native library is configured")
+class OwnedGraphicsDeviceTests(unittest.TestCase):
+    """XNA's public GraphicsDevice constructor and Dispose now reach a real device.
+
+    Every other route hands out the Game's device, borrowed for the duration of a
+    callback and released with its Game. The current generation can also create an
+    independent device the caller owns, so the constructor is a real device rather
+    than a refusal, and Dispose destroys the one kind it may.
+    """
+
+    def test_owned_device_is_independent_and_disposable(self) -> None:
+        case = self
+        observed: dict[str, object] = {}
+
+        class Probe(Game):
+            def __init__(self) -> None:
+                super().__init__()
+                self.manager = GraphicsDeviceManager(self)
+
+            def Update(self, gameTime) -> None:
+                borrowed = self.GraphicsDevice
+                parameters = PresentationParameters()
+                parameters.BackBufferWidth = 64
+                parameters.BackBufferHeight = 64
+                parameters.IsFullScreen = False
+                owned = GraphicsDevice(borrowed.Adapter, GraphicsProfile.Reach, parameters)
+                case.assertIsNot(owned, borrowed)
+
+                # A resource belongs to the device that made it, not to the game.
+                texture = Texture2D(owned, 4, 4)
+                case.assertEqual((texture.Width, texture.Height), (4, 4))
+                texture.Dispose()
+
+                owned.Dispose()
+                owned.Dispose()  # idempotent
+                with case.assertRaises(RuntimeError):
+                    _ = owned.Viewport
+                observed["owned"] = True
+
+                # The Game's device is borrowed and stays the Game's to release.
+                with case.assertRaises(NativeCapabilityError):
+                    borrowed.Dispose()
+                observed["borrowed_refused"] = True
+                self.Exit()
+
+            def Draw(self, gameTime) -> None:
+                self.GraphicsDevice.Clear(Color.Black)
+
+        game = Probe()
+        try:
+            game.Run()
+        finally:
+            game.Dispose()
+        self.assertTrue(observed.get("owned"))
+        self.assertTrue(observed.get("borrowed_refused"))
+
+    def test_constructor_still_validates_its_arguments(self) -> None:
+        with self.assertRaises(TypeError):
+            GraphicsDevice(None, GraphicsProfile.Reach, PresentationParameters())
+        with self.assertRaises(TypeError):
+            GraphicsDevice(object(), GraphicsProfile.Reach, None)

@@ -17,12 +17,53 @@ from ._resources import Texture, Texture2D, _release
 from ._texture_volume import TextureCube
 
 
-class RenderTarget2D(Texture2D):
+class _ContentLostSubscription:
+    """Native ContentLost delivery shared by both render-target kinds.
+
+    CNA raises this only when a renderer reports that it lost and recreated its
+    device, which destroys the contents of default-pool resources.  Only renderer
+    families whose API can lose a device raise it at all; on the rest the
+    subscription is valid and simply silent, and no event is synthesized to make
+    it look otherwise.
+    """
+
+    def _subscribe_content_lost(self) -> None:
+        target = self
+
+        @abi.CNA_RenderTargetContentLostCallback
+        def callback(render_target: int, context: object) -> None:
+            try:
+                target.ContentLost(target, None)
+            except BaseException as error:
+                target._dispose_error = error
+
+        registration = c.c_uint64()
+        library = get_library()
+        library.check(
+            library.cna_render_target_subscribe_content_lost(
+                self._require_handle(), callback, None, c.byref(registration)),
+            "cna_render_target_subscribe_content_lost")
+        self._content_lost_registration = int(registration.value)
+        # CNA keeps the trampoline until unsubscription or destruction, and the
+        # owning handle outlives this facade.
+        self._native.retain_for_registration(callback)
+
+    def _release_content_lost(self) -> None:
+        registration, self._content_lost_registration = self._content_lost_registration, 0
+        if not registration:
+            return
+        library = get_library()
+        library.check(library.cna_render_target_unsubscribe_content_lost(registration),
+                      "cna_render_target_unsubscribe_content_lost")
+
+
+class RenderTarget2D(Texture2D, _ContentLostSubscription):
     __slots__ = ("_depth_format", "_multi_sample_count", "_usage",
-                 "_is_content_lost", "_renderer_available")
+                 "_is_content_lost", "_renderer_available", "_content_lost_registration")
     ContentLost = Event()
 
     def _before_dispose(self) -> None:
+        self._release_content_lost()
         if self.GraphicsDevice is not None:
             self.GraphicsDevice._ensure_render_target_unbound_for_dispose(self)
         super()._before_dispose()
@@ -57,6 +98,8 @@ class RenderTarget2D(Texture2D):
             graphicsDevice._require_handle(), c.byref(info), c.byref(output)),
             "cna_render_target2d_create")
         self._init_resource(graphicsDevice, int(output.value), _release("cna_render_target_destroy"))
+        self._content_lost_registration = 0
+        self._subscribe_content_lost()
         self._read_render_target_info()
 
     def _read_render_target_info(self) -> None:
@@ -87,10 +130,14 @@ class RenderTarget2D(Texture2D):
         self._require_handle(); return self._depth_format
 
 
-class RenderTargetCube(TextureCube):
+class RenderTargetCube(TextureCube, _ContentLostSubscription):
     __slots__ = ("_depth_format", "_multi_sample_count", "_usage",
-                 "_is_content_lost", "_renderer_available")
+                 "_is_content_lost", "_renderer_available", "_content_lost_registration")
     ContentLost = Event()
+
+    def _before_dispose(self) -> None:
+        self._release_content_lost()
+        super()._before_dispose()
 
     def __init__(self, *args: object) -> None:
         if len(args) == 5:
@@ -125,6 +172,8 @@ class RenderTargetCube(TextureCube):
             graphicsDevice._require_handle(), c.byref(info), c.byref(output)),
             "cna_render_target_cube_create")
         self._init_resource(graphicsDevice, int(output.value), _release("cna_render_target_destroy"))
+        self._content_lost_registration = 0
+        self._subscribe_content_lost()
         self._read_render_target_info()
 
     def _before_dispose(self) -> None:
