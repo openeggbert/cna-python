@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Crash-isolated Audio/XACT ownership and callback stress for ABI 0.7."""
+"""Crash-isolated Audio/XACT ownership and callback stress."""
 
 from __future__ import annotations
 
@@ -91,8 +91,21 @@ def main() -> int:
                                           "cna_audio_unsubscribe_ext")
                         elif output.value != 0:
                             raise RuntimeError("failed microphone registration leaked a handle")
-                    if Microphone.All or Microphone.Default is not None:
-                        raise RuntimeError("NULL audio fabricated a microphone")
+                    # The enumerated set is whatever the audio backend reports. What
+                    # must hold on any backend is that the set is stable, that every
+                    # entry is a Microphone, and that a default is one of them rather
+                    # than an invented device.
+                    devices = Microphone.All
+                    if devices is not Microphone.All:
+                        raise RuntimeError("Microphone.All is not a stable collection")
+                    if not all(isinstance(value, Microphone) for value in devices):
+                        raise RuntimeError("Microphone.All contains a non-Microphone value")
+                    default = Microphone.Default
+                    if default is not None and default not in list(devices):
+                        raise RuntimeError("Microphone.Default is not in Microphone.All")
+                    if not devices and default is not None:
+                        raise RuntimeError("a default microphone was reported with no devices")
+                    counts["MICROPHONE_DEVICES"] = len(devices)
                     for _ in range(args.cycles):
                         try: AudioEngine(str(invalid_xgs))
                         except NativeError: pass

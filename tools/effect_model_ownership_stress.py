@@ -26,8 +26,9 @@ def main()->int:
     if args.cycles<20:parser.error("--cycles must be at least 20")
     counts={name:0 for name in ("EFFECT_BASE","EFFECT_CLONE","EFFECT_PARAMETER",
         "EFFECT_PARENT_CHILD","STOCK_EFFECT","MODEL_DIRECT_GRAPH","MODEL_XNB",
-        "COMPRESSED_MODEL","MODEL_DRAW","MODEL_UNLOAD_RELOAD","TEXTURE3D_FAILED_CREATE",
-        "TEXTURECUBE_FAILED_TRANSFER")}
+        "COMPRESSED_MODEL","MODEL_DRAW","MODEL_UNLOAD_RELOAD",
+        "TEXTURE3D_REFUSED_CREATE","TEXTURE3D_ROUND_TRIP",
+        "TEXTURECUBE_REFUSED_TRANSFER","TEXTURECUBE_ROUND_TRIP")}
     assets={"model":_model_xnb(),"compressed/model":_compressed_model_xnb()}
 
     class StressGame(Game):
@@ -85,22 +86,37 @@ def main()->int:
                 except RuntimeError:pass
                 else:raise RuntimeError("retained ModelMesh survived Unload")
                 self.Content.Unload();counts["MODEL_UNLOAD_RELOAD"]+=1
+            # A renderer that rasterizes creates volume textures and a backend that
+            # does not refuses them.  Both are contract-conformant, so the stress
+            # exercises whichever path this artifact takes and requires only that
+            # it leaks nothing: a refusal must publish no handle, and a success
+            # must round-trip and dispose.
+            values=[Color.Red,Color.Green,Color.Blue,Color.White]
             for _ in range(args.cycles):
-                try:Texture3D(self.GraphicsDevice,2,2,2,False,SurfaceFormat.Color)
+                try:volume=Texture3D(self.GraphicsDevice,2,2,2,False,SurfaceFormat.Color)
                 except NativeError as error:
                     if error.result!=6:raise
-                else:raise RuntimeError("qualified HEADLESS unexpectedly created Texture3D")
-                counts["TEXTURE3D_FAILED_CREATE"]+=1
-            values=[Color.Red,Color.Green,Color.Blue,Color.White]
+                    counts["TEXTURE3D_REFUSED_CREATE"]+=1
+                else:
+                    try:
+                        volume.SetData([Color(index,0,0,255) for index in range(8)])
+                        read=[Color(0,0,0,0)]*8;volume.GetData(read)
+                        if [int(value.R) for value in read]!=list(range(8)):
+                            raise RuntimeError("Texture3D round trip lost data")
+                    finally:volume.Dispose()
+                    counts["TEXTURE3D_ROUND_TRIP"]+=1
             for _ in range(args.cycles):
                 cube=TextureCube(self.GraphicsDevice,2,False,SurfaceFormat.Color)
                 try:
                     try:cube.SetData(CubeMapFace.PositiveX,values)
                     except NativeError as error:
                         if error.result!=6:raise
-                    else:raise RuntimeError("qualified HEADLESS unexpectedly stored TextureCube data")
+                        counts["TEXTURECUBE_REFUSED_TRANSFER"]+=1
+                    else:
+                        read=[Color.Black]*4;cube.GetData(CubeMapFace.PositiveX,read)
+                        if read!=values:raise RuntimeError("TextureCube round trip lost data")
+                        counts["TEXTURECUBE_ROUND_TRIP"]+=1
                 finally:cube.Dispose()
-                counts["TEXTURECUBE_FAILED_TRANSFER"]+=1
             self.Exit()
 
     game=StressGame()
