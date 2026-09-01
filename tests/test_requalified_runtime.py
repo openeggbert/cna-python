@@ -11,8 +11,10 @@ import unittest
 
 from Microsoft.Xna.Framework import Color, Game, GraphicsDeviceManager, Vector3
 from Microsoft.Xna.Framework.Graphics import (
-    BasicEffect, BufferUsage, DynamicVertexBuffer, SetDataOptions, Texture2D,
-    VertexPositionColor,
+    AlphaTestEffect, BasicEffect, BufferUsage, DualTextureEffect, DynamicIndexBuffer,
+    DynamicVertexBuffer, EnvironmentMapEffect, IndexBuffer, IndexElementSize,
+    OcclusionQuery, RenderTarget2D, SetDataOptions, SkinnedEffect, SpriteBatch,
+    SurfaceFormat, Texture2D, TextureCube, VertexBuffer, VertexPositionColor,
 )
 from _cna_native.errors import NativeUnavailableError
 from _cna_native.runtime_identity import runtime_identity
@@ -62,11 +64,33 @@ class DroppedWrapperOwnershipTests(unittest.TestCase):
         game.Dispose()
         self.assertTrue(True)
 
-    def test_dropped_texture_is_released_by_the_owning_generation(self) -> None:
-        self._run_dropping(lambda device: Texture2D(device, 2, 2))
+    #: Every owned graphics resource kind reachable without a fixture.  A dropped
+    #: wrapper of any of them must be released by the owning generation.
+    DROPPABLE = {
+        "Texture2D": lambda device: Texture2D(device, 2, 2),
+        "TextureCube": lambda device: TextureCube(device, 4, False, SurfaceFormat.Color),
+        "SpriteBatch": lambda device: SpriteBatch(device),
+        "BasicEffect": lambda device: BasicEffect(device),
+        "AlphaTestEffect": lambda device: AlphaTestEffect(device),
+        "DualTextureEffect": lambda device: DualTextureEffect(device),
+        "EnvironmentMapEffect": lambda device: EnvironmentMapEffect(device),
+        "SkinnedEffect": lambda device: SkinnedEffect(device),
+        "VertexBuffer": lambda device: VertexBuffer(
+            device, VertexPositionColor, 3, BufferUsage.None_),
+        "DynamicVertexBuffer": lambda device: DynamicVertexBuffer(
+            device, VertexPositionColor, 3, BufferUsage.None_),
+        "IndexBuffer": lambda device: IndexBuffer(
+            device, IndexElementSize.SixteenBits, 3, BufferUsage.None_),
+        "DynamicIndexBuffer": lambda device: DynamicIndexBuffer(
+            device, IndexElementSize.SixteenBits, 3, BufferUsage.None_),
+        "RenderTarget2D": lambda device: RenderTarget2D(device, 4, 4),
+        "OcclusionQuery": lambda device: OcclusionQuery(device),
+    }
 
-    def test_dropped_effect_releases_its_views_before_its_handle(self) -> None:
-        self._run_dropping(lambda device: BasicEffect(device))
+    def test_every_dropped_graphics_resource_is_released(self) -> None:
+        for name, make in self.DROPPABLE.items():
+            with self.subTest(resource=name):
+                self._run_dropping(make)
 
     def test_retained_resources_still_dispose_cleanly(self) -> None:
         class Probe(Game):

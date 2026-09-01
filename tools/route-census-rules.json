@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "notes": [
+    "Ordered rules; the first match wins. Purpose says why a route exists.",
+    "Status says why it is or is not imported, and is overridden to BOUND for any",
+    "route the ctypes manifest actually imports.",
+    "ACTIONABLE_LOCAL means: needed by a selected deliverable and implementable now.",
+    "A capability CNA offers that this product has not selected is a deliberate",
+    "non-binding, not an outstanding task; binding a route with no consumer is not",
+    "progress."
+  ],
+  "rules": [
+    {
+      "id": "video-frame-identity",
+      "match": {
+        "names": [
+          "cna_video_player_get_frame_ext"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "Frame generation is what XNA's two alternating frame textures need for change detection; selected for the VideoPlayer.GetTexture projection."
+    },
+    {
+      "id": "render-target-content-lost",
+      "match": {
+        "names": [
+          "cna_render_target_subscribe_content_lost",
+          "cna_render_target_unsubscribe_content_lost"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "RenderTarget2D/Cube ContentLost is XNA public surface and CNA now has the subscription; delivery only happens on renderers that can lose a device."
+    },
+    {
+      "id": "owned-graphics-device",
+      "match": {
+        "names": [
+          "cna_graphics_device_create",
+          "cna_graphics_device_destroy"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "XNA's GraphicsDevice constructor and Dispose are public; CNA now has an owned device rather than only the Game's borrowed one."
+    },
+    {
+      "id": "graphics-device-resource-events",
+      "match": {
+        "names": [
+          "cna_graphics_device_subscribe_resource_created",
+          "cna_graphics_device_subscribe_resource_destroyed"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "BLOCKED_UPSTREAM",
+      "reason": "CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated."
+    },
+    {
+      "id": "gamer-services-dispatcher",
+      "match": {
+        "names": [
+          "cna_gamer_services_dispatcher_initialize",
+          "cna_gamer_services_dispatcher_set_window_handle",
+          "cna_gamer_services_dispatcher_update"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "boundReason": "imported: GamerServicesComponent is the one selected member of this family",
+      "reason": "GamerServicesComponent's three dispatcher routes are the only part of this family inside the selected profile."
+    },
+    {
+      "id": "renderer-test-seam",
+      "match": {
+        "names": [
+          "cna_graphics_renderer_reset_selection_for_tests_ext"
+        ]
+      },
+      "purpose": "TOOLING_ONLY",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API.",
+      "boundReason": "not applicable: the test seam is not imported",
+      "boundIsError": true
+    },
+    {
+      "id": "renderer-identity",
+      "match": {
+        "prefixes": [
+          "cna_graphics_renderer_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
+      "boundReason": "imported: runtime capability evidence names the backend that produced it"
+    },
+    {
+      "id": "clr-type-name",
+      "match": {
+        "suffixes": [
+          "_get_type_name_size",
+          "_copy_type_name"
+        ]
+      },
+      "purpose": "NOT_USEFUL_FOR_PYTHON",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it.",
+      "boundReason": "not applicable: no CLR type-name route is imported",
+      "boundIsError": true
+    },
+    {
+      "id": "native-disposed-flag",
+      "match": {
+        "suffixes": [
+          "_get_is_disposed"
+        ]
+      },
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released.",
+      "boundReason": "imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable"
+    },
+    {
+      "id": "value-struct-initialisers",
+      "match": {
+        "suffixes": [
+          "_init",
+          "_init_bounds",
+          "_init_from_rectangle"
+        ]
+      },
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout.",
+      "boundReason": "not applicable: no value-struct initialiser is imported",
+      "boundIsError": true
+    },
+    {
+      "id": "xna-value-types",
+      "match": {
+        "headers": [
+          "vectors.h",
+          "matrix.h",
+          "math.h",
+          "math_values.h",
+          "quaternion.h",
+          "geometry.h",
+          "color.h",
+          "named_colors.h",
+          "curve.h",
+          "packed_vectors.h",
+          "vertex_values.h",
+          "graphics3d.h"
+        ]
+      },
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "XNA value types are implemented natively in Python against pinned XNA-derived behaviour; a per-operation C call would add a boundary crossing without adding behaviour.",
+      "boundReason": "not applicable: XNA value types are managed",
+      "boundIsError": true
+    },
+    {
+      "id": "xna-backing-families",
+      "match": {
+        "headers": [
+          "abi.h",
+          "core.h",
+          "runtime.h",
+          "runtime_window.h",
+          "runtime_components.h",
+          "runtime_graphics_manager.h",
+          "display.h",
+          "graphics.h",
+          "graphics_device.h",
+          "graphics_resource.h",
+          "graphics_state.h",
+          "texture.h",
+          "texture_volume.h",
+          "render_target.h",
+          "vertex_resources.h",
+          "index_resources.h",
+          "sprite_font.h",
+          "effects.h",
+          "input.h",
+          "input_keyboard.h",
+          "input_mouse.h",
+          "input_gamepad.h",
+          "input_touch.h",
+          "audio.h",
+          "xact.h",
+          "storage.h",
+          "media.h",
+          "media_library.h",
+          "media_player.h",
+          "video.h"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
+      "boundReason": "imported: the selected 257-type XNA projection reaches this route"
+    },
+    {
+      "id": "engine-layer",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "CNA's modern engine layer is outside the selected XNA profile and outside the selected extension profile; opening it is a separate product decision, and it must never leak into Microsoft.Xna.Framework.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "cnb-content",
+      "match": {
+        "headers": [
+          "cnb.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "CNA-native compiled content is extension-owned; the strict XNA ContentManager stays managed XNB and must not silently prefer another format.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "native-models",
+      "match": {
+        "headers": [
+          "models.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "native-content-manager",
+      "match": {
+        "headers": [
+          "content.h",
+          "content_readers.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "Microsoft.Xna.Framework.Content is the managed XNB reader table, cache, rollback and Unload; a CNA-native content manager is a second cache domain and belongs to the extension profile.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "sensors-devices",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h",
+          "devices_ext.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "Sensors and device services are CNA-only capabilities outside the selected XNA profile and outside the selected extension profile.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "extended-input",
+      "match": {
+        "headers": [
+          "input_haptics.h",
+          "input_joystick.h",
+          "input_devices.h",
+          "input_text.h",
+          "input_cursor.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "XNA 4.0 has no haptics, joystick, text-input or cursor API; these are CNA-only input families and belong to the extension profile rather than to the XNA namespace.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "modern-graphics-extensions",
+      "match": {
+        "headers": [
+          "graphics_ext.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "core-extensions",
+      "match": {
+        "headers": [
+          "core_ext.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "net-profile",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h"
+        ]
+      },
+      "purpose": "OUT_OF_SELECTED_PROFILE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "Microsoft.Xna.Framework.Net is not in the selected 257-type profile; opening it requires a deliberate future-profile decision.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "gamer-services-profile",
+      "match": {
+        "headers": [
+          "gamer_services.h"
+        ]
+      },
+      "purpose": "OUT_OF_SELECTED_PROFILE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated.",
+      "boundReason": "imported: the selected profile reaches this route"
+    },
+    {
+      "id": "ext-suffixed-capability",
+      "match": {
+        "suffixes": [
+          "_ext"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "A CNA extension route with no XNA counterpart; it is reviewed and deliberately outside the selected profile rather than pending.",
+      "boundReason": "imported: the selected profile reaches this route"
+    }
+  ]
+}
