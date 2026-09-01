@@ -84,7 +84,7 @@
    "operation": "GameWindow properties and screen-device change",
    "status": "VERIFIED_NATIVE",
    "evidence": "runtime_window.h routes",
-   "notes": "HEADLESS reports its real null-window state."
+   "notes": "The control artifact reports its real null-window state; the windowed renderer reports a real 800x480 client bounds and a real screen device name."
   },
   {
    "operation": "GameWindow resize/orientation events",
@@ -124,7 +124,7 @@
    "operation": "Graphics adapter/display/presentation queries",
    "status": "VERIFIED_NATIVE",
    "evidence": "display.h routes and native integration",
-   "notes": "Durable adapter and display facades; one actual HEADLESS adapter."
+   "notes": "Durable adapter and display facades. Each artifact reports its own single adapter."
   },
   {
    "operation": "Blend/depth/rasterizer/sampler state binding",
@@ -202,7 +202,7 @@
    "operation": "RenderTarget2D create/bind/query",
    "status": "VERIFIED_NATIVE",
    "evidence": "render_target.h and native foundation/stress",
-   "notes": "Command-path and lifetime verified under HEADLESS."
+   "notes": "Create, bind and query are verified on both artifacts; the pixels a target keeps are verified separately on the renderer that rasterizes."
   },
   {
    "operation": "RenderTarget visible output",
@@ -230,7 +230,7 @@
    "operation": "RenderTargetCube current content-loss state",
    "status": "VERIFIED_NATIVE",
    "evidence": "cna_render_target_get_info.is_content_lost",
-   "notes": "The current state is queried from CNA; HEADLESS reports its real state."
+   "notes": "The current state is queried from CNA rather than tracked in Python; each artifact reports its own."
   },
   {
    "operation": "RenderTargetCube ContentLost delivery",
@@ -247,8 +247,8 @@
   {
    "operation": "GraphicsDevice.Present()",
    "status": "VERIFIED_NATIVE",
-   "evidence": "cna_graphics_device_present and 60/600-frame consumers",
-   "notes": "HEADLESS command completion is not visible presentation evidence."
+   "evidence": "cna_graphics_device_present and 60/600-frame consumers on both artifacts",
+   "notes": "Present completes on both artifacts. On the renderer that rasterizes, the starter's frame check reads the back buffer afterwards and finds the drawn frame; on the control artifact there is no pixel storage to read, and completion is not presentation evidence."
   },
   {
    "operation": "GraphicsDevice.Present(rectangles, window)",
@@ -353,7 +353,7 @@
    "notes": "The byte buffer reaches CNA with exact ownership rollback; route verification is distinct from backend acceptance."
   },
   {
-   "operation": "Compiled Effect execution on HEADLESS",
+   "operation": "Compiled Effect execution",
    "status": "BLOCKED_FIXTURE",
    "evidence": "cna_graphics_device_executes_shader_effect_source_ext answers true on the windowed renderer and false on the control artifact",
    "notes": "The running device is asked rather than the renderer name inferred from. The windowed renderer does execute shader effect source, so what is missing is a legal compiled-effect fixture, not backend support. No shader is fabricated.",
@@ -425,7 +425,7 @@
    "notes": "All six faces and mip/rectangle contracts are implemented over the canonical ABI."
   },
   {
-   "operation": "TextureCube Color transfer on HEADLESS",
+   "operation": "TextureCube Color transfer",
    "status": "VERIFIED_NATIVE",
    "evidence": "cna_texturecube_set_data/get_data; two faces written with different contents read back distinctly",
    "notes": "The face selector is proven by writing two faces differently rather than by writing one.",
@@ -444,7 +444,7 @@
    "operation": "Model.Draw command path",
    "status": "VERIFIED_NATIVE",
    "evidence": "XNB Model -> buffers -> BasicEffect -> native pass -> cna_graphics_device_draw_indexed_primitives",
-   "notes": "The ordinary indexed route accepts the command under HEADLESS; no special Model renderer or visible-output claim exists."
+   "notes": "The ordinary indexed route accepts the command on both artifacts. The pixels it produces are a separate row, verified on the renderer that rasterizes."
   },
   {
    "operation": "Model visible GPU output",
@@ -579,7 +579,7 @@
   {
    "operation": "Touch capabilities and state",
    "status": "VERIFIED_NATIVE",
-   "evidence": "cna_touch_get_capabilities/state on exact HEADLESS ABI 0.7",
+   "evidence": "cna_touch_get_capabilities/state",
    "notes": "The qualified runtime honestly reports no connected physical panel and an empty snapshot."
   },
   {
@@ -591,7 +591,7 @@
   {
    "operation": "Physical touch input",
    "status": "BLOCKED_HARDWARE",
-   "evidence": "HEADLESS has no physical touch source",
+   "evidence": "neither qualified artifact has a physical touch source",
    "notes": "An empty native state is not treated as hardware qualification and no touches are fabricated."
   },
   {
@@ -769,7 +769,7 @@
    "notes": "The fixture is generated at test time and never committed; the repository ships no encoded media. CNA refuses a video whose declared metadata disagrees with the file, so the clip is produced to match the asset exactly."
   },
   {
-   "operation": "Video decode on HEADLESS",
+   "operation": "Video decode on a non-rendering backend",
    "status": "VERIFIED_NATIVE",
    "evidence": "the same generated clip decodes on the non-windowed control artifact",
    "notes": "Decoding does not depend on the renderer; it was the title-relative path, not the backend, that prevented it before."

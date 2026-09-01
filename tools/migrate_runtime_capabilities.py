@@ -161,7 +161,7 @@ CHANGES: dict[str, tuple] = {
         "The subscription is real. Only renderer families whose API can lose a device raise it, "
         "and none is available on this platform; none is fabricated.",
         None),
-    "Compiled Effect execution on HEADLESS": (
+    "Compiled Effect execution": (
         "BLOCKED_FIXTURE",
         "cna_graphics_device_executes_shader_effect_source_ext answers true on the windowed "
         "renderer and false on the control artifact",
@@ -180,7 +180,7 @@ CHANGES: dict[str, tuple] = {
         "Creation and the complete Color codec work on the windowed renderer. The control "
         "artifact refuses creation, which is a renderer boundary rather than a missing feature.",
         {"control": "BLOCKED_RENDERER", "gpu": "VERIFIED_NATIVE"}),
-    "TextureCube Color transfer on HEADLESS": (
+    "TextureCube Color transfer": (
         "VERIFIED_NATIVE",
         "cna_texturecube_set_data/get_data; two faces written with different contents read back "
         "distinctly",
@@ -248,7 +248,7 @@ CHANGES: dict[str, tuple] = {
         "encoded media. CNA refuses a video whose declared metadata disagrees with the file, so "
         "the clip is produced to match the asset exactly.",
         None),
-    "Video decode on HEADLESS": (
+    "Video decode on a non-rendering backend": (
         "VERIFIED_NATIVE",
         "the same generated clip decodes on the non-windowed control artifact",
         "Decoding does not depend on the renderer; it was the title-relative path, not the "
