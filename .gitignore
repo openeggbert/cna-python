@@ -24,3 +24,7 @@ htmlcov/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Reference-extractor build output (a .NET tool, not shipped source)
+/tools/reference_extractor/bin/
+/tools/reference_extractor/obj/

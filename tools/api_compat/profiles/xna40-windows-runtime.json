@@ -1,5 +1,13 @@
 {
+  "id": "xna40-windows-runtime",
   "name": "XNA 4.0 Windows runtime",
+  "platform": "WINDOWS_RUNTIME",
+  "contract": "xna40-windows-runtime-contract.json",
+  "assemblyRoot": "~/deps/xna40-windows-assemblies",
+  "resolveDirectories": [
+    "/usr/lib/mono/4.5"
+  ],
+  "coreAssemblyName": "mscorlib",
   "referenceAssemblies": [
     "Microsoft.Xna.Framework.dll",
     "Microsoft.Xna.Framework.Game.dll",
