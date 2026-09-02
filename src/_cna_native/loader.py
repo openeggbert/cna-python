@@ -28,6 +28,7 @@ from .cnb_manifest import (
     CURVE_CODEC_FUNCTION_MANIFEST,
     NATIVE_CONTENT_MANAGER_FUNCTION_MANIFEST,
 )
+from .engine_manifest import ENGINE_FUNCTION_MANIFEST
 from .media_manifest import MEDIA_FUNCTION_MANIFEST
 
 SUPPORTED_ABI_MAJOR = 0
@@ -643,6 +644,8 @@ FUNCTION_MANIFEST += MEDIA_FUNCTION_MANIFEST
 # slice its codec depends on.  See `docs/cnb-cnj-extensions.md`.
 FUNCTION_MANIFEST += (CNB_FUNCTION_MANIFEST + CURVE_CODEC_FUNCTION_MANIFEST
                       + NATIVE_CONTENT_MANAGER_FUNCTION_MANIFEST)
+# CNA's modern engine layer.  See `docs/engine-extensions.md`.
+FUNCTION_MANIFEST += ENGINE_FUNCTION_MANIFEST
 
 
 def _resolve() -> Path:

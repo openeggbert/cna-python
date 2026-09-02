@@ -158,8 +158,22 @@ class CnbLoader:
 
     __slots__ = ("_handle",)
 
-    def __init__(self, handle: _support.NativeHandle) -> None:
+    def __init__(self) -> None:
+        raise TypeError(
+            "CnbLoader is produced by this module's own operations and is not "
+            "constructed directly")
+
+    @classmethod
+    def _wrap(cls, handle: _support.NativeHandle) -> "CnbLoader":
+        """Builds the facade around an already-owned handle.
+
+        Private, and it bypasses ``__init__`` deliberately: the public
+        signature a caller reads must not name a native type, and there is
+        no owned handle a caller could supply anyway.
+        """
+        self = cls.__new__(cls)
         self._handle = handle
+        return self
 
     @property
     def closed(self) -> bool:
@@ -242,7 +256,7 @@ class LoaderRegistration:
             # A callback-scoped borrow: CNA invalidates it before this returns, so
             # the wrapper gives the handle up rather than destroying memory that
             # belongs to whoever called the loader.
-            borrowed = CnbDocument(_support.NativeHandle(
+            borrowed = CnbDocument._wrap(_support.NativeHandle(
                 int(document_handle), "cna_cnb_document_destroy", "document"))
             try:
                 value = self._loader(borrowed, name)
@@ -353,7 +367,7 @@ def resolve_loader(document: CnbDocument) -> CnbLoader:
     type that happens to collide, and decoding it with this loader would silently
     misinterpret someone's content.
     """
-    return CnbLoader(_support.NativeHandle(
+    return CnbLoader._wrap(_support.NativeHandle(
         _support.out_handle(
             "cna_cnb_loader_registry_resolve_for_document", document._value),
         "cna_cnb_loader_destroy", "loader"))
@@ -378,7 +392,7 @@ def find_loader(asset_type_id: int) -> CnbLoader | None:
                   c.byref(found), c.byref(handle))
     if not found.value:
         return None
-    return CnbLoader(_support.NativeHandle(
+    return CnbLoader._wrap(_support.NativeHandle(
         int(handle.value), "cna_cnb_loader_destroy", "loader"))
 
 

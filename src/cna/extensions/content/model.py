@@ -378,12 +378,26 @@ class CnbModelData:
 
     __slots__ = ("_handle",)
 
-    def __init__(self, handle: _support.NativeHandle) -> None:
+    def __init__(self) -> None:
+        raise TypeError(
+            "CnbModelData is produced by this module's own operations and is not "
+            "constructed directly")
+
+    @classmethod
+    def _wrap(cls, handle: _support.NativeHandle) -> "CnbModelData":
+        """Builds the facade around an already-owned handle.
+
+        Private, and it bypasses ``__init__`` deliberately: the public
+        signature a caller reads must not name a native type, and there is
+        no owned handle a caller could supply anyway.
+        """
+        self = cls.__new__(cls)
         self._handle = handle
+        return self
 
     @classmethod
     def _adopt(cls, handle: int) -> "CnbModelData":
-        return cls(_support.NativeHandle(
+        return cls._wrap(_support.NativeHandle(
             handle, "cna_cnb_model_destroy", "model data"))
 
     @classmethod
@@ -1093,9 +1107,23 @@ class CnbModelFromCnj:
 
     __slots__ = ("_handle", "_taken")
 
-    def __init__(self, handle: _support.NativeHandle) -> None:
+    def __init__(self) -> None:
+        raise TypeError(
+            "CnbModelFromCnj is produced by this module's own operations and is not "
+            "constructed directly")
+
+    @classmethod
+    def _wrap(cls, handle: _support.NativeHandle) -> "CnbModelFromCnj":
+        """Builds the facade around an already-owned handle.
+
+        Private, and it bypasses ``__init__`` deliberately: the public
+        signature a caller reads must not name a native type, and there is
+        no owned handle a caller could supply anyway.
+        """
+        self = cls.__new__(cls)
         self._handle = handle
         self._taken = False
+        return self
 
     @property
     def closed(self) -> bool:
@@ -1200,5 +1228,5 @@ def build_model_from_cnj(cnj_path: "str | os.PathLike[str]", *,
     handle = _support.out_handle(
         "cna_cnb_build_model_from_cnj", path_view, root_view)
     del keep_path, keep_root
-    return CnbModelFromCnj(_support.NativeHandle(
+    return CnbModelFromCnj._wrap(_support.NativeHandle(
         handle, "cna_cnb_model_from_cnj_destroy", "model from cnj"))

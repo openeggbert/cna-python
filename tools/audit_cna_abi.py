@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from _cna_native import abi
 from _cna_native import cnb_abi
+from _cna_native import engine_abi
 from _cna_native.loader import FUNCTION_MANIFEST, QUALIFIED_ABI
 
 
@@ -71,6 +72,7 @@ TYPES = {
         cnb_abi.CNA_KeyframeEXT, cnb_abi.CNA_BoneTrackEXTDescriptor,
         cnb_abi.CNA_AnimationClipEXTDescriptor, cnb_abi.CNA_CurveKey,
         cnb_abi.CNA_ContentManagerCreateInfo,
+        *engine_abi.ENGINE_STRUCTURES,
     )
 }
 
@@ -107,6 +109,10 @@ def c_measurements(cna_root: Path) -> dict[str, int]:
         elif kind == "TYPE":
             result[f"SIZE:{owner}"] = int(rest[0])
             result[f"ALIGN:{owner}"] = int(rest[1])
+        elif kind == "FVALUE":
+            # A float constant cannot round-trip through an integer, so it gets
+            # its own line kind rather than being truncated into VALUE.
+            result[f"FVALUE:{owner}"] = float(rest[0])
         elif kind == "FIELD":
             result[f"OFFSET:{owner}:{rest[0]}"] = int(rest[1])
     return result
@@ -150,6 +156,11 @@ def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
     for name in dir(cnb_abi):
         if name.startswith(CNB_CONSTANT_PREFIXES):
             result[f"VALUE:{name}"] = getattr(cnb_abi, name)
+    # Every engine constant the generator emitted, compared against the value the
+    # C compiler computes from the same header.  A float lands on the FVALUE key.
+    for name in engine_abi.ENGINE_CONSTANTS:
+        value = getattr(engine_abi, name)
+        result[f"{'FVALUE' if isinstance(value, float) else 'VALUE'}:{name}"] = value
     for name, value in TYPES.items():
         result[f"SIZE:{name}"] = ctypes.sizeof(value)
         result[f"ALIGN:{name}"] = ctypes.alignment(value)
@@ -173,6 +184,29 @@ def ctype_name(value: object) -> str:
     return getattr(value, "__name__", repr(value))
 
 
+def _agrees(key: str, c_value: object, py_value: object) -> bool:
+    """Compares one measurement, at the width C actually stores it in.
+
+    Every measurement but one is an integer and compares exactly. A ``float``
+    constant does not: C computes it in single precision and this binding holds
+    it as a Python double, so ``0.001F`` is genuinely 0.00100000005 on one side
+    and 0.001 on the other. Rounding the Python value through a ``c_float``
+    compares the two at the width the constant has, which is the property that
+    matters; nothing is tolerated, and a constant that really changed still
+    fails.
+    """
+    if py_value is None:
+        return False
+    if key.startswith("FVALUE:"):
+        # Both sides are rounded to the width C stores the constant in. The C
+        # probe prints a shortest round-tripping decimal, which is not the exact
+        # double of that float, so rounding only the Python side would still
+        # disagree with a value that is in fact identical.
+        return (float(ctypes.c_float(float(py_value)).value)
+                == float(ctypes.c_float(float(c_value)).value))
+    return py_value == c_value
+
+
 def main() -> int:
     args = arguments()
     cna_root, library = Path(args.cna_root).resolve(), Path(args.library).resolve()
@@ -181,7 +215,8 @@ def main() -> int:
     c_values = c_measurements(cna_root)
     py_values = ctypes_measurements(c_values)
     mismatches = [{"measurement": key, "c": value, "ctypes": py_values.get(key)}
-                  for key, value in sorted(c_values.items()) if py_values.get(key) != value]
+                  for key, value in sorted(c_values.items())
+                  if not _agrees(key, value, py_values.get(key))]
     exported = exports(library)
     required = [value[0] for value in FUNCTION_MANIFEST]
     manifest = [

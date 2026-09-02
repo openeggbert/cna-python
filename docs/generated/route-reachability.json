@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1048,
-    "DIRECT_CALL_SITE": 954,
+    "BOUND_ROUTES": 1084,
+    "DIRECT_CALL_SITE": 990,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
     "REACHED_BY_NAME_TEMPLATE": 15,
     "ADMITTED_WITH_REASON": 37,
@@ -578,13 +578,13 @@
   "consumers": {
     "cna_get_abi_version": [],
     "cna_error_get_last_info": [
-      "src/_cna_native/loader.py:748"
-    ],
-    "cna_error_get_last_message_size": [
       "src/_cna_native/loader.py:751"
     ],
+    "cna_error_get_last_message_size": [
+      "src/_cna_native/loader.py:754"
+    ],
     "cna_error_copy_last_message": [
-      "src/_cna_native/loader.py:755"
+      "src/_cna_native/loader.py:758"
     ],
     "cna_game_create": [
       "src/Microsoft/Xna/Framework/_game.py:196"
@@ -2765,247 +2765,247 @@
       "src/cna/extensions/content/format.py:450"
     ],
     "cna_cnb_chunk_entry_is_mandatory": [
-      "src/cna/extensions/content/document.py:246"
+      "src/cna/extensions/content/document.py:260"
     ],
     "cna_cnb_has_magic": [
       "src/cna/extensions/content/format.py:231"
     ],
     "cna_cnb_document_parse": [
-      "src/cna/extensions/content/document.py:129"
+      "src/cna/extensions/content/document.py:143"
     ],
     "cna_cnb_document_parse_file": [
       "src/_cna_native/cnb_support.py:176",
-      "src/cna/extensions/content/document.py:143"
+      "src/cna/extensions/content/document.py:157"
     ],
     "cna_cnb_document_destroy": [
-      "src/cna/extensions/content/document.py:131",
-      "src/cna/extensions/content/loaders.py:246"
+      "src/cna/extensions/content/document.py:145",
+      "src/cna/extensions/content/loaders.py:260"
     ],
     "cna_cnb_document_get_origin_size": [
-      "src/cna/extensions/content/document.py:185"
-    ],
-    "cna_cnb_document_copy_origin": [
-      "src/cna/extensions/content/document.py:185"
-    ],
-    "cna_cnb_document_get_container_major": [
-      "src/cna/extensions/content/document.py:192"
-    ],
-    "cna_cnb_document_get_container_minor": [
-      "src/cna/extensions/content/document.py:193"
-    ],
-    "cna_cnb_document_get_asset_type_id": [
       "src/cna/extensions/content/document.py:199"
     ],
+    "cna_cnb_document_copy_origin": [
+      "src/cna/extensions/content/document.py:199"
+    ],
+    "cna_cnb_document_get_container_major": [
+      "src/cna/extensions/content/document.py:206"
+    ],
+    "cna_cnb_document_get_container_minor": [
+      "src/cna/extensions/content/document.py:207"
+    ],
+    "cna_cnb_document_get_asset_type_id": [
+      "src/cna/extensions/content/document.py:213"
+    ],
     "cna_cnb_document_get_asset_schema_version": [
-      "src/cna/extensions/content/document.py:212"
+      "src/cna/extensions/content/document.py:226"
     ],
     "cna_cnb_document_get_chunk_count": [
-      "src/cna/extensions/content/document.py:238"
+      "src/cna/extensions/content/document.py:252"
     ],
     "cna_cnb_document_get_chunk": [
-      "src/cna/extensions/content/document.py:245"
+      "src/cna/extensions/content/document.py:259"
     ],
     "cna_cnb_document_copy_chunk_data": [
-      "src/cna/extensions/content/document.py:269"
+      "src/cna/extensions/content/document.py:283"
     ],
     "cna_cnb_document_open_chunk": [
-      "src/cna/extensions/content/document.py:280"
+      "src/cna/extensions/content/document.py:294"
     ],
     "cna_cnb_document_find_all": [
-      "src/cna/extensions/content/document.py:289"
+      "src/cna/extensions/content/document.py:303"
     ],
     "cna_cnb_document_find_single": [
-      "src/cna/extensions/content/document.py:300"
+      "src/cna/extensions/content/document.py:314"
     ],
     "cna_cnb_document_require_single": [
-      "src/cna/extensions/content/document.py:307"
+      "src/cna/extensions/content/document.py:321"
     ],
     "cna_cnb_document_require_mandatory_chunks_understood": [
-      "src/cna/extensions/content/document.py:319"
+      "src/cna/extensions/content/document.py:333"
     ],
     "cna_cnb_document_get_metadata": [
-      "src/cna/extensions/content/document.py:329"
+      "src/cna/extensions/content/document.py:343"
     ],
     "cna_cnb_document_get_metadata_asset_type_name_size": [
-      "src/cna/extensions/content/document.py:334"
+      "src/cna/extensions/content/document.py:348"
     ],
     "cna_cnb_document_copy_metadata_asset_type_name": [
-      "src/cna/extensions/content/document.py:335"
+      "src/cna/extensions/content/document.py:349"
     ],
     "cna_cnb_document_get_metadata_content_name_size": [
-      "src/cna/extensions/content/document.py:338"
+      "src/cna/extensions/content/document.py:352"
     ],
     "cna_cnb_document_copy_metadata_content_name": [
-      "src/cna/extensions/content/document.py:339"
+      "src/cna/extensions/content/document.py:353"
     ],
     "cna_cnb_document_get_external_reference_count": [
-      "src/cna/extensions/content/document.py:347"
-    ],
-    "cna_cnb_document_get_external_reference": [
       "src/cna/extensions/content/document.py:361"
     ],
+    "cna_cnb_document_get_external_reference": [
+      "src/cna/extensions/content/document.py:375"
+    ],
     "cna_cnb_document_get_external_reference_name_size": [
-      "src/cna/extensions/content/document.py:364"
+      "src/cna/extensions/content/document.py:378"
     ],
     "cna_cnb_document_copy_external_reference_name": [
-      "src/cna/extensions/content/document.py:365"
+      "src/cna/extensions/content/document.py:379"
     ],
     "cna_cnb_document_require_asset": [
-      "src/cna/extensions/content/document.py:229"
+      "src/cna/extensions/content/document.py:243"
     ],
     "cna_cnb_document_get_limits": [
-      "src/cna/extensions/content/document.py:219"
+      "src/cna/extensions/content/document.py:233"
     ],
     "cna_cnb_reader_create": [
-      "src/cna/extensions/content/primitives.py:100"
+      "src/cna/extensions/content/primitives.py:114"
     ],
     "cna_cnb_reader_destroy": [
-      "src/cna/extensions/content/primitives.py:102"
+      "src/cna/extensions/content/primitives.py:116"
     ],
     "cna_cnb_reader_get_remaining": [
-      "src/cna/extensions/content/primitives.py:132"
+      "src/cna/extensions/content/primitives.py:146"
     ],
     "cna_cnb_reader_get_position": [
-      "src/cna/extensions/content/primitives.py:137"
+      "src/cna/extensions/content/primitives.py:151"
     ],
     "cna_cnb_reader_get_size": [
-      "src/cna/extensions/content/primitives.py:142"
+      "src/cna/extensions/content/primitives.py:156"
     ],
     "cna_cnb_reader_get_context_size": [
-      "src/cna/extensions/content/primitives.py:148"
+      "src/cna/extensions/content/primitives.py:162"
     ],
     "cna_cnb_reader_copy_context": [
-      "src/cna/extensions/content/primitives.py:148"
+      "src/cna/extensions/content/primitives.py:162"
     ],
     "cna_cnb_reader_read_u8": [
-      "src/cna/extensions/content/primitives.py:155"
+      "src/cna/extensions/content/primitives.py:169"
     ],
     "cna_cnb_reader_read_u16": [
-      "src/cna/extensions/content/primitives.py:159"
+      "src/cna/extensions/content/primitives.py:173"
     ],
     "cna_cnb_reader_read_u32": [
-      "src/cna/extensions/content/primitives.py:163"
+      "src/cna/extensions/content/primitives.py:177"
     ],
     "cna_cnb_reader_read_u64": [
-      "src/cna/extensions/content/primitives.py:167"
+      "src/cna/extensions/content/primitives.py:181"
     ],
     "cna_cnb_reader_read_i32": [
-      "src/cna/extensions/content/primitives.py:171"
+      "src/cna/extensions/content/primitives.py:185"
     ],
     "cna_cnb_reader_read_f32": [
-      "src/cna/extensions/content/primitives.py:175"
+      "src/cna/extensions/content/primitives.py:189"
     ],
     "cna_cnb_reader_read_f64": [
-      "src/cna/extensions/content/primitives.py:179"
+      "src/cna/extensions/content/primitives.py:193"
     ],
     "cna_cnb_reader_read_string": [
-      "src/cna/extensions/content/primitives.py:190"
+      "src/cna/extensions/content/primitives.py:204"
     ],
     "cna_cnb_reader_copy_string": [
-      "src/cna/extensions/content/primitives.py:192"
+      "src/cna/extensions/content/primitives.py:206"
     ],
     "cna_cnb_reader_read_count": [
-      "src/cna/extensions/content/primitives.py:203"
+      "src/cna/extensions/content/primitives.py:217"
     ],
     "cna_cnb_reader_read_bytes": [
-      "src/cna/extensions/content/primitives.py:213"
+      "src/cna/extensions/content/primitives.py:227"
     ],
     "cna_cnb_reader_skip": [
-      "src/cna/extensions/content/primitives.py:237"
+      "src/cna/extensions/content/primitives.py:251"
     ],
     "cna_cnb_reader_require_exhausted": [
-      "src/cna/extensions/content/primitives.py:247"
+      "src/cna/extensions/content/primitives.py:261"
     ],
     "cna_cnb_reader_fail": [
-      "src/cna/extensions/content/primitives.py:256"
+      "src/cna/extensions/content/primitives.py:270"
     ],
     "cna_cnb_is_well_formed_utf8": [
       "src/cna/extensions/content/format.py:332"
     ],
     "cna_cnb_byte_writer_create": [
-      "src/cna/extensions/content/primitives.py:279"
+      "src/cna/extensions/content/primitives.py:293"
     ],
     "cna_cnb_byte_writer_create_from_bytes": [
-      "src/cna/extensions/content/primitives.py:283"
+      "src/cna/extensions/content/primitives.py:297"
     ],
     "cna_cnb_byte_writer_destroy": [
-      "src/cna/extensions/content/primitives.py:286"
+      "src/cna/extensions/content/primitives.py:300"
     ],
     "cna_cnb_byte_writer_write_u8": [
-      "src/cna/extensions/content/primitives.py:308"
+      "src/cna/extensions/content/primitives.py:322"
     ],
     "cna_cnb_byte_writer_write_u16": [
-      "src/cna/extensions/content/primitives.py:313"
+      "src/cna/extensions/content/primitives.py:327"
     ],
     "cna_cnb_byte_writer_write_u32": [
-      "src/cna/extensions/content/primitives.py:318"
+      "src/cna/extensions/content/primitives.py:332"
     ],
     "cna_cnb_byte_writer_write_u64": [
-      "src/cna/extensions/content/primitives.py:323"
-    ],
-    "cna_cnb_byte_writer_write_i32": [
-      "src/cna/extensions/content/primitives.py:328"
-    ],
-    "cna_cnb_byte_writer_write_f32": [
-      "src/cna/extensions/content/primitives.py:333"
-    ],
-    "cna_cnb_byte_writer_write_f64": [
       "src/cna/extensions/content/primitives.py:337"
     ],
-    "cna_cnb_byte_writer_write_string": [
+    "cna_cnb_byte_writer_write_i32": [
       "src/cna/extensions/content/primitives.py:342"
     ],
+    "cna_cnb_byte_writer_write_f32": [
+      "src/cna/extensions/content/primitives.py:347"
+    ],
+    "cna_cnb_byte_writer_write_f64": [
+      "src/cna/extensions/content/primitives.py:351"
+    ],
+    "cna_cnb_byte_writer_write_string": [
+      "src/cna/extensions/content/primitives.py:356"
+    ],
     "cna_cnb_byte_writer_write_bytes": [
-      "src/cna/extensions/content/primitives.py:348"
+      "src/cna/extensions/content/primitives.py:362"
     ],
     "cna_cnb_byte_writer_write_zeros": [
-      "src/cna/extensions/content/primitives.py:354"
+      "src/cna/extensions/content/primitives.py:368"
     ],
     "cna_cnb_byte_writer_get_size": [
-      "src/cna/extensions/content/primitives.py:365"
+      "src/cna/extensions/content/primitives.py:379"
     ],
     "cna_cnb_byte_writer_copy_bytes": [
-      "src/cna/extensions/content/primitives.py:369"
+      "src/cna/extensions/content/primitives.py:383"
     ],
     "cna_cnb_byte_writer_take": [
-      "src/cna/extensions/content/primitives.py:378"
+      "src/cna/extensions/content/primitives.py:392"
     ],
     "cna_cnb_writer_create": [
-      "src/cna/extensions/content/primitives.py:405"
+      "src/cna/extensions/content/primitives.py:419"
     ],
     "cna_cnb_writer_destroy": [
-      "src/cna/extensions/content/primitives.py:410"
+      "src/cna/extensions/content/primitives.py:424"
     ],
     "cna_cnb_writer_set_metadata": [
-      "src/cna/extensions/content/primitives.py:441"
+      "src/cna/extensions/content/primitives.py:455"
     ],
     "cna_cnb_writer_add_external_reference": [
-      "src/cna/extensions/content/primitives.py:460"
+      "src/cna/extensions/content/primitives.py:474"
     ],
     "cna_cnb_writer_clear_external_references": [
-      "src/cna/extensions/content/primitives.py:467"
+      "src/cna/extensions/content/primitives.py:481"
     ],
     "cna_cnb_writer_add_chunk": [
-      "src/cna/extensions/content/primitives.py:480"
+      "src/cna/extensions/content/primitives.py:494"
     ],
     "cna_cnb_writer_get_schema_chunk_count": [
-      "src/cna/extensions/content/primitives.py:490"
+      "src/cna/extensions/content/primitives.py:504"
     ],
     "cna_cnb_writer_set_compression": [
-      "src/cna/extensions/content/primitives.py:502"
+      "src/cna/extensions/content/primitives.py:516"
     ],
     "cna_cnb_writer_set_limits": [
-      "src/cna/extensions/content/primitives.py:523"
+      "src/cna/extensions/content/primitives.py:537"
     ],
     "cna_cnb_writer_get_limits": [
-      "src/cna/extensions/content/primitives.py:511"
+      "src/cna/extensions/content/primitives.py:525"
     ],
     "cna_cnb_writer_build": [
-      "src/cna/extensions/content/primitives.py:556"
+      "src/cna/extensions/content/primitives.py:570"
     ],
     "cna_cnb_writer_write_to_file": [
       "src/_cna_native/cnb_support.py:183",
-      "src/cna/extensions/content/primitives.py:561"
+      "src/cna/extensions/content/primitives.py:575"
     ],
     "cna_cnb_is_known_texture_format": [
       "src/cna/extensions/content/textures.py:217"
@@ -3032,311 +3032,311 @@
       "src/cna/extensions/content/textures.py:287"
     ],
     "cna_cnb_texture_data_create": [
-      "src/cna/extensions/content/textures.py:328"
+      "src/cna/extensions/content/textures.py:342"
     ],
     "cna_cnb_texture_data_create_rgba8": [
-      "src/cna/extensions/content/textures.py:345"
+      "src/cna/extensions/content/textures.py:359"
     ],
     "cna_cnb_texture_data_destroy": [
-      "src/cna/extensions/content/textures.py:306"
+      "src/cna/extensions/content/textures.py:320"
     ],
     "cna_cnb_texture_data_get_info": [
-      "src/cna/extensions/content/textures.py:375"
-    ],
-    "cna_cnb_texture_data_get_level_dimensions": [
       "src/cna/extensions/content/textures.py:389"
     ],
+    "cna_cnb_texture_data_get_level_dimensions": [
+      "src/cna/extensions/content/textures.py:403"
+    ],
     "cna_cnb_texture_data_add_representation": [
-      "src/cna/extensions/content/textures.py:401"
+      "src/cna/extensions/content/textures.py:415"
     ],
     "cna_cnb_texture_data_get_representation_count": [
-      "src/cna/extensions/content/textures.py:408"
+      "src/cna/extensions/content/textures.py:422"
     ],
     "cna_cnb_texture_data_get_representation_format": [
-      "src/cna/extensions/content/textures.py:413"
+      "src/cna/extensions/content/textures.py:427"
     ],
     "cna_cnb_texture_data_get_level_count": [
-      "src/cna/extensions/content/textures.py:419"
+      "src/cna/extensions/content/textures.py:433"
     ],
     "cna_cnb_texture_data_set_level": [
-      "src/cna/extensions/content/textures.py:429"
+      "src/cna/extensions/content/textures.py:443"
     ],
     "cna_cnb_texture_data_copy_level": [
-      "src/cna/extensions/content/textures.py:438"
+      "src/cna/extensions/content/textures.py:452"
     ],
     "cna_cnb_texture_data_select_representation": [
-      "src/cna/extensions/content/textures.py:466"
+      "src/cna/extensions/content/textures.py:480"
     ],
     "cna_cnb_encode_texture2d": [
-      "src/cna/extensions/content/textures.py:494"
+      "src/cna/extensions/content/textures.py:508"
     ],
     "cna_cnb_encode_texture_cube": [
-      "src/cna/extensions/content/textures.py:503"
+      "src/cna/extensions/content/textures.py:517"
     ],
     "cna_cnb_encode_texture3d": [
-      "src/cna/extensions/content/textures.py:512"
-    ],
-    "cna_cnb_decode_texture2d": [
-      "src/cna/extensions/content/textures.py:521"
-    ],
-    "cna_cnb_decode_texture_cube": [
       "src/cna/extensions/content/textures.py:526"
     ],
+    "cna_cnb_decode_texture2d": [
+      "src/cna/extensions/content/textures.py:535"
+    ],
+    "cna_cnb_decode_texture_cube": [
+      "src/cna/extensions/content/textures.py:540"
+    ],
     "cna_cnb_decode_texture3d": [
-      "src/cna/extensions/content/textures.py:531"
+      "src/cna/extensions/content/textures.py:545"
     ],
     "cna_cnb_writer_append_embedded_texture2d": [
-      "src/cna/extensions/content/primitives.py:544"
+      "src/cna/extensions/content/primitives.py:558"
     ],
     "cna_cnb_document_read_embedded_texture2d": [
-      "src/cna/extensions/content/document.py:387"
+      "src/cna/extensions/content/document.py:401"
     ],
     "cna_cnb_model_create": [
-      "src/cna/extensions/content/model.py:392"
+      "src/cna/extensions/content/model.py:406"
     ],
     "cna_cnb_model_destroy": [
-      "src/cna/extensions/content/model.py:387"
+      "src/cna/extensions/content/model.py:401"
     ],
     "cna_cnb_model_get_info": [
-      "src/cna/extensions/content/model.py:419"
+      "src/cna/extensions/content/model.py:433"
     ],
     "cna_cnb_model_set_flags": [
-      "src/cna/extensions/content/model.py:430"
+      "src/cna/extensions/content/model.py:444"
     ],
     "cna_cnb_model_add_bone": [
-      "src/cna/extensions/content/model.py:442"
+      "src/cna/extensions/content/model.py:456"
     ],
     "cna_cnb_model_get_bone": [
-      "src/cna/extensions/content/model.py:452"
+      "src/cna/extensions/content/model.py:466"
     ],
     "cna_cnb_model_get_bone_name_size": [
-      "src/cna/extensions/content/model.py:454"
+      "src/cna/extensions/content/model.py:468"
     ],
     "cna_cnb_model_copy_bone_name": [
-      "src/cna/extensions/content/model.py:454"
+      "src/cna/extensions/content/model.py:468"
     ],
     "cna_cnb_model_add_part": [
-      "src/cna/extensions/content/model.py:495"
+      "src/cna/extensions/content/model.py:509"
     ],
     "cna_cnb_model_get_part": [
-      "src/cna/extensions/content/model.py:503"
+      "src/cna/extensions/content/model.py:517"
     ],
     "cna_cnb_model_set_part": [
-      "src/cna/extensions/content/model.py:541"
+      "src/cna/extensions/content/model.py:555"
     ],
     "cna_cnb_model_get_part_name_size": [
-      "src/cna/extensions/content/model.py:607"
+      "src/cna/extensions/content/model.py:621"
     ],
     "cna_cnb_model_copy_part_name": [
-      "src/cna/extensions/content/model.py:607"
+      "src/cna/extensions/content/model.py:621"
     ],
     "cna_cnb_model_get_part_external_effect_size": [
-      "src/cna/extensions/content/model.py:610"
+      "src/cna/extensions/content/model.py:624"
     ],
     "cna_cnb_model_copy_part_external_effect": [
-      "src/cna/extensions/content/model.py:611"
+      "src/cna/extensions/content/model.py:625"
     ],
     "cna_cnb_model_set_part_vertex_bytes": [
-      "src/cna/extensions/content/model.py:561"
+      "src/cna/extensions/content/model.py:575"
     ],
     "cna_cnb_model_copy_part_vertex_bytes": [
-      "src/cna/extensions/content/model.py:591"
+      "src/cna/extensions/content/model.py:605"
     ],
     "cna_cnb_model_set_part_index_bytes": [
-      "src/cna/extensions/content/model.py:583"
-    ],
-    "cna_cnb_model_copy_part_index_bytes": [
       "src/cna/extensions/content/model.py:597"
     ],
+    "cna_cnb_model_copy_part_index_bytes": [
+      "src/cna/extensions/content/model.py:611"
+    ],
     "cna_cnb_model_get_material": [
-      "src/cna/extensions/content/model.py:755"
+      "src/cna/extensions/content/model.py:769"
     ],
     "cna_cnb_model_set_material": [
-      "src/cna/extensions/content/model.py:654"
+      "src/cna/extensions/content/model.py:668"
     ],
     "cna_cnb_model_get_material_texture_size": [
-      "src/cna/extensions/content/model.py:678"
+      "src/cna/extensions/content/model.py:692"
     ],
     "cna_cnb_model_copy_material_texture": [
-      "src/cna/extensions/content/model.py:679"
+      "src/cna/extensions/content/model.py:693"
     ],
     "cna_cnb_model_set_material_texture": [
-      "src/cna/extensions/content/model.py:670"
+      "src/cna/extensions/content/model.py:684"
     ],
     "cna_cnb_model_get_material_texture_coordinate_set": [
-      "src/cna/extensions/content/model.py:696"
+      "src/cna/extensions/content/model.py:710"
     ],
     "cna_cnb_model_set_material_texture_coordinate_set": [
-      "src/cna/extensions/content/model.py:687"
+      "src/cna/extensions/content/model.py:701"
     ],
     "cna_cnb_model_get_material_texture_transform": [
-      "src/cna/extensions/content/model.py:717"
+      "src/cna/extensions/content/model.py:731"
     ],
     "cna_cnb_model_set_material_texture_transform": [
-      "src/cna/extensions/content/model.py:709"
+      "src/cna/extensions/content/model.py:723"
     ],
     "cna_cnb_model_get_material_sampler": [
-      "src/cna/extensions/content/model.py:742"
+      "src/cna/extensions/content/model.py:756"
     ],
     "cna_cnb_model_set_material_sampler": [
-      "src/cna/extensions/content/model.py:734"
+      "src/cna/extensions/content/model.py:748"
     ],
     "cna_cnb_model_has_morph": [
-      "src/cna/extensions/content/model.py:786"
+      "src/cna/extensions/content/model.py:800"
     ],
     "cna_cnb_model_get_morph": [
-      "src/cna/extensions/content/model.py:820"
+      "src/cna/extensions/content/model.py:834"
     ],
     "cna_cnb_model_set_morph": [
-      "src/cna/extensions/content/model.py:807"
+      "src/cna/extensions/content/model.py:821"
     ],
     "cna_cnb_model_clear_morph": [
-      "src/cna/extensions/content/model.py:813"
+      "src/cna/extensions/content/model.py:827"
     ],
     "cna_cnb_model_add_morph_target": [
-      "src/cna/extensions/content/model.py:833"
+      "src/cna/extensions/content/model.py:847"
     ],
     "cna_cnb_model_set_morph_target_deltas": [
-      "src/cna/extensions/content/model.py:841"
+      "src/cna/extensions/content/model.py:855"
     ],
     "cna_cnb_model_copy_morph_target_deltas": [
-      "src/cna/extensions/content/model.py:851"
+      "src/cna/extensions/content/model.py:865"
     ],
     "cna_cnb_model_set_morph_weights": [
-      "src/cna/extensions/content/model.py:859"
+      "src/cna/extensions/content/model.py:873"
     ],
     "cna_cnb_model_copy_morph_weights": [
-      "src/cna/extensions/content/model.py:866"
+      "src/cna/extensions/content/model.py:880"
     ],
     "cna_cnb_model_add_morph_weight_key": [
-      "src/cna/extensions/content/model.py:878"
-    ],
-    "cna_cnb_model_get_morph_weight_key": [
       "src/cna/extensions/content/model.py:892"
     ],
+    "cna_cnb_model_get_morph_weight_key": [
+      "src/cna/extensions/content/model.py:906"
+    ],
     "cna_cnb_model_copy_morph_weight_key_values": [
-      "src/cna/extensions/content/model.py:896"
+      "src/cna/extensions/content/model.py:910"
     ],
     "cna_cnb_model_add_mesh": [
-      "src/cna/extensions/content/model.py:913"
+      "src/cna/extensions/content/model.py:927"
     ],
     "cna_cnb_model_get_mesh": [
-      "src/cna/extensions/content/model.py:924"
+      "src/cna/extensions/content/model.py:938"
     ],
     "cna_cnb_model_get_mesh_name_size": [
-      "src/cna/extensions/content/model.py:928"
+      "src/cna/extensions/content/model.py:942"
     ],
     "cna_cnb_model_copy_mesh_name": [
-      "src/cna/extensions/content/model.py:928"
+      "src/cna/extensions/content/model.py:942"
     ],
     "cna_cnb_model_copy_mesh_part_indices": [
-      "src/cna/extensions/content/model.py:932"
+      "src/cna/extensions/content/model.py:946"
     ],
     "cna_cnb_model_set_skeleton": [
-      "src/cna/extensions/content/model.py:961"
-    ],
-    "cna_cnb_model_clear_skeleton": [
-      "src/cna/extensions/content/model.py:967"
-    ],
-    "cna_cnb_model_get_skeleton": [
       "src/cna/extensions/content/model.py:975"
     ],
+    "cna_cnb_model_clear_skeleton": [
+      "src/cna/extensions/content/model.py:981"
+    ],
+    "cna_cnb_model_get_skeleton": [
+      "src/cna/extensions/content/model.py:989"
+    ],
     "cna_cnb_model_copy_skeleton_hierarchy": [
-      "src/cna/extensions/content/model.py:986"
+      "src/cna/extensions/content/model.py:1000"
     ],
     "cna_cnb_model_copy_skeleton_matrices": [
-      "src/cna/extensions/content/model.py:979"
+      "src/cna/extensions/content/model.py:993"
     ],
     "cna_cnb_model_add_animation": [
-      "src/cna/extensions/content/model.py:1007"
+      "src/cna/extensions/content/model.py:1021"
     ],
     "cna_cnb_model_get_animation_name_size": [
-      "src/cna/extensions/content/model.py:1036"
+      "src/cna/extensions/content/model.py:1050"
     ],
     "cna_cnb_model_copy_animation_name": [
-      "src/cna/extensions/content/model.py:1037"
+      "src/cna/extensions/content/model.py:1051"
     ],
     "cna_cnb_model_get_animation": [
-      "src/cna/extensions/content/model.py:1018"
+      "src/cna/extensions/content/model.py:1032"
     ],
     "cna_cnb_model_get_animation_track": [
-      "src/cna/extensions/content/model.py:1025"
+      "src/cna/extensions/content/model.py:1039"
     ],
     "cna_cnb_model_copy_animation_keyframes": [
-      "src/cna/extensions/content/model.py:1028"
+      "src/cna/extensions/content/model.py:1042"
     ],
     "cna_cnb_model_add_light": [
-      "src/cna/extensions/content/model.py:1060"
+      "src/cna/extensions/content/model.py:1074"
     ],
     "cna_cnb_model_get_light": [
-      "src/cna/extensions/content/model.py:1065"
+      "src/cna/extensions/content/model.py:1079"
     ],
     "cna_cnb_encode_model": [
-      "src/cna/extensions/content/model.py:1168"
+      "src/cna/extensions/content/model.py:1196"
     ],
     "cna_cnb_decode_model": [
-      "src/cna/extensions/content/model.py:1176"
+      "src/cna/extensions/content/model.py:1204"
     ],
     "cna_cnb_build_model_from_cnj": [
       "src/_cna_native/cnb_support.py:181",
-      "src/cna/extensions/content/model.py:1201"
+      "src/cna/extensions/content/model.py:1229"
     ],
     "cna_cnb_model_from_cnj_destroy": [
-      "src/cna/extensions/content/model.py:1204"
+      "src/cna/extensions/content/model.py:1232"
     ],
     "cna_cnb_model_from_cnj_take_model": [
-      "src/cna/extensions/content/model.py:1131"
+      "src/cna/extensions/content/model.py:1159"
     ],
     "cna_cnb_model_from_cnj_get_absorbed_file_count": [
-      "src/cna/extensions/content/model.py:1139"
+      "src/cna/extensions/content/model.py:1167"
     ],
     "cna_cnb_model_from_cnj_get_absorbed_file_size": [
-      "src/cna/extensions/content/model.py:1142"
+      "src/cna/extensions/content/model.py:1170"
     ],
     "cna_cnb_model_from_cnj_copy_absorbed_file": [
-      "src/cna/extensions/content/model.py:1143"
+      "src/cna/extensions/content/model.py:1171"
     ],
     "cna_cnb_model_from_cnj_get_external_reference_count": [
-      "src/cna/extensions/content/model.py:1151"
+      "src/cna/extensions/content/model.py:1179"
     ],
     "cna_cnb_model_from_cnj_get_external_reference_size": [
-      "src/cna/extensions/content/model.py:1154"
+      "src/cna/extensions/content/model.py:1182"
     ],
     "cna_cnb_model_from_cnj_copy_external_reference": [
-      "src/cna/extensions/content/model.py:1155"
+      "src/cna/extensions/content/model.py:1183"
     ],
     "cna_cnb_sprite_font_data_create": [
-      "src/cna/extensions/content/fonts.py:148"
+      "src/cna/extensions/content/fonts.py:162"
     ],
     "cna_cnb_sprite_font_data_destroy": [
-      "src/cna/extensions/content/fonts.py:143"
+      "src/cna/extensions/content/fonts.py:157"
     ],
     "cna_cnb_sprite_font_data_get_info": [
-      "src/cna/extensions/content/fonts.py:173"
+      "src/cna/extensions/content/fonts.py:187"
     ],
     "cna_cnb_sprite_font_data_set_info": [
-      "src/cna/extensions/content/fonts.py:204"
-    ],
-    "cna_cnb_sprite_font_data_add_glyph": [
-      "src/cna/extensions/content/fonts.py:210"
-    ],
-    "cna_cnb_sprite_font_data_get_glyph": [
       "src/cna/extensions/content/fonts.py:218"
     ],
+    "cna_cnb_sprite_font_data_add_glyph": [
+      "src/cna/extensions/content/fonts.py:224"
+    ],
+    "cna_cnb_sprite_font_data_get_glyph": [
+      "src/cna/extensions/content/fonts.py:232"
+    ],
     "cna_cnb_sprite_font_data_set_glyph": [
-      "src/cna/extensions/content/fonts.py:226"
+      "src/cna/extensions/content/fonts.py:240"
     ],
     "cna_cnb_sprite_font_data_set_atlas": [
-      "src/cna/extensions/content/fonts.py:239"
+      "src/cna/extensions/content/fonts.py:253"
     ],
     "cna_cnb_sprite_font_data_copy_atlas": [
-      "src/cna/extensions/content/fonts.py:247"
+      "src/cna/extensions/content/fonts.py:261"
     ],
     "cna_cnb_encode_sprite_font": [
-      "src/cna/extensions/content/fonts.py:258"
+      "src/cna/extensions/content/fonts.py:272"
     ],
     "cna_cnb_decode_sprite_font": [
-      "src/cna/extensions/content/fonts.py:266"
+      "src/cna/extensions/content/fonts.py:280"
     ],
     "cna_cnb_audio_frame_bytes": [
       "src/cna/extensions/content/audio.py:66"
@@ -3348,22 +3348,22 @@
       "src/cna/extensions/content/audio.py:75"
     ],
     "cna_cnb_sound_effect_data_create": [
-      "src/cna/extensions/content/audio.py:179"
+      "src/cna/extensions/content/audio.py:193"
     ],
     "cna_cnb_sound_effect_data_destroy": [
-      "src/cna/extensions/content/audio.py:154"
+      "src/cna/extensions/content/audio.py:168"
     ],
     "cna_cnb_sound_effect_data_get_info": [
-      "src/cna/extensions/content/audio.py:206"
+      "src/cna/extensions/content/audio.py:220"
     ],
     "cna_cnb_sound_effect_data_copy_samples": [
-      "src/cna/extensions/content/audio.py:218"
-    ],
-    "cna_cnb_encode_sound_effect": [
       "src/cna/extensions/content/audio.py:232"
     ],
+    "cna_cnb_encode_sound_effect": [
+      "src/cna/extensions/content/audio.py:246"
+    ],
     "cna_cnb_decode_sound_effect": [
-      "src/cna/extensions/content/audio.py:240"
+      "src/cna/extensions/content/audio.py:254"
     ],
     "cna_cnb_encode_song": [
       "src/cna/extensions/content/media.py:84"
@@ -3402,65 +3402,65 @@
       "src/cna/extensions/content/curves.py:136"
     ],
     "cna_cnb_encode_animation_clip": [
-      "src/cna/extensions/content/animation.py:195"
+      "src/cna/extensions/content/animation.py:209"
     ],
     "cna_cnb_decode_animation_clip": [
-      "src/cna/extensions/content/animation.py:206"
+      "src/cna/extensions/content/animation.py:220"
     ],
     "cna_cnb_animation_clip_destroy": [
-      "src/cna/extensions/content/animation.py:85"
+      "src/cna/extensions/content/animation.py:99"
     ],
     "cna_cnb_animation_clip_get": [
-      "src/cna/extensions/content/animation.py:109"
+      "src/cna/extensions/content/animation.py:123"
     ],
     "cna_cnb_animation_clip_get_track": [
-      "src/cna/extensions/content/animation.py:134"
+      "src/cna/extensions/content/animation.py:148"
     ],
     "cna_cnb_animation_clip_copy_keyframes": [
-      "src/cna/extensions/content/animation.py:137"
+      "src/cna/extensions/content/animation.py:151"
     ],
     "cna_cnb_reader_read_seconds": [
-      "src/cna/extensions/content/primitives.py:225"
+      "src/cna/extensions/content/primitives.py:239"
     ],
     "cna_cnb_reader_read_keyframe": [
-      "src/cna/extensions/content/primitives.py:232"
+      "src/cna/extensions/content/primitives.py:246"
     ],
     "cna_cnb_byte_writer_write_keyframe": [
-      "src/cna/extensions/content/primitives.py:360"
+      "src/cna/extensions/content/primitives.py:374"
     ],
     "cna_cnb_loader_registry_register": [
-      "src/cna/extensions/content/loaders.py:336"
+      "src/cna/extensions/content/loaders.py:350"
     ],
     "cna_cnb_loader_registry_remove": [
-      "src/cna/extensions/content/loaders.py:284"
+      "src/cna/extensions/content/loaders.py:298"
     ],
     "cna_cnb_loader_registry_clear": [
-      "src/cna/extensions/content/loaders.py:421"
+      "src/cna/extensions/content/loaders.py:435"
     ],
     "cna_cnb_loader_registry_is_registered": [
-      "src/cna/extensions/content/loaders.py:388"
+      "src/cna/extensions/content/loaders.py:402"
     ],
     "cna_cnb_loader_registry_find": [
-      "src/cna/extensions/content/loaders.py:375"
+      "src/cna/extensions/content/loaders.py:389"
     ],
     "cna_cnb_loader_registry_get_registered_type_name_size": [
-      "src/cna/extensions/content/loaders.py:395"
+      "src/cna/extensions/content/loaders.py:409"
     ],
     "cna_cnb_loader_registry_copy_registered_type_name": [
-      "src/cna/extensions/content/loaders.py:396"
+      "src/cna/extensions/content/loaders.py:410"
     ],
     "cna_cnb_loader_registry_resolve_for_document": [
       "src/_cna_native/cnb_support.py:182",
-      "src/cna/extensions/content/loaders.py:358"
+      "src/cna/extensions/content/loaders.py:372"
     ],
     "cna_cnb_loader_registry_register_builtins": [
-      "src/cna/extensions/content/loaders.py:408"
+      "src/cna/extensions/content/loaders.py:422"
     ],
     "cna_cnb_loader_destroy": [
-      "src/cna/extensions/content/loaders.py:359"
+      "src/cna/extensions/content/loaders.py:373"
     ],
     "cna_cnb_loader_invoke": [
-      "src/cna/extensions/content/loaders.py:193"
+      "src/cna/extensions/content/loaders.py:207"
     ],
     "cna_cnb_import_image_as_texture2d": [
       "src/_cna_native/cnb_support.py:177",
@@ -3482,40 +3482,40 @@
     ],
     "cna_cnb_compile_cnj": [
       "src/_cna_native/cnb_support.py:180",
-      "src/cna/extensions/content/compiler.py:162"
+      "src/cna/extensions/content/compiler.py:176"
     ],
     "cna_cnb_cnj_result_destroy": [
-      "src/cna/extensions/content/compiler.py:165"
+      "src/cna/extensions/content/compiler.py:179"
     ],
     "cna_cnb_cnj_result_get_asset_type_id": [
-      "src/cna/extensions/content/compiler.py:70"
+      "src/cna/extensions/content/compiler.py:84"
     ],
     "cna_cnb_cnj_result_get_asset_type_name_size": [
-      "src/cna/extensions/content/compiler.py:76"
+      "src/cna/extensions/content/compiler.py:90"
     ],
     "cna_cnb_cnj_result_copy_asset_type_name": [
-      "src/cna/extensions/content/compiler.py:77"
+      "src/cna/extensions/content/compiler.py:91"
     ],
     "cna_cnb_cnj_result_copy_bytes": [
-      "src/cna/extensions/content/compiler.py:87"
-    ],
-    "cna_cnb_cnj_result_get_absorbed_file_count": [
-      "src/cna/extensions/content/compiler.py:97"
-    ],
-    "cna_cnb_cnj_result_get_absorbed_file_size": [
-      "src/cna/extensions/content/compiler.py:100"
-    ],
-    "cna_cnb_cnj_result_copy_absorbed_file": [
       "src/cna/extensions/content/compiler.py:101"
     ],
+    "cna_cnb_cnj_result_get_absorbed_file_count": [
+      "src/cna/extensions/content/compiler.py:111"
+    ],
+    "cna_cnb_cnj_result_get_absorbed_file_size": [
+      "src/cna/extensions/content/compiler.py:114"
+    ],
+    "cna_cnb_cnj_result_copy_absorbed_file": [
+      "src/cna/extensions/content/compiler.py:115"
+    ],
     "cna_cnb_cnj_result_get_external_reference_count": [
-      "src/cna/extensions/content/compiler.py:113"
+      "src/cna/extensions/content/compiler.py:127"
     ],
     "cna_cnb_cnj_result_get_external_reference_size": [
-      "src/cna/extensions/content/compiler.py:116"
+      "src/cna/extensions/content/compiler.py:130"
     ],
     "cna_cnb_cnj_result_copy_external_reference": [
-      "src/cna/extensions/content/compiler.py:117"
+      "src/cna/extensions/content/compiler.py:131"
     ],
     "cna_curve_create": [
       "src/cna/extensions/content/curves.py:49"
@@ -3555,6 +3555,115 @@
     ],
     "cna_content_manager_destroy": [
       "src/cna/extensions/content/loaders.py:122"
+    ],
+    "cna_engine_layer_get_version": [
+      "src/_cna_native/engine_support.py:73"
+    ],
+    "cna_engine_layer_copy_version_string": [
+      "src/cna/extensions/engine/__init__.py:111"
+    ],
+    "cna_graphics_memory_barrier_has": [
+      "src/cna/extensions/engine/compute.py:80"
+    ],
+    "cna_storage_buffer_create": [
+      "src/cna/extensions/engine/compute.py:148"
+    ],
+    "cna_storage_buffer_create_typed": [
+      "src/cna/extensions/engine/compute.py:163"
+    ],
+    "cna_storage_buffer_set_bytes": [
+      "src/cna/extensions/engine/compute.py:190"
+    ],
+    "cna_storage_buffer_get_bytes": [
+      "src/cna/extensions/engine/compute.py:200"
+    ],
+    "cna_storage_buffer_get_byte_size": [
+      "src/cna/extensions/engine/compute.py:173"
+    ],
+    "cna_storage_buffer_set_elements": [
+      "src/cna/extensions/engine/compute.py:219"
+    ],
+    "cna_storage_buffer_get_elements": [
+      "src/cna/extensions/engine/compute.py:229"
+    ],
+    "cna_storage_buffer_get_element_count": [
+      "src/cna/extensions/engine/compute.py:178"
+    ],
+    "cna_storage_buffer_get_element_byte_size": [
+      "src/cna/extensions/engine/compute.py:184"
+    ],
+    "cna_storage_buffer_destroy": [
+      "src/cna/extensions/engine/compute.py:150"
+    ],
+    "cna_compute_shader_create": [
+      "src/_cna_native/engine_support.py:88",
+      "src/cna/extensions/engine/compute.py:278"
+    ],
+    "cna_compute_shader_set_uniform_int": [
+      "src/cna/extensions/engine/compute.py:338"
+    ],
+    "cna_compute_shader_set_uniform_float": [
+      "src/cna/extensions/engine/compute.py:341"
+    ],
+    "cna_compute_shader_bind_storage_buffer": [
+      "src/cna/extensions/engine/compute.py:354"
+    ],
+    "cna_compute_shader_bind_texture": [
+      "src/cna/extensions/engine/compute.py:362"
+    ],
+    "cna_compute_shader_is_image_binding_supported": [
+      "src/cna/extensions/engine/compute.py:313"
+    ],
+    "cna_compute_shader_bind_image": [
+      "src/cna/extensions/engine/compute.py:380"
+    ],
+    "cna_compute_shader_dispatch": [
+      "src/cna/extensions/engine/compute.py:391"
+    ],
+    "cna_compute_shader_barrier": [
+      "src/cna/extensions/engine/compute.py:399"
+    ],
+    "cna_compute_shader_is_valid": [
+      "src/cna/extensions/engine/compute.py:298"
+    ],
+    "cna_compute_shader_copy_compile_error": [
+      "src/cna/extensions/engine/compute.py:303"
+    ],
+    "cna_compute_shader_destroy": [
+      "src/cna/extensions/engine/compute.py:280"
+    ],
+    "cna_gpu_timer_create": [
+      "src/cna/extensions/engine/compute.py:431"
+    ],
+    "cna_gpu_timer_is_supported": [
+      "src/cna/extensions/engine/compute.py:437"
+    ],
+    "cna_gpu_timer_copy_unsupported_reason": [
+      "src/cna/extensions/engine/compute.py:442"
+    ],
+    "cna_gpu_timer_begin": [
+      "src/cna/extensions/engine/compute.py:469"
+    ],
+    "cna_gpu_timer_end": [
+      "src/cna/extensions/engine/compute.py:473"
+    ],
+    "cna_gpu_timer_is_result_available": [
+      "src/cna/extensions/engine/compute.py:453"
+    ],
+    "cna_gpu_timer_poll": [
+      "src/cna/extensions/engine/compute.py:477"
+    ],
+    "cna_gpu_timer_get_last_milliseconds": [
+      "src/cna/extensions/engine/compute.py:464"
+    ],
+    "cna_gpu_timer_get_sample_count": [
+      "src/cna/extensions/engine/compute.py:459"
+    ],
+    "cna_gpu_timer_is_open": [
+      "src/cna/extensions/engine/compute.py:448"
+    ],
+    "cna_gpu_timer_destroy": [
+      "src/cna/extensions/engine/compute.py:432"
     ]
   }
 }

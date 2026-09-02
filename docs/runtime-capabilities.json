@@ -918,6 +918,86 @@
       "status": "NOT_USEFUL_FOR_PYTHON",
       "evidence": "cna_cnb_checked_add and cna_cnb_checked_multiply are the two cnb.h routes not imported",
       "notes": "They refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; a call would turn an exact answer into a narrower one. The bounds checks that matter happen where a value has to fit a native width, and name the value rather than truncating it."
+    },
+    {
+      "operation": "Engine layer availability",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "absent (version 0)",
+        "gpu": "present (version 2)"
+      },
+      "evidence": "cna_engine_layer_get_version; cna_engine_layer_copy_version_string; tests/test_engine_compute.py EngineIdentityTests",
+      "notes": "The two artifacts genuinely differ and that is the point of the row. Both export all 857 engine symbols; only the GPU artifact has an engine layer behind them. cna.extensions.engine.is_available() reads the version route, never the symbol table or the renderer's name."
+    },
+    {
+      "operation": "Engine absence reported as a build fact",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "EngineUnavailableError raised",
+        "gpu": "not applicable"
+      },
+      "evidence": "tests/test_engine_compute.py EngineAbsenceTests",
+      "notes": "Constructing an engine object on a build with no engine layer raises EngineUnavailableError, not EngineUnsupportedError. Only the control artifact can prove this side of the distinction."
+    },
+    {
+      "operation": "Compute memory-barrier mask",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_graphics_memory_barrier_has; seven containment cases cross-checked against Python's own bit arithmetic",
+      "notes": "The nine named bits are distinct powers of two and fold exactly to ALL. CNA's containment answer is compared with Python's rather than trusted."
+    },
+    {
+      "operation": "Storage buffer, byte and typed",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_storage_buffer_* (10 routes); tests/test_engine_compute.py StorageBufferTests",
+      "notes": "Upload and readback preserve bytes; a typed buffer reports both its element count and element size, a byte-sized one reports zero for both, and an element upload of the wrong shape is refused before CNA."
+    },
+    {
+      "operation": "Compute shader dispatch",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified on Mesa GL ES 3.2"
+      },
+      "evidence": "cna_compute_shader_* (12 routes); tests/test_engine_compute.py ComputeShaderTests",
+      "notes": "Evidence is buffer content Python predicts from the shader's own arithmetic, not a result code: uniforms reach the program, a changed uniform changes every element, and a second bound buffer is genuinely read. Two project-authored GLSL ES 3.10 programs."
+    },
+    {
+      "operation": "Compute shader image binding",
+      "status": "BLOCKED_RENDERER",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "unsupported"
+      },
+      "evidence": "cna_compute_shader_is_image_binding_supported answers false on the GPU artifact",
+      "notes": "A capability separate from compute itself: this renderer compiles and dispatches compute programs and still cannot bind a texture as a read/write image. bind_image refuses by name rather than failing inside CNA."
+    },
+    {
+      "operation": "Compute shader compile diagnostics",
+      "status": "BLOCKED_UPSTREAM",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "measured"
+      },
+      "evidence": "ENGINE-001 in docs/engine-upstream-findings.md; six bad sources, all CNA_RESULT_INTERNAL with no handle",
+      "notes": "engine_layer.h documents creation as succeeding for source that does not compile, with the failure read back through is_valid. It fails instead, and reports a caller's bad shader in the internal category. The binding raises ComputeShaderCompileError, keeps result 12 verbatim, and carries the compiler log."
+    },
+    {
+      "operation": "GPU timer query",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_gpu_timer_* (11 routes); tests/test_engine_compute.py GpuTimerTests",
+      "notes": "Timing is nondeterministic, so no duration is asserted. What is asserted is the state machine: closed before, open inside the measurement, closed after, a result that arrives on polling, a sample count that advances by exactly one, and a finite non-negative duration."
     }
   ]
 }

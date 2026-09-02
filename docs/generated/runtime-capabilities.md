@@ -16,11 +16,11 @@ the status held on every artifact it was measured on.
 ## Totals
 
 ```text
-CAPABILITIES=140
-VERIFIED_NATIVE=103
+CAPABILITIES=148
+VERIFIED_NATIVE=109
 VERIFIED_MANAGED=11
-BLOCKED_UPSTREAM=7
-BLOCKED_RENDERER=2
+BLOCKED_UPSTREAM=8
+BLOCKED_RENDERER=3
 BLOCKED_PLATFORM=5
 BLOCKED_HARDWARE=2
 BLOCKED_FIXTURE=4
@@ -174,3 +174,11 @@ ACTIONABLE_LOCAL=0
 | Native ContentManager beyond loader invocation | DELIBERATE_OUT_OF_SCOPE | same on all | content.h has roughly 92 routes; exactly cna_content_manager_create and cna_content_manager_destroy are bound | Opened only as far as cna_cnb_loader_invoke requires, which is measured: passing no manager is refused. It is a separate cache domain from Microsoft.Xna.Framework.Content.ContentManager, asserted rather than described, and no load, cache, manifest or root-directory route is bound. |
 | CNB Effect asset schema | BLOCKED_UPSTREAM | same on all | cnb.h reserves CNA_CNB_ASSET_TYPE_EFFECT with no schema; cna_cnb_compile_cnj refuses "Effect" by name | By design rather than by omission: CNA has many renderers, so a .cnb carrying one API's shader bytecode would be useless on the others. Nothing is fabricated; a caller asking for one is refused with the reason. |
 | CNB checked integer arithmetic routes | NOT_USEFUL_FOR_PYTHON | same on all | cna_cnb_checked_add and cna_cnb_checked_multiply are the two cnb.h routes not imported | They refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; a call would turn an exact answer into a narrower one. The bounds checks that matter happen where a value has to fit a native width, and name the value rather than truncating it. |
+| Engine layer availability | VERIFIED_NATIVE | control: absent (version 0); gpu: present (version 2) | cna_engine_layer_get_version; cna_engine_layer_copy_version_string; tests/test_engine_compute.py EngineIdentityTests | The two artifacts genuinely differ and that is the point of the row. Both export all 857 engine symbols; only the GPU artifact has an engine layer behind them. cna.extensions.engine.is_available() reads the version route, never the symbol table or the renderer's name. |
+| Engine absence reported as a build fact | VERIFIED_NATIVE | control: EngineUnavailableError raised; gpu: not applicable | tests/test_engine_compute.py EngineAbsenceTests | Constructing an engine object on a build with no engine layer raises EngineUnavailableError, not EngineUnsupportedError. Only the control artifact can prove this side of the distinction. |
+| Compute memory-barrier mask | VERIFIED_NATIVE | control: unavailable (no engine layer); gpu: verified | cna_graphics_memory_barrier_has; seven containment cases cross-checked against Python's own bit arithmetic | The nine named bits are distinct powers of two and fold exactly to ALL. CNA's containment answer is compared with Python's rather than trusted. |
+| Storage buffer, byte and typed | VERIFIED_NATIVE | control: unavailable (no engine layer); gpu: verified | cna_storage_buffer_* (10 routes); tests/test_engine_compute.py StorageBufferTests | Upload and readback preserve bytes; a typed buffer reports both its element count and element size, a byte-sized one reports zero for both, and an element upload of the wrong shape is refused before CNA. |
+| Compute shader dispatch | VERIFIED_NATIVE | control: unavailable (no engine layer); gpu: verified on Mesa GL ES 3.2 | cna_compute_shader_* (12 routes); tests/test_engine_compute.py ComputeShaderTests | Evidence is buffer content Python predicts from the shader's own arithmetic, not a result code: uniforms reach the program, a changed uniform changes every element, and a second bound buffer is genuinely read. Two project-authored GLSL ES 3.10 programs. |
+| Compute shader image binding | BLOCKED_RENDERER | control: unavailable (no engine layer); gpu: unsupported | cna_compute_shader_is_image_binding_supported answers false on the GPU artifact | A capability separate from compute itself: this renderer compiles and dispatches compute programs and still cannot bind a texture as a read/write image. bind_image refuses by name rather than failing inside CNA. |
+| Compute shader compile diagnostics | BLOCKED_UPSTREAM | control: unavailable (no engine layer); gpu: measured | ENGINE-001 in docs/engine-upstream-findings.md; six bad sources, all CNA_RESULT_INTERNAL with no handle | engine_layer.h documents creation as succeeding for source that does not compile, with the failure read back through is_valid. It fails instead, and reports a caller's bad shader in the internal category. The binding raises ComputeShaderCompileError, keeps result 12 verbatim, and carries the compiler log. |
+| GPU timer query | VERIFIED_NATIVE | control: unavailable (no engine layer); gpu: verified | cna_gpu_timer_* (11 routes); tests/test_engine_compute.py GpuTimerTests | Timing is nondeterministic, so no duration is asserted. What is asserted is the state machine: closed before, open inside the measurement, closed after, a result that arrives on polling, a sample count that advances by exactly one, and a finite non-negative duration. |

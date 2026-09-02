@@ -76,12 +76,26 @@ class CnbAnimationClip:
 
     __slots__ = ("_handle",)
 
-    def __init__(self, handle: _support.NativeHandle) -> None:
+    def __init__(self) -> None:
+        raise TypeError(
+            "CnbAnimationClip is produced by this module's own operations and is not "
+            "constructed directly")
+
+    @classmethod
+    def _wrap(cls, handle: _support.NativeHandle) -> "CnbAnimationClip":
+        """Builds the facade around an already-owned handle.
+
+        Private, and it bypasses ``__init__`` deliberately: the public
+        signature a caller reads must not name a native type, and there is
+        no owned handle a caller could supply anyway.
+        """
+        self = cls.__new__(cls)
         self._handle = handle
+        return self
 
     @classmethod
     def _adopt(cls, handle: int) -> "CnbAnimationClip":
-        return cls(_support.NativeHandle(
+        return cls._wrap(_support.NativeHandle(
             handle, "cna_cnb_animation_clip_destroy", "animation clip"))
 
     @property

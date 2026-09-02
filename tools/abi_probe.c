@@ -33,6 +33,7 @@
 #include "CNA/C/curve.h"
 #include "CNA/C/cnb.h"
 #include "CNA/C/content.h"
+#include "CNA/C/engine_layer.h"
 
 #define TYPE(T) do { \
     printf("TYPE %s %zu %zu\n", #T, sizeof(T), alignof(T)); \
@@ -40,6 +41,10 @@
 #define FIELD(T, F) do { \
     printf("FIELD %s %s %zu\n", #T, #F, offsetof(T, F)); \
 } while (0)
+
+// Generated from engine_layer.h by tools/generate_engine_abi.py, so no engine
+// structure can gain a field without this probe measuring it.
+#include "engine_abi_probe.inc"
 
 static CNA_Result lifecycle_callback(
     CNA_Handle game, const CNA_GameTime* game_time, void* context, CNA_CallbackError* out_error)
@@ -424,5 +429,6 @@ int main(void) {
     printf("VALUE CNA_SURFACE_FORMAT_BC7_SRGB_EXT %llu\n", (unsigned long long)(CNA_SURFACE_FORMAT_BC7_SRGB_EXT));
     printf("VALUE CNA_SURFACE_FORMAT_BYTE_EXT %llu\n", (unsigned long long)(CNA_SURFACE_FORMAT_BYTE_EXT));
     printf("VALUE CNA_SURFACE_FORMAT_USHORT_EXT %llu\n", (unsigned long long)(CNA_SURFACE_FORMAT_USHORT_EXT));
+    ENGINE_ABI_PROBE();
     return 0;
 }

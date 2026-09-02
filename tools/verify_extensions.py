@@ -88,8 +88,20 @@ def _annotation_leaks(path: Path, tree: ast.AST) -> list[dict[str, object]]:
     """
     leaks: list[dict[str, object]] = []
 
+    #: Methods Python calls through public syntax even though their names begin
+    #: with an underscore.  ``StorageBuffer(device, 64)`` publishes
+    #: ``__init__``'s annotations exactly as much as a named method publishes
+    #: its own, and ``with buffer:`` publishes ``__enter__``'s, so exempting
+    #: every dunder left the constructor -- the one signature a caller always
+    #: reads -- outside the gate.
+    PUBLIC_DUNDERS = frozenset({
+        "__init__", "__new__", "__enter__", "__exit__", "__call__", "__iter__",
+        "__next__", "__getitem__", "__setitem__", "__contains__", "__len__",
+        "__eq__", "__ne__", "__lt__", "__le__", "__gt__", "__ge__", "__hash__",
+    })
+
     def public(name: str) -> bool:
-        return not name.startswith("_")
+        return not name.startswith("_") or name in PUBLIC_DUNDERS
 
     def check(where: str, node: ast.AST | None, line: int) -> None:
         if node is None:

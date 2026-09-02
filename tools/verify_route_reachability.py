@@ -33,6 +33,7 @@ DECLARATION_MODULES = {
     SOURCE / "_cna_native/loader.py",
     SOURCE / "_cna_native/media_manifest.py",
     SOURCE / "_cna_native/cnb_manifest.py",
+    SOURCE / "_cna_native/engine_manifest.py",
 }
 
 #: Underscores a name-template's constant head must contain before it is specific

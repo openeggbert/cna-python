@@ -106,10 +106,24 @@ class CnbDocument:
 
     __slots__ = ("_handle", "_readers")
 
-    def __init__(self, handle: _support.NativeHandle) -> None:
+    def __init__(self) -> None:
+        raise TypeError(
+            "CnbDocument is produced by this module's own operations and is not "
+            "constructed directly")
+
+    @classmethod
+    def _wrap(cls, handle: _support.NativeHandle) -> "CnbDocument":
+        """Builds the facade around an already-owned handle.
+
+        Private, and it bypasses ``__init__`` deliberately: the public
+        signature a caller reads must not name a native type, and there is
+        no owned handle a caller could supply anyway.
+        """
+        self = cls.__new__(cls)
         # Constructed through the classmethods below; the handle is already owned.
         self._handle = handle
         self._readers: list[CnbReader] = []
+        return self
 
     # --- construction ------------------------------------------------------
 
@@ -128,7 +142,7 @@ class CnbDocument:
         handle = _support.out_handle(
             "cna_cnb_document_parse", pointer, c.c_uint64(count), view, limits_pointer)
         del keep, keep_origin, keep_limits
-        return cls(_support.NativeHandle(handle, "cna_cnb_document_destroy", "document"))
+        return cls._wrap(_support.NativeHandle(handle, "cna_cnb_document_destroy", "document"))
 
     @classmethod
     def parse_file(cls, path: "str | os.PathLike[str]", *,
@@ -142,7 +156,7 @@ class CnbDocument:
         limits_pointer, keep_limits = _limits_pointer(limits)
         handle = _support.out_handle("cna_cnb_document_parse_file", view, limits_pointer)
         del keep, keep_limits
-        return cls(_support.NativeHandle(handle, "cna_cnb_document_destroy", "document"))
+        return cls._wrap(_support.NativeHandle(handle, "cna_cnb_document_destroy", "document"))
 
     # --- lifetime ----------------------------------------------------------
 

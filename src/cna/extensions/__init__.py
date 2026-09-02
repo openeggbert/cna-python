@@ -19,10 +19,13 @@ Currently open:
 * :mod:`cna.extensions.content` -- CNA's own `.cnb` compiled content format and
   its `.cnj` source documents. The strict XNA ``ContentManager`` stays managed
   XNB and is not changed by it.
+* :mod:`cna.extensions.engine` -- CNA's modern engine layer: PBR materials,
+  post-process chains, shadows, clustered lighting, probes and GPU compute. The
+  strict XNA graphics surface stays the selected XNA 4.0 profile.
 """
 
 from __future__ import annotations
 
-from . import content, graphics
+from . import content, engine, graphics
 
-__all__ = ["content", "graphics"]
+__all__ = ["content", "engine", "graphics"]

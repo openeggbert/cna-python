@@ -82,8 +82,22 @@ class CnbReader:
 
     __slots__ = ("_handle",)
 
-    def __init__(self, handle: _support.NativeHandle) -> None:
+    def __init__(self) -> None:
+        raise TypeError(
+            "CnbReader is produced by this module's own operations and is not "
+            "constructed directly")
+
+    @classmethod
+    def _wrap(cls, handle: _support.NativeHandle) -> "CnbReader":
+        """Builds the facade around an already-owned handle.
+
+        Private, and it bypasses ``__init__`` deliberately: the public
+        signature a caller reads must not name a native type, and there is
+        no owned handle a caller could supply anyway.
+        """
+        self = cls.__new__(cls)
         self._handle = handle
+        return self
 
     @classmethod
     def over_bytes(cls, data: bytes, *, context: str = "",
@@ -99,11 +113,11 @@ class CnbReader:
         handle = _support.out_handle(
             "cna_cnb_reader_create", pointer, c.c_uint64(count), view, limits_pointer)
         del keep, keep_context, keep_limits
-        return cls(_support.NativeHandle(handle, "cna_cnb_reader_destroy", "reader"))
+        return cls._wrap(_support.NativeHandle(handle, "cna_cnb_reader_destroy", "reader"))
 
     @classmethod
     def _adopt(cls, handle: int, *, parent: _support.NativeHandle) -> "CnbReader":
-        return cls(_support.NativeHandle(
+        return cls._wrap(_support.NativeHandle(
             handle, "cna_cnb_reader_destroy", "reader", parent=parent))
 
     @property

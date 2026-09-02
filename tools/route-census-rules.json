@@ -10,7 +10,10 @@
     "progress.",
     "cnb.h is a selected family: its routes are ACTIONABLE_LOCAL until bound, which",
     "is what makes an unbound one a task rather than a decision. The two exceptions",
-    "carry their own rule and their own reason."
+    "carry their own rule and their own reason.",
+    "engine_layer.h is a selected family. It has no blanket rule: every route is",
+    "claimed by a named family, so a route CNA adds that no family covers becomes",
+    "UNREVIEWED and fails the gate rather than being absorbed as deliberate."
   ],
   "rules": [
     {
@@ -187,6 +190,1278 @@
       "boundReason": "imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable"
     },
     {
+      "id": "engine-engine-identity",
+      "family": "engine-identity",
+      "familyTitle": "engine-layer identity",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_engine_layer_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (engine-layer identity: the engine layer's own revision, which every capability report has to name) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name"
+    },
+    {
+      "id": "engine-compute-barrier",
+      "family": "compute-barrier",
+      "familyTitle": "compute memory-barrier mask",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_graphics_memory_barrier_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (compute memory-barrier mask: the containment test for the barrier bit mask a compute dispatch orders) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects compute memory-barrier mask -- the containment test for the barrier bit mask a compute dispatch orders"
+    },
+    {
+      "id": "engine-storage-buffer",
+      "family": "storage-buffer",
+      "familyTitle": "GPU storage buffers",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_storage_buffer_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (GPU storage buffers: the shader-storage buffer a compute dispatch reads and writes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects GPU storage buffers -- the shader-storage buffer a compute dispatch reads and writes"
+    },
+    {
+      "id": "engine-compute-shader",
+      "family": "compute-shader",
+      "familyTitle": "compute shaders",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_compute_shader_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (compute shaders: compute programs, their bindings and their dispatch) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects compute shaders -- compute programs, their bindings and their dispatch"
+    },
+    {
+      "id": "engine-gpu-timer",
+      "family": "gpu-timer",
+      "familyTitle": "GPU timers",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_gpu_timer_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (GPU timers: GPU-side elapsed-time queries) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries"
+    },
+    {
+      "id": "engine-render-target-pool",
+      "family": "render-target-pool",
+      "familyTitle": "render-target pools",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_render_target_pool_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through"
+    },
+    {
+      "id": "engine-shader-effect-factory",
+      "family": "shader-effect-factory",
+      "familyTitle": "shader-effect factories",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_shader_effect_factory_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset"
+    },
+    {
+      "id": "engine-scoped-render-target",
+      "family": "scoped-render-target",
+      "familyTitle": "scoped render targets",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_scoped_render_target_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change"
+    },
+    {
+      "id": "engine-fullscreen-pass",
+      "family": "fullscreen-pass",
+      "familyTitle": "full-screen drawing",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_fullscreen_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws"
+    },
+    {
+      "id": "engine-post-process-pass",
+      "family": "post-process-pass",
+      "familyTitle": "post-process passes",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_post_process_pass_",
+          "cna_post_process_effect_pass_",
+          "cna_post_process_context_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in"
+    },
+    {
+      "id": "engine-post-process-chain",
+      "family": "post-process-chain",
+      "familyTitle": "the post-process chain",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_post_process_chain_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets"
+    },
+    {
+      "id": "engine-pbr-material",
+      "family": "pbr-material",
+      "familyTitle": "PBR materials",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_pbr_material_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode"
+    },
+    {
+      "id": "engine-pbr-material-extensions",
+      "family": "pbr-material-extensions",
+      "familyTitle": "PBR material extensions",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_pbr_material_extensions_",
+          "cna_thin_film_iridescence_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence"
+    },
+    {
+      "id": "engine-pbr-effect",
+      "family": "pbr-effect",
+      "familyTitle": "PBR effects",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_pbr_effect_",
+          "cna_skinned_pbr_effect_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material"
+    },
+    {
+      "id": "engine-gltf-material-bridge",
+      "family": "gltf-material-bridge",
+      "familyTitle": "the glTF material bridge",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_gltf_material_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material"
+    },
+    {
+      "id": "engine-light-values",
+      "family": "light-values",
+      "familyTitle": "engine light values",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_directional_light_ext_",
+          "cna_point_light_ext_",
+          "cna_spot_light_ext_",
+          "cna_punctual_light_ext_",
+          "cna_shadow_cascade_state_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults"
+    },
+    {
+      "id": "engine-shadow-map",
+      "family": "shadow-map",
+      "familyTitle": "directional shadow maps",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_shadow_map_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices"
+    },
+    {
+      "id": "engine-cascaded-shadow-map",
+      "family": "cascaded-shadow-map",
+      "familyTitle": "cascaded shadow maps",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_cascaded_shadow_map_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping"
+    },
+    {
+      "id": "engine-cube-shadow-map",
+      "family": "cube-shadow-map",
+      "familyTitle": "cube shadow maps",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_cube_shadow_map_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces"
+    },
+    {
+      "id": "engine-spot-shadow-map",
+      "family": "spot-shadow-map",
+      "familyTitle": "spot shadow maps",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_spot_shadow_map_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows"
+    },
+    {
+      "id": "engine-effect-engine-bindings",
+      "family": "effect-engine-bindings",
+      "familyTitle": "engine state on an effect",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_effect_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL"
+    },
+    {
+      "id": "engine-clustered-shadow-policy",
+      "family": "clustered-shadow-policy",
+      "familyTitle": "the clustered shadow budget",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_shadow_policy_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget"
+    },
+    {
+      "id": "engine-contact-shadow",
+      "family": "contact-shadow",
+      "familyTitle": "contact shadows",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_contact_shadow_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination"
+    },
+    {
+      "id": "engine-depth-normal-prepass",
+      "family": "depth-normal-prepass",
+      "familyTitle": "the depth/normal prepass",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_depth_normal_prepass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects"
+    },
+    {
+      "id": "engine-clustered-light-values",
+      "family": "clustered-light-values",
+      "familyTitle": "clustered light values",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_light_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (clustered light values: the clustered light value structure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects clustered light values -- the clustered light value structure"
+    },
+    {
+      "id": "engine-clustered-light-set",
+      "family": "clustered-light-set",
+      "familyTitle": "the clustered light set",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_light_set_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes"
+    },
+    {
+      "id": "engine-cluster-grid",
+      "family": "cluster-grid",
+      "familyTitle": "the cluster grid",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_light_grid_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices"
+    },
+    {
+      "id": "engine-cluster-assignment",
+      "family": "cluster-assignment",
+      "familyTitle": "the cluster light assignment",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_light_assignment_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster"
+    },
+    {
+      "id": "engine-cluster-buffer",
+      "family": "cluster-buffer",
+      "familyTitle": "the clustered light upload buffer",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_light_buffer_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into"
+    },
+    {
+      "id": "engine-cluster-compute",
+      "family": "cluster-compute",
+      "familyTitle": "the compute cluster assignment",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_light_compute_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU"
+    },
+    {
+      "id": "engine-clustered-forward-effect",
+      "family": "clustered-forward-effect",
+      "familyTitle": "the clustered forward effect",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_clustered_forward_effect_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer"
+    },
+    {
+      "id": "engine-render-pipeline-settings",
+      "family": "render-pipeline-settings",
+      "familyTitle": "render pipeline settings",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_render_pipeline_settings_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline"
+    },
+    {
+      "id": "engine-render-pipeline",
+      "family": "render-pipeline",
+      "familyTitle": "the render pipeline",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_render_pipeline_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports"
+    },
+    {
+      "id": "engine-ssao",
+      "family": "ssao",
+      "familyTitle": "screen-space ambient occlusion",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_ssao_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass"
+    },
+    {
+      "id": "engine-ssr",
+      "family": "ssr",
+      "familyTitle": "screen-space reflections",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_ssr_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass"
+    },
+    {
+      "id": "engine-motion-blur",
+      "family": "motion-blur",
+      "familyTitle": "motion blur",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_motion_blur_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass"
+    },
+    {
+      "id": "engine-depth-of-field",
+      "family": "depth-of-field",
+      "familyTitle": "depth of field",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_depth_of_field_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion"
+    },
+    {
+      "id": "engine-atmospheric-sky",
+      "family": "atmospheric-sky",
+      "familyTitle": "the atmospheric sky",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_atmospheric_sky_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance"
+    },
+    {
+      "id": "engine-skybox",
+      "family": "skybox",
+      "familyTitle": "the skybox",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_skybox_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox"
+    },
+    {
+      "id": "engine-aerial-perspective",
+      "family": "aerial-perspective",
+      "familyTitle": "aerial perspective",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_aerial_perspective_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance"
+    },
+    {
+      "id": "engine-height-fog",
+      "family": "height-fog",
+      "familyTitle": "height fog",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_height_fog_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth"
+    },
+    {
+      "id": "engine-light-shaft",
+      "family": "light-shaft",
+      "familyTitle": "light shafts",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_light_shaft_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects light shafts -- radial light shafts"
+    },
+    {
+      "id": "engine-volumetric-fog",
+      "family": "volumetric-fog",
+      "familyTitle": "volumetric fog",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_volumetric_fog_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog"
+    },
+    {
+      "id": "engine-blit",
+      "family": "blit",
+      "familyTitle": "the blit pass",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_blit_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the blit pass: the exact source-to-destination copy) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy"
+    },
+    {
+      "id": "engine-bloom",
+      "family": "bloom",
+      "familyTitle": "bloom",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_bloom_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations"
+    },
+    {
+      "id": "engine-fxaa",
+      "family": "fxaa",
+      "familyTitle": "FXAA",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_fxaa_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing"
+    },
+    {
+      "id": "engine-chromatic-aberration",
+      "family": "chromatic-aberration",
+      "familyTitle": "chromatic aberration",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_chromatic_aberration_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset"
+    },
+    {
+      "id": "engine-film-grain",
+      "family": "film-grain",
+      "familyTitle": "film grain",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_film_grain_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects film grain -- the stochastic grain pass"
+    },
+    {
+      "id": "engine-lens-flare",
+      "family": "lens-flare",
+      "familyTitle": "lens flare",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_lens_flare_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare"
+    },
+    {
+      "id": "engine-ascii",
+      "family": "ascii",
+      "familyTitle": "the ASCII pass",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_ascii_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the ASCII pass: the ASCII-art post-process pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass"
+    },
+    {
+      "id": "engine-spatial-upscale",
+      "family": "spatial-upscale",
+      "familyTitle": "spatial upscaling",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_spatial_upscale_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass"
+    },
+    {
+      "id": "engine-tonemap",
+      "family": "tonemap",
+      "familyTitle": "tonemapping",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_tonemap_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve"
+    },
+    {
+      "id": "engine-color-grade",
+      "family": "color-grade",
+      "familyTitle": "colour grading",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_color_grade_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table"
+    },
+    {
+      "id": "engine-cube-lut",
+      "family": "cube-lut",
+      "familyTitle": "cube LUTs",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_cube_lut_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples"
+    },
+    {
+      "id": "engine-hdr-display-output",
+      "family": "hdr-display-output",
+      "familyTitle": "HDR display output",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_hdr_display_output_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions"
+    },
+    {
+      "id": "engine-auto-exposure",
+      "family": "auto-exposure",
+      "familyTitle": "auto exposure",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_auto_exposure_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure"
+    },
+    {
+      "id": "engine-light-probe",
+      "family": "light-probe",
+      "familyTitle": "light probes",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_light_probe_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe"
+    },
+    {
+      "id": "engine-light-probe-volume",
+      "family": "light-probe-volume",
+      "familyTitle": "light probe volumes",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_light_probe_volume_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation"
+    },
+    {
+      "id": "engine-light-probe-baker",
+      "family": "light-probe-baker",
+      "familyTitle": "the light probe baker",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_light_probe_baker_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene"
+    },
+    {
+      "id": "engine-environment-processor",
+      "family": "environment-processor",
+      "familyTitle": "the environment processor",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_environment_processor_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation"
+    },
+    {
+      "id": "engine-image-based-light",
+      "family": "image-based-light",
+      "familyTitle": "image-based lighting",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_image_based_light_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples"
+    },
+    {
+      "id": "engine-area-light",
+      "family": "area-light",
+      "familyTitle": "area lights",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_area_light_ext_",
+          "cna_area_light_shading_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms"
+    },
+    {
+      "id": "engine-area-light-brdf-table",
+      "family": "area-light-brdf-table",
+      "familyTitle": "the area-light BRDF table",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_area_light_brdf_table_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample"
+    },
+    {
+      "id": "engine-lod-group",
+      "family": "lod-group",
+      "familyTitle": "level of detail",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_lod_group_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one"
+    },
+    {
+      "id": "engine-frustum-culler",
+      "family": "frustum-culler",
+      "familyTitle": "frustum culling",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_frustum_culler_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling"
+    },
+    {
+      "id": "engine-instanced-renderer",
+      "family": "instanced-renderer",
+      "familyTitle": "instanced rendering",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_instanced_renderer_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer"
+    },
+    {
+      "id": "engine-gpu-instance-culler",
+      "family": "gpu-instance-culler",
+      "familyTitle": "GPU instance culling",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_gpu_instance_culler_",
+          "cna_gpu_cullable_instance_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling"
+    },
+    {
+      "id": "engine-indirect-draw",
+      "family": "indirect-draw",
+      "familyTitle": "indirect draws",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_indirect_draw_arguments_",
+          "cna_indirect_draw_indexed_arguments_",
+          "cna_graphics_device_draw_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer"
+    },
+    {
+      "id": "engine-particles",
+      "family": "particles",
+      "familyTitle": "particle systems",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_particle_system_",
+          "cna_particle_emitter_settings_",
+          "cna_particle_init"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value"
+    },
+    {
+      "id": "engine-decals",
+      "family": "decals",
+      "familyTitle": "decals",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_decal_pass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects decals -- projected decals"
+    },
+    {
+      "id": "engine-weighted-blended-transparency",
+      "family": "weighted-blended-transparency",
+      "familyTitle": "weighted blended transparency",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_weighted_blended_transparency_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency"
+    },
+    {
+      "id": "engine-transparent-draw-list",
+      "family": "transparent-draw-list",
+      "familyTitle": "the transparent draw list",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_transparent_draw_list_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission"
+    },
+    {
+      "id": "engine-debug-draw",
+      "family": "debug-draw",
+      "familyTitle": "debug drawing",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_debug_draw_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos"
+    },
+    {
+      "id": "engine-device-shadow-sampling",
+      "family": "device-shadow-sampling",
+      "familyTitle": "device shadow-sampling capability",
+      "match": {
+        "headers": [
+          "engine_layer.h"
+        ],
+        "prefixes": [
+          "cna_graphics_device_supports_shadow_sampling_ext"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected engine-layer extension family (device shadow-sampling capability: whether the device can sample a depth texture as a shadow comparison) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison"
+    },
+    {
       "id": "value-struct-initialisers",
       "match": {
         "suffixes": [
@@ -265,18 +1540,6 @@
       "status": "DELIBERATE_NON_BINDING",
       "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "boundReason": "imported: the selected 257-type XNA projection reaches this route"
-    },
-    {
-      "id": "engine-layer",
-      "match": {
-        "headers": [
-          "engine_layer.h"
-        ]
-      },
-      "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "CNA's modern engine layer is outside the selected XNA profile and outside the selected extension profile; opening it is a separate product decision, and it must never leak into Microsoft.Xna.Framework.",
-      "boundReason": "imported: the selected profile reaches this route"
     },
     {
       "id": "native-models",
@@ -394,6 +1657,31 @@
       "status": "DELIBERATE_NON_BINDING",
       "reason": "A CNA extension route with no XNA counterpart; it is reviewed and deliberately outside the selected profile rather than pending.",
       "boundReason": "imported: the selected profile reaches this route"
+    }
+  ],
+  "selectedFamilies": [
+    {
+      "id": "cnb-cnj",
+      "label": "CNB_CNJ",
+      "title": "CNA's compiled content format",
+      "headers": [
+        "cnb.h"
+      ],
+      "ruleIds": [
+        "cnb-curve-codec-dependency",
+        "cnb-loader-content-manager-dependency"
+      ],
+      "description": "`cnb.h` plus the two dependency slices its codecs and loader registry need.\nEvery route here is BOUND or carries its own written non-binding reason."
+    },
+    {
+      "id": "engine",
+      "label": "ENGINE",
+      "title": "CNA's modern engine layer",
+      "headers": [
+        "engine_layer.h"
+      ],
+      "ruleIds": [],
+      "description": "`engine_layer.h`, grouped into named sub-families. There is no blanket rule:\na route no sub-family claims is UNREVIEWED and fails the gate. Every route here\nis BOUND or carries its own written non-binding reason."
     }
   ]
 }
