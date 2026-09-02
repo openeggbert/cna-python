@@ -1798,6 +1798,16 @@
       },
       "evidence": "cna.extensions.engine.AsciiEffect; tests/test_engine_debug.py::StandaloneAsciiEffectTests",
       "notes": "The standalone effect is the only way to quantize an arbitrary texture into an arbitrary rectangle; an AsciiPass runs inside a post-process chain and can do neither. last_grid_dimensions is measured to describe the *source* -- its size divided by the cell size -- and not how many cells the destination covered: a 32-pixel source with an 8-pixel cell is four by four whether it fills the viewport or a 64 by 32 rectangle. The property's documentation said the second thing and now says the first, checked over three cell sizes and three destinations."
+    },
+    {
+      "operation": "The engine tests are measured by planting defects in them",
+      "status": "VERIFIED_MANAGED",
+      "byArtifact": {
+        "control": "not applicable",
+        "gpu": "verified"
+      },
+      "evidence": "tools/mutation/engine_mutations.py: PLANTED=47 KILLED=47 SURVIVED=0",
+      "notes": "Forty-seven plausible mistakes -- an axis swapped, a bound dropped, a view not released, a formula written in double where CNA writes it in float -- each planted alone and each required to make a *focused* test fail. The oracles are mutated too and on purpose: an oracle wrong in the same way as CNA would make a whole family agree on a defect. The first run killed 37 and left nine survivors, every one of them a real gap: the slice spacing was compared approximately where only an exact comparison can tell float from double, the shadow-policy lights were all white so a score weighting the channels equally agreed, the disc quad's axis scale was never compared with CNA at all, the destination rectangle of an ASCII draw was invisible to every assertion, and hysteresis was never tried across two levels. All nine are closed by new cases, one of the nine mutations was itself a no-op and was replaced, and the second run kills every one."
     }
   ]
 }

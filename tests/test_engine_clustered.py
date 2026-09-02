@@ -531,9 +531,15 @@ class ClusteredLightGridTests(unittest.TestCase):
         distances = self._grid(body)["distances"]
         expected = [oracle.slice_distance(NEAR, FAR, SLICES, index)
                     for index in range(SLICES + 1)]
+        # Exactly, not nearly. The oracle computes the exponential at single
+        # precision because CNA does, and measured over six near/far/count
+        # combinations the two agree to the bit. A double-precision oracle
+        # agrees to about three units in the last place instead -- which no
+        # approximate comparison at this magnitude could tell from a correct
+        # implementation, and which would silently accept a boundary that puts a
+        # light on the wrong side of a cluster.
         for index, (got, want) in enumerate(zip(distances, expected)):
-            self.assertAlmostEqual(got, want, places=5, msg=f"slice {index}")
-        # The two ends are the planes exactly, not nearly.
+            self.assertEqual(got, want, f"slice {index}")
         self.assertEqual(distances[0], oracle.f32(NEAR))
         self.assertEqual(distances[-1], oracle.f32(FAR))
 
@@ -849,6 +855,33 @@ class ClusteredLightAssignmentTests(unittest.TestCase):
 
         self.assertIsNotNone(in_game(body)["raised"])
 
+    def test_a_sphere_with_no_radius_reaches_no_cluster(self) -> None:
+        """A light set refuses a range of zero, so the sphere is passed directly.
+
+        An assignment takes raw bounds, which is the only way to reach this rule:
+        a zero-radius sphere sitting inside a cluster would otherwise be kept,
+        because the distance from a point inside a box is zero and zero is not
+        greater than zero.
+        """
+        def body(game, device, out):
+            with ClusteredLightGrid(device, TILES_X, TILES_Y, SLICES) as grid, \
+                    ClusteredLightAssignment(device) as assignment:
+                grid.set_projection(PROJECTION, NEAR, FAR)
+                inside = BoundingSphere(Vector3(0.0, 0.0, -5.0), 0.0)
+                real = BoundingSphere(Vector3(0.0, 0.0, -5.0), 3.0)
+                assignment.assign(grid, Matrix.Identity, [inside, real])
+                out.update(indices=assignment.indices(),
+                           offsets=assignment.offsets())
+
+        observed = in_game(body)
+        spheres = [(Vector3(0.0, 0.0, -5.0), 0.0), (Vector3(0.0, 0.0, -5.0), 3.0)]
+        offsets, indices = oracle.assign_clusters(
+            PROJECTION, TILES_X, TILES_Y, SLICES, NEAR, FAR, Matrix.Identity, spheres)
+        self.assertEqual(list(observed["indices"]), indices)
+        self.assertEqual(list(observed["offsets"]), offsets)
+        self.assertNotIn(0, observed["indices"], "the zero-radius sphere reaches nothing")
+        self.assertIn(1, observed["indices"], "the real one still does")
+
     def test_no_lights_assigns_nothing_rather_than_failing(self) -> None:
         def body(lights, grid, assignment, out):
             out.update(offsets=assignment.offsets(), indices=assignment.indices())
@@ -876,12 +909,18 @@ class ClusteredLightAssignmentTests(unittest.TestCase):
 class ClusteredShadowPolicyTests(unittest.TestCase):
     #: Three shadow casters at increasing distance, plus one that asks for nothing.
     #: In range of the camera, so the falloff is non-zero and the ranking is real.
+    #: Deliberately varied: a white one, a green one and a blue one of the same
+    #: intensity (so a score that weighted the channels equally would agree with
+    #: one that follows the eye), one closer to the camera than a unit (so the
+    #: falloff's distance floor is exercised), and one that asks for nothing.
     CASTERS = (_point(Vector3(1.0, 0.0, -2.0), range_=30.0, intensity=1.0,
                       color=Vector3(1.0, 1.0, 1.0), casts_shadows=True),
                _point(Vector3(4.0, 0.0, -4.0), range_=30.0, intensity=1.0,
-                      color=Vector3(1.0, 1.0, 1.0), casts_shadows=True),
+                      color=Vector3(0.0, 1.0, 0.0), casts_shadows=True),
                _point(Vector3(9.0, 0.0, -9.0), range_=30.0, intensity=1.0,
-                      color=Vector3(1.0, 1.0, 1.0), casts_shadows=True),
+                      color=Vector3(0.0, 0.0, 1.0), casts_shadows=True),
+               _point(Vector3(0.25, 0.0, -0.5), range_=30.0, intensity=1.0,
+                      color=Vector3(1.0, 0.5, 0.25), casts_shadows=True),
                _point(Vector3(2.0, 0.0, -3.0), range_=30.0, intensity=5.0,
                       color=Vector3(1.0, 1.0, 1.0), casts_shadows=False))
     CAMERA = Vector3(0.0, 0.0, 0.0)
@@ -927,10 +966,10 @@ class ClusteredShadowPolicyTests(unittest.TestCase):
                        refused=policy.refused_count)
 
         observed = self._policy(body)
-        self.assertEqual(observed["requests"], 3)
+        self.assertEqual(observed["requests"], 4)
         self.assertEqual(observed["refused"],
                          max(0, observed["requests"] - len(observed["selected"])))
-        self.assertNotIn(3, observed["selected"])
+        self.assertNotIn(4, observed["selected"])
 
     def test_the_budget_is_what_is_granted_and_the_rest_are_refused(self) -> None:
         def body(lights, policy, out):
@@ -940,7 +979,7 @@ class ClusteredShadowPolicyTests(unittest.TestCase):
 
         observed = self._policy(body, budget=1)
         self.assertEqual(len(observed["selected"]), 1)
-        self.assertEqual(observed["refused"], 2)
+        self.assertEqual(observed["refused"], 3)
         self.assertEqual([index for index, flag in enumerate(observed["flags"]) if flag],
                          list(observed["selected"]))
 
@@ -964,7 +1003,7 @@ class ClusteredShadowPolicyTests(unittest.TestCase):
 
         observed = self._policy(body, budget=0)
         self.assertEqual(observed["selected"], ())
-        self.assertEqual(observed["refused"], 3)
+        self.assertEqual(observed["refused"], 4)
 
     def test_a_light_outside_the_view_scores_zero_and_still_has_a_score(self) -> None:
         """Dropped by scoring nothing rather than by disappearing, so score() explains it."""
@@ -1228,7 +1267,22 @@ class AreaLightShadingTests(unittest.TestCase):
             for axis in ("X", "Y", "Z"):
                 self.assertAlmostEqual(getattr(got, axis), getattr(want, axis), places=6)
 
+    def test_a_disc_quad_matches_an_independent_construction(self) -> None:
+        from dataclasses import replace
+
+        light = replace(AreaLight.default(), shape=AreaLightShape.Disc,
+                        position=Vector3(1.0, -2.0, 3.0),
+                        right_axis=Vector3(0.5, 0.0, 0.0),
+                        up_axis=Vector3(0.0, 0.25, 0.0))
+        corners = area_light_quad(light, Vector3(0.0, 0.0, 0.0))
+        expected = oracle.area_light_quad(int(AreaLightShape.Disc), light.position,
+                                          light.right_axis, light.up_axis)
+        for got, want in zip(corners, expected):
+            for axis in "XYZ":
+                self.assertAlmostEqual(getattr(got, axis), getattr(want, axis), places=6)
+
     def test_a_disc_quad_encloses_the_area_a_disc_encloses(self) -> None:
+        """The identity the axis scale exists for, checked on CNA's own quad."""
         from dataclasses import replace
 
         light = replace(AreaLight.default(), shape=AreaLightShape.Disc,

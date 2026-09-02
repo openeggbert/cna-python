@@ -166,6 +166,28 @@ class LodGroupTests(unittest.TestCase):
             self.assertEqual(held, 0, "6.0 is within 2.0 of the boundary at 5.0")
             self.assertEqual(moved, 1, "20.0 is a real change, not a wobble")
 
+    def test_hysteresis_never_holds_across_more_than_one_boundary(self) -> None:
+        """A jump of two levels is a real change, whatever the margin.
+
+        Holding it back would be worse than the flicker hysteresis prevents:
+        the object would be drawn at a level chosen for a distance it left some
+        time ago. Checked with a margin far larger than the boundary it would
+        otherwise be sticky at.
+        """
+        group, _parts = self._group()
+        with group:
+            group.hysteresis = 1000.0
+            group.reset_hysteresis()
+            self.assertEqual(group.select_index(1.0), 0)
+            two_away = group.select_index(30.0)
+            self.assertEqual(
+                two_away,
+                oracle.lod_apply_hysteresis(
+                    list(SORTED_THRESHOLDS),
+                    oracle.lod_select_by_distance(list(SORTED_THRESHOLDS), 30.0), 0,
+                    30.0, 1000.0))
+            self.assertEqual(two_away, 2, "two levels at once is never sticky")
+
     def test_a_non_positive_margin_becomes_zero_rather_than_being_refused(self) -> None:
         with LodGroup() as group:
             self.assertEqual(group.hysteresis, 0.0)

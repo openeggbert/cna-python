@@ -339,22 +339,39 @@ class DebugGizmoTests(unittest.TestCase):
         def body(debug, device, out):
             with LightProbeVolume(BOX, 3, 2, 4) as volume:
                 debug.add_probe_volume_gizmo(volume, RED, 0.25)
+                # Indexed by the grid's own flat order, so a transposed lattice
+                # would compare against a different position rather than a
+                # missing one.
+                positions = [None] * volume.probe_count
+                for z in range(4):
+                    for y in range(2):
+                        for x in range(3):
+                            positions[oracle.probe_volume_index(3, 2, x, y, z)] = \
+                                volume.probe_position(x, y, z)
                 out.update(count=debug.line_count, probes=volume.probe_count,
-                           positions=[volume.probe_position(x, y, z)
-                                      for z in range(4) for y in range(2)
-                                      for x in range(3)],
-                           vertices=debug.vertices(True))
+                           positions=positions, vertices=debug.vertices(True))
 
         observed = self._drawn(body)
         self.assertEqual(observed["count"],
                          oracle.debug_probe_volume_lines(observed["probes"]))
-        # Every probe position is the midpoint of one of the crosses.
-        seen = {tuple(round(value, 4) for value in vertex.position)
-                for vertex in observed["vertices"]}
-        for position in observed["positions"]:
-            self.assertIn(
-                (round(position.X - 0.25, 4), round(position.Y, 4),
-                 round(position.Z, 4)), seen)
+        # The box first, then three lines per probe, in the grid's own flat
+        # order -- x fastest, then y, then z. Checked as a sequence rather than
+        # as a set, because a set would agree with a transposed lattice.
+        pairs = list(zip(observed["vertices"][::2], observed["vertices"][1::2]))
+        crosses = pairs[DEBUG_DRAW_BOX_EDGE_COUNT:]
+        self.assertEqual(len(crosses), 3 * observed["probes"])
+        for z in range(4):
+            for y in range(2):
+                for x in range(3):
+                    flat = oracle.probe_volume_index(3, 2, x, y, z)
+                    start, end = crosses[flat * 3]
+                    position = observed["positions"][flat]
+                    self.assertAlmostEqual(start.position.X, position.X - 0.25,
+                                           places=4, msg=f"probe ({x}, {y}, {z})")
+                    self.assertAlmostEqual(end.position.X, position.X + 0.25,
+                                           places=4, msg=f"probe ({x}, {y}, {z})")
+                    self.assertAlmostEqual(start.position.Y, position.Y, places=4)
+                    self.assertAlmostEqual(start.position.Z, position.Z, places=4)
 
     def test_a_cluster_grid_is_one_box_per_slice(self) -> None:
         def body(debug, device, out):
@@ -470,6 +487,51 @@ class StandaloneAsciiEffectTests(unittest.TestCase):
         with self.assertRaises(TypeError) as caught:
             AsciiEffect()
         self.assertIn("AsciiPass.ascii_effect", str(caught.exception))
+
+    def test_the_destination_rectangle_bounds_where_the_glyphs_land(self) -> None:
+        """Rendered, because the grid dimensions cannot see the rectangle at all.
+
+        The glyphs are drawn into a render target cleared to a colour nothing
+        else produces, and the corner outside the rectangle is asserted to still
+        hold it. A draw that ignored the rectangle would fill the whole target
+        and that corner would change.
+        """
+        def body(game, device, out):
+            from Microsoft.Xna.Framework.Graphics import (
+                RenderTarget2D, SurfaceFormat, Texture2D,
+            )
+
+            source = Texture2D(device, 16, 16, False, SurfaceFormat.Color)
+            source.SetData([Color(240, 240, 240, 255)] * 256)
+            target = RenderTarget2D(device, 32, 32)
+            try:
+                with AsciiEffect(device) as effect:
+                    effect.cell_size = (4, 4)
+                    device.SetRenderTarget(target)
+                    try:
+                        device.Clear(Color(7, 11, 13, 255))
+                        effect.draw(source, Rectangle(0, 0, 16, 16))
+                    finally:
+                        device.SetRenderTarget(None)
+                    pixels = [Color(0, 0, 0, 0)] * (32 * 32)
+                    target.GetData(pixels)
+                    out["outside"] = tuple(int(value) for value in
+                                           (pixels[31 * 32 + 31].R,
+                                            pixels[31 * 32 + 31].G,
+                                            pixels[31 * 32 + 31].B))
+                    out["inside_changed"] = any(
+                        (int(pixels[y * 32 + x].R), int(pixels[y * 32 + x].G),
+                         int(pixels[y * 32 + x].B)) != (7, 11, 13)
+                        for y in range(16) for x in range(16))
+            finally:
+                target.Dispose()
+                source.Dispose()
+
+        observed = in_game(body)
+        self.assertEqual(observed["outside"], (7, 11, 13),
+                         "a draw that ignored the rectangle would have covered this")
+        self.assertTrue(observed["inside_changed"],
+                        "and it must actually have drawn inside it")
 
     def test_the_grid_describes_the_source_and_not_the_destination(self) -> None:
         """Measured, and the opposite of what "grid dimensions" suggests.
