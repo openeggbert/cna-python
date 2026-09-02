@@ -581,13 +581,13 @@
   "consumers": {
     "cna_get_abi_version": [],
     "cna_error_get_last_info": [
-      "src/_cna_native/loader.py:761"
+      "src/_cna_native/loader.py:817"
     ],
     "cna_error_get_last_message_size": [
-      "src/_cna_native/loader.py:764"
+      "src/_cna_native/loader.py:820"
     ],
     "cna_error_copy_last_message": [
-      "src/_cna_native/loader.py:768"
+      "src/_cna_native/loader.py:824"
     ],
     "cna_game_create": [
       "src/Microsoft/Xna/Framework/_game.py:196"

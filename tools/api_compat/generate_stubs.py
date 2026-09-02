@@ -134,10 +134,6 @@ HEADERS = {
         "from .. import ContentItem, ExternalReferenceOfT, NamedValueDictionaryOfT",
         "",
         "T = TypeVar(\"T\")",
-        "# XNA constrains MaterialContent.GetValueTypeProperty's T to a value",
-        "# type; the constraint is projected as the bound and the name carries",
-        "# it, so the type's three differently constrained Ts stay distinct.",
-        "TValue = TypeVar(\"TValue\", bound=object)",
         "ElementType = TypeVar(\"ElementType\")",
         "TargetType = TypeVar(\"TargetType\")",
         "TInput = TypeVar(\"TInput\")",
@@ -379,16 +375,18 @@ def main() -> int:
         found, _ = target_types(sibling)
         targets.update(found)
     stub_paths = selected.stub_paths
+    by_namespace = {selected.namespace_of(package): package
+                    for package in selected.packages}
     by_package: dict[str, list[dict]] = {package: [] for package in selected.packages}
     for expected in [value for contract in contracts for value in contract["types"]]:
         identity = expected["name"]
         if identity not in targets:
             continue
-        package = identity.rsplit(".", 1)[0]
-        if package in by_package:
+        package = by_namespace.get(identity.rsplit(".", 1)[0])
+        if package is not None:
             by_package[package].append(expected)
     for package, values in by_package.items():
-        lines = [*HEADERS[package], ""]
+        lines = [*HEADERS[selected.namespace_of(package)], ""]
         nested = {value["name"].split("+", 1)[0]: value for value in values
                   if "+" in value["name"] and "." in projected_type_name(value["name"])}
         for expected in values:

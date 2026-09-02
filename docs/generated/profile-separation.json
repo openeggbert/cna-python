@@ -1,0 +1,32 @@
+{
+ "schemaVersion": 1,
+ "summary": {
+  "DEFAULT_PROFILE_TYPES": 257,
+  "DEFAULT_PROFILE_MEMBERS": 2423,
+  "PLATFORM_PROFILES": 1,
+  "DECLARED_REMOVALS": 1,
+  "PLATFORM_LEAKS": 0,
+  "WINDOWS_ONLY_REACHABLE_FROM_PLATFORM": 0,
+  "UNJUSTIFIED_REMOVALS": 0,
+  "DEFAULT_PROFILE_DRIFT": 0
+ },
+ "platforms": [
+  {
+   "profile": "xna40-xbox360-runtime",
+   "types": 318,
+   "sharedWithWindows": 318,
+   "platformOnlyTypes": 0,
+   "windowsOnlyTypes": 13
+  }
+ ],
+ "removals": [
+  {
+   "profile": "xna40-xbox360-runtime",
+   "member": "Microsoft.Xna.Framework.Net.NetworkSessionJoinException.GetObjectData"
+  }
+ ],
+ "leaks": [],
+ "windowsOnlyReachable": [],
+ "unjustified": [],
+ "drift": []
+}

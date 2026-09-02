@@ -67,7 +67,20 @@ class Profile:
 
     @property
     def packages(self) -> tuple[str, ...]:
+        """The Python packages to import, in import order."""
         return tuple(self.data["pythonPackages"])
+
+    def namespace_of(self, package: str) -> str:
+        """The XNA namespace a Python package projects.
+
+        Usually the same string: ``Microsoft.Xna.Framework.Graphics`` is both.
+        A *platform* profile is the exception -- its packages live under an
+        import root of their own, because two profiles cannot both be
+        ``Microsoft.Xna.Framework`` in one interpreter -- and the mapping from
+        one to the other is declared rather than derived, so a package that
+        moved cannot silently project a namespace it does not hold.
+        """
+        return self.data.get("packageNamespaces", {}).get(package, package)
 
     @property
     def siblings(self) -> tuple[str, ...]:
@@ -281,6 +294,7 @@ def parse_stubs(profile: Profile) -> tuple[dict[str, StubType], dict[str, TypeVa
     result: dict[str, StubType] = {}
     typevars: dict[str, TypeVarDeclaration] = {}
     for package, path in profile.stub_paths.items():
+        namespace = profile.namespace_of(package)
         tree = ast.parse(path.read_text(), filename=str(path))
         for node in tree.body:
             if not isinstance(node, (ast.Assign, ast.AnnAssign)):
@@ -342,7 +356,7 @@ def parse_stubs(profile: Profile) -> tuple[dict[str, StubType], dict[str, TypeVa
                     ),
                 )
                 declaration.callables.setdefault(member.name, []).append(callable_value)
-            result[projected_type_identity(package, qualified_name)] = declaration
+            result[projected_type_identity(namespace, qualified_name)] = declaration
             for nested in node.body:
                 if isinstance(nested, ast.ClassDef) and not nested.name.startswith("_"):
                     parse_class(nested, f"{qualified_name}.{nested.name}")
@@ -443,20 +457,35 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
     return projected_type_name(value).replace("+", ".")
 
 
+def _type_constraints(value: dict[str, Any]) -> list[str]:
+    """One generic parameter's type constraints, with the redundant one dropped.
+
+    ``where T : struct`` is a *special* constraint, and the two mscorlibs this
+    repository reads encode it differently: .NET 4.5's records the special
+    constraint alone, while the Compact Framework's the Xbox assemblies were
+    built against records it **and** an explicit ``System.ValueType`` type
+    constraint. Both say the same thing, so counting the second one would make
+    two identical signatures look different -- and would report a metadata
+    encoding as a platform difference, which is exactly what a profile
+    comparison must not do.
+    """
+    constraints = list(value.get("typeConstraints", ()))
+    if "struct" in value.get("specialConstraints", ()) \
+            and "System.ValueType" in constraints:
+        constraints.remove("System.ValueType")
+    return constraints
+
+
 def _projected_generic_name(value: dict[str, Any]) -> str:
     """The Python TypeVar name for one CLR generic parameter.
 
-    A constrained parameter is renamed after its constraint. Python declares a
-    TypeVar once per module, so two CLR parameters that share a name and differ
-    only in their constraint -- ``MaterialContent`` has three ``T``s, one
-    ``struct``, one ``class``, one unconstrained -- would otherwise have to be
-    one declaration that is wrong for at least two of them.
+    A parameter constrained to a *named type* is renamed after it. Python
+    declares a TypeVar once per module, so two CLR parameters that share a name
+    and differ in what they are constrained to would otherwise have to be one
+    declaration that is wrong for at least one of them.
     """
-    constraints = value.get("typeConstraints", ())
-    if constraints == ["Microsoft.Xna.Framework.Graphics.IVertexType"]:
+    if _type_constraints(value) == ["Microsoft.Xna.Framework.Graphics.IVertexType"]:
         return value["name"] + "Vertex"
-    if constraints == ["System.ValueType"]:
-        return value["name"] + "Value"
     return value["name"]
 
 
@@ -603,12 +632,13 @@ def target_types(profile: Profile) -> tuple[dict[str, type], list[dict[str, str]
     diagnostics: list[dict[str, str]] = []
     seen_objects: dict[int, str] = {}
     for package_name in profile.packages:
+        namespace = profile.namespace_of(package_name)
         package = importlib.import_module(package_name)
         for name in getattr(package, "__all__", ()):
             value = getattr(package, name)
             if not isinstance(value, type):
                 continue
-            identity = projected_type_identity(package_name, name)
+            identity = projected_type_identity(namespace, name)
             previous = seen_objects.get(id(value))
             if previous is not None and previous != identity:
                 diagnostics.append({"category": "UNEXPECTED_TYPE", "type": identity,
@@ -617,7 +647,7 @@ def target_types(profile: Profile) -> tuple[dict[str, type], list[dict[str, str]
             seen_objects[id(value)] = identity
             result[identity] = value
         for identity, mapped in _TYPE_NAMES.items():
-            if identity.rsplit(".", 1)[0] != package_name or "." not in mapped:
+            if identity.rsplit(".", 1)[0] != namespace or "." not in mapped:
                 continue
             parts = mapped.split(".")
             value = package
@@ -690,9 +720,20 @@ def is_property_shape(raw: object, static: bool) -> tuple[bool, bool, bool]:
 
 
 def actual_member_names(owner: type) -> set[str]:
+    """Every public name the type itself declares.
+
+    A member a *platform profile* has declared removed is not one of them: it is
+    spelled as a descriptor that raises ``AttributeError`` on access, which is
+    what a member that is not there does, and counting it here would report the
+    absence as an extra member. The profile-separation gate checks every
+    removal against the two contracts that justify it, so this cannot be used to
+    hide a member the platform really has.
+    """
     language = set(json.loads(RULES.read_text())["languageMembers"])
     return {name for name in owner.__dict__
-            if (not name.startswith("_") or name in language) and name not in {"None"}}
+            if (not name.startswith("_") or name in language)
+            and name not in {"None"}
+            and not getattr(owner.__dict__[name], "_xna_removed_on_platform", False)}
 
 
 def add(diagnostics: list[dict[str, str]], category: str, type_name: str, detail: str) -> None:
@@ -812,7 +853,7 @@ def compare_generic_bounds(identity: str, name: str, members: list[dict[str, Any
     measured: set[tuple[str, str | None]] = set()
     for member in members:
         for parameter in member.get("genericParameters", ()):
-            constraints = parameter.get("typeConstraints", ())
+            constraints = _type_constraints(parameter)
             expected_bound = mapped_type(constraints[0]) if len(constraints) == 1 else None
             projected_name = _projected_generic_name(parameter)
             key = (projected_name, expected_bound)

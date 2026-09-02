@@ -104,16 +104,46 @@ ignoring the refusal would hide the divergence.
 
 **Unblocks when** `destroy` accepts a disposed session, or `dispose` releases it.
 
-## 5. `~/deps/cna-c-abi-0.21.0` predates a route the current headers declare
+## 5. No CNA artifact exports a route the current headers declare
 
 **Route** `cna_network_session_replace_session_properties`.
 
-**Expected.** A pinned `0.21.0` artifact exports every route the `0.21.0`
-headers declare.
+**Expected.** A `0.21.0` artifact exports every route the `0.21.0` headers
+declare -- 4,055 of them.
 
-**Actual.** The copy under `~/deps/cna-c-abi-0.21.0/` does not export it; both
-qualified build trees do. This is an artifact-age finding rather than a CNA
-defect: the ABI audit runs against the two qualified artifacts, where
-`MISSING_SYMBOLS` is 0.
+**Actual.** Every artifact on this machine exports 4,054, and the one it is
+missing is this route. Measured on 2026-09-02 across seven builds:
 
-**Unblocks when** the `~/deps` copy is refreshed from a current build.
+| artifact | `cna_` symbols | has the route |
+| --- | --- | --- |
+| `~/deps/cna-c-abi-0.21.0` | 4054 | no |
+| `~/deps/cna-c-abi-0.21.0-opengl33` | 4054 | no |
+| `~/deps/cna-c-abi-0.21.0-opengles3-fx` | 4054 | no |
+| `~/deps/cna-c-abi-0.21.0-software` | 4054 | no |
+| `cnanext/build-asan` | 4054 | no |
+| `cnanext/build-ubsan` | 4054 | no |
+| `cnanext/cmake-build-opengl33` | 4054 | no |
+
+Two build trees *did* export it earlier in this session --
+`cmake-build-headless` (sha256 `94078be9…`) and `cmake-build-opengles3`
+(sha256 `65ce46a4…`), both built 2026-09-01 -- and the ABI audit and the whole
+test suite were green against them. Both directories were removed while this
+session was running, by another agent's rebuild, and no artifact that replaced
+them has the route.
+
+**Local behaviour.** The loader used to refuse any library missing a bound
+symbol, which is right for drift and wrong for a route CNA has declared and not
+yet shipped: it made the other 4,054 routes unusable because of one. It now
+carries a short declared list -- `_cna_native.loader.PENDING_ROUTES` -- and a
+route on it binds to a stub that raises when it is *called*, naming the route,
+the artifact and this finding. Every other missing symbol still refuses the
+library, and `tests/test_pending_routes.py` requires that.
+
+`tools/audit_cna_abi.py` reports `PENDING_ROUTES` separately from
+`MISSING_SYMBOLS`, and fails if a pending route is not in the canonical headers
+(`PENDING_ROUTES_NOT_IN_HEADERS`) or if the artifact does export it after all
+(`STALE_PENDING_ROUTES`). So the list cannot become a place to hide a typo, and
+it deletes itself the day a build ships the route.
+
+**Unblocks when** any CNA artifact exports it: the audit then reports
+`STALE_PENDING_ROUTES=1` and the entry comes out.

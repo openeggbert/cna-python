@@ -245,7 +245,23 @@ def main() -> int:
          "arity": len(parameters), "ownership": ownership}
         for symbol, return_type, parameters, ownership in FUNCTION_MANIFEST
     ]
-    missing = sorted(set(required) - exported)
+    from _cna_native.loader import PENDING_ROUTES
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from cna_headers import parse_include_directory  # noqa: E402
+
+    declarations = set(parse_include_directory(
+        cna_root / "modules" / "c-api" / "include"))
+    absent = sorted(set(required) - exported)
+    # A route CNA has *declared* and no artifact ships yet is separated from a
+    # symbol that is simply not there. The separation is only honest while both
+    # halves are checked: a pending route must be declared in the canonical
+    # headers, and a declaration for a route the artifact does export is stale.
+    pending = [symbol for symbol in absent if symbol in PENDING_ROUTES]
+    missing = [symbol for symbol in absent if symbol not in PENDING_ROUTES]
+    undeclared = sorted(symbol for symbol in PENDING_ROUTES
+                        if symbol not in declarations)
+    stale = sorted(symbol for symbol in PENDING_ROUTES if symbol in exported)
     report = {
         "schemaVersion": 1,
         "summary": {
@@ -254,11 +270,18 @@ def main() -> int:
             "C_LAYOUT_MEASUREMENTS": len(c_values),
             "CTYPES_LAYOUT_MEASUREMENTS": len(py_values),
             "MISSING_SYMBOLS": len(missing),
+            "PENDING_ROUTES": len(pending),
+            "PENDING_ROUTES_NOT_IN_HEADERS": len(undeclared),
+            "STALE_PENDING_ROUTES": len(stale),
             "ABI_MISMATCHES": len(mismatches),
         },
         "boundFunctions": required,
         "functionManifest": manifest,
         "missingSymbols": missing,
+        "pendingRoutes": [{"symbol": symbol, "reason": PENDING_ROUTES[symbol]}
+                          for symbol in pending],
+        "pendingRoutesNotInHeaders": undeclared,
+        "stalePendingRoutes": stale,
         "mismatches": mismatches,
         "c": c_values,
         "ctypes": py_values,
@@ -267,7 +290,7 @@ def main() -> int:
         Path(args.output).write_text(json.dumps(report, indent=2) + "\n")
     for name, value in report["summary"].items():
         print(f"{name}={value}")
-    return 1 if missing or mismatches else 0
+    return 1 if missing or mismatches or undeclared or stale else 0
 
 
 if __name__ == "__main__":

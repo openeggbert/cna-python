@@ -181,6 +181,32 @@ asset-name special case is an acceptable way to make it green.
 - [x] Record four narrow blockers, each citing where the missing capability is
   documented and what would unblock it, in `docs/content-pipeline.md`.
 
+## Completed platform profile: `xna40-xbox360-runtime`
+
+- [x] Measure the Xbox 360 surface against Microsoft's own metadata and the
+  Compact Framework `mscorlib` the assemblies were built for: 318 types, 3,577
+  CLR members, 2,986 mapped Python members, zero diagnostics.
+- [x] Establish that it is a strict subset -- zero Xbox-only types, zero
+  Xbox-only members, zero enum-value differences, zero type-shape differences --
+  and that the whole difference is thirteen `Microsoft.Xna.Framework.Design`
+  converters and ten .NET-Framework-only serialization members.
+- [x] *Generate* the profile from the contract rather than writing 316
+  re-exports by hand, with `--check` proving a regeneration changes nothing.
+- [x] Give a member the platform does not declare a spelling that does not lie:
+  a descriptor that raises on *access*, so `hasattr` answers False, while the
+  narrowed type stays catchable as the Windows one it derives from.
+- [x] Gate the separation with `tools/verify_profile_separation.py`: zero
+  platform leaks, zero Windows-only names reachable from the platform root, zero
+  unjustified removals, and the default Windows profile still exactly 257 types
+  and 2,423 members. Each is planted and required to fail.
+- [x] Find and fix the one place a *metadata encoding* was about to be reported
+  as a platform difference: the two `mscorlib`s spell `where T : struct`
+  differently, and the verifier now reads both spellings as the one thing they
+  say.
+- [x] Record the profile in `docs/xbox360-profile.md`, including what it is not:
+  a surface, verified on Windows, and never a claim about hardware nobody here
+  has.
+
 ## Current measured boundary
 
 - Strict profiles, each against its own reference contract:
@@ -190,6 +216,7 @@ asset-name special case is an acceptable way to make it green.
   | `xna40-windows-runtime` | 257 / 2,964 | 257 / 2,887 | 257 / 2,423 | 0 |
   | `xna40-windows-online` | 74 / 676 | 74 / 605 | 74 / 605 | 0 |
   | `xna40-windows-content-pipeline` | 128 / 743 | 128 / 598 | 128 / 598 | 0 |
+  | `xna40-xbox360-runtime` | 318 / 3,577 | 318 / 2,986 | 318 / 2,986 | 0 |
 
   Every mismatch, leak, allowlist and unmeasured category is zero in both.
   Normal and leak-only strict checks pass. The two share two Python packages
@@ -208,16 +235,27 @@ asset-name special case is an acceptable way to make it green.
   satisfy its own reachability.
 - Behavior evidence: 181 PURE_XNA_DERIVED observations, 1,004 assertions, zero
   failures.
-- Runtime evidence: two artifacts. A non-windowed control and an OPENGLES3
-  renderer on an isolated display, both with a real SDL3 mixer on a deterministic
-  device. Every capability row names the artifact that produced it.
+- Runtime evidence: two artifacts. A non-windowed HEADLESS control
+  (`~/deps/cna-c-abi-0.21.0`) and an OPENGL33 renderer on an isolated display
+  (`~/deps/cna-c-abi-0.21.0-opengl33`), both with a real SDL3 mixer on a
+  deterministic device. Every capability row names the artifact that produced
+  it. The two build trees this session started against were removed by another
+  agent's rebuild while it was running; the pinned artifacts that replaced them
+  are missing one declared route, which is upstream finding 5 and is now
+  handled by a declared pending-route list rather than by refusing the library.
+- Native boundary: 2,626 bound routes, 0 missing symbols, 1 declared pending
+  route present in the canonical headers and in no artifact yet, 0 stale
+  pending declarations, 0 ABI mismatches.
 - Extension profile: `cna.extensions.graphics`, `.content`, `.engine`,
   `.devices`, `.input` and `.online`, 59 modules and 1,126 public names, zero
   surface diagnostics, and no dependency from the XNA namespace on any of them.
 - Content Pipeline coverage: 667 projected members, 623 implemented, 39 abstract
   by design, four blockers with written reasons, zero unreviewed, zero stale,
   `CONTENT_PIPELINE_ACTIONABLE_LOCAL = 0`.
-- Falsifiability: 243 planted defects across six families, all killed.
+- Profile separation: zero platform leaks, zero Windows-only names reachable
+  from a platform root, zero unjustified removals, and the default Windows
+  profile unchanged at 257 types and 2,423 members.
+- Falsifiability: 250 planted defects across seven families, all killed.
 
 ## Invariants
 
@@ -235,21 +273,18 @@ asset-name special case is an acceptable way to make it green.
 ## The six opened scopes
 
 On 2026-09-02 every remaining "future profile" and "unopened extension" decision
-was revoked by product decision, and all six scopes were opened. Four are
+was revoked by product decision, and all six scopes were opened. Five are
 finished:
 
 1. Sensors and device services -- `docs/device-extensions.md`.
 2. Extended input -- `docs/input-extensions.md`.
 3. Net, wider GamerServices and Avatar -- `docs/online-profile.md`.
 4. The XNA Content Pipeline -- `docs/content-pipeline.md`.
+5. The Xbox 360 surface profile -- `docs/xbox360-profile.md`.
 
-Two remain, each with its reference contract already generated and pinned:
+One remains:
 
-4. **Xbox 360 profile** (`xna40-xbox360-runtime`, 318 types, 3,577 members),
-   already measured as a strict subset of Windows runtime+online: zero
-   Xbox-only types, zero Xbox-only members, zero enum value differences and
-   zero type-shape differences.
-5. **Windows Phone profile**. The reference assemblies are proven absent from
+6. **Windows Phone profile**. The reference assemblies are proven absent from
    this machine, so every row that depends on reference metadata is
    `BLOCKED_REFERENCE_ASSET`; the locally authoritative and structural work is
    not blocked by that and is not excused by it.

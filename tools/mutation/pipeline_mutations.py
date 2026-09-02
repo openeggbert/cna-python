@@ -560,6 +560,31 @@ MUTATIONS = [
 ]
 
 
+#: The generated trees a mutation may need rebuilt before it means anything, and
+#: the generator that rebuilds each. A defect in a *generator* only reaches the
+#: code under test once the generator has run.
+GENERATORS = {
+    "tools/generate_xbox_profile.py": (
+        "tools/generate_xbox_profile.py", "src/cna/profiles"),
+}
+
+
+def _regenerate(relative: str) -> dict[Path, str]:
+    """Runs the generator a mutated file belongs to; answers what it overwrote."""
+    entry = GENERATORS.get(relative)
+    if entry is None:
+        return {}
+    generator, tree = entry
+    root = ROOT / tree
+    before = {path: path.read_text(encoding="utf-8")
+              for path in root.rglob("*.py")}
+    environment = dict(os.environ)
+    environment["PYTHONPATH"] = f"{ROOT / 'src'}{os.pathsep}{ROOT}"
+    subprocess.run([sys.executable, generator], cwd=str(ROOT), env=environment,
+                   capture_output=True, text=True, timeout=300)
+    return before
+
+
 def run(module: str) -> tuple[bool, str]:
     environment = dict(os.environ)
     environment["PYTHONPATH"] = f"{ROOT / 'src'}{os.pathsep}{ROOT}"
@@ -578,12 +603,15 @@ def main() -> int:
             inapplicable.append((label, f"anchor appears {original.count(old)} times"))
             continue
         path.write_text(original.replace(old, new), encoding="utf-8")
+        generated = _regenerate(relative)
         try:
             for cache in ROOT.rglob("__pycache__"):
                 subprocess.run(["rm", "-rf", str(cache)], check=False)
             passed, stderr = run(module)
         finally:
             path.write_text(original, encoding="utf-8")
+            for target, text in generated.items():
+                target.write_text(text, encoding="utf-8")
             for cache in ROOT.rglob("__pycache__"):
                 subprocess.run(["rm", "-rf", str(cache)], check=False)
         if passed:
@@ -607,6 +635,65 @@ def main() -> int:
         print(f"  SKIPPED  {label}: {reason}")
     return 1 if survived or inapplicable else 0
 
+
+
+
+#: The Xbox 360 surface profile. Small, because most of the profile is
+#: *generated* and the generator's own check is what guards it -- but the rules
+#: that make the generation correct are not generated, and these plant them.
+XBOX_MUTATIONS = [
+    ("xbox: treat the two encodings of `where T : struct` as different",
+     "tools/api_compat/verify.py",
+     "    if \"struct\" in value.get(\"specialConstraints\", ()) \\\n"
+     "            and \"System.ValueType\" in constraints:\n"
+     "        constraints.remove(\"System.ValueType\")",
+     "    pass",
+     "tests.test_xbox360_profile"),
+    ("xbox: let a removed member hide one the platform still has",
+     "tools/verify_profile_separation.py",
+     "                if any(projected_name(platform, value, rules) == member\n"
+     "                       for value in platform[\"members\"]):\n"
+     "                    unjustified.append(\n"
+     "                        f\"{entry['member']}: the platform contract still has it\")",
+     "                pass",
+     "tests.test_xbox360_profile"),
+    ("xbox: check only the namespace a Windows-only type came from",
+     "tools/verify_profile_separation.py",
+     "            if name in exported:",
+     "            if False:",
+     "tests.test_xbox360_profile"),
+    ("xbox: stop comparing the default profile's counts",
+     "tools/verify_profile_separation.py",
+     "    if measured[\"TARGET_TYPES\"] != DEFAULT_TYPES:",
+     "    if False:",
+     "tests.test_xbox360_profile"),
+    ("xbox: raise only when a removed member is called, not when it is read",
+     "tools/generate_xbox_profile.py",
+     "    def __get__(self, instance: object, owner: type | None = None):\n"
+     "        raise AttributeError(f\"{self._name} is not declared on this platform: \"\n"
+     "                             f\"{self._reason}\")",
+     "    def __get__(self, instance: object, owner: type | None = None):\n"
+     "        def refuse(*arguments: object) -> None:\n"
+     "            raise AttributeError(self._name)\n"
+     "        return refuse",
+     "tests.test_xbox360_profile"),
+    ("xbox: narrow a type without keeping it catchable as the Windows one",
+     "tools/generate_xbox_profile.py",
+     "        bases = [f\"_Windows{name}\"]\n"
+     "        if name in base_of:\n"
+     "            bases.append(base_of[name])",
+     "        bases = [base_of[name]] if name in base_of else [\"Exception\"]",
+     "tests.test_xbox360_profile"),
+    ("xbox: export a type the Xbox assemblies do not declare",
+     "tools/generate_xbox_profile.py",
+     "        exports.setdefault(namespace, []).append(name)",
+     "        exports.setdefault(namespace, []).append(name)\n"
+     "        if namespace == \"Microsoft.Xna.Framework\":\n"
+     "            exports[namespace].append(\"ColorConverter\")",
+     "tests.test_xbox360_profile"),
+]
+
+MUTATIONS = MUTATIONS + XBOX_MUTATIONS
 
 if __name__ == "__main__":
     raise SystemExit(main())

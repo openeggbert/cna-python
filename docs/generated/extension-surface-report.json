@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "EXTENSION_MODULES": 59,
+    "EXTENSION_MODULES": 61,
     "PUBLIC_EXTENSION_NAMES": 1126,
     "PUBLIC_CTYPES_LEAK": 0,
     "PRIVATE_NATIVE_LEAK": 0,
@@ -70,7 +70,9 @@
     "cna.extensions.online.errors",
     "cna.extensions.online.gamers",
     "cna.extensions.online.guide",
-    "cna.extensions.online.sessions"
+    "cna.extensions.online.sessions",
+    "cna.profiles",
+    "cna.profiles.xbox360"
   ],
   "signatures": {
     "cna.extensions.content.AssetType": "class",

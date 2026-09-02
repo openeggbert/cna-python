@@ -159,7 +159,7 @@
       "TOutput": "destinationType"
     },
     "Microsoft.Xna.Framework.Content.Pipeline.MaterialContent.GetValueTypeProperty": {
-      "TValue": "expected"
+      "T": "expected"
     },
     "Microsoft.Xna.Framework.Content.Pipeline.MaterialContent.GetReferenceTypeProperty": {
       "T": "expected"

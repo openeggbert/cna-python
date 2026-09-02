@@ -6,6 +6,9 @@
     "C_LAYOUT_MEASUREMENTS": 2518,
     "CTYPES_LAYOUT_MEASUREMENTS": 2518,
     "MISSING_SYMBOLS": 0,
+    "PENDING_ROUTES": 1,
+    "PENDING_ROUTES_NOT_IN_HEADERS": 0,
+    "STALE_PENDING_ROUTES": 0,
     "ABI_MISMATCHES": 0
   },
   "boundFunctions": [
@@ -30325,6 +30328,14 @@
     }
   ],
   "missingSymbols": [],
+  "pendingRoutes": [
+    {
+      "symbol": "cna_network_session_replace_session_properties",
+      "reason": "declared in net_sessions.h and exported by no CNA artifact measured here: seven builds checked on 2026-09-02, including every pinned artifact under ~/deps and the tree's own build directories, all export 4054 of the headers' 4055 routes and all are missing this one. See docs/online-upstream-findings.md."
+    }
+  ],
+  "pendingRoutesNotInHeaders": [],
+  "stalePendingRoutes": [],
   "mismatches": [],
   "c": {
     "VALUE:CNA_ABI_VERSION": 5376,

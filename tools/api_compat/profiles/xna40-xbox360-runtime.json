@@ -8,6 +8,33 @@
     "~/deps/xna40-xbox360-assemblies"
   ],
   "coreAssemblyName": "mscorlib",
+  "pythonPackages": [
+    "cna.profiles.xbox360.Microsoft.Xna.Framework",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Audio",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Content",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.GamerServices",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Graphics",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Graphics.PackedVector",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Input",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Input.Touch",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Media",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Net",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Storage"
+  ],
+  "packageNamespaces": {
+    "cna.profiles.xbox360.Microsoft.Xna.Framework": "Microsoft.Xna.Framework",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Audio": "Microsoft.Xna.Framework.Audio",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Content": "Microsoft.Xna.Framework.Content",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.GamerServices": "Microsoft.Xna.Framework.GamerServices",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Graphics": "Microsoft.Xna.Framework.Graphics",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Graphics.PackedVector": "Microsoft.Xna.Framework.Graphics.PackedVector",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Input": "Microsoft.Xna.Framework.Input",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Input.Touch": "Microsoft.Xna.Framework.Input.Touch",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Media": "Microsoft.Xna.Framework.Media",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Net": "Microsoft.Xna.Framework.Net",
+    "cna.profiles.xbox360.Microsoft.Xna.Framework.Storage": "Microsoft.Xna.Framework.Storage"
+  },
+  "siblingProfiles": [],
   "referenceAssemblies": [
     "Microsoft.Xna.Framework.dll",
     "Microsoft.Xna.Framework.Game.dll",
@@ -34,5 +61,7 @@
   },
   "referenceTypes": 318,
   "referenceMembers": 3577,
+  "expectedPythonTypes": 318,
+  "expectedPythonMembers": 2986,
   "allowlist": []
 }

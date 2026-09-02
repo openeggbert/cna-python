@@ -724,6 +724,53 @@ def _route_recorder():
     return wrap
 
 
+#: Canonical routes that CNA's headers declare and that no released artifact
+#: exports yet, with the reason each is here.
+#:
+#: A missing symbol is otherwise fatal, and must stay fatal: it is what catches
+#: an artifact that has drifted from the headers this binding was generated
+#: against. But a route CNA has *declared and not yet shipped* is a different
+#: thing, and refusing to load at all would make every route in the library
+#: unusable because of one that is not there yet.
+#:
+#: So a route named here binds to a stub that raises when it is **called**,
+#: naming the route and the artifact; every other missing symbol still refuses
+#: the library. ``tools/audit_cna_abi.py`` reports these separately from
+#: ``MISSING_SYMBOLS`` and checks that each is genuinely declared in the
+#: canonical headers, so this cannot become a place to hide a typo.
+PENDING_ROUTES: dict[str, str] = {
+    "cna_network_session_replace_session_properties":
+        "declared in net_sessions.h and exported by no CNA artifact measured "
+        "here: seven builds checked on 2026-09-02, including every pinned "
+        "artifact under ~/deps and the tree's own build directories, all "
+        "export 4054 of the headers' 4055 routes and all are missing this one. "
+        "See docs/online-upstream-findings.md.",
+}
+
+
+class _PendingRoute:
+    """A declared route the loaded artifact does not export.
+
+    Calling it raises rather than crashing: the failure names the route, the
+    artifact and where the reason is written down, which is what a caller needs
+    to know whether to wait for a newer build or to do something else.
+    """
+
+    __slots__ = ("_symbol", "_path", "_reason")
+
+    def __init__(self, symbol: str, path: Path, reason: str) -> None:
+        self._symbol = symbol
+        self._path = path
+        self._reason = reason
+
+    def __call__(self, *arguments: object) -> int:
+        raise NativeUnavailableError(
+            f"{self._symbol} is not exported by {self._path}: {self._reason}")
+
+    def __repr__(self) -> str:  # pragma: no cover - diagnostic only
+        return f"<pending CNA route {self._symbol}>"
+
+
 class NativeLibrary:
     def __init__(self, path: Path) -> None:
         self.path = path
@@ -743,16 +790,25 @@ class NativeLibrary:
             raise NativeAbiMismatchError(QUALIFIED_ABI, actual, str(path))
         self.abi_version = actual
         recorder = _route_recorder()
+        pending: list[str] = []
         for symbol, restype, argtypes, _ownership in FUNCTION_MANIFEST[1:]:
             try:
                 function = getattr(self._cdll, symbol)
             except AttributeError as error:
-                raise NativeLibraryError(
-                    f"CNA ABI {format_abi(actual)} library {path} is missing required symbol {symbol}"
-                ) from error
+                reason = PENDING_ROUTES.get(symbol)
+                if reason is None:
+                    raise NativeLibraryError(
+                        f"CNA ABI {format_abi(actual)} library {path} is missing required symbol {symbol}"
+                    ) from error
+                pending.append(symbol)
+                setattr(self, symbol, _PendingRoute(symbol, path, reason))
+                continue
             function.restype = restype
             function.argtypes = argtypes
             setattr(self, symbol, function if recorder is None else recorder(symbol, function))
+        #: The declared routes this particular artifact does not export. Empty
+        #: for an artifact built from the same headers this binding was.
+        self.pending_routes = tuple(pending)
 
     def _last_error(self) -> tuple[int | None, str]:
         info = abi.CNA_ErrorInfo()
