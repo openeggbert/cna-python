@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1222,
+    "BOUND_ROUTES": 1302,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -10,25 +10,25 @@
     "CNB_CNJ_BOUND": 283,
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
-    "ENGINE_ROUTES": 857,
-    "ENGINE_BOUND": 174,
+    "ENGINE_ROUTES": 862,
+    "ENGINE_BOUND": 254,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 682,
-    "PURPOSE_XNA_BACKING": 1175,
-    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1819,
-    "PURPOSE_MANAGED_BY_DESIGN": 536,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 607,
+    "PURPOSE_XNA_BACKING": 1171,
+    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1824,
+    "PURPOSE_MANAGED_BY_DESIGN": 535,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1222,
-    "STATUS_ACTIONABLE_LOCAL": 682,
+    "STATUS_BOUND": 1302,
+    "STATUS_ACTIONABLE_LOCAL": 607,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 2149,
+    "STATUS_DELIBERATE_NON_BINDING": 2144,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -204,6 +204,24 @@
       "status": "DELIBERATE_NON_BINDING",
       "reason": "Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released.",
       "boundReason": "imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable"
+    },
+    {
+      "id": "engine-pbr-dependency",
+      "family": "pbr-effect",
+      "familyTitle": "the minimal slice the PBR family cannot work without",
+      "match": {
+        "names": [
+          "cna_pbr_material_ext_init",
+          "cna_pbr_effect_create",
+          "cna_skinned_pbr_effect_create",
+          "cna_pbr_effect_set_texture",
+          "cna_pbr_effect_get_texture"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal graphics_ext.h and effects.h slice the selected PBR family cannot work without. cna_pbr_material_ext_init is the only route that fills a 27-field material with CNA's own defaults, and engine_layer.h declares no route that creates a PbrEffect, so without the two constructors every PBR route in it is unreachable. The texture pair is there because cna_pbr_effect_apply_material drops all seven texture slots (ENGINE-005), so without it a PBR effect could never have a texture. A dependency of the selected engine profile, not a decision to bind either header.",
+      "boundReason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005"
     },
     {
       "id": "engine-engine-identity",
@@ -1712,7 +1730,9 @@
       "headers": [
         "engine_layer.h"
       ],
-      "ruleIds": [],
+      "ruleIds": [
+        "engine-pbr-dependency"
+      ],
       "description": "`engine_layer.h`, grouped into named sub-families. There is no blanket rule:\na route no sub-family claims is UNREVIEWED and fails the gate. Every route here\nis BOUND or carries its own written non-binding reason."
     }
   ],
@@ -19937,67 +19957,67 @@
       "route": "cna_gltf_material_bridge_build_extensions",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
       "rule": "engine-gltf-material-bridge",
       "family": "gltf-material-bridge",
       "familyTitle": "the glTF material bridge",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gltf_material_bridge_build_material",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
       "rule": "engine-gltf-material-bridge",
       "family": "gltf-material-bridge",
       "familyTitle": "the glTF material bridge",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gltf_material_extension_source_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
       "rule": "engine-gltf-material-bridge",
       "family": "gltf-material-bridge",
       "familyTitle": "the glTF material bridge",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gltf_material_extension_textures_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
       "rule": "engine-gltf-material-bridge",
       "family": "gltf-material-bridge",
       "familyTitle": "the glTF material bridge",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gltf_material_source_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
       "rule": "engine-gltf-material-bridge",
       "family": "gltf-material-bridge",
       "familyTitle": "the glTF material bridge",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gltf_material_textures_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
       "rule": "engine-gltf-material-bridge",
       "family": "gltf-material-bridge",
       "familyTitle": "the glTF material bridge",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_cullable_instance_init",
@@ -33027,34 +33047,34 @@
       "route": "cna_pbr_effect_apply_material",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
       "rule": "engine-pbr-effect",
       "family": "pbr-effect",
       "familyTitle": "PBR effects",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_effect_create",
       "header": "effects.h",
-      "purpose": "XNA_BACKING",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
-      "rule": "xna-backing-families",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "BOUND",
+      "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+      "rule": "engine-pbr-dependency",
+      "family": "pbr-effect",
+      "familyTitle": "the minimal slice the PBR family cannot work without",
+      "bound": true
     },
     {
       "route": "cna_pbr_effect_extract_material",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
       "rule": "engine-pbr-effect",
       "family": "pbr-effect",
       "familyTitle": "PBR effects",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_effect_get_alpha",
@@ -33213,13 +33233,13 @@
     {
       "route": "cna_pbr_effect_get_texture",
       "header": "effects.h",
-      "purpose": "XNA_BACKING",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
-      "rule": "xna-backing-families",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "BOUND",
+      "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+      "rule": "engine-pbr-dependency",
+      "family": "pbr-effect",
+      "familyTitle": "the minimal slice the PBR family cannot work without",
+      "bound": true
     },
     {
       "route": "cna_pbr_effect_get_texture_coordinate_set_ext",
@@ -33422,13 +33442,13 @@
     {
       "route": "cna_pbr_effect_set_texture",
       "header": "effects.h",
-      "purpose": "XNA_BACKING",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
-      "rule": "xna-backing-families",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "BOUND",
+      "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+      "rule": "engine-pbr-dependency",
+      "family": "pbr-effect",
+      "familyTitle": "the minimal slice the PBR family cannot work without",
+      "bound": true
     },
     {
       "route": "cna_pbr_effect_set_texture_coordinate_set_ext",
@@ -33478,705 +33498,705 @@
       "route": "cna_pbr_material_apply_state",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_ext_copy_to_string",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_ext_equals",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_ext_get_hash_code",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_ext_init",
       "header": "graphics_ext.h",
-      "purpose": "MANAGED_BY_DESIGN",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout.",
-      "rule": "value-struct-initialisers",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "BOUND",
+      "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+      "rule": "engine-pbr-dependency",
+      "family": "pbr-effect",
+      "familyTitle": "the minimal slice the PBR family cannot work without",
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_copy_from",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_copy_to_string",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_equals",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_attenuation_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_attenuation_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_clearcoat_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_clearcoat_normal_scale",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_clearcoat_normal_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_clearcoat_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_clearcoat_roughness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_clearcoat_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_hash_code",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_iridescence_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_iridescence_ior",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_iridescence_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_iridescence_thickness_maximum",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_iridescence_thickness_minimum",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_iridescence_thickness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_sheen_color_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_sheen_color_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_sheen_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_sheen_roughness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_subsurface_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_subsurface_wrap",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_thickness_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_thickness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_transmission_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_get_transmission_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_is_iridescence_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_is_neutral",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_is_sheen_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_is_subsurface_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_is_transmission_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_attenuation_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_attenuation_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_clearcoat_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_clearcoat_normal_scale",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_clearcoat_normal_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_clearcoat_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_clearcoat_roughness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_clearcoat_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_iridescence_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_iridescence_ior",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_iridescence_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_iridescence_thickness_maximum",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_iridescence_thickness_minimum",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_iridescence_thickness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_sheen_color_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_sheen_color_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_sheen_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_sheen_roughness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_subsurface_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_subsurface_wrap",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_thickness_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_thickness_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_transmission_factor",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_extensions_set_transmission_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
       "rule": "engine-pbr-material",
       "family": "pbr-material",
       "familyTitle": "PBR materials",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_material_init",
@@ -38846,12 +38866,12 @@
       "route": "cna_skinned_pbr_effect_apply_material",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
       "rule": "engine-pbr-effect",
       "family": "pbr-effect",
       "familyTitle": "PBR effects",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skinned_pbr_effect_copy_bone_transforms",
@@ -38867,24 +38887,24 @@
     {
       "route": "cna_skinned_pbr_effect_create",
       "header": "effects.h",
-      "purpose": "XNA_BACKING",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
-      "rule": "xna-backing-families",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "BOUND",
+      "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+      "rule": "engine-pbr-dependency",
+      "family": "pbr-effect",
+      "familyTitle": "the minimal slice the PBR family cannot work without",
+      "bound": true
     },
     {
       "route": "cna_skinned_pbr_effect_extract_material",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
       "rule": "engine-pbr-effect",
       "family": "pbr-effect",
       "familyTitle": "PBR effects",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skinned_pbr_effect_get_weights_per_vertex",
@@ -42520,23 +42540,23 @@
       "route": "cna_thin_film_iridescence_copy_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence",
       "rule": "engine-pbr-material-extensions",
       "family": "pbr-material-extensions",
       "familyTitle": "PBR material extensions",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_thin_film_iridescence_evaluate",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence",
       "rule": "engine-pbr-material-extensions",
       "family": "pbr-material-extensions",
       "familyTitle": "PBR material extensions",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_title_container_read_ext",
@@ -53723,67 +53743,67 @@
         "route": "cna_gltf_material_bridge_build_extensions",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
         "rule": "engine-gltf-material-bridge",
         "family": "gltf-material-bridge",
         "familyTitle": "the glTF material bridge",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gltf_material_bridge_build_material",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
         "rule": "engine-gltf-material-bridge",
         "family": "gltf-material-bridge",
         "familyTitle": "the glTF material bridge",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gltf_material_extension_source_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
         "rule": "engine-gltf-material-bridge",
         "family": "gltf-material-bridge",
         "familyTitle": "the glTF material bridge",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gltf_material_extension_textures_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
         "rule": "engine-gltf-material-bridge",
         "family": "gltf-material-bridge",
         "familyTitle": "the glTF material bridge",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gltf_material_source_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
         "rule": "engine-gltf-material-bridge",
         "family": "gltf-material-bridge",
         "familyTitle": "the glTF material bridge",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gltf_material_textures_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material",
         "rule": "engine-gltf-material-bridge",
         "family": "gltf-material-bridge",
         "familyTitle": "the glTF material bridge",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_cullable_instance_init",
@@ -55747,716 +55767,760 @@
         "route": "cna_pbr_effect_apply_material",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
         "rule": "engine-pbr-effect",
         "family": "pbr-effect",
         "familyTitle": "PBR effects",
-        "bound": false
+        "bound": true
+      },
+      {
+        "route": "cna_pbr_effect_create",
+        "header": "effects.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+        "rule": "engine-pbr-dependency",
+        "family": "pbr-effect",
+        "familyTitle": "the minimal slice the PBR family cannot work without",
+        "bound": true
       },
       {
         "route": "cna_pbr_effect_extract_material",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
         "rule": "engine-pbr-effect",
         "family": "pbr-effect",
         "familyTitle": "PBR effects",
-        "bound": false
+        "bound": true
+      },
+      {
+        "route": "cna_pbr_effect_get_texture",
+        "header": "effects.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+        "rule": "engine-pbr-dependency",
+        "family": "pbr-effect",
+        "familyTitle": "the minimal slice the PBR family cannot work without",
+        "bound": true
+      },
+      {
+        "route": "cna_pbr_effect_set_texture",
+        "header": "effects.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+        "rule": "engine-pbr-dependency",
+        "family": "pbr-effect",
+        "familyTitle": "the minimal slice the PBR family cannot work without",
+        "bound": true
       },
       {
         "route": "cna_pbr_material_apply_state",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_ext_copy_to_string",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_ext_equals",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_ext_get_hash_code",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
+      },
+      {
+        "route": "cna_pbr_material_ext_init",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+        "rule": "engine-pbr-dependency",
+        "family": "pbr-effect",
+        "familyTitle": "the minimal slice the PBR family cannot work without",
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_copy_from",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_copy_to_string",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_equals",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_attenuation_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_attenuation_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_clearcoat_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_clearcoat_normal_scale",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_clearcoat_normal_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_clearcoat_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_clearcoat_roughness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_clearcoat_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_hash_code",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_iridescence_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_iridescence_ior",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_iridescence_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_iridescence_thickness_maximum",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_iridescence_thickness_minimum",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_iridescence_thickness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_sheen_color_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_sheen_color_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_sheen_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_sheen_roughness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_subsurface_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_subsurface_wrap",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_thickness_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_thickness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_transmission_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_get_transmission_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_is_iridescence_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_is_neutral",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_is_sheen_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_is_subsurface_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_is_transmission_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_attenuation_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_attenuation_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_clearcoat_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_clearcoat_normal_scale",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_clearcoat_normal_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_clearcoat_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_clearcoat_roughness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_clearcoat_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_iridescence_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_iridescence_ior",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_iridescence_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_iridescence_thickness_maximum",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_iridescence_thickness_minimum",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_iridescence_thickness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_sheen_color_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_sheen_color_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_sheen_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_sheen_roughness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_subsurface_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_subsurface_wrap",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_thickness_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_thickness_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_transmission_factor",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_material_extensions_set_transmission_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode",
         "rule": "engine-pbr-material",
         "family": "pbr-material",
         "familyTitle": "PBR materials",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_point_light_ext_init",
@@ -57540,23 +57604,34 @@
         "route": "cna_skinned_pbr_effect_apply_material",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
         "rule": "engine-pbr-effect",
         "family": "pbr-effect",
         "familyTitle": "PBR effects",
-        "bound": false
+        "bound": true
+      },
+      {
+        "route": "cna_skinned_pbr_effect_create",
+        "header": "effects.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005",
+        "rule": "engine-pbr-dependency",
+        "family": "pbr-effect",
+        "familyTitle": "the minimal slice the PBR family cannot work without",
+        "bound": true
       },
       {
         "route": "cna_skinned_pbr_effect_extract_material",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material",
         "rule": "engine-pbr-effect",
         "family": "pbr-effect",
         "familyTitle": "PBR effects",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_compute_view_ray",
@@ -58409,23 +58484,23 @@
         "route": "cna_thin_film_iridescence_copy_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence",
         "rule": "engine-pbr-material-extensions",
         "family": "pbr-material-extensions",
         "familyTitle": "PBR material extensions",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_thin_film_iridescence_evaluate",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence",
         "rule": "engine-pbr-material-extensions",
         "family": "pbr-material-extensions",
         "familyTitle": "PBR material extensions",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_create",

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1222,
-    "DIRECT_CALL_SITE": 1128,
+    "BOUND_ROUTES": 1302,
+    "DIRECT_CALL_SITE": 1208,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
     "REACHED_BY_NAME_TEMPLATE": 15,
     "ADMITTED_WITH_REASON": 37,
@@ -3562,7 +3562,7 @@
       "src/_cna_native/engine_support.py:73"
     ],
     "cna_engine_layer_copy_version_string": [
-      "src/cna/extensions/engine/__init__.py:162"
+      "src/cna/extensions/engine/__init__.py:184"
     ],
     "cna_graphics_memory_barrier_has": [
       "src/cna/extensions/engine/compute.py:80"
@@ -4080,6 +4080,246 @@
     ],
     "cna_effect_get_punctual_light_ext": [
       "src/cna/extensions/engine/shadows.py:839"
+    ],
+    "cna_pbr_effect_apply_material": [
+      "src/cna/extensions/engine/pbr.py:683"
+    ],
+    "cna_skinned_pbr_effect_apply_material": [
+      "src/cna/extensions/engine/pbr.py:692"
+    ],
+    "cna_pbr_effect_extract_material": [
+      "src/cna/extensions/engine/pbr.py:684"
+    ],
+    "cna_skinned_pbr_effect_extract_material": [
+      "src/cna/extensions/engine/pbr.py:693"
+    ],
+    "cna_pbr_material_apply_state": [
+      "src/cna/extensions/engine/pbr.py:328"
+    ],
+    "cna_pbr_material_extensions_create": [
+      "src/cna/extensions/engine/pbr.py:401"
+    ],
+    "cna_pbr_material_extensions_destroy": [
+      "src/cna/extensions/engine/pbr.py:402"
+    ],
+    "cna_pbr_material_extensions_copy_from": [
+      "src/cna/extensions/engine/pbr.py:427"
+    ],
+    "cna_pbr_material_extensions_get_clearcoat_factor": [
+      "src/cna/extensions/engine/pbr.py:449"
+    ],
+    "cna_pbr_material_extensions_set_clearcoat_factor": [
+      "src/cna/extensions/engine/pbr.py:450"
+    ],
+    "cna_pbr_material_extensions_get_clearcoat_roughness": [
+      "src/cna/extensions/engine/pbr.py:453"
+    ],
+    "cna_pbr_material_extensions_set_clearcoat_roughness": [
+      "src/cna/extensions/engine/pbr.py:454"
+    ],
+    "cna_pbr_material_extensions_get_clearcoat_normal_scale": [
+      "src/cna/extensions/engine/pbr.py:457"
+    ],
+    "cna_pbr_material_extensions_set_clearcoat_normal_scale": [
+      "src/cna/extensions/engine/pbr.py:458"
+    ],
+    "cna_pbr_material_extensions_get_sheen_roughness": [
+      "src/cna/extensions/engine/pbr.py:461"
+    ],
+    "cna_pbr_material_extensions_set_sheen_roughness": [
+      "src/cna/extensions/engine/pbr.py:462"
+    ],
+    "cna_pbr_material_extensions_get_transmission_factor": [
+      "src/cna/extensions/engine/pbr.py:465"
+    ],
+    "cna_pbr_material_extensions_set_transmission_factor": [
+      "src/cna/extensions/engine/pbr.py:466"
+    ],
+    "cna_pbr_material_extensions_get_thickness_factor": [
+      "src/cna/extensions/engine/pbr.py:469"
+    ],
+    "cna_pbr_material_extensions_set_thickness_factor": [
+      "src/cna/extensions/engine/pbr.py:470"
+    ],
+    "cna_pbr_material_extensions_get_attenuation_distance": [
+      "src/cna/extensions/engine/pbr.py:473"
+    ],
+    "cna_pbr_material_extensions_set_attenuation_distance": [
+      "src/cna/extensions/engine/pbr.py:474"
+    ],
+    "cna_pbr_material_extensions_get_iridescence_factor": [
+      "src/cna/extensions/engine/pbr.py:477"
+    ],
+    "cna_pbr_material_extensions_set_iridescence_factor": [
+      "src/cna/extensions/engine/pbr.py:478"
+    ],
+    "cna_pbr_material_extensions_get_iridescence_ior": [
+      "src/cna/extensions/engine/pbr.py:481"
+    ],
+    "cna_pbr_material_extensions_set_iridescence_ior": [
+      "src/cna/extensions/engine/pbr.py:482"
+    ],
+    "cna_pbr_material_extensions_get_iridescence_thickness_minimum": [
+      "src/cna/extensions/engine/pbr.py:485"
+    ],
+    "cna_pbr_material_extensions_set_iridescence_thickness_minimum": [
+      "src/cna/extensions/engine/pbr.py:486"
+    ],
+    "cna_pbr_material_extensions_get_iridescence_thickness_maximum": [
+      "src/cna/extensions/engine/pbr.py:489"
+    ],
+    "cna_pbr_material_extensions_set_iridescence_thickness_maximum": [
+      "src/cna/extensions/engine/pbr.py:490"
+    ],
+    "cna_pbr_material_extensions_get_subsurface_wrap": [
+      "src/cna/extensions/engine/pbr.py:493"
+    ],
+    "cna_pbr_material_extensions_set_subsurface_wrap": [
+      "src/cna/extensions/engine/pbr.py:494"
+    ],
+    "cna_pbr_material_extensions_get_sheen_color_factor": [
+      "src/cna/extensions/engine/pbr.py:498"
+    ],
+    "cna_pbr_material_extensions_set_sheen_color_factor": [
+      "src/cna/extensions/engine/pbr.py:499"
+    ],
+    "cna_pbr_material_extensions_get_attenuation_color": [
+      "src/cna/extensions/engine/pbr.py:502"
+    ],
+    "cna_pbr_material_extensions_set_attenuation_color": [
+      "src/cna/extensions/engine/pbr.py:503"
+    ],
+    "cna_pbr_material_extensions_get_subsurface_color": [
+      "src/cna/extensions/engine/pbr.py:506"
+    ],
+    "cna_pbr_material_extensions_set_subsurface_color": [
+      "src/cna/extensions/engine/pbr.py:507"
+    ],
+    "cna_pbr_material_extensions_get_clearcoat_texture": [
+      "src/cna/extensions/engine/pbr.py:511"
+    ],
+    "cna_pbr_material_extensions_set_clearcoat_texture": [
+      "src/cna/extensions/engine/pbr.py:512"
+    ],
+    "cna_pbr_material_extensions_get_clearcoat_roughness_texture": [
+      "src/cna/extensions/engine/pbr.py:515"
+    ],
+    "cna_pbr_material_extensions_set_clearcoat_roughness_texture": [
+      "src/cna/extensions/engine/pbr.py:516"
+    ],
+    "cna_pbr_material_extensions_get_clearcoat_normal_texture": [
+      "src/cna/extensions/engine/pbr.py:519"
+    ],
+    "cna_pbr_material_extensions_set_clearcoat_normal_texture": [
+      "src/cna/extensions/engine/pbr.py:520"
+    ],
+    "cna_pbr_material_extensions_get_sheen_color_texture": [
+      "src/cna/extensions/engine/pbr.py:523"
+    ],
+    "cna_pbr_material_extensions_set_sheen_color_texture": [
+      "src/cna/extensions/engine/pbr.py:524"
+    ],
+    "cna_pbr_material_extensions_get_sheen_roughness_texture": [
+      "src/cna/extensions/engine/pbr.py:527"
+    ],
+    "cna_pbr_material_extensions_set_sheen_roughness_texture": [
+      "src/cna/extensions/engine/pbr.py:528"
+    ],
+    "cna_pbr_material_extensions_get_transmission_texture": [
+      "src/cna/extensions/engine/pbr.py:531"
+    ],
+    "cna_pbr_material_extensions_set_transmission_texture": [
+      "src/cna/extensions/engine/pbr.py:532"
+    ],
+    "cna_pbr_material_extensions_get_thickness_texture": [
+      "src/cna/extensions/engine/pbr.py:535"
+    ],
+    "cna_pbr_material_extensions_set_thickness_texture": [
+      "src/cna/extensions/engine/pbr.py:536"
+    ],
+    "cna_pbr_material_extensions_get_iridescence_texture": [
+      "src/cna/extensions/engine/pbr.py:539"
+    ],
+    "cna_pbr_material_extensions_set_iridescence_texture": [
+      "src/cna/extensions/engine/pbr.py:540"
+    ],
+    "cna_pbr_material_extensions_get_iridescence_thickness_texture": [
+      "src/cna/extensions/engine/pbr.py:543"
+    ],
+    "cna_pbr_material_extensions_set_iridescence_thickness_texture": [
+      "src/cna/extensions/engine/pbr.py:544"
+    ],
+    "cna_pbr_material_extensions_is_subsurface_enabled": [
+      "src/cna/extensions/engine/pbr.py:549"
+    ],
+    "cna_pbr_material_extensions_is_iridescence_enabled": [
+      "src/cna/extensions/engine/pbr.py:552"
+    ],
+    "cna_pbr_material_extensions_is_transmission_enabled": [
+      "src/cna/extensions/engine/pbr.py:555"
+    ],
+    "cna_pbr_material_extensions_is_sheen_enabled": [
+      "src/cna/extensions/engine/pbr.py:558"
+    ],
+    "cna_pbr_material_extensions_is_neutral": [
+      "src/cna/extensions/engine/pbr.py:561"
+    ],
+    "cna_pbr_material_extensions_equals": [
+      "src/cna/extensions/engine/pbr.py:435"
+    ],
+    "cna_pbr_material_extensions_get_hash_code": [
+      "src/cna/extensions/engine/pbr.py:440"
+    ],
+    "cna_pbr_material_extensions_copy_to_string": [
+      "src/cna/extensions/engine/pbr.py:445"
+    ],
+    "cna_thin_film_iridescence_evaluate": [
+      "src/cna/extensions/engine/pbr.py:902"
+    ],
+    "cna_thin_film_iridescence_copy_glsl": [
+      "src/cna/extensions/engine/pbr.py:917"
+    ],
+    "cna_pbr_material_ext_equals": [
+      "src/cna/extensions/engine/pbr.py:306"
+    ],
+    "cna_pbr_material_ext_get_hash_code": [
+      "src/cna/extensions/engine/pbr.py:312"
+    ],
+    "cna_pbr_material_ext_copy_to_string": [
+      "src/cna/extensions/engine/pbr.py:317"
+    ],
+    "cna_gltf_material_source_ext_init": [
+      "src/cna/extensions/engine/pbr.py:724"
+    ],
+    "cna_gltf_material_extension_source_ext_init": [
+      "src/cna/extensions/engine/pbr.py:790"
+    ],
+    "cna_gltf_material_textures_ext_init": [
+      "src/cna/extensions/engine/pbr.py:853"
+    ],
+    "cna_gltf_material_extension_textures_ext_init": [
+      "src/cna/extensions/engine/pbr.py:884"
+    ],
+    "cna_gltf_material_bridge_build_material": [
+      "src/cna/extensions/engine/pbr.py:858"
+    ],
+    "cna_gltf_material_bridge_build_extensions": [
+      "src/cna/extensions/engine/pbr.py:887"
+    ],
+    "cna_pbr_material_ext_init": [
+      "src/cna/extensions/engine/pbr.py:233"
+    ],
+    "cna_pbr_effect_create": [
+      "src/cna/extensions/engine/pbr.py:682"
+    ],
+    "cna_skinned_pbr_effect_create": [
+      "src/cna/extensions/engine/pbr.py:691"
+    ],
+    "cna_pbr_effect_set_texture": [
+      "src/cna/extensions/engine/pbr.py:656"
+    ],
+    "cna_pbr_effect_get_texture": [
+      "src/cna/extensions/engine/pbr.py:628"
     ]
   }
 }

@@ -33,7 +33,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
-from cna_headers import strip_comments  # noqa: E402
+from cna_headers import parse_header, strip_comments  # noqa: E402
 
 ABI_PATH = ROOT / "src/_cna_native/engine_abi.py"
 PROBE_PATH = ROOT / "tools/engine_abi_probe.inc"
@@ -70,6 +70,12 @@ IMPORTED = {
     "CNA_StringView": "abi.CNA_StringView",
     "CNA_Rectangle": "abi.CNA_Rectangle",
 }
+
+#: Constant families the engine needs whose names are not derivable from an
+#: identity typedef. ``CNA_PBR_TEXTURE_*`` numbers the slots of an array field
+#: rather than being an enum of its own, so no typedef points at it; the values
+#: still come from the canonical header and are still measured by the C probe.
+EXTRA_CONSTANT_PREFIXES = ("CNA_PBR_TEXTURE_",)
 
 _STRUCT = re.compile(r"typedef struct (CNA_[A-Za-z0-9_]+)\s*\{(.*?)\}\s*\1\s*;", re.S)
 _SCALAR_TYPEDEF = re.compile(r"^typedef\s+(uint32_t|int32_t|uint64_t|float)\s+(CNA_[A-Za-z0-9_]+)\s*;",
@@ -234,6 +240,23 @@ def generate(header: Path) -> tuple[str, str]:
         structures.append((name, _fields(body)))
     declared = {name for name, _ in structures}
 
+    # A structure an engine *route* takes but no engine structure embeds. The
+    # PBR material is the case that matters: every route that applies, extracts
+    # or compares one takes it by pointer, and it is declared in graphics_ext.h.
+    # Finding it by walking the routes rather than naming it here means the next
+    # such type arrives without an edit.
+    for declaration in parse_header(header):
+        for parameter in declaration.parameters:
+            spelling = parameter.type_text
+            for prefix in ("const ", "struct "):
+                spelling = spelling.replace(prefix, "")
+            spelling = spelling.replace("*", "").strip()
+            if (spelling.startswith("CNA_") and spelling not in declared
+                    and spelling not in IMPORTED and spelling not in aliases
+                    and spelling not in SCALARS and spelling in bodies):
+                structures.append((spelling, _fields(bodies[spelling])))
+                declared.add(spelling)
+
     # A structure this family embeds but another header declares is generated
     # here too, in dependency order, unless the existing audit already measures
     # it. Nothing is transcribed by hand, and nothing is measured twice.
@@ -252,6 +275,25 @@ def generate(header: Path) -> tuple[str, str]:
                 structures.insert(0, (c_type, _fields(bodies[c_type])))
                 declared.add(c_type)
                 pending = True
+
+    # A structure must be emitted after everything it embeds, whichever order
+    # the headers happened to declare them in.
+    by_name = dict(structures)
+    ordered: list[tuple[str, list[tuple[str, str, str | None]]]] = []
+    placed: set[str] = set()
+
+    def place(name: str) -> None:
+        if name in placed:
+            return
+        placed.add(name)
+        for c_type, _field, _array in by_name[name]:
+            if c_type in by_name and c_type != name:
+                place(c_type)
+        ordered.append((name, by_name[name]))
+
+    for name, _fields_of in structures:
+        place(name)
+    structures = ordered
 
     lines = [
         '"""Generated ctypes layouts and constants for CNA\'s ``engine_layer.h``.',
@@ -282,13 +324,26 @@ def generate(header: Path) -> tuple[str, str]:
                      if (name in own_aliases or name in used) and not name.endswith("Handle"))
     for name in emitted:
         lines.append(f"{name} = {SCALARS[aliases[name]]}")
-    # The members of every identity above, from whichever header declares them.
-    for alias in emitted:
-        prefixes = _member_prefixes(alias)
-        for name, body in sorted(neighbours.items()):
-            if name in constants or not name.startswith(prefixes):
+    # The members of every identity above, from whichever header declares them,
+    # plus the families that have no identity to be derived from.
+    wanted = {name: body for prefixes in
+              [_member_prefixes(alias) for alias in emitted] + [EXTRA_CONSTANT_PREFIXES]
+              for name, body in neighbours.items()
+              if name not in constants and name.startswith(prefixes)}
+    # One constant may be defined as another -- `CNA_PBR_TEXTURE_MAXIMUM` is the
+    # last slot -- and alphabetical order does not respect that, so this repeats
+    # until nothing more resolves and then reports whatever is left.
+    while wanted:
+        progressed = False
+        for name in sorted(wanted):
+            try:
+                constants[name] = _evaluate(wanted[name], constants)
+            except GenerationError:
                 continue
-            constants[name] = _evaluate(body, constants)
+            del wanted[name]
+            progressed = True
+        if not progressed:
+            raise GenerationError(f"unresolvable constants: {sorted(wanted)}")
     lines.append("")
     lines.append("#: Every opaque engine handle is a ``CNA_Handle``. The names are kept so a")
     lines.append("#: manifest entry can say which object a handle parameter refers to.")

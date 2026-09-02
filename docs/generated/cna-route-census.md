@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1222
+BOUND_ROUTES=1302
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -13,25 +13,25 @@ CNB_CNJ_ROUTES=285
 CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
 SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
-ENGINE_ROUTES=857
-ENGINE_BOUND=174
+ENGINE_ROUTES=862
+ENGINE_BOUND=254
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=682
-PURPOSE_XNA_BACKING=1175
-PURPOSE_CNA_EXTENSION_CANDIDATE=1819
-PURPOSE_MANAGED_BY_DESIGN=536
+SELECTED_ENGINE_ACTIONABLE_LOCAL=607
+PURPOSE_XNA_BACKING=1171
+PURPOSE_CNA_EXTENSION_CANDIDATE=1824
+PURPOSE_MANAGED_BY_DESIGN=535
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1222
-STATUS_ACTIONABLE_LOCAL=682
+STATUS_BOUND=1302
+STATUS_ACTIONABLE_LOCAL=607
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
 STATUS_BLOCKED_HARDWARE=0
 STATUS_BLOCKED_FIXTURE=0
 STATUS_LANGUAGE_MAPPING_LIMITATION=0
-STATUS_DELIBERATE_NON_BINDING=2149
+STATUS_DELIBERATE_NON_BINDING=2144
 STATUS_UNREVIEWED=0
 ```
 
@@ -40,11 +40,11 @@ STATUS_UNREVIEWED=0
 | Purpose | Status | Routes |
 |---|---|---:|
 | XNA_BACKING | BOUND | 727 |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 682 |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 659 |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 519 |
-| CNA_EXTENSION_CANDIDATE | BOUND | 478 |
-| XNA_BACKING | DELIBERATE_NON_BINDING | 446 |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 607 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 558 |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 518 |
+| XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
@@ -357,8 +357,8 @@ is BOUND or carries its own written non-binding reason.
 
 | Status | Routes |
 |---|---:|
-| ACTIONABLE_LOCAL | 682 |
-| BOUND | 174 |
+| ACTIONABLE_LOCAL | 607 |
+| BOUND | 254 |
 | DELIBERATE_NON_BINDING | 1 |
 
 ### By sub-family
@@ -401,7 +401,7 @@ is BOUND or carries its own written non-binding reason.
 | `frustum-culler` (frustum culling) | 10 | 0 | ACTIONABLE_LOCAL 10 |
 | `fullscreen-pass` (full-screen drawing) | 4 | 4 | BOUND 4 |
 | `fxaa` (FXAA) | 5 | 0 | ACTIONABLE_LOCAL 5 |
-| `gltf-material-bridge` (the glTF material bridge) | 6 | 0 | ACTIONABLE_LOCAL 6 |
+| `gltf-material-bridge` (the glTF material bridge) | 6 | 6 | BOUND 6 |
 | `gpu-instance-culler` (GPU instance culling) | 11 | 0 | ACTIONABLE_LOCAL 11 |
 | `gpu-timer` (GPU timers) | 11 | 11 | BOUND 11 |
 | `hdr-display-output` (HDR display output) | 15 | 0 | ACTIONABLE_LOCAL 15 |
@@ -418,9 +418,9 @@ is BOUND or carries its own written non-binding reason.
 | `lod-group` (level of detail) | 14 | 0 | ACTIONABLE_LOCAL 14 |
 | `motion-blur` (motion blur) | 5 | 0 | ACTIONABLE_LOCAL 5 |
 | `particles` (particle systems) | 24 | 0 | ACTIONABLE_LOCAL 24 |
-| `pbr-effect` (PBR effects) | 4 | 0 | ACTIONABLE_LOCAL 4 |
-| `pbr-material` (PBR materials) | 63 | 0 | ACTIONABLE_LOCAL 63 |
-| `pbr-material-extensions` (PBR material extensions) | 2 | 0 | ACTIONABLE_LOCAL 2 |
+| `pbr-effect` (PBR effects) | 9 | 9 | BOUND 9 |
+| `pbr-material` (PBR materials) | 63 | 63 | BOUND 63 |
+| `pbr-material-extensions` (PBR material extensions) | 2 | 2 | BOUND 2 |
 | `post-process-chain` (C ownership transfer Python does not need) | 14 | 13 | BOUND 13, DELIBERATE_NON_BINDING 1 |
 | `post-process-pass` (post-process passes) | 9 | 8 | ACTIONABLE_LOCAL 1, BOUND 8 |
 | `render-pipeline` (the render pipeline) | 33 | 0 | ACTIONABLE_LOCAL 33 |
@@ -829,12 +829,12 @@ is BOUND or carries its own written non-binding reason.
 | `cna_fxaa_pass_edge_threshold_for_quality` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_fxaa_pass_get_edge_threshold` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_fxaa_pass_set_edge_threshold` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gltf_material_bridge_build_extensions` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gltf_material_bridge_build_material` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gltf_material_extension_source_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gltf_material_extension_textures_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gltf_material_source_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gltf_material_textures_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_gltf_material_bridge_build_extensions` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
+| `cna_gltf_material_bridge_build_material` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
+| `cna_gltf_material_extension_source_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
+| `cna_gltf_material_extension_textures_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
+| `cna_gltf_material_source_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
+| `cna_gltf_material_textures_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
 | `cna_gpu_cullable_instance_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_gpu_instance_culler_copy_instance_lookup_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_gpu_instance_culler_copy_unsupported_reason` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1013,71 +1013,75 @@ is BOUND or carries its own written non-binding reason.
 | `cna_particle_system_step` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_particle_system_update` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_particle_system_uses_compute` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_effect_apply_material` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_effect_extract_material` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_apply_state` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_ext_copy_to_string` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_ext_equals` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_ext_get_hash_code` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_copy_from` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_copy_to_string` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_equals` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_attenuation_color` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_attenuation_distance` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_clearcoat_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_clearcoat_normal_scale` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_clearcoat_normal_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_clearcoat_roughness` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_clearcoat_roughness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_clearcoat_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_hash_code` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_iridescence_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_iridescence_ior` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_iridescence_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_iridescence_thickness_maximum` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_iridescence_thickness_minimum` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_iridescence_thickness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_sheen_color_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_sheen_color_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_sheen_roughness` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_sheen_roughness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_subsurface_color` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_subsurface_wrap` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_thickness_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_thickness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_transmission_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_get_transmission_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_is_iridescence_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_is_neutral` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_is_sheen_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_is_subsurface_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_is_transmission_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_attenuation_color` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_attenuation_distance` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_clearcoat_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_clearcoat_normal_scale` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_clearcoat_normal_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_clearcoat_roughness` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_clearcoat_roughness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_clearcoat_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_iridescence_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_iridescence_ior` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_iridescence_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_iridescence_thickness_maximum` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_iridescence_thickness_minimum` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_iridescence_thickness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_sheen_color_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_sheen_color_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_sheen_roughness` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_sheen_roughness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_subsurface_color` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_subsurface_wrap` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_thickness_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_thickness_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_transmission_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_pbr_material_extensions_set_transmission_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_pbr_effect_apply_material` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
+| `cna_pbr_effect_create` | effects.h | BOUND | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
+| `cna_pbr_effect_extract_material` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
+| `cna_pbr_effect_get_texture` | effects.h | BOUND | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
+| `cna_pbr_effect_set_texture` | effects.h | BOUND | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
+| `cna_pbr_material_apply_state` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_ext_copy_to_string` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_ext_equals` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_ext_get_hash_code` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_ext_init` | graphics_ext.h | BOUND | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
+| `cna_pbr_material_extensions_copy_from` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_copy_to_string` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_equals` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_attenuation_color` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_attenuation_distance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_clearcoat_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_clearcoat_normal_scale` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_clearcoat_normal_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_clearcoat_roughness` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_clearcoat_roughness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_clearcoat_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_hash_code` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_iridescence_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_iridescence_ior` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_iridescence_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_iridescence_thickness_maximum` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_iridescence_thickness_minimum` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_iridescence_thickness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_sheen_color_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_sheen_color_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_sheen_roughness` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_sheen_roughness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_subsurface_color` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_subsurface_wrap` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_thickness_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_thickness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_transmission_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_get_transmission_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_is_iridescence_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_is_neutral` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_is_sheen_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_is_subsurface_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_is_transmission_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_attenuation_color` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_attenuation_distance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_clearcoat_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_clearcoat_normal_scale` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_clearcoat_normal_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_clearcoat_roughness` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_clearcoat_roughness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_clearcoat_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_iridescence_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_iridescence_ior` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_iridescence_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_iridescence_thickness_maximum` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_iridescence_thickness_minimum` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_iridescence_thickness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_sheen_color_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_sheen_color_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_sheen_roughness` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_sheen_roughness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_subsurface_color` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_subsurface_wrap` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_thickness_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_thickness_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_transmission_factor` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| `cna_pbr_material_extensions_set_transmission_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
 | `cna_point_light_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults |
 | `cna_post_process_chain_add_owned_pass` | engine_layer.h | DELIBERATE_NON_BINDING | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
 | `cna_post_process_chain_add_pass` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
@@ -1176,8 +1180,9 @@ is BOUND or carries its own written non-binding reason.
 | `cna_shadow_map_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
 | `cna_shadow_map_set_depth_bias` | engine_layer.h | BOUND | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
 | `cna_shadow_map_size_for_quality` | engine_layer.h | BOUND | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
-| `cna_skinned_pbr_effect_apply_material` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_skinned_pbr_effect_extract_material` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_skinned_pbr_effect_apply_material` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
+| `cna_skinned_pbr_effect_create` | effects.h | BOUND | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
+| `cna_skinned_pbr_effect_extract_material` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
 | `cna_skybox_compute_view_ray` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_skybox_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_skybox_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1255,8 +1260,8 @@ is BOUND or carries its own written non-binding reason.
 | `cna_storage_buffer_get_elements` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU storage buffers -- the shader-storage buffer a compute dispatch reads and writes |
 | `cna_storage_buffer_set_bytes` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU storage buffers -- the shader-storage buffer a compute dispatch reads and writes |
 | `cna_storage_buffer_set_elements` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU storage buffers -- the shader-storage buffer a compute dispatch reads and writes |
-| `cna_thin_film_iridescence_copy_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_thin_film_iridescence_evaluate` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_thin_film_iridescence_copy_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
+| `cna_thin_film_iridescence_evaluate` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
 | `cna_tonemap_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_tonemap_pass_get_deband_strength` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_tonemap_pass_get_exposure` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1305,7 +1310,7 @@ is BOUND or carries its own written non-binding reason.
 | Purpose | Status | Routes | Reason |
 |---|---|---:|---|
 | XNA_BACKING | BOUND | 719 | imported: the selected 257-type XNA projection reaches this route |
-| XNA_BACKING | DELIBERATE_NON_BINDING | 446 | In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer. |
+| XNA_BACKING | DELIBERATE_NON_BINDING | 442 | In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer. |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 436 | XNA value types are implemented natively in Python against pinned XNA-derived behaviour; a per-operation C call would add a boundary crossing without adding behaviour. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 270 | imported: cna.extensions.content projects CNA's own compiled content format |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 239 | The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated. |
@@ -1315,8 +1320,8 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 119 | XNA 4.0 has no haptics, joystick, text-input or cursor API; these are CNA-only input families and belong to the extension profile rather than to the XNA namespace. |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 108 | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 90 | Microsoft.Xna.Framework.Content is the managed XNB reader table, cache, rollback and Unload; a CNA-native content manager is a second cache domain and belongs to the extension profile. |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 70 | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 63 | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 69 | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 63 | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 35 | Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 33 | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 29 | In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1375,16 +1380,17 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 8 | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 7 | In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 7 | In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 6 | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 5 | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | XNA_BACKING | BOUND | 5 | imported: the selected profile reaches this route |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 5 | In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 3 | In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 3 | In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1397,7 +1403,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 1 | In the selected engine-layer extension family (clustered light values: the clustered light value structure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison |

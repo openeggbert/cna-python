@@ -2,9 +2,6 @@
 // Included by tools/abi_probe.c so the C compiler measures every engine
 // structure and every engine constant rather than this binding asserting them.
 #define ENGINE_ABI_PROBE() do { \
-    TYPE(CNA_BoundingBox); \
-    FIELD(CNA_BoundingBox, min); \
-    FIELD(CNA_BoundingBox, max); \
     TYPE(CNA_TextureTransformEXT); \
     FIELD(CNA_TextureTransformEXT, struct_size); \
     FIELD(CNA_TextureTransformEXT, struct_version); \
@@ -276,11 +273,67 @@
     FIELD(CNA_IndirectDrawIndexedArguments, first_index); \
     FIELD(CNA_IndirectDrawIndexedArguments, base_vertex); \
     FIELD(CNA_IndirectDrawIndexedArguments, base_instance); \
+    TYPE(CNA_BoundingBox); \
+    FIELD(CNA_BoundingBox, min); \
+    FIELD(CNA_BoundingBox, max); \
     TYPE(CNA_GpuCullableInstance); \
     FIELD(CNA_GpuCullableInstance, struct_size); \
     FIELD(CNA_GpuCullableInstance, struct_version); \
     FIELD(CNA_GpuCullableInstance, world); \
     FIELD(CNA_GpuCullableInstance, bounds); \
+    TYPE(CNA_SamplerState); \
+    FIELD(CNA_SamplerState, struct_size); \
+    FIELD(CNA_SamplerState, struct_version); \
+    FIELD(CNA_SamplerState, address_u); \
+    FIELD(CNA_SamplerState, address_v); \
+    FIELD(CNA_SamplerState, address_w); \
+    FIELD(CNA_SamplerState, filter); \
+    FIELD(CNA_SamplerState, max_anisotropy); \
+    FIELD(CNA_SamplerState, max_mip_level); \
+    FIELD(CNA_SamplerState, mip_map_level_of_detail_bias); \
+    FIELD(CNA_SamplerState, reserved); \
+    TYPE(CNA_PbrMaterialEXT); \
+    FIELD(CNA_PbrMaterialEXT, struct_size); \
+    FIELD(CNA_PbrMaterialEXT, struct_version); \
+    FIELD(CNA_PbrMaterialEXT, albedo_texture); \
+    FIELD(CNA_PbrMaterialEXT, normal_texture); \
+    FIELD(CNA_PbrMaterialEXT, metallic_roughness_texture); \
+    FIELD(CNA_PbrMaterialEXT, ambient_occlusion_texture); \
+    FIELD(CNA_PbrMaterialEXT, emissive_texture); \
+    FIELD(CNA_PbrMaterialEXT, specular_texture); \
+    FIELD(CNA_PbrMaterialEXT, specular_color_texture); \
+    FIELD(CNA_PbrMaterialEXT, albedo_color); \
+    FIELD(CNA_PbrMaterialEXT, emissive_factor); \
+    FIELD(CNA_PbrMaterialEXT, specular_color_factor); \
+    FIELD(CNA_PbrMaterialEXT, metallic_factor); \
+    FIELD(CNA_PbrMaterialEXT, roughness_factor); \
+    FIELD(CNA_PbrMaterialEXT, normal_scale); \
+    FIELD(CNA_PbrMaterialEXT, occlusion_strength); \
+    FIELD(CNA_PbrMaterialEXT, ior); \
+    FIELD(CNA_PbrMaterialEXT, specular_factor); \
+    FIELD(CNA_PbrMaterialEXT, alpha_cutoff); \
+    FIELD(CNA_PbrMaterialEXT, alpha_mode); \
+    FIELD(CNA_PbrMaterialEXT, double_sided); \
+    FIELD(CNA_PbrMaterialEXT, base_color_texture_srgb); \
+    FIELD(CNA_PbrMaterialEXT, emissive_texture_srgb); \
+    FIELD(CNA_PbrMaterialEXT, specular_color_texture_srgb); \
+    FIELD(CNA_PbrMaterialEXT, output_encoded_to_srgb); \
+    FIELD(CNA_PbrMaterialEXT, reserved); \
+    FIELD(CNA_PbrMaterialEXT, texture_coordinate_sets); \
+    FIELD(CNA_PbrMaterialEXT, texture_transforms); \
+    TYPE(CNA_BoundingSphere); \
+    FIELD(CNA_BoundingSphere, center); \
+    FIELD(CNA_BoundingSphere, radius); \
+    TYPE(CNA_VertexElement); \
+    FIELD(CNA_VertexElement, offset); \
+    FIELD(CNA_VertexElement, format); \
+    FIELD(CNA_VertexElement, usage); \
+    FIELD(CNA_VertexElement, usage_index); \
+    TYPE(CNA_BoundingFrustum); \
+    FIELD(CNA_BoundingFrustum, matrix); \
+    TYPE(CNA_VertexPositionColor); \
+    FIELD(CNA_VertexPositionColor, position); \
+    FIELD(CNA_VertexPositionColor, color); \
     printf("VALUE CNA_POST_PROCESS_CONTEXT_SIZE_V1 %lld\n", (long long)(CNA_POST_PROCESS_CONTEXT_SIZE_V1)); \
     printf("VALUE CNA_ALPHA_MODE_BLEND_EXT %lld\n", (long long)(CNA_ALPHA_MODE_BLEND_EXT)); \
     printf("VALUE CNA_ALPHA_MODE_MASK_EXT %lld\n", (long long)(CNA_ALPHA_MODE_MASK_EXT)); \
@@ -351,7 +404,15 @@
     printf("VALUE CNA_MOTION_BLUR_SAMPLE_COUNT_EXT %lld\n", (long long)(CNA_MOTION_BLUR_SAMPLE_COUNT_EXT)); \
     printf("VALUE CNA_PARTICLE_BINDING %lld\n", (long long)(CNA_PARTICLE_BINDING)); \
     printf("VALUE CNA_PARTICLE_SYSTEM_DEFAULT_CAPACITY %lld\n", (long long)(CNA_PARTICLE_SYSTEM_DEFAULT_CAPACITY)); \
+    printf("VALUE CNA_PBR_TEXTURE_BASE_COLOR %lld\n", (long long)(CNA_PBR_TEXTURE_BASE_COLOR)); \
+    printf("VALUE CNA_PBR_TEXTURE_EMISSIVE %lld\n", (long long)(CNA_PBR_TEXTURE_EMISSIVE)); \
+    printf("VALUE CNA_PBR_TEXTURE_MAXIMUM %lld\n", (long long)(CNA_PBR_TEXTURE_MAXIMUM)); \
+    printf("VALUE CNA_PBR_TEXTURE_METALLIC_ROUGHNESS %lld\n", (long long)(CNA_PBR_TEXTURE_METALLIC_ROUGHNESS)); \
+    printf("VALUE CNA_PBR_TEXTURE_NORMAL %lld\n", (long long)(CNA_PBR_TEXTURE_NORMAL)); \
+    printf("VALUE CNA_PBR_TEXTURE_OCCLUSION %lld\n", (long long)(CNA_PBR_TEXTURE_OCCLUSION)); \
     printf("VALUE CNA_PBR_TEXTURE_SLOT_COUNT %lld\n", (long long)(CNA_PBR_TEXTURE_SLOT_COUNT)); \
+    printf("VALUE CNA_PBR_TEXTURE_SPECULAR_COLOR_EXT %lld\n", (long long)(CNA_PBR_TEXTURE_SPECULAR_COLOR_EXT)); \
+    printf("VALUE CNA_PBR_TEXTURE_SPECULAR_EXT %lld\n", (long long)(CNA_PBR_TEXTURE_SPECULAR_EXT)); \
     printf("VALUE CNA_POST_PROCESS_CONTEXT_VERSION_2 %lld\n", (long long)(CNA_POST_PROCESS_CONTEXT_VERSION_2)); \
     printf("VALUE CNA_PUNCTUAL_LIGHT_KIND_EXT_NONE %lld\n", (long long)(CNA_PUNCTUAL_LIGHT_KIND_EXT_NONE)); \
     printf("VALUE CNA_PUNCTUAL_LIGHT_KIND_EXT_POINT %lld\n", (long long)(CNA_PUNCTUAL_LIGHT_KIND_EXT_POINT)); \
@@ -370,6 +431,15 @@
     printf("VALUE CNA_SHADOW_QUALITY_ULTRA %lld\n", (long long)(CNA_SHADOW_QUALITY_ULTRA)); \
     printf("VALUE CNA_SSR_PASS_MAX_STEP_COUNT_EXT %lld\n", (long long)(CNA_SSR_PASS_MAX_STEP_COUNT_EXT)); \
     printf("VALUE CNA_SSR_PASS_MIN_STEP_COUNT_EXT %lld\n", (long long)(CNA_SSR_PASS_MIN_STEP_COUNT_EXT)); \
+    printf("VALUE CNA_TEXTURE_FILTER_ANISOTROPIC %lld\n", (long long)(CNA_TEXTURE_FILTER_ANISOTROPIC)); \
+    printf("VALUE CNA_TEXTURE_FILTER_LINEAR %lld\n", (long long)(CNA_TEXTURE_FILTER_LINEAR)); \
+    printf("VALUE CNA_TEXTURE_FILTER_LINEAR_MIP_POINT %lld\n", (long long)(CNA_TEXTURE_FILTER_LINEAR_MIP_POINT)); \
+    printf("VALUE CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR %lld\n", (long long)(CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR)); \
+    printf("VALUE CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_POINT %lld\n", (long long)(CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_POINT)); \
+    printf("VALUE CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_LINEAR %lld\n", (long long)(CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_LINEAR)); \
+    printf("VALUE CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT %lld\n", (long long)(CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT)); \
+    printf("VALUE CNA_TEXTURE_FILTER_POINT %lld\n", (long long)(CNA_TEXTURE_FILTER_POINT)); \
+    printf("VALUE CNA_TEXTURE_FILTER_POINT_MIP_LINEAR %lld\n", (long long)(CNA_TEXTURE_FILTER_POINT_MIP_LINEAR)); \
     printf("VALUE CNA_TONEMAPPING_MODE_ACES %lld\n", (long long)(CNA_TONEMAPPING_MODE_ACES)); \
     printf("VALUE CNA_TONEMAPPING_MODE_FILMIC %lld\n", (long long)(CNA_TONEMAPPING_MODE_FILMIC)); \
     printf("VALUE CNA_TONEMAPPING_MODE_NONE %lld\n", (long long)(CNA_TONEMAPPING_MODE_NONE)); \
@@ -378,6 +448,31 @@
     printf("VALUE CNA_TRANSPARENCY_MODE_NONE %lld\n", (long long)(CNA_TRANSPARENCY_MODE_NONE)); \
     printf("VALUE CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT %lld\n", (long long)(CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT)); \
     printf("VALUE CNA_TRANSPARENCY_MODE_SORTED %lld\n", (long long)(CNA_TRANSPARENCY_MODE_SORTED)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_BYTE4 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_BYTE4)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_COLOR %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_COLOR)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR2 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR2)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR4 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR4)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT2 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT2)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT4 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT4)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_SHORT2 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_SHORT2)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_SHORT4 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_SHORT4)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_SINGLE %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_SINGLE)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_VECTOR2 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_VECTOR2)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_VECTOR3 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_VECTOR3)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_FORMAT_VECTOR4 %lld\n", (long long)(CNA_VERTEX_ELEMENT_FORMAT_VECTOR4)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_BINORMAL %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_BINORMAL)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_BLEND_INDICES %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_BLEND_INDICES)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_BLEND_WEIGHT %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_BLEND_WEIGHT)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_COLOR %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_COLOR)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_DEPTH %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_DEPTH)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_FOG %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_FOG)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_NORMAL %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_NORMAL)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_POINT_SIZE %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_POINT_SIZE)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_POSITION %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_POSITION)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_SAMPLE %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_SAMPLE)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_TANGENT %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_TANGENT)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_TESSELLATE_FACTOR %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_TESSELLATE_FACTOR)); \
+    printf("VALUE CNA_VERTEX_ELEMENT_USAGE_TEXTURE_COORDINATE %lld\n", (long long)(CNA_VERTEX_ELEMENT_USAGE_TEXTURE_COORDINATE)); \
     printf("VALUE CNA_VOLUMETRIC_FOG_SLICE_COUNT_EXT %lld\n", (long long)(CNA_VOLUMETRIC_FOG_SLICE_COUNT_EXT)); \
     printf("VALUE CNA_VOLUMETRIC_FOG_SLICE_RESOLUTION_EXT %lld\n", (long long)(CNA_VOLUMETRIC_FOG_SLICE_RESOLUTION_EXT)); \
 } while (0)

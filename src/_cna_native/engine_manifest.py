@@ -442,12 +442,211 @@ ENGINE_SHADOW_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
      "caller output; borrowed effect"),
 )
 
+#: Physically based materials: the value, its glTF extensions, the bridge that
+#: builds one from a glTF material, and the effects that render it.
+ENGINE_PBR_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
+    ("cna_pbr_effect_apply_material", c.c_uint32, [c.c_uint64, c.POINTER(engine.CNA_PbrMaterialEXT)],
+     "borrowed effect; every field of the value crosses, textures by handle"),
+    ("cna_skinned_pbr_effect_apply_material", c.c_uint32, [c.c_uint64, c.POINTER(engine.CNA_PbrMaterialEXT)],
+     "borrowed effect; every field of the value crosses, textures by handle"),
+    ("cna_pbr_effect_extract_material", c.c_uint32, [c.c_uint64, c.POINTER(engine.CNA_PbrMaterialEXT)],
+     "caller output; the texture handles are the effect's and are not new "
+     "borrows"),
+    ("cna_skinned_pbr_effect_extract_material", c.c_uint32, [c.c_uint64, c.POINTER(engine.CNA_PbrMaterialEXT)],
+     "caller output; the texture handles are the effect's and are not new "
+     "borrows"),
+    ("cna_pbr_material_apply_state", c.c_uint32, [c.POINTER(engine.CNA_PbrMaterialEXT), c.c_uint64],
+     "borrowed graphics device; sets blending, depth write and culling from "
+     "the value"),
+    ("cna_pbr_material_extensions_create", c.c_uint32, [c.POINTER(c.c_uint64)],
+     "owned material extensions; needs no device, so it works wherever the "
+     "layer is"),
+    ("cna_pbr_material_extensions_destroy", c.c_uint32, [c.c_uint64],
+     "consumes material extensions"),
+    ("cna_pbr_material_extensions_copy_from", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed destination and source; copies every field, retains nothing"),
+    ("cna_pbr_material_extensions_get_clearcoat_factor", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_clearcoat_factor", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_clearcoat_roughness", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_clearcoat_roughness", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_clearcoat_normal_scale", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_clearcoat_normal_scale", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_sheen_roughness", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_sheen_roughness", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_transmission_factor", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_transmission_factor", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_thickness_factor", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_thickness_factor", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_attenuation_distance", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_attenuation_distance", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_iridescence_factor", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_iridescence_factor", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_iridescence_ior", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_iridescence_ior", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_iridescence_thickness_minimum", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_iridescence_thickness_minimum", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_iridescence_thickness_maximum", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_iridescence_thickness_maximum", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_subsurface_wrap", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_subsurface_wrap", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_sheen_color_factor", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Vector3)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_sheen_color_factor", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Vector3)],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_attenuation_color", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Vector3)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_attenuation_color", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Vector3)],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_subsurface_color", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Vector3)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_subsurface_color", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Vector3)],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_clearcoat_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; the handle is the one that was set and is not a new borrow"),
+    ("cna_pbr_material_extensions_set_clearcoat_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_clearcoat_roughness_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_clearcoat_roughness_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_clearcoat_normal_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_clearcoat_normal_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_sheen_color_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_sheen_color_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_sheen_roughness_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_sheen_roughness_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_transmission_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_transmission_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_thickness_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_thickness_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_iridescence_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_iridescence_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_get_iridescence_thickness_texture", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_set_iridescence_thickness_texture", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed material extensions; copies the value"),
+    ("cna_pbr_material_extensions_is_subsurface_enabled", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_is_iridescence_enabled", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_is_transmission_enabled", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_is_sheen_enabled", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_is_neutral", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_equals", c.c_uint32, [c.c_uint64, c.c_uint64, c.POINTER(c.c_uint8)],
+     "borrowed material extensions"),
+    ("cna_pbr_material_extensions_get_hash_code", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed material extensions"),
+    ("cna_pbr_material_extensions_copy_to_string", c.c_uint32, [c.c_uint64, c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)],
+     "borrowed material extensions"),
+    ("cna_thin_film_iridescence_evaluate", c.c_uint32, [c.c_float, c.c_float, c.c_float, c.c_float, c.POINTER(abi.CNA_Vector3), c.POINTER(abi.CNA_Vector3)],
+     "pure function over caller-owned input; nothing is retained"),
+    ("cna_thin_film_iridescence_copy_glsl", c.c_uint32, [c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol"),
+    ("cna_pbr_material_ext_equals", c.c_uint32, [c.POINTER(engine.CNA_PbrMaterialEXT), c.POINTER(engine.CNA_PbrMaterialEXT), c.POINTER(c.c_uint8)],
+     "pure function over two caller-owned values; textures compare by handle "
+     "identity"),
+    ("cna_pbr_material_ext_get_hash_code", c.c_uint32, [c.POINTER(engine.CNA_PbrMaterialEXT), c.POINTER(c.c_uint64)],
+     "caller output; borrowed PBR material value"),
+    ("cna_pbr_material_ext_copy_to_string", c.c_uint32, [c.POINTER(engine.CNA_PbrMaterialEXT), c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)],
+     "borrowed PBR material value"),
+    ("cna_gltf_material_source_ext_init", c.c_uint32, [c.POINTER(engine.CNA_GltfMaterialSourceEXT)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_gltf_material_extension_source_ext_init", c.c_uint32, [c.POINTER(engine.CNA_GltfMaterialExtensionSourceEXT)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_gltf_material_textures_ext_init", c.c_uint32, [c.POINTER(engine.CNA_GltfMaterialTexturesEXT)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_gltf_material_extension_textures_ext_init", c.c_uint32, [c.POINTER(engine.CNA_GltfMaterialExtensionTexturesEXT)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_gltf_material_bridge_build_material", c.c_uint32, [c.POINTER(engine.CNA_GltfMaterialSourceEXT), c.POINTER(engine.CNA_GltfMaterialTexturesEXT), c.POINTER(engine.CNA_PbrMaterialEXT)],
+     "caller output; pure over the source and the caller's borrowed textures"),
+    ("cna_gltf_material_bridge_build_extensions", c.c_uint32, [c.POINTER(engine.CNA_GltfMaterialExtensionSourceEXT), c.POINTER(engine.CNA_GltfMaterialExtensionTexturesEXT), c.c_uint64],
+     "borrowed destination extensions; pure over the source and borrowed "
+     "textures"),
+)
+
+#: The minimal slices two other canonical headers have to contribute before the
+#: PBR family is reachable at all.
+#:
+#: ``graphics_ext.h``: ``CNA_PbrMaterialEXT`` is declared there, and
+#: ``cna_pbr_material_ext_init`` is the only route that fills one with CNA's own
+#: defaults. Without it a material would have to be built from a Python-side
+#: transcription of every default, which is the one thing this family must not
+#: do -- the material is 27 fields, and a drifted default is invisible.
+#:
+#: ``effects.h``: nothing in ``engine_layer.h`` creates a ``PbrEffect``, and
+#: ``cna_pbr_effect_apply_material`` refuses an effect that is not one. The two
+#: constructors are imported for that reason.
+#:
+#: The texture pair is imported for a second, measured reason.
+#: ``cna_pbr_effect_apply_material`` is documented to carry *every* field of the
+#: material and does carry every scalar, but drops all seven texture slots:
+#: after applying a material with a base-colour texture,
+#: ``cna_pbr_effect_get_texture`` reports no texture in any slot. Without these
+#: two routes a PBR effect could never have a texture at all, which is the
+#: family's central capability. See ENGINE-005 in
+#: ``docs/engine-upstream-findings.md``. No other per-field setter from that
+#: header is imported: the scalars really do cross.
+ENGINE_PBR_DEPENDENCY_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
+    ("cna_pbr_material_ext_init", c.c_uint32, [c.POINTER(engine.CNA_PbrMaterialEXT)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_pbr_effect_create", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "owned effect; borrows the graphics device for the call"),
+    ("cna_skinned_pbr_effect_create", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "owned effect; borrows the graphics device for the call"),
+    ("cna_pbr_effect_set_texture", c.c_uint32, [c.c_uint64, c.c_uint32, c.c_uint64],
+     "borrowed effect; retains the texture for the slot"),
+    ("cna_pbr_effect_get_texture", c.c_uint32,
+     [c.c_uint64, c.c_uint32, c.POINTER(c.c_uint8), c.POINTER(c.c_uint64)],
+     "caller output; the handle is the one the effect retains"),
+)
+
 #: Every engine route this binding imports, in one tuple for the loader.
 ENGINE_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ENGINE_IDENTITY_MANIFEST
     + ENGINE_COMPUTE_MANIFEST
     + ENGINE_POSTPROCESS_MANIFEST
     + ENGINE_SHADOW_MANIFEST
+    + ENGINE_PBR_MANIFEST
+    + ENGINE_PBR_DEPENDENCY_MANIFEST
 )
 
 # ``engine`` is imported for the structures later slices pass by pointer; the

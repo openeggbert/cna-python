@@ -258,6 +258,61 @@ header's protocol.
 
 ---
 
+## ENGINE-005 -- `cna_pbr_effect_apply_material` carries every scalar and no texture
+
+**Status:** open. The public setter works around it visibly; the raw behaviour
+is pinned by a test.
+
+**Documented contract.** `engine_layer.h`, of `cna_pbr_effect_apply_material`:
+
+> @param material The material to apply; **every field of the full material
+> crosses**.
+
+**Actual result.** Every scalar crosses. Not one of the seven texture slots
+does. Measured on the GPU artifact: apply a material with `metallic_factor`
+0.1875 and a base-colour `Texture2D`, then read it back two ways.
+
+```text
+cna_pbr_effect_create                          -> 0
+cna_pbr_effect_apply_material                  -> 0
+cna_pbr_effect_extract_material                -> 0
+  metallic_factor                              -> 0.1875   (crossed)
+  albedo_texture                               -> 0        (did not)
+cna_pbr_effect_get_texture, slots 0..6         -> has_texture false in all seven
+```
+
+The second read is the one that settles it. `cna_pbr_effect_get_texture` is a
+different route in a different header (`effects.h`) with its own storage, so
+"the effect has no texture" is not the extract route agreeing with itself: the
+texture never reached the effect. The fault is in `apply`, not in `extract`.
+
+`cna_pbr_effect_set_texture` on the same effect works, so the capability exists
+and only the material path drops it.
+
+**A measured bound found alongside it.** A texture-coordinate set other than 0
+or 1 is refused -- `CNA_RESULT_INVALID_ARGUMENT`, *"PBR packed texture-coordinate
+set must be 0 or 1."* CNA packs one bit per slot. Recorded because the field is
+an `int32` and nothing in its documentation says so.
+
+**Affected Python operation.** `cna.extensions.engine.PbrEffect.material` and
+`SkinnedPbrEffect.material`.
+
+**Local behaviour.** The setter applies the material and then assigns each of
+the seven slots with `cna_pbr_effect_set_texture`, so assigning a material
+assigns the material. That is a workaround, and it is a visible one: it is
+stated at the property, the two extra routes are declared in the manifest with
+this finding as their reason, and
+`tests/test_engine_pbr.py::PbrEffectTests::test_apply_material_alone_carries_no_texture_at_all`
+drives the raw route and asserts the defect, so it fails the day CNA fixes it.
+Without the workaround a PBR effect could never have a texture at all, which is
+the family's central capability -- reporting the defect and shipping nothing
+would not have been the more honest option.
+
+**Unblock condition.** `apply_material` carrying the seven texture handles. The
+public API does not change when it does; the pinning test does.
+
+---
+
 Findings are added as each engine family is qualified. A family that has not
 been measured yet has no entry here, and an absent entry is not a claim that it
 is clean.

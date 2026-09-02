@@ -45,7 +45,7 @@ Importing this module needs no native library. Constructing anything in it does.
 
 from __future__ import annotations
 
-from . import compute, errors, postprocess, shadows, values
+from . import compute, errors, pbr, postprocess, shadows, values
 from .compute import (
     ComputeShader, GpuTimer, ImageAccess, MemoryBarrier, StorageBuffer,
     barrier_contains,
@@ -54,6 +54,12 @@ from .postprocess import (
     BlitPass, EffectPass, FullscreenPass, PassTiming, PostProcessChain,
     PostProcessContext, PostProcessPass, RenderTargetPool, RenderTargetScope,
     ShaderEffectFactory, bind_render_target,
+)
+from .pbr import (
+    AlphaMode, GltfMaterialExtensionSource, GltfMaterialSource, PBR_TEXTURE_SLOT_COUNT,
+    PbrEffect, PbrMaterial, PbrMaterialExtensions, PbrTextureSlot, SkinnedPbrEffect,
+    TextureTransform, TransparencyMode, build_extensions, build_material,
+    thin_film_iridescence, thin_film_iridescence_glsl,
 )
 from .shadows import (
     CascadedShadowMap, CubeShadowMap, ShadowMap, ShadowReceiver, SpotShadowMap,
@@ -74,6 +80,7 @@ from .errors import (
 __all__ = [
     "compute",
     "errors",
+    "pbr",
     "postprocess",
     "shadows",
     "values",
@@ -98,6 +105,21 @@ __all__ = [
     "RenderTargetScope",
     "ShaderEffectFactory",
     "bind_render_target",
+    "AlphaMode",
+    "GltfMaterialExtensionSource",
+    "GltfMaterialSource",
+    "PBR_TEXTURE_SLOT_COUNT",
+    "PbrEffect",
+    "PbrMaterial",
+    "PbrMaterialExtensions",
+    "PbrTextureSlot",
+    "SkinnedPbrEffect",
+    "TextureTransform",
+    "TransparencyMode",
+    "build_extensions",
+    "build_material",
+    "thin_film_iridescence",
+    "thin_film_iridescence_glsl",
     "CascadedShadowMap",
     "CubeShadowMap",
     "ShadowMap",

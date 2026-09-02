@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1222,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1222,
-    "C_LAYOUT_MEASUREMENTS": 1622,
-    "CTYPES_LAYOUT_MEASUREMENTS": 1622,
+    "BOUND_FUNCTIONS": 1302,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1302,
+    "C_LAYOUT_MEASUREMENTS": 1701,
+    "CTYPES_LAYOUT_MEASUREMENTS": 1701,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -1230,7 +1230,87 @@
     "cna_effect_set_shadow_cascades_ext",
     "cna_effect_get_shadow_cascades_ext",
     "cna_effect_set_punctual_light_ext",
-    "cna_effect_get_punctual_light_ext"
+    "cna_effect_get_punctual_light_ext",
+    "cna_pbr_effect_apply_material",
+    "cna_skinned_pbr_effect_apply_material",
+    "cna_pbr_effect_extract_material",
+    "cna_skinned_pbr_effect_extract_material",
+    "cna_pbr_material_apply_state",
+    "cna_pbr_material_extensions_create",
+    "cna_pbr_material_extensions_destroy",
+    "cna_pbr_material_extensions_copy_from",
+    "cna_pbr_material_extensions_get_clearcoat_factor",
+    "cna_pbr_material_extensions_set_clearcoat_factor",
+    "cna_pbr_material_extensions_get_clearcoat_roughness",
+    "cna_pbr_material_extensions_set_clearcoat_roughness",
+    "cna_pbr_material_extensions_get_clearcoat_normal_scale",
+    "cna_pbr_material_extensions_set_clearcoat_normal_scale",
+    "cna_pbr_material_extensions_get_sheen_roughness",
+    "cna_pbr_material_extensions_set_sheen_roughness",
+    "cna_pbr_material_extensions_get_transmission_factor",
+    "cna_pbr_material_extensions_set_transmission_factor",
+    "cna_pbr_material_extensions_get_thickness_factor",
+    "cna_pbr_material_extensions_set_thickness_factor",
+    "cna_pbr_material_extensions_get_attenuation_distance",
+    "cna_pbr_material_extensions_set_attenuation_distance",
+    "cna_pbr_material_extensions_get_iridescence_factor",
+    "cna_pbr_material_extensions_set_iridescence_factor",
+    "cna_pbr_material_extensions_get_iridescence_ior",
+    "cna_pbr_material_extensions_set_iridescence_ior",
+    "cna_pbr_material_extensions_get_iridescence_thickness_minimum",
+    "cna_pbr_material_extensions_set_iridescence_thickness_minimum",
+    "cna_pbr_material_extensions_get_iridescence_thickness_maximum",
+    "cna_pbr_material_extensions_set_iridescence_thickness_maximum",
+    "cna_pbr_material_extensions_get_subsurface_wrap",
+    "cna_pbr_material_extensions_set_subsurface_wrap",
+    "cna_pbr_material_extensions_get_sheen_color_factor",
+    "cna_pbr_material_extensions_set_sheen_color_factor",
+    "cna_pbr_material_extensions_get_attenuation_color",
+    "cna_pbr_material_extensions_set_attenuation_color",
+    "cna_pbr_material_extensions_get_subsurface_color",
+    "cna_pbr_material_extensions_set_subsurface_color",
+    "cna_pbr_material_extensions_get_clearcoat_texture",
+    "cna_pbr_material_extensions_set_clearcoat_texture",
+    "cna_pbr_material_extensions_get_clearcoat_roughness_texture",
+    "cna_pbr_material_extensions_set_clearcoat_roughness_texture",
+    "cna_pbr_material_extensions_get_clearcoat_normal_texture",
+    "cna_pbr_material_extensions_set_clearcoat_normal_texture",
+    "cna_pbr_material_extensions_get_sheen_color_texture",
+    "cna_pbr_material_extensions_set_sheen_color_texture",
+    "cna_pbr_material_extensions_get_sheen_roughness_texture",
+    "cna_pbr_material_extensions_set_sheen_roughness_texture",
+    "cna_pbr_material_extensions_get_transmission_texture",
+    "cna_pbr_material_extensions_set_transmission_texture",
+    "cna_pbr_material_extensions_get_thickness_texture",
+    "cna_pbr_material_extensions_set_thickness_texture",
+    "cna_pbr_material_extensions_get_iridescence_texture",
+    "cna_pbr_material_extensions_set_iridescence_texture",
+    "cna_pbr_material_extensions_get_iridescence_thickness_texture",
+    "cna_pbr_material_extensions_set_iridescence_thickness_texture",
+    "cna_pbr_material_extensions_is_subsurface_enabled",
+    "cna_pbr_material_extensions_is_iridescence_enabled",
+    "cna_pbr_material_extensions_is_transmission_enabled",
+    "cna_pbr_material_extensions_is_sheen_enabled",
+    "cna_pbr_material_extensions_is_neutral",
+    "cna_pbr_material_extensions_equals",
+    "cna_pbr_material_extensions_get_hash_code",
+    "cna_pbr_material_extensions_copy_to_string",
+    "cna_thin_film_iridescence_evaluate",
+    "cna_thin_film_iridescence_copy_glsl",
+    "cna_pbr_material_ext_equals",
+    "cna_pbr_material_ext_get_hash_code",
+    "cna_pbr_material_ext_copy_to_string",
+    "cna_gltf_material_source_ext_init",
+    "cna_gltf_material_extension_source_ext_init",
+    "cna_gltf_material_textures_ext_init",
+    "cna_gltf_material_extension_textures_ext_init",
+    "cna_gltf_material_bridge_build_material",
+    "cna_gltf_material_bridge_build_extensions",
+    "cna_pbr_material_ext_init",
+    "cna_pbr_effect_create",
+    "cna_skinned_pbr_effect_create",
+    "cna_pbr_effect_set_texture",
+    "cna_pbr_effect_get_texture"
   ],
   "functionManifest": [
     {
@@ -14117,6 +14197,815 @@
       ],
       "arity": 2,
       "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_pbr_effect_apply_material",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PbrMaterialEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; every field of the value crosses, textures by handle"
+    },
+    {
+      "symbol": "cna_skinned_pbr_effect_apply_material",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PbrMaterialEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; every field of the value crosses, textures by handle"
+    },
+    {
+      "symbol": "cna_pbr_effect_extract_material",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PbrMaterialEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the texture handles are the effect's and are not new borrows"
+    },
+    {
+      "symbol": "cna_skinned_pbr_effect_extract_material",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PbrMaterialEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the texture handles are the effect's and are not new borrows"
+    },
+    {
+      "symbol": "cna_pbr_material_apply_state",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PbrMaterialEXT>",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed graphics device; sets blending, depth write and culling from the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned material extensions; needs no device, so it works wherever the layer is"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_copy_from",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed destination and source; copies every field, retains nothing"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_clearcoat_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_clearcoat_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_clearcoat_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_clearcoat_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_clearcoat_normal_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_clearcoat_normal_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_sheen_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_sheen_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_transmission_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_transmission_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_thickness_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_thickness_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_attenuation_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_attenuation_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_iridescence_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_iridescence_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_iridescence_ior",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_iridescence_ior",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_iridescence_thickness_minimum",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_iridescence_thickness_minimum",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_iridescence_thickness_maximum",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_iridescence_thickness_maximum",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_subsurface_wrap",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_subsurface_wrap",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_sheen_color_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_sheen_color_factor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_attenuation_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_attenuation_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_subsurface_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_subsurface_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_clearcoat_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the handle is the one that was set and is not a new borrow"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_clearcoat_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_clearcoat_roughness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_clearcoat_roughness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_clearcoat_normal_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_clearcoat_normal_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_sheen_color_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_sheen_color_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_sheen_roughness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_sheen_roughness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_transmission_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_transmission_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_thickness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_thickness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_iridescence_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_iridescence_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_iridescence_thickness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_set_iridescence_thickness_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed material extensions; copies the value"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_is_subsurface_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_is_iridescence_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_is_transmission_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_is_sheen_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_is_neutral",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed material extensions"
+    },
+    {
+      "symbol": "cna_pbr_material_extensions_copy_to_string",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed material extensions"
+    },
+    {
+      "symbol": "cna_thin_film_iridescence_evaluate",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 6,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_thin_film_iridescence_copy_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_pbr_material_ext_equals",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PbrMaterialEXT>",
+        "pointer<CNA_PbrMaterialEXT>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over two caller-owned values; textures compare by handle identity"
+    },
+    {
+      "symbol": "cna_pbr_material_ext_get_hash_code",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PbrMaterialEXT>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed PBR material value"
+    },
+    {
+      "symbol": "cna_pbr_material_ext_copy_to_string",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PbrMaterialEXT>",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed PBR material value"
+    },
+    {
+      "symbol": "cna_gltf_material_source_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GltfMaterialSourceEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_gltf_material_extension_source_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GltfMaterialExtensionSourceEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_gltf_material_textures_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GltfMaterialTexturesEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_gltf_material_extension_textures_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GltfMaterialExtensionTexturesEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_gltf_material_bridge_build_material",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GltfMaterialSourceEXT>",
+        "pointer<CNA_GltfMaterialTexturesEXT>",
+        "pointer<CNA_PbrMaterialEXT>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; pure over the source and the caller's borrowed textures"
+    },
+    {
+      "symbol": "cna_gltf_material_bridge_build_extensions",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GltfMaterialExtensionSourceEXT>",
+        "pointer<CNA_GltfMaterialExtensionTexturesEXT>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed destination extensions; pure over the source and borrowed textures"
+    },
+    {
+      "symbol": "cna_pbr_material_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PbrMaterialEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_pbr_effect_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned effect; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_skinned_pbr_effect_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned effect; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_pbr_effect_set_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed effect; retains the texture for the slot"
+    },
+    {
+      "symbol": "cna_pbr_effect_get_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ubyte>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; the handle is the one the effect retains"
     }
   ],
   "missingSymbols": [],
@@ -15341,10 +16230,6 @@
     "VALUE:CNA_SURFACE_FORMAT_BC7_SRGB_EXT": 24,
     "VALUE:CNA_SURFACE_FORMAT_BYTE_EXT": 25,
     "VALUE:CNA_SURFACE_FORMAT_USHORT_EXT": 26,
-    "SIZE:CNA_BoundingBox": 24,
-    "ALIGN:CNA_BoundingBox": 4,
-    "OFFSET:CNA_BoundingBox:min": 0,
-    "OFFSET:CNA_BoundingBox:max": 12,
     "SIZE:CNA_TextureTransformEXT": 28,
     "ALIGN:CNA_TextureTransformEXT": 4,
     "OFFSET:CNA_TextureTransformEXT:struct_size": 0,
@@ -15639,12 +16524,53 @@
     "OFFSET:CNA_IndirectDrawIndexedArguments:first_index": 8,
     "OFFSET:CNA_IndirectDrawIndexedArguments:base_vertex": 12,
     "OFFSET:CNA_IndirectDrawIndexedArguments:base_instance": 16,
+    "SIZE:CNA_BoundingBox": 24,
+    "ALIGN:CNA_BoundingBox": 4,
+    "OFFSET:CNA_BoundingBox:min": 0,
+    "OFFSET:CNA_BoundingBox:max": 12,
     "SIZE:CNA_GpuCullableInstance": 96,
     "ALIGN:CNA_GpuCullableInstance": 4,
     "OFFSET:CNA_GpuCullableInstance:struct_size": 0,
     "OFFSET:CNA_GpuCullableInstance:struct_version": 4,
     "OFFSET:CNA_GpuCullableInstance:world": 8,
     "OFFSET:CNA_GpuCullableInstance:bounds": 72,
+    "SIZE:CNA_PbrMaterialEXT": 360,
+    "ALIGN:CNA_PbrMaterialEXT": 8,
+    "OFFSET:CNA_PbrMaterialEXT:struct_size": 0,
+    "OFFSET:CNA_PbrMaterialEXT:struct_version": 4,
+    "OFFSET:CNA_PbrMaterialEXT:albedo_texture": 8,
+    "OFFSET:CNA_PbrMaterialEXT:normal_texture": 16,
+    "OFFSET:CNA_PbrMaterialEXT:metallic_roughness_texture": 24,
+    "OFFSET:CNA_PbrMaterialEXT:ambient_occlusion_texture": 32,
+    "OFFSET:CNA_PbrMaterialEXT:emissive_texture": 40,
+    "OFFSET:CNA_PbrMaterialEXT:specular_texture": 48,
+    "OFFSET:CNA_PbrMaterialEXT:specular_color_texture": 56,
+    "OFFSET:CNA_PbrMaterialEXT:albedo_color": 64,
+    "OFFSET:CNA_PbrMaterialEXT:emissive_factor": 68,
+    "OFFSET:CNA_PbrMaterialEXT:specular_color_factor": 80,
+    "OFFSET:CNA_PbrMaterialEXT:metallic_factor": 92,
+    "OFFSET:CNA_PbrMaterialEXT:roughness_factor": 96,
+    "OFFSET:CNA_PbrMaterialEXT:normal_scale": 100,
+    "OFFSET:CNA_PbrMaterialEXT:occlusion_strength": 104,
+    "OFFSET:CNA_PbrMaterialEXT:ior": 108,
+    "OFFSET:CNA_PbrMaterialEXT:specular_factor": 112,
+    "OFFSET:CNA_PbrMaterialEXT:alpha_cutoff": 116,
+    "OFFSET:CNA_PbrMaterialEXT:alpha_mode": 120,
+    "OFFSET:CNA_PbrMaterialEXT:double_sided": 124,
+    "OFFSET:CNA_PbrMaterialEXT:base_color_texture_srgb": 125,
+    "OFFSET:CNA_PbrMaterialEXT:emissive_texture_srgb": 126,
+    "OFFSET:CNA_PbrMaterialEXT:specular_color_texture_srgb": 127,
+    "OFFSET:CNA_PbrMaterialEXT:output_encoded_to_srgb": 128,
+    "OFFSET:CNA_PbrMaterialEXT:reserved": 129,
+    "OFFSET:CNA_PbrMaterialEXT:texture_coordinate_sets": 132,
+    "OFFSET:CNA_PbrMaterialEXT:texture_transforms": 160,
+    "SIZE:CNA_BoundingSphere": 16,
+    "ALIGN:CNA_BoundingSphere": 4,
+    "OFFSET:CNA_BoundingSphere:center": 0,
+    "OFFSET:CNA_BoundingSphere:radius": 12,
+    "SIZE:CNA_BoundingFrustum": 64,
+    "ALIGN:CNA_BoundingFrustum": 4,
+    "OFFSET:CNA_BoundingFrustum:matrix": 0,
     "VALUE:CNA_POST_PROCESS_CONTEXT_SIZE_V1": 328,
     "VALUE:CNA_ALPHA_MODE_BLEND_EXT": 2,
     "VALUE:CNA_ALPHA_MODE_MASK_EXT": 1,
@@ -15715,7 +16641,15 @@
     "VALUE:CNA_MOTION_BLUR_SAMPLE_COUNT_EXT": 8,
     "VALUE:CNA_PARTICLE_BINDING": 7,
     "VALUE:CNA_PARTICLE_SYSTEM_DEFAULT_CAPACITY": 1024,
+    "VALUE:CNA_PBR_TEXTURE_BASE_COLOR": 0,
+    "VALUE:CNA_PBR_TEXTURE_EMISSIVE": 3,
+    "VALUE:CNA_PBR_TEXTURE_MAXIMUM": 6,
+    "VALUE:CNA_PBR_TEXTURE_METALLIC_ROUGHNESS": 2,
+    "VALUE:CNA_PBR_TEXTURE_NORMAL": 1,
+    "VALUE:CNA_PBR_TEXTURE_OCCLUSION": 4,
     "VALUE:CNA_PBR_TEXTURE_SLOT_COUNT": 7,
+    "VALUE:CNA_PBR_TEXTURE_SPECULAR_COLOR_EXT": 6,
+    "VALUE:CNA_PBR_TEXTURE_SPECULAR_EXT": 5,
     "VALUE:CNA_POST_PROCESS_CONTEXT_VERSION_2": 2,
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_NONE": 0,
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_POINT": 1,
@@ -15734,6 +16668,15 @@
     "VALUE:CNA_SHADOW_QUALITY_ULTRA": 4,
     "VALUE:CNA_SSR_PASS_MAX_STEP_COUNT_EXT": 64,
     "VALUE:CNA_SSR_PASS_MIN_STEP_COUNT_EXT": 4,
+    "VALUE:CNA_TEXTURE_FILTER_ANISOTROPIC": 2,
+    "VALUE:CNA_TEXTURE_FILTER_LINEAR": 0,
+    "VALUE:CNA_TEXTURE_FILTER_LINEAR_MIP_POINT": 3,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR": 5,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_POINT": 6,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_LINEAR": 7,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT": 8,
+    "VALUE:CNA_TEXTURE_FILTER_POINT": 1,
+    "VALUE:CNA_TEXTURE_FILTER_POINT_MIP_LINEAR": 4,
     "VALUE:CNA_TONEMAPPING_MODE_ACES": 3,
     "VALUE:CNA_TONEMAPPING_MODE_FILMIC": 2,
     "VALUE:CNA_TONEMAPPING_MODE_NONE": 0,
@@ -15742,6 +16685,31 @@
     "VALUE:CNA_TRANSPARENCY_MODE_NONE": 0,
     "VALUE:CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT": 2,
     "VALUE:CNA_TRANSPARENCY_MODE_SORTED": 1,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_BYTE4": 5,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_COLOR": 4,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR2": 10,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR4": 11,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT2": 8,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT4": 9,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_SHORT2": 6,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_SHORT4": 7,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_SINGLE": 0,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_VECTOR2": 1,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_VECTOR3": 2,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_VECTOR4": 3,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_BINORMAL": 4,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_BLEND_INDICES": 6,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_BLEND_WEIGHT": 7,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_COLOR": 1,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_DEPTH": 8,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_FOG": 9,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_NORMAL": 3,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_POINT_SIZE": 10,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_POSITION": 0,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_SAMPLE": 11,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_TANGENT": 5,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_TESSELLATE_FACTOR": 12,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_TEXTURE_COORDINATE": 2,
     "VALUE:CNA_VOLUMETRIC_FOG_SLICE_COUNT_EXT": 32,
     "VALUE:CNA_VOLUMETRIC_FOG_SLICE_RESOLUTION_EXT": 96
   },
@@ -16050,7 +17018,15 @@
     "VALUE:CNA_MOTION_BLUR_SAMPLE_COUNT_EXT": 8,
     "VALUE:CNA_PARTICLE_BINDING": 7,
     "VALUE:CNA_PARTICLE_SYSTEM_DEFAULT_CAPACITY": 1024,
+    "VALUE:CNA_PBR_TEXTURE_BASE_COLOR": 0,
+    "VALUE:CNA_PBR_TEXTURE_EMISSIVE": 3,
+    "VALUE:CNA_PBR_TEXTURE_MAXIMUM": 6,
+    "VALUE:CNA_PBR_TEXTURE_METALLIC_ROUGHNESS": 2,
+    "VALUE:CNA_PBR_TEXTURE_NORMAL": 1,
+    "VALUE:CNA_PBR_TEXTURE_OCCLUSION": 4,
     "VALUE:CNA_PBR_TEXTURE_SLOT_COUNT": 7,
+    "VALUE:CNA_PBR_TEXTURE_SPECULAR_COLOR_EXT": 6,
+    "VALUE:CNA_PBR_TEXTURE_SPECULAR_EXT": 5,
     "VALUE:CNA_POST_PROCESS_CONTEXT_SIZE_V1": 328,
     "VALUE:CNA_POST_PROCESS_CONTEXT_VERSION_2": 2,
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_NONE": 0,
@@ -16070,6 +17046,15 @@
     "VALUE:CNA_SHADOW_QUALITY_ULTRA": 4,
     "VALUE:CNA_SSR_PASS_MAX_STEP_COUNT_EXT": 64,
     "VALUE:CNA_SSR_PASS_MIN_STEP_COUNT_EXT": 4,
+    "VALUE:CNA_TEXTURE_FILTER_ANISOTROPIC": 2,
+    "VALUE:CNA_TEXTURE_FILTER_LINEAR": 0,
+    "VALUE:CNA_TEXTURE_FILTER_LINEAR_MIP_POINT": 3,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR": 5,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_POINT": 6,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_LINEAR": 7,
+    "VALUE:CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT": 8,
+    "VALUE:CNA_TEXTURE_FILTER_POINT": 1,
+    "VALUE:CNA_TEXTURE_FILTER_POINT_MIP_LINEAR": 4,
     "VALUE:CNA_TONEMAPPING_MODE_ACES": 3,
     "VALUE:CNA_TONEMAPPING_MODE_FILMIC": 2,
     "VALUE:CNA_TONEMAPPING_MODE_NONE": 0,
@@ -16078,6 +17063,31 @@
     "VALUE:CNA_TRANSPARENCY_MODE_NONE": 0,
     "VALUE:CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT": 2,
     "VALUE:CNA_TRANSPARENCY_MODE_SORTED": 1,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_BYTE4": 5,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_COLOR": 4,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR2": 10,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR4": 11,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT2": 8,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT4": 9,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_SHORT2": 6,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_SHORT4": 7,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_SINGLE": 0,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_VECTOR2": 1,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_VECTOR3": 2,
+    "VALUE:CNA_VERTEX_ELEMENT_FORMAT_VECTOR4": 3,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_BINORMAL": 4,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_BLEND_INDICES": 6,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_BLEND_WEIGHT": 7,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_COLOR": 1,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_DEPTH": 8,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_FOG": 9,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_NORMAL": 3,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_POINT_SIZE": 10,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_POSITION": 0,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_SAMPLE": 11,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_TANGENT": 5,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_TESSELLATE_FACTOR": 12,
+    "VALUE:CNA_VERTEX_ELEMENT_USAGE_TEXTURE_COORDINATE": 2,
     "VALUE:CNA_VOLUMETRIC_FOG_SLICE_COUNT_EXT": 32,
     "VALUE:CNA_VOLUMETRIC_FOG_SLICE_RESOLUTION_EXT": 96,
     "SIZE:CNA_StringView": 16,
@@ -16292,8 +17302,6 @@
     "ALIGN:CNA_CurveKey": 4,
     "SIZE:CNA_ContentManagerCreateInfo": 32,
     "ALIGN:CNA_ContentManagerCreateInfo": 8,
-    "SIZE:CNA_BoundingBox": 24,
-    "ALIGN:CNA_BoundingBox": 4,
     "SIZE:CNA_TextureTransformEXT": 28,
     "ALIGN:CNA_TextureTransformEXT": 4,
     "SIZE:CNA_PostProcessContext": 336,
@@ -16340,8 +17348,16 @@
     "ALIGN:CNA_IndirectDrawArguments": 4,
     "SIZE:CNA_IndirectDrawIndexedArguments": 20,
     "ALIGN:CNA_IndirectDrawIndexedArguments": 4,
+    "SIZE:CNA_BoundingBox": 24,
+    "ALIGN:CNA_BoundingBox": 4,
     "SIZE:CNA_GpuCullableInstance": 96,
     "ALIGN:CNA_GpuCullableInstance": 4,
+    "SIZE:CNA_PbrMaterialEXT": 360,
+    "ALIGN:CNA_PbrMaterialEXT": 8,
+    "SIZE:CNA_BoundingSphere": 16,
+    "ALIGN:CNA_BoundingSphere": 4,
+    "SIZE:CNA_BoundingFrustum": 64,
+    "ALIGN:CNA_BoundingFrustum": 4,
     "OFFSET:CNA_StringView:data": 0,
     "OFFSET:CNA_StringView:byte_length": 8,
     "OFFSET:CNA_ErrorInfo:struct_size": 0,
@@ -17114,8 +18130,6 @@
     "OFFSET:CNA_ContentManagerCreateInfo:struct_version": 4,
     "OFFSET:CNA_ContentManagerCreateInfo:root_directory": 8,
     "OFFSET:CNA_ContentManagerCreateInfo:reserved": 24,
-    "OFFSET:CNA_BoundingBox:min": 0,
-    "OFFSET:CNA_BoundingBox:max": 12,
     "OFFSET:CNA_TextureTransformEXT:struct_size": 0,
     "OFFSET:CNA_TextureTransformEXT:struct_version": 4,
     "OFFSET:CNA_TextureTransformEXT:offset": 8,
@@ -17364,9 +18378,42 @@
     "OFFSET:CNA_IndirectDrawIndexedArguments:first_index": 8,
     "OFFSET:CNA_IndirectDrawIndexedArguments:base_vertex": 12,
     "OFFSET:CNA_IndirectDrawIndexedArguments:base_instance": 16,
+    "OFFSET:CNA_BoundingBox:min": 0,
+    "OFFSET:CNA_BoundingBox:max": 12,
     "OFFSET:CNA_GpuCullableInstance:struct_size": 0,
     "OFFSET:CNA_GpuCullableInstance:struct_version": 4,
     "OFFSET:CNA_GpuCullableInstance:world": 8,
-    "OFFSET:CNA_GpuCullableInstance:bounds": 72
+    "OFFSET:CNA_GpuCullableInstance:bounds": 72,
+    "OFFSET:CNA_PbrMaterialEXT:struct_size": 0,
+    "OFFSET:CNA_PbrMaterialEXT:struct_version": 4,
+    "OFFSET:CNA_PbrMaterialEXT:albedo_texture": 8,
+    "OFFSET:CNA_PbrMaterialEXT:normal_texture": 16,
+    "OFFSET:CNA_PbrMaterialEXT:metallic_roughness_texture": 24,
+    "OFFSET:CNA_PbrMaterialEXT:ambient_occlusion_texture": 32,
+    "OFFSET:CNA_PbrMaterialEXT:emissive_texture": 40,
+    "OFFSET:CNA_PbrMaterialEXT:specular_texture": 48,
+    "OFFSET:CNA_PbrMaterialEXT:specular_color_texture": 56,
+    "OFFSET:CNA_PbrMaterialEXT:albedo_color": 64,
+    "OFFSET:CNA_PbrMaterialEXT:emissive_factor": 68,
+    "OFFSET:CNA_PbrMaterialEXT:specular_color_factor": 80,
+    "OFFSET:CNA_PbrMaterialEXT:metallic_factor": 92,
+    "OFFSET:CNA_PbrMaterialEXT:roughness_factor": 96,
+    "OFFSET:CNA_PbrMaterialEXT:normal_scale": 100,
+    "OFFSET:CNA_PbrMaterialEXT:occlusion_strength": 104,
+    "OFFSET:CNA_PbrMaterialEXT:ior": 108,
+    "OFFSET:CNA_PbrMaterialEXT:specular_factor": 112,
+    "OFFSET:CNA_PbrMaterialEXT:alpha_cutoff": 116,
+    "OFFSET:CNA_PbrMaterialEXT:alpha_mode": 120,
+    "OFFSET:CNA_PbrMaterialEXT:double_sided": 124,
+    "OFFSET:CNA_PbrMaterialEXT:base_color_texture_srgb": 125,
+    "OFFSET:CNA_PbrMaterialEXT:emissive_texture_srgb": 126,
+    "OFFSET:CNA_PbrMaterialEXT:specular_color_texture_srgb": 127,
+    "OFFSET:CNA_PbrMaterialEXT:output_encoded_to_srgb": 128,
+    "OFFSET:CNA_PbrMaterialEXT:reserved": 129,
+    "OFFSET:CNA_PbrMaterialEXT:texture_coordinate_sets": 132,
+    "OFFSET:CNA_PbrMaterialEXT:texture_transforms": 160,
+    "OFFSET:CNA_BoundingSphere:center": 0,
+    "OFFSET:CNA_BoundingSphere:radius": 12,
+    "OFFSET:CNA_BoundingFrustum:matrix": 0
   }
 }

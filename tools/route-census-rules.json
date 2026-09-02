@@ -190,6 +190,24 @@
       "boundReason": "imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable"
     },
     {
+      "id": "engine-pbr-dependency",
+      "family": "pbr-effect",
+      "familyTitle": "the minimal slice the PBR family cannot work without",
+      "match": {
+        "names": [
+          "cna_pbr_material_ext_init",
+          "cna_pbr_effect_create",
+          "cna_skinned_pbr_effect_create",
+          "cna_pbr_effect_set_texture",
+          "cna_pbr_effect_get_texture"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal graphics_ext.h and effects.h slice the selected PBR family cannot work without. cna_pbr_material_ext_init is the only route that fills a 27-field material with CNA's own defaults, and engine_layer.h declares no route that creates a PbrEffect, so without the two constructors every PBR route in it is unreachable. The texture pair is there because cna_pbr_effect_apply_material drops all seven texture slots (ENGINE-005), so without it a PBR effect could never have a texture. A dependency of the selected engine profile, not a decision to bind either header.",
+      "boundReason": "imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005"
+    },
+    {
       "id": "engine-engine-identity",
       "family": "engine-identity",
       "familyTitle": "engine-layer identity",
@@ -1696,7 +1714,9 @@
       "headers": [
         "engine_layer.h"
       ],
-      "ruleIds": [],
+      "ruleIds": [
+        "engine-pbr-dependency"
+      ],
       "description": "`engine_layer.h`, grouped into named sub-families. There is no blanket rule:\na route no sub-family claims is UNREVIEWED and fails the gate. Every route here\nis BOUND or carries its own written non-binding reason."
     }
   ]

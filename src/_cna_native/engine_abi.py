@@ -32,8 +32,12 @@ CNA_LutInterpolation = c.c_uint32
 CNA_PunctualLightKindEXT = c.c_uint32
 CNA_RenderQuality = c.c_uint32
 CNA_ShadowQuality = c.c_uint32
+CNA_TextureAddressMode = c.c_uint32
+CNA_TextureFilter = c.c_uint32
 CNA_TonemappingMode = c.c_uint32
 CNA_TransparencyMode = c.c_uint32
+CNA_VertexElementFormat = c.c_uint32
+CNA_VertexElementUsage = c.c_uint32
 
 #: Every opaque engine handle is a ``CNA_Handle``. The names are kept so a
 #: manifest entry can say which object a handle parameter refers to.
@@ -154,7 +158,15 @@ CNA_LUT_INTERPOLATION_TRILINEAR = 0
 CNA_MOTION_BLUR_SAMPLE_COUNT_EXT = 8
 CNA_PARTICLE_BINDING = 7
 CNA_PARTICLE_SYSTEM_DEFAULT_CAPACITY = 1024
+CNA_PBR_TEXTURE_BASE_COLOR = 0
+CNA_PBR_TEXTURE_EMISSIVE = 3
+CNA_PBR_TEXTURE_MAXIMUM = 6
+CNA_PBR_TEXTURE_METALLIC_ROUGHNESS = 2
+CNA_PBR_TEXTURE_NORMAL = 1
+CNA_PBR_TEXTURE_OCCLUSION = 4
 CNA_PBR_TEXTURE_SLOT_COUNT = 7
+CNA_PBR_TEXTURE_SPECULAR_COLOR_EXT = 6
+CNA_PBR_TEXTURE_SPECULAR_EXT = 5
 CNA_POST_PROCESS_CONTEXT_VERSION_2 = 2
 CNA_PUNCTUAL_LIGHT_KIND_EXT_NONE = 0
 CNA_PUNCTUAL_LIGHT_KIND_EXT_POINT = 1
@@ -173,6 +185,15 @@ CNA_SHADOW_QUALITY_MEDIUM = 2
 CNA_SHADOW_QUALITY_ULTRA = 4
 CNA_SSR_PASS_MAX_STEP_COUNT_EXT = 64
 CNA_SSR_PASS_MIN_STEP_COUNT_EXT = 4
+CNA_TEXTURE_FILTER_ANISOTROPIC = 2
+CNA_TEXTURE_FILTER_LINEAR = 0
+CNA_TEXTURE_FILTER_LINEAR_MIP_POINT = 3
+CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR = 5
+CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_POINT = 6
+CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_LINEAR = 7
+CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT = 8
+CNA_TEXTURE_FILTER_POINT = 1
+CNA_TEXTURE_FILTER_POINT_MIP_LINEAR = 4
 CNA_TONEMAPPING_MODE_ACES = 3
 CNA_TONEMAPPING_MODE_FILMIC = 2
 CNA_TONEMAPPING_MODE_NONE = 0
@@ -181,17 +202,35 @@ CNA_TONEMAPPING_MODE_UNCHARTED2 = 4
 CNA_TRANSPARENCY_MODE_NONE = 0
 CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT = 2
 CNA_TRANSPARENCY_MODE_SORTED = 1
+CNA_VERTEX_ELEMENT_FORMAT_BYTE4 = 5
+CNA_VERTEX_ELEMENT_FORMAT_COLOR = 4
+CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR2 = 10
+CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR4 = 11
+CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT2 = 8
+CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT4 = 9
+CNA_VERTEX_ELEMENT_FORMAT_SHORT2 = 6
+CNA_VERTEX_ELEMENT_FORMAT_SHORT4 = 7
+CNA_VERTEX_ELEMENT_FORMAT_SINGLE = 0
+CNA_VERTEX_ELEMENT_FORMAT_VECTOR2 = 1
+CNA_VERTEX_ELEMENT_FORMAT_VECTOR3 = 2
+CNA_VERTEX_ELEMENT_FORMAT_VECTOR4 = 3
+CNA_VERTEX_ELEMENT_USAGE_BINORMAL = 4
+CNA_VERTEX_ELEMENT_USAGE_BLEND_INDICES = 6
+CNA_VERTEX_ELEMENT_USAGE_BLEND_WEIGHT = 7
+CNA_VERTEX_ELEMENT_USAGE_COLOR = 1
+CNA_VERTEX_ELEMENT_USAGE_DEPTH = 8
+CNA_VERTEX_ELEMENT_USAGE_FOG = 9
+CNA_VERTEX_ELEMENT_USAGE_NORMAL = 3
+CNA_VERTEX_ELEMENT_USAGE_POINT_SIZE = 10
+CNA_VERTEX_ELEMENT_USAGE_POSITION = 0
+CNA_VERTEX_ELEMENT_USAGE_SAMPLE = 11
+CNA_VERTEX_ELEMENT_USAGE_TANGENT = 5
+CNA_VERTEX_ELEMENT_USAGE_TESSELLATE_FACTOR = 12
+CNA_VERTEX_ELEMENT_USAGE_TEXTURE_COORDINATE = 2
 CNA_VOLUMETRIC_FOG_SLICE_COUNT_EXT = 32
 CNA_VOLUMETRIC_FOG_SLICE_RESOLUTION_EXT = 96
 
 # --- structures ------------------------------------------------------------
-
-class CNA_BoundingBox(c.Structure):
-    _fields_ = [
-        ("min", abi.CNA_Vector3),
-        ("max", abi.CNA_Vector3),
-    ]
-
 
 class CNA_TextureTransformEXT(c.Structure):
     _fields_ = [
@@ -556,6 +595,13 @@ class CNA_IndirectDrawIndexedArguments(c.Structure):
     ]
 
 
+class CNA_BoundingBox(c.Structure):
+    _fields_ = [
+        ("min", abi.CNA_Vector3),
+        ("max", abi.CNA_Vector3),
+    ]
+
+
 class CNA_GpuCullableInstance(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -565,13 +611,89 @@ class CNA_GpuCullableInstance(c.Structure):
     ]
 
 
+class CNA_SamplerState(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32),
+        ("struct_version", c.c_uint32),
+        ("address_u", c.c_uint32),
+        ("address_v", c.c_uint32),
+        ("address_w", c.c_uint32),
+        ("filter", c.c_uint32),
+        ("max_anisotropy", c.c_int32),
+        ("max_mip_level", c.c_int32),
+        ("mip_map_level_of_detail_bias", c.c_float),
+        ("reserved", c.c_uint32),
+    ]
+
+
+class CNA_PbrMaterialEXT(c.Structure):
+    _fields_ = [
+        ("struct_size", c.c_uint32),
+        ("struct_version", c.c_uint32),
+        ("albedo_texture", c.c_uint64),
+        ("normal_texture", c.c_uint64),
+        ("metallic_roughness_texture", c.c_uint64),
+        ("ambient_occlusion_texture", c.c_uint64),
+        ("emissive_texture", c.c_uint64),
+        ("specular_texture", c.c_uint64),
+        ("specular_color_texture", c.c_uint64),
+        ("albedo_color", abi.CNA_Color),
+        ("emissive_factor", abi.CNA_Vector3),
+        ("specular_color_factor", abi.CNA_Vector3),
+        ("metallic_factor", c.c_float),
+        ("roughness_factor", c.c_float),
+        ("normal_scale", c.c_float),
+        ("occlusion_strength", c.c_float),
+        ("ior", c.c_float),
+        ("specular_factor", c.c_float),
+        ("alpha_cutoff", c.c_float),
+        ("alpha_mode", c.c_uint32),
+        ("double_sided", c.c_uint8),
+        ("base_color_texture_srgb", c.c_uint8),
+        ("emissive_texture_srgb", c.c_uint8),
+        ("specular_color_texture_srgb", c.c_uint8),
+        ("output_encoded_to_srgb", c.c_uint8),
+        ("reserved", c.c_uint8 * 3),
+        ("texture_coordinate_sets", c.c_int32 * 7),
+        ("texture_transforms", CNA_TextureTransformEXT * 7),
+    ]
+
+
+class CNA_BoundingSphere(c.Structure):
+    _fields_ = [
+        ("center", abi.CNA_Vector3),
+        ("radius", c.c_float),
+    ]
+
+
+class CNA_VertexElement(c.Structure):
+    _fields_ = [
+        ("offset", c.c_int32),
+        ("format", c.c_uint32),
+        ("usage", c.c_uint32),
+        ("usage_index", c.c_int32),
+    ]
+
+
+class CNA_BoundingFrustum(c.Structure):
+    _fields_ = [
+        ("matrix", abi.CNA_Matrix),
+    ]
+
+
+class CNA_VertexPositionColor(c.Structure):
+    _fields_ = [
+        ("position", abi.CNA_Vector3),
+        ("color", abi.CNA_Color),
+    ]
+
+
 # --- constants derived from a generated layout ------------------------------
 
 CNA_POST_PROCESS_CONTEXT_SIZE_V1 = CNA_PostProcessContext.settings.offset
 
 #: Every generated structure, in declaration order, for the ABI audit.
 ENGINE_STRUCTURES = (
-    CNA_BoundingBox,
     CNA_TextureTransformEXT,
     CNA_PostProcessContext,
     CNA_DirectionalLightEXT,
@@ -595,7 +717,14 @@ ENGINE_STRUCTURES = (
     CNA_LodLevelEXT,
     CNA_IndirectDrawArguments,
     CNA_IndirectDrawIndexedArguments,
+    CNA_BoundingBox,
     CNA_GpuCullableInstance,
+    CNA_SamplerState,
+    CNA_PbrMaterialEXT,
+    CNA_BoundingSphere,
+    CNA_VertexElement,
+    CNA_BoundingFrustum,
+    CNA_VertexPositionColor,
 )
 
 #: Every generated constant, for the ABI audit to re-read from C.
@@ -669,7 +798,15 @@ ENGINE_CONSTANTS = (
     "CNA_MOTION_BLUR_SAMPLE_COUNT_EXT",
     "CNA_PARTICLE_BINDING",
     "CNA_PARTICLE_SYSTEM_DEFAULT_CAPACITY",
+    "CNA_PBR_TEXTURE_BASE_COLOR",
+    "CNA_PBR_TEXTURE_EMISSIVE",
+    "CNA_PBR_TEXTURE_MAXIMUM",
+    "CNA_PBR_TEXTURE_METALLIC_ROUGHNESS",
+    "CNA_PBR_TEXTURE_NORMAL",
+    "CNA_PBR_TEXTURE_OCCLUSION",
     "CNA_PBR_TEXTURE_SLOT_COUNT",
+    "CNA_PBR_TEXTURE_SPECULAR_COLOR_EXT",
+    "CNA_PBR_TEXTURE_SPECULAR_EXT",
     "CNA_POST_PROCESS_CONTEXT_SIZE_V1",
     "CNA_POST_PROCESS_CONTEXT_VERSION_2",
     "CNA_PUNCTUAL_LIGHT_KIND_EXT_NONE",
@@ -689,6 +826,15 @@ ENGINE_CONSTANTS = (
     "CNA_SHADOW_QUALITY_ULTRA",
     "CNA_SSR_PASS_MAX_STEP_COUNT_EXT",
     "CNA_SSR_PASS_MIN_STEP_COUNT_EXT",
+    "CNA_TEXTURE_FILTER_ANISOTROPIC",
+    "CNA_TEXTURE_FILTER_LINEAR",
+    "CNA_TEXTURE_FILTER_LINEAR_MIP_POINT",
+    "CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR",
+    "CNA_TEXTURE_FILTER_MIN_LINEAR_MAG_POINT_MIP_POINT",
+    "CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_LINEAR",
+    "CNA_TEXTURE_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT",
+    "CNA_TEXTURE_FILTER_POINT",
+    "CNA_TEXTURE_FILTER_POINT_MIP_LINEAR",
     "CNA_TONEMAPPING_MODE_ACES",
     "CNA_TONEMAPPING_MODE_FILMIC",
     "CNA_TONEMAPPING_MODE_NONE",
@@ -697,6 +843,31 @@ ENGINE_CONSTANTS = (
     "CNA_TRANSPARENCY_MODE_NONE",
     "CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT",
     "CNA_TRANSPARENCY_MODE_SORTED",
+    "CNA_VERTEX_ELEMENT_FORMAT_BYTE4",
+    "CNA_VERTEX_ELEMENT_FORMAT_COLOR",
+    "CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR2",
+    "CNA_VERTEX_ELEMENT_FORMAT_HALF_VECTOR4",
+    "CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT2",
+    "CNA_VERTEX_ELEMENT_FORMAT_NORMALIZED_SHORT4",
+    "CNA_VERTEX_ELEMENT_FORMAT_SHORT2",
+    "CNA_VERTEX_ELEMENT_FORMAT_SHORT4",
+    "CNA_VERTEX_ELEMENT_FORMAT_SINGLE",
+    "CNA_VERTEX_ELEMENT_FORMAT_VECTOR2",
+    "CNA_VERTEX_ELEMENT_FORMAT_VECTOR3",
+    "CNA_VERTEX_ELEMENT_FORMAT_VECTOR4",
+    "CNA_VERTEX_ELEMENT_USAGE_BINORMAL",
+    "CNA_VERTEX_ELEMENT_USAGE_BLEND_INDICES",
+    "CNA_VERTEX_ELEMENT_USAGE_BLEND_WEIGHT",
+    "CNA_VERTEX_ELEMENT_USAGE_COLOR",
+    "CNA_VERTEX_ELEMENT_USAGE_DEPTH",
+    "CNA_VERTEX_ELEMENT_USAGE_FOG",
+    "CNA_VERTEX_ELEMENT_USAGE_NORMAL",
+    "CNA_VERTEX_ELEMENT_USAGE_POINT_SIZE",
+    "CNA_VERTEX_ELEMENT_USAGE_POSITION",
+    "CNA_VERTEX_ELEMENT_USAGE_SAMPLE",
+    "CNA_VERTEX_ELEMENT_USAGE_TANGENT",
+    "CNA_VERTEX_ELEMENT_USAGE_TESSELLATE_FACTOR",
+    "CNA_VERTEX_ELEMENT_USAGE_TEXTURE_COORDINATE",
     "CNA_VOLUMETRIC_FOG_SLICE_COUNT_EXT",
     "CNA_VOLUMETRIC_FOG_SLICE_RESOLUTION_EXT",
 )

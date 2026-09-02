@@ -1168,6 +1168,66 @@
       },
       "evidence": "ENGINE-002 in docs/engine-upstream-findings.md",
       "notes": "Every engine getter that answers with a handle returns a fresh counted view that must be released. One route documents the opposite and two document nothing. Objects that own a useful view hand it out once and dispose it on close; the rest release immediately. A test closes a map after reading its texture and its caster effect and proves both were released."
+    },
+    {
+      "operation": "PBR material value",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_pbr_material_ext_* and cna_pbr_material_ext_init; tests/test_engine_pbr.py PbrMaterialValueTests",
+      "notes": "Twenty-seven fields, every default read from CNA rather than written down. Each field is changed alone and CNA's own equality confirms it reached the native value. The seven texture slots are keyed by slot rather than by structure position, because CNA numbers emissive before occlusion and declares them the other way round."
+    },
+    {
+      "operation": "PBR material extensions",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_pbr_material_extensions_* (61 routes); tests/test_engine_pbr.py PbrMaterialExtensionsTests",
+      "notes": "Clearcoat, sheen, transmission, volume, iridescence and subsurface: twelve scalars, three colours and nine texture slots all round-trip. The is_* flags are CNA's derived answers, not stored state -- setting a transmission factor turns transmission on and zeroing it returns the object to neutral."
+    },
+    {
+      "operation": "glTF material bridge",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_gltf_material_* (6 routes); tests/test_engine_pbr.py GltfBridgeTests",
+      "notes": "Every core factor reaches the material, including each slot's own coordinate set and transform. The bridge quantises glTF's linear float base colour into the material's byte colour, which the test asserts as a quantisation rather than as an identity."
+    },
+    {
+      "operation": "Thin-film iridescence",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_thin_film_iridescence_evaluate and _copy_glsl",
+      "notes": "The term varies with film thickness and separates the channels, which is what makes it iridescence rather than a tint; a film matching the surrounding medium collapses toward its base reflectance. CNA also publishes the GLSL, so a custom shader and the CPU evaluation agree by construction."
+    },
+    {
+      "operation": "PBR effect material state",
+      "status": "BLOCKED_UPSTREAM",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "measured and worked around"
+      },
+      "evidence": "ENGINE-005 in docs/engine-upstream-findings.md",
+      "notes": "cna_pbr_effect_apply_material is documented to carry every field and carries every scalar; not one of the seven texture slots crosses, confirmed by an independent route in another header. The public setter assigns the slots itself so a material really is applied, and a test drives the raw route so the defect stays visible."
+    },
+    {
+      "operation": "PBR effect construction",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_pbr_effect_create and cna_skinned_pbr_effect_create, the effects.h dependency slice; tests/test_engine_pbr.py PbrEffectTests",
+      "notes": "engine_layer.h has no route that creates a PbrEffect, so without this two-route slice every PBR route in it would be unreachable. The effect comes back as a strict Effect with its parameters and techniques, and applying a material's state really does change the device's blend and cull state."
     }
   ]
 }
