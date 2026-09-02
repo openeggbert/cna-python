@@ -82,6 +82,16 @@ def main() -> int:
         )
         smoke = run([str(python), "main.py", "--smoke-test"], cwd=consumer, env=environment)
         stability = run([str(python), "main.py", "--stability-test"], cwd=consumer, env=environment)
+        # The CNA extension profile has to reach an installed wheel too: a
+        # generated consumer with no source checkout on its path must be able to
+        # import it and compile one `.cnj` asset through it.
+        extensions = run(
+            [str(python), "-c",
+             "from cna.extensions import graphics, content; "
+             "print('EXTENSION_PROBE=PASS', len(content.__all__))"],
+            cwd=consumer, env=environment,
+        )
+        cnb_smoke = run([str(python), "main.py", "--verify-cnb"], cwd=consumer, env=environment)
 
         print(f"WHEEL={wheel.name}")
         print(f"WHEEL_SHA256={sha256(wheel)}")
@@ -91,11 +101,16 @@ def main() -> int:
         stability_passed = "SUCCESS drew 600 real CNA frames" in stability
         print("SMOKE_60=PASS" if smoke_passed else "SMOKE_60=FAIL")
         print("STABILITY_600=PASS" if stability_passed else "STABILITY_600=FAIL")
+        extensions_passed = "EXTENSION_PROBE=PASS" in extensions
+        cnb_passed = "CNB_VERIFICATION=ok" in cnb_smoke
+        print("EXTENSION_IMPORT=PASS" if extensions_passed else "EXTENSION_IMPORT=FAIL")
+        print("CNB_SMOKE=PASS" if cnb_passed else "CNB_SMOKE=FAIL")
         print(f"ABSOLUTE_DEVELOPER_PATHS={absolute_leaks}")
         print(f"SIBLING_SOURCE_DEPENDENCIES={sibling_leaks}")
         print(f"PYTHONPATH_SOURCE_DEPENDENCIES={pythonpath_leaks}")
         return 1 if (absolute_leaks or sibling_leaks or pythonpath_leaks
-                     or not smoke_passed or not stability_passed) else 0
+                     or not smoke_passed or not stability_passed
+                     or not extensions_passed or not cnb_passed) else 0
 
 
 if __name__ == "__main__":

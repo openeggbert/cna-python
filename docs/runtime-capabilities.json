@@ -1,796 +1,923 @@
 {
- "schemaVersion": 2,
- "abi": "0.21.0",
- "cnaRevision": "7712534d3d22c7e284714e0e87afebba3f3cb472",
- "sharpRuntimeRevision": "9cc96cd57cde394940cc24d58743edf9bf63d3fb",
- "artifacts": [
-  {
-   "id": "control",
-   "role": "deterministic non-windowed control",
-   "renderer": "HEADLESS",
-   "rasterizes": false,
-   "audio": "SDL3 mixer on the dummy device",
-   "video": "AUTO (FFmpeg present)",
-   "platform": "Linux x86-64",
-   "sha256": "94078be94dc1f1e6c8787c1cd17b08c9430d1e4bb5699947cd2b7aafee40281d"
-  },
-  {
-   "id": "gpu",
-   "role": "real windowed renderer",
-   "renderer": "OPENGLES3",
-   "rasterizes": true,
-   "audio": "SDL3 mixer on the dummy device",
-   "video": "AUTO (FFmpeg present)",
-   "platform": "Linux x86-64, isolated Xvfb display, Mesa GL ES 3.2 (llvmpipe)",
-   "sha256": "65ce46a49b754586e8a99406901a9627e38f4473b594c0266400db65e4d73da9"
-  }
- ],
- "statuses": [
-  "VERIFIED_NATIVE",
-  "VERIFIED_MANAGED",
-  "BLOCKED_UPSTREAM",
-  "BLOCKED_RENDERER",
-  "BLOCKED_PLATFORM",
-  "BLOCKED_HARDWARE",
-  "BLOCKED_FIXTURE",
-  "LANGUAGE_MAPPING_LIMITATION",
-  "DELIBERATE_OUT_OF_SCOPE",
-  "ACTIONABLE_LOCAL"
- ],
- "operations": [
-  {
-   "operation": "FrameworkDispatcher explicit Update",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_framework_dispatcher_update; Milestone-8 dispatcher tests",
-   "notes": "One explicit call adds one pump to the existing single automatic post-Update pump and re-raises contained callback failures after native return."
-  },
-  {
-   "operation": "FrameworkDispatcher Update without a live Game",
-   "status": "BLOCKED_UPSTREAM",
-   "evidence": "runtime.h cna_framework_dispatcher_update(CNA_Handle game); re-read on CNA 0.21.0",
-   "notes": "Re-measured, unchanged: the route still takes a Game handle, so it has nothing to pump without one. XNA permits a process-level call; Python reports the limitation and never silently no-ops."
-  },
-  {
-   "operation": "GamerServicesComponent lifecycle",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_gamer_services_dispatcher_set_window_handle/initialize/update",
-   "notes": "The normal GameComponent initialization/update order uses the Game window and current native generation."
-  },
-  {
-   "operation": "Broader GamerServices ecosystem",
-   "status": "DELIBERATE_OUT_OF_SCOPE",
-   "evidence": "the selected 257-type profile ends at GamerServicesComponent",
-   "notes": "Not a backend limit: CNA has 250 gamer-service routes and the profile deliberately excludes them. Opening the family is a future-profile decision, and no Gamer, Guide, Avatar, achievement or leaderboard facade is fabricated meanwhile."
-  },
-  {
-   "operation": "Game.Components/services/traversal",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "tests.test_game_graphics_foundation.GameObjectModelTests",
-   "notes": "Per-Game services and snapshot traversal with stable ordering."
-  },
-  {
-   "operation": "Game.ResetElapsedTime/SuppressDraw",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_game_reset_elapsed_time; cna_game_suppress_draw",
-   "notes": "Calls the active native Game lifecycle."
-  },
-  {
-   "operation": "Game activation/deactivation delivery",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_game_subscribe; the Activated event is delivered on both qualified artifacts",
-   "notes": "Activation is delivered for real. A deactivation transition needs a focus change no automated run performs, so it is exercised but not observed here."
-  },
-  {
-   "operation": "GameWindow properties and screen-device change",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "runtime_window.h routes",
-   "notes": "The control artifact reports its real null-window state; the windowed renderer reports a real 800x480 client bounds and a real screen device name."
-  },
-  {
-   "operation": "GameWindow resize/orientation events",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_game_window_subscribe; ClientSizeChanged delivered after ApplyChanges resized the window from 800x480 to 512x384 on the windowed artifact",
-   "notes": "The event is real on a renderer that has a window. The control artifact has none, so it delivers nothing and none is synthesized. Orientation never changes on this platform.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "SurfaceFormat and graphics value enums",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "behavior graphics.surface_format.values",
-   "notes": "Values follow XNA metadata, independently of CNA enum ordering."
-  },
-  {
-   "operation": "Viewport.Project/Unproject",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "behavior graphics.viewport.*",
-   "notes": "Binary32 XNA operation ordering."
-  },
-  {
-   "operation": "GraphicsResource disposal event",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_graphics_resource_subscribe_disposing",
-   "notes": "Exactly-once event before native release; double Dispose is idempotent."
-  },
-  {
-   "operation": "GraphicsDevice.ResourceCreated/ResourceDestroyed",
-   "status": "BLOCKED_UPSTREAM",
-   "evidence": "graphics_device.h CNA_ResourceCreatedEventInfo / CNA_ResourceDestroyedEventInfo",
-   "notes": "The subscription routes now exist, but CNA states that the event is raised from the graphics-resource base constructor, so the object is still under construction and no native object pointer crosses the ABI. XNA's ResourceCreatedEventArgs.Resource therefore cannot be supplied and would have to be fabricated."
-  },
-  {
-   "operation": "Graphics adapter/display/presentation queries",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "display.h routes and native integration",
-   "notes": "Durable adapter and display facades. Each artifact reports its own single adapter."
-  },
-  {
-   "operation": "Blend/depth/rasterizer/sampler state binding",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "graphics_state.h and native foundation test",
-   "notes": "XNA defaults and post-bind freeze are managed; descriptors are copied by CNA."
-  },
-  {
-   "operation": "SamplerStateCollection/TextureCollection",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "graphics_device.h state/texture slot routes",
-   "notes": "Durable per-device stage facades; Reach exposes zero vertex-stage slots."
-  },
-  {
-   "operation": "Texture metadata and Color transfer",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "texture.h and native tests",
-   "notes": "Format and level count are read from native resource information."
-  },
-  {
-   "operation": "Texture2D PNG/JPEG encoding",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_texture2d_*encoded* and native foundation test",
-   "notes": "Uses CNA encoders with writable-stream validation and rollback."
-  },
-  {
-   "operation": "Vertex declarations and built-in codecs",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "graphics.vertex.strides; explicit struct.pack codecs",
-   "notes": "No reflection, pickle, JSON, or __dict__ layout inference."
-  },
-  {
-   "operation": "Vertex/Index buffer create, transfer, binding",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "vertex_resources.h; index_resources.h; native foundation/stress",
-   "notes": "Owned handles; native binding borrows and bound disposal is rejected."
-  },
-  {
-   "operation": "DynamicVertexBuffer.SetData(offset, streaming options)",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_vertex_buffer_set_data_raw_at_with_options; a window written at vertex three with NoOverwrite left vertices zero to two intact",
-   "notes": "Closed upstream: the current generation has the route carrying both the destination offset and the streaming hint, which the historical one lacked."
-  },
-  {
-   "operation": "DrawPrimitives/DrawIndexedPrimitives",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "rendered-pixel test: each path writes its own colour and reads it back",
-   "notes": "Both paths produce the colour they were given on the windowed renderer. The control artifact has no pixel storage and refuses back-buffer readback outright.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "DrawInstancedPrimitives",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_graphics_device_draw_instanced_primitives; two instances drawn and read back",
-   "notes": "Executes and rasterizes on the windowed renderer.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "DrawUserPrimitives/DrawUserIndexedPrimitives",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "rendered-pixel test: each user path writes its own colour and reads it back",
-   "notes": "Both user-array paths rasterize. Only explicit built-in vertex codecs and deterministic contiguous bytes are accepted.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "RenderTarget2D create/bind/query",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "render_target.h and native foundation/stress",
-   "notes": "Create, bind and query are verified on both artifacts; the pixels a target keeps are verified separately on the renderer that rasterizes."
-  },
-  {
-   "operation": "RenderTarget visible output",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "a render target cleared to a known colour reads that colour back through GetData, and the backbuffer keeps its own",
-   "notes": "Rendering into a target and reading it back is verified; the two surfaces are shown to be distinct rather than assumed.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "OcclusionQuery",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_occlusion_query_*; the query completes asynchronously and PixelCount reads after it",
-   "notes": "XNA's query is asynchronous. The control artifact answers at once and the windowed renderer takes a bounded number of polls; both satisfy the contract, so the test waits rather than encoding one backend's timing."
-  },
-  {
-   "operation": "RenderTargetCube create/bind/query",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_render_target_cube_create; ordinary render-target binding routes; Milestone-8 native tests",
-   "notes": "Both constructors preserve format/depth/MSAA/usage, all six faces round-trip through GetRenderTargets, and the type retains TextureCube ownership."
-  },
-  {
-   "operation": "RenderTargetCube current content-loss state",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_render_target_get_info.is_content_lost",
-   "notes": "The current state is queried from CNA rather than tracked in Python; each artifact reports its own."
-  },
-  {
-   "operation": "RenderTargetCube ContentLost delivery",
-   "status": "BLOCKED_RENDERER",
-   "evidence": "cna_render_target_subscribe_content_lost / _unsubscribe_content_lost",
-   "notes": "Subscription and release are now real and verified on both artifacts. CNA raises the event only where a renderer can lose and recreate its device, which none of the identities available on this platform can, so a subscription here is valid and silent. No loss is synthesized."
-  },
-  {
-   "operation": "Bound render-target disposal",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_render_target_destroy returns CNA_RESULT_INVALID_STATE, 'Disposing target that is still bound'; the same handle destroys cleanly once unbound",
-   "notes": "Closed upstream: the historical generation aborted the process here, which is why Python guards before calling. CNA now refuses cleanly, and the Python guard is kept as defence in depth. It preserves the handle for a legal retry and never silently restores the backbuffer."
-  },
-  {
-   "operation": "GraphicsDevice.Present()",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_graphics_device_present and 60/600-frame consumers on both artifacts",
-   "notes": "Present completes on both artifacts. On the renderer that rasterizes, the starter's frame check reads the back buffer afterwards and finds the drawn frame; on the control artifact there is no pixel storage to read, and completion is not presentation evidence."
-  },
-  {
-   "operation": "GraphicsDevice.Present(rectangles, window)",
-   "status": "BLOCKED_UPSTREAM",
-   "evidence": "graphics_device.h cna_graphics_device_present(CNA_Handle graphics_device)",
-   "notes": "Re-measured, unchanged: the only Present route takes the device alone, with no source or destination rectangle and no target window. Raises after strict argument validation."
-  },
-  {
-   "operation": "GraphicsDevice.Reset events",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_graphics_device_reset* and event subscriptions",
-   "notes": "Resetting and Reset are delivered by actual native transitions."
-  },
-  {
-   "operation": "GraphicsDevice.DeviceLost",
-   "status": "BLOCKED_RENDERER",
-   "evidence": "cna_graphics_device_subscribe_event; no device-loss transition exists on this renderer",
-   "notes": "The subscription is real. Only renderer families whose API can lose a device raise it, and none is available on this platform; none is fabricated."
-  },
-  {
-   "operation": "GraphicsDeviceManager lifecycle/preparing settings",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "runtime_graphics_manager.h routes",
-   "notes": "Mutable preparation callback writes validated settings back to CNA."
-  },
-  {
-   "operation": "SpriteFont metrics and DrawString",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "sprite_font.h plus SpriteBatch glyph submissions",
-   "notes": "Private glyph factory is used until Content/XNB can construct public assets."
-  },
-  {
-   "operation": "SpriteFont public Content loading",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "SpriteFontReader graph; tests.test_content_native.NativeContentTests",
-   "notes": "Real reader-table graph constructs the existing native SpriteFont, verifies metrics/DrawString, cache identity, and reverse atlas ownership."
-  },
-  {
-   "operation": "ContentManager.OpenStream / TitleContainer.OpenStream",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_title_location_set_path_ext; cna_title_container_read_ext; managed path suite",
-   "notes": "Deterministic application title root with lexical and symlink escape rejection; no process-CWD fallback."
-  },
-  {
-   "operation": "ContentManager.ReadAsset/XNB",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "managed ContentReader suite plus native Texture2D/SpriteFont/buffer graphs",
-   "notes": "Header, exact reader resolver, versions, custom readers, shared fixups, external references, cache, rollback, and reverse disposal are exercised."
-  },
-  {
-   "operation": "XNB LZX framing and decoder",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "single/multi-frame synthetic suite and independent MonoGame fixture comparison",
-   "notes": "Persistent 64 KiB state, short/extended framing, exact declared output, malformed boundaries, and compressed resource graphs."
-  },
-  {
-   "operation": "ResourceContentManager",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "Mapping/GetObject adapter and stream ownership tests",
-   "notes": "No public System.Resources support package is introduced."
-  },
-  {
-   "operation": "Content Load[T] caller type enforcement",
-   "status": "LANGUAGE_MAPPING_LIMITATION",
-   "evidence": "docs/xna-python-mapping.md generic-erasure rule",
-   "notes": "The root reader determines runtime shape; Python cannot recover erased caller T, while reader-declared target shape remains validated."
-  },
-  {
-   "operation": "ContentReader.ReadRawObject[T] without reader token",
-   "status": "LANGUAGE_MAPPING_LIMITATION",
-   "evidence": "tests.test_content.ContentTests",
-   "notes": "No assignment-context, caller-bytecode, asset-name, or locals inference; explicit-reader overloads are functional."
-  },
-  {
-   "operation": "Effect reflection ownership graph",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "native identity integration and effect-model ownership stress",
-   "notes": "Effect is the sole owner; parameter, annotation, technique, pass, light, and collection handles are stable owned views retained by and invalidated with the Effect."
-  },
-  {
-   "operation": "Effect typed parameters",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_effect_parameter_get/set_value*, native codec integration",
-   "notes": "Boolean, Int32, Single, String, Vector2/3/4, Quaternion, Matrix/transpose, all selected arrays, and Texture2D/Cube identities use copied typed storage."
-  },
-  {
-   "operation": "Effect annotations",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_effect_annotation_get_value_* integration",
-   "notes": "Read-only scalar, string, vector, and matrix codecs use real annotation views and metadata validation."
-  },
-  {
-   "operation": "EffectPass.Apply",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_effect_pass_apply; stock and Model-XNB draw tests",
-   "notes": "A real native pass identity is applied repeatedly; applying after parent disposal is rejected."
-  },
-  {
-   "operation": "Compiled Effect creation route",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_effect_create_compiled with project-authored legal conformance FXB SHA-256 2e1fe1dd74d67f4395ae6db4451c1a19ee4478dfe7906f9d665a499e28d2a074",
-   "notes": "The byte buffer reaches CNA with exact ownership rollback; route verification is distinct from backend acceptance."
-  },
-  {
-   "operation": "Compiled Effect execution",
-   "status": "BLOCKED_FIXTURE",
-   "evidence": "cna_graphics_device_executes_shader_effect_source_ext answers true on the windowed renderer and false on the control artifact",
-   "notes": "The running device is asked rather than the renderer name inferred from. The windowed renderer does execute shader effect source, so what is missing is a legal compiled-effect fixture, not backend support. No shader is fabricated.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "BLOCKED_FIXTURE"
-   }
-  },
-  {
-   "operation": "BasicEffect",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_basic_effect_* property/create routes and cna_effect_pass_apply",
-   "notes": "Native state, directional lights, clone isolation, texture retention, and Apply are verified; visible pixels are not."
-  },
-  {
-   "operation": "AlphaTestEffect",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_alpha_test_effect_* and cna_effect_pass_apply",
-   "notes": "Native properties, texture retention, clone/disposal route, and Apply are verified."
-  },
-  {
-   "operation": "DualTextureEffect",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_dual_texture_effect_* and cna_effect_pass_apply",
-   "notes": "Both native texture slots, managed identity retention, state, and Apply are verified."
-  },
-  {
-   "operation": "EnvironmentMapEffect",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_environment_map_effect_* and cna_effect_pass_apply",
-   "notes": "Texture2D/TextureCube identities, lights/fog/matrices, state, and Apply are verified."
-  },
-  {
-   "operation": "SkinnedEffect",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_skinned_effect_* and cna_effect_pass_apply",
-   "notes": "Exact 1..72 bone-transform transfer, weights, lights/fog/matrices, state, and Apply are verified."
-  },
-  {
-   "operation": "EffectMaterial",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_effect_material_create",
-   "notes": "The material owns a distinct native Effect cloned from its source."
-  },
-  {
-   "operation": "Stock-effect visible GPU output",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "BasicEffect with vertex colours produces the drawn colour through every draw path",
-   "notes": "Stock-effect output is rendered and read back.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "Texture3D",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_texture3d_create/set_data/get_data; all eight voxels round-trip exactly",
-   "notes": "Creation and the complete Color codec work on the windowed renderer. The control artifact refuses creation, which is a renderer boundary rather than a missing feature.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "TextureCube creation and metadata",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_texturecube_create/get_info and repeated lifecycle tests",
-   "notes": "All six faces and mip/rectangle contracts are implemented over the canonical ABI."
-  },
-  {
-   "operation": "TextureCube Color transfer",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_texturecube_set_data/get_data; two faces written with different contents read back distinctly",
-   "notes": "The face selector is proven by writing two faces differently rather than by writing one.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "Model graph",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "Model collection/identity behavior and direct graph stress",
-   "notes": "Bones, hierarchy, meshes, parts, effects, tags, transform copies, and deterministic invalidation are verified."
-  },
-  {
-   "operation": "Model.Draw command path",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "XNB Model -> buffers -> BasicEffect -> native pass -> cna_graphics_device_draw_indexed_primitives",
-   "notes": "The ordinary indexed route accepts the command on both artifacts. The pixels it produces are a separate row, verified on the renderer that rasterizes."
-  },
-  {
-   "operation": "Model visible GPU output",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "a Model loaded from XNB and drawn through its BasicEffect covered 47,960 pixels",
-   "notes": "The managed XNB model graph draws for real. The graph itself stays managed by design; CNA's native model runtime is a separate extension concept and does not replace it.",
-   "byArtifact": {
-    "control": "BLOCKED_RENDERER",
-    "gpu": "VERIFIED_NATIVE"
-   }
-  },
-  {
-   "operation": "Model XNB",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "legal synthetic Windows XNB v5 graph integration",
-   "notes": "Two bones, one mesh, two parts, shared native buffers/BasicEffect, tags, cache, Unload/reload, external reference, and rollback are verified."
-  },
-  {
-   "operation": "Compressed Model XNB",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "same legal Model payload through existing managed LZX framing",
-   "notes": "The same reader table, reader, public graph, shared native resources, draw, cache, Unload/reload, and rollback paths are used."
-  },
-  {
-   "operation": "SoundEffect construction/playback",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_sound_effect_create_pcm16_range_ext; cna_sound_effect_create_from_encoded_ext; cna_sound_effect_play*; tests.test_audio.AudioNativeTests",
-   "notes": "Raw PCM16 and legal project-authored RIFF/WAVE data reach CNA with copied input and transactional ownership. NULL audio accepts construction but produces no audible-output claim."
-  },
-  {
-   "operation": "SoundEffectInstance",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_sound_effect_create_instance; cna_sound_effect_instance_*; Audio ownership stress",
-   "notes": "Playback/state methods use native state; Volume, Pitch, Pan, and IsLooped retain XNA's cached read-after-disposal behavior."
-  },
-  {
-   "operation": "SoundEffectInstance.Apply3D(single listener)",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_sound_effect_instance_apply_3d",
-   "notes": "The listener and emitter are copied into the exact native route."
-  },
-  {
-   "operation": "SoundEffectInstance.Apply3D(multiple listeners)",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_sound_effect_instance_apply_3d_multi_ext accepts any positive listener count",
-   "notes": "Closed upstream since ABI 0.9: the historical generation refused every count but one. Where several listeners are given the nearest decides the applied attenuation, pan and Doppler, which is an approximation CNA documents rather than one this binding invents. A zero count stays refused and is not guessed at."
-  },
-  {
-   "operation": "DynamicSoundEffectInstance",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_dynamic_sound_effect_instance_*; tests.test_audio; Audio ownership stress",
-   "notes": "Submitted ranges are copied by CNA, pending count and sample helpers are native, and no Python buffer retention is required."
-  },
-  {
-   "operation": "DynamicSoundEffectInstance.BufferNeeded",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_dynamic_sound_effect_instance_subscribe_buffer_needed; cna_framework_dispatcher_update",
-   "notes": "CNA documents and testing confirms delivery on the Game thread during its dispatcher pump. The trampoline verifies owner-thread identity, contains exceptions in Python, and registrations are removed before disposal."
-  },
-  {
-   "operation": "Microphone enumeration",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_microphone_get_count and the indexed name/rate/state routes; the real mixer enumerates capture devices and reports a default",
-   "notes": "The historical null backend had no devices at all. Enumeration, naming, sample rate and default selection are now measured against a real backend."
-  },
-  {
-   "operation": "Microphone capture",
-   "status": "BLOCKED_HARDWARE",
-   "evidence": "Start/Stop transition the state machine, BufferDuration validation refuses a 10 ms duration, GetSampleSizeInBytes matches the reported rate, and GetData returns bytes",
-   "notes": "The capture path is fully exercised: the state machine, the duration contract, the size arithmetic and a real byte transfer. The bytes are silence because the deterministic device supplies silence, so a non-zero sample remains physical-capture evidence this environment cannot produce."
-  },
-  {
-   "operation": "AudioEngine",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_audio_engine_create* real malformed-XGS error routes and rollback",
-   "notes": "The complete public root and owned child graph are implemented. No successful-engine claim is made without a legal authored XGS fixture."
-  },
-  {
-   "operation": "AudioEngine renderer selection",
-   "status": "BLOCKED_UPSTREAM",
-   "evidence": "xact.h: 'Both extra arguments are accepted and ignored'",
-   "notes": "Re-measured, unchanged: CNA has exactly one audio backend, so a renderer id has nothing to select between. Reported rather than approximated."
-  },
-  {
-   "operation": "AudioEngine look-ahead",
-   "status": "BLOCKED_UPSTREAM",
-   "evidence": "xact.h: 'Both extra arguments are accepted and ignored'",
-   "notes": "Re-measured, unchanged: the backend has no scheduling look-ahead to set."
-  },
-  {
-   "operation": "RendererDetail",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "audio.renderer.default behavior observation; renderer enumeration ABI routes",
-   "notes": "XNA default null strings, equality, hash, copy, and type-name ToString behavior are verified. NULL audio yields no fabricated renderer."
-  },
-  {
-   "operation": "AudioCategory",
-   "status": "BLOCKED_FIXTURE",
-   "evidence": "cna_audio_engine_get_category; cna_audio_category_* exact ABI and managed default-value tests",
-   "notes": "The parent-owned value facade, stable cache, default semantics, and invalidation are complete; successful category operations require legal authored XGS data."
-  },
-  {
-   "operation": "WaveBank",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_wave_bank_create* failed-create routes; Audio ownership stress",
-   "notes": "Both constructor shapes, rollback, ownership, and disposal are verified through CNA. Successful authored-bank loading remains asset-pending."
-  },
-  {
-   "operation": "SoundBank",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_sound_bank_create failed-create route; Audio ownership stress",
-   "notes": "Construction failure, rollback, ownership, and disposal are verified through CNA. Successful authored-bank loading remains asset-pending."
-  },
-  {
-   "operation": "Cue",
-   "status": "BLOCKED_FIXTURE",
-   "evidence": "complete cna_cue_* ABI and SoundBank-owned lifecycle implementation",
-   "notes": "The full facade and ownership path are present, but normal acquisition and method execution require a legal authored SoundBank fixture."
-  },
-  {
-   "operation": "Authored XACT playback",
-   "status": "BLOCKED_FIXTURE",
-   "evidence": "repository/reference fixture audit found no legal redistributable XGS/XSB/XWB set",
-   "notes": "No asset is fabricated and the absence of a legal fixture is not classified as a CNA defect."
-  },
-  {
-   "operation": "Touch value types and TouchCollection",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "behavior touch.*; tests.test_milestone8.Milestone8ManagedTests",
-   "notes": "Exact flags, value copies, XNA equality distinction, read-only collection, and nested Enumerator boundaries are exercised."
-  },
-  {
-   "operation": "Touch capabilities and state",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_touch_get_capabilities/state",
-   "notes": "The qualified runtime honestly reports no connected physical panel and an empty snapshot."
-  },
-  {
-   "operation": "TouchPanel static configuration",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_touch_panel_get/set_* round trips",
-   "notes": "Gestures, window IntPtr, display orientation, width, and height use the current Game generation with XNA validation."
-  },
-  {
-   "operation": "Physical touch input",
-   "status": "BLOCKED_HARDWARE",
-   "evidence": "neither qualified artifact has a physical touch source",
-   "notes": "An empty native state is not treated as hardware qualification and no touches are fabricated."
-  },
-  {
-   "operation": "Touch gesture recognition",
-   "status": "BLOCKED_PLATFORM",
-   "evidence": "real gesture availability/read routes; qualified queue is empty",
-   "notes": "The no-gesture exception path is verified; positive recognition requires a platform event source."
-  },
-  {
-   "operation": "Storage selector operation",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "all four cna_storage_device_show_selector* routes",
-   "notes": "CNA completes synchronously and deterministically returns its configured device; Python reports that timing and does not claim UI was shown."
-  },
-  {
-   "operation": "Storage selector UI",
-   "status": "BLOCKED_PLATFORM",
-   "evidence": "CNA 0.7 selector implementation has no OS UI",
-   "notes": "No selector interface is fabricated."
-  },
-  {
-   "operation": "Storage async Begin/End mapping",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "opaque one-shot result provenance and callback tests",
-   "notes": "Same-token callbacks, state retention, operation/device/generation checks, double-End rejection, and exception containment are verified."
-  },
-  {
-   "operation": "Storage filesystem and streams",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_storage_container_* and cna_storage_stream_* integration/stress",
-   "notes": "Directory/file/pattern operations and capability-based read/write/seek/flush/close use CNA exclusively with exact ownership."
-  },
-  {
-   "operation": "Storage path containment",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "lexical/resolved containment tests before CNA dispatch",
-   "notes": "Absolute, drive, mixed-separator, NUL, lexical .., and symlink escapes are rejected, closing CNA 0.7's traversal mismatch."
-  },
-  {
-   "operation": "Storage FileShare enforcement",
-   "status": "BLOCKED_UPSTREAM",
-   "evidence": "storage.h: 'The canonical implementation currently ignores file_share'",
-   "notes": "Re-measured, unchanged. The exact flag value reaches the C ABI and Python reports the divergence instead of pretending the lock was taken."
-  },
-  {
-   "operation": "StorageContainer.Disposing",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_storage_container_subscribe_disposing and exactly-once lifecycle tests",
-   "notes": "The real native callback is observed before Python handler delivery; double Dispose is idempotent and self-removal is safe."
-  },
-  {
-   "operation": "StorageDevice.DeviceChanged registration",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_storage_device_subscribe/unsubscribe_device_changed",
-   "notes": "Registration lifetime and shared dispatcher queue delivery are bound without exposing a callback through ctypes."
-  },
-  {
-   "operation": "Real storage-device transitions",
-   "status": "BLOCKED_PLATFORM",
-   "evidence": "qualified host exposes no deterministic attach/remove transition",
-   "notes": "No DeviceChanged event is fabricated."
-  },
-  {
-   "operation": "Media enum and VisualizationData values",
-   "status": "VERIFIED_MANAGED",
-   "evidence": "10 PURE_XNA_DERIVED Media observations; independent ctypes/C layout probe",
-   "notes": "Exact sparse enum identities and two stable immutable 256-Single snapshots; no ctypes buffer escapes."
-  },
-  {
-   "operation": "Media read-only collections",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "seven cna_*_collection_* route groups; tests.test_media; Media ownership stress",
-   "notes": "Native ordering, bounds, snapshot iteration, stable item facades, disposal-to-empty, and generation invalidation are verified."
-  },
-  {
-   "operation": "Artist/Album/Genre/Playlist graph",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "canonical catalog relationship routes and shared identity domain",
-   "notes": "The qualified music provider is empty; picture-album relationship identity supplies positive graph evidence without invented music entries."
-  },
-  {
-   "operation": "MediaLibrary lifecycle",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_media_library_create/dispose/destroy; 20 lifecycle and wrong-thread/retry cycles",
-   "notes": "The library owns its provider handle; child handles retain provider state, public Dispose preserves documented readable metadata, and generation teardown destroys children first."
-  },
-  {
-   "operation": "MediaLibrary music catalog",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "qualified Local Device provider returned zero Songs/Albums/Artists/Genres/Playlists",
-   "notes": "This verifies the real empty provider result on this host only; it is not a claim about other platforms or user libraries."
-  },
-  {
-   "operation": "MediaLibrary pictures",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "qualified provider returned native Picture/PictureAlbum metadata and stable relationships",
-   "notes": "Names, dimensions, dates, nested album ordering, disposal, and identity are native; no catalog entry is fabricated."
-  },
-  {
-   "operation": "Picture image/thumbnail/token",
-   "status": "BLOCKED_PLATFORM",
-   "evidence": "real copy/token routes bound; qualified catalog referenced host files unavailable to the isolated run",
-   "notes": "Failures remain native provider evidence; Python does not manufacture image bytes or scan filesystem directories."
-  },
-  {
-   "operation": "MediaSource local enumeration",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_media_source_get_available_* returned one Local Device snapshot",
-   "notes": "Repeated snapshots share generation-scoped facades by source index/value identity."
-  },
-  {
-   "operation": "MediaSource removable/network coverage",
-   "status": "BLOCKED_PLATFORM",
-   "evidence": "qualified host exposed no Windows Media Connect source",
-   "notes": "No removable, network, or pseudo-source is fabricated."
-  },
-  {
-   "operation": "Song URI construction and metadata",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_song_create_from_uri plus metadata/equality/relationship routes; 20 authored-file cycles",
-   "notes": "A project-created local file reaches the real Song factory; no SoundEffect substitution is used."
-  },
-  {
-   "operation": "MediaPlayer process-global state",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "synchronized generation manager and two-Game scalar/queue tests",
-   "notes": "Scalar state persists through CNA where XNA defines it; raw handles, registrations, and queued work never cross Game generations."
-  },
-  {
-   "operation": "MediaPlayer transport",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "real Play/Pause/Resume/Stop/Move routes; NULL-audio Song playback accepted",
-   "notes": "Native state and callbacks are observed; audible playback is not claimed for NULL audio."
-  },
-  {
-   "operation": "MediaQueue",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_media_player_get_queue and queue routes; 20 generation cycles",
-   "notes": "One facade per generation, stable Song item/active identity, live replacement, and deterministic stale-generation rejection."
-  },
-  {
-   "operation": "MediaPlayer events",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "native subscribe/unsubscribe callbacks; owner-thread dispatcher; 50-delivery stress",
-   "notes": "Trampolines contain BaseException, copy only generation work, invoke no user code in C, and discard stale events."
-  },
-  {
-   "operation": "VisualizationData native route",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_media_player_get_visualization_data; 2056-byte/align-4 structure with offsets 8 and 1032",
-   "notes": "The exact route copies into immutable Python tuples; no waveform or spectrum is synthesized."
-  },
-  {
-   "operation": "Real visualization spectrum",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "with a generated 440 Hz tone playing, the 256-point spectrum has a non-zero peak and the waveform swings both positive and negative",
-   "notes": "The historical null backend had no decoded signal, so zeros were all it could report. A real mixer decodes the tone and the visualization follows it."
-  },
-  {
-   "operation": "Video metadata object",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_video_create_with_metadata and all public getters",
-   "notes": "Metadata construction is native and content-owned; it does not pretend that the encoded file has been decoded."
-  },
-  {
-   "operation": "Video XNB",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "private VideoReader test covers reader table, cache identity, Unload, stale retained value, and post-create rollback",
-   "notes": "It reuses ContentManager/XNB/LZX ownership and does not special-case asset names."
-  },
-  {
-   "operation": "Video decode",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "a generated clip loaded through ContentManager plays and yields frame textures on both artifacts",
-   "notes": "The fixture is generated at test time and never committed; the repository ships no encoded media. CNA refuses a video whose declared metadata disagrees with the file, so the clip is produced to match the asset exactly."
-  },
-  {
-   "operation": "Video decode on a non-rendering backend",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "the same generated clip decodes on the non-windowed control artifact",
-   "notes": "Decoding does not depend on the renderer; it was the title-relative path, not the backend, that prevented it before."
-  },
-  {
-   "operation": "VideoPlayer control",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_video_player_create/state/property/dispose routes and 20 cycles",
-   "notes": "Operation-specific disposal behavior preserves cached IsLooped, IsMuted, and Volume; finite out-of-range Volume throws and NaN is retained."
-  },
-  {
-   "operation": "VideoPlayer.GetTexture route",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_video_player_get_frame_ext; no frame before playback maps to None",
-   "notes": "Asking before playback has produced a frame is an ordinary answer of None, matching the canonical implementation rather than faulting."
-  },
-  {
-   "operation": "Video frame stable identity/generation",
-   "status": "VERIFIED_NATIVE",
-   "evidence": "cna_video_player_get_frame_ext supplies a monotonic decode generation with the borrowed frame texture",
-   "notes": "Closed upstream since ABI 0.9. GetTexture returns a real Texture2D that borrows the runtime's frame; it is never owned, never destroyed and never registered per frame, and a use after the borrow ended refuses with the reason it ended. CNA decodes into a single texture rather than alternating two, which is a divergence from XNA's slot model that the generation makes observable rather than hidden."
-  }
- ]
+  "schemaVersion": 2,
+  "abi": "0.21.0",
+  "cnaRevision": "5347b52eae1311fbea1f89955ae8a48c6843a88a",
+  "sharpRuntimeRevision": "9cc96cd57cde394940cc24d58743edf9bf63d3fb",
+  "artifacts": [
+    {
+      "id": "control",
+      "role": "deterministic non-windowed control",
+      "renderer": "HEADLESS",
+      "rasterizes": false,
+      "audio": "SDL3 mixer on the dummy device",
+      "video": "AUTO (FFmpeg present)",
+      "platform": "Linux x86-64",
+      "sha256": "94078be94dc1f1e6c8787c1cd17b08c9430d1e4bb5699947cd2b7aafee40281d"
+    },
+    {
+      "id": "gpu",
+      "role": "real windowed renderer",
+      "renderer": "OPENGLES3",
+      "rasterizes": true,
+      "audio": "SDL3 mixer on the dummy device",
+      "video": "AUTO (FFmpeg present)",
+      "platform": "Linux x86-64, isolated Xvfb display, Mesa GL ES 3.2 (llvmpipe)",
+      "sha256": "65ce46a49b754586e8a99406901a9627e38f4473b594c0266400db65e4d73da9"
+    }
+  ],
+  "statuses": [
+    "VERIFIED_NATIVE",
+    "VERIFIED_MANAGED",
+    "BLOCKED_UPSTREAM",
+    "BLOCKED_RENDERER",
+    "BLOCKED_PLATFORM",
+    "BLOCKED_HARDWARE",
+    "BLOCKED_FIXTURE",
+    "LANGUAGE_MAPPING_LIMITATION",
+    "NOT_USEFUL_FOR_PYTHON",
+    "DELIBERATE_OUT_OF_SCOPE",
+    "ACTIONABLE_LOCAL"
+  ],
+  "operations": [
+    {
+      "operation": "FrameworkDispatcher explicit Update",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_framework_dispatcher_update; Milestone-8 dispatcher tests",
+      "notes": "One explicit call adds one pump to the existing single automatic post-Update pump and re-raises contained callback failures after native return."
+    },
+    {
+      "operation": "FrameworkDispatcher Update without a live Game",
+      "status": "BLOCKED_UPSTREAM",
+      "evidence": "runtime.h cna_framework_dispatcher_update(CNA_Handle game); re-read on CNA 0.21.0",
+      "notes": "Re-measured, unchanged: the route still takes a Game handle, so it has nothing to pump without one. XNA permits a process-level call; Python reports the limitation and never silently no-ops."
+    },
+    {
+      "operation": "GamerServicesComponent lifecycle",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_gamer_services_dispatcher_set_window_handle/initialize/update",
+      "notes": "The normal GameComponent initialization/update order uses the Game window and current native generation."
+    },
+    {
+      "operation": "Broader GamerServices ecosystem",
+      "status": "DELIBERATE_OUT_OF_SCOPE",
+      "evidence": "the selected 257-type profile ends at GamerServicesComponent",
+      "notes": "Not a backend limit: CNA has 250 gamer-service routes and the profile deliberately excludes them. Opening the family is a future-profile decision, and no Gamer, Guide, Avatar, achievement or leaderboard facade is fabricated meanwhile."
+    },
+    {
+      "operation": "Game.Components/services/traversal",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "tests.test_game_graphics_foundation.GameObjectModelTests",
+      "notes": "Per-Game services and snapshot traversal with stable ordering."
+    },
+    {
+      "operation": "Game.ResetElapsedTime/SuppressDraw",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_game_reset_elapsed_time; cna_game_suppress_draw",
+      "notes": "Calls the active native Game lifecycle."
+    },
+    {
+      "operation": "Game activation/deactivation delivery",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_game_subscribe; the Activated event is delivered on both qualified artifacts",
+      "notes": "Activation is delivered for real. A deactivation transition needs a focus change no automated run performs, so it is exercised but not observed here."
+    },
+    {
+      "operation": "GameWindow properties and screen-device change",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "runtime_window.h routes",
+      "notes": "The control artifact reports its real null-window state; the windowed renderer reports a real 800x480 client bounds and a real screen device name."
+    },
+    {
+      "operation": "GameWindow resize/orientation events",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_game_window_subscribe; ClientSizeChanged delivered after ApplyChanges resized the window from 800x480 to 512x384 on the windowed artifact",
+      "notes": "The event is real on a renderer that has a window. The control artifact has none, so it delivers nothing and none is synthesized. Orientation never changes on this platform.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "SurfaceFormat and graphics value enums",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "behavior graphics.surface_format.values",
+      "notes": "Values follow XNA metadata, independently of CNA enum ordering."
+    },
+    {
+      "operation": "Viewport.Project/Unproject",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "behavior graphics.viewport.*",
+      "notes": "Binary32 XNA operation ordering."
+    },
+    {
+      "operation": "GraphicsResource disposal event",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_graphics_resource_subscribe_disposing",
+      "notes": "Exactly-once event before native release; double Dispose is idempotent."
+    },
+    {
+      "operation": "GraphicsDevice.ResourceCreated/ResourceDestroyed",
+      "status": "BLOCKED_UPSTREAM",
+      "evidence": "graphics_device.h CNA_ResourceCreatedEventInfo / CNA_ResourceDestroyedEventInfo",
+      "notes": "The subscription routes now exist, but CNA states that the event is raised from the graphics-resource base constructor, so the object is still under construction and no native object pointer crosses the ABI. XNA's ResourceCreatedEventArgs.Resource therefore cannot be supplied and would have to be fabricated."
+    },
+    {
+      "operation": "Graphics adapter/display/presentation queries",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "display.h routes and native integration",
+      "notes": "Durable adapter and display facades. Each artifact reports its own single adapter."
+    },
+    {
+      "operation": "Blend/depth/rasterizer/sampler state binding",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "graphics_state.h and native foundation test",
+      "notes": "XNA defaults and post-bind freeze are managed; descriptors are copied by CNA."
+    },
+    {
+      "operation": "SamplerStateCollection/TextureCollection",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "graphics_device.h state/texture slot routes",
+      "notes": "Durable per-device stage facades; Reach exposes zero vertex-stage slots."
+    },
+    {
+      "operation": "Texture metadata and Color transfer",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "texture.h and native tests",
+      "notes": "Format and level count are read from native resource information."
+    },
+    {
+      "operation": "Texture2D PNG/JPEG encoding",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_texture2d_*encoded* and native foundation test",
+      "notes": "Uses CNA encoders with writable-stream validation and rollback."
+    },
+    {
+      "operation": "Vertex declarations and built-in codecs",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "graphics.vertex.strides; explicit struct.pack codecs",
+      "notes": "No reflection, pickle, JSON, or __dict__ layout inference."
+    },
+    {
+      "operation": "Vertex/Index buffer create, transfer, binding",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "vertex_resources.h; index_resources.h; native foundation/stress",
+      "notes": "Owned handles; native binding borrows and bound disposal is rejected."
+    },
+    {
+      "operation": "DynamicVertexBuffer.SetData(offset, streaming options)",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_vertex_buffer_set_data_raw_at_with_options; a window written at vertex three with NoOverwrite left vertices zero to two intact",
+      "notes": "Closed upstream: the current generation has the route carrying both the destination offset and the streaming hint, which the historical one lacked."
+    },
+    {
+      "operation": "DrawPrimitives/DrawIndexedPrimitives",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "rendered-pixel test: each path writes its own colour and reads it back",
+      "notes": "Both paths produce the colour they were given on the windowed renderer. The control artifact has no pixel storage and refuses back-buffer readback outright.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "DrawInstancedPrimitives",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_graphics_device_draw_instanced_primitives; two instances drawn and read back",
+      "notes": "Executes and rasterizes on the windowed renderer.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "DrawUserPrimitives/DrawUserIndexedPrimitives",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "rendered-pixel test: each user path writes its own colour and reads it back",
+      "notes": "Both user-array paths rasterize. Only explicit built-in vertex codecs and deterministic contiguous bytes are accepted.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "RenderTarget2D create/bind/query",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "render_target.h and native foundation/stress",
+      "notes": "Create, bind and query are verified on both artifacts; the pixels a target keeps are verified separately on the renderer that rasterizes."
+    },
+    {
+      "operation": "RenderTarget visible output",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "a render target cleared to a known colour reads that colour back through GetData, and the backbuffer keeps its own",
+      "notes": "Rendering into a target and reading it back is verified; the two surfaces are shown to be distinct rather than assumed.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "OcclusionQuery",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_occlusion_query_*; the query completes asynchronously and PixelCount reads after it",
+      "notes": "XNA's query is asynchronous. The control artifact answers at once and the windowed renderer takes a bounded number of polls; both satisfy the contract, so the test waits rather than encoding one backend's timing."
+    },
+    {
+      "operation": "RenderTargetCube create/bind/query",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_render_target_cube_create; ordinary render-target binding routes; Milestone-8 native tests",
+      "notes": "Both constructors preserve format/depth/MSAA/usage, all six faces round-trip through GetRenderTargets, and the type retains TextureCube ownership."
+    },
+    {
+      "operation": "RenderTargetCube current content-loss state",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_render_target_get_info.is_content_lost",
+      "notes": "The current state is queried from CNA rather than tracked in Python; each artifact reports its own."
+    },
+    {
+      "operation": "RenderTargetCube ContentLost delivery",
+      "status": "BLOCKED_RENDERER",
+      "evidence": "cna_render_target_subscribe_content_lost / _unsubscribe_content_lost",
+      "notes": "Subscription and release are now real and verified on both artifacts. CNA raises the event only where a renderer can lose and recreate its device, which none of the identities available on this platform can, so a subscription here is valid and silent. No loss is synthesized."
+    },
+    {
+      "operation": "Bound render-target disposal",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_render_target_destroy returns CNA_RESULT_INVALID_STATE, 'Disposing target that is still bound'; the same handle destroys cleanly once unbound",
+      "notes": "Closed upstream: the historical generation aborted the process here, which is why Python guards before calling. CNA now refuses cleanly, and the Python guard is kept as defence in depth. It preserves the handle for a legal retry and never silently restores the backbuffer."
+    },
+    {
+      "operation": "GraphicsDevice.Present()",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_graphics_device_present and 60/600-frame consumers on both artifacts",
+      "notes": "Present completes on both artifacts. On the renderer that rasterizes, the starter's frame check reads the back buffer afterwards and finds the drawn frame; on the control artifact there is no pixel storage to read, and completion is not presentation evidence."
+    },
+    {
+      "operation": "GraphicsDevice.Present(rectangles, window)",
+      "status": "BLOCKED_UPSTREAM",
+      "evidence": "graphics_device.h cna_graphics_device_present(CNA_Handle graphics_device)",
+      "notes": "Re-measured, unchanged: the only Present route takes the device alone, with no source or destination rectangle and no target window. Raises after strict argument validation."
+    },
+    {
+      "operation": "GraphicsDevice.Reset events",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_graphics_device_reset* and event subscriptions",
+      "notes": "Resetting and Reset are delivered by actual native transitions."
+    },
+    {
+      "operation": "GraphicsDevice.DeviceLost",
+      "status": "BLOCKED_RENDERER",
+      "evidence": "cna_graphics_device_subscribe_event; no device-loss transition exists on this renderer",
+      "notes": "The subscription is real. Only renderer families whose API can lose a device raise it, and none is available on this platform; none is fabricated."
+    },
+    {
+      "operation": "GraphicsDeviceManager lifecycle/preparing settings",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "runtime_graphics_manager.h routes",
+      "notes": "Mutable preparation callback writes validated settings back to CNA."
+    },
+    {
+      "operation": "SpriteFont metrics and DrawString",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "sprite_font.h plus SpriteBatch glyph submissions",
+      "notes": "Private glyph factory is used until Content/XNB can construct public assets."
+    },
+    {
+      "operation": "SpriteFont public Content loading",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "SpriteFontReader graph; tests.test_content_native.NativeContentTests",
+      "notes": "Real reader-table graph constructs the existing native SpriteFont, verifies metrics/DrawString, cache identity, and reverse atlas ownership."
+    },
+    {
+      "operation": "ContentManager.OpenStream / TitleContainer.OpenStream",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_title_location_set_path_ext; cna_title_container_read_ext; managed path suite",
+      "notes": "Deterministic application title root with lexical and symlink escape rejection; no process-CWD fallback."
+    },
+    {
+      "operation": "ContentManager.ReadAsset/XNB",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "managed ContentReader suite plus native Texture2D/SpriteFont/buffer graphs",
+      "notes": "Header, exact reader resolver, versions, custom readers, shared fixups, external references, cache, rollback, and reverse disposal are exercised."
+    },
+    {
+      "operation": "XNB LZX framing and decoder",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "single/multi-frame synthetic suite and independent MonoGame fixture comparison",
+      "notes": "Persistent 64 KiB state, short/extended framing, exact declared output, malformed boundaries, and compressed resource graphs."
+    },
+    {
+      "operation": "ResourceContentManager",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "Mapping/GetObject adapter and stream ownership tests",
+      "notes": "No public System.Resources support package is introduced."
+    },
+    {
+      "operation": "Content Load[T] caller type enforcement",
+      "status": "LANGUAGE_MAPPING_LIMITATION",
+      "evidence": "docs/xna-python-mapping.md generic-erasure rule",
+      "notes": "The root reader determines runtime shape; Python cannot recover erased caller T, while reader-declared target shape remains validated."
+    },
+    {
+      "operation": "ContentReader.ReadRawObject[T] without reader token",
+      "status": "LANGUAGE_MAPPING_LIMITATION",
+      "evidence": "tests.test_content.ContentTests",
+      "notes": "No assignment-context, caller-bytecode, asset-name, or locals inference; explicit-reader overloads are functional."
+    },
+    {
+      "operation": "Effect reflection ownership graph",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "native identity integration and effect-model ownership stress",
+      "notes": "Effect is the sole owner; parameter, annotation, technique, pass, light, and collection handles are stable owned views retained by and invalidated with the Effect."
+    },
+    {
+      "operation": "Effect typed parameters",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_effect_parameter_get/set_value*, native codec integration",
+      "notes": "Boolean, Int32, Single, String, Vector2/3/4, Quaternion, Matrix/transpose, all selected arrays, and Texture2D/Cube identities use copied typed storage."
+    },
+    {
+      "operation": "Effect annotations",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_effect_annotation_get_value_* integration",
+      "notes": "Read-only scalar, string, vector, and matrix codecs use real annotation views and metadata validation."
+    },
+    {
+      "operation": "EffectPass.Apply",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_effect_pass_apply; stock and Model-XNB draw tests",
+      "notes": "A real native pass identity is applied repeatedly; applying after parent disposal is rejected."
+    },
+    {
+      "operation": "Compiled Effect creation route",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_effect_create_compiled with project-authored legal conformance FXB SHA-256 2e1fe1dd74d67f4395ae6db4451c1a19ee4478dfe7906f9d665a499e28d2a074",
+      "notes": "The byte buffer reaches CNA with exact ownership rollback; route verification is distinct from backend acceptance."
+    },
+    {
+      "operation": "Compiled Effect execution",
+      "status": "BLOCKED_FIXTURE",
+      "evidence": "cna_graphics_device_executes_shader_effect_source_ext answers true on the windowed renderer and false on the control artifact",
+      "notes": "The running device is asked rather than the renderer name inferred from. The windowed renderer does execute shader effect source, so what is missing is a legal compiled-effect fixture, not backend support. No shader is fabricated.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "BLOCKED_FIXTURE"
+      }
+    },
+    {
+      "operation": "BasicEffect",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_basic_effect_* property/create routes and cna_effect_pass_apply",
+      "notes": "Native state, directional lights, clone isolation, texture retention, and Apply are verified; visible pixels are not."
+    },
+    {
+      "operation": "AlphaTestEffect",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_alpha_test_effect_* and cna_effect_pass_apply",
+      "notes": "Native properties, texture retention, clone/disposal route, and Apply are verified."
+    },
+    {
+      "operation": "DualTextureEffect",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_dual_texture_effect_* and cna_effect_pass_apply",
+      "notes": "Both native texture slots, managed identity retention, state, and Apply are verified."
+    },
+    {
+      "operation": "EnvironmentMapEffect",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_environment_map_effect_* and cna_effect_pass_apply",
+      "notes": "Texture2D/TextureCube identities, lights/fog/matrices, state, and Apply are verified."
+    },
+    {
+      "operation": "SkinnedEffect",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_skinned_effect_* and cna_effect_pass_apply",
+      "notes": "Exact 1..72 bone-transform transfer, weights, lights/fog/matrices, state, and Apply are verified."
+    },
+    {
+      "operation": "EffectMaterial",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_effect_material_create",
+      "notes": "The material owns a distinct native Effect cloned from its source."
+    },
+    {
+      "operation": "Stock-effect visible GPU output",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "BasicEffect with vertex colours produces the drawn colour through every draw path",
+      "notes": "Stock-effect output is rendered and read back.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "Texture3D",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_texture3d_create/set_data/get_data; all eight voxels round-trip exactly",
+      "notes": "Creation and the complete Color codec work on the windowed renderer. The control artifact refuses creation, which is a renderer boundary rather than a missing feature.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "TextureCube creation and metadata",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_texturecube_create/get_info and repeated lifecycle tests",
+      "notes": "All six faces and mip/rectangle contracts are implemented over the canonical ABI."
+    },
+    {
+      "operation": "TextureCube Color transfer",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_texturecube_set_data/get_data; two faces written with different contents read back distinctly",
+      "notes": "The face selector is proven by writing two faces differently rather than by writing one.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "Model graph",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "Model collection/identity behavior and direct graph stress",
+      "notes": "Bones, hierarchy, meshes, parts, effects, tags, transform copies, and deterministic invalidation are verified."
+    },
+    {
+      "operation": "Model.Draw command path",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "XNB Model -> buffers -> BasicEffect -> native pass -> cna_graphics_device_draw_indexed_primitives",
+      "notes": "The ordinary indexed route accepts the command on both artifacts. The pixels it produces are a separate row, verified on the renderer that rasterizes."
+    },
+    {
+      "operation": "Model visible GPU output",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "a Model loaded from XNB and drawn through its BasicEffect covered 47,960 pixels",
+      "notes": "The managed XNB model graph draws for real. The graph itself stays managed by design; CNA's native model runtime is a separate extension concept and does not replace it.",
+      "byArtifact": {
+        "control": "BLOCKED_RENDERER",
+        "gpu": "VERIFIED_NATIVE"
+      }
+    },
+    {
+      "operation": "Model XNB",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "legal synthetic Windows XNB v5 graph integration",
+      "notes": "Two bones, one mesh, two parts, shared native buffers/BasicEffect, tags, cache, Unload/reload, external reference, and rollback are verified."
+    },
+    {
+      "operation": "Compressed Model XNB",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "same legal Model payload through existing managed LZX framing",
+      "notes": "The same reader table, reader, public graph, shared native resources, draw, cache, Unload/reload, and rollback paths are used."
+    },
+    {
+      "operation": "SoundEffect construction/playback",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_sound_effect_create_pcm16_range_ext; cna_sound_effect_create_from_encoded_ext; cna_sound_effect_play*; tests.test_audio.AudioNativeTests",
+      "notes": "Raw PCM16 and legal project-authored RIFF/WAVE data reach CNA with copied input and transactional ownership. NULL audio accepts construction but produces no audible-output claim."
+    },
+    {
+      "operation": "SoundEffectInstance",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_sound_effect_create_instance; cna_sound_effect_instance_*; Audio ownership stress",
+      "notes": "Playback/state methods use native state; Volume, Pitch, Pan, and IsLooped retain XNA's cached read-after-disposal behavior."
+    },
+    {
+      "operation": "SoundEffectInstance.Apply3D(single listener)",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_sound_effect_instance_apply_3d",
+      "notes": "The listener and emitter are copied into the exact native route."
+    },
+    {
+      "operation": "SoundEffectInstance.Apply3D(multiple listeners)",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_sound_effect_instance_apply_3d_multi_ext accepts any positive listener count",
+      "notes": "Closed upstream since ABI 0.9: the historical generation refused every count but one. Where several listeners are given the nearest decides the applied attenuation, pan and Doppler, which is an approximation CNA documents rather than one this binding invents. A zero count stays refused and is not guessed at."
+    },
+    {
+      "operation": "DynamicSoundEffectInstance",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_dynamic_sound_effect_instance_*; tests.test_audio; Audio ownership stress",
+      "notes": "Submitted ranges are copied by CNA, pending count and sample helpers are native, and no Python buffer retention is required."
+    },
+    {
+      "operation": "DynamicSoundEffectInstance.BufferNeeded",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_dynamic_sound_effect_instance_subscribe_buffer_needed; cna_framework_dispatcher_update",
+      "notes": "CNA documents and testing confirms delivery on the Game thread during its dispatcher pump. The trampoline verifies owner-thread identity, contains exceptions in Python, and registrations are removed before disposal."
+    },
+    {
+      "operation": "Microphone enumeration",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_microphone_get_count and the indexed name/rate/state routes; the real mixer enumerates capture devices and reports a default",
+      "notes": "The historical null backend had no devices at all. Enumeration, naming, sample rate and default selection are now measured against a real backend."
+    },
+    {
+      "operation": "Microphone capture",
+      "status": "BLOCKED_HARDWARE",
+      "evidence": "Start/Stop transition the state machine, BufferDuration validation refuses a 10 ms duration, GetSampleSizeInBytes matches the reported rate, and GetData returns bytes",
+      "notes": "The capture path is fully exercised: the state machine, the duration contract, the size arithmetic and a real byte transfer. The bytes are silence because the deterministic device supplies silence, so a non-zero sample remains physical-capture evidence this environment cannot produce."
+    },
+    {
+      "operation": "AudioEngine",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_audio_engine_create* real malformed-XGS error routes and rollback",
+      "notes": "The complete public root and owned child graph are implemented. No successful-engine claim is made without a legal authored XGS fixture."
+    },
+    {
+      "operation": "AudioEngine renderer selection",
+      "status": "BLOCKED_UPSTREAM",
+      "evidence": "xact.h: 'Both extra arguments are accepted and ignored'",
+      "notes": "Re-measured, unchanged: CNA has exactly one audio backend, so a renderer id has nothing to select between. Reported rather than approximated."
+    },
+    {
+      "operation": "AudioEngine look-ahead",
+      "status": "BLOCKED_UPSTREAM",
+      "evidence": "xact.h: 'Both extra arguments are accepted and ignored'",
+      "notes": "Re-measured, unchanged: the backend has no scheduling look-ahead to set."
+    },
+    {
+      "operation": "RendererDetail",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "audio.renderer.default behavior observation; renderer enumeration ABI routes",
+      "notes": "XNA default null strings, equality, hash, copy, and type-name ToString behavior are verified. NULL audio yields no fabricated renderer."
+    },
+    {
+      "operation": "AudioCategory",
+      "status": "BLOCKED_FIXTURE",
+      "evidence": "cna_audio_engine_get_category; cna_audio_category_* exact ABI and managed default-value tests",
+      "notes": "The parent-owned value facade, stable cache, default semantics, and invalidation are complete; successful category operations require legal authored XGS data."
+    },
+    {
+      "operation": "WaveBank",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_wave_bank_create* failed-create routes; Audio ownership stress",
+      "notes": "Both constructor shapes, rollback, ownership, and disposal are verified through CNA. Successful authored-bank loading remains asset-pending."
+    },
+    {
+      "operation": "SoundBank",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_sound_bank_create failed-create route; Audio ownership stress",
+      "notes": "Construction failure, rollback, ownership, and disposal are verified through CNA. Successful authored-bank loading remains asset-pending."
+    },
+    {
+      "operation": "Cue",
+      "status": "BLOCKED_FIXTURE",
+      "evidence": "complete cna_cue_* ABI and SoundBank-owned lifecycle implementation",
+      "notes": "The full facade and ownership path are present, but normal acquisition and method execution require a legal authored SoundBank fixture."
+    },
+    {
+      "operation": "Authored XACT playback",
+      "status": "BLOCKED_FIXTURE",
+      "evidence": "repository/reference fixture audit found no legal redistributable XGS/XSB/XWB set",
+      "notes": "No asset is fabricated and the absence of a legal fixture is not classified as a CNA defect."
+    },
+    {
+      "operation": "Touch value types and TouchCollection",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "behavior touch.*; tests.test_milestone8.Milestone8ManagedTests",
+      "notes": "Exact flags, value copies, XNA equality distinction, read-only collection, and nested Enumerator boundaries are exercised."
+    },
+    {
+      "operation": "Touch capabilities and state",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_touch_get_capabilities/state",
+      "notes": "The qualified runtime honestly reports no connected physical panel and an empty snapshot."
+    },
+    {
+      "operation": "TouchPanel static configuration",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_touch_panel_get/set_* round trips",
+      "notes": "Gestures, window IntPtr, display orientation, width, and height use the current Game generation with XNA validation."
+    },
+    {
+      "operation": "Physical touch input",
+      "status": "BLOCKED_HARDWARE",
+      "evidence": "neither qualified artifact has a physical touch source",
+      "notes": "An empty native state is not treated as hardware qualification and no touches are fabricated."
+    },
+    {
+      "operation": "Touch gesture recognition",
+      "status": "BLOCKED_PLATFORM",
+      "evidence": "real gesture availability/read routes; qualified queue is empty",
+      "notes": "The no-gesture exception path is verified; positive recognition requires a platform event source."
+    },
+    {
+      "operation": "Storage selector operation",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "all four cna_storage_device_show_selector* routes",
+      "notes": "CNA completes synchronously and deterministically returns its configured device; Python reports that timing and does not claim UI was shown."
+    },
+    {
+      "operation": "Storage selector UI",
+      "status": "BLOCKED_PLATFORM",
+      "evidence": "CNA 0.7 selector implementation has no OS UI",
+      "notes": "No selector interface is fabricated."
+    },
+    {
+      "operation": "Storage async Begin/End mapping",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "opaque one-shot result provenance and callback tests",
+      "notes": "Same-token callbacks, state retention, operation/device/generation checks, double-End rejection, and exception containment are verified."
+    },
+    {
+      "operation": "Storage filesystem and streams",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_storage_container_* and cna_storage_stream_* integration/stress",
+      "notes": "Directory/file/pattern operations and capability-based read/write/seek/flush/close use CNA exclusively with exact ownership."
+    },
+    {
+      "operation": "Storage path containment",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "lexical/resolved containment tests before CNA dispatch",
+      "notes": "Absolute, drive, mixed-separator, NUL, lexical .., and symlink escapes are rejected, closing CNA 0.7's traversal mismatch."
+    },
+    {
+      "operation": "Storage FileShare enforcement",
+      "status": "BLOCKED_UPSTREAM",
+      "evidence": "storage.h: 'The canonical implementation currently ignores file_share'",
+      "notes": "Re-measured, unchanged. The exact flag value reaches the C ABI and Python reports the divergence instead of pretending the lock was taken."
+    },
+    {
+      "operation": "StorageContainer.Disposing",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_storage_container_subscribe_disposing and exactly-once lifecycle tests",
+      "notes": "The real native callback is observed before Python handler delivery; double Dispose is idempotent and self-removal is safe."
+    },
+    {
+      "operation": "StorageDevice.DeviceChanged registration",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_storage_device_subscribe/unsubscribe_device_changed",
+      "notes": "Registration lifetime and shared dispatcher queue delivery are bound without exposing a callback through ctypes."
+    },
+    {
+      "operation": "Real storage-device transitions",
+      "status": "BLOCKED_PLATFORM",
+      "evidence": "qualified host exposes no deterministic attach/remove transition",
+      "notes": "No DeviceChanged event is fabricated."
+    },
+    {
+      "operation": "Media enum and VisualizationData values",
+      "status": "VERIFIED_MANAGED",
+      "evidence": "10 PURE_XNA_DERIVED Media observations; independent ctypes/C layout probe",
+      "notes": "Exact sparse enum identities and two stable immutable 256-Single snapshots; no ctypes buffer escapes."
+    },
+    {
+      "operation": "Media read-only collections",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "seven cna_*_collection_* route groups; tests.test_media; Media ownership stress",
+      "notes": "Native ordering, bounds, snapshot iteration, stable item facades, disposal-to-empty, and generation invalidation are verified."
+    },
+    {
+      "operation": "Artist/Album/Genre/Playlist graph",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "canonical catalog relationship routes and shared identity domain",
+      "notes": "The qualified music provider is empty; picture-album relationship identity supplies positive graph evidence without invented music entries."
+    },
+    {
+      "operation": "MediaLibrary lifecycle",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_media_library_create/dispose/destroy; 20 lifecycle and wrong-thread/retry cycles",
+      "notes": "The library owns its provider handle; child handles retain provider state, public Dispose preserves documented readable metadata, and generation teardown destroys children first."
+    },
+    {
+      "operation": "MediaLibrary music catalog",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "qualified Local Device provider returned zero Songs/Albums/Artists/Genres/Playlists",
+      "notes": "This verifies the real empty provider result on this host only; it is not a claim about other platforms or user libraries."
+    },
+    {
+      "operation": "MediaLibrary pictures",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "qualified provider returned native Picture/PictureAlbum metadata and stable relationships",
+      "notes": "Names, dimensions, dates, nested album ordering, disposal, and identity are native; no catalog entry is fabricated."
+    },
+    {
+      "operation": "Picture image/thumbnail/token",
+      "status": "BLOCKED_PLATFORM",
+      "evidence": "real copy/token routes bound; qualified catalog referenced host files unavailable to the isolated run",
+      "notes": "Failures remain native provider evidence; Python does not manufacture image bytes or scan filesystem directories."
+    },
+    {
+      "operation": "MediaSource local enumeration",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_media_source_get_available_* returned one Local Device snapshot",
+      "notes": "Repeated snapshots share generation-scoped facades by source index/value identity."
+    },
+    {
+      "operation": "MediaSource removable/network coverage",
+      "status": "BLOCKED_PLATFORM",
+      "evidence": "qualified host exposed no Windows Media Connect source",
+      "notes": "No removable, network, or pseudo-source is fabricated."
+    },
+    {
+      "operation": "Song URI construction and metadata",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_song_create_from_uri plus metadata/equality/relationship routes; 20 authored-file cycles",
+      "notes": "A project-created local file reaches the real Song factory; no SoundEffect substitution is used."
+    },
+    {
+      "operation": "MediaPlayer process-global state",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "synchronized generation manager and two-Game scalar/queue tests",
+      "notes": "Scalar state persists through CNA where XNA defines it; raw handles, registrations, and queued work never cross Game generations."
+    },
+    {
+      "operation": "MediaPlayer transport",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "real Play/Pause/Resume/Stop/Move routes; NULL-audio Song playback accepted",
+      "notes": "Native state and callbacks are observed; audible playback is not claimed for NULL audio."
+    },
+    {
+      "operation": "MediaQueue",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_media_player_get_queue and queue routes; 20 generation cycles",
+      "notes": "One facade per generation, stable Song item/active identity, live replacement, and deterministic stale-generation rejection."
+    },
+    {
+      "operation": "MediaPlayer events",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "native subscribe/unsubscribe callbacks; owner-thread dispatcher; 50-delivery stress",
+      "notes": "Trampolines contain BaseException, copy only generation work, invoke no user code in C, and discard stale events."
+    },
+    {
+      "operation": "VisualizationData native route",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_media_player_get_visualization_data; 2056-byte/align-4 structure with offsets 8 and 1032",
+      "notes": "The exact route copies into immutable Python tuples; no waveform or spectrum is synthesized."
+    },
+    {
+      "operation": "Real visualization spectrum",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "with a generated 440 Hz tone playing, the 256-point spectrum has a non-zero peak and the waveform swings both positive and negative",
+      "notes": "The historical null backend had no decoded signal, so zeros were all it could report. A real mixer decodes the tone and the visualization follows it."
+    },
+    {
+      "operation": "Video metadata object",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_video_create_with_metadata and all public getters",
+      "notes": "Metadata construction is native and content-owned; it does not pretend that the encoded file has been decoded."
+    },
+    {
+      "operation": "Video XNB",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "private VideoReader test covers reader table, cache identity, Unload, stale retained value, and post-create rollback",
+      "notes": "It reuses ContentManager/XNB/LZX ownership and does not special-case asset names."
+    },
+    {
+      "operation": "Video decode",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "a generated clip loaded through ContentManager plays and yields frame textures on both artifacts",
+      "notes": "The fixture is generated at test time and never committed; the repository ships no encoded media. CNA refuses a video whose declared metadata disagrees with the file, so the clip is produced to match the asset exactly."
+    },
+    {
+      "operation": "Video decode on a non-rendering backend",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "the same generated clip decodes on the non-windowed control artifact",
+      "notes": "Decoding does not depend on the renderer; it was the title-relative path, not the backend, that prevented it before."
+    },
+    {
+      "operation": "VideoPlayer control",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_video_player_create/state/property/dispose routes and 20 cycles",
+      "notes": "Operation-specific disposal behavior preserves cached IsLooped, IsMuted, and Volume; finite out-of-range Volume throws and NaN is retained."
+    },
+    {
+      "operation": "VideoPlayer.GetTexture route",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_video_player_get_frame_ext; no frame before playback maps to None",
+      "notes": "Asking before playback has produced a frame is an ordinary answer of None, matching the canonical implementation rather than faulting."
+    },
+    {
+      "operation": "Video frame stable identity/generation",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_video_player_get_frame_ext supplies a monotonic decode generation with the borrowed frame texture",
+      "notes": "Closed upstream since ABI 0.9. GetTexture returns a real Texture2D that borrows the runtime's frame; it is never owned, never destroyed and never registered per frame, and a use after the borrow ended refuses with the reason it ended. CNA decodes into a single texture rather than alternating two, which is a divergence from XNA's slot model that the generation makes observable rather than hidden."
+    },
+    {
+      "operation": "CNB container parse and validation",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_document_parse/parse_file; tests.test_cnb_format, tests.test_cnb_malformed",
+      "notes": "Every container invariant is applied before an accessor hands out a byte. Measured on the control artifact: flipping any single byte of a small document either leaves it valid or is refused, and every prefix length is refused; the whole batch also runs in a child process, which exits 0."
+    },
+    {
+      "operation": "CNB chunk checksums",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_crc32c and the stored per-chunk checksum; tests.test_cnb_format.ChecksumTests",
+      "notes": "CRC-32C reproduces the published check value 0xE3069283 for \"123456789\", and the hardware and portable paths agree byte for byte on this machine, so a stored checksum does not depend on which path computed it."
+    },
+    {
+      "operation": "CNB chunk compression",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_copy_compressed/copy_decompressed; tests.test_cnb_format.CompressionTests",
+      "notes": "Zstandard is implemented in both qualified artifacts. LZ4 and Deflate have frozen wire identities and no implementation, and are refused rather than silently stored. Measured limit: a flipped byte in a Zstandard frame is often refused but can still decode to the declared length with different contents, so the exact-size rule bounds allocation and the chunk's own CRC-32C is what catches content corruption."
+    },
+    {
+      "operation": "CNB reader, byte writer and container writer",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "the cna_cnb_reader_*, cna_cnb_byte_writer_* and cna_cnb_writer_* families; tests.test_cnb_format",
+      "notes": "Every primitive round-trips, the encoding is checked against bytes written out by hand rather than only against the reader, and building the same document twice gives byte-identical output."
+    },
+    {
+      "operation": "CNB Texture2D/Texture3D/TextureCube codecs",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_encode_texture2d/cube/3d and their decoders; tests.test_cnb_codecs",
+      "notes": "Asset data only: no graphics device is involved, so both artifacts run these identically. Six asymmetric cube faces, face-major then mip ordering, and exact level payloads are asserted; the block-rounding rule is computed independently rather than read back."
+    },
+    {
+      "operation": "CNB SoundEffect codec",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_encode_sound_effect/decode_sound_effect; tests.test_cnb_codecs",
+      "notes": "Asset data only: no audio device is involved. The AUDH header's six fields are decoded by hand from the chunk as well as through the codec, so a sample-rate/channel swap is visible."
+    },
+    {
+      "operation": "CNB SpriteFont codec",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_encode_sprite_font/decode_sprite_font; tests.test_cnb_codecs",
+      "notes": "All five font chunks and all four strides are asserted against the glyph count. The atlas travels inside the file and comes back independently owned. MeasureString is not used as an oracle; the encoded data graph is."
+    },
+    {
+      "operation": "CNB Song and Video codecs",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_encode_song/encode_video and their decoders; tests.test_cnb_codecs",
+      "notes": "Both schemas store metadata plus an external stream reference rather than embedded media, which is asserted: the stream name appears in XREF, not in a payload chunk. No playback is involved and none is claimed."
+    },
+    {
+      "operation": "CNB Curve codec",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_encode_curve/decode_curve over the eleven-route curve.h slice; tests.test_cnb_codecs",
+      "notes": "The codec speaks in native Curve handles, so a native curve is built from the managed keys and destroyed before the call returns. What comes back is an ordinary managed Microsoft.Xna.Framework.Curve with nothing to close."
+    },
+    {
+      "operation": "CNB AnimationClip codec",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_encode_animation_clip/decode_animation_clip; tests.test_cnb_codecs",
+      "notes": "Non-symmetric transforms throughout, so a translation/scale swap or a quaternion reorder is a different value. The target space is content and is asserted for both identities rather than defaulted."
+    },
+    {
+      "operation": "CNB Model graph encode and decode",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_encode_model/decode_model and the 58-route model family; tests.test_cnb_model",
+      "notes": "One deliberately asymmetric fixture: three chained bones, two parts with different vertex and index byte lengths, a mesh naming its parts out of index order, a full material with three texture names and all three per-slot arrays, a skeleton with a root prefix, two morph targets on different delta streams, a cubic-spline weight key, an animation with two tracks, and a light. The whole graph survives byte-identical encoding."
+    },
+    {
+      "operation": "CNB model built directly from a .cnj",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_build_model_from_cnj and cna_cnb_model_from_cnj_take_model; tests.test_cnb_pipeline",
+      "notes": "take_model transfers ownership exactly once and a second call raises rather than producing a second owner of the same native model; the taken model outlives the result it came from. Measured difference from compile_cnj: this route does not list the .cnj among its absorbed files, and an empty model document yields one synthesized Root bone."
+    },
+    {
+      "operation": "CNJ compilation",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_compile_cnj; tests.test_cnb_pipeline, tests.test_cnb_tool_crosscheck",
+      "notes": "Compiling the same document twice gives identical bytes, and so does CNA's own cna_tool_cnj_to_cnb in a separate OS process -- two processes share no allocator state or warm heap, which makes that the strongest determinism evidence available."
+    },
+    {
+      "operation": "CNJ sidecar containment",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "ResolveCnjSourceFileSafely through cna_cnb_compile_cnj; tests.test_cnb_pipeline.SidecarContainmentTests",
+      "notes": "A parent traversal, a traversal to a file that exists, an absolute path, a missing sidecar and a truncated sidecar are each refused. Measured against cnb.h's prose: content_root is a containment boundary, not a resolution base -- a sidecar always resolves against the document's own directory."
+    },
+    {
+      "operation": "CNB source importers: image, DDS, WAV",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_import_image_as_texture2d, import/decode_dds_as_texture_cube, import/decode_wav_as_sound_effect; tests.test_cnb_pipeline",
+      "notes": "Each is asserted against pixels and samples the test generated, not against a file size. The colour key is applied only when asked for. 8-bit PCM is widened exactly and 24-bit is refused by name rather than truncated."
+    },
+    {
+      "operation": "CNB loader registry: registration and resolution",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "the cna_cnb_loader_registry_* family; tests.test_cnb_pipeline.LoaderRegistryTests",
+      "notes": "register_builtins installs Curve and AnimationClip and no other built-in type, which is asserted for all ten. Resolution proves identity as well as number for a custom type; measured, the writer refuses to produce a colliding file at all, so there is no path through this API to one its own loader would have to refuse."
+    },
+    {
+      "operation": "CNB loader invocation from Python",
+      "status": "VERIFIED_NATIVE",
+      "evidence": "cna_cnb_loader_invoke with cna_content_manager_create; tests.test_cnb_loaders",
+      "notes": "Measured on the control artifact inside one frame of a real Game. A Python loader is registered, resolved for its document and invoked, and the very object it returned comes back by identity. An exception raised inside a loader arrives as itself after CNA has returned through its own frames. A built-in loader's C++ object is reported as unsupported rather than handed across."
+    },
+    {
+      "operation": "CNB loader object generality",
+      "status": "LANGUAGE_MAPPING_LIMITATION",
+      "evidence": "cna_cnb_loader_invoke's void* out_object; cnb.h's own note that a C++ loader answers CNA_RESULT_NOT_SUPPORTED",
+      "notes": "A Python loader's object crosses as an opaque token this package resolves back, which works only within this process and only for loaders registered from Python. CNA's built-in loaders construct C++ objects that cannot cross the C boundary at all. The API reports that rather than faking a generality the ABI does not have."
+    },
+    {
+      "operation": "Native ContentManager beyond loader invocation",
+      "status": "DELIBERATE_OUT_OF_SCOPE",
+      "evidence": "content.h has roughly 92 routes; exactly cna_content_manager_create and cna_content_manager_destroy are bound",
+      "notes": "Opened only as far as cna_cnb_loader_invoke requires, which is measured: passing no manager is refused. It is a separate cache domain from Microsoft.Xna.Framework.Content.ContentManager, asserted rather than described, and no load, cache, manifest or root-directory route is bound."
+    },
+    {
+      "operation": "CNB Effect asset schema",
+      "status": "BLOCKED_UPSTREAM",
+      "evidence": "cnb.h reserves CNA_CNB_ASSET_TYPE_EFFECT with no schema; cna_cnb_compile_cnj refuses \"Effect\" by name",
+      "notes": "By design rather than by omission: CNA has many renderers, so a .cnb carrying one API's shader bytecode would be useless on the others. Nothing is fabricated; a caller asking for one is refused with the reason."
+    },
+    {
+      "operation": "CNB checked integer arithmetic routes",
+      "status": "NOT_USEFUL_FOR_PYTHON",
+      "evidence": "cna_cnb_checked_add and cna_cnb_checked_multiply are the two cnb.h routes not imported",
+      "notes": "They refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; a call would turn an exact answer into a narrower one. The bounds checks that matter happen where a value has to fit a native width, and name the value rather than truncating it."
+    }
+  ]
 }

@@ -14,7 +14,10 @@ from pathlib import Path
 import subprocess
 import sys
 
-ROOT = Path("/rv/data/development/github.com/openeggbert/_bindings/cna-python")
+#: The repository this tool lives in, derived from its own location rather
+#: than written down: an absolute developer path in a shipped file is both a
+#: leak and a file that only works on one machine.
+ROOT = Path(__file__).resolve().parents[2]
 
 #: (label, file, old, new, the test module the kill is expected in)
 MUTATIONS = [

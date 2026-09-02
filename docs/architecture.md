@@ -27,6 +27,23 @@ else: a member CNA offers but XNA never had does not belong there, because a
 name in that namespace is a claim about XNA. CNA-only capabilities live under
 `cna.extensions`, which the XNA namespace never imports and does not depend on.
 
+Two extension families are open. `cna.extensions.graphics` reports renderer
+identity and selection. `cna.extensions.content` projects CNA's own `.cnb`
+compiled content format and its `.cnj` source documents; the strict XNA
+`ContentManager` is unchanged by it, still reads `.xnb` and only `.xnb`, and
+keeps its own separate cache. The dependency runs extension -> strict only: the
+content extension reuses `Curve`, `Rectangle`, `Vector3`, `Matrix` and
+`SurfaceFormat` where those are exactly the natural representation, and a test in
+a fresh interpreter asserts that importing the XNA namespace loads no `cna`
+module at all. See `docs/cnb-cnj-extensions.md`.
+
+Opening a family may require a small slice of another header, and that is a
+dependency rather than a second decision: the CNB curve codec speaks in native
+`Curve` handles, so eleven `curve.h` routes are imported and used only inside two
+functions, and `cna_cnb_loader_invoke` requires a content manager, so exactly two
+`content.h` routes are imported. Each carries its own census rule and its own
+written reason.
+
 Public namespaces preserve XNA names. Private modules split math, geometry,
 game hosting, component/services, display/presentation, graphics states,
 resources, vertices/buffers, render targets, input, Audio/XACT, loader, ABI
@@ -159,6 +176,13 @@ generalised to a backend that cannot produce it.
 Four gates answer four different questions and none substitutes for another: the
 strict verifier asks whether the XNA namespace is exactly the selected
 projection; the extension gate asks whether CNA-only surface stays out of it and
-keeps its own promises; the ABI and prototype gates ask whether the native
-boundary is what the headers declare; and the reachability gate asks whether
-every bound route is actually called.
+keeps its own promises, including that no public signature *names* a handle or a
+ctypes type; the ABI and prototype gates ask whether the native boundary is what
+the headers declare; and the reachability gate asks whether every bound route is
+actually called.
+
+Each gate has been shown to fail. Planted defects prove it: a raw handle in a
+public annotation, a wrong ctypes prototype, a wrong struct layout, a route
+missing from the census, and a bound route whose only caller was removed. The
+last of those found a real hole rather than confirming a guard, which is the
+reason the plants are kept rather than run once.

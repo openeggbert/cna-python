@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "WHEEL_BYTE_REPRODUCIBLE": 1,
+    "WHEEL_CONTENT_REPRODUCIBLE": 1,
+    "SDIST_BYTE_REPRODUCIBLE": 0,
+    "SDIST_CONTENT_REPRODUCIBLE": 1,
+    "WHEEL_SHA256": "f1b2e698ff4f0a883e575bef5b0d7e2c8f29ae57ec185350855c6c24315bdd0e",
+    "WHEEL_FILES": 102,
+    "SDIST_FILES": 232
+  },
+  "sourceDateEpoch": "1700000000"
+}

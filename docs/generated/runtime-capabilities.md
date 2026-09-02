@@ -1,6 +1,6 @@
 # Runtime capability inventory
 
-CNA C ABI 0.21.0, cnanext `7712534d3d22`, Sharp Runtime `9cc96cd57cde`.
+CNA C ABI 0.21.0, cnanext `5347b52eae13`, Sharp Runtime `9cc96cd57cde`.
 
 A status is a claim about a measured artifact, never about CNA in general.
 Where a row differs between artifacts the breakdown is shown; where it does not,
@@ -16,16 +16,17 @@ the status held on every artifact it was measured on.
 ## Totals
 
 ```text
-CAPABILITIES=119
-VERIFIED_NATIVE=86
+CAPABILITIES=140
+VERIFIED_NATIVE=103
 VERIFIED_MANAGED=11
-BLOCKED_UPSTREAM=6
+BLOCKED_UPSTREAM=7
 BLOCKED_RENDERER=2
 BLOCKED_PLATFORM=5
 BLOCKED_HARDWARE=2
 BLOCKED_FIXTURE=4
-LANGUAGE_MAPPING_LIMITATION=2
-DELIBERATE_OUT_OF_SCOPE=1
+LANGUAGE_MAPPING_LIMITATION=3
+NOT_USEFUL_FOR_PYTHON=1
+DELIBERATE_OUT_OF_SCOPE=2
 ACTIONABLE_LOCAL=0
 ```
 
@@ -152,3 +153,24 @@ ACTIONABLE_LOCAL=0
 | VideoPlayer control | VERIFIED_NATIVE | same on all | cna_video_player_create/state/property/dispose routes and 20 cycles | Operation-specific disposal behavior preserves cached IsLooped, IsMuted, and Volume; finite out-of-range Volume throws and NaN is retained. |
 | VideoPlayer.GetTexture route | VERIFIED_NATIVE | same on all | cna_video_player_get_frame_ext; no frame before playback maps to None | Asking before playback has produced a frame is an ordinary answer of None, matching the canonical implementation rather than faulting. |
 | Video frame stable identity/generation | VERIFIED_NATIVE | same on all | cna_video_player_get_frame_ext supplies a monotonic decode generation with the borrowed frame texture | Closed upstream since ABI 0.9. GetTexture returns a real Texture2D that borrows the runtime's frame; it is never owned, never destroyed and never registered per frame, and a use after the borrow ended refuses with the reason it ended. CNA decodes into a single texture rather than alternating two, which is a divergence from XNA's slot model that the generation makes observable rather than hidden. |
+| CNB container parse and validation | VERIFIED_NATIVE | same on all | cna_cnb_document_parse/parse_file; tests.test_cnb_format, tests.test_cnb_malformed | Every container invariant is applied before an accessor hands out a byte. Measured on the control artifact: flipping any single byte of a small document either leaves it valid or is refused, and every prefix length is refused; the whole batch also runs in a child process, which exits 0. |
+| CNB chunk checksums | VERIFIED_NATIVE | same on all | cna_cnb_crc32c and the stored per-chunk checksum; tests.test_cnb_format.ChecksumTests | CRC-32C reproduces the published check value 0xE3069283 for "123456789", and the hardware and portable paths agree byte for byte on this machine, so a stored checksum does not depend on which path computed it. |
+| CNB chunk compression | VERIFIED_NATIVE | same on all | cna_cnb_copy_compressed/copy_decompressed; tests.test_cnb_format.CompressionTests | Zstandard is implemented in both qualified artifacts. LZ4 and Deflate have frozen wire identities and no implementation, and are refused rather than silently stored. Measured limit: a flipped byte in a Zstandard frame is often refused but can still decode to the declared length with different contents, so the exact-size rule bounds allocation and the chunk's own CRC-32C is what catches content corruption. |
+| CNB reader, byte writer and container writer | VERIFIED_NATIVE | same on all | the cna_cnb_reader_*, cna_cnb_byte_writer_* and cna_cnb_writer_* families; tests.test_cnb_format | Every primitive round-trips, the encoding is checked against bytes written out by hand rather than only against the reader, and building the same document twice gives byte-identical output. |
+| CNB Texture2D/Texture3D/TextureCube codecs | VERIFIED_NATIVE | same on all | cna_cnb_encode_texture2d/cube/3d and their decoders; tests.test_cnb_codecs | Asset data only: no graphics device is involved, so both artifacts run these identically. Six asymmetric cube faces, face-major then mip ordering, and exact level payloads are asserted; the block-rounding rule is computed independently rather than read back. |
+| CNB SoundEffect codec | VERIFIED_NATIVE | same on all | cna_cnb_encode_sound_effect/decode_sound_effect; tests.test_cnb_codecs | Asset data only: no audio device is involved. The AUDH header's six fields are decoded by hand from the chunk as well as through the codec, so a sample-rate/channel swap is visible. |
+| CNB SpriteFont codec | VERIFIED_NATIVE | same on all | cna_cnb_encode_sprite_font/decode_sprite_font; tests.test_cnb_codecs | All five font chunks and all four strides are asserted against the glyph count. The atlas travels inside the file and comes back independently owned. MeasureString is not used as an oracle; the encoded data graph is. |
+| CNB Song and Video codecs | VERIFIED_NATIVE | same on all | cna_cnb_encode_song/encode_video and their decoders; tests.test_cnb_codecs | Both schemas store metadata plus an external stream reference rather than embedded media, which is asserted: the stream name appears in XREF, not in a payload chunk. No playback is involved and none is claimed. |
+| CNB Curve codec | VERIFIED_NATIVE | same on all | cna_cnb_encode_curve/decode_curve over the eleven-route curve.h slice; tests.test_cnb_codecs | The codec speaks in native Curve handles, so a native curve is built from the managed keys and destroyed before the call returns. What comes back is an ordinary managed Microsoft.Xna.Framework.Curve with nothing to close. |
+| CNB AnimationClip codec | VERIFIED_NATIVE | same on all | cna_cnb_encode_animation_clip/decode_animation_clip; tests.test_cnb_codecs | Non-symmetric transforms throughout, so a translation/scale swap or a quaternion reorder is a different value. The target space is content and is asserted for both identities rather than defaulted. |
+| CNB Model graph encode and decode | VERIFIED_NATIVE | same on all | cna_cnb_encode_model/decode_model and the 58-route model family; tests.test_cnb_model | One deliberately asymmetric fixture: three chained bones, two parts with different vertex and index byte lengths, a mesh naming its parts out of index order, a full material with three texture names and all three per-slot arrays, a skeleton with a root prefix, two morph targets on different delta streams, a cubic-spline weight key, an animation with two tracks, and a light. The whole graph survives byte-identical encoding. |
+| CNB model built directly from a .cnj | VERIFIED_NATIVE | same on all | cna_cnb_build_model_from_cnj and cna_cnb_model_from_cnj_take_model; tests.test_cnb_pipeline | take_model transfers ownership exactly once and a second call raises rather than producing a second owner of the same native model; the taken model outlives the result it came from. Measured difference from compile_cnj: this route does not list the .cnj among its absorbed files, and an empty model document yields one synthesized Root bone. |
+| CNJ compilation | VERIFIED_NATIVE | same on all | cna_cnb_compile_cnj; tests.test_cnb_pipeline, tests.test_cnb_tool_crosscheck | Compiling the same document twice gives identical bytes, and so does CNA's own cna_tool_cnj_to_cnb in a separate OS process -- two processes share no allocator state or warm heap, which makes that the strongest determinism evidence available. |
+| CNJ sidecar containment | VERIFIED_NATIVE | same on all | ResolveCnjSourceFileSafely through cna_cnb_compile_cnj; tests.test_cnb_pipeline.SidecarContainmentTests | A parent traversal, a traversal to a file that exists, an absolute path, a missing sidecar and a truncated sidecar are each refused. Measured against cnb.h's prose: content_root is a containment boundary, not a resolution base -- a sidecar always resolves against the document's own directory. |
+| CNB source importers: image, DDS, WAV | VERIFIED_NATIVE | same on all | cna_cnb_import_image_as_texture2d, import/decode_dds_as_texture_cube, import/decode_wav_as_sound_effect; tests.test_cnb_pipeline | Each is asserted against pixels and samples the test generated, not against a file size. The colour key is applied only when asked for. 8-bit PCM is widened exactly and 24-bit is refused by name rather than truncated. |
+| CNB loader registry: registration and resolution | VERIFIED_NATIVE | same on all | the cna_cnb_loader_registry_* family; tests.test_cnb_pipeline.LoaderRegistryTests | register_builtins installs Curve and AnimationClip and no other built-in type, which is asserted for all ten. Resolution proves identity as well as number for a custom type; measured, the writer refuses to produce a colliding file at all, so there is no path through this API to one its own loader would have to refuse. |
+| CNB loader invocation from Python | VERIFIED_NATIVE | same on all | cna_cnb_loader_invoke with cna_content_manager_create; tests.test_cnb_loaders | Measured on the control artifact inside one frame of a real Game. A Python loader is registered, resolved for its document and invoked, and the very object it returned comes back by identity. An exception raised inside a loader arrives as itself after CNA has returned through its own frames. A built-in loader's C++ object is reported as unsupported rather than handed across. |
+| CNB loader object generality | LANGUAGE_MAPPING_LIMITATION | same on all | cna_cnb_loader_invoke's void* out_object; cnb.h's own note that a C++ loader answers CNA_RESULT_NOT_SUPPORTED | A Python loader's object crosses as an opaque token this package resolves back, which works only within this process and only for loaders registered from Python. CNA's built-in loaders construct C++ objects that cannot cross the C boundary at all. The API reports that rather than faking a generality the ABI does not have. |
+| Native ContentManager beyond loader invocation | DELIBERATE_OUT_OF_SCOPE | same on all | content.h has roughly 92 routes; exactly cna_content_manager_create and cna_content_manager_destroy are bound | Opened only as far as cna_cnb_loader_invoke requires, which is measured: passing no manager is refused. It is a separate cache domain from Microsoft.Xna.Framework.Content.ContentManager, asserted rather than described, and no load, cache, manifest or root-directory route is bound. |
+| CNB Effect asset schema | BLOCKED_UPSTREAM | same on all | cnb.h reserves CNA_CNB_ASSET_TYPE_EFFECT with no schema; cna_cnb_compile_cnj refuses "Effect" by name | By design rather than by omission: CNA has many renderers, so a .cnb carrying one API's shader bytecode would be useless on the others. Nothing is fabricated; a caller asking for one is refused with the reason. |
+| CNB checked integer arithmetic routes | NOT_USEFUL_FOR_PYTHON | same on all | cna_cnb_checked_add and cna_cnb_checked_multiply are the two cnb.h routes not imported | They refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; a call would turn an exact answer into a narrower one. The bounds checks that matter happen where a value has to fit a native width, and name the value rather than truncating it. |
