@@ -80,6 +80,65 @@ def _matches(rule: dict, name: str, header: str) -> bool:
     return bool(match)
 
 
+def shadowed_rules(declarations: dict, rules: list[dict]) -> list[dict]:
+    """Rules an earlier rule has taken every route away from.
+
+    First-match-wins makes a rule's *position* part of its meaning, and a rule
+    that names specific routes is the most specific kind there is -- so it losing
+    every one of them to an earlier prefix rule is always a mistake rather than a
+    choice. It happened: ``engine-c-lifetime-transfer`` names three ownership
+    transfers as deliberate non-bindings, and one of them sat one position behind
+    ``engine-post-process-pass``, whose prefix claimed it. The census then
+    reported a decision that had already been made as an outstanding task, and
+    nothing noticed, because every other check asks about routes rather than
+    about rules.
+
+    Two things are reported, because a rule can fail in two ways:
+
+    * a rule that names routes and does not get one of them -- always a defect,
+      whatever else the rule still classifies;
+    * a rule that classifies nothing at all -- either shadowed entirely or dead.
+      A dead rule is worth removing rather than keeping: a broad catch-all left
+      at the end of the list quietly converts every future route CNA adds into a
+      reviewed decision nobody made, which is exactly what ``UNREVIEWED`` exists
+      to prevent.
+    """
+    claimed: dict[str, str | None] = {}
+    for name, declaration in declarations.items():
+        for rule in rules:
+            if _matches(rule, name, declaration.header):
+                claimed[name] = rule.get("id")
+                break
+    diagnostics = []
+    for index, rule in enumerate(rules):
+        identifier = rule.get("id", index)
+        matched = [name for name, winner in claimed.items() if winner == identifier]
+        lost = sorted(name for name in rule["match"].get("names", ())
+                      if name in declarations and claimed.get(name) != identifier)
+        if lost:
+            diagnostics.append({
+                "rule": identifier,
+                "kind": "NAMED_ROUTE_TAKEN",
+                "shadowedBy": sorted({claimed[name] for name in lost}),
+                "routes": lost,
+            })
+        # One rule, one diagnostic: a named rule that lost every route it names
+        # has already been reported, and saying it classifies nothing as well
+        # would make the count of *rules* to fix disagree with the count of
+        # lines printed.
+        if matched or lost:
+            continue
+        would_match = [name for name, declaration in declarations.items()
+                       if _matches(rule, name, declaration.header)]
+        diagnostics.append({
+            "rule": identifier,
+            "kind": "SHADOWED" if would_match else "DEAD",
+            "shadowedBy": sorted({claimed[name] for name in would_match}),
+            "routes": sorted(would_match),
+        })
+    return diagnostics
+
+
 def classify(declarations: dict, bound: set[str], rules: list[dict]) -> list[dict]:
     rows: list[dict] = []
     for name, declaration in sorted(declarations.items()):
@@ -229,6 +288,7 @@ def main() -> int:
     # A family default legitimately covers both imported and unimported routes.
     exclusive = {rule.get("id") for rule in rules if rule.get("boundIsError")}
     contradictions = [row["route"] for row in rows if row["bound"] and row["rule"] in exclusive]
+    shadowed = shadowed_rules(declarations, rules)
 
     counts: dict[str, int] = {}
     for row in rows:
@@ -241,6 +301,7 @@ def main() -> int:
         "BOUND_NOT_IN_HEADERS": len(missing),
         "UNREVIEWED": len(unreviewed),
         "RULE_CONTRADICTIONS": len(contradictions),
+        "RULE_SHADOWING_DIAGNOSTICS": len(shadowed),
     }
     selected: dict[str, list[dict]] = {}
     for family in families:
@@ -266,6 +327,7 @@ def main() -> int:
         "selectedFamily": selected,
         "boundNotInHeaders": missing,
         "ruleContradictions": contradictions,
+        "ruleShadowing": shadowed,
     }
     if args.output:
         Path(args.output).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
@@ -277,7 +339,18 @@ def main() -> int:
         print(f"UNREVIEWED {row['header']}: {row['route']}")
     for route in contradictions[:20]:
         print(f"CONTRADICTION {route} is bound but its rule says it is not")
-    return 1 if unreviewed or missing or contradictions else 0
+    for entry in shadowed[:20]:
+        if entry["kind"] == "NAMED_ROUTE_TAKEN":
+            print(f"SHADOWED rule {entry['rule']} names "
+                  f"{', '.join(entry['routes'])}, which went to "
+                  f"{', '.join(entry['shadowedBy'])}")
+        elif entry["kind"] == "SHADOWED":
+            print(f"SHADOWED rule {entry['rule']} classifies nothing; its "
+                  f"{len(entry['routes'])} route(s) went to "
+                  f"{', '.join(entry['shadowedBy'])}")
+        else:
+            print(f"DEAD rule {entry['rule']} matches no canonical route at all")
+    return 1 if unreviewed or missing or contradictions or shadowed else 0
 
 
 if __name__ == "__main__":

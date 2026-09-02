@@ -6,6 +6,7 @@
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
+    "RULE_SHADOWING_DIAGNOSTICS": 0,
     "CNB_CNJ_ROUTES": 285,
     "CNB_CNJ_BOUND": 283,
     "CNB_CNJ_UNREVIEWED": 0,
@@ -13,22 +14,22 @@
     "ENGINE_ROUTES": 870,
     "ENGINE_BOUND": 722,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 146,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 145,
     "PURPOSE_XNA_BACKING": 1171,
-    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1823,
-    "PURPOSE_MANAGED_BY_DESIGN": 536,
+    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1822,
+    "PURPOSE_MANAGED_BY_DESIGN": 537,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
     "STATUS_BOUND": 1770,
-    "STATUS_ACTIONABLE_LOCAL": 146,
+    "STATUS_ACTIONABLE_LOCAL": 145,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 2137,
+    "STATUS_DELIBERATE_NON_BINDING": 2138,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -204,6 +205,23 @@
       "status": "DELIBERATE_NON_BINDING",
       "reason": "Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released.",
       "boundReason": "imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable"
+    },
+    {
+      "id": "engine-c-lifetime-transfer",
+      "family": "post-process-chain",
+      "familyTitle": "C ownership transfer Python does not need",
+      "match": {
+        "names": [
+          "cna_post_process_effect_pass_create_owning",
+          "cna_post_process_chain_add_owned_pass",
+          "cna_skybox_set_owned_environment"
+        ]
+      },
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "boundReason": "not applicable: no C ownership transfer is imported",
+      "boundIsError": true
     },
     {
       "id": "engine-ascii-dependency",
@@ -408,23 +426,6 @@
       "status": "ACTIONABLE_LOCAL",
       "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
       "boundReason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in"
-    },
-    {
-      "id": "engine-c-lifetime-transfer",
-      "family": "post-process-chain",
-      "familyTitle": "C ownership transfer Python does not need",
-      "match": {
-        "names": [
-          "cna_post_process_effect_pass_create_owning",
-          "cna_post_process_chain_add_owned_pass",
-          "cna_skybox_set_owned_environment"
-        ]
-      },
-      "purpose": "MANAGED_BY_DESIGN",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
-      "boundReason": "not applicable: no C ownership transfer is imported",
-      "boundIsError": true
     },
     {
       "id": "engine-post-process-chain",
@@ -1709,18 +1710,6 @@
       "purpose": "OUT_OF_SELECTED_PROFILE",
       "status": "DELIBERATE_NON_BINDING",
       "reason": "The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated.",
-      "boundReason": "imported: the selected profile reaches this route"
-    },
-    {
-      "id": "ext-suffixed-capability",
-      "match": {
-        "suffixes": [
-          "_ext"
-        ]
-      },
-      "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "A CNA extension route with no XNA counterpart; it is reviewed and deliberately outside the selected profile rather than pending.",
       "boundReason": "imported: the selected profile reaches this route"
     }
   ],
@@ -35515,12 +35504,12 @@
     {
       "route": "cna_post_process_effect_pass_create_owning",
       "header": "engine_layer.h",
-      "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
-      "rule": "engine-post-process-pass",
-      "family": "post-process-pass",
-      "familyTitle": "post-process passes",
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "rule": "engine-c-lifetime-transfer",
+      "family": "post-process-chain",
+      "familyTitle": "C ownership transfer Python does not need",
       "bound": false
     },
     {
@@ -56816,12 +56805,12 @@
       {
         "route": "cna_post_process_effect_pass_create_owning",
         "header": "engine_layer.h",
-        "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
-        "rule": "engine-post-process-pass",
-        "family": "post-process-pass",
-        "familyTitle": "post-process passes",
+        "purpose": "MANAGED_BY_DESIGN",
+        "status": "DELIBERATE_NON_BINDING",
+        "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+        "rule": "engine-c-lifetime-transfer",
+        "family": "post-process-chain",
+        "familyTitle": "C ownership transfer Python does not need",
         "bound": false
       },
       {
@@ -59071,5 +59060,6 @@
     ]
   },
   "boundNotInHeaders": [],
-  "ruleContradictions": []
+  "ruleContradictions": [],
+  "ruleShadowing": []
 }

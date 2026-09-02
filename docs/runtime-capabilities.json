@@ -1598,6 +1598,26 @@
       },
       "evidence": "docs/engine-upstream-findings.md ENGINE-006; tests/test_engine_clustered.py::ClusteredConstructorTests",
       "notes": "engine_layer.h documents the first parameter of four constructors as 'the owning game'. The C layer resolves it as a graphics device and refuses a game handle with CNA_RESULT_INVALID_HANDLE. Every class in the package takes a GraphicsDevice, so the difference is invisible from Python; the raw route is driven with both handles so the pin fails the day either side changes."
+    },
+    {
+      "operation": "Census rules are checked against each other, not only against routes",
+      "status": "VERIFIED_MANAGED",
+      "byArtifact": {
+        "control": "verified",
+        "gpu": "verified"
+      },
+      "evidence": "tools/route_census.py shadowed_rules; tests/test_census_gate.py",
+      "notes": "The census classifies by first match, so a rule's position is part of its meaning and an earlier rule can silently overrule a later one. It had: engine-c-lifetime-transfer names three C ownership transfers as deliberate non-bindings and one sat behind a prefix rule that claimed it, so a decision already made was reported as an outstanding task. The gate now rejects a rule that names a route another rule took, and a rule that classifies nothing at all -- which found a second defect, a dead *_ext catch-all that would have turned every route CNA adds later into a reviewed decision nobody made. Both shapes are planted and required to fail in tests/test_census_gate.py."
+    },
+    {
+      "operation": "The CNB read-scaling check measures the copy, not the allocator",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "verified",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_cnb_boundaries.py::CopyBehaviourTests::test_reading_a_payload_scales_with_its_size_not_its_square and ::test_the_scaling_measurement_rejects_a_quadratic_reader",
+      "notes": "A level read allocates its destination, and glibc serves an allocation above its dynamic mmap threshold with fresh pages faulted in on every call. Measured, a cold 1 MB read cost 1254 microseconds against 82 after another test had freed a few megabytes, while a 4 MB read stayed slow either way -- so the ratio the check asserted on was the allocator's state rather than the copy's complexity, and adding an unrelated test file was enough to flip it. Reading an 8 MB payload first lifts the threshold past both sizes, and the best of several attempts is taken. The ratio is then 2.3 to 2.5 whatever ran before, which is the cache hierarchy rather than the algorithm; a planted quadratic reader measures 41 to 45 on the same harness, and a companion case requires it to be rejected."
     }
   ]
 }

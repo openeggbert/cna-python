@@ -9,6 +9,7 @@ BOUND_ROUTES=1770
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
+RULE_SHADOWING_DIAGNOSTICS=0
 CNB_CNJ_ROUTES=285
 CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
@@ -16,22 +17,22 @@ SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 ENGINE_ROUTES=870
 ENGINE_BOUND=722
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=146
+SELECTED_ENGINE_ACTIONABLE_LOCAL=145
 PURPOSE_XNA_BACKING=1171
-PURPOSE_CNA_EXTENSION_CANDIDATE=1823
-PURPOSE_MANAGED_BY_DESIGN=536
+PURPOSE_CNA_EXTENSION_CANDIDATE=1822
+PURPOSE_MANAGED_BY_DESIGN=537
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
 STATUS_BOUND=1770
-STATUS_ACTIONABLE_LOCAL=146
+STATUS_ACTIONABLE_LOCAL=145
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
 STATUS_BLOCKED_HARDWARE=0
 STATUS_BLOCKED_FIXTURE=0
 STATUS_LANGUAGE_MAPPING_LIMITATION=0
-STATUS_DELIBERATE_NON_BINDING=2137
+STATUS_DELIBERATE_NON_BINDING=2138
 STATUS_UNREVIEWED=0
 ```
 
@@ -42,10 +43,10 @@ STATUS_UNREVIEWED=0
 | CNA_EXTENSION_CANDIDATE | BOUND | 1026 |
 | XNA_BACKING | BOUND | 727 |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 651 |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 519 |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 520 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 146 |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 145 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
@@ -358,8 +359,8 @@ is BOUND or carries its own written non-binding reason.
 | Status | Routes |
 |---|---:|
 | BOUND | 722 |
-| ACTIONABLE_LOCAL | 146 |
-| DELIBERATE_NON_BINDING | 2 |
+| ACTIONABLE_LOCAL | 145 |
+| DELIBERATE_NON_BINDING | 3 |
 
 ### By sub-family
 
@@ -421,8 +422,8 @@ is BOUND or carries its own written non-binding reason.
 | `pbr-effect` (PBR effects) | 9 | 9 | BOUND 9 |
 | `pbr-material` (PBR materials) | 63 | 63 | BOUND 63 |
 | `pbr-material-extensions` (PBR material extensions) | 2 | 2 | BOUND 2 |
-| `post-process-chain` (C ownership transfer Python does not need) | 15 | 13 | BOUND 13, DELIBERATE_NON_BINDING 2 |
-| `post-process-pass` (post-process passes) | 9 | 8 | ACTIONABLE_LOCAL 1, BOUND 8 |
+| `post-process-chain` (C ownership transfer Python does not need) | 16 | 13 | BOUND 13, DELIBERATE_NON_BINDING 3 |
+| `post-process-pass` (post-process passes) | 8 | 8 | BOUND 8 |
 | `render-pipeline` (the render pipeline) | 33 | 33 | BOUND 33 |
 | `render-pipeline-settings` (render pipeline settings) | 4 | 4 | BOUND 4 |
 | `render-target-pool` (render-target pools) | 6 | 6 | BOUND 6 |
@@ -1107,7 +1108,7 @@ is BOUND or carries its own written non-binding reason.
 | `cna_post_process_chain_set_gpu_timing_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
 | `cna_post_process_context_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | `cna_post_process_effect_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
-| `cna_post_process_effect_pass_create_owning` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_post_process_effect_pass_create_owning` | engine_layer.h | DELIBERATE_NON_BINDING | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
 | `cna_post_process_effect_pass_get_effect` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | `cna_post_process_effect_pass_set_effect` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | `cna_post_process_pass_apply` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
@@ -1404,6 +1405,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset |
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
 | XNA_BACKING | BOUND | 3 | imported: GamerServicesComponent is the one selected member of this family |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 3 | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h. |
@@ -1414,11 +1416,9 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 2 | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects clustered light values -- the clustered light value structure |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects compute memory-barrier mask -- the containment test for the barrier bit mask a compute dispatch orders |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 | A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 1 | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
