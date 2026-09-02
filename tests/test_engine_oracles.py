@@ -179,3 +179,143 @@ class ComparisonTests(unittest.TestCase):
         produced = oracle.transform_coordinate((2.0, 4.0, 2.0), Matrix(*values))
         self.assertAlmostEqual(produced.X, 1.0, places=6)
         self.assertAlmostEqual(produced.Y, 2.0, places=6)
+
+
+class ParticleRandomTests(unittest.TestCase):
+    """The hash, checked as a hash rather than against itself."""
+
+    def test_the_draw_is_in_range_and_deterministic(self) -> None:
+        for seed in (0, 1, 7, 4096, 0xFFFFFFFF):
+            with self.subTest(seed=seed):
+                value = oracle.particle_random(seed)
+                self.assertGreaterEqual(value, 0.0)
+                self.assertLess(value, 1.0)
+                self.assertEqual(value, oracle.particle_random(seed))
+
+    def test_neighbouring_seeds_decorrelate(self) -> None:
+        """The property that makes it usable: consecutive seeds are unrelated.
+
+        A hash that varied smoothly would give a particle emitter a gradient
+        rather than a spread, which is the failure this hash exists to avoid.
+        """
+        values = [oracle.particle_random(seed) for seed in range(64)]
+        self.assertEqual(len(set(values)), 64, "two of 64 consecutive seeds collided")
+        differences = [abs(b - a) for a, b in zip(values, values[1:])]
+        self.assertGreater(sum(differences) / len(differences), 0.2,
+                           "consecutive draws move too little to be decorrelated")
+
+    def test_the_hash_stays_inside_thirty_two_bits(self) -> None:
+        for seed in (0, 1, 0x7FFFFFFF, 0xFFFFFFFF):
+            with self.subTest(seed=seed):
+                self.assertLessEqual(oracle.particle_hash(seed), 0xFFFFFFFF)
+                self.assertGreaterEqual(oracle.particle_hash(seed), 0)
+
+
+class DepthPackingTests(unittest.TestCase):
+    def test_the_top_channel_is_empty_because_a_float_runs_out_of_bits(self) -> None:
+        """The property that makes single precision part of the algorithm.
+
+        ``0.876 * 2**24`` is about 14.7 million, which needs every one of a
+        ``float``'s 24 mantissa bits for its integer part, so its fractional
+        part is exactly zero. That is not a rounding artefact to be tolerated:
+        it is what the first channel actually carries, and an oracle computing
+        in doubles would report otherwise.
+        """
+        self.assertEqual(oracle.pack_depth(0.87654321)[0], 0.0)
+        # And the remaining channels do carry the depth.
+        self.assertAlmostEqual(oracle.unpack_depth(*oracle.pack_depth(0.87654321)),
+                               0.87654321, places=5)
+
+    def test_packing_and_unpacking_are_inverses(self) -> None:
+        for depth in (0.0, 0.001, 0.25, 0.5, 0.75, 0.9999):
+            with self.subTest(depth=depth):
+                red, green, blue, alpha = oracle.pack_depth(depth)
+                self.assertAlmostEqual(
+                    oracle.unpack_depth(red, green, blue, alpha), depth, places=6)
+
+    def test_one_is_clamped_short_so_it_does_not_wrap_to_zero(self) -> None:
+        """The whole reason the clamp exists."""
+        packed = oracle.pack_depth(1.0)
+        self.assertGreater(oracle.unpack_depth(*packed), 0.99,
+                           "a far-plane depth must not read back as the nearest surface")
+
+    def test_every_channel_stays_in_range(self) -> None:
+        for depth in (0.0, 0.125, 0.6, 0.99999994):
+            with self.subTest(depth=depth):
+                for channel in oracle.pack_depth(depth):
+                    self.assertGreaterEqual(channel, -1e-6)
+                    self.assertLessEqual(channel, 1.0 + 1e-6)
+
+
+class VelocityTests(unittest.TestCase):
+    def test_the_alpha_marker_decides_whether_there_is_a_velocity(self) -> None:
+        self.assertTrue(oracle.has_velocity(0))
+        self.assertTrue(oracle.has_velocity(127))
+        self.assertFalse(oracle.has_velocity(128))
+        self.assertFalse(oracle.has_velocity(255))
+
+    def test_an_unmarked_texel_decodes_to_no_velocity_rather_than_a_zero_one(self) -> None:
+        self.assertEqual(oracle.decode_velocity(255, 255, 0, 255), (0.0, 0.0))
+
+    def test_the_midpoint_is_zero_and_the_ends_are_plus_and_minus_one(self) -> None:
+        self.assertEqual(oracle.decode_velocity(255, 0, 0, 0), (1.0, -1.0))
+        middle = oracle.decode_velocity(128, 128, 0, 0)
+        self.assertAlmostEqual(middle[0], 0.00392, places=4)
+
+
+class TransparencyWeightTests(unittest.TestCase):
+    def test_near_fragments_weigh_more_than_far_ones(self) -> None:
+        near = oracle.transparency_weight(1.0, 1.0, 100.0)
+        far = oracle.transparency_weight(90.0, 1.0, 100.0)
+        self.assertGreater(near, far,
+                           "an order-independent blend has to favour near fragments")
+
+    def test_the_ceiling_binds_and_the_floor_cannot(self) -> None:
+        """Depth zero saturates the weight; the lower clamp is unreachable.
+
+        The depth is normalised and clamped to ``0..1`` first, so the falloff
+        never falls below ``0.03 / (1e-5 + 1)``, which is three times the 0.01
+        floor. The floor is defensive rather than dead code that matters, and
+        knowing that is better than assuming it binds somewhere.
+        """
+        self.assertAlmostEqual(oracle.transparency_weight(0.0, 1.0, 100.0), 3e3,
+                               places=1)
+        beyond = oracle.transparency_weight(1000.0, 1.0, 100.0)
+        self.assertAlmostEqual(beyond, 0.03 / (1e-5 + 1.0), places=6)
+        self.assertGreater(beyond, 1e-2)
+        # And it really is clamped: twice the far plane weighs the same as the
+        # far plane itself.
+        self.assertEqual(oracle.transparency_weight(200.0, 1.0, 100.0), beyond)
+
+    def test_alpha_scales_it_linearly(self) -> None:
+        full = oracle.transparency_weight(10.0, 1.0, 100.0)
+        half = oracle.transparency_weight(10.0, 0.5, 100.0)
+        self.assertAlmostEqual(half, full * 0.5, places=5)
+
+
+class SortKeyTests(unittest.TestCase):
+    def test_a_box_containing_the_camera_sorts_at_zero(self) -> None:
+        self.assertEqual(oracle.sort_key(Vector3(-1.0, -1.0, -1.0),
+                                         Vector3(1.0, 1.0, 1.0),
+                                         Vector3(0.5, -0.25, 0.0)), 0.0)
+
+    def test_the_distance_is_to_the_nearest_face_not_the_centre(self) -> None:
+        """A 3-4-5 case, worked by hand."""
+        key = oracle.sort_key(Vector3(3.0, 4.0, 0.0), Vector3(9.0, 9.0, 0.0),
+                              Vector3(0.0, 0.0, 0.0))
+        self.assertAlmostEqual(key, 5.0, places=6)
+
+    def test_it_grows_with_distance(self) -> None:
+        near = oracle.sort_key(Vector3(1.0, 0.0, 0.0), Vector3(2.0, 1.0, 1.0),
+                               Vector3(0.0, 0.0, 0.0))
+        far = oracle.sort_key(Vector3(10.0, 0.0, 0.0), Vector3(11.0, 1.0, 1.0),
+                              Vector3(0.0, 0.0, 0.0))
+        self.assertLess(near, far)
+
+
+class DecalBoxTests(unittest.TestCase):
+    def test_the_box_is_the_unit_cube_and_its_faces_are_inclusive(self) -> None:
+        self.assertTrue(oracle.is_inside_decal_box(Vector3(0.0, 0.0, 0.0)))
+        self.assertTrue(oracle.is_inside_decal_box(Vector3(0.5, -0.5, 0.5)))
+        self.assertFalse(oracle.is_inside_decal_box(Vector3(0.5001, 0.0, 0.0)))
+        self.assertFalse(oracle.is_inside_decal_box(Vector3(0.0, 0.0, -0.6)))

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1302,
-    "DIRECT_CALL_SITE": 1208,
+    "BOUND_ROUTES": 1387,
+    "DIRECT_CALL_SITE": 1293,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
     "REACHED_BY_NAME_TEMPLATE": 15,
     "ADMITTED_WITH_REASON": 37,
@@ -3562,7 +3562,7 @@
       "src/_cna_native/engine_support.py:73"
     ],
     "cna_engine_layer_copy_version_string": [
-      "src/cna/extensions/engine/__init__.py:184"
+      "src/cna/extensions/engine/__init__.py:218"
     ],
     "cna_graphics_memory_barrier_has": [
       "src/cna/extensions/engine/compute.py:80"
@@ -4320,6 +4320,261 @@
     ],
     "cna_pbr_effect_get_texture": [
       "src/cna/extensions/engine/pbr.py:628"
+    ],
+    "cna_depth_normal_prepass_create": [
+      "src/cna/extensions/engine/scene.py:664"
+    ],
+    "cna_depth_normal_prepass_resize": [
+      "src/cna/extensions/engine/scene.py:741"
+    ],
+    "cna_depth_normal_prepass_get_pass_count": [
+      "src/cna/extensions/engine/scene.py:682"
+    ],
+    "cna_depth_normal_prepass_begin": [
+      "src/cna/extensions/engine/scene.py:783"
+    ],
+    "cna_depth_normal_prepass_end": [
+      "src/cna/extensions/engine/scene.py:790"
+    ],
+    "cna_depth_normal_prepass_get_prepass_effect": [
+      "src/cna/extensions/engine/scene.py:767"
+    ],
+    "cna_depth_normal_prepass_get_skinned_prepass_effect": [
+      "src/cna/extensions/engine/scene.py:773"
+    ],
+    "cna_depth_normal_prepass_get_depth_texture": [
+      "src/cna/extensions/engine/scene.py:749"
+    ],
+    "cna_depth_normal_prepass_get_normal_texture": [
+      "src/cna/extensions/engine/scene.py:755"
+    ],
+    "cna_depth_normal_prepass_get_velocity_texture_ext": [
+      "src/cna/extensions/engine/scene.py:761"
+    ],
+    "cna_depth_normal_prepass_is_supported": [
+      "src/cna/extensions/engine/scene.py:671"
+    ],
+    "cna_depth_normal_prepass_is_using_multiple_render_targets": [
+      "src/cna/extensions/engine/scene.py:689"
+    ],
+    "cna_depth_normal_prepass_is_depth_packed": [
+      "src/cna/extensions/engine/scene.py:695"
+    ],
+    "cna_depth_normal_prepass_uses_packed_depth_ext": [
+      "src/cna/extensions/engine/scene.py:589"
+    ],
+    "cna_depth_normal_prepass_get_roughness": [
+      "src/cna/extensions/engine/scene.py:701"
+    ],
+    "cna_depth_normal_prepass_set_roughness": [
+      "src/cna/extensions/engine/scene.py:706"
+    ],
+    "cna_depth_normal_prepass_is_velocity_enabled_ext": [
+      "src/cna/extensions/engine/scene.py:712"
+    ],
+    "cna_depth_normal_prepass_set_velocity_enabled_ext": [
+      "src/cna/extensions/engine/scene.py:717"
+    ],
+    "cna_depth_normal_prepass_set_previous_world_ext": [
+      "src/cna/extensions/engine/scene.py:723"
+    ],
+    "cna_depth_normal_prepass_set_previous_camera_ext": [
+      "src/cna/extensions/engine/scene.py:731"
+    ],
+    "cna_depth_normal_prepass_copy_depth_decode_glsl": [
+      "src/cna/extensions/engine/scene.py:640"
+    ],
+    "cna_depth_normal_prepass_copy_velocity_decode_glsl": [
+      "src/cna/extensions/engine/scene.py:646"
+    ],
+    "cna_depth_normal_prepass_has_velocity_ext": [
+      "src/cna/extensions/engine/scene.py:624"
+    ],
+    "cna_depth_normal_prepass_decode_velocity_ext": [
+      "src/cna/extensions/engine/scene.py:633"
+    ],
+    "cna_depth_normal_prepass_pack_depth": [
+      "src/cna/extensions/engine/scene.py:602"
+    ],
+    "cna_depth_normal_prepass_unpack_depth": [
+      "src/cna/extensions/engine/scene.py:612"
+    ],
+    "cna_depth_normal_prepass_destroy": [
+      "src/cna/extensions/engine/scene.py:659"
+    ],
+    "cna_transparent_draw_list_create": [
+      "src/cna/extensions/engine/scene.py:858"
+    ],
+    "cna_transparent_draw_list_destroy": [
+      "src/cna/extensions/engine/scene.py:855"
+    ],
+    "cna_transparent_draw_list_clear": [
+      "src/cna/extensions/engine/scene.py:892"
+    ],
+    "cna_transparent_draw_list_submit": [
+      "src/cna/extensions/engine/scene.py:879"
+    ],
+    "cna_transparent_draw_list_get_count": [
+      "src/cna/extensions/engine/scene.py:887"
+    ],
+    "cna_transparent_draw_list_draw_sorted": [
+      "src/cna/extensions/engine/scene.py:917"
+    ],
+    "cna_transparent_draw_list_copy_sorted_order_ext": [
+      "src/cna/extensions/engine/scene.py:903"
+    ],
+    "cna_transparent_draw_list_sort_key": [
+      "src/cna/extensions/engine/scene.py:821"
+    ],
+    "cna_transparent_draw_list_camera_position_of": [
+      "src/cna/extensions/engine/scene.py:834"
+    ],
+    "cna_weighted_blended_transparency_create": [
+      "src/cna/extensions/engine/scene.py:963"
+    ],
+    "cna_weighted_blended_transparency_destroy": [
+      "src/cna/extensions/engine/scene.py:959"
+    ],
+    "cna_weighted_blended_transparency_is_supported": [
+      "src/cna/extensions/engine/scene.py:970"
+    ],
+    "cna_weighted_blended_transparency_copy_unsupported_reason": [
+      "src/cna/extensions/engine/scene.py:977"
+    ],
+    "cna_weighted_blended_transparency_resize": [
+      "src/cna/extensions/engine/scene.py:1007"
+    ],
+    "cna_weighted_blended_transparency_begin": [
+      "src/cna/extensions/engine/scene.py:1023"
+    ],
+    "cna_weighted_blended_transparency_end": [
+      "src/cna/extensions/engine/scene.py:1027"
+    ],
+    "cna_weighted_blended_transparency_resolve": [
+      "src/cna/extensions/engine/scene.py:1017"
+    ],
+    "cna_weighted_blended_transparency_is_accumulating": [
+      "src/cna/extensions/engine/scene.py:983"
+    ],
+    "cna_weighted_blended_transparency_get_accumulation_texture_ext": [
+      "src/cna/extensions/engine/scene.py:991"
+    ],
+    "cna_weighted_blended_transparency_get_revealage_texture_ext": [
+      "src/cna/extensions/engine/scene.py:998"
+    ],
+    "cna_weighted_blended_transparency_copy_accumulation_glsl": [
+      "src/cna/extensions/engine/scene.py:946"
+    ],
+    "cna_weighted_blended_transparency_weight": [
+      "src/cna/extensions/engine/scene.py:937"
+    ],
+    "cna_decal_pass_create": [
+      "src/cna/extensions/engine/scene.py:511"
+    ],
+    "cna_decal_pass_destroy": [
+      "src/cna/extensions/engine/scene.py:508"
+    ],
+    "cna_decal_pass_get_opacity": [
+      "src/cna/extensions/engine/scene.py:517"
+    ],
+    "cna_decal_pass_set_opacity": [
+      "src/cna/extensions/engine/scene.py:521"
+    ],
+    "cna_decal_pass_get_tint": [
+      "src/cna/extensions/engine/scene.py:528"
+    ],
+    "cna_decal_pass_set_tint": [
+      "src/cna/extensions/engine/scene.py:534"
+    ],
+    "cna_decal_pass_get_max_slope_angle": [
+      "src/cna/extensions/engine/scene.py:543"
+    ],
+    "cna_decal_pass_set_max_slope_angle": [
+      "src/cna/extensions/engine/scene.py:548"
+    ],
+    "cna_decal_pass_set_prepass_inputs": [
+      "src/cna/extensions/engine/scene.py:557"
+    ],
+    "cna_decal_pass_set_camera": [
+      "src/cna/extensions/engine/scene.py:565"
+    ],
+    "cna_decal_pass_draw": [
+      "src/cna/extensions/engine/scene.py:573"
+    ],
+    "cna_decal_pass_is_inside_decal_box": [
+      "src/cna/extensions/engine/scene.py:497"
+    ],
+    "cna_particle_emitter_settings_init": [
+      "src/cna/extensions/engine/scene.py:232"
+    ],
+    "cna_particle_init": [
+      "src/cna/extensions/engine/scene.py:282"
+    ],
+    "cna_particle_system_create": [
+      "src/cna/extensions/engine/scene.py:343"
+    ],
+    "cna_particle_system_create_with_capacity": [
+      "src/cna/extensions/engine/scene.py:347"
+    ],
+    "cna_particle_system_destroy": [
+      "src/cna/extensions/engine/scene.py:339"
+    ],
+    "cna_particle_system_get_capacity": [
+      "src/cna/extensions/engine/scene.py:354"
+    ],
+    "cna_particle_system_get_settings": [
+      "src/cna/extensions/engine/scene.py:367"
+    ],
+    "cna_particle_system_set_settings": [
+      "src/cna/extensions/engine/scene.py:376"
+    ],
+    "cna_particle_system_reset": [
+      "src/cna/extensions/engine/scene.py:432"
+    ],
+    "cna_particle_system_update": [
+      "src/cna/extensions/engine/scene.py:436"
+    ],
+    "cna_particle_system_draw": [
+      "src/cna/extensions/engine/scene.py:443"
+    ],
+    "cna_particle_system_set_depth_input_ext": [
+      "src/cna/extensions/engine/scene.py:425"
+    ],
+    "cna_particle_system_get_softness_ext": [
+      "src/cna/extensions/engine/scene.py:411"
+    ],
+    "cna_particle_system_set_softness_ext": [
+      "src/cna/extensions/engine/scene.py:416"
+    ],
+    "cna_particle_system_uses_compute": [
+      "src/cna/extensions/engine/scene.py:382"
+    ],
+    "cna_particle_system_is_simulation_on_cpu_ext": [
+      "src/cna/extensions/engine/scene.py:394"
+    ],
+    "cna_particle_system_set_simulation_on_cpu_ext": [
+      "src/cna/extensions/engine/scene.py:399"
+    ],
+    "cna_particle_system_copy_unsupported_reason": [
+      "src/cna/extensions/engine/scene.py:388"
+    ],
+    "cna_particle_system_get_active_count": [
+      "src/cna/extensions/engine/scene.py:360"
+    ],
+    "cna_particle_system_is_emission_rate_clamped": [
+      "src/cna/extensions/engine/scene.py:405"
+    ],
+    "cna_particle_system_copy_particles_ext": [
+      "src/cna/extensions/engine/scene.py:459"
+    ],
+    "cna_particle_system_step": [
+      "src/cna/extensions/engine/scene.py:480"
+    ],
+    "cna_particle_system_random": [
+      "src/cna/extensions/engine/scene.py:320"
+    ],
+    "cna_particle_system_copy_particle_lookup_glsl": [
+      "src/cna/extensions/engine/scene.py:326"
     ]
   }
 }

@@ -15,9 +15,22 @@ Everything is plain Python and needs no native library.
 
 from __future__ import annotations
 
+import ctypes
 import math
 
 from Microsoft.Xna.Framework import Matrix, Vector3
+
+
+def f32(value: float) -> float:
+    """One value rounded to the width C computes it in.
+
+    Most of the formulas here are precision-independent, and two of them are
+    not: depth packing multiplies by 2**24, where a ``float`` has run out of
+    fractional bits and a ``double`` has not. Modelling the arithmetic in
+    doubles there would produce an oracle that disagrees with a correct
+    implementation, which is worse than no oracle.
+    """
+    return float(ctypes.c_float(value).value)
 
 
 def normalized(value: Vector3) -> Vector3:
@@ -147,3 +160,98 @@ def matrices_agree(left: Matrix, right: Matrix, tolerance: float = 1e-4) -> bool
 def vectors_agree(left: Vector3, right: Vector3, tolerance: float = 1e-4) -> bool:
     return (abs(left.X - right.X) <= tolerance and abs(left.Y - right.Y) <= tolerance
             and abs(left.Z - right.Z) <= tolerance)
+
+
+# --- the scene helpers -------------------------------------------------------
+
+
+def particle_hash(value: int) -> int:
+    """CNA's integer hash, the one every particle draw is seeded from.
+
+    Three xor-shift and multiply rounds over 32 bits. Written out because a
+    random draw whose oracle came from the same routine it checks would agree
+    with any hash at all.
+    """
+    mask = 0xFFFFFFFF
+    value &= mask
+    value ^= value >> 16
+    value = (value * 0x7FEB352D) & mask
+    value ^= value >> 15
+    value = (value * 0x846CA68B) & mask
+    value ^= value >> 16
+    return value & mask
+
+
+def particle_random(seed: int) -> float:
+    """The draw in ``[0, 1)``: the low 24 bits of the hash over 2**24."""
+    return (particle_hash(seed) & 0x00FFFFFF) / 16777216.0
+
+
+def pack_depth(value: float) -> tuple[float, float, float, float]:
+    """Splits a normalised depth across four channels.
+
+    The clamp stops one texel short of one, because ``fract(1.0)`` is zero and
+    an unclamped far-plane depth would read back as the nearest surface. Each
+    channel then drops the part the previous one already holds.
+
+    Computed in single precision throughout, because that is where the answer
+    comes from: ``depth * 2**24`` exceeds a ``float``'s 24 bits of mantissa for
+    most depths, so its fractional part -- the first channel -- is genuinely
+    zero. In doubles it would not be, and the oracle would disagree with a
+    correct implementation.
+    """
+    clamped = f32(min(max(f32(value), 0.0), 0.99999994))
+    shifts = (16777216.0, 65536.0, 256.0, 1.0)
+    channels = []
+    for shift in shifts:
+        scaled = f32(clamped * shift)
+        channels.append(f32(scaled - math.floor(scaled)))
+    return (f32(channels[0]),
+            f32(channels[1] - f32(channels[0] / 256.0)),
+            f32(channels[2] - f32(channels[1] / 256.0)),
+            f32(channels[3] - f32(channels[2] / 256.0)))
+
+
+def unpack_depth(red: float, green: float, blue: float, alpha: float) -> float:
+    """Reassembles the depth from four channels."""
+    return red / 16777216.0 + green / 65536.0 + blue / 256.0 + alpha
+
+
+def has_velocity(alpha: int) -> bool:
+    """A velocity texel is marked by an alpha below the midpoint."""
+    return alpha < 128
+
+
+def decode_velocity(red: int, green: int, blue: int, alpha: int) -> tuple[float, float]:
+    """Two channels remapped from ``0..255`` onto ``-1..1``; zero when unmarked."""
+    if not has_velocity(alpha):
+        return 0.0, 0.0
+    return (red / 255.0 - 0.5) * 2.0, (green / 255.0 - 0.5) * 2.0
+
+
+def transparency_weight(view_depth: float, alpha: float, far_plane: float) -> float:
+    """The weight an order-independent blend gives one fragment.
+
+    Depth normalised and clamped, then a fourth-power falloff clamped into
+    ``0.01 .. 3000``. The order of operations matters: the CPU twin exists to be
+    compared against the GPU's, so a reassociated version would disagree in the
+    last bits for a reason nobody could then locate.
+    """
+    z = min(max(view_depth / max(far_plane, 1e-4), 0.0), 1.0)
+    return alpha * min(max(0.03 / (1e-5 + z ** 4.0), 1e-2), 3e3)
+
+
+def sort_key(minimum: Vector3, maximum: Vector3, camera: Vector3) -> float:
+    """The distance to the nearest point of a box, zero inside it."""
+    def component(value: float, low: float, high: float) -> float:
+        return min(max(value, low), high) - value
+
+    x = component(camera.X, minimum.X, maximum.X)
+    y = component(camera.Y, minimum.Y, maximum.Y)
+    z = component(camera.Z, minimum.Z, maximum.Z)
+    return math.sqrt(x * x + y * y + z * z)
+
+
+def is_inside_decal_box(point: Vector3) -> bool:
+    """A decal's box is the unit cube centred on the origin."""
+    return (abs(point.X) <= 0.5 and abs(point.Y) <= 0.5 and abs(point.Z) <= 0.5)

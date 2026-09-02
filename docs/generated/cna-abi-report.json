@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1302,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1302,
-    "C_LAYOUT_MEASUREMENTS": 1701,
-    "CTYPES_LAYOUT_MEASUREMENTS": 1701,
+    "BOUND_FUNCTIONS": 1387,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1387,
+    "C_LAYOUT_MEASUREMENTS": 1704,
+    "CTYPES_LAYOUT_MEASUREMENTS": 1704,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -1310,7 +1310,92 @@
     "cna_pbr_effect_create",
     "cna_skinned_pbr_effect_create",
     "cna_pbr_effect_set_texture",
-    "cna_pbr_effect_get_texture"
+    "cna_pbr_effect_get_texture",
+    "cna_depth_normal_prepass_create",
+    "cna_depth_normal_prepass_resize",
+    "cna_depth_normal_prepass_get_pass_count",
+    "cna_depth_normal_prepass_begin",
+    "cna_depth_normal_prepass_end",
+    "cna_depth_normal_prepass_get_prepass_effect",
+    "cna_depth_normal_prepass_get_skinned_prepass_effect",
+    "cna_depth_normal_prepass_get_depth_texture",
+    "cna_depth_normal_prepass_get_normal_texture",
+    "cna_depth_normal_prepass_get_velocity_texture_ext",
+    "cna_depth_normal_prepass_is_supported",
+    "cna_depth_normal_prepass_is_using_multiple_render_targets",
+    "cna_depth_normal_prepass_is_depth_packed",
+    "cna_depth_normal_prepass_uses_packed_depth_ext",
+    "cna_depth_normal_prepass_get_roughness",
+    "cna_depth_normal_prepass_set_roughness",
+    "cna_depth_normal_prepass_is_velocity_enabled_ext",
+    "cna_depth_normal_prepass_set_velocity_enabled_ext",
+    "cna_depth_normal_prepass_set_previous_world_ext",
+    "cna_depth_normal_prepass_set_previous_camera_ext",
+    "cna_depth_normal_prepass_copy_depth_decode_glsl",
+    "cna_depth_normal_prepass_copy_velocity_decode_glsl",
+    "cna_depth_normal_prepass_has_velocity_ext",
+    "cna_depth_normal_prepass_decode_velocity_ext",
+    "cna_depth_normal_prepass_pack_depth",
+    "cna_depth_normal_prepass_unpack_depth",
+    "cna_depth_normal_prepass_destroy",
+    "cna_transparent_draw_list_create",
+    "cna_transparent_draw_list_destroy",
+    "cna_transparent_draw_list_clear",
+    "cna_transparent_draw_list_submit",
+    "cna_transparent_draw_list_get_count",
+    "cna_transparent_draw_list_draw_sorted",
+    "cna_transparent_draw_list_copy_sorted_order_ext",
+    "cna_transparent_draw_list_sort_key",
+    "cna_transparent_draw_list_camera_position_of",
+    "cna_weighted_blended_transparency_create",
+    "cna_weighted_blended_transparency_destroy",
+    "cna_weighted_blended_transparency_is_supported",
+    "cna_weighted_blended_transparency_copy_unsupported_reason",
+    "cna_weighted_blended_transparency_resize",
+    "cna_weighted_blended_transparency_begin",
+    "cna_weighted_blended_transparency_end",
+    "cna_weighted_blended_transparency_resolve",
+    "cna_weighted_blended_transparency_is_accumulating",
+    "cna_weighted_blended_transparency_get_accumulation_texture_ext",
+    "cna_weighted_blended_transparency_get_revealage_texture_ext",
+    "cna_weighted_blended_transparency_copy_accumulation_glsl",
+    "cna_weighted_blended_transparency_weight",
+    "cna_decal_pass_create",
+    "cna_decal_pass_destroy",
+    "cna_decal_pass_get_opacity",
+    "cna_decal_pass_set_opacity",
+    "cna_decal_pass_get_tint",
+    "cna_decal_pass_set_tint",
+    "cna_decal_pass_get_max_slope_angle",
+    "cna_decal_pass_set_max_slope_angle",
+    "cna_decal_pass_set_prepass_inputs",
+    "cna_decal_pass_set_camera",
+    "cna_decal_pass_draw",
+    "cna_decal_pass_is_inside_decal_box",
+    "cna_particle_emitter_settings_init",
+    "cna_particle_init",
+    "cna_particle_system_create",
+    "cna_particle_system_create_with_capacity",
+    "cna_particle_system_destroy",
+    "cna_particle_system_get_capacity",
+    "cna_particle_system_get_settings",
+    "cna_particle_system_set_settings",
+    "cna_particle_system_reset",
+    "cna_particle_system_update",
+    "cna_particle_system_draw",
+    "cna_particle_system_set_depth_input_ext",
+    "cna_particle_system_get_softness_ext",
+    "cna_particle_system_set_softness_ext",
+    "cna_particle_system_uses_compute",
+    "cna_particle_system_is_simulation_on_cpu_ext",
+    "cna_particle_system_set_simulation_on_cpu_ext",
+    "cna_particle_system_copy_unsupported_reason",
+    "cna_particle_system_get_active_count",
+    "cna_particle_system_is_emission_rate_clamped",
+    "cna_particle_system_copy_particles_ext",
+    "cna_particle_system_step",
+    "cna_particle_system_random",
+    "cna_particle_system_copy_particle_lookup_glsl"
   ],
   "functionManifest": [
     {
@@ -15006,6 +15091,895 @@
       ],
       "arity": 4,
       "ownership": "caller output; the handle is the one the effect retains"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned prepass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_resize",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_get_pass_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 6,
+      "ownership": "borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_get_prepass_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the prepass effect; released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_get_skinned_prepass_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the prepass effect; released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_get_depth_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the prepass target; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_get_normal_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the prepass target; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_get_velocity_texture_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the prepass target; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_is_using_multiple_render_targets",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_is_depth_packed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_uses_packed_depth_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed graphics device"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_get_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_set_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed prepass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_is_velocity_enabled_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed prepass"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_set_velocity_enabled_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed prepass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_set_previous_world_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed prepass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_set_previous_camera_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed prepass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_copy_depth_decode_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "c_ubyte",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_copy_velocity_decode_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_has_velocity_ext",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_Color",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_decode_velocity_ext",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_Color",
+        "pointer<CNA_Vector2>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_pack_depth",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "pointer<c_float>",
+        "pointer<c_float>",
+        "pointer<c_float>",
+        "pointer<c_float>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_unpack_depth",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_depth_normal_prepass_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes prepass"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned draw list; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes draw list"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_clear",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed draw list"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_submit",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingBox>",
+        "CFunctionType",
+        "c_void_p"
+      ],
+      "arity": 4,
+      "ownership": "borrowed list; the callback and its context are RETAINED until clear or destroy"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed draw list"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_draw_sorted",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed list; invokes every retained callback in sorted order"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_copy_sorted_order_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed list"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_sort_key",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_BoundingBox>",
+        "pointer<CNA_Vector3>",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_transparent_draw_list_camera_position_of",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned transparency; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes transparency"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed transparency"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_copy_unsupported_reason",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_resize",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed transparency"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed transparency"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed transparency"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_resolve",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed transparency"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_is_accumulating",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed transparency"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_get_accumulation_texture_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the accumulation target; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_get_revealage_texture_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the revealage target; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_copy_accumulation_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_weighted_blended_transparency_weight",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_decal_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned decal pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_decal_pass_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes decal pass"
+    },
+    {
+      "symbol": "cna_decal_pass_get_opacity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed decal pass"
+    },
+    {
+      "symbol": "cna_decal_pass_set_opacity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed decal pass; copies the value"
+    },
+    {
+      "symbol": "cna_decal_pass_get_tint",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed decal pass"
+    },
+    {
+      "symbol": "cna_decal_pass_set_tint",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed decal pass; copies the value"
+    },
+    {
+      "symbol": "cna_decal_pass_get_max_slope_angle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed decal pass"
+    },
+    {
+      "symbol": "cna_decal_pass_set_max_slope_angle",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed decal pass; copies the value"
+    },
+    {
+      "symbol": "cna_decal_pass_set_prepass_inputs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed pass; both textures are BORROWED for every later draw"
+    },
+    {
+      "symbol": "cna_decal_pass_set_camera",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_float"
+      ],
+      "arity": 4,
+      "ownership": "borrowed decal pass; copies the value"
+    },
+    {
+      "symbol": "cna_decal_pass_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 5,
+      "ownership": "borrowed pass; the decal texture is borrowed for the call"
+    },
+    {
+      "symbol": "cna_decal_pass_is_inside_decal_box",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_particle_emitter_settings_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ParticleEmitterSettings>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_particle_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Particle>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_particle_system_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned particle system; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_particle_system_create_with_capacity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes particle system"
+    },
+    {
+      "symbol": "cna_particle_system_get_capacity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_get_settings",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ParticleEmitterSettings>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_set_settings",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ParticleEmitterSettings>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed particle system; copies the value"
+    },
+    {
+      "symbol": "cna_particle_system_reset",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_update",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "borrowed system; the texture is borrowed for the call"
+    },
+    {
+      "symbol": "cna_particle_system_set_depth_input_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 3,
+      "ownership": "borrowed system; the depth texture is BORROWED for every later draw"
+    },
+    {
+      "symbol": "cna_particle_system_get_softness_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_set_softness_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed particle system; copies the value"
+    },
+    {
+      "symbol": "cna_particle_system_uses_compute",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_particle_system_is_simulation_on_cpu_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_set_simulation_on_cpu_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed particle system; copies the value"
+    },
+    {
+      "symbol": "cna_particle_system_copy_unsupported_reason",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_particle_system_get_active_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_is_emission_rate_clamped",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed particle system"
+    },
+    {
+      "symbol": "cna_particle_system_copy_particles_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Particle>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; copies particle values, hands out no handle"
+    },
+    {
+      "symbol": "cna_particle_system_step",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Particle>",
+        "c_int",
+        "pointer<CNA_ParticleEmitterSettings>",
+        "c_float"
+      ],
+      "arity": 4,
+      "ownership": "pure function over a caller-owned particle; advances it in place"
+    },
+    {
+      "symbol": "cna_particle_system_random",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over a seed; nothing is retained"
+    },
+    {
+      "symbol": "cna_particle_system_copy_particle_lookup_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol"
     }
   ],
   "missingSymbols": [],
@@ -16571,6 +17545,9 @@
     "SIZE:CNA_BoundingFrustum": 64,
     "ALIGN:CNA_BoundingFrustum": 4,
     "OFFSET:CNA_BoundingFrustum:matrix": 0,
+    "VALUE:CNA_TransparentDrawCallback": 8,
+    "VALUE:CNA_RenderPipelineDrawCallback": 8,
+    "VALUE:CNA_LightProbeSceneDrawCallback": 8,
     "VALUE:CNA_POST_PROCESS_CONTEXT_SIZE_V1": 328,
     "VALUE:CNA_ALPHA_MODE_BLEND_EXT": 2,
     "VALUE:CNA_ALPHA_MODE_MASK_EXT": 1,
@@ -16949,6 +17926,9 @@
     "VALUE:CNA_SURFACE_FORMAT_USHORT_EXT": 26,
     "VALUE:CNA_SURFACE_FORMAT_VECTOR2": 14,
     "VALUE:CNA_SURFACE_FORMAT_VECTOR4": 15,
+    "VALUE:CNA_TransparentDrawCallback": 8,
+    "VALUE:CNA_RenderPipelineDrawCallback": 8,
+    "VALUE:CNA_LightProbeSceneDrawCallback": 8,
     "VALUE:CNA_ALPHA_MODE_BLEND_EXT": 2,
     "VALUE:CNA_ALPHA_MODE_MASK_EXT": 1,
     "VALUE:CNA_ALPHA_MODE_MAXIMUM_EXT": 2,

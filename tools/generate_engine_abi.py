@@ -84,6 +84,8 @@ _HANDLE_TYPEDEF = re.compile(r"^typedef\s+CNA_Handle\s+(CNA_[A-Za-z0-9_]+)\s*;",
 _DEFINE = re.compile(r"^#define\s+(CNA_[A-Za-z0-9_]+)\s+(.+?)\s*$", re.M)
 _FIELD = re.compile(r"^(?P<type>[A-Za-z_][A-Za-z0-9_ *]*?)\s*(?P<name>[A-Za-z_][A-Za-z0-9_]*)"
                     r"(?:\[(?P<array>[^\]]+)\])?\s*$")
+_CALLBACK = re.compile(
+    r"typedef\s+(CNA_Result|void)\s*\(\s*\*\s*(CNA_[A-Za-z0-9_]+)\s*\)\s*\(([^)]*)\)\s*;")
 _OFFSETOF = re.compile(r"offsetof\s*\(\s*(CNA_[A-Za-z0-9_]+)\s*,\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)")
 _CAMEL_BOUNDARY = re.compile(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
 
@@ -163,11 +165,26 @@ def _fields(body: str) -> list[tuple[str, str, str | None]]:
     return result
 
 
-def _ctype(c_type: str, aliases: dict[str, str]) -> str:
+def _ctype(c_type: str, aliases: dict[str, str], *, typed_pointers: bool = False) -> str:
+    """One C spelling as ctypes.
+
+    ``typed_pointers`` distinguishes the two places a pointer appears. In a
+    *structure field* what is stored is the pointer itself and its pointee is
+    measured separately, so a bare ``c_void_p`` is both correct and honest. In a
+    *callback signature* the pointee type is part of the contract the compiler
+    checks, so it is rendered.
+    """
+    if c_type == "void":
+        return "None"
     if c_type.endswith("*"):
-        # A borrowed pointer to another structure. Its own layout is measured
-        # separately; what this field carries is the pointer.
-        return "c.c_void_p"
+        if not typed_pointers:
+            return "c.c_void_p"
+        pointee = c_type[:-1].strip()
+        if pointee.startswith("const "):
+            pointee = pointee[len("const "):].strip()
+        if pointee == "void":
+            return "c.c_void_p"
+        return f"c.POINTER({_ctype(pointee, aliases, typed_pointers=True)})"
     if c_type in SCALARS:
         return SCALARS[c_type]
     if c_type in aliases:
@@ -209,6 +226,9 @@ def generate(header: Path) -> tuple[str, str]:
         for name in _HANDLE_TYPEDEF.findall(neighbour):
             aliases.setdefault(name, "uint64_t")
     handles = _HANDLE_TYPEDEF.findall(text)
+    callbacks = [(name, _fields(f"{returns} unused")[0][0] if False else returns,
+                  [part.strip() for part in parameters.split(",") if part.strip()])
+                 for returns, name, parameters in _CALLBACK.findall(text)]
 
     #: Every ``#define`` in every canonical header, so an identity declared
     #: elsewhere can contribute its members. Without this the engine's own
@@ -352,6 +372,26 @@ def generate(header: Path) -> tuple[str, str]:
         lines.append(f'    "{name}",')
     lines.append(")")
     lines.append("")
+    if callbacks:
+        lines.append("")
+        lines.append("#: Function pointers the engine layer hands to CNA. A Python callable")
+        lines.append("#: bound to one of these must be rooted for as long as CNA can call it;")
+        lines.append("#: the trampoline is what CNA holds, not the Python object.")
+        for name, returns, parameters in callbacks:
+            rendered = ", ".join(
+                _ctype(" ".join(part.split()[:-1]) if len(part.split()) > 1 else part,
+                       aliases, typed_pointers=True)
+                for part in parameters) or ""
+            spelling = _ctype(returns, aliases)
+            lines.append(f"{name} = c.CFUNCTYPE({spelling}"
+                         + (f", {rendered}" if rendered else "") + ")")
+        lines.append("")
+        lines.append("#: Every generated callback type, for the ABI audit.")
+        lines.append("ENGINE_CALLBACKS = (")
+        for name, _returns, _parameters in callbacks:
+            lines.append(f"    \"{name}\",")
+        lines.append(")")
+    lines.append("")
     lines.append("# --- constants -------------------------------------------------------------")
     lines.append("")
     for name in sorted(constants):
@@ -404,6 +444,8 @@ def generate(header: Path) -> tuple[str, str]:
         probe.append(f"    TYPE({name}); \\")
         for _c_type, field, _array in fields:
             probe.append(f"    FIELD({name}, {field}); \\")
+    for name, _returns, _parameters in callbacks:
+        probe.append(f'    printf("VALUE {name} %zu\\n", sizeof({name})); \\')
     for name in sorted(derived):
         probe.append(f'    printf("VALUE {name} %lld\\n", (long long)({name})); \\')
     for name in sorted(constants):

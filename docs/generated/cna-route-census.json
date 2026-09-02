@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1302,
+    "BOUND_ROUTES": 1387,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -11,17 +11,17 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 862,
-    "ENGINE_BOUND": 254,
+    "ENGINE_BOUND": 339,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 607,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 522,
     "PURPOSE_XNA_BACKING": 1171,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1824,
     "PURPOSE_MANAGED_BY_DESIGN": 535,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1302,
-    "STATUS_ACTIONABLE_LOCAL": 607,
+    "STATUS_BOUND": 1387,
+    "STATUS_ACTIONABLE_LOCAL": 522,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -13874,133 +13874,133 @@
       "route": "cna_decal_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_get_max_slope_angle",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_get_opacity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_get_tint",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_is_inside_decal_box",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_set_camera",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_set_max_slope_angle",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_set_opacity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_set_prepass_inputs",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_set_tint",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects decals -- projected decals",
       "rule": "engine-decals",
       "family": "decals",
       "familyTitle": "decals",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_effect_create",
@@ -14061,298 +14061,298 @@
       "route": "cna_depth_normal_prepass_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_copy_depth_decode_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_copy_velocity_decode_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_decode_velocity_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_get_depth_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_get_normal_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_get_pass_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_get_prepass_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_get_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_get_skinned_prepass_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_get_velocity_texture_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_has_velocity_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_is_depth_packed",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_is_using_multiple_render_targets",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_is_velocity_enabled_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_pack_depth",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_resize",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_set_previous_camera_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_set_previous_world_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_set_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_set_velocity_enabled_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_unpack_depth",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_normal_prepass_uses_packed_depth_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
       "rule": "engine-depth-normal-prepass",
       "family": "depth-normal-prepass",
       "familyTitle": "the depth/normal prepass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_circle_of_confusion_millimetres",
@@ -32783,265 +32783,265 @@
       "route": "cna_particle_emitter_settings_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_copy_particle_lookup_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_copy_particles_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_copy_unsupported_reason",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_create_with_capacity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_get_active_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_get_capacity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_get_settings",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_get_softness_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_is_emission_rate_clamped",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_is_simulation_on_cpu_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_random",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_reset",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_set_depth_input_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_set_settings",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_set_simulation_on_cpu_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_set_softness_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_step",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_update",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_particle_system_uses_compute",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
       "rule": "engine-particles",
       "family": "particles",
       "familyTitle": "particle systems",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_pbr_effect_apply_material",
@@ -43266,100 +43266,100 @@
       "route": "cna_transparent_draw_list_camera_position_of",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_clear",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_copy_sorted_order_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_draw_sorted",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_get_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_sort_key",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_transparent_draw_list_submit",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
       "rule": "engine-transparent-draw-list",
       "family": "transparent-draw-list",
       "familyTitle": "the transparent draw list",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_url_launcher_open_ext",
@@ -46192,144 +46192,144 @@
       "route": "cna_weighted_blended_transparency_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_copy_accumulation_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_copy_unsupported_reason",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_get_accumulation_texture_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_get_revealage_texture_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_is_accumulating",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_resize",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_resolve",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_weighted_blended_transparency_weight",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
       "rule": "engine-weighted-blended-transparency",
       "family": "weighted-blended-transparency",
       "familyTitle": "weighted blended transparency",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_write_leaderboards_event_info_init",
@@ -52610,430 +52610,430 @@
         "route": "cna_decal_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_get_max_slope_angle",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_get_opacity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_get_tint",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_is_inside_decal_box",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_set_camera",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_set_max_slope_angle",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_set_opacity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_set_prepass_inputs",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_set_tint",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects decals -- projected decals",
         "rule": "engine-decals",
         "family": "decals",
         "familyTitle": "decals",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_copy_depth_decode_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_copy_velocity_decode_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_decode_velocity_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_get_depth_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_get_normal_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_get_pass_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_get_prepass_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_get_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_get_skinned_prepass_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_get_velocity_texture_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_has_velocity_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_is_depth_packed",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_is_using_multiple_render_targets",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_is_velocity_enabled_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_pack_depth",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_resize",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_set_previous_camera_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_set_previous_world_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_set_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_set_velocity_enabled_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_unpack_depth",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_normal_prepass_uses_packed_depth_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects",
         "rule": "engine-depth-normal-prepass",
         "family": "depth-normal-prepass",
         "familyTitle": "the depth/normal prepass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_circle_of_confusion_millimetres",
@@ -55503,265 +55503,265 @@
         "route": "cna_particle_emitter_settings_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_copy_particle_lookup_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_copy_particles_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_copy_unsupported_reason",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_create_with_capacity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_get_active_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_get_capacity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_get_settings",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_get_softness_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_is_emission_rate_clamped",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_is_simulation_on_cpu_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_random",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_reset",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_set_depth_input_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_set_settings",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_set_simulation_on_cpu_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_set_softness_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_step",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_update",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_system_uses_compute",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value",
         "rule": "engine-particles",
         "family": "particles",
         "familyTitle": "particle systems",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_pbr_effect_apply_material",
@@ -58638,100 +58638,100 @@
         "route": "cna_transparent_draw_list_camera_position_of",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_clear",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_copy_sorted_order_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_draw_sorted",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_get_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_sort_key",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_submit",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission",
         "rule": "engine-transparent-draw-list",
         "family": "transparent-draw-list",
         "familyTitle": "the transparent draw list",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_create",
@@ -58825,144 +58825,144 @@
         "route": "cna_weighted_blended_transparency_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_copy_accumulation_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_copy_unsupported_reason",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_get_accumulation_texture_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_get_revealage_texture_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_is_accumulating",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_resize",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_resolve",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_weight",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency",
         "rule": "engine-weighted-blended-transparency",
         "family": "weighted-blended-transparency",
         "familyTitle": "weighted blended transparency",
-        "bound": false
+        "bound": true
       }
     ]
   },

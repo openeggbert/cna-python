@@ -45,7 +45,7 @@ Importing this module needs no native library. Constructing anything in it does.
 
 from __future__ import annotations
 
-from . import compute, errors, pbr, postprocess, shadows, values
+from . import compute, errors, pbr, postprocess, scene, shadows, values
 from .compute import (
     ComputeShader, GpuTimer, ImageAccess, MemoryBarrier, StorageBuffer,
     barrier_contains,
@@ -60,6 +60,15 @@ from .pbr import (
     PbrEffect, PbrMaterial, PbrMaterialExtensions, PbrTextureSlot, SkinnedPbrEffect,
     TextureTransform, TransparencyMode, build_extensions, build_material,
     thin_film_iridescence, thin_film_iridescence_glsl,
+)
+from .scene import (
+    DecalPass, DepthEncoding, DepthNormalPrepass, PARTICLE_STORAGE_BINDING,
+    PARTICLE_SYSTEM_DEFAULT_CAPACITY, Particle, ParticleEmitterSettings,
+    ParticleSystem, TransparentDrawList, WeightedBlendedTransparency,
+    camera_position_of, decode_velocity, depth_decode_glsl, has_velocity,
+    is_inside_decal_box, pack_depth, particle_lookup_glsl, particle_random,
+    sort_key, transparency_accumulation_glsl, transparency_weight, unpack_depth,
+    uses_packed_depth, velocity_decode_glsl,
 )
 from .shadows import (
     CascadedShadowMap, CubeShadowMap, ShadowMap, ShadowReceiver, SpotShadowMap,
@@ -82,6 +91,7 @@ __all__ = [
     "errors",
     "pbr",
     "postprocess",
+    "scene",
     "shadows",
     "values",
     "layer_version",
@@ -120,6 +130,30 @@ __all__ = [
     "build_material",
     "thin_film_iridescence",
     "thin_film_iridescence_glsl",
+    "DecalPass",
+    "DepthEncoding",
+    "DepthNormalPrepass",
+    "PARTICLE_STORAGE_BINDING",
+    "PARTICLE_SYSTEM_DEFAULT_CAPACITY",
+    "Particle",
+    "ParticleEmitterSettings",
+    "ParticleSystem",
+    "TransparentDrawList",
+    "WeightedBlendedTransparency",
+    "camera_position_of",
+    "decode_velocity",
+    "depth_decode_glsl",
+    "has_velocity",
+    "is_inside_decal_box",
+    "pack_depth",
+    "particle_lookup_glsl",
+    "particle_random",
+    "sort_key",
+    "transparency_accumulation_glsl",
+    "transparency_weight",
+    "unpack_depth",
+    "uses_packed_depth",
+    "velocity_decode_glsl",
     "CascadedShadowMap",
     "CubeShadowMap",
     "ShadowMap",

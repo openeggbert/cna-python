@@ -87,6 +87,21 @@ ENGINE_HANDLE_TYPES = (
     "CNA_WeightedBlendedTransparencyHandle",
 )
 
+
+#: Function pointers the engine layer hands to CNA. A Python callable
+#: bound to one of these must be rooted for as long as CNA can call it;
+#: the trampoline is what CNA holds, not the Python object.
+CNA_TransparentDrawCallback = c.CFUNCTYPE(c.c_uint32, c.c_void_p)
+CNA_RenderPipelineDrawCallback = c.CFUNCTYPE(c.c_uint32, c.c_void_p)
+CNA_LightProbeSceneDrawCallback = c.CFUNCTYPE(None, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix), c.c_void_p)
+
+#: Every generated callback type, for the ABI audit.
+ENGINE_CALLBACKS = (
+    "CNA_TransparentDrawCallback",
+    "CNA_RenderPipelineDrawCallback",
+    "CNA_LightProbeSceneDrawCallback",
+)
+
 # --- constants -------------------------------------------------------------
 
 CNA_ALPHA_MODE_BLEND_EXT = 2

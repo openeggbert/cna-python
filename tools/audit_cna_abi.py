@@ -158,6 +158,8 @@ def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
             result[f"VALUE:{name}"] = getattr(cnb_abi, name)
     # Every engine constant the generator emitted, compared against the value the
     # C compiler computes from the same header.  A float lands on the FVALUE key.
+    for name in engine_abi.ENGINE_CALLBACKS:
+        result[f"VALUE:{name}"] = ctypes.sizeof(getattr(engine_abi, name))
     for name in engine_abi.ENGINE_CONSTANTS:
         value = getattr(engine_abi, name)
         result[f"{'FVALUE' if isinstance(value, float) else 'VALUE'}:{name}"] = value

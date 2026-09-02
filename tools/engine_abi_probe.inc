@@ -334,6 +334,9 @@
     TYPE(CNA_VertexPositionColor); \
     FIELD(CNA_VertexPositionColor, position); \
     FIELD(CNA_VertexPositionColor, color); \
+    printf("VALUE CNA_TransparentDrawCallback %zu\n", sizeof(CNA_TransparentDrawCallback)); \
+    printf("VALUE CNA_RenderPipelineDrawCallback %zu\n", sizeof(CNA_RenderPipelineDrawCallback)); \
+    printf("VALUE CNA_LightProbeSceneDrawCallback %zu\n", sizeof(CNA_LightProbeSceneDrawCallback)); \
     printf("VALUE CNA_POST_PROCESS_CONTEXT_SIZE_V1 %lld\n", (long long)(CNA_POST_PROCESS_CONTEXT_SIZE_V1)); \
     printf("VALUE CNA_ALPHA_MODE_BLEND_EXT %lld\n", (long long)(CNA_ALPHA_MODE_BLEND_EXT)); \
     printf("VALUE CNA_ALPHA_MODE_MASK_EXT %lld\n", (long long)(CNA_ALPHA_MODE_MASK_EXT)); \

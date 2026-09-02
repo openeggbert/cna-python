@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1302
+BOUND_ROUTES=1387
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -14,17 +14,17 @@ CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
 SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 ENGINE_ROUTES=862
-ENGINE_BOUND=254
+ENGINE_BOUND=339
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=607
+SELECTED_ENGINE_ACTIONABLE_LOCAL=522
 PURPOSE_XNA_BACKING=1171
 PURPOSE_CNA_EXTENSION_CANDIDATE=1824
 PURPOSE_MANAGED_BY_DESIGN=535
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1302
-STATUS_ACTIONABLE_LOCAL=607
+STATUS_BOUND=1387
+STATUS_ACTIONABLE_LOCAL=522
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
@@ -41,8 +41,8 @@ STATUS_UNREVIEWED=0
 |---|---|---:|
 | XNA_BACKING | BOUND | 727 |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 659 |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 607 |
-| CNA_EXTENSION_CANDIDATE | BOUND | 558 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 643 |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 522 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 518 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
@@ -357,8 +357,8 @@ is BOUND or carries its own written non-binding reason.
 
 | Status | Routes |
 |---|---:|
-| ACTIONABLE_LOCAL | 607 |
-| BOUND | 254 |
+| ACTIONABLE_LOCAL | 522 |
+| BOUND | 339 |
 | DELIBERATE_NON_BINDING | 1 |
 
 ### By sub-family
@@ -390,8 +390,8 @@ is BOUND or carries its own written non-binding reason.
 | `cube-lut` (cube LUTs) | 11 | 0 | ACTIONABLE_LOCAL 11 |
 | `cube-shadow-map` (cube shadow maps) | 17 | 17 | BOUND 17 |
 | `debug-draw` (debug drawing) | 21 | 0 | ACTIONABLE_LOCAL 21 |
-| `decals` (decals) | 12 | 0 | ACTIONABLE_LOCAL 12 |
-| `depth-normal-prepass` (the depth/normal prepass) | 27 | 0 | ACTIONABLE_LOCAL 27 |
+| `decals` (decals) | 12 | 12 | BOUND 12 |
+| `depth-normal-prepass` (the depth/normal prepass) | 27 | 27 | BOUND 27 |
 | `depth-of-field` (depth of field) | 10 | 0 | ACTIONABLE_LOCAL 10 |
 | `device-shadow-sampling` (device shadow-sampling capability) | 1 | 1 | BOUND 1 |
 | `effect-engine-bindings` (engine state on an effect) | 16 | 14 | ACTIONABLE_LOCAL 2, BOUND 14 |
@@ -417,7 +417,7 @@ is BOUND or carries its own written non-binding reason.
 | `light-values` (engine light values) | 5 | 5 | BOUND 5 |
 | `lod-group` (level of detail) | 14 | 0 | ACTIONABLE_LOCAL 14 |
 | `motion-blur` (motion blur) | 5 | 0 | ACTIONABLE_LOCAL 5 |
-| `particles` (particle systems) | 24 | 0 | ACTIONABLE_LOCAL 24 |
+| `particles` (particle systems) | 24 | 24 | BOUND 24 |
 | `pbr-effect` (PBR effects) | 9 | 9 | BOUND 9 |
 | `pbr-material` (PBR materials) | 63 | 63 | BOUND 63 |
 | `pbr-material-extensions` (PBR material extensions) | 2 | 2 | BOUND 2 |
@@ -436,9 +436,9 @@ is BOUND or carries its own written non-binding reason.
 | `ssr` (screen-space reflections) | 15 | 0 | ACTIONABLE_LOCAL 15 |
 | `storage-buffer` (GPU storage buffers) | 10 | 10 | BOUND 10 |
 | `tonemap` (tonemapping) | 12 | 0 | ACTIONABLE_LOCAL 12 |
-| `transparent-draw-list` (the transparent draw list) | 9 | 0 | ACTIONABLE_LOCAL 9 |
+| `transparent-draw-list` (the transparent draw list) | 9 | 9 | BOUND 9 |
 | `volumetric-fog` (volumetric fog) | 8 | 0 | ACTIONABLE_LOCAL 8 |
-| `weighted-blended-transparency` (weighted blended transparency) | 13 | 0 | ACTIONABLE_LOCAL 13 |
+| `weighted-blended-transparency` (weighted blended transparency) | 13 | 13 | BOUND 13 |
 
 | Route | Header | Status | Reason |
 |---|---|---|---|
@@ -726,45 +726,45 @@ is BOUND or carries its own written non-binding reason.
 | `cna_debug_draw_get_line_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_debug_draw_is_depth_tested` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_debug_draw_set_depth_tested` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_draw` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_get_max_slope_angle` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_get_opacity` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_get_tint` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_is_inside_decal_box` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_set_camera` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_set_max_slope_angle` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_set_opacity` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_set_prepass_inputs` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_decal_pass_set_tint` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_begin` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_copy_depth_decode_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_copy_velocity_decode_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_decode_velocity_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_end` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_get_depth_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_get_normal_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_get_pass_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_get_prepass_effect` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_get_roughness` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_get_skinned_prepass_effect` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_get_velocity_texture_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_has_velocity_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_is_depth_packed` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_is_supported` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_is_using_multiple_render_targets` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_is_velocity_enabled_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_pack_depth` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_resize` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_set_previous_camera_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_set_previous_world_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_set_roughness` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_set_velocity_enabled_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_unpack_depth` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_depth_normal_prepass_uses_packed_depth_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_decal_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_get_max_slope_angle` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_get_opacity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_get_tint` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_is_inside_decal_box` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_set_camera` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_set_max_slope_angle` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_set_opacity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_set_prepass_inputs` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_decal_pass_set_tint` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
+| `cna_depth_normal_prepass_begin` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_copy_depth_decode_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_copy_velocity_decode_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_decode_velocity_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_end` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_get_depth_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_get_normal_texture` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_get_pass_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_get_prepass_effect` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_get_roughness` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_get_skinned_prepass_effect` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_get_velocity_texture_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_has_velocity_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_is_depth_packed` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_is_using_multiple_render_targets` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_is_velocity_enabled_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_pack_depth` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_resize` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_set_previous_camera_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_set_previous_world_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_set_roughness` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_set_velocity_enabled_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_unpack_depth` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
+| `cna_depth_normal_prepass_uses_packed_depth_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
 | `cna_depth_of_field_pass_circle_of_confusion_millimetres` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_depth_of_field_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_depth_of_field_pass_get_f_number` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -989,30 +989,30 @@ is BOUND or carries its own written non-binding reason.
 | `cna_motion_blur_pass_get_strength` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_motion_blur_pass_set_max_distance` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_motion_blur_pass_set_strength` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_emitter_settings_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_copy_particle_lookup_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_copy_particles_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_copy_unsupported_reason` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_create_with_capacity` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_draw` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_get_active_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_get_capacity` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_get_settings` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_get_softness_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_is_emission_rate_clamped` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_is_simulation_on_cpu_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_random` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_reset` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_set_depth_input_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_set_settings` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_set_simulation_on_cpu_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_set_softness_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_step` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_update` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_particle_system_uses_compute` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_particle_emitter_settings_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_copy_particle_lookup_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_copy_particles_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_copy_unsupported_reason` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_create_with_capacity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_get_active_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_get_capacity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_get_settings` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_get_softness_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_is_emission_rate_clamped` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_is_simulation_on_cpu_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_random` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_reset` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_set_depth_input_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_set_settings` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_set_simulation_on_cpu_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_set_softness_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_step` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_update` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| `cna_particle_system_uses_compute` | engine_layer.h | BOUND | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
 | `cna_pbr_effect_apply_material` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
 | `cna_pbr_effect_create` | effects.h | BOUND | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
 | `cna_pbr_effect_extract_material` | engine_layer.h | BOUND | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
@@ -1274,15 +1274,15 @@ is BOUND or carries its own written non-binding reason.
 | `cna_tonemap_pass_set_gamma` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_tonemap_pass_set_mode` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_tonemap_pass_tonemap_channel` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_camera_position_of` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_clear` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_copy_sorted_order_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_draw_sorted` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_get_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_sort_key` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_transparent_draw_list_submit` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_transparent_draw_list_camera_position_of` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_clear` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_copy_sorted_order_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_draw_sorted` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_get_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_sort_key` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| `cna_transparent_draw_list_submit` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
 | `cna_volumetric_fog_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_volumetric_fog_pass_get_anisotropy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_volumetric_fog_pass_get_density` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1291,19 +1291,19 @@ is BOUND or carries its own written non-binding reason.
 | `cna_volumetric_fog_pass_set_density` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_volumetric_fog_pass_set_light` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_volumetric_fog_pass_set_range` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_begin` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_copy_accumulation_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_copy_unsupported_reason` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_end` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_get_accumulation_texture_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_get_revealage_texture_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_is_accumulating` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_is_supported` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_resize` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_resolve` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_weighted_blended_transparency_weight` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_weighted_blended_transparency_begin` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_copy_accumulation_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_copy_unsupported_reason` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_end` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_get_accumulation_texture_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_get_revealage_texture_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_is_accumulating` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_resize` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_resolve` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
+| `cna_weighted_blended_transparency_weight` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
 
 ## Reasons
 
@@ -1325,10 +1325,10 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 35 | Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 33 | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 29 | In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 27 | In the selected engine-layer extension family (the depth/normal prepass: linear depth, view-space normals and velocity for the screen-space effects) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 27 | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 25 | Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 24 | In the selected engine-layer extension family (particle systems: the particle system, its emitter settings and its particle value) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 21 | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: runtime capability evidence names the backend that produced it |
 | CNA_EXTENSION_CANDIDATE | BOUND | 20 | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
@@ -1352,13 +1352,13 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 12 | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 12 | In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 12 | In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 12 | In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects compute shaders -- compute programs, their bindings and their dispatch |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 12 | In the selected engine-layer extension family (decals: projected decals) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects decals -- projected decals |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 12 | In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 11 | In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 11 | In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1373,7 +1373,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 8 | In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 8 | In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
