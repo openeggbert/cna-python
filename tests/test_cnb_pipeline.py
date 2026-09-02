@@ -78,10 +78,14 @@ class ImageImportTests(_Scratch):
             self.assertEqual(decoded[4:8], bytes(pixels[4:8]))
 
     def test_no_colour_key_is_applied_unless_one_is_asked_for(self) -> None:
-        pixels = distinct_rgba(2, 1)
+        # The first pixel is opaque black, which is what an unrequested default
+        # key would match: if one were applied anyway, its alpha would be 0.
+        pixels = bytes((0, 0, 0, 255)) + bytes((1, 2, 3, 255))
         path = self.write("plain.png", png(2, 1, pixels))
         with cnb.import_image_as_texture2d(path) as texture:
-            self.assertEqual(texture.level(0, 0), pixels)
+            decoded = texture.level(0, 0)
+            self.assertEqual(decoded, pixels)
+            self.assertEqual(decoded[3], 255, "no key was asked for")
 
     def test_a_file_that_is_not_there_is_a_missing_reference(self) -> None:
         with self.assertRaises(cnb.CnbMissingReferenceError):

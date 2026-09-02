@@ -158,8 +158,14 @@ class ModelGraphTests(unittest.TestCase):
             parents = [bone.parent for bone in model.bones]
             self.assertEqual(names, ["root", "spine", "head"])
             self.assertEqual(parents, [-1, 0, 1], "a parent swap is a different chain")
-            self.assertEqual(model.bone(2).transform.M11, 200.0)
-            self.assertEqual(model.bone(2).transform.M44, 215.0)
+            transform = model.bone(2).transform
+            self.assertEqual(transform.M11, 200.0)
+            self.assertEqual(transform.M44, 215.0)
+            # Off-diagonal, so a transposed transform is a different number:
+            # M12 and M21 are 201 and 204, and the diagonal cannot tell them
+            # apart.
+            self.assertEqual(transform.M12, 201.0)
+            self.assertEqual(transform.M21, 204.0)
 
     def test_each_part_keeps_its_own_bytes_and_its_own_shape(self) -> None:
         with _build_model() as model:

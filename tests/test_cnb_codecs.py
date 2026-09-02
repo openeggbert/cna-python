@@ -232,6 +232,19 @@ class Texture2DCodecTests(unittest.TestCase):
                 texture.select_representation(lambda f: f == cnb.TextureFormat.Rgba8), 1)
             self.assertIsNone(texture.select_representation(lambda f: False))
 
+    def test_a_level_is_read_from_the_representation_it_was_asked_for(self) -> None:
+        # Two representations with different level bytes: reading from the wrong
+        # one is a different payload rather than the same one twice.
+        with cnb.CnbTextureData.create(4, 4) as texture:
+            first = texture.add_representation(cnb.TextureFormat.Rgba8)
+            second = texture.add_representation(cnb.TextureFormat.Bgra8)
+            texture.set_level(first, 0, bytes([0xA1]) * 64)
+            texture.set_level(second, 0, bytes([0xB2]) * 64)
+            self.assertEqual(texture.representation_format(first), cnb.TextureFormat.Rgba8)
+            self.assertEqual(texture.representation_format(second), cnb.TextureFormat.Bgra8)
+            self.assertEqual(texture.level(first, 0), bytes([0xA1]) * 64)
+            self.assertEqual(texture.level(second, 0), bytes([0xB2]) * 64)
+
     def test_an_exception_in_the_predicate_reaches_the_caller_after_native_return(self) -> None:
         # A Python exception unwinding through a C frame is undefined behaviour;
         # it is captured, the predicate answers "no", and it is re-raised here.

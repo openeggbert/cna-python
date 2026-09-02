@@ -297,23 +297,6 @@ def out_struct(structure: type, version: int, operation: str, *arguments: object
     return value
 
 
-def sized_bytes(size_operation: str, copy_operation: str, arguments: Iterable[object]) -> bytes:
-    """Runs the two-call size/copy protocol and returns exactly the reported bytes.
-
-    The buffer is allocated at the size CNA reports, never at a "large enough"
-    guess, and the returned bytes are trimmed to the count the copy call wrote
-    rather than to the count the size call predicted.
-    """
-    arguments = tuple(arguments)
-    size = out_u64(size_operation, *arguments)
-    if size == 0:
-        return b""
-    buffer = (c.c_uint8 * size)()
-    written = c.c_uint64()
-    call(copy_operation, *arguments, buffer, c.c_uint64(size), c.byref(written))
-    return bytes(bytearray(buffer)[: written.value])
-
-
 def sized_text(size_operation: str, copy_operation: str, arguments: Iterable[object],
                what: str) -> str:
     """The two-call protocol for a CNA string, with its UTF-8 contract enforced.
@@ -520,7 +503,7 @@ __all__ = [
     "NativeError", "NativeHandle", "call", "checked", "checked_product",
     "float_array", "format_supported_bridge", "guard", "int32_array", "out_bool",
     "out_f32", "out_f64", "out_handle", "out_i32", "out_struct", "out_u16",
-    "out_u32", "out_u64", "out_u8", "read_only_bytes", "sized_bytes", "sized_text",
+    "out_u32", "out_u64", "out_u8", "read_only_bytes", "sized_text",
     "string_view", "two_call_bytes", "two_call_floats", "two_call_int32s",
     "two_call_structs", "two_call_text", "two_call_uint32s", "two_call_uint64s",
     "uint32_array",
