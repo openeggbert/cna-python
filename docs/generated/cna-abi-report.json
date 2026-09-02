@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1654,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1654,
+    "BOUND_FUNCTIONS": 1770,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1770,
     "C_LAYOUT_MEASUREMENTS": 1672,
     "CTYPES_LAYOUT_MEASUREMENTS": 1672,
     "MISSING_SYMBOLS": 0,
@@ -1662,7 +1662,123 @@
     "cna_atmospheric_sky_get_intensity",
     "cna_atmospheric_sky_set_intensity",
     "cna_atmospheric_sky_copy_model_glsl",
-    "cna_atmospheric_sky_radiance"
+    "cna_atmospheric_sky_radiance",
+    "cna_clustered_light_ext_init",
+    "cna_clustered_light_set_is_usable",
+    "cna_clustered_light_set_create",
+    "cna_clustered_light_set_add",
+    "cna_clustered_light_set_add_point",
+    "cna_clustered_light_set_add_spot",
+    "cna_clustered_light_set_replace_at",
+    "cna_clustered_light_set_remove_at",
+    "cna_clustered_light_set_clear",
+    "cna_clustered_light_set_get_count",
+    "cna_clustered_light_set_is_empty",
+    "cna_clustered_light_set_get_at",
+    "cna_clustered_light_set_copy_lights",
+    "cna_clustered_light_set_get_bounds_at",
+    "cna_clustered_light_set_copy_bounds",
+    "cna_clustered_light_set_destroy",
+    "cna_clustered_light_grid_create",
+    "cna_clustered_light_grid_get_tiles_x",
+    "cna_clustered_light_grid_get_tiles_y",
+    "cna_clustered_light_grid_get_slice_count",
+    "cna_clustered_light_grid_get_cluster_count",
+    "cna_clustered_light_grid_cluster_index",
+    "cna_clustered_light_grid_set_projection",
+    "cna_clustered_light_grid_has_projection",
+    "cna_clustered_light_grid_get_near_plane",
+    "cna_clustered_light_grid_get_far_plane",
+    "cna_clustered_light_grid_get_inverse_projection",
+    "cna_clustered_light_grid_slice_distance",
+    "cna_clustered_light_grid_slice_for_view_distance",
+    "cna_clustered_light_grid_cluster_bounds",
+    "cna_clustered_light_grid_destroy",
+    "cna_clustered_light_assignment_create",
+    "cna_clustered_light_assignment_assign",
+    "cna_clustered_light_assignment_clear",
+    "cna_clustered_light_assignment_adopt",
+    "cna_clustered_light_assignment_get_light_count",
+    "cna_clustered_light_assignment_get_cluster_count",
+    "cna_clustered_light_assignment_copy_lights_in_cluster",
+    "cna_clustered_light_assignment_copy_indices",
+    "cna_clustered_light_assignment_copy_offsets",
+    "cna_clustered_light_assignment_get_total_reference_count",
+    "cna_clustered_light_assignment_get_max_lights_per_cluster",
+    "cna_clustered_light_assignment_destroy",
+    "cna_clustered_light_compute_create",
+    "cna_clustered_light_compute_is_supported",
+    "cna_clustered_light_compute_copy_unsupported_reason",
+    "cna_clustered_light_compute_get_stride",
+    "cna_clustered_light_compute_assign",
+    "cna_clustered_light_compute_used_compute",
+    "cna_clustered_light_compute_has_overflowed",
+    "cna_clustered_light_compute_destroy",
+    "cna_clustered_light_buffer_create",
+    "cna_clustered_light_buffer_upload",
+    "cna_clustered_light_buffer_bind",
+    "cna_clustered_light_buffer_is_uploaded",
+    "cna_clustered_light_buffer_get_light_count",
+    "cna_clustered_light_buffer_get_cluster_count",
+    "cna_clustered_light_buffer_get_reference_count",
+    "cna_clustered_light_buffer_copy_light_lookup_glsl",
+    "cna_clustered_light_buffer_destroy",
+    "cna_clustered_shadow_policy_create",
+    "cna_clustered_shadow_policy_get_budget",
+    "cna_clustered_shadow_policy_set_budget",
+    "cna_clustered_shadow_policy_get_hysteresis",
+    "cna_clustered_shadow_policy_set_hysteresis",
+    "cna_clustered_shadow_policy_select",
+    "cna_clustered_shadow_policy_copy_selected",
+    "cna_clustered_shadow_policy_is_selected",
+    "cna_clustered_shadow_policy_get_score",
+    "cna_clustered_shadow_policy_get_request_count",
+    "cna_clustered_shadow_policy_get_refused_count",
+    "cna_clustered_shadow_policy_reset",
+    "cna_clustered_shadow_policy_destroy",
+    "cna_clustered_forward_effect_create",
+    "cna_clustered_forward_effect_is_supported",
+    "cna_clustered_forward_effect_get_effect",
+    "cna_clustered_forward_effect_begin",
+    "cna_clustered_forward_effect_get_base_color",
+    "cna_clustered_forward_effect_set_base_color",
+    "cna_clustered_forward_effect_get_metallic",
+    "cna_clustered_forward_effect_set_metallic",
+    "cna_clustered_forward_effect_get_roughness",
+    "cna_clustered_forward_effect_set_roughness",
+    "cna_clustered_forward_effect_get_ior",
+    "cna_clustered_forward_effect_set_ior",
+    "cna_clustered_forward_effect_get_ambient",
+    "cna_clustered_forward_effect_set_ambient",
+    "cna_clustered_forward_effect_get_opaque_frame",
+    "cna_clustered_forward_effect_set_opaque_frame",
+    "cna_clustered_forward_effect_get_material_extensions",
+    "cna_clustered_forward_effect_set_material_extensions",
+    "cna_clustered_forward_effect_has_area_light",
+    "cna_clustered_forward_effect_set_area_light",
+    "cna_clustered_forward_effect_clear_area_light",
+    "cna_clustered_forward_effect_has_light_probe",
+    "cna_clustered_forward_effect_clear_light_probe",
+    "cna_clustered_forward_effect_volume_attenuation",
+    "cna_clustered_forward_effect_contribution",
+    "cna_clustered_forward_effect_contribution_with_extensions",
+    "cna_clustered_forward_effect_destroy",
+    "cna_area_light_ext_init",
+    "cna_area_light_ext_is_valid",
+    "cna_area_light_shading_lobe_scale_for",
+    "cna_area_light_shading_quad_of",
+    "cna_area_light_shading_coverage",
+    "cna_area_light_shading_contribution",
+    "cna_area_light_shading_copy_shading_glsl",
+    "cna_area_light_brdf_table_create",
+    "cna_area_light_brdf_table_create_with_size",
+    "cna_area_light_brdf_table_get_texture",
+    "cna_area_light_brdf_table_get_size",
+    "cna_area_light_brdf_table_get_sample_count",
+    "cna_area_light_brdf_table_get_generation_milliseconds",
+    "cna_area_light_brdf_table_evaluate",
+    "cna_area_light_brdf_table_copy_lookup_glsl",
+    "cna_area_light_brdf_table_destroy"
   ],
   "functionManifest": [
     {
@@ -18995,6 +19111,1253 @@
       ],
       "arity": 4,
       "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_clustered_light_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ClusteredLightEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_clustered_light_set_is_usable",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ClusteredLightEXT>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_clustered_light_set_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned light set; borrows the game for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_set_add",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ClusteredLightEXT>",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed set; copies the light value"
+    },
+    {
+      "symbol": "cna_clustered_light_set_add_point",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PointLightEXT>",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed set; converts and copies the light value"
+    },
+    {
+      "symbol": "cna_clustered_light_set_add_spot",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpotLightEXT>",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed set; converts and copies the light value"
+    },
+    {
+      "symbol": "cna_clustered_light_set_replace_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_ClusteredLightEXT>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed set; copies the light value over the one at that index"
+    },
+    {
+      "symbol": "cna_clustered_light_set_remove_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed set; the later lights move down one index"
+    },
+    {
+      "symbol": "cna_clustered_light_set_clear",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed set; drops every light it holds"
+    },
+    {
+      "symbol": "cna_clustered_light_set_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed set"
+    },
+    {
+      "symbol": "cna_clustered_light_set_is_empty",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed set"
+    },
+    {
+      "symbol": "cna_clustered_light_set_get_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_ClusteredLightEXT>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; copies the light value out"
+    },
+    {
+      "symbol": "cna_clustered_light_set_copy_lights",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ClusteredLightEXT>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol over light values"
+    },
+    {
+      "symbol": "cna_clustered_light_set_get_bounds_at",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_BoundingSphere>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; the sphere is computed, not stored"
+    },
+    {
+      "symbol": "cna_clustered_light_set_copy_bounds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingSphere>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol over bounding spheres"
+    },
+    {
+      "symbol": "cna_clustered_light_set_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the set"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned grid; borrows the game for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_get_tiles_x",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_get_tiles_y",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_get_slice_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_get_cluster_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_cluster_index",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<c_int>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_set_projection",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 4,
+      "ownership": "borrowed grid; copies the matrix and inverts it once"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_has_projection",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_get_near_plane",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_get_far_plane",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_get_inverse_projection",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; copies the grid's own inverse"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_slice_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_slice_for_view_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed grid"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_cluster_bounds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<CNA_BoundingBox>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; the box is computed, not stored"
+    },
+    {
+      "symbol": "cna_clustered_light_grid_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the grid"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned assignment; borrows the game for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_assign",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_BoundingSphere>",
+        "c_ulong"
+      ],
+      "arity": 5,
+      "ownership": "borrowed assignment and grid; the sphere array is borrowed for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_clear",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed assignment; drops every cluster list"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_adopt",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_int>",
+        "c_ulong"
+      ],
+      "arity": 6,
+      "ownership": "borrowed assignment; copies both int arrays"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_get_light_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed assignment"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_get_cluster_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed assignment"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_copy_lights_in_cluster",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; two-call size/copy protocol over light indices"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_copy_indices",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol over the packed index list"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_copy_offsets",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol over the cluster offsets"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_get_total_reference_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed assignment"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_get_max_lights_per_cluster",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed assignment"
+    },
+    {
+      "symbol": "cna_clustered_light_assignment_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the assignment"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned compute assigner; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compute assigner"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_copy_unsupported_reason",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_get_stride",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compute assigner"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_assign",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_BoundingSphere>",
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 6,
+      "ownership": "borrowed compute assigner and grid; writes through the caller's assignment handle"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_used_compute",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compute assigner"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_has_overflowed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compute assigner"
+    },
+    {
+      "symbol": "cna_clustered_light_compute_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the compute assigner"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned light buffer; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_upload",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "borrowed buffer; the set, grid and assignment are borrowed for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_bind",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed buffer; the effect is borrowed for the call"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_is_uploaded",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed buffer"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_get_light_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed buffer"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_get_cluster_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed buffer"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_get_reference_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed buffer"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_copy_light_lookup_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol; no object behind it"
+    },
+    {
+      "symbol": "cna_clustered_light_buffer_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the buffer"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned policy; borrows the game for the call"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_get_budget",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed policy"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_set_budget",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed policy; a negative value is ignored rather than refused"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_get_hysteresis",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed policy"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_set_hysteresis",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed policy; a value below one is ignored rather than refused"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_select",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 5,
+      "ownership": "borrowed policy; the light set is borrowed for the call"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_copy_selected",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol over light indices"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_is_selected",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed policy"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_get_score",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed policy"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_get_request_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed policy"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_get_refused_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed policy"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_reset",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed policy; forgets the last selection"
+    },
+    {
+      "symbol": "cna_clustered_shadow_policy_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the policy"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned clustered forward effect; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the shader; released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Vector3>",
+        "c_ulong"
+      ],
+      "arity": 6,
+      "ownership": "borrowed effect; the light buffer is borrowed for the call"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_base_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_base_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_metallic",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_metallic",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_ior",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_ior",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_ambient",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_ambient",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value, flooring each channel at zero"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_opaque_frame",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the caller's texture; released with cna_texture2d_destroy"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_opaque_frame",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; retains the caller's texture"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_get_material_extensions",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the effect's own extensions; released with cna_pbr_material_extensions_destroy"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_material_extensions",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the extension values out of the caller's object"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_has_area_light",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_area_light",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_AreaLightEXT>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed effect; copies the light value and retains the caller's BRDF table"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_clear_area_light",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed effect; drops the area light and releases the table"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_has_light_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_clear_light_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed effect; drops the probe and the probe volume"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_volume_attenuation",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_contribution",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ClusteredLightEXT>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 17,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_contribution_with_extensions",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ClusteredLightEXT>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_float",
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 9,
+      "ownership": "pure function; the extensions object is borrowed for the call"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the effect"
+    },
+    {
+      "symbol": "cna_area_light_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_AreaLightEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_area_light_ext_is_valid",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_AreaLightEXT>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_area_light_shading_lobe_scale_for",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_area_light_shading_quad_of",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_AreaLightEXT>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; writes CNA_AREA_LIGHT_QUAD_CORNER_COUNT corners"
+    },
+    {
+      "symbol": "cna_area_light_shading_coverage",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_ubyte",
+        "pointer<c_float>"
+      ],
+      "arity": 6,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_area_light_shading_contribution",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_AreaLightEXT>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 8,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_area_light_shading_copy_shading_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol; no object behind it"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned BRDF table; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_create_with_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned BRDF table; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_get_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the table's texture; released with cna_texture2d_destroy"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_get_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed table"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_get_sample_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed table"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_get_generation_milliseconds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_double>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed table"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_evaluate",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_int",
+        "pointer<CNA_AreaLightBrdfTerms>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned output; no table object is involved"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_copy_lookup_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol; no object behind it"
+    },
+    {
+      "symbol": "cna_area_light_brdf_table_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the table"
     }
   ],
   "missingSymbols": [],

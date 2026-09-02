@@ -271,6 +271,22 @@ class Texture2D(Texture):
         self._read_info()
 
     @classmethod
+    def _view_of(cls, graphicsDevice: GraphicsDevice, handle: int) -> "Texture2D":
+        """Wraps a native texture this facade did not create but does own.
+
+        Private, and not part of the XNA surface. The counterpart of
+        ``RenderTarget2D._view_of``: the facade owns the *handle* and releases it
+        with ``cna_texture2d_destroy`` on ``Dispose``, which is exactly what an
+        engine-layer counted view onto a texture wants. Distinct from
+        ``_borrow_frame``, which never releases anything, because a frame texture
+        is lent for a bounded time and a counted view is not.
+        """
+        self = cls.__new__(cls)
+        self._init_resource(graphicsDevice, handle, _release("cna_texture2d_destroy"))
+        self._read_info()
+        return self
+
+    @classmethod
     def _borrow_frame(cls, graphicsDevice: GraphicsDevice, handle: int,
                       validate) -> "Texture2D":
         """Wraps a frame texture the runtime owns and lends for a bounded time.

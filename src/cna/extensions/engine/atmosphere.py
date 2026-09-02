@@ -149,18 +149,10 @@ class SsaoPass(_ScreenSpacePass):
         """
         # The two-call protocol, because the kernel's length is CNA's and is
         # not the sample count: asking for `sample_count` offsets answers
-        # BUFFER_TOO_SMALL rather than truncating, which is the right refusal
-        # and the reason the size is asked for first.
-        count = c.c_uint64()
-        _support.size_call("cna_ssao_pass_copy_kernel", self._handle.argument, None,
-                           c.c_uint64(0), c.byref(count))
-        if count.value == 0:
-            return ()
-        destination = (_abi.CNA_Vector3 * count.value)()
-        written = c.c_uint64()
-        _support.call("cna_ssao_pass_copy_kernel", self._handle.argument, destination,
-                      c.c_uint64(count.value), c.byref(written))
-        return tuple(_vector(destination[index]) for index in range(int(written.value)))
+        # BUFFER_TOO_SMALL rather than truncating.
+        offsets, written = _support.copied_values(
+            _abi.CNA_Vector3, "cna_ssao_pass_copy_kernel", (self._handle.argument,))
+        return tuple(_vector(offsets[index]) for index in range(written))
 
 
 class SsrPass(_ScreenSpacePass):

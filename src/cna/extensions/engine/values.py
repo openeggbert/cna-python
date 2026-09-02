@@ -40,6 +40,10 @@ __all__ = [
     "PointLight",
     "SpotLight",
     "PunctualLight",
+    "ClusteredLightKind",
+    "ClusteredLight",
+    "AreaLightShape",
+    "AreaLight",
     "ShadowCascadeState",
     "SHADOW_CASCADE_MAXIMUM",
     "CUBE_SHADOW_FACE_COUNT",
@@ -350,3 +354,248 @@ class ShadowCascadeState:
         value.camera_view = _native_matrix(self.camera_view)
         value.debug_tint = 1 if self.debug_tint else 0
         return value
+
+
+class ClusteredLightKind(IntEnum):
+    """Which of the two shapes a clustered light has.
+
+    There is no directional member: a light with no position has no bounding
+    sphere, so it cannot be sorted into clusters at all and is a job for the
+    effect's own directional term instead.
+    """
+
+    Point = _engine.CNA_CLUSTERED_LIGHT_TYPE_POINT
+    Spot = _engine.CNA_CLUSTERED_LIGHT_TYPE_SPOT
+
+
+class AreaLightShape(IntEnum):
+    """The outline an area light emits from."""
+
+    Rectangle = _engine.CNA_AREA_LIGHT_SHAPE_RECTANGLE_EXT
+    Disc = _engine.CNA_AREA_LIGHT_SHAPE_DISC_EXT
+    Tube = _engine.CNA_AREA_LIGHT_SHAPE_TUBE_EXT
+
+
+@dataclass(frozen=True)
+class ClusteredLight:
+    """One light a :class:`~cna.extensions.engine.ClusteredLightSet` holds.
+
+    The union of :class:`PointLight` and :class:`SpotLight`: ``direction``,
+    ``inner_angle`` and ``outer_angle`` mean nothing when ``kind`` is
+    ``Point``, and CNA does not read them then. ``is_usable`` is what decides
+    whether a set will take it.
+    """
+
+    kind: ClusteredLightKind
+    position: Vector3
+    direction: Vector3
+    color: Vector3
+    intensity: float
+    range_: float
+    inner_angle: float
+    outer_angle: float
+    casts_shadows: bool
+
+    @classmethod
+    def default(cls) -> "ClusteredLight":
+        """CNA's own canonical defaults, read rather than transcribed."""
+        return cls._from_native(
+            _defaults(_engine.CNA_ClusteredLightEXT, "cna_clustered_light_ext_init"))
+
+    @classmethod
+    def _from_native(cls, value) -> "ClusteredLight":
+        return cls(ClusteredLightKind(int(value.type)), _vector(value.position),
+                   _vector(value.direction), _vector(value.color),
+                   float(value.intensity), float(value.range),
+                   float(value.inner_angle), float(value.outer_angle),
+                   bool(value.casts_shadows))
+
+    def _native(self):
+        value = _support.in_struct(_engine.CNA_ClusteredLightEXT, 1)
+        value.type = int(ClusteredLightKind(self.kind))
+        value.position = _native_vector(self.position)
+        value.direction = _native_vector(self.direction)
+        value.color = _native_vector(self.color)
+        value.intensity = _support.real(self.intensity, "intensity")
+        value.range = _support.real(self.range_, "range_")
+        value.inner_angle = _support.real(self.inner_angle, "inner_angle")
+        value.outer_angle = _support.real(self.outer_angle, "outer_angle")
+        value.casts_shadows = 1 if self.casts_shadows else 0
+        return value
+
+    @property
+    def is_usable(self) -> bool:
+        """Whether a clustered light set would accept this light.
+
+        CNA decides, not this module: a set refuses a light rather than
+        skipping it later, and asking first is how a caller finds out without
+        catching the refusal.
+
+        Unlike :attr:`AreaLight.is_valid`, this needs the engine layer:
+        ``engine_layer.h`` documents it as answering ``NOT_SUPPORTED`` without
+        one, and it does. The rule belongs to the light *set* rather than to the
+        light value, which is where the difference between the two comes from.
+        """
+        native = self._native()
+        return _support.out_bool("cna_clustered_light_set_is_usable", c.byref(native))
+
+
+@dataclass(frozen=True)
+class AreaLight:
+    """A light that emits from a surface rather than from a point.
+
+    ``right_axis`` and ``up_axis`` are half-extents, not directions: their
+    lengths are half the light's width and half its height. A ``Disc`` uses
+    them as half-axes of an ellipse, and a ``Tube`` uses ``right_axis`` as its
+    axis and the *length* of ``up_axis`` as its radius.
+    """
+
+    shape: AreaLightShape
+    two_sided: bool
+    position: Vector3
+    right_axis: Vector3
+    up_axis: Vector3
+    color: Vector3
+    intensity: float
+    range_: float
+
+    @classmethod
+    def default(cls) -> "AreaLight":
+        """CNA's own canonical defaults, read rather than transcribed."""
+        return cls._from_native(
+            _defaults(_engine.CNA_AreaLightEXT, "cna_area_light_ext_init"))
+
+    @classmethod
+    def _from_native(cls, value) -> "AreaLight":
+        return cls(AreaLightShape(int(value.shape)), bool(value.two_sided),
+                   _vector(value.position), _vector(value.right_axis),
+                   _vector(value.up_axis), _vector(value.color),
+                   float(value.intensity), float(value.range))
+
+    def _native(self):
+        value = _support.in_struct(_engine.CNA_AreaLightEXT, 1)
+        value.shape = int(AreaLightShape(self.shape))
+        value.two_sided = 1 if self.two_sided else 0
+        value.position = _native_vector(self.position)
+        value.right_axis = _native_vector(self.right_axis)
+        value.up_axis = _native_vector(self.up_axis)
+        value.color = _native_vector(self.color)
+        value.intensity = _support.real(self.intensity, "intensity")
+        value.range = _support.real(self.range_, "range_")
+        return value
+
+    @property
+    def is_valid(self) -> bool:
+        """Whether CNA would shade with this light rather than ignore it.
+
+        Answers on a build with no engine layer, which ``engine_layer.h``
+        documents as "SUCCESS in every build" and measurement confirms: the rule
+        belongs to the value itself. :attr:`ClusteredLight.is_usable` is the
+        deliberate opposite.
+        """
+        native = self._native()
+        return _support.out_bool("cna_area_light_ext_is_valid", c.byref(native))
+
+
+def _device_handle(device: object) -> c.c_uint64:
+    """The native handle of a strict-XNA graphics device, refusing anything else."""
+    if not hasattr(device, "_require_handle"):
+        raise TypeError("device must be a Microsoft.Xna.Framework.Graphics.GraphicsDevice")
+    return c.c_uint64(int(device._require_handle()))
+
+
+class _EngineObject:
+    """Common lifetime for an owned engine handle and the counted views it lends.
+
+    Public subclasses take the arguments a caller has -- a device, a size, some
+    source -- and never a handle: a signature naming one would publish a private
+    native type, and there is no owned handle a caller could supply.
+
+    Every engine getter that answers with a handle answers with a *fresh* counted
+    view, whatever its documentation says (ENGINE-002). A view is therefore built
+    once per key, cached, and disposed when the owner closes -- so reading a
+    property in a loop cannot leak, and the owning game can still be destroyed.
+    """
+
+    __slots__ = ("_handle", "_device", "_views", "_retained")
+
+    _DESTROY: str = ""
+
+    def _attach(self, handle: int, device: object = None) -> None:
+        self._handle = _support.NativeHandle(handle, self._DESTROY, type(self).__name__)
+        self._device = device
+        self._views: dict[str, object] = {}
+        self._retained: list[object] = []
+
+    @property
+    def is_closed(self) -> bool:
+        """True once :meth:`close` has run."""
+        return self._handle.closed
+
+    def close(self) -> None:
+        """Disposes every view handed out, then releases the object.
+
+        A view is either a strict-XNA resource, which is released by ``Dispose``,
+        or another object in this package, which is released by ``close``. Both
+        are asked for, because a view left alive keeps the owning game alive and
+        the failure shows up as an unrelated game refusing to be destroyed.
+        """
+        if self._handle.closed:
+            return
+        for view in reversed(list(self._views.values())):
+            self._release_view(view)
+        self._views.clear()
+        self._handle.close()
+        self._retained.clear()
+
+    @staticmethod
+    def _release_view(view: object) -> None:
+        dispose = getattr(view, "Dispose", None)
+        if dispose is not None:
+            if not getattr(view, "IsDisposed", False):
+                dispose()
+            return
+        close = getattr(view, "close", None)
+        if close is not None and not getattr(view, "is_closed", False):
+            close()
+
+    def __enter__(self):
+        self._handle.value
+        return self
+
+    def __exit__(self, *_exception: object) -> None:
+        self.close()
+
+    def _drop_view(self, key: str) -> None:
+        """Releases one cached view, because what it looked at has been replaced."""
+        view = self._views.pop(key, None)
+        if view is not None:
+            self._release_view(view)
+
+    def _view(self, key: str, route: str, factory):
+        existing = self._views.get(key)
+        if existing is not None and not (getattr(existing, "IsDisposed", False)
+                                         or getattr(existing, "is_closed", False)):
+            return existing
+        handle = _support.out_handle(route, self._handle.argument)
+        if handle == 0:
+            return None
+        view = factory(handle)
+        self._views[key] = view
+        return view
+
+    def _render_target_view(self, key: str, route: str):
+        from Microsoft.Xna.Framework.Graphics import RenderTarget2D
+
+        return self._view(key, route,
+                          lambda handle: RenderTarget2D._view_of(self._device, handle))
+
+    def _effect_view(self, key: str, route: str):
+        from Microsoft.Xna.Framework.Graphics import Effect
+
+        def build(handle: int):
+            effect = Effect.__new__(Effect)
+            effect._initialize_native(self._device, handle)
+            return effect
+
+        return self._view(key, route, build)

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1654,
+    "BOUND_ROUTES": 1770,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -11,17 +11,17 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 870,
-    "ENGINE_BOUND": 606,
+    "ENGINE_BOUND": 722,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 262,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 146,
     "PURPOSE_XNA_BACKING": 1171,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1823,
     "PURPOSE_MANAGED_BY_DESIGN": 536,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1654,
-    "STATUS_ACTIONABLE_LOCAL": 262,
+    "STATUS_BOUND": 1770,
+    "STATUS_ACTIONABLE_LOCAL": 146,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -3220,177 +3220,177 @@
       "route": "cna_area_light_brdf_table_copy_lookup_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_create_with_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_evaluate",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_get_generation_milliseconds",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_get_sample_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_get_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_brdf_table_get_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
       "rule": "engine-area-light-brdf-table",
       "family": "area-light-brdf-table",
       "familyTitle": "the area-light BRDF table",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
       "rule": "engine-area-light",
       "family": "area-light",
       "familyTitle": "area lights",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_ext_is_valid",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
       "rule": "engine-area-light",
       "family": "area-light",
       "familyTitle": "area lights",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_shading_contribution",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
       "rule": "engine-area-light",
       "family": "area-light",
       "familyTitle": "area lights",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_shading_copy_shading_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
       "rule": "engine-area-light",
       "family": "area-light",
       "familyTitle": "area lights",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_shading_coverage",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
       "rule": "engine-area-light",
       "family": "area-light",
       "familyTitle": "area lights",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_shading_lobe_scale_for",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
       "rule": "engine-area-light",
       "family": "area-light",
       "familyTitle": "area lights",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_area_light_shading_quad_of",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
       "rule": "engine-area-light",
       "family": "area-light",
       "familyTitle": "area lights",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_artist_collection_copy_type_name",
@@ -6663,243 +6663,243 @@
       "route": "cna_clustered_forward_effect_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_clear_area_light",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_clear_light_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_contribution",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_contribution_with_extensions",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_ambient",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_base_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_ior",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_material_extensions",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_metallic",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_opaque_frame",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_get_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_has_area_light",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_has_light_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_ambient",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_area_light",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_base_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_ior",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_light_probe",
@@ -6927,859 +6927,859 @@
       "route": "cna_clustered_forward_effect_set_material_extensions",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_metallic",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_opaque_frame",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_volume_attenuation",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_adopt",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_assign",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_clear",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_copy_indices",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_copy_lights_in_cluster",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_copy_offsets",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_get_cluster_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_get_light_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_get_max_lights_per_cluster",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_assignment_get_total_reference_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
       "rule": "engine-cluster-assignment",
       "family": "cluster-assignment",
       "familyTitle": "the cluster light assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_bind",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_copy_light_lookup_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_get_cluster_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_get_light_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_get_reference_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_is_uploaded",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_buffer_upload",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
       "rule": "engine-cluster-buffer",
       "family": "cluster-buffer",
       "familyTitle": "the clustered light upload buffer",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_assign",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_copy_unsupported_reason",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_get_stride",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_has_overflowed",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_compute_used_compute",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
       "rule": "engine-cluster-compute",
       "family": "cluster-compute",
       "familyTitle": "the compute cluster assignment",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (clustered light values: the clustered light value structure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects clustered light values -- the clustered light value structure",
       "rule": "engine-clustered-light-values",
       "family": "clustered-light-values",
       "familyTitle": "clustered light values",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_cluster_bounds",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_cluster_index",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_get_cluster_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_get_far_plane",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_get_inverse_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_get_near_plane",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_get_slice_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_get_tiles_x",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_get_tiles_y",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_has_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_set_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_slice_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_grid_slice_for_view_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
       "rule": "engine-cluster-grid",
       "family": "cluster-grid",
       "familyTitle": "the cluster grid",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_add",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_add_point",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_add_spot",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_clear",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_copy_bounds",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_copy_lights",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_get_at",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_get_bounds_at",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_get_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_is_empty",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_is_usable",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_remove_at",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_light_set_replace_at",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
       "rule": "engine-clustered-light-set",
       "family": "clustered-light-set",
       "familyTitle": "the clustered light set",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_copy_selected",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_get_budget",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_get_hysteresis",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_get_refused_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_get_request_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_get_score",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_is_selected",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_reset",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_select",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_set_budget",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_shadow_policy_set_hysteresis",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
       "rule": "engine-clustered-shadow-policy",
       "family": "clustered-shadow-policy",
       "familyTitle": "the clustered shadow budget",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cnb_animation_clip_copy_keyframes",
@@ -49634,177 +49634,177 @@
         "route": "cna_area_light_brdf_table_copy_lookup_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_create_with_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_evaluate",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_get_generation_milliseconds",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_get_sample_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_get_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_get_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample",
         "rule": "engine-area-light-brdf-table",
         "family": "area-light-brdf-table",
         "familyTitle": "the area-light BRDF table",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
         "rule": "engine-area-light",
         "family": "area-light",
         "familyTitle": "area lights",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_ext_is_valid",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
         "rule": "engine-area-light",
         "family": "area-light",
         "familyTitle": "area lights",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_shading_contribution",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
         "rule": "engine-area-light",
         "family": "area-light",
         "familyTitle": "area lights",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_shading_copy_shading_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
         "rule": "engine-area-light",
         "family": "area-light",
         "familyTitle": "area lights",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_shading_coverage",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
         "rule": "engine-area-light",
         "family": "area-light",
         "familyTitle": "area lights",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_shading_lobe_scale_for",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
         "rule": "engine-area-light",
         "family": "area-light",
         "familyTitle": "area lights",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_shading_quad_of",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms",
         "rule": "engine-area-light",
         "family": "area-light",
         "familyTitle": "area lights",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ascii_pass_create",
@@ -50613,243 +50613,243 @@
         "route": "cna_clustered_forward_effect_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_clear_area_light",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_clear_light_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_contribution",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_contribution_with_extensions",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_ambient",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_base_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_ior",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_material_extensions",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_metallic",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_opaque_frame",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_get_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_has_area_light",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_has_light_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_ambient",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_area_light",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_base_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_ior",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_light_probe",
@@ -50877,859 +50877,859 @@
         "route": "cna_clustered_forward_effect_set_material_extensions",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_metallic",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_opaque_frame",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_volume_attenuation",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_adopt",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_assign",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_clear",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_copy_indices",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_copy_lights_in_cluster",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_copy_offsets",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_get_cluster_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_get_light_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_get_max_lights_per_cluster",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_assignment_get_total_reference_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster light assignment: which lights land in which cluster) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster",
         "rule": "engine-cluster-assignment",
         "family": "cluster-assignment",
         "familyTitle": "the cluster light assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_bind",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_copy_light_lookup_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_get_cluster_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_get_light_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_get_reference_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_is_uploaded",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_buffer_upload",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into",
         "rule": "engine-cluster-buffer",
         "family": "cluster-buffer",
         "familyTitle": "the clustered light upload buffer",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_assign",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_copy_unsupported_reason",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_get_stride",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_has_overflowed",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_compute_used_compute",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU",
         "rule": "engine-cluster-compute",
         "family": "cluster-compute",
         "familyTitle": "the compute cluster assignment",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (clustered light values: the clustered light value structure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects clustered light values -- the clustered light value structure",
         "rule": "engine-clustered-light-values",
         "family": "clustered-light-values",
         "familyTitle": "clustered light values",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_cluster_bounds",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_cluster_index",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_get_cluster_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_get_far_plane",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_get_inverse_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_get_near_plane",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_get_slice_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_get_tiles_x",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_get_tiles_y",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_has_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_set_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_slice_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_grid_slice_for_view_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the cluster grid: the view-frustum cluster subdivision and its logarithmic depth slices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices",
         "rule": "engine-cluster-grid",
         "family": "cluster-grid",
         "familyTitle": "the cluster grid",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_add",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_add_point",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_add_spot",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_clear",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_copy_bounds",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_copy_lights",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_get_at",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_get_bounds_at",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_get_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_is_empty",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_is_usable",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_remove_at",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_light_set_replace_at",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered light set: the collection of clustered light values a grid consumes) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes",
         "rule": "engine-clustered-light-set",
         "family": "clustered-light-set",
         "familyTitle": "the clustered light set",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_copy_selected",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_get_budget",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_get_hysteresis",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_get_refused_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_get_request_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_get_score",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_is_selected",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_reset",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_select",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_set_budget",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_shadow_policy_set_hysteresis",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget",
         "rule": "engine-clustered-shadow-policy",
         "family": "clustered-shadow-policy",
         "familyTitle": "the clustered shadow budget",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_create",

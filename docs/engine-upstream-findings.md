@@ -311,6 +311,62 @@ would not have been the more honest option.
 **Unblock condition.** `apply_material` carrying the seven texture handles. The
 public API does not change when it does; the pinning test does.
 
+## ENGINE-006 -- four clustered constructors document a game and accept a device
+
+**Status:** open. Harmless once known; the public API never exposes the
+difference, and the refusal is pinned by a test.
+
+**Documented contract.** `engine_layer.h`, of all four clustered constructors:
+
+> @param game The owning game.
+
+with, above `CNA_ClusteredLightSetHandle`:
+
+> The set needs no device, but it is parented to a game so its lifetime is
+> accounted for like every other owned resource.
+
+and the same sentence above `CNA_ClusteredShadowPolicyHandle`.
+
+**Actual result.** The first parameter is resolved as a **graphics device**, not
+as a game. Passing a real `CNA_Handle` for a running game is refused. Measured
+on the GPU artifact:
+
+```text
+cna_clustered_light_set_create(game_handle,   &out) -> 2  (CNA_RESULT_INVALID_HANDLE)
+                                                          out = CNA_INVALID_HANDLE
+cna_clustered_light_set_create(device_handle, &out) -> 0
+```
+
+The C layer resolves the argument with `GetBorrowedGraphicsDevice`, which
+accepts `ObjectKind::GraphicsDevice` and `ObjectKind::OwnedGraphicsDevice` and
+nothing else; a game handle reaches neither branch. The parenting the
+documentation describes does happen -- the resource is registered against
+`graphicsDevice->parentGame` -- so the *behaviour* is what the prose promises
+and only the parameter is named for the wrong object.
+
+**The four routes.** `cna_clustered_light_set_create`,
+`cna_clustered_light_grid_create`, `cna_clustered_light_assignment_create`,
+`cna_clustered_shadow_policy_create`. They are the only four routes in
+`engine_layer.h` whose first parameter is spelled `CNA_Handle game`; every other
+constructor in the header spells the same parameter `graphics_device`, which is
+what made the inconsistency worth checking rather than assuming.
+
+**Affected Python operation.** None, by construction.
+`cna.extensions.engine.ClusteredLightSet`, `ClusteredLightGrid`,
+`ClusteredLightAssignment` and `ClusteredShadowPolicy` all take a
+`GraphicsDevice`, like every other engine class, so a caller never has the
+choice. Reading the documentation and passing a `Game` would have produced four
+constructors that always fail.
+
+**Local behaviour.** The device handle is passed.
+`tests/test_engine_clustered.py::ClusteredConstructorTests::test_the_owning_game_parameter_takes_a_device_and_refuses_a_game`
+drives the raw route with both handles and asserts both answers, so it fails the
+day either the documentation or the implementation changes.
+
+**Unblock condition.** None needed for CNA-Python. Upstream, either renaming the
+parameter to `graphics_device` or teaching `GetBorrowedGraphicsDevice` to resolve
+a game handle would settle it; the first matches what the other constructors do.
+
 ---
 
 Findings are added as each engine family is qualified. A family that has not

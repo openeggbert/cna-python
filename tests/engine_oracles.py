@@ -270,3 +270,340 @@ def bloom_extract_channel(value: float, threshold: float) -> float:
     knee = max(threshold * 0.5, 1e-4)
     contribution = min(max((value - threshold + knee) / (2.0 * knee), 0.0), 1.0)
     return value * contribution * contribution
+
+
+# --- clustered lighting -------------------------------------------------------
+
+
+def cluster_index(tiles_x: int, tiles_y: int, x: int, y: int, slice_: int) -> int:
+    """The flat index of one cluster.
+
+    x varies fastest, then y, then depth: the layout the GPU path recovers with
+    ``cluster % tilesX``, ``(cluster / tilesX) % tilesY``, ``cluster / (tilesX *
+    tilesY)``, which is the same statement read the other way round.
+    """
+    return (slice_ * tiles_y + y) * tiles_x + x
+
+
+def slice_distance(near_plane: float, far_plane: float, slice_count: int,
+                   slice_: int) -> float:
+    """The view distance where a depth slice begins.
+
+    Logarithmic spacing: ``near * (far / near) ** (slice / slice_count)``. The
+    two ends are named rather than computed, because the exponential is 1 and
+    the ratio exactly only in real arithmetic and the boundary has to be the
+    plane itself.
+
+    Computed at single precision throughout: the exponential of a float ratio is
+    not the exponential of the same ratio in double, and the difference lands in
+    the last bits of a number that decides which cluster a light is in.
+    """
+    if slice_ == 0:
+        return f32(near_plane)
+    if slice_ == slice_count:
+        return f32(far_plane)
+    ratio = f32(f32(far_plane) / f32(near_plane))
+    exponent = f32(f32(slice_) / f32(slice_count))
+    return f32(f32(near_plane) * f32(math.pow(ratio, exponent)))
+
+
+def slice_for_view_distance(near_plane: float, far_plane: float, slice_count: int,
+                            view_distance: float) -> int:
+    """Which slice a point at that distance falls in.
+
+    The inverse of :func:`slice_distance`, clamped at both ends so a light that
+    pokes out of the frustum still lands in a slice rather than nowhere.
+    """
+    if view_distance <= near_plane:
+        return 0
+    if view_distance >= far_plane:
+        return slice_count - 1
+    ratio = f32(f32(math.log(f32(f32(view_distance) / f32(near_plane))))
+                / f32(math.log(f32(f32(far_plane) / f32(near_plane)))))
+    return max(0, min(slice_count - 1, int(math.floor(f32(ratio * f32(slice_count))))))
+
+
+def invert_matrix4(matrix: Matrix) -> list[float]:
+    """A 4x4 inverse by cofactor expansion, in row-major order.
+
+    Written out rather than taken from :meth:`Matrix.Invert`, because the point
+    of the cluster-bounds oracle is to unproject without using the same code
+    CNA does. Kept in double precision: this is the one step where matching
+    CNA's exact float rounding is neither possible nor wanted, so the bounds are
+    compared with a tolerance instead.
+    """
+    m = list(matrix)
+    inverse = [0.0] * 16
+    inverse[0] = (m[5] * m[10] * m[15] - m[5] * m[11] * m[14] - m[9] * m[6] * m[15]
+                  + m[9] * m[7] * m[14] + m[13] * m[6] * m[11] - m[13] * m[7] * m[10])
+    inverse[4] = (-m[4] * m[10] * m[15] + m[4] * m[11] * m[14] + m[8] * m[6] * m[15]
+                  - m[8] * m[7] * m[14] - m[12] * m[6] * m[11] + m[12] * m[7] * m[10])
+    inverse[8] = (m[4] * m[9] * m[15] - m[4] * m[11] * m[13] - m[8] * m[5] * m[15]
+                  + m[8] * m[7] * m[13] + m[12] * m[5] * m[11] - m[12] * m[7] * m[9])
+    inverse[12] = (-m[4] * m[9] * m[14] + m[4] * m[10] * m[13] + m[8] * m[5] * m[14]
+                   - m[8] * m[6] * m[13] - m[12] * m[5] * m[10] + m[12] * m[6] * m[9])
+    inverse[1] = (-m[1] * m[10] * m[15] + m[1] * m[11] * m[14] + m[9] * m[2] * m[15]
+                  - m[9] * m[3] * m[14] - m[13] * m[2] * m[11] + m[13] * m[3] * m[10])
+    inverse[5] = (m[0] * m[10] * m[15] - m[0] * m[11] * m[14] - m[8] * m[2] * m[15]
+                  + m[8] * m[3] * m[14] + m[12] * m[2] * m[11] - m[12] * m[3] * m[10])
+    inverse[9] = (-m[0] * m[9] * m[15] + m[0] * m[11] * m[13] + m[8] * m[1] * m[15]
+                  - m[8] * m[3] * m[13] - m[12] * m[1] * m[11] + m[12] * m[3] * m[9])
+    inverse[13] = (m[0] * m[9] * m[14] - m[0] * m[10] * m[13] - m[8] * m[1] * m[14]
+                   + m[8] * m[2] * m[13] + m[12] * m[1] * m[10] - m[12] * m[2] * m[9])
+    inverse[2] = (m[1] * m[6] * m[15] - m[1] * m[7] * m[14] - m[5] * m[2] * m[15]
+                  + m[5] * m[3] * m[14] + m[13] * m[2] * m[7] - m[13] * m[3] * m[6])
+    inverse[6] = (-m[0] * m[6] * m[15] + m[0] * m[7] * m[14] + m[4] * m[2] * m[15]
+                  - m[4] * m[3] * m[14] - m[12] * m[2] * m[7] + m[12] * m[3] * m[6])
+    inverse[10] = (m[0] * m[5] * m[15] - m[0] * m[7] * m[13] - m[4] * m[1] * m[15]
+                   + m[4] * m[3] * m[13] + m[12] * m[1] * m[7] - m[12] * m[3] * m[5])
+    inverse[14] = (-m[0] * m[5] * m[14] + m[0] * m[6] * m[13] + m[4] * m[1] * m[14]
+                   - m[4] * m[2] * m[13] - m[12] * m[1] * m[6] + m[12] * m[2] * m[5])
+    inverse[3] = (-m[1] * m[6] * m[11] + m[1] * m[7] * m[10] + m[5] * m[2] * m[11]
+                  - m[5] * m[3] * m[10] - m[9] * m[2] * m[7] + m[9] * m[3] * m[6])
+    inverse[7] = (m[0] * m[6] * m[11] - m[0] * m[7] * m[10] - m[4] * m[2] * m[11]
+                  + m[4] * m[3] * m[10] + m[8] * m[2] * m[7] - m[8] * m[3] * m[6])
+    inverse[11] = (-m[0] * m[5] * m[11] + m[0] * m[7] * m[9] + m[4] * m[1] * m[11]
+                   - m[4] * m[3] * m[9] - m[8] * m[1] * m[7] + m[8] * m[3] * m[5])
+    inverse[15] = (m[0] * m[5] * m[10] - m[0] * m[6] * m[9] - m[4] * m[1] * m[10]
+                   + m[4] * m[2] * m[9] + m[8] * m[1] * m[6] - m[8] * m[2] * m[5])
+    determinant = (m[0] * inverse[0] + m[1] * inverse[4] + m[2] * inverse[8]
+                   + m[3] * inverse[12])
+    if determinant == 0.0:
+        raise ValueError("the matrix is singular")
+    return [value / determinant for value in inverse]
+
+
+def _unproject(inverse: list[float], x: float, y: float, z: float) -> Vector3:
+    values = [
+        x * inverse[0] + y * inverse[4] + z * inverse[8] + inverse[12],
+        x * inverse[1] + y * inverse[5] + z * inverse[9] + inverse[13],
+        x * inverse[2] + y * inverse[6] + z * inverse[10] + inverse[14],
+    ]
+    w = x * inverse[3] + y * inverse[7] + z * inverse[11] + inverse[15]
+    if abs(w) <= 1e-9:
+        return Vector3(*values)
+    return Vector3(*(value / w for value in values))
+
+
+def _at_distance(at_near: Vector3, at_far: Vector3, distance: float) -> Vector3:
+    """The point on a corner ray at one view distance.
+
+    Written as an interpolation between the near and far unprojections rather
+    than as a ray scaled by 1/z, because view-space z is linear along that
+    segment for an orthographic projection as well as a perspective one, and the
+    scaling form is right only for the second.
+    """
+    span = at_near.Z - at_far.Z
+    if abs(span) <= 1e-9:
+        return at_near
+    t = (at_near.Z + distance) / span
+    return Vector3(at_near.X + (at_far.X - at_near.X) * t,
+                   at_near.Y + (at_far.Y - at_near.Y) * t, -distance)
+
+
+def cluster_bounds(projection: Matrix, tiles_x: int, tiles_y: int, slice_count: int,
+                   near_plane: float, far_plane: float, x: int, y: int,
+                   slice_: int) -> tuple[Vector3, Vector3]:
+    """The view-space box one cluster occupies, as ``(minimum, maximum)``.
+
+    Four tile corners unprojected at both NDC depths, each brought to the
+    slice's two distances, and the eight results bounded.
+    """
+    inverse = invert_matrix4(projection)
+    us = (2.0 * x / tiles_x - 1.0, 2.0 * (x + 1) / tiles_x - 1.0)
+    vs = (2.0 * y / tiles_y - 1.0, 2.0 * (y + 1) / tiles_y - 1.0)
+    distances = (slice_distance(near_plane, far_plane, slice_count, slice_),
+                 slice_distance(near_plane, far_plane, slice_count, slice_ + 1))
+    points = []
+    for u in us:
+        for v in vs:
+            at_near = _unproject(inverse, u, v, 0.0)
+            at_far = _unproject(inverse, u, v, 1.0)
+            points.extend(_at_distance(at_near, at_far, distance)
+                          for distance in distances)
+    return (Vector3(min(p.X for p in points), min(p.Y for p in points),
+                    min(p.Z for p in points)),
+            Vector3(max(p.X for p in points), max(p.Y for p in points),
+                    max(p.Z for p in points)))
+
+
+def point_light_bounds(position: Vector3, range_: float) -> tuple[Vector3, float]:
+    """A point light reaches a sphere centred on itself."""
+    return position, range_
+
+
+def spot_light_bounds(position: Vector3, direction: Vector3, range_: float,
+                      outer_angle: float) -> tuple[Vector3, float]:
+    """The bounding sphere of a cone, in its two cases.
+
+    A cone wider than 45 degrees is bounded by the sphere through its base rim,
+    centred at the base. A narrower one is bounded by the sphere through the
+    apex *and* the rim, whose centre sits further along the axis than the base
+    does. Using the wide case everywhere would be correct but loose, and a torch
+    would claim every cluster behind the person holding it.
+    """
+    axis = normalized(direction)
+    if axis.X == 0.0 and axis.Y == 0.0 and axis.Z == 0.0:
+        axis = Vector3(0.0, -1.0, 0.0)
+    cosine = f32(math.cos(outer_angle))
+    if outer_angle > 0.78539816339:
+        radius = f32(range_ * f32(math.sin(outer_angle)))
+        centre = Vector3(position.X + axis.X * range_ * cosine,
+                         position.Y + axis.Y * range_ * cosine,
+                         position.Z + axis.Z * range_ * cosine)
+        return centre, radius
+    radius = f32(range_ / (2.0 * max(cosine, 1e-4)))
+    return (Vector3(position.X + axis.X * radius, position.Y + axis.Y * radius,
+                    position.Z + axis.Z * radius), radius)
+
+
+def squared_distance_to_box(minimum: Vector3, maximum: Vector3,
+                            point: Vector3) -> float:
+    """Zero inside the box, and the squared distance to its nearest point outside."""
+    total = 0.0
+    for low, high, value in ((minimum.X, maximum.X, point.X),
+                             (minimum.Y, maximum.Y, point.Y),
+                             (minimum.Z, maximum.Z, point.Z)):
+        if value < low:
+            total += (low - value) ** 2
+        elif value > high:
+            total += (value - high) ** 2
+    return total
+
+
+def assign_clusters(projection: Matrix, tiles_x: int, tiles_y: int, slice_count: int,
+                    near_plane: float, far_plane: float, view: Matrix,
+                    spheres) -> tuple[list[int], list[int]]:
+    """Which lights land in which clusters, as ``(offsets, indices)``.
+
+    A whole reimplementation of the sort, because the compressed-row output is
+    the family's central claim and checking only its totals would let a
+    transposed grid through. A light with a non-positive radius is skipped, one
+    wholly behind the camera or wholly beyond the far plane never enters the
+    loop, and the rest are tested against every cluster in their own slice range.
+    """
+    cluster_count = tiles_x * tiles_y * slice_count
+    per_cluster: list[list[int]] = [[] for _ in range(cluster_count)]
+    for light, sphere in enumerate(spheres):
+        centre, radius = sphere
+        if not radius > 0.0:
+            continue
+        view_centre = transform_coordinate((centre.X, centre.Y, centre.Z), view)
+        radius_squared = radius * radius
+        nearest = -view_centre.Z - radius
+        furthest = -view_centre.Z + radius
+        if furthest <= 0.0 or nearest >= far_plane:
+            continue
+        first = slice_for_view_distance(near_plane, far_plane, slice_count, nearest)
+        last = slice_for_view_distance(near_plane, far_plane, slice_count, furthest)
+        for slice_ in range(first, last + 1):
+            for y in range(tiles_y):
+                for x in range(tiles_x):
+                    minimum, maximum = cluster_bounds(
+                        projection, tiles_x, tiles_y, slice_count, near_plane,
+                        far_plane, x, y, slice_)
+                    if squared_distance_to_box(minimum, maximum,
+                                               view_centre) > radius_squared:
+                        continue
+                    per_cluster[cluster_index(tiles_x, tiles_y, x, y, slice_)].append(light)
+    offsets = [0]
+    indices: list[int] = []
+    for cluster in range(cluster_count):
+        indices.extend(per_cluster[cluster])
+        offsets.append(len(indices))
+    return offsets, indices
+
+
+def rec709_luminance(color: Vector3) -> float:
+    """How much of a colour the eye sees.
+
+    A green light and a blue one of the same numeric intensity do not carry the
+    same weight in a picture, and a shadow budget should follow the picture.
+    """
+    return f32(0.2126 * color.X + 0.7152 * color.Y + 0.0722 * color.Z)
+
+
+def windowed_falloff(distance: float, range_: float) -> float:
+    """Inverse square, windowed so it reaches zero at the light's range.
+
+    ``(1 - (d/r)**4)`` clamped, squared, over ``d**2``: the window takes it
+    smoothly to nothing at the range rather than cutting it off, and the
+    denominator is floored so a light at the origin is bright rather than
+    infinite.
+    """
+    if distance >= range_:
+        return 0.0
+    ratio = f32(distance / max(range_, 1e-4))
+    window = min(max(f32(1.0 - ratio * ratio * ratio * ratio), 0.0), 1.0)
+    return f32(window * window / max(f32(distance * distance), 1e-4))
+
+
+def shadow_policy_score(color: Vector3, intensity: float, range_: float,
+                        position: Vector3, camera: Vector3) -> float:
+    """What one shadow-casting light is worth, for ranking inside a budget.
+
+    Luminance times intensity times the falloff at the camera's distance, with
+    that distance floored at one unit: at the camera's own position the falloff
+    diverges, and a light the camera is standing inside is as important as a
+    light can be rather than infinitely more important than every other.
+    """
+    dx, dy, dz = (position.X - camera.X, position.Y - camera.Y, position.Z - camera.Z)
+    distance = f32(math.sqrt(f32(dx * dx + dy * dy + dz * dz)))
+    return f32(rec709_luminance(color) * intensity
+               * windowed_falloff(max(distance, 1.0), range_))
+
+
+def volume_attenuation(color: Vector3, attenuation_distance: float,
+                       thickness: float) -> Vector3:
+    """What survives ``thickness`` of a medium, as a closed form.
+
+    CNA computes ``exp(-(-ln c / d) * t)``. That is ``c ** (t / d)`` exactly, so
+    the power is the independent statement of the same physics rather than a
+    transcription of the same three calls. The colour is clamped into
+    ``1e-4 .. 1`` first, because a zero channel has no logarithm.
+    """
+    if not attenuation_distance > 0.0 or not thickness > 0.0:
+        return Vector3(1.0, 1.0, 1.0)
+    exponent = thickness / attenuation_distance
+    return Vector3(*(min(max(channel, 1e-4), 1.0) ** exponent
+                     for channel in (color.X, color.Y, color.Z)))
+
+
+def lobe_scale_for(roughness: float) -> float:
+    """The width of the specular lobe a roughness implies.
+
+    The GGX alpha -- roughness squared -- floored so that a mirror still has a
+    lobe with a width rather than a line.
+    """
+    clamped = min(max(roughness, 0.0), 1.0)
+    return f32(max(f32(clamped * clamped), 0.02))
+
+
+#: A disc of half-axes a and b encloses ``pi*a*b``; a rectangle of the same
+#: half-axes encloses ``4*a*b``. Scaling both by ``sqrt(pi)/2`` makes the two
+#: areas equal, so a disc delivers a disc's irradiance even though the outline
+#: integrated is a rectangle.
+DISC_AXIS_SCALE = math.sqrt(math.pi) / 2.0
+
+
+def area_light_quad(shape: int, position: Vector3, right_axis: Vector3,
+                    up_axis: Vector3) -> tuple[Vector3, ...]:
+    """The four corners of a rectangle or disc light, counter-clockwise.
+
+    A tube is not covered: its quad is billboarded toward the surface, so it is
+    a different statement and is tested against its own geometric properties
+    rather than against a closed form.
+    """
+    right, up = right_axis, up_axis
+    if shape == 1:
+        right = Vector3(*(value * DISC_AXIS_SCALE
+                          for value in (right.X, right.Y, right.Z)))
+        up = Vector3(*(value * DISC_AXIS_SCALE for value in (up.X, up.Y, up.Z)))
+    return (Vector3(position.X - right.X - up.X, position.Y - right.Y - up.Y,
+                    position.Z - right.Z - up.Z),
+            Vector3(position.X + right.X - up.X, position.Y + right.Y - up.Y,
+                    position.Z + right.Z - up.Z),
+            Vector3(position.X + right.X + up.X, position.Y + right.Y + up.Y,
+                    position.Z + right.Z + up.Z),
+            Vector3(position.X - right.X + up.X, position.Y - right.Y + up.Y,
+                    position.Z - right.Z + up.Z))

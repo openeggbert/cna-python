@@ -1488,6 +1488,116 @@
       },
       "evidence": "_cna_native.engine_support.borrowed_view; every handle-returning getter in the package",
       "notes": "Rather than a table of which routes hand out a fresh view -- which would go stale the day CNA changes one -- every getter compares the handle it gets against the handle this binding supplied and releases only a different one. That is what makes reading a property any number of times leak nothing while never destroying the caller's own object."
+    },
+    {
+      "operation": "Clustered light set and its bounding spheres",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredLightSetTests",
+      "notes": "A CPU collection of light values. Every bounding sphere is compared with one tests/engine_oracles.py derives from the cone geometry, including the two-case split a spot light uses: a cone narrower than 45 degrees is bounded by the sphere through its apex and rim, which is not centred on the light. The 256-light ceiling is a measured constant and the refusal past it is asserted."
+    },
+    {
+      "operation": "Clustered light grid: logarithmic depth slicing",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredLightGridTests; tests/engine_oracles.py slice_distance, cluster_bounds",
+      "notes": "Every slice boundary, every cluster index and every one of the 30 cluster boxes of a 3x2x5 grid is compared with an independent computation, including a 4x4 matrix inverse written out rather than taken from Matrix.Invert. The oracle computes the exponential at single precision, because the float and double results differ in the last bits and that decides which cluster a light is in."
+    },
+    {
+      "operation": "Cluster boxes are conservative, not a partition",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredLightGridTests::test_the_slices_meet_exactly_in_depth_and_the_tiles_overlap_across_it",
+      "notes": "Measured: neighbouring clusters meet exactly in depth and overlap across the screen, because an axis-aligned box around a frustum slab is as wide as that slab's far face. A light is therefore assigned to clusters it only nearly touches and never missed from one it reaches. Written down because the obvious expectation -- a clean tiling -- is false, and a test asserting it would have been asserting a defect."
+    },
+    {
+      "operation": "Clustered light assignment, CPU and GPU",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredLightAssignmentTests, ::ClusteredLightComputeTests",
+      "notes": "Three implementations are compared entry for entry: CNA's CPU sort, CNA's compute shader, and a whole reimplementation of the sort in tests/engine_oracles.py. The two CNA paths are designed to agree exactly rather than plausibly -- the shader is handed the grid's own inverse projection so the two never differ in their last bits -- and the test asserts equality rather than similarity. Also checked under a view matrix that is not the identity, which is what a missing world-to-view transform would hide."
+    },
+    {
+      "operation": "Clustered shadow budget",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredShadowPolicyTests; tests/engine_oracles.py shadow_policy_score",
+      "notes": "Every score is compared with Rec. 709 luminance times intensity times the windowed falloff, computed independently. Two setters ignore an out-of-range value instead of refusing it -- a negative budget and a hysteresis below one leave the old value in place -- which is asserted rather than described. The hysteresis bonus is applied to the incumbent's score rather than as a rule in the comparison, and the test shows a weaker incumbent holding its slot against a challenger inside the bonus."
+    },
+    {
+      "operation": "Clustered light buffer and its published GLSL",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredLightBufferTests, ::PublishedGlslTests",
+      "notes": "A mismatched set, grid and assignment is refused rather than uploaded, which is asserted with an assignment built for a different grid and one built for fewer lights. Binding needs an effect compiled from source; an Effect built from XNA bytecode is refused, because the buffer sets uniforms by name and bytecode has none. The uniform names the published GLSL declares are checked against the ones bind sets, which is the contract's two halves."
+    },
+    {
+      "operation": "Clustered forward effect material bounds",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredForwardEffectTests",
+      "notes": "Four different rules, measured and asserted separately: base colour and metallic clamp to 0..1, roughness clamps to 0.04..1 (a perfectly smooth microfacet distribution divides by zero), ambient floors each channel at zero without a ceiling, and index of refraction *ignores* a value below one rather than clamping it. The roughness floor is asserted at the single-precision float CNA holds, not at the decimal 0.04."
+    },
+    {
+      "operation": "Clustered forward effect material extensions view",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna.extensions.engine.ClusteredForwardEffect.material_extensions",
+      "notes": "The getter hands out a counted view onto the effect's own extensions and the setter *replaces* the object behind it, so a view taken before an assignment looks at a set that no longer exists. The cached view is dropped on assignment; without that, reading the property back after setting a clearcoat factor answered zero. Found by a test that assigned and read back rather than by inspection."
+    },
+    {
+      "operation": "Area lights: quad, coverage and BRDF",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "partly (value defaults and is_valid only)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::AreaLightShadingTests, ::BrdfEvaluationTests",
+      "notes": "The rectangle quad is compared corner for corner with an independent construction, and the disc quad is checked against the identity its axis scale exists for: pi*a*b equals the scaled rectangle's area. A tube's quad is billboarded, so it is checked by the property that it turns with the surface while its axis does not. Coverage is measured to emit from the +z face of the default light, to be zero for a surface in the light's own plane, and to rise as the lobe narrows. The BRDF is a Monte Carlo integral, so it is checked against what the integral must be -- a fraction in 0..1, a unit average direction, monotone in roughness, convergent in sample count and deterministic -- rather than against a transcription of the same importance sampling."
+    },
+    {
+      "operation": "Which clustered value routes answer without an engine layer",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "verified",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_clustered.py::ClusteredAbsenceTests",
+      "notes": "Measured and matching what engine_layer.h documents for each route: both _init routes fill a value with its canonical defaults on any build, AreaLight.is_valid answers on any build ('SUCCESS in every build'), and ClusteredLight.is_usable does not, because that rule belongs to the light set rather than to the value. Nine other routes are asserted to report the layer as unavailable rather than answering with a plausible number."
+    },
+    {
+      "operation": "The clustered constructors take a device, not a game",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "docs/engine-upstream-findings.md ENGINE-006; tests/test_engine_clustered.py::ClusteredConstructorTests",
+      "notes": "engine_layer.h documents the first parameter of four constructors as 'the owning game'. The C layer resolves it as a graphics device and refuses a game handle with CNA_RESULT_INVALID_HANDLE. Every class in the package takes a GraphicsDevice, so the difference is invisible from Python; the raw route is driven with both handles so the pin fails the day either side changes."
     }
   ]
 }

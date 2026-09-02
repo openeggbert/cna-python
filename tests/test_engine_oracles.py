@@ -346,3 +346,356 @@ class BloomExtractionTests(unittest.TestCase):
     def test_it_rises_with_the_value(self) -> None:
         values = [oracle.bloom_extract_channel(x / 10.0, 0.5) for x in range(11)]
         self.assertEqual(values, sorted(values))
+
+
+class ClusterIndexTests(unittest.TestCase):
+    def test_a_two_by_two_by_two_grid_numbers_x_fastest(self) -> None:
+        """Eight clusters, listed in the order the flat index puts them.
+
+        x varies fastest, then y, then depth, so (1, 0, 0) is 1 and (0, 1, 0) is
+        2 and (0, 0, 1) is 4. Written out here rather than computed.
+        """
+        listed = [oracle.cluster_index(2, 2, x, y, s)
+                  for s in range(2) for y in range(2) for x in range(2)]
+        self.assertEqual(listed, [0, 1, 2, 3, 4, 5, 6, 7])
+
+    def test_the_layout_is_the_one_the_gpu_path_undoes(self) -> None:
+        """The shader recovers x, y and slice from the flat index this way."""
+        tiles_x, tiles_y, slices = 3, 2, 5
+        for slice_ in range(slices):
+            for y in range(tiles_y):
+                for x in range(tiles_x):
+                    flat = oracle.cluster_index(tiles_x, tiles_y, x, y, slice_)
+                    self.assertEqual(flat % tiles_x, x)
+                    self.assertEqual((flat // tiles_x) % tiles_y, y)
+                    self.assertEqual(flat // (tiles_x * tiles_y), slice_)
+
+    def test_every_cluster_gets_its_own_index(self) -> None:
+        seen = {oracle.cluster_index(7, 5, x, y, s)
+                for s in range(9) for y in range(5) for x in range(7)}
+        self.assertEqual(len(seen), 7 * 5 * 9)
+        self.assertEqual(max(seen), 7 * 5 * 9 - 1)
+
+
+class SliceDistanceTests(unittest.TestCase):
+    def test_a_ratio_of_sixteen_over_four_slices_doubles_each_time(self) -> None:
+        """near 1, far 16, four slices: the ratio is 16, so each step is 16**0.25 = 2.
+
+        1, 2, 4, 8, 16 -- worked here from the exponent, not from the routine.
+        """
+        distances = [oracle.slice_distance(1.0, 16.0, 4, index) for index in range(5)]
+        for expected, actual in zip([1.0, 2.0, 4.0, 8.0, 16.0], distances):
+            self.assertAlmostEqual(actual, expected, places=5)
+
+    def test_the_two_ends_are_the_planes_exactly(self) -> None:
+        """Not approximately: a boundary that is 47.499996 puts a light in the wrong slice."""
+        self.assertEqual(oracle.slice_distance(0.35, 47.5, 5, 0), oracle.f32(0.35))
+        self.assertEqual(oracle.slice_distance(0.35, 47.5, 5, 5), oracle.f32(47.5))
+
+    def test_the_slices_grow(self) -> None:
+        widths = [oracle.slice_distance(0.35, 47.5, 8, index + 1)
+                  - oracle.slice_distance(0.35, 47.5, 8, index) for index in range(8)]
+        self.assertEqual(widths, sorted(widths))
+        self.assertGreater(widths[0], 0.0)
+
+    def test_one_slice_is_the_whole_range(self) -> None:
+        self.assertEqual(oracle.slice_distance(2.0, 30.0, 1, 0), 2.0)
+        self.assertEqual(oracle.slice_distance(2.0, 30.0, 1, 1), 30.0)
+
+
+class SliceForViewDistanceTests(unittest.TestCase):
+    def test_it_inverts_the_spacing_at_a_slice_centre(self) -> None:
+        """near 1, far 16, four slices: 3 sits between 2 and 4, so it is slice 1."""
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, 3.0), 1)
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, 1.5), 0)
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, 6.0), 2)
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, 12.0), 3)
+
+    def test_both_ends_clamp_rather_than_run_off(self) -> None:
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, -5.0), 0)
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, 1.0), 0)
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, 16.0), 3)
+        self.assertEqual(oracle.slice_for_view_distance(1.0, 16.0, 4, 1e6), 3)
+
+    def test_it_agrees_with_the_boundaries_it_inverts(self) -> None:
+        """A point just inside a slice's own range lands in that slice."""
+        near, far, count = 0.35, 47.5, 6
+        for index in range(count):
+            low = oracle.slice_distance(near, far, count, index)
+            high = oracle.slice_distance(near, far, count, index + 1)
+            middle = math.sqrt(low * high)
+            self.assertEqual(
+                oracle.slice_for_view_distance(near, far, count, middle), index)
+
+
+class MatrixInverseTests(unittest.TestCase):
+    def test_a_scale_matrix_inverts_to_the_reciprocal_scale(self) -> None:
+        scale = Matrix(2.0, 0, 0, 0, 0, 4.0, 0, 0, 0, 0, 8.0, 0, 0, 0, 0, 1.0)
+        inverse = oracle.invert_matrix4(scale)
+        self.assertAlmostEqual(inverse[0], 0.5, places=9)
+        self.assertAlmostEqual(inverse[5], 0.25, places=9)
+        self.assertAlmostEqual(inverse[10], 0.125, places=9)
+        self.assertAlmostEqual(inverse[15], 1.0, places=9)
+
+    def test_the_product_with_the_original_is_the_identity(self) -> None:
+        projection = Matrix.CreatePerspectiveFieldOfView(0.9773843811168246,
+                                                         1.7777777777777777, 0.35, 47.5)
+        values, inverse = list(projection), oracle.invert_matrix4(projection)
+        for row in range(4):
+            for column in range(4):
+                total = sum(values[row * 4 + k] * inverse[k * 4 + column]
+                            for k in range(4))
+                self.assertAlmostEqual(total, 1.0 if row == column else 0.0, places=6)
+
+    def test_a_singular_matrix_is_refused_rather_than_dividing_by_zero(self) -> None:
+        with self.assertRaises(ValueError):
+            oracle.invert_matrix4(Matrix(*([0.0] * 16)))
+
+
+class ClusterBoundsTests(unittest.TestCase):
+    PROJECTION = Matrix.CreatePerspectiveFieldOfView(0.9773843811168246,
+                                                     1.7777777777777777, 0.35, 47.5)
+
+    def test_a_cluster_spans_exactly_its_slice_in_depth(self) -> None:
+        """View distance is -z, so the box runs from -far_of_slice to -near_of_slice."""
+        minimum, maximum = oracle.cluster_bounds(self.PROJECTION, 3, 2, 5, 0.35, 47.5,
+                                                 0, 0, 0)
+        self.assertAlmostEqual(maximum.Z, -oracle.slice_distance(0.35, 47.5, 5, 0),
+                               places=6)
+        self.assertAlmostEqual(minimum.Z, -oracle.slice_distance(0.35, 47.5, 5, 1),
+                               places=6)
+
+    def test_the_whole_grid_covers_the_frustum_and_no_more(self) -> None:
+        """One tile and one slice is the frustum itself, to the two planes."""
+        minimum, maximum = oracle.cluster_bounds(self.PROJECTION, 1, 1, 1, 0.35, 47.5,
+                                                 0, 0, 0)
+        # Half-height at the far plane: far * tan(fov / 2).
+        half_height = 47.5 * math.tan(0.9773843811168246 / 2.0)
+        self.assertAlmostEqual(maximum.Y, half_height, places=4)
+        self.assertAlmostEqual(minimum.Y, -half_height, places=4)
+        self.assertAlmostEqual(maximum.X, half_height * 1.7777777777777777, places=4)
+
+    def test_neighbouring_tiles_overlap_because_the_box_is_axis_aligned(self) -> None:
+        """A box around a frustum slab is as wide as its far face.
+
+        So it reaches past its neighbour's near face, and the two overlap. The
+        first version of this case compared tiles 1 and 2 of a four-tile row --
+        which straddle the centre, where both boundaries are zero -- and passed
+        without checking anything.
+        """
+        left = oracle.cluster_bounds(self.PROJECTION, 4, 1, 1, 0.35, 47.5, 0, 0, 0)
+        right = oracle.cluster_bounds(self.PROJECTION, 4, 1, 1, 0.35, 47.5, 1, 0, 0)
+        self.assertLess(right[0].X, left[1].X)
+        self.assertLess(left[0].X, right[0].X)
+        self.assertLess(left[1].X, right[1].X)
+
+    def test_the_slices_of_one_tile_meet_exactly_in_depth(self) -> None:
+        """Depth is the axis a cluster really does partition."""
+        near = oracle.cluster_bounds(self.PROJECTION, 1, 1, 4, 0.35, 47.5, 0, 0, 1)
+        far = oracle.cluster_bounds(self.PROJECTION, 1, 1, 4, 0.35, 47.5, 0, 0, 2)
+        self.assertAlmostEqual(near[0].Z, far[1].Z, places=6)
+
+    def test_the_tiles_of_one_row_tile_the_row(self) -> None:
+        whole = oracle.cluster_bounds(self.PROJECTION, 1, 1, 1, 0.35, 47.5, 0, 0, 0)
+        pieces = [oracle.cluster_bounds(self.PROJECTION, 5, 1, 1, 0.35, 47.5, x, 0, 0)
+                  for x in range(5)]
+        self.assertAlmostEqual(pieces[0][0].X, whole[0].X, places=5)
+        self.assertAlmostEqual(pieces[-1][1].X, whole[1].X, places=5)
+
+
+class LightBoundsTests(unittest.TestCase):
+    def test_a_point_light_bounds_itself(self) -> None:
+        centre, radius = oracle.point_light_bounds(Vector3(1.0, 2.0, 3.0), 4.0)
+        self.assertEqual((centre.X, centre.Y, centre.Z, radius), (1.0, 2.0, 3.0, 4.0))
+
+    def test_a_wide_cone_is_bounded_at_its_base(self) -> None:
+        """A 60-degree cone of range 2 along -y: base at y = -2*cos(60) = -1, radius 2*sin(60)."""
+        centre, radius = oracle.spot_light_bounds(
+            Vector3(0.0, 0.0, 0.0), Vector3(0.0, -1.0, 0.0), 2.0, math.pi / 3.0)
+        self.assertAlmostEqual(centre.Y, -1.0, places=5)
+        self.assertAlmostEqual(radius, 2.0 * math.sin(math.pi / 3.0), places=5)
+
+    def test_a_narrow_cone_uses_the_sphere_through_the_apex(self) -> None:
+        """A 30-degree cone of range 2: radius 2/(2*cos 30) = 1.1547, centred there."""
+        centre, radius = oracle.spot_light_bounds(
+            Vector3(0.0, 0.0, 0.0), Vector3(0.0, -1.0, 0.0), 2.0, math.pi / 6.0)
+        self.assertAlmostEqual(radius, 2.0 / (2.0 * math.cos(math.pi / 6.0)), places=5)
+        self.assertAlmostEqual(centre.Y, -radius, places=5)
+
+    def test_the_narrow_sphere_really_contains_the_apex_and_the_rim(self) -> None:
+        """The property the two-case split exists for, checked rather than assumed."""
+        angle, range_ = math.pi / 6.0, 2.0
+        centre, radius = oracle.spot_light_bounds(
+            Vector3(0.0, 0.0, 0.0), Vector3(0.0, -1.0, 0.0), range_, angle)
+        apex = math.dist((0.0, 0.0, 0.0), (centre.X, centre.Y, centre.Z))
+        rim = math.dist((range_ * math.sin(angle), -range_ * math.cos(angle), 0.0),
+                        (centre.X, centre.Y, centre.Z))
+        self.assertLessEqual(apex, radius + 1e-5)
+        self.assertLessEqual(rim, radius + 1e-5)
+
+    def test_the_narrow_case_is_tighter_than_the_wide_one_would_be(self) -> None:
+        """Why the split exists: the base-centred sphere is looser for a torch."""
+        angle, range_ = math.pi / 12.0, 10.0
+        _, narrow = oracle.spot_light_bounds(
+            Vector3(0.0, 0.0, 0.0), Vector3(0.0, -1.0, 0.0), range_, angle)
+        wide = range_ * math.sin(angle)
+        # The base-rim sphere has a smaller radius but does not contain the apex,
+        # so it is not a bound at all; the apex is `range_` from its centre.
+        self.assertLess(wide, narrow)
+        self.assertGreater(range_, wide)
+
+
+class ClusterAssignmentTests(unittest.TestCase):
+    PROJECTION = Matrix.CreatePerspectiveFieldOfView(0.9773843811168246,
+                                                     1.7777777777777777, 0.35, 47.5)
+
+    def _assign(self, spheres, tiles_x=2, tiles_y=2, slices=2):
+        return oracle.assign_clusters(self.PROJECTION, tiles_x, tiles_y, slices,
+                                      0.35, 47.5, Matrix.Identity, spheres)
+
+    def test_no_lights_gives_an_all_zero_offset_table(self) -> None:
+        offsets, indices = self._assign([])
+        self.assertEqual(offsets, [0] * (2 * 2 * 2 + 1))
+        self.assertEqual(indices, [])
+
+    def test_a_light_behind_the_camera_reaches_nothing(self) -> None:
+        offsets, indices = self._assign([(Vector3(0.0, 0.0, 10.0), 1.0)])
+        self.assertEqual(indices, [])
+        self.assertEqual(offsets[-1], 0)
+
+    def test_a_light_with_no_radius_is_skipped(self) -> None:
+        self.assertEqual(self._assign([(Vector3(0.0, 0.0, -5.0), 0.0)])[1], [])
+        self.assertEqual(self._assign([(Vector3(0.0, 0.0, -5.0), -1.0)])[1], [])
+
+    def test_a_light_enclosing_the_frustum_reaches_every_cluster(self) -> None:
+        offsets, indices = self._assign([(Vector3(0.0, 0.0, -20.0), 500.0)])
+        self.assertEqual(indices, [0] * 8)
+        self.assertEqual(offsets, list(range(9)))
+
+    def test_the_offsets_describe_the_indices(self) -> None:
+        """The structural invariant CNA's own adopt() checks for."""
+        offsets, indices = self._assign([(Vector3(0.0, 0.0, -5.0), 3.0),
+                                         (Vector3(2.0, 1.0, -20.0), 6.0)])
+        self.assertEqual(offsets[0], 0)
+        self.assertEqual(offsets[-1], len(indices))
+        self.assertEqual(offsets, sorted(offsets))
+        self.assertTrue(all(0 <= index < 2 for index in indices))
+
+    def test_a_light_in_one_corner_does_not_reach_the_opposite_one(self) -> None:
+        """The test that a transposed grid would fail."""
+        offsets, indices = self._assign([(Vector3(-3.0, 3.0, -6.0), 1.0)],
+                                        tiles_x=2, tiles_y=2, slices=1)
+        reached = {cluster for cluster in range(4)
+                   if offsets[cluster + 1] > offsets[cluster]}
+        self.assertNotEqual(reached, {0, 1, 2, 3})
+        self.assertTrue(reached)
+
+
+class ShadowPolicyScoreTests(unittest.TestCase):
+    def test_white_at_one_unit_inside_its_range_scores_the_falloff(self) -> None:
+        """A white light of intensity 1, range 2, one unit away.
+
+        luminance 1, falloff (1 - (0.5)**4)**2 / 1 = 0.9375**2 = 0.87890625.
+        Worked here from the formula, not from the routine.
+        """
+        score = oracle.shadow_policy_score(
+            Vector3(1.0, 1.0, 1.0), 1.0, 2.0, Vector3(1.0, 0.0, 0.0),
+            Vector3(0.0, 0.0, 0.0))
+        self.assertAlmostEqual(score, 0.87890625, places=6)
+
+    def test_a_light_at_or_beyond_its_range_scores_nothing(self) -> None:
+        self.assertEqual(oracle.shadow_policy_score(
+            Vector3(1.0, 1.0, 1.0), 1.0, 4.0, Vector3(4.0, 0.0, 0.0),
+            Vector3(0.0, 0.0, 0.0)), 0.0)
+
+    def test_green_outweighs_blue_of_the_same_intensity(self) -> None:
+        green = oracle.shadow_policy_score(Vector3(0.0, 1.0, 0.0), 1.0, 5.0,
+                                           Vector3(2.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0))
+        blue = oracle.shadow_policy_score(Vector3(0.0, 0.0, 1.0), 1.0, 5.0,
+                                          Vector3(2.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0))
+        self.assertGreater(green, blue)
+        self.assertAlmostEqual(green / blue, 0.7152 / 0.0722, places=3)
+
+    def test_standing_inside_a_light_is_finite(self) -> None:
+        """The distance floors at one unit, so the falloff cannot diverge."""
+        at_zero = oracle.shadow_policy_score(
+            Vector3(1.0, 1.0, 1.0), 1.0, 10.0, Vector3(0.0, 0.0, 0.0),
+            Vector3(0.0, 0.0, 0.0))
+        at_one = oracle.shadow_policy_score(
+            Vector3(1.0, 1.0, 1.0), 1.0, 10.0, Vector3(1.0, 0.0, 0.0),
+            Vector3(0.0, 0.0, 0.0))
+        self.assertTrue(math.isfinite(at_zero))
+        self.assertEqual(at_zero, at_one)
+
+    def test_a_nearer_light_of_equal_colour_outranks_a_further_one(self) -> None:
+        scores = [oracle.shadow_policy_score(Vector3(1.0, 1.0, 1.0), 1.0, 20.0,
+                                             Vector3(float(d), 0.0, 0.0),
+                                             Vector3(0.0, 0.0, 0.0))
+                  for d in range(1, 12)]
+        self.assertEqual(scores, sorted(scores, reverse=True))
+
+
+class VolumeAttenuationTests(unittest.TestCase):
+    def test_one_attenuation_distance_leaves_the_colour_itself(self) -> None:
+        result = oracle.volume_attenuation(Vector3(0.5, 0.25, 1.0), 2.0, 2.0)
+        self.assertAlmostEqual(result.X, 0.5, places=6)
+        self.assertAlmostEqual(result.Y, 0.25, places=6)
+        self.assertAlmostEqual(result.Z, 1.0, places=6)
+
+    def test_half_the_distance_is_the_square_root(self) -> None:
+        result = oracle.volume_attenuation(Vector3(0.25, 1.0, 0.0625), 2.0, 1.0)
+        self.assertAlmostEqual(result.X, 0.5, places=6)
+        self.assertAlmostEqual(result.Y, 1.0, places=6)
+        self.assertAlmostEqual(result.Z, 0.25, places=6)
+
+    def test_no_medium_leaves_everything(self) -> None:
+        for distance, thickness in ((0.0, 1.0), (2.0, 0.0), (-1.0, 1.0), (2.0, -1.0)):
+            result = oracle.volume_attenuation(Vector3(0.5, 0.5, 0.5), distance,
+                                               thickness)
+            self.assertEqual((result.X, result.Y, result.Z), (1.0, 1.0, 1.0))
+
+    def test_a_black_channel_does_not_take_a_logarithm_of_zero(self) -> None:
+        result = oracle.volume_attenuation(Vector3(0.0, 0.0, 0.0), 1.0, 1.0)
+        self.assertTrue(all(math.isfinite(value)
+                            for value in (result.X, result.Y, result.Z)))
+        self.assertAlmostEqual(result.X, 1e-4, places=8)
+
+
+class LobeScaleTests(unittest.TestCase):
+    def test_it_is_roughness_squared_above_the_floor(self) -> None:
+        self.assertAlmostEqual(oracle.lobe_scale_for(0.5), 0.25, places=6)
+        self.assertAlmostEqual(oracle.lobe_scale_for(1.0), 1.0, places=6)
+        self.assertAlmostEqual(oracle.lobe_scale_for(0.25), 0.0625, places=6)
+
+    def test_a_mirror_keeps_a_width(self) -> None:
+        self.assertAlmostEqual(oracle.lobe_scale_for(0.0), 0.02, places=6)
+        self.assertAlmostEqual(oracle.lobe_scale_for(0.1), 0.02, places=6)
+
+    def test_it_clamps_outside_zero_to_one(self) -> None:
+        self.assertAlmostEqual(oracle.lobe_scale_for(-1.0), 0.02, places=6)
+        self.assertAlmostEqual(oracle.lobe_scale_for(5.0), 1.0, places=6)
+
+
+class AreaLightQuadTests(unittest.TestCase):
+    def test_a_unit_rectangle_has_the_corners_its_axes_describe(self) -> None:
+        corners = oracle.area_light_quad(0, Vector3(0.0, 0.0, 0.0),
+                                         Vector3(0.5, 0.0, 0.0), Vector3(0.0, 0.5, 0.0))
+        self.assertEqual([(c.X, c.Y, c.Z) for c in corners],
+                         [(-0.5, -0.5, 0.0), (0.5, -0.5, 0.0),
+                          (0.5, 0.5, 0.0), (-0.5, 0.5, 0.0)])
+
+    def test_a_disc_encloses_the_area_a_disc_encloses(self) -> None:
+        """The scale exists so pi*a*b equals 4*(a*s)*(b*s); check that identity."""
+        a, b = 0.5, 0.25
+        corners = oracle.area_light_quad(1, Vector3(0.0, 0.0, 0.0),
+                                         Vector3(a, 0.0, 0.0), Vector3(0.0, b, 0.0))
+        width = corners[1].X - corners[0].X
+        height = corners[2].Y - corners[1].Y
+        self.assertAlmostEqual(width * height, math.pi * a * b, places=6)
+
+    def test_the_corners_go_counter_clockwise_about_the_axes(self) -> None:
+        corners = oracle.area_light_quad(0, Vector3(1.0, 2.0, 3.0),
+                                         Vector3(2.0, 0.0, 0.0), Vector3(0.0, 3.0, 0.0))
+        self.assertLess(corners[0].X, corners[1].X)
+        self.assertLess(corners[1].Y, corners[2].Y)
+        self.assertGreater(corners[2].X, corners[3].X)

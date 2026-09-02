@@ -403,6 +403,20 @@ class PbrMaterialExtensions:
         #: The caller's texture objects, beside the handles CNA stores.
         self._textures: dict[str, object] = {}
 
+    @classmethod
+    def _wrap(cls, handle: _support.NativeHandle) -> "PbrMaterialExtensions":
+        """Adopts a handle this class did not create.
+
+        Private, and not part of the public surface: a public signature naming a
+        handle would publish a private native type. Used for the counted view an
+        owner hands out onto its own extensions, which this object then owns and
+        releases -- see ENGINE-002.
+        """
+        self = cls.__new__(cls)
+        self._handle = handle
+        self._textures = {}
+        return self
+
     @property
     def is_closed(self) -> bool:
         """True once :meth:`close` has run."""

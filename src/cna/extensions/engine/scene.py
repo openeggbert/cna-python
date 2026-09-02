@@ -40,7 +40,8 @@ from _cna_native import abi as _abi
 from _cna_native import engine_abi as _engine
 from _cna_native import engine_support as _support
 
-from .values import _native_matrix, _native_vector, _vector
+from .values import (_EngineObject, _device_handle, _native_matrix,
+                     _native_vector, _vector)
 
 if TYPE_CHECKING:  # pragma: no cover - annotations only
     from Microsoft.Xna.Framework import BoundingBox
@@ -92,12 +93,6 @@ class DepthEncoding(IntEnum):
     HalfFloat = _engine.CNA_DEPTH_ENCODING_HALF_FLOAT
 
 
-def _device_handle(device: "GraphicsDevice") -> c.c_uint64:
-    if not hasattr(device, "_require_handle"):
-        raise TypeError("device must be a Microsoft.Xna.Framework.Graphics.GraphicsDevice")
-    return c.c_uint64(device._require_handle())
-
-
 def _optional_texture(value: object, what: str) -> c.c_uint64:
     if value is None:
         return c.c_uint64(0)
@@ -131,69 +126,6 @@ def _colour(value: Color) -> _abi.CNA_Color:
     if not isinstance(value, Color):
         raise TypeError("expected a Microsoft.Xna.Framework.Color")
     return _abi.CNA_Color(int(value.R), int(value.G), int(value.B), int(value.A))
-
-
-class _EngineObject:
-    """Common lifetime for an owned engine handle and its counted views."""
-
-    __slots__ = ("_handle", "_device", "_views", "_retained")
-
-    _DESTROY: str = ""
-
-    def _attach(self, handle: int, device: "GraphicsDevice | None" = None) -> None:
-        self._handle = _support.NativeHandle(handle, self._DESTROY, type(self).__name__)
-        self._device = device
-        self._views: dict[str, object] = {}
-        self._retained: list[object] = []
-
-    @property
-    def is_closed(self) -> bool:
-        """True once :meth:`close` has run."""
-        return self._handle.closed
-
-    def close(self) -> None:
-        """Disposes every view handed out, then releases the object."""
-        if self._handle.closed:
-            return
-        for view in reversed(list(self._views.values())):
-            dispose = getattr(view, "Dispose", None)
-            if dispose is not None and not getattr(view, "IsDisposed", False):
-                dispose()
-        self._views.clear()
-        self._handle.close()
-        self._retained.clear()
-
-    def __enter__(self):
-        self._handle.value
-        return self
-
-    def __exit__(self, *_exception: object) -> None:
-        self.close()
-
-    def _view(self, key: str, route: str, factory):
-        existing = self._views.get(key)
-        if existing is not None and not getattr(existing, "IsDisposed", False):
-            return existing
-        handle = _support.out_handle(route, self._handle.argument)
-        if handle == 0:
-            return None
-        view = factory(handle)
-        self._views[key] = view
-        return view
-
-    def _render_target_view(self, key: str, route: str):
-        return self._view(key, route,
-                          lambda handle: RenderTarget2D._view_of(self._device, handle))
-
-    def _effect_view(self, key: str, route: str):
-        from Microsoft.Xna.Framework.Graphics import Effect
-
-        def build(handle: int):
-            effect = Effect.__new__(Effect)
-            effect._initialize_native(self._device, handle)
-            return effect
-
-        return self._view(key, route, build)
 
 
 # --- particles ---------------------------------------------------------------

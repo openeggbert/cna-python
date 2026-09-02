@@ -303,6 +303,29 @@ def copied_text(operation: str, arguments: Iterable[object], what: str) -> str:
         raise ValueError(f"{what} is not well-formed UTF-8") from error
 
 
+def copied_values(element: type, operation: str, arguments: Iterable[object]):
+    """The two-call size/copy protocol for a route that copies a range of values.
+
+    The sibling of :func:`copied_text` for the routes whose count is a number of
+    *values* rather than a number of bytes. Sized first because the length is
+    CNA's and not the caller's: asking for a guessed number answers
+    ``CNA_RESULT_BUFFER_TOO_SMALL`` rather than truncating, which is the right
+    refusal and the reason it is asked for at all.
+
+    Returns the filled ``element`` array and the number of entries CNA wrote,
+    which is never larger than the size it asked for.
+    """
+    arguments = tuple(arguments)
+    count = c.c_uint64()
+    size_call(operation, *arguments, None, c.c_uint64(0), c.byref(count))
+    if count.value == 0:
+        return (element * 0)(), 0
+    destination = (element * count.value)()
+    written = c.c_uint64()
+    call(operation, *arguments, destination, c.c_uint64(count.value), c.byref(written))
+    return destination, int(written.value)
+
+
 def float_array(values: Sequence[float], what: str) -> tuple[object, int]:
     """Copies a real-number sequence into a C array, or ``(None, 0)`` when empty."""
     try:
