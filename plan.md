@@ -146,6 +146,41 @@ asset-name special case is an acceptable way to make it green.
   profile itself in `docs/online-profile.md`. Every result is
   `SYNTHETIC_SIGNED_IN_GAMER_VERIFIED` and never `REAL_PLATFORM_SIGN_IN_VERIFIED`.
 
+## Completed design-time profile: `xna40-windows-content-pipeline`
+
+- [x] Project XNA's whole design-time surface: 128 types, 743 CLR members, 598
+  mapped Python members, zero diagnostics -- and no CNA route at all, because a
+  content build reads files and writes files.
+- [x] Keep it structurally separate from the runtime: it is a *subpackage* of
+  `Microsoft.Xna.Framework.Content`, which is where XNA puts it, and Python
+  imports a subpackage only when something asks for it. Two tests in fresh
+  interpreters assert that importing the runtime namespace loads no pipeline
+  module and that importing the pipeline loads no CNA library.
+- [x] Write every decoder the pipeline needs rather than depending on one: PNG
+  (all five filters, palettes and transparency), BMP, TGA (plain and RLE), DDS
+  (uncompressed and DXT), RIFF/WAVE with its `smpl` loop region, MPEG audio and
+  ASF headers, and DirectX `.x`.
+- [x] Implement a real DXT1/3/5 codec, with endpoints chosen along each block's
+  own colour axis, and check it by decompressing, against hand-worked blocks,
+  and against the format's own quantisation bound.
+- [x] Build the XNB writer and prove it against an independent reader -- the
+  `ContentManager` in this repository -- for thirteen value types, four list
+  types, a texture and a whole model loaded in a running `Game`.
+- [x] Build the intermediate XML serializer, both ends, with a reflective
+  serializer that writes a type's state and not its derived values.
+- [x] Build the four MSBuild tasks as real, incremental build steps: a
+  dependency an importer recorded rebuilds the asset that named it, and a clean
+  removes what the cache recorded and nothing else.
+- [x] Gate the whole surface with `tools/verify_content_pipeline.py`: every
+  member that can refuse carries a written decision, `UNREVIEWED = 0`,
+  `STALE = 0`, `CONTENT_PIPELINE_ACTIONABLE_LOCAL = 0`, and both shapes of the
+  defect are planted in `tests/test_content_pipeline_gate.py`.
+- [x] Plant 85 defects across the family and kill all of them; 28 survivors on
+  the first run were real test gaps and are closed, and two mutations were
+  withdrawn as provably equivalent with the measurement recorded beside them.
+- [x] Record four narrow blockers, each citing where the missing capability is
+  documented and what would unblock it, in `docs/content-pipeline.md`.
+
 ## Current measured boundary
 
 - Strict profiles, each against its own reference contract:
@@ -154,6 +189,7 @@ asset-name special case is an acceptable way to make it green.
   | --- | --- | --- | --- | --- |
   | `xna40-windows-runtime` | 257 / 2,964 | 257 / 2,887 | 257 / 2,423 | 0 |
   | `xna40-windows-online` | 74 / 676 | 74 / 605 | 74 / 605 | 0 |
+  | `xna40-windows-content-pipeline` | 128 / 743 | 128 / 598 | 128 / 598 | 0 |
 
   Every mismatch, leak, allowlist and unmeasured category is zero in both.
   Normal and leak-only strict checks pass. The two share two Python packages
@@ -178,7 +214,10 @@ asset-name special case is an acceptable way to make it green.
 - Extension profile: `cna.extensions.graphics`, `.content`, `.engine`,
   `.devices`, `.input` and `.online`, 59 modules and 1,126 public names, zero
   surface diagnostics, and no dependency from the XNA namespace on any of them.
-- Falsifiability: 158 planted defects across the five families, all killed.
+- Content Pipeline coverage: 667 projected members, 623 implemented, 39 abstract
+  by design, four blockers with written reasons, zero unreviewed, zero stale,
+  `CONTENT_PIPELINE_ACTIONABLE_LOCAL = 0`.
+- Falsifiability: 243 planted defects across six families, all killed.
 
 ## Invariants
 
@@ -196,24 +235,21 @@ asset-name special case is an acceptable way to make it green.
 ## The six opened scopes
 
 On 2026-09-02 every remaining "future profile" and "unopened extension" decision
-was revoked by product decision, and all six scopes were opened. Three are
+was revoked by product decision, and all six scopes were opened. Four are
 finished:
 
 1. Sensors and device services -- `docs/device-extensions.md`.
 2. Extended input -- `docs/input-extensions.md`.
 3. Net, wider GamerServices and Avatar -- `docs/online-profile.md`.
+4. The XNA Content Pipeline -- `docs/content-pipeline.md`.
 
-Three remain, each with its reference contract already generated and pinned:
+Two remain, each with its reference contract already generated and pinned:
 
-4. **XNA Content Pipeline** (`xna40-windows-content-pipeline`, 128 types, 743
-   members). Design-time surface. CNA declares no content-pipeline header, so
-   this is a pure-Python projection whose oracle is the XNB reader this
-   repository already ships.
-5. **Xbox 360 profile** (`xna40-xbox360-runtime`, 318 types, 3,577 members),
+4. **Xbox 360 profile** (`xna40-xbox360-runtime`, 318 types, 3,577 members),
    already measured as a strict subset of Windows runtime+online: zero
    Xbox-only types, zero Xbox-only members, zero enum value differences and
    zero type-shape differences.
-6. **Windows Phone profile**. The reference assemblies are proven absent from
+5. **Windows Phone profile**. The reference assemblies are proven absent from
    this machine, so every row that depends on reference metadata is
    `BLOCKED_REFERENCE_ASSET`; the locally authoritative and structural work is
    not blocked by that and is not excused by it.

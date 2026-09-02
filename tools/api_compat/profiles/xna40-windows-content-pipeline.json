@@ -8,6 +8,16 @@
     "/usr/lib/mono/4.5"
   ],
   "coreAssemblyName": "mscorlib",
+  "pythonPackages": [
+    "Microsoft.Xna.Framework.Content.Pipeline",
+    "Microsoft.Xna.Framework.Content.Pipeline.Audio",
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics",
+    "Microsoft.Xna.Framework.Content.Pipeline.Processors",
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler",
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate",
+    "Microsoft.Xna.Framework.Content.Pipeline.Tasks"
+  ],
+  "siblingProfiles": [],
   "referenceAssemblies": [
     "Microsoft.Xna.Framework.Content.Pipeline.dll",
     "Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll",
@@ -28,5 +38,7 @@
   },
   "referenceTypes": 128,
   "referenceMembers": 743,
-  "allowlist": []
+  "expectedPythonTypes": 128,
+  "allowlist": [],
+  "expectedPythonMembers": 598
 }

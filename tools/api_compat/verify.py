@@ -108,6 +108,10 @@ _TYPE_NAMES: dict[str, str] = _RULE_DATA.get("typeNames", {})
 _TYPE_MAPPINGS: dict[str, str] = _RULE_DATA.get("typeMappings", {})
 _MEMBER_TYPE_MAPPINGS: dict[str, str] = _RULE_DATA.get("memberTypeMappings", {})
 _PARAMETER_OMISSIONS: list[dict[str, Any]] = _RULE_DATA.get("parameterOmissions", [])
+#: ``owner.member`` -> {CLR generic name: Python keyword}. See
+#: :func:`_type_argument_parameters`.
+_TYPE_ARGUMENT_KEYWORDS: dict[str, dict[str, str]] = _RULE_DATA.get(
+    "typeArgumentKeywords", {})
 
 
 def projected_type_name(identity: str) -> str:
@@ -169,6 +173,13 @@ class ExpectedParameter:
     name: str
     annotation: str
     optional: bool = False
+    #: True for a parameter that stands in for a CLR *type argument* rather than
+    #: a CLR parameter. Python calls carry no type arguments, so a generic
+    #: method whose type argument cannot be inferred from any value takes it as
+    #: a keyword. The projection is declared in ``mapping-rules.json`` and read
+    #: by both the stub generator and this checker, so the two cannot disagree
+    #: about whether one is there.
+    keyword: bool = False
 
 
 @dataclass(frozen=True)
@@ -374,13 +385,23 @@ def _split_generic(value: str) -> tuple[str, list[str]] | None:
 
 
 def mapped_type(value: str | None, *, parameter_name: str | None = None,
-                return_position: bool = False, typevars: tuple[str, ...] = ()) -> str:
+                return_position: bool = False, typevars: tuple[str, ...] = (),
+                class_typevars: tuple[str, ...] = ()) -> str:
+    """One CLR type name, as the Python annotation that projects it.
+
+    ``!N`` is the *declaring type's* Nth generic parameter and ``!!N`` is the
+    *member's*. They are resolved from separate lists because they name separate
+    things: ``ChildCollection<TParent, TChild>.GetParent(!1) -> !0`` has no
+    member generics at all, and resolving its ``!0`` against the member's empty
+    list would silently answer ``T``.
+    """
     if value is None:
         return "None"
     if value.endswith("&"):
         value = value[:-1]
     if value.endswith("[]"):
-        element = mapped_type(value[:-2], typevars=typevars)
+        element = mapped_type(value[:-2], typevars=typevars,
+                              class_typevars=class_typevars)
         if return_position:
             return f"list[{element}]"
         if parameter_name in {"destinationArray", "corners", "data"}:
@@ -391,6 +412,8 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
         return typevars[index] if index < len(typevars) else f"T{index}"
     if value.startswith("!"):
         index = int(value[1:])
+        if index < len(class_typevars):
+            return class_typevars[index]
         return typevars[index] if index < len(typevars) else "T" if index == 0 else f"T{index}"
     if value in _TYPE_MAPPINGS:
         return _TYPE_MAPPINGS[value]
@@ -399,7 +422,9 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
     generic = _split_generic(value)
     if generic is not None:
         owner, arguments = generic
-        mapped = [mapped_type(argument, typevars=typevars) for argument in arguments]
+        mapped = [mapped_type(argument, typevars=typevars,
+                              class_typevars=class_typevars)
+                  for argument in arguments]
         if owner.startswith("System.Nullable`1"):
             return f"{mapped[0]} | None"
         if owner.startswith("System.Action`1"):
@@ -419,14 +444,48 @@ def mapped_type(value: str | None, *, parameter_name: str | None = None,
 
 
 def _projected_generic_name(value: dict[str, Any]) -> str:
+    """The Python TypeVar name for one CLR generic parameter.
+
+    A constrained parameter is renamed after its constraint. Python declares a
+    TypeVar once per module, so two CLR parameters that share a name and differ
+    only in their constraint -- ``MaterialContent`` has three ``T``s, one
+    ``struct``, one ``class``, one unconstrained -- would otherwise have to be
+    one declaration that is wrong for at least two of them.
+    """
     constraints = value.get("typeConstraints", ())
     if constraints == ["Microsoft.Xna.Framework.Graphics.IVertexType"]:
         return value["name"] + "Vertex"
+    if constraints == ["System.ValueType"]:
+        return value["name"] + "Value"
     return value["name"]
 
 
+def _type_argument_parameters(owner: str | None, member: str,
+                              generic_names: tuple[str, ...]
+                              ) -> tuple[ExpectedParameter, ...]:
+    """The keyword parameters that stand in for a CLR type argument.
+
+    A generic method whose type argument appears in no parameter cannot have it
+    inferred from a Python call, so the projection takes it as a keyword. Which
+    methods those are, and what the keyword is called, is data in
+    ``mapping-rules.json`` -- read here and by the stub generator, so the
+    signature the checker expects and the one the stub declares come from one
+    place.
+    """
+    if owner is None:
+        return ()
+    rule = _TYPE_ARGUMENT_KEYWORDS.get(f"{owner}.{member}")
+    if not rule:
+        return ()
+    return tuple(
+        ExpectedParameter(rule[generic], f"type[{generic}]", False, True)
+        for generic in generic_names if generic in rule
+    )
+
+
 def expected_callable(member: dict[str, Any], projected: str,
-                      owner_identity: str | None = None) -> ExpectedCallable:
+                      owner_identity: str | None = None,
+                      class_typevars: tuple[str, ...] = ()) -> ExpectedCallable:
     generic_names = tuple(_projected_generic_name(value)
                           for value in member.get("genericParameters", ()))
     parameters = tuple(
@@ -435,7 +494,7 @@ def expected_callable(member: dict[str, Any], projected: str,
             _MEMBER_TYPE_MAPPINGS.get(
                 f"{owner_identity}.{member['name']}.{parameter['name'] or 'value'}",
                 mapped_type(parameter["type"], parameter_name=parameter["name"] or "value",
-                            typevars=generic_names),
+                            typevars=generic_names, class_typevars=class_typevars),
             ),
             bool(parameter.get("optional")),
         )
@@ -444,8 +503,11 @@ def expected_callable(member: dict[str, Any], projected: str,
             owner_identity, member["name"], parameter["name"] or "value"
         )
     )
+    parameters = parameters + _type_argument_parameters(
+        owner_identity, member["name"], generic_names)
     outputs = [
-        mapped_type(parameter["type"], typevars=generic_names)
+        mapped_type(parameter["type"], typevars=generic_names,
+                    class_typevars=class_typevars)
         for parameter in member.get("parameters", ()) if parameter.get("out")
     ]
     if member["kind"] == "constructor":
@@ -455,7 +517,7 @@ def expected_callable(member: dict[str, Any], projected: str,
         primary = _MEMBER_TYPE_MAPPINGS.get(
             f"{owner_identity}.{member['name']}.return",
             mapped_type(member.get("returnType"), return_position=True,
-                        typevars=generic_names),
+                        typevars=generic_names, class_typevars=class_typevars),
         )
         values = ([] if primary == "None" else [primary]) + outputs
         return_type = values[0] if len(values) == 1 else f"tuple[{', '.join(values)}]" if values else "None"
@@ -485,9 +547,11 @@ def _parameter_is_omitted(owner: str | None, member: str, parameter: str) -> boo
 
 def expected_callables(owner: dict[str, Any], name: str,
                        members: list[dict[str, Any]]) -> list[ExpectedCallable]:
+    class_typevars = tuple(_projected_generic_name(value)
+                           for value in owner.get("genericParameters", ()))
     result: list[ExpectedCallable] = []
     for member in members:
-        value = expected_callable(member, name, owner["name"])
+        value = expected_callable(member, name, owner["name"], class_typevars)
         if value not in result:
             result.append(value)
     if members[0]["kind"] == "constructor" and owner["kind"] == "struct":
@@ -825,6 +889,10 @@ _BCL_INTERFACE_MEMBERS: dict[str, tuple[str, ...]] = {
     "System.Collections.Generic.ICollection`1": ("__iter__", "__len__"),
     "System.Collections.Generic.IList`1": ("__getitem__", "__iter__", "__len__"),
     "System.Collections.Generic.IDictionary`2": ("__getitem__", "__iter__", "__len__"),
+    # The non-generic IList is the same protocol with no element type. XNA's
+    # ``VertexChannel`` implements it precisely because its elements are of a
+    # type only the run time knows.
+    "System.Collections.IList": ("__getitem__", "__iter__", "__len__"),
 }
 
 
@@ -1079,24 +1147,38 @@ def verify(selected: Profile) -> dict[str, Any]:
                     add(diagnostics, "FIELD_MAPPING_MISMATCH", identity,
                         f"{name}: stub static={declaration.static}, expected static={sample.get('static')}")
             elif sample["kind"] == "property":
+                # A CLR type may declare several indexers -- one by name and one
+                # by position, say -- and Python has one ``__getitem__``. What
+                # the projection must provide is therefore the *union*: writable
+                # when any overload is writable, because a caller reaching the
+                # writable one has to find a ``__setitem__``.
+                expected_get = any(bool(value.get("get")) for value in members)
+                expected_set = any(bool(value.get("set")) for value in members)
                 if name == "__getitem__" and callable(getattr(target, name, None)):
                     shaped, can_get, can_set = True, True, raw_member(target, "__setitem__") is not None
                 else:
                     shaped, can_get, can_set = is_property_shape(raw, bool(sample.get("static")))
-                if not shaped or can_get != bool(sample.get("get")) or can_set != bool(sample.get("set")):
+                if not shaped or can_get != expected_get or can_set != expected_set:
                     add(diagnostics, "PROPERTY_MAPPING_MISMATCH", identity,
-                        f"{name}: expected get={sample.get('get')} set={sample.get('set')} static={sample.get('static')}")
+                        f"{name}: expected get={expected_get} set={expected_set} static={sample.get('static')}")
                 expected_type = _MEMBER_TYPE_MAPPINGS.get(
                     f"{identity}.{sample['name']}",
                     mapped_type(sample["type"], return_position=True,
-                                typevars=generic_parameters),
+                                class_typevars=generic_parameters),
                 )
                 if name == "__getitem__":
-                    expected_indexers = [expected_callable({
-                        "kind": "method", "name": "Item", "static": False,
-                        "returnType": sample["type"], "parameters": sample.get("parameters", ()),
-                        "genericParameters": [],
-                    }, name, identity)]
+                    # Every declared indexer, not just the first: two overloads
+                    # are two signatures the stub has to carry.
+                    expected_indexers = []
+                    for value in members:
+                        candidate = expected_callable({
+                            "kind": "method", "name": "Item", "static": False,
+                            "returnType": value["type"],
+                            "parameters": value.get("parameters", ()),
+                            "genericParameters": [],
+                        }, name, identity, generic_parameters)
+                        if candidate not in expected_indexers:
+                            expected_indexers.append(candidate)
                     declarations = stub.callables.get(name, [])
                     if not declarations:
                         add(diagnostics, "PROPERTY_MAPPING_MISMATCH", identity,
@@ -1140,7 +1222,13 @@ def verify(selected: Profile) -> dict[str, Any]:
                     compare_callable_contract(identity, name, projected, declarations,
                                               raw, typevars, diagnostics)
                     compare_generic_bounds(identity, name, members, typevars, diagnostics)
-                expected_arities = {len(value.parameters) for value in projected}
+                # Arity is the *positional* call shape. A keyword parameter
+                # standing in for a CLR type argument is not part of it: XNA's
+                # method takes the arguments it takes, and the type argument is
+                # spelled rather than passed.
+                expected_arities = {
+                    sum(1 for parameter in value.parameters if not parameter.keyword)
+                    for value in projected}
                 actual_arities = accepted_arities(target, name, raw)
                 if actual_arities is None:
                     add(diagnostics, "OVERLOAD_MAPPING_MISMATCH", identity,

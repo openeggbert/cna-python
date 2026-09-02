@@ -107,12 +107,88 @@ HEADERS = {
         "",
         "TPacked = TypeVar(\"TPacked\")",
     ],
+    "Microsoft.Xna.Framework.Content.Pipeline": [
+        "from datetime import timedelta",
+        "from enum import IntEnum",
+        "from typing import Any, Callable, Generic, Iterable, Iterator, Mapping, MutableSequence, Sequence, TextIO, TypeVar, overload",
+        "from .... import Color, Matrix, Vector2, Vector3",
+        "",
+        "T = TypeVar(\"T\")",
+        "TChild = TypeVar(\"TChild\")",
+        "TInput = TypeVar(\"TInput\")",
+        "TOutput = TypeVar(\"TOutput\")",
+        "TParent = TypeVar(\"TParent\")",
+    ],
+    "Microsoft.Xna.Framework.Content.Pipeline.Audio": [
+        "from datetime import timedelta",
+        "from enum import IntEnum",
+        "from typing import Any, Sequence",
+        "from .. import ContentItem",
+    ],
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics": [
+        "from datetime import timedelta",
+        "from enum import IntEnum",
+        "from typing import Any, Callable, Generic, Iterable, Iterator, MutableSequence, Sequence, TypeVar, overload",
+        "from ..... import Color, Matrix, Rectangle, Vector2, Vector3",
+        "from .....Graphics import CompareFunction, GraphicsProfile, SurfaceFormat, VertexElementFormat, VertexElementUsage",
+        "from .. import ContentItem, ExternalReferenceOfT, NamedValueDictionaryOfT",
+        "",
+        "T = TypeVar(\"T\")",
+        "# XNA constrains MaterialContent.GetValueTypeProperty's T to a value",
+        "# type; the constraint is projected as the bound and the name carries",
+        "# it, so the type's three differently constrained Ts stay distinct.",
+        "TValue = TypeVar(\"TValue\", bound=object)",
+        "ElementType = TypeVar(\"ElementType\")",
+        "TargetType = TypeVar(\"TargetType\")",
+        "TInput = TypeVar(\"TInput\")",
+        "TOutput = TypeVar(\"TOutput\")",
+    ],
+    "Microsoft.Xna.Framework.Content.Pipeline.Processors": [
+        "from enum import IntEnum",
+        "from typing import Any, Iterable, Sequence, overload",
+        "from ..... import BoundingSphere, Color, Matrix",
+        "from .. import ContentItem, ContentProcessorContext, ContentProcessorOfT",
+        "from ..Audio import AudioContent, ConversionQuality",
+        "from ..Graphics import (",
+        "    FontDescription, MaterialContent, NodeContent, Texture2DContent,",
+        "    TextureContent,",
+        ")",
+        "from ...._video import VideoContent",
+    ],
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler": [
+        "from typing import Any, BinaryIO, Generic, TypeVar, overload",
+        "from ...... import Color, Matrix, Quaternion, Vector2, Vector3, Vector4",
+        "from ......Graphics import GraphicsProfile",
+        "from ... import ExternalReferenceOfT, TargetPlatform",
+        "",
+        "T = TypeVar(\"T\")",
+    ],
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate": [
+        "from typing import Any, Callable, Generic, TextIO, TypeVar, overload",
+        "from .... import ContentSerializerAttribute",
+        "from ... import ExternalReferenceOfT",
+        "",
+        "T = TypeVar(\"T\")",
+    ],
+    "Microsoft.Xna.Framework.Content.Pipeline.Tasks": [
+        "from typing import Any, Sequence",
+    ],
 }
 
 
 def parameter_text(parameters) -> str:
+    """One signature's parameters, with the keyword-only marker where needed.
+
+    A parameter standing in for a CLR type argument is keyword-only, because
+    that is what keeps the *positional* signature XNA's. ``*`` is written once,
+    before the first of them.
+    """
     result = []
+    marked = False
     for parameter in parameters:
+        if getattr(parameter, "keyword", False) and not marked:
+            result.append("*")
+            marked = True
         name = (parameter.name or "value") + ("_" if parameter.name == "None" else "")
         result.append(f"{name}: {parameter.annotation}" + (" = ..." if parameter.optional else ""))
     return ", ".join(result)
@@ -177,11 +253,14 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
                 annotation = f"Final[{annotation}]" if sample.get("constant") else f"ClassVar[{annotation}]"
             lines.append(f"    {name}: {annotation}")
         elif sample["kind"] == "property" and name == "__getitem__":
+            # A CLR type may declare several indexers -- by name and by
+            # position, say -- and every one of them is a signature the stub
+            # has to carry.
             signature = expected_callables(expected, name, [{
                 "kind": "method", "name": "Item", "static": False,
-                "returnType": sample["type"], "parameters": sample.get("parameters", ()),
+                "returnType": value["type"], "parameters": value.get("parameters", ()),
                 "genericParameters": [],
-            }])
+            } for value in members])
             lines.extend(render_callable(name, signature))
         elif sample["kind"] == "property":
             annotation = rules.get("memberTypeMappings", {}).get(
@@ -231,6 +310,13 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
             argument = interface_name[interface_name.find("[") + 1:-1]
             if raw_member(target, "__iter__") is not None:
                 lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
+            if raw_member(target, "__len__") is not None:
+                lines.append("    def __len__(self) -> int: ...")
+        if interface_name == "System.Collections.IList":
+            # The non-generic IList: the same protocol with no element type, so
+            # what it yields is whatever the run time holds.
+            if raw_member(target, "__iter__") is not None:
+                lines.append("    def __iter__(self) -> Iterator[object]: ...")
             if raw_member(target, "__len__") is not None:
                 lines.append("    def __len__(self) -> int: ...")
         if interface_name.startswith("System.Collections.Generic.IList`1["):

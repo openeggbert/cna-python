@@ -36,7 +36,17 @@
     "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator": "ModelMeshPartCollectionEnumerator",
     "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator": "TouchCollection.Enumerator",
     "Microsoft.Xna.Framework.GamerServices.GamerCollection`1": "GamerCollectionOfT",
-    "Microsoft.Xna.Framework.GamerServices.GamerCollection`1+GamerCollectionEnumerator": "GamerCollectionOfT.GamerCollectionEnumerator"
+    "Microsoft.Xna.Framework.GamerServices.GamerCollection`1+GamerCollectionEnumerator": "GamerCollectionOfT.GamerCollectionEnumerator",
+    "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2": "ChildCollectionOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.ContentImporter`1": "ContentImporterOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessor`2": "ContentProcessorOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.ExternalReference`1": "ExternalReferenceOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1": "NamedValueDictionaryOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1": "PixelBitmapContentOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1": "VertexChannelOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter`1": "ContentTypeWriterOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1": "ContentTypeSerializerOfT",
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer+ChildCallback": "ContentTypeSerializer.ChildCallback"
   },
   "typeMappings": {
     "System.ComponentModel.ITypeDescriptorContext": "object",
@@ -54,7 +64,12 @@
     "System.DateTime": "datetime",
     "System.Runtime.Serialization.SerializationInfo": "object",
     "System.Runtime.Serialization.StreamingContext": "object",
-    "System.Globalization.RegionInfo": "str"
+    "System.Globalization.RegionInfo": "str",
+    "System.Xml.XmlWriter": "TextIO",
+    "System.Xml.XmlReader": "TextIO",
+    "Microsoft.Build.Framework.ITaskItem": "object",
+    "System.Converter`2": "Callable",
+    "System.ValueType": "object"
   },
   "memberTypeMappings": {
     "Microsoft.Xna.Framework.Audio.AudioCategory.Name": "str | None",
@@ -81,7 +96,12 @@
     "System.Attribute": "object",
     "System.ComponentModel.ExpandableObjectConverter": "composition:_MathTypeConverterBase",
     "System.Runtime.InteropServices.ExternalException": "Exception",
-    "System.IO.BinaryReader": "composition:_BinaryReader"
+    "System.IO.BinaryReader": "composition:_BinaryReader",
+    "System.Collections.ObjectModel.Collection`1": "composition:_Collection",
+    "System.Collections.ObjectModel.ReadOnlyCollection`1": "composition:_ReadOnlyCollection",
+    "System.IO.BinaryWriter": "composition:_BinaryWriter",
+    "Microsoft.Build.Utilities.Task": "composition:_Task",
+    "System.MulticastDelegate": "object"
   },
   "parameterOmissions": [
     {
@@ -120,5 +140,32 @@
     "__len__",
     "__next__",
     "insert"
-  ]
+  ],
+  "typeArgumentKeywords": {
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.CreateVertexChannel": {
+      "T": "elementType"
+    },
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.ReadConvertedContent": {
+      "TargetType": "targetType"
+    },
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.ReadConvertedContent": {
+      "TargetType": "targetType"
+    },
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.ConvertChannelContent": {
+      "TargetType": "targetType"
+    },
+    "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VectorConverter.GetConverter": {
+      "TInput": "sourceType",
+      "TOutput": "destinationType"
+    },
+    "Microsoft.Xna.Framework.Content.Pipeline.MaterialContent.GetValueTypeProperty": {
+      "TValue": "expected"
+    },
+    "Microsoft.Xna.Framework.Content.Pipeline.MaterialContent.GetReferenceTypeProperty": {
+      "T": "expected"
+    },
+    "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Deserialize": {
+      "T": "targetType"
+    }
+  }
 }

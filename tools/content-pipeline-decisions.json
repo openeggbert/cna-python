@@ -1,0 +1,226 @@
+{
+ "schemaVersion": 1,
+ "note": "Every Content Pipeline member whose implementation can raise NotImplementedError, and why. Read by tools/verify_content_pipeline.py, which reports a member that refuses and is not listed here as UNREVIEWED and one listed here that no longer refuses as STALE.",
+ "decisions": [
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.GetParent",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: where a child's parent pointer lives is the derived collection's to say, and NodeContentCollection and GeometryContentCollection say it differently."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.SetParent",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA, and the write half of the same decision as GetParent: the derived collection owns the field the parent pointer lives in."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.LogImportantMessage",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a build tool provides the sink, and this is the message it must show even when ordinary ones are hidden."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.LogMessage",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a build tool provides the sink. Tasks._CollectingLogger is this repository's, and BuildContent uses it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.LogWarning",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a build tool provides the sink, and a warning also carries the identity of the content it is about."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.AddDependency",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: only the build knows what to do with a dependency. Tasks._ImporterContext records them and BuildContent rebuilds on them."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.IntermediateDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the build owns the intermediate directory, which is also where its dependency cache lives. Tasks._ImporterContext answers it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.Logger",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the build owns the logger. Tasks._ImporterContext is the concrete one, and every importer test runs against a context."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.OutputDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the build owns the output directory, and only the build knows where it is. Tasks._ImporterContext answers it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporter`1.Import",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: this is the method an importer exists to override, and ten of them do."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.AddDependency",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.AddOutputFile",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.BuildAndLoadAsset",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.BuildAsset",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.BuildConfiguration",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.Convert",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.IntermediateDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.Logger",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.OutputDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.OutputFilename",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.Parameters",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.TargetPlatform",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.TargetProfile",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessor`2.Process",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the method a processor exists to override, and twelve of them do."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.GetPixelData",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: how pixels are stored is the derived bitmap's. PixelBitmapContentOfT and DxtBitmapContent both implement it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.SetPixelData",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: how pixels are stored is the derived bitmap's business, and PixelBitmapContentOfT and DxtBitmapContent store them differently."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.TryGetFormat",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a bitmap's surface format follows from its storage, and every concrete bitmap answers it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentImporter.Import",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: the contract an importer implements."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: what a build tool reads to decide which processors it may offer for an importer's output."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.OutputType",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: the other half of what a build tool reads to match importers to processors."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.Process",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: the untyped half of the contract a processor implements, and ContentProcessorOfT is what implements it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.GetRuntimeReader",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the CLR name of the reader goes into the file's reader table, and only the writer knows which reader that is."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.GetRuntimeType",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the CLR name of the type a runtime will build is known only to the writer that produces it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.Write",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: writing one type is what a type writer is. Twenty-four built-in writers implement it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter`1.Write",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "inherited abstract: a closed writer overrides it with the typed form, which is the same method in Python."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.Deserialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: reading one type back out of XML is what a type serializer is for; four implementations of it ship here."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.Serialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: reading and writing one type as XML is what a type serializer is. The scalar, collection, dictionary and reflective serializers implement it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1.Deserialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "inherited abstract: the read half of the same decision as Serialize."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1.Serialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "inherited abstract: a closed serializer overrides it with the typed form, which is the same method in Python."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.Copy",
+   "status": "IMPLEMENTED_ERROR_PATH",
+   "reason": "implemented. The NotImplementedError is the end of the double dispatch: both bitmaps were asked and neither can perform this particular copy, which is an error about the arguments rather than a member that refuses."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor.Process",
+   "status": "BLOCKED_UPSTREAM",
+   "reason": "BLOCKED_UPSTREAM: compiling HLSL needs a shader compiler. CNA's effects.h says at cna_effect_create_compiled that 'this runtime embeds no HLSL compiler and the XNA/FNA toolchain must compile it first', and Python's standard library has none. Everything up to the compiler runs: the input is validated and Defines is parsed. Unblocked by a CNA route that takes effect source and answers bytecode."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontDescriptionProcessor.Process",
+   "status": "BLOCKED_UPSTREAM",
+   "reason": "BLOCKED_UPSTREAM: rasterizing a named font needs a TrueType rasterizer. Python's standard library has none and CNA's C ABI declares none -- sprite_font.h reads a SpriteFont and does not build one. FontTextureProcessor produces the same SpriteFontContent from a texture and is fully implemented, so the format is reachable. Unblocked by a CNA route that rasterizes a font file into glyphs."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.Execute",
+   "status": "BLOCKED_UPSTREAM",
+   "reason": "BLOCKED_FIXTURE for a project with content, implemented for one without: an .xap is compiled by Microsoft's XACT tool, which is Windows-only and not redistributable, and CNA's xact.h reads wave and sound banks rather than building them. SoundEffectProcessor builds ordinary sound effects. Unblocked by a CNA route that compiles an XACT project."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.FbxImporter.Import",
+   "status": "BLOCKED_FIXTURE",
+   "reason": "BLOCKED_FIXTURE: FBX is a proprietary format with no public specification, its only complete reader is Autodesk's SDK, and neither this package nor CNA's C ABI provides one. A partial reader would disagree with the artist's file silently, which is worse than not reading it. XImporter reads DirectX .x, which every FBX exporter can write, so the model path is reachable. Unblocked by a CNA route that imports FBX."
+  }
+ ]
+}

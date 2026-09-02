@@ -1,0 +1,2735 @@
+{
+ "schemaVersion": 1,
+ "profile": "xna40-windows-content-pipeline",
+ "summary": {
+  "PROJECTED_MEMBERS": 667,
+  "IMPLEMENTED": 623,
+  "UNREVIEWED": 0,
+  "STALE_DECISIONS": 0,
+  "DECISIONS_FOR_ABSENT_MEMBERS": 0,
+  "STATUS_ABSTRACT_BY_DESIGN": 39,
+  "STATUS_IMPLEMENTED_ERROR_PATH": 1,
+  "STATUS_BLOCKED_UPSTREAM": 3,
+  "STATUS_BLOCKED_FIXTURE": 1,
+  "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
+  "STATUS_ACTIONABLE_LOCAL": 0,
+  "CONTENT_PIPELINE_ACTIONABLE_LOCAL": 0
+ },
+ "unreviewed": [],
+ "stale": [],
+ "absent": [],
+ "members": [
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.ConvertFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.Data",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.Dispose",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.Duration",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.FileName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.FileType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.Format",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.LoopLength",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.LoopStart",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFileType.Mp3",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFileType.Wav",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFileType.Wma",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFormat.AverageBytesPerSecond",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFormat.BitsPerSample",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFormat.BlockAlign",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFormat.ChannelCount",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFormat.Format",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFormat.NativeWaveFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.AudioFormat.SampleRate",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.ConversionFormat.Adpcm",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.ConversionFormat.Pcm",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.ConversionFormat.WindowsMedia",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.ConversionFormat.Xma",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.ConversionQuality.Best",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.ConversionQuality.Low",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Audio.ConversionQuality.Medium",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.ClearItems",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.GetParent",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: where a child's parent pointer lives is the derived collection's to say, and NodeContentCollection and GeometryContentCollection say it differently."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.InsertItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.RemoveItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.SetItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.SetParent",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA, and the write half of the same decision as GetParent: the derived collection owns the field the parent pointer lives in."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ChildCollection`2.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.GetCurrentFilename",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.LogImportantMessage",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a build tool provides the sink, and this is the message it must show even when ordinary ones are hidden."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.LogMessage",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a build tool provides the sink. Tasks._CollectingLogger is this repository's, and BuildContent uses it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.LogWarning",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a build tool provides the sink, and a warning also carries the identity of the content it is about."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.LoggerRootDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.PopFile",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.PushFile",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentBuildLogger.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentIdentity.FragmentIdentifier",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentIdentity.SourceFilename",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentIdentity.SourceTool",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentIdentity.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterAttribute.CacheImportedData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterAttribute.DefaultProcessor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterAttribute.DisplayName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterAttribute.FileExtensions",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterAttribute.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.AddDependency",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: only the build knows what to do with a dependency. Tasks._ImporterContext records them and BuildContent rebuilds on them."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.IntermediateDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the build owns the intermediate directory, which is also where its dependency cache lives. Tasks._ImporterContext answers it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.Logger",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the build owns the logger. Tasks._ImporterContext is the concrete one, and every importer test runs against a context."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.OutputDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the build owns the output directory, and only the build knows where it is. Tasks._ImporterContext answers it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporterContext.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporter`1.Import",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: this is the method an importer exists to override, and ten of them do."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentImporter`1.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentItem.Identity",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentItem.Name",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentItem.OpaqueData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentItem.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorAttribute.DisplayName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorAttribute.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.AddDependency",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.AddOutputFile",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.BuildAndLoadAsset",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.BuildAsset",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.BuildConfiguration",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.Convert",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.IntermediateDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.Logger",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.OutputDirectory",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.OutputFilename",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.Parameters",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.TargetPlatform",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.TargetProfile",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a processor context is what a *build* provides. Tasks._ProcessorContext is the concrete one -- its BuildAsset really builds a nested asset and writes it -- and the build-task tests run through it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessor`2.Process",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the method a processor exists to override, and twelve of them do."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ContentProcessor`2.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ExternalReference`1.Filename",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ExternalReference`1.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.FbxImporter.Import",
+   "status": "BLOCKED_FIXTURE",
+   "reason": "BLOCKED_FIXTURE: FBX is a proprietary format with no public specification, its only complete reader is Autodesk's SDK, and neither this package nor CNA's C ABI provides one. A partial reader would disagree with the artist's file silently, which is worse than not reading it. XImporter reads DirectX .x, which every FBX exporter can write, so the model path is reachable. Unblocked by a CNA route that imports FBX."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.FbxImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.FontDescriptionImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.FontDescriptionImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.Alpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.AlphaFunction",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.AlphaFunctionKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.AlphaKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.DiffuseColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.DiffuseColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.ReferenceAlpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.ReferenceAlphaKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.Texture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.TextureKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.VertexColorEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.VertexColorEnabledKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AlphaTestMaterialContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.Add",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.Clear",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.Contains",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.Count",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.GetEnumerator",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.IndexOf",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.Remove",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.RemoveAt",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.__getitem__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannel.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationChannelDictionary.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationContent.Channels",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationContent.Duration",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationContentDictionary.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationKeyframe.CompareTo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationKeyframe.Time",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationKeyframe.Transform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.AnimationKeyframe.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.Alpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.AlphaKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.DiffuseColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.DiffuseColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.EmissiveColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.EmissiveColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.SpecularColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.SpecularColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.SpecularPower",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.SpecularPowerKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.Texture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.TextureKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.VertexColorEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.VertexColorEnabledKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BasicMaterialContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.Copy",
+   "status": "IMPLEMENTED_ERROR_PATH",
+   "reason": "implemented. The NotImplementedError is the end of the double dispatch: both bitmaps were asked and neither can perform this particular copy, which is an error about the arguments rather than a member that refuses."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.GetPixelData",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: how pixels are stored is the derived bitmap's. PixelBitmapContentOfT and DxtBitmapContent both implement it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.Height",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.SetPixelData",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: how pixels are stored is the derived bitmap's business, and PixelBitmapContentOfT and DxtBitmapContent store them differently."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.ToString",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.TryCopyFrom",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.TryCopyTo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.TryGetFormat",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: a bitmap's surface format follows from its storage, and every concrete bitmap answers it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.ValidateCopyArguments",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.Width",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BoneContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BoneWeight.BoneName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BoneWeight.Weight",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BoneWeight.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BoneWeightCollection.NormalizeWeights",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.BoneWeightCollection.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.Alpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.AlphaKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.DiffuseColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.DiffuseColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.Texture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.Texture2",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.Texture2Key",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.TextureKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.VertexColorEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.VertexColorEnabledKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DualTextureMaterialContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Dxt1BitmapContent.TryGetFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Dxt1BitmapContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Dxt3BitmapContent.TryGetFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Dxt3BitmapContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Dxt5BitmapContent.TryGetFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Dxt5BitmapContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DxtBitmapContent.GetPixelData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DxtBitmapContent.SetPixelData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DxtBitmapContent.TryCopyFrom",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DxtBitmapContent.TryCopyTo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.DxtBitmapContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EffectContent.EffectCode",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EffectContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EffectMaterialContent.CompiledEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EffectMaterialContent.CompiledEffectKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EffectMaterialContent.Effect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EffectMaterialContent.EffectKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EffectMaterialContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.Alpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.AlphaKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.DiffuseColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.DiffuseColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EmissiveColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EmissiveColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EnvironmentMap",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EnvironmentMapAmount",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EnvironmentMapAmountKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EnvironmentMapKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EnvironmentMapSpecular",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.EnvironmentMapSpecularKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.FresnelFactor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.FresnelFactorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.Texture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.TextureKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.EnvironmentMapMaterialContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.Characters",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.DefaultCharacter",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.FontName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.Size",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.Spacing",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.Style",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.UseKerning",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescription.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescriptionStyle.Bold",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescriptionStyle.Italic",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.FontDescriptionStyle.Regular",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.GeometryContent.Indices",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.GeometryContent.Material",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.GeometryContent.Parent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.GeometryContent.Vertices",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.GeometryContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.GeometryContentCollection.GetParent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.GeometryContentCollection.SetParent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndexCollection.AddRange",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndexCollection.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndirectPositionCollection.Contains",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndirectPositionCollection.CopyTo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndirectPositionCollection.Count",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndirectPositionCollection.GetEnumerator",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndirectPositionCollection.IndexOf",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.IndirectPositionCollection.__getitem__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.GetReferenceTypeProperty",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.GetTexture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.GetValueTypeProperty",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.SetProperty",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.SetTexture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.Textures",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.AddTriangleVertex",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.CreatePosition",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.CreateVertexChannel",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.FinishMesh",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.MergeDuplicatePositions",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.MergePositionTolerance",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.Name",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.SetMaterial",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.SetOpaqueData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.SetVertexChannelData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.StartMesh",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder.SwapWindingOrder",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent.Geometry",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent.Positions",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.CalculateNormals",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.CalculateTangentFrames",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.FindSkeleton",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.FlattenSkeleton",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.MergeDuplicatePositions",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.MergeDuplicateVertices",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.OptimizeForCache",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.SwapWindingOrder",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper.TransformScene",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MipmapChain.InsertItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MipmapChain.SetItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MipmapChain.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MipmapChainCollection.ClearItems",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MipmapChainCollection.InsertItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MipmapChainCollection.RemoveItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.MipmapChainCollection.SetItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent.AbsoluteTransform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent.Animations",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent.Children",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent.Parent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent.Transform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContentCollection.GetParent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContentCollection.SetParent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.GetPixel",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.GetPixelData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.GetRow",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.ReplaceColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.SetPixel",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.SetPixelData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.ToString",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.TryCopyFrom",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.TryCopyTo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.TryGetFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PixelBitmapContent`1.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.PositionCollection.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.Alpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.AlphaKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.DiffuseColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.DiffuseColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.EmissiveColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.EmissiveColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.SpecularColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.SpecularColorKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.SpecularPower",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.SpecularPowerKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.Texture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.TextureKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.WeightsPerVertex",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.WeightsPerVertexKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.SkinnedMaterialContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent.Mipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent.Validate",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture2DContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture3DContent.GenerateMipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture3DContent.Validate",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.Texture3DContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent.ConvertBitmapType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent.Faces",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent.GenerateMipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent.Validate",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureCubeContent.Validate",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureCubeContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureReferenceDictionary.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VectorConverter.GetConverter",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VectorConverter.TryGetSurfaceFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VectorConverter.TryGetVectorType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VectorConverter.TryGetVertexElementFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.Contains",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.CopyTo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.Count",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.ElementType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.GetEnumerator",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.IndexOf",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.Name",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.ReadConvertedContent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel.__getitem__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.Add",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.Clear",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.Contains",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.ConvertChannelContent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.Count",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.Get",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.GetEnumerator",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.IndexOf",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.Insert",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.Remove",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.RemoveAt",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelCollection.__getitem__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.Binormal",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.Color",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.DecodeBaseName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.DecodeUsageIndex",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.EncodeName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.Normal",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.Tangent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.TextureCoordinate",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.TryDecodeUsage",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannelNames.Weights",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.Contains",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.CopyTo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.ElementType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.GetEnumerator",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.IndexOf",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.ReadConvertedContent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexChannel`1.__getitem__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.Add",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.AddRange",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.Channels",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.CreateVertexBuffer",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.Insert",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.InsertRange",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.PositionIndices",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.Positions",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.RemoveAt",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.RemoveRange",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Graphics.VertexContent.VertexCount",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentImporter.Import",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: the contract an importer implements."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.InputType",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: what a build tool reads to decide which processors it may offer for an importer's output."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.OutputType",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: the other half of what a build tool reads to match importers to processors."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.IContentProcessor.Process",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "an interface member: the untyped half of the contract a processor implements, and ContentProcessorOfT is what implements it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.InvalidContentException.ContentIdentity",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.InvalidContentException.GetObjectData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.InvalidContentException.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Mp3Importer.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Mp3Importer.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.Add",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.AddItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.Clear",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.ClearItems",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.ContainsKey",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.Count",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.DefaultSerializerType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.GetEnumerator",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.Keys",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.Remove",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.RemoveItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.SetItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.TryGetValue",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.Values",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.__getitem__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.NamedValueDictionary`1.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.AddItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.ClearItems",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.DefaultSerializerType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.GetContentAsXml",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.GetValue",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.RemoveItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.SetItem",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.OpaqueDataDictionary.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.Errors",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ImporterAttributes",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ImporterNames",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ImporterOutputTypes",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ProcessorAttributes",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ProcessorInputTypes",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ProcessorNames",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ProcessorOutputTypes",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.ProcessorParameters",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.Update",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineComponentScanner.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.PipelineException.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ProcessorParameter.DefaultValue",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ProcessorParameter.Description",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ProcessorParameter.DisplayName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ProcessorParameter.IsEnum",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ProcessorParameter.PossibleEnumValues",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ProcessorParameter.PropertyName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.ProcessorParameter.PropertyType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.CompiledEffectContent.GetEffectCode",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.CompiledEffectContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor.DebugMode",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor.Defines",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor.Process",
+   "status": "BLOCKED_UPSTREAM",
+   "reason": "BLOCKED_UPSTREAM: compiling HLSL needs a shader compiler. CNA's effects.h says at cna_effect_create_compiled that 'this runtime embeds no HLSL compiler and the XNA/FNA toolchain must compile it first', and Python's standard library has none. Everything up to the compiler runs: the input is validated and Defines is parsed. Unblocked by a CNA route that takes effect source and answers bytecode."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessorDebugMode.Auto",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessorDebugMode.Debug",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessorDebugMode.Optimize",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontDescriptionProcessor.Process",
+   "status": "BLOCKED_UPSTREAM",
+   "reason": "BLOCKED_UPSTREAM: rasterizing a named font needs a TrueType rasterizer. Python's standard library has none and CNA's C ABI declares none -- sprite_font.h reads a SpriteFont and does not build one. FontTextureProcessor produces the same SpriteFontContent from a texture and is fully implemented, so the format is reachable. Unblocked by a CNA route that rasterizes a font file into glyphs."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontDescriptionProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor.FirstCharacter",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor.GetCharacterForIndex",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor.PremultiplyAlpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor.TextureFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.BuildEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.BuildTexture",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.ColorKeyColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.ColorKeyEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.DefaultEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.GenerateMipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.PremultiplyTextureAlpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.ResizeTexturesToPowerOfTwo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.TextureFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessorDefaultEffect.AlphaTestEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessorDefaultEffect.BasicEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessorDefaultEffect.DualTextureEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessorDefaultEffect.EnvironmentMapEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessorDefaultEffect.SkinnedEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelBoneContent.Children",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelBoneContent.Index",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelBoneContent.Name",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelBoneContent.Parent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelBoneContent.Transform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelContent.Bones",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelContent.Meshes",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelContent.Root",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelContent.Tag",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshContent.BoundingSphere",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshContent.MeshParts",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshContent.Name",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshContent.ParentBone",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshContent.SourceMesh",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshContent.Tag",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.IndexBuffer",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.Material",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.NumVertices",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.PrimitiveCount",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.StartIndex",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.Tag",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.VertexBuffer",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelMeshPartContent.VertexOffset",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.ColorKeyColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.ColorKeyEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.ConvertMaterial",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.DefaultEffect",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.GenerateMipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.GenerateTangentFrames",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.PremultiplyTextureAlpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.PremultiplyVertexColors",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.ProcessGeometryUsingMaterial",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.ProcessVertexChannel",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.ResizeTexturesToPowerOfTwo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.RotationX",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.RotationY",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.RotationZ",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.Scale",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.SwapWindingOrder",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.TextureFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelTextureProcessor.ColorKeyColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelTextureProcessor.ColorKeyEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelTextureProcessor.GenerateMipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelTextureProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelTextureProcessor.ResizeToPowerOfTwo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelTextureProcessor.TextureFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelTextureProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.PassThroughProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.PassThroughProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SongProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SongProcessor.Quality",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SongProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SoundEffectProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SoundEffectProcessor.Quality",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SoundEffectProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SpriteTextureProcessor.ColorKeyColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SpriteTextureProcessor.ColorKeyEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SpriteTextureProcessor.GenerateMipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SpriteTextureProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SpriteTextureProcessor.ResizeToPowerOfTwo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SpriteTextureProcessor.TextureFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.SpriteTextureProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.ColorKeyColor",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.ColorKeyEnabled",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.GenerateMipmaps",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.PremultiplyAlpha",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.ResizeToPowerOfTwo",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.TextureFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessorOutputFormat.Color",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessorOutputFormat.DxtCompressed",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessorOutputFormat.NoChange",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexBufferContent.SizeOf",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexBufferContent.VertexData",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexBufferContent.VertexDeclaration",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexBufferContent.Write",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexBufferContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexDeclarationContent.VertexElements",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexDeclarationContent.VertexStride",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VertexDeclarationContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VideoProcessor.Process",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VideoProcessor.VideoSoundtrackType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Processors.VideoProcessor.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentCompiler.GetTypeWriter",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.CanDeserializeIntoExistingObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.GetRuntimeReader",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the CLR name of the reader goes into the file's reader table, and only the writer knows which reader that is."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.GetRuntimeType",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: the CLR name of the type a runtime will build is known only to the writer that produces it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.Initialize",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.ShouldCompressContent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.TargetType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.TypeVersion",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.Write",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: writing one type is what a type writer is. Twenty-four built-in writers implement it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriterAttribute.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter`1.Write",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "inherited abstract: a closed writer overrides it with the typed form, which is the same method in Python."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentTypeWriter`1.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.Dispose",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.TargetPlatform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.TargetProfile",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.Write",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.WriteExternalReference",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.WriteObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.WriteRawObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler.ContentWriter.WriteSharedResource",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer+ChildCallback.BeginInvoke",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer+ChildCallback.EndInvoke",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer+ChildCallback.Invoke",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer+ChildCallback.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.CanDeserializeIntoExistingObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.Deserialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: reading one type back out of XML is what a type serializer is for; four implementations of it ship here."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.Initialize",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.ObjectIsEmpty",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.ScanChildren",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.Serialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "abstract in XNA: reading and writing one type as XML is what a type serializer is. The scalar, collection, dictionary and reflective serializers implement it."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.TargetType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.XmlTypeName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializerAttribute.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1.Deserialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "inherited abstract: the read half of the same decision as Serialize."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1.ObjectIsEmpty",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1.ScanChildren",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1.Serialize",
+   "status": "ABSTRACT_BY_DESIGN",
+   "reason": "inherited abstract: a closed serializer overrides it with the typed form, which is the same method in Python."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.ContentTypeSerializer`1.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.MoveToElement",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.ReadExternalReference",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.ReadObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.ReadRawObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.ReadSharedResource",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.ReadTypeName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.Serializer",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateReader.Xml",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Deserialize",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.GetTypeSerializer",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateWriter.Serializer",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateWriter.WriteExternalReference",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateWriter.WriteObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateWriter.WriteRawObject",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateWriter.WriteSharedResource",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateWriter.WriteTypeName",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateWriter.Xml",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.TargetPlatform.Windows",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.TargetPlatform.WindowsPhone",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.TargetPlatform.Xbox360",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.BuildConfiguration",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.CancelEventNameFormat",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.CompressContent",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.ContentProjectGUID",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.Execute",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.IntermediateDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.IntermediateFiles",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.LoggerRootDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.OutputContentFiles",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.OutputDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.PipelineAssemblies",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.PipelineAssemblyDependencies",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.RebuildAll",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.RebuiltContentFiles",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.RootDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.SourceAssets",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.TargetPlatform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.TargetProfile",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.BuildConfiguration",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.ContentProjectGUID",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.Execute",
+   "status": "BLOCKED_UPSTREAM",
+   "reason": "BLOCKED_FIXTURE for a project with content, implemented for one without: an .xap is compiled by Microsoft's XACT tool, which is Windows-only and not redistributable, and CNA's xact.h reads wave and sound banks rather than building them. SoundEffectProcessor builds ordinary sound effects. Unblocked by a CNA route that compiles an XACT project."
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.IntermediateDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.IntermediateFiles",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.LoggerRootDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.OutputDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.OutputXactFiles",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.RebuildAll",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.RebuiltXactFiles",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.RootDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.TargetPlatform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.TargetProfile",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.XactProjects",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.XnaFrameworkVersion",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.BuildXact.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.BuildConfiguration",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.ContentProjectGUID",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.Execute",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.IntermediateDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.OutputDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.RootDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.TargetPlatform",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.TargetProfile",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.CleanContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.GetLastOutputs.ContentProjectGUID",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.GetLastOutputs.Execute",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.GetLastOutputs.IntermediateDirectory",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.GetLastOutputs.OutputContentFiles",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.Tasks.GetLastOutputs.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.BitsPerSecond",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.Dispose",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.Duration",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.Filename",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.FramesPerSecond",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.Height",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.VideoSoundtrackType",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.Width",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.VideoContent.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.WavImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.WavImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.WmaImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.WmaImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.WmvImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.WmvImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.XImporter.Dispose",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.XImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.XImporter.__init__",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.XmlImporter.Import",
+   "status": "IMPLEMENTED"
+  },
+  {
+   "member": "Microsoft.Xna.Framework.Content.Pipeline.XmlImporter.__init__",
+   "status": "IMPLEMENTED"
+  }
+ ]
+}
