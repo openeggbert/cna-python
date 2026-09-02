@@ -102,6 +102,25 @@ class RenderTarget2D(Texture2D, _ContentLostSubscription):
         self._subscribe_content_lost()
         self._read_render_target_info()
 
+    @classmethod
+    def _view_of(cls, graphicsDevice: GraphicsDevice, handle: int) -> "RenderTarget2D":
+        """Wraps a native render target this facade did not create.
+
+        Private, and not part of the XNA surface. The facade owns the *handle*
+        and releases it on ``Dispose``; whether that also frees storage is the
+        producer's contract, not this class's business. An engine-layer pool
+        hands out counted views whose release is exactly
+        ``cna_render_target_destroy``, which is what this facade already calls,
+        so a view can carry the whole ``RenderTarget2D`` surface without either
+        side pretending to own what the other does.
+        """
+        self = cls.__new__(cls)
+        self._init_resource(graphicsDevice, handle, _release("cna_render_target_destroy"))
+        self._content_lost_registration = 0
+        self._subscribe_content_lost()
+        self._read_render_target_info()
+        return self
+
     def _read_render_target_info(self) -> None:
         value = abi.CNA_RenderTargetInfo()
         value.struct_size, value.struct_version = c.sizeof(value), 1

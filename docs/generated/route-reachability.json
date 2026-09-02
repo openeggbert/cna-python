@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1084,
-    "DIRECT_CALL_SITE": 990,
+    "BOUND_ROUTES": 1125,
+    "DIRECT_CALL_SITE": 1031,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
     "REACHED_BY_NAME_TEMPLATE": 15,
     "ADMITTED_WITH_REASON": 37,
@@ -1324,7 +1324,8 @@
       "src/Microsoft/Xna/Framework/Graphics/_effects.py:310"
     ],
     "cna_effect_destroy": [
-      "src/Microsoft/Xna/Framework/Graphics/_effects.py:316"
+      "src/Microsoft/Xna/Framework/Graphics/_effects.py:316",
+      "src/cna/extensions/engine/postprocess.py:560"
     ],
     "cna_effect_apply": [
       "src/Microsoft/Xna/Framework/Graphics/_effects.py:340"
@@ -1837,7 +1838,7 @@
       "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:97"
     ],
     "cna_render_target_get_info": [
-      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:109"
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:128"
     ],
     "cna_render_target_subscribe_content_lost": [
       "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:43"
@@ -1927,7 +1928,7 @@
       "src/Microsoft/Xna/Framework/Input/_input.py:712"
     ],
     "cna_render_target_cube_create": [
-      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:171"
+      "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:190"
     ],
     "cna_graphics_device_set_render_target_cube": [
       "src/Microsoft/Xna/Framework/Graphics/_device.py:766"
@@ -3560,7 +3561,7 @@
       "src/_cna_native/engine_support.py:73"
     ],
     "cna_engine_layer_copy_version_string": [
-      "src/cna/extensions/engine/__init__.py:111"
+      "src/cna/extensions/engine/__init__.py:128"
     ],
     "cna_graphics_memory_barrier_has": [
       "src/cna/extensions/engine/compute.py:80"
@@ -3642,19 +3643,19 @@
       "src/cna/extensions/engine/compute.py:442"
     ],
     "cna_gpu_timer_begin": [
-      "src/cna/extensions/engine/compute.py:469"
+      "src/cna/extensions/engine/compute.py:478"
     ],
     "cna_gpu_timer_end": [
-      "src/cna/extensions/engine/compute.py:473"
+      "src/cna/extensions/engine/compute.py:482"
     ],
     "cna_gpu_timer_is_result_available": [
       "src/cna/extensions/engine/compute.py:453"
     ],
     "cna_gpu_timer_poll": [
-      "src/cna/extensions/engine/compute.py:477"
+      "src/cna/extensions/engine/compute.py:486"
     ],
     "cna_gpu_timer_get_last_milliseconds": [
-      "src/cna/extensions/engine/compute.py:464"
+      "src/cna/extensions/engine/compute.py:473"
     ],
     "cna_gpu_timer_get_sample_count": [
       "src/cna/extensions/engine/compute.py:459"
@@ -3664,6 +3665,129 @@
     ],
     "cna_gpu_timer_destroy": [
       "src/cna/extensions/engine/compute.py:432"
+    ],
+    "cna_render_target_pool_create": [
+      "src/cna/extensions/engine/postprocess.py:147"
+    ],
+    "cna_render_target_pool_acquire": [
+      "src/cna/extensions/engine/postprocess.py:200"
+    ],
+    "cna_render_target_pool_reset": [
+      "src/cna/extensions/engine/postprocess.py:215"
+    ],
+    "cna_render_target_pool_get_target_count": [
+      "src/cna/extensions/engine/postprocess.py:175"
+    ],
+    "cna_render_target_pool_get_estimated_bytes": [
+      "src/cna/extensions/engine/postprocess.py:181"
+    ],
+    "cna_render_target_pool_destroy": [
+      "src/cna/extensions/engine/postprocess.py:148"
+    ],
+    "cna_shader_effect_factory_create": [
+      "src/cna/extensions/engine/postprocess.py:235"
+    ],
+    "cna_shader_effect_factory_acquire": [
+      "src/cna/extensions/engine/postprocess.py:257"
+    ],
+    "cna_shader_effect_factory_contains": [
+      "src/cna/extensions/engine/postprocess.py:268"
+    ],
+    "cna_shader_effect_factory_get_compile_count": [
+      "src/cna/extensions/engine/postprocess.py:280"
+    ],
+    "cna_shader_effect_factory_clear": [
+      "src/cna/extensions/engine/postprocess.py:288"
+    ],
+    "cna_shader_effect_factory_destroy": [
+      "src/cna/extensions/engine/postprocess.py:236"
+    ],
+    "cna_scoped_render_target_begin": [
+      "src/cna/extensions/engine/postprocess.py:329"
+    ],
+    "cna_scoped_render_target_get_has_recorded_previous": [
+      "src/cna/extensions/engine/postprocess.py:307"
+    ],
+    "cna_scoped_render_target_end": [
+      "src/cna/extensions/engine/postprocess.py:331"
+    ],
+    "cna_fullscreen_pass_create": [
+      "src/cna/extensions/engine/postprocess.py:349"
+    ],
+    "cna_fullscreen_pass_draw": [
+      "src/cna/extensions/engine/postprocess.py:361"
+    ],
+    "cna_fullscreen_pass_draw_over_current_target": [
+      "src/cna/extensions/engine/postprocess.py:374"
+    ],
+    "cna_fullscreen_pass_destroy": [
+      "src/cna/extensions/engine/postprocess.py:350"
+    ],
+    "cna_post_process_context_init": [
+      "src/cna/extensions/engine/postprocess.py:436"
+    ],
+    "cna_blit_pass_create": [
+      "src/cna/extensions/engine/postprocess.py:504"
+    ],
+    "cna_post_process_effect_pass_create": [
+      "src/cna/extensions/engine/postprocess.py:531"
+    ],
+    "cna_post_process_effect_pass_get_effect": [
+      "src/cna/extensions/engine/postprocess.py:556"
+    ],
+    "cna_post_process_effect_pass_set_effect": [
+      "src/cna/extensions/engine/postprocess.py:570"
+    ],
+    "cna_post_process_pass_apply": [
+      "src/cna/extensions/engine/postprocess.py:489"
+    ],
+    "cna_post_process_pass_copy_name": [
+      "src/cna/extensions/engine/postprocess.py:471"
+    ],
+    "cna_post_process_pass_is_supported": [
+      "src/cna/extensions/engine/postprocess.py:481"
+    ],
+    "cna_post_process_pass_destroy": [
+      "src/cna/extensions/engine/postprocess.py:505"
+    ],
+    "cna_post_process_chain_create": [
+      "src/cna/extensions/engine/postprocess.py:603"
+    ],
+    "cna_post_process_chain_destroy": [
+      "src/cna/extensions/engine/postprocess.py:604"
+    ],
+    "cna_post_process_chain_add_pass": [
+      "src/cna/extensions/engine/postprocess.py:619"
+    ],
+    "cna_post_process_chain_clear": [
+      "src/cna/extensions/engine/postprocess.py:625"
+    ],
+    "cna_post_process_chain_get_pass_count": [
+      "src/cna/extensions/engine/postprocess.py:631"
+    ],
+    "cna_post_process_chain_apply": [
+      "src/cna/extensions/engine/postprocess.py:639"
+    ],
+    "cna_post_process_chain_reset_targets": [
+      "src/cna/extensions/engine/postprocess.py:644"
+    ],
+    "cna_post_process_chain_get_target_pool": [
+      "src/cna/extensions/engine/postprocess.py:655"
+    ],
+    "cna_post_process_chain_is_gpu_timing_enabled": [
+      "src/cna/extensions/engine/postprocess.py:661"
+    ],
+    "cna_post_process_chain_set_gpu_timing_enabled": [
+      "src/cna/extensions/engine/postprocess.py:674"
+    ],
+    "cna_post_process_chain_get_pass_timing_count": [
+      "src/cna/extensions/engine/postprocess.py:690"
+    ],
+    "cna_post_process_chain_get_pass_timing": [
+      "src/cna/extensions/engine/postprocess.py:695"
+    ],
+    "cna_post_process_chain_copy_pass_timing_name": [
+      "src/cna/extensions/engine/postprocess.py:698"
     ]
   }
 }

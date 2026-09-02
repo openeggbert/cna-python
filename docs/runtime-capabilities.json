@@ -998,6 +998,96 @@
       },
       "evidence": "cna_gpu_timer_* (11 routes); tests/test_engine_compute.py GpuTimerTests",
       "notes": "Timing is nondeterministic, so no duration is asserted. What is asserted is the state machine: closed before, open inside the measurement, closed after, a result that arrives on polling, a sample count that advances by exactly one, and a finite non-negative duration."
+    },
+    {
+      "operation": "Engine render-target pool",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_render_target_pool_* (6 routes); tests/test_engine_postprocess.py RenderTargetPoolTests",
+      "notes": "The same shape and slot reuses one target and a new slot allocates another; disposing a view leaves the pooled storage; reset is refused while a view is out and succeeds after. A pooled view is a working RenderTarget2D: it binds, clears and reads back."
+    },
+    {
+      "operation": "Engine render-target scope",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_scoped_render_target_* (3 routes); tests/test_engine_postprocess.py RenderTargetScopeTests",
+      "notes": "Proven by pixels rather than by a flag: a clear after the scope closes lands on the outer target and not on the inner one. Nested scopes refuse an out-of-order close, and neither the stack nor the binding changes when they do."
+    },
+    {
+      "operation": "Engine shader-effect factory",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified on Mesa GL ES 3.2"
+      },
+      "evidence": "cna_shader_effect_factory_* (6 routes); tests/test_engine_postprocess.py ShaderEffectFactoryTests",
+      "notes": "A second acquire of one name compiles nothing, measured by compile_count rather than assumed. The effect comes back as a strict Effect view with parameters and techniques; clear is refused while a view is out, and clearing does not reset the compile count."
+    },
+    {
+      "operation": "Engine full-screen draw",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_fullscreen_pass_* (4 routes); tests/test_engine_postprocess.py FullscreenPassTests",
+      "notes": "A copy reproduces all sixteen pixels of an asymmetric 4x4 source exactly, so a transpose, flip, swizzle or offset would fail rather than pass."
+    },
+    {
+      "operation": "Post-process pass and blit",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_post_process_pass_*, cna_blit_pass_create, cna_post_process_context_init; tests/test_engine_postprocess.py PostProcessPassTests",
+      "notes": "A blit reproduces its source exactly. An effect pass halves red and leaves green and blue untouched, which is the shader's own arithmetic computed independently in Python. A closed pass refuses before reaching CNA."
+    },
+    {
+      "operation": "Post-process chain ordering",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_post_process_chain_* (12 routes); tests/test_engine_postprocess.py PostProcessChainTests",
+      "notes": "Order is proven with two passes that do not commute: (r/2)-64 gives 36 and (r-64)/2 gives 68 from the same source. A chain with no source or a non-positive size is refused. Two blits still reproduce the source exactly through the pooled intermediates."
+    },
+    {
+      "operation": "Post-process effect handle lifetime",
+      "status": "BLOCKED_UPSTREAM",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "measured and worked around"
+      },
+      "evidence": "ENGINE-002 in docs/engine-upstream-findings.md",
+      "notes": "cna_post_process_effect_pass_get_effect returns a new counted handle per call, which the header says must not be destroyed. Not destroying it stops the factory and then the game being destroyed. The binding releases the view immediately, so reading the property any number of times leaks nothing."
+    },
+    {
+      "operation": "GPU timer first sample",
+      "status": "BLOCKED_UPSTREAM",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "measured"
+      },
+      "evidence": "ENGINE-003; the first collected duration is exactly 4294.967295 ms on every run",
+      "notes": "An unsigned 32-bit underflow, not a duration. Reported verbatim rather than discarded, because discarding it would hide the defect and disagree with sample_count. Both the standalone timer and the chain's timings show it, and both are pinned by tests that fail when CNA fixes it."
+    },
+    {
+      "operation": "Post-process chain GPU timing",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified across frames"
+      },
+      "evidence": "cna_post_process_chain_get_pass_timing*; ENGINE-004 for the flag; eight frames, seven samples",
+      "notes": "Timing works: one sample per frame after the first, around 0.003 ms for a 4x4 blit. The flag is not observable until the chain has applied once, which is ENGINE-004 -- the header's documented read-back reports no timing on a device that is about to time. Measured across frames, because a query opened in one frame is collected in a later one."
     }
   ]
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1084,
+    "BOUND_ROUTES": 1125,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -11,24 +11,24 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 857,
-    "ENGINE_BOUND": 36,
+    "ENGINE_BOUND": 77,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 821,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 779,
     "PURPOSE_XNA_BACKING": 1175,
-    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1820,
-    "PURPOSE_MANAGED_BY_DESIGN": 535,
+    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1819,
+    "PURPOSE_MANAGED_BY_DESIGN": 536,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1084,
-    "STATUS_ACTIONABLE_LOCAL": 821,
+    "STATUS_BOUND": 1125,
+    "STATUS_ACTIONABLE_LOCAL": 779,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 2148,
+    "STATUS_DELIBERATE_NON_BINDING": 2149,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -376,6 +376,22 @@
       "status": "ACTIONABLE_LOCAL",
       "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
       "boundReason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in"
+    },
+    {
+      "id": "engine-c-lifetime-transfer",
+      "family": "post-process-chain",
+      "familyTitle": "C ownership transfer Python does not need",
+      "match": {
+        "names": [
+          "cna_post_process_effect_pass_create_owning",
+          "cna_post_process_chain_add_owned_pass"
+        ]
+      },
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "boundReason": "not applicable: no C ownership transfer is imported",
+      "boundIsError": true
     },
     {
       "id": "engine-post-process-chain",
@@ -5269,12 +5285,12 @@
       "route": "cna_blit_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the blit pass: the exact source-to-destination copy) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy",
       "rule": "engine-blit",
       "family": "blit",
       "familyTitle": "the blit pass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_create",
@@ -17160,45 +17176,45 @@
       "route": "cna_fullscreen_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
       "rule": "engine-fullscreen-pass",
       "family": "fullscreen-pass",
       "familyTitle": "full-screen drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fullscreen_pass_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
       "rule": "engine-fullscreen-pass",
       "family": "fullscreen-pass",
       "familyTitle": "full-screen drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fullscreen_pass_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
       "rule": "engine-fullscreen-pass",
       "family": "fullscreen-pass",
       "familyTitle": "full-screen drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fullscreen_pass_draw_over_current_target",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
       "rule": "engine-fullscreen-pass",
       "family": "fullscreen-pass",
       "familyTitle": "full-screen drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fxaa_pass_copy_fragment_glsl",
@@ -35287,178 +35303,178 @@
     {
       "route": "cna_post_process_chain_add_owned_pass",
       "header": "engine_layer.h",
-      "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
-      "rule": "engine-post-process-chain",
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "rule": "engine-c-lifetime-transfer",
       "family": "post-process-chain",
-      "familyTitle": "the post-process chain",
+      "familyTitle": "C ownership transfer Python does not need",
       "bound": false
     },
     {
       "route": "cna_post_process_chain_add_pass",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_apply",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_clear",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_copy_pass_timing_name",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_get_pass_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_get_pass_timing",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_get_pass_timing_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_get_target_pool",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_is_gpu_timing_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_reset_targets",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_chain_set_gpu_timing_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
       "rule": "engine-post-process-chain",
       "family": "post-process-chain",
       "familyTitle": "the post-process chain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_context_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_effect_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_effect_pass_create_owning",
@@ -35475,67 +35491,67 @@
       "route": "cna_post_process_effect_pass_get_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_effect_pass_set_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_pass_apply",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_pass_copy_name",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_pass_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_post_process_pass_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
       "rule": "engine-post-process-pass",
       "family": "post-process-pass",
       "familyTitle": "post-process passes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_power_get_battery_percent_ext",
@@ -37246,67 +37262,67 @@
       "route": "cna_render_target_pool_acquire",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
       "rule": "engine-render-target-pool",
       "family": "render-target-pool",
       "familyTitle": "render-target pools",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_pool_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
       "rule": "engine-render-target-pool",
       "family": "render-target-pool",
       "familyTitle": "render-target pools",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_pool_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
       "rule": "engine-render-target-pool",
       "family": "render-target-pool",
       "familyTitle": "render-target pools",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_pool_get_estimated_bytes",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
       "rule": "engine-render-target-pool",
       "family": "render-target-pool",
       "familyTitle": "render-target pools",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_pool_get_target_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
       "rule": "engine-render-target-pool",
       "family": "render-target-pool",
       "familyTitle": "render-target pools",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_pool_reset",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
       "rule": "engine-render-target-pool",
       "family": "render-target-pool",
       "familyTitle": "render-target pools",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_target_subscribe_content_lost",
@@ -37356,34 +37372,34 @@
       "route": "cna_scoped_render_target_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change",
       "rule": "engine-scoped-render-target",
       "family": "scoped-render-target",
       "familyTitle": "scoped render targets",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_scoped_render_target_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change",
       "rule": "engine-scoped-render-target",
       "family": "scoped-render-target",
       "familyTitle": "scoped render targets",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_scoped_render_target_get_has_recorded_previous",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change",
       "rule": "engine-scoped-render-target",
       "family": "scoped-render-target",
       "familyTitle": "scoped render targets",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_sensor_info_equals",
@@ -37532,67 +37548,67 @@
       "route": "cna_shader_effect_factory_acquire",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
       "rule": "engine-shader-effect-factory",
       "family": "shader-effect-factory",
       "familyTitle": "shader-effect factories",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shader_effect_factory_clear",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
       "rule": "engine-shader-effect-factory",
       "family": "shader-effect-factory",
       "familyTitle": "shader-effect factories",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shader_effect_factory_contains",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
       "rule": "engine-shader-effect-factory",
       "family": "shader-effect-factory",
       "familyTitle": "shader-effect factories",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shader_effect_factory_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
       "rule": "engine-shader-effect-factory",
       "family": "shader-effect-factory",
       "familyTitle": "shader-effect factories",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shader_effect_factory_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
       "rule": "engine-shader-effect-factory",
       "family": "shader-effect-factory",
       "familyTitle": "shader-effect factories",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shader_effect_factory_get_compile_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
       "rule": "engine-shader-effect-factory",
       "family": "shader-effect-factory",
       "familyTitle": "shader-effect factories",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shader_effect_get_projection",
@@ -50055,12 +50071,12 @@
         "route": "cna_blit_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the blit pass: the exact source-to-destination copy) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy",
         "rule": "engine-blit",
         "family": "blit",
         "familyTitle": "the blit pass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_create",
@@ -53608,45 +53624,45 @@
         "route": "cna_fullscreen_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
         "rule": "engine-fullscreen-pass",
         "family": "fullscreen-pass",
         "familyTitle": "full-screen drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fullscreen_pass_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
         "rule": "engine-fullscreen-pass",
         "family": "fullscreen-pass",
         "familyTitle": "full-screen drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fullscreen_pass_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
         "rule": "engine-fullscreen-pass",
         "family": "fullscreen-pass",
         "familyTitle": "full-screen drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fullscreen_pass_draw_over_current_target",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws",
         "rule": "engine-fullscreen-pass",
         "family": "fullscreen-pass",
         "familyTitle": "full-screen drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fxaa_pass_copy_fragment_glsl",
@@ -56456,178 +56472,178 @@
       {
         "route": "cna_post_process_chain_add_owned_pass",
         "header": "engine_layer.h",
-        "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
-        "rule": "engine-post-process-chain",
+        "purpose": "MANAGED_BY_DESIGN",
+        "status": "DELIBERATE_NON_BINDING",
+        "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+        "rule": "engine-c-lifetime-transfer",
         "family": "post-process-chain",
-        "familyTitle": "the post-process chain",
+        "familyTitle": "C ownership transfer Python does not need",
         "bound": false
       },
       {
         "route": "cna_post_process_chain_add_pass",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_apply",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_clear",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_copy_pass_timing_name",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_get_pass_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_get_pass_timing",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_get_pass_timing_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_get_target_pool",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_is_gpu_timing_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_reset_targets",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_set_gpu_timing_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets",
         "rule": "engine-post-process-chain",
         "family": "post-process-chain",
         "familyTitle": "the post-process chain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_context_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_effect_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_effect_pass_create_owning",
@@ -56644,67 +56660,67 @@
         "route": "cna_post_process_effect_pass_get_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_effect_pass_set_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_pass_apply",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_pass_copy_name",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_pass_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_pass_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in",
         "rule": "engine-post-process-pass",
         "family": "post-process-pass",
         "familyTitle": "post-process passes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_punctual_light_ext_init",
@@ -57128,166 +57144,166 @@
         "route": "cna_render_target_pool_acquire",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
         "rule": "engine-render-target-pool",
         "family": "render-target-pool",
         "familyTitle": "render-target pools",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_target_pool_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
         "rule": "engine-render-target-pool",
         "family": "render-target-pool",
         "familyTitle": "render-target pools",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_target_pool_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
         "rule": "engine-render-target-pool",
         "family": "render-target-pool",
         "familyTitle": "render-target pools",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_target_pool_get_estimated_bytes",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
         "rule": "engine-render-target-pool",
         "family": "render-target-pool",
         "familyTitle": "render-target pools",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_target_pool_get_target_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
         "rule": "engine-render-target-pool",
         "family": "render-target-pool",
         "familyTitle": "render-target pools",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_target_pool_reset",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through",
         "rule": "engine-render-target-pool",
         "family": "render-target-pool",
         "familyTitle": "render-target pools",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_scoped_render_target_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change",
         "rule": "engine-scoped-render-target",
         "family": "scoped-render-target",
         "familyTitle": "scoped render targets",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_scoped_render_target_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change",
         "rule": "engine-scoped-render-target",
         "family": "scoped-render-target",
         "familyTitle": "scoped render targets",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_scoped_render_target_get_has_recorded_previous",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change",
         "rule": "engine-scoped-render-target",
         "family": "scoped-render-target",
         "familyTitle": "scoped render targets",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shader_effect_factory_acquire",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
         "rule": "engine-shader-effect-factory",
         "family": "shader-effect-factory",
         "familyTitle": "shader-effect factories",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shader_effect_factory_clear",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
         "rule": "engine-shader-effect-factory",
         "family": "shader-effect-factory",
         "familyTitle": "shader-effect factories",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shader_effect_factory_contains",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
         "rule": "engine-shader-effect-factory",
         "family": "shader-effect-factory",
         "familyTitle": "shader-effect factories",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shader_effect_factory_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
         "rule": "engine-shader-effect-factory",
         "family": "shader-effect-factory",
         "familyTitle": "shader-effect factories",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shader_effect_factory_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
         "rule": "engine-shader-effect-factory",
         "family": "shader-effect-factory",
         "familyTitle": "shader-effect factories",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shader_effect_factory_get_compile_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset",
         "rule": "engine-shader-effect-factory",
         "family": "shader-effect-factory",
         "familyTitle": "shader-effect factories",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_cascade_state_ext_init",

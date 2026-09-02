@@ -102,6 +102,136 @@ there -- and the test above is what will say so.
 
 ---
 
+## ENGINE-002 -- `cna_post_process_effect_pass_get_effect` leaks a counted view
+
+**Status:** open. Worked around by releasing the view; it would otherwise stop a
+game being destroyed.
+
+**Documented contract.** `engine_layer.h` says of the returned handle:
+
+> The returned handle is borrowed from the pass; do not destroy it.
+
+**Actual result.** Each call returns a **different** handle from the one the
+caller supplied, and each one is a counted borrow that **must** be destroyed.
+Measured on the GPU artifact:
+
+```text
+factory acquire                      -> effect handle 4294967316
+effect pass create with that effect  -> ok
+get_effect (first call)              -> handle 4294967318   (a new handle)
+get_effect (second call)             -> handle 4294967319   (another new one)
+pass destroy                         -> ok
+factory destroy, 3 handles alive     -> 3  (CNA_RESULT_INVALID_STATE)
+cna_effect_destroy(second view)      -> ok
+factory destroy, 2 handles alive     -> 3
+cna_effect_destroy(first view)       -> ok
+factory destroy, 1 handle alive      -> 3
+cna_effect_destroy(acquired handle)  -> ok
+factory destroy, 0 handles alive     -> 0
+```
+
+CNA's own diagnostic names the rule: *"Every borrowed cached effect handle must
+be released before the factory."* And once the factory cannot be destroyed,
+`cna_game_destroy` answers *"All owned C child resources must be destroyed
+before the game."* -- so a program that follows the documentation exactly leaks
+one handle per read and eventually cannot shut down.
+
+**Affected Python operation.** `cna.extensions.engine.EffectPass.effect`.
+
+**Local behaviour.** The property calls the route, releases the view it gets
+with `cna_effect_destroy` immediately, and returns the caller's own `Effect`
+object. Reading it any number of times leaks nothing. The reason is stated at
+the property rather than hidden, because a caller reading the C header would
+otherwise conclude the opposite.
+
+**Unblock condition.** Either the header stops saying "do not destroy it", or
+the route stops counting the handle it returns. Neither changes this binding's
+behaviour: releasing a view that is no longer counted is still correct.
+
+---
+
+## ENGINE-003 -- the first GPU-timer sample is an unsigned 32-bit underflow
+
+**Status:** open. Reported verbatim; not hidden.
+
+**Actual result.** The **first** duration a `GpuTimer` collects is exactly
+`4294.967295` ms, which is `(2**32 - 1)` nanoseconds. Every later sample is a
+plausible microsecond-scale duration. Measured on the GPU artifact, six
+consecutive measurements of one 4x4 `Clear`:
+
+```text
+run=0 collected=True samples=1 ms=4294.967295
+run=1 collected=True samples=2 ms=0.017193
+run=2 collected=True samples=3 ms=0.007895
+run=3 collected=True samples=4 ms=0.014116
+run=4 collected=True samples=5 ms=0.007053
+run=5 collected=True samples=6 ms=0.006512
+```
+
+`4294.967295 ms` is not a measurement: nothing clears a 4x4 back buffer for 4.3
+seconds. It is an elapsed of `-1` nanosecond wrapped into 32 unsigned bits,
+which is what a first sample computed against an uninitialised or zero start
+timestamp produces.
+
+The post-process chain shows the same value through its own timer -- the first
+sample it collects reads `4294.9673` ms and every later frame reads about
+`0.003` ms -- so the defect is in the timer rather than in one caller of it.
+
+**Reproducer.** Create a `GpuTimer`, bracket any draw with `begin`/`end`, poll
+until `is_result_available`, and read `get_last_milliseconds`. The first
+answer is the wrap value on every run.
+
+**Affected Python operation.** `cna.extensions.engine.GpuTimer.last_milliseconds`
+and `PostProcessChain.pass_timings`.
+
+**Local behaviour.** CNA's number is returned unchanged. Discarding the first
+sample in Python would hide a real defect and would silently disagree with
+`sample_count`, which counts it. The docstring says so, and
+`tests/test_engine_compute.py` and `tests/test_engine_postprocess.py` both
+*pin* the wrap value, so the day CNA fixes it the tests fail and this finding is
+re-measured rather than quietly outliving the defect.
+
+**Unblock condition.** A first sample that is a duration.
+
+---
+
+## ENGINE-004 -- a chain's GPU timing flag is not observable until it has run
+
+**Status:** open. Does not block; the documented protocol is what misleads.
+
+**Documented contract.** Of `cna_post_process_chain_set_gpu_timing_enabled`:
+
+> A renderer without GPU timers accepts the request and reports `CNA_FALSE`
+> afterwards rather than refusing, so ask
+> `cna_post_process_chain_is_gpu_timing_enabled` what it got.
+
+**Actual result.** On a renderer whose GPU timer demonstrably works, the read
+straight after the write still answers `CNA_FALSE`. It answers `CNA_TRUE` only
+after the chain has applied once:
+
+```text
+standalone GpuTimer is_supported     -> true
+chain is_gpu_timing_enabled          -> false
+set_gpu_timing_enabled(true)
+chain is_gpu_timing_enabled          -> false     <- the documented check
+after the first apply                -> true
+after eight applies                  -> true, 7 samples, ~0.003 ms
+```
+
+So the documented way to find out whether timing is on reports "no timing" on a
+device that is about to time perfectly well. The distinction the documentation
+draws -- between a renderer that accepts and stays off and one that turns on --
+cannot be made at the moment it says to make it.
+
+**Affected Python operation.**
+`cna.extensions.engine.PostProcessChain.gpu_timing_enabled`.
+
+**Local behaviour.** The property reports what CNA reports, and its
+documentation says when the answer becomes meaningful instead of repeating the
+header's protocol.
+
+---
+
 Findings are added as each engine family is qualified. A family that has not
 been measured yet has no entry here, and an absent entry is not a claim that it
 is clean.

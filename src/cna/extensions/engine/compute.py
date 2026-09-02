@@ -460,7 +460,16 @@ class GpuTimer(_EngineObject):
 
     @property
     def last_milliseconds(self) -> float:
-        """The most recently collected duration, in milliseconds."""
+        """The most recently collected duration, in milliseconds.
+
+        **The first sample a timer collects is not a duration.** On CNA 0.21.0
+        it is exactly ``4294.967295`` -- ``(2**32 - 1)`` nanoseconds, an
+        unsigned underflow -- and every sample after it is plausible. The value
+        is returned unchanged: dropping it here would hide the defect and would
+        disagree with :attr:`sample_count`, which counts it. See ENGINE-003 in
+        ``docs/engine-upstream-findings.md``, and take the first measurement as
+        a warm-up.
+        """
         return _support.out_f64("cna_gpu_timer_get_last_milliseconds",
                                 self._handle.argument)
 

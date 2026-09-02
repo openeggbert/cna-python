@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1084
+BOUND_ROUTES=1125
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -14,24 +14,24 @@ CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
 SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 ENGINE_ROUTES=857
-ENGINE_BOUND=36
+ENGINE_BOUND=77
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=821
+SELECTED_ENGINE_ACTIONABLE_LOCAL=779
 PURPOSE_XNA_BACKING=1175
-PURPOSE_CNA_EXTENSION_CANDIDATE=1820
-PURPOSE_MANAGED_BY_DESIGN=535
+PURPOSE_CNA_EXTENSION_CANDIDATE=1819
+PURPOSE_MANAGED_BY_DESIGN=536
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1084
-STATUS_ACTIONABLE_LOCAL=821
+STATUS_BOUND=1125
+STATUS_ACTIONABLE_LOCAL=779
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
 STATUS_BLOCKED_HARDWARE=0
 STATUS_BLOCKED_FIXTURE=0
 STATUS_LANGUAGE_MAPPING_LIMITATION=0
-STATUS_DELIBERATE_NON_BINDING=2148
+STATUS_DELIBERATE_NON_BINDING=2149
 STATUS_UNREVIEWED=0
 ```
 
@@ -39,13 +39,13 @@ STATUS_UNREVIEWED=0
 
 | Purpose | Status | Routes |
 |---|---|---:|
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 821 |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 779 |
 | XNA_BACKING | BOUND | 727 |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 659 |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 518 |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 519 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 446 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
-| CNA_EXTENSION_CANDIDATE | BOUND | 340 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 381 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
@@ -357,8 +357,9 @@ is BOUND or carries its own written non-binding reason.
 
 | Status | Routes |
 |---|---:|
-| ACTIONABLE_LOCAL | 821 |
-| BOUND | 36 |
+| ACTIONABLE_LOCAL | 779 |
+| BOUND | 77 |
+| DELIBERATE_NON_BINDING | 1 |
 
 ### By sub-family
 
@@ -370,7 +371,7 @@ is BOUND or carries its own written non-binding reason.
 | `ascii` (the ASCII pass) | 2 | 0 | ACTIONABLE_LOCAL 2 |
 | `atmospheric-sky` (the atmospheric sky) | 12 | 0 | ACTIONABLE_LOCAL 12 |
 | `auto-exposure` (auto exposure) | 13 | 0 | ACTIONABLE_LOCAL 13 |
-| `blit` (the blit pass) | 1 | 0 | ACTIONABLE_LOCAL 1 |
+| `blit` (the blit pass) | 1 | 1 | BOUND 1 |
 | `bloom` (bloom) | 10 | 0 | ACTIONABLE_LOCAL 10 |
 | `cascaded-shadow-map` (cascaded shadow maps) | 24 | 0 | ACTIONABLE_LOCAL 24 |
 | `chromatic-aberration` (chromatic aberration) | 3 | 0 | ACTIONABLE_LOCAL 3 |
@@ -398,7 +399,7 @@ is BOUND or carries its own written non-binding reason.
 | `environment-processor` (the environment processor) | 13 | 0 | ACTIONABLE_LOCAL 13 |
 | `film-grain` (film grain) | 3 | 0 | ACTIONABLE_LOCAL 3 |
 | `frustum-culler` (frustum culling) | 10 | 0 | ACTIONABLE_LOCAL 10 |
-| `fullscreen-pass` (full-screen drawing) | 4 | 0 | ACTIONABLE_LOCAL 4 |
+| `fullscreen-pass` (full-screen drawing) | 4 | 4 | BOUND 4 |
 | `fxaa` (FXAA) | 5 | 0 | ACTIONABLE_LOCAL 5 |
 | `gltf-material-bridge` (the glTF material bridge) | 6 | 0 | ACTIONABLE_LOCAL 6 |
 | `gpu-instance-culler` (GPU instance culling) | 11 | 0 | ACTIONABLE_LOCAL 11 |
@@ -420,13 +421,13 @@ is BOUND or carries its own written non-binding reason.
 | `pbr-effect` (PBR effects) | 4 | 0 | ACTIONABLE_LOCAL 4 |
 | `pbr-material` (PBR materials) | 63 | 0 | ACTIONABLE_LOCAL 63 |
 | `pbr-material-extensions` (PBR material extensions) | 2 | 0 | ACTIONABLE_LOCAL 2 |
-| `post-process-chain` (the post-process chain) | 14 | 0 | ACTIONABLE_LOCAL 14 |
-| `post-process-pass` (post-process passes) | 9 | 0 | ACTIONABLE_LOCAL 9 |
+| `post-process-chain` (C ownership transfer Python does not need) | 14 | 13 | BOUND 13, DELIBERATE_NON_BINDING 1 |
+| `post-process-pass` (post-process passes) | 9 | 8 | ACTIONABLE_LOCAL 1, BOUND 8 |
 | `render-pipeline` (the render pipeline) | 33 | 0 | ACTIONABLE_LOCAL 33 |
 | `render-pipeline-settings` (render pipeline settings) | 4 | 0 | ACTIONABLE_LOCAL 4 |
-| `render-target-pool` (render-target pools) | 6 | 0 | ACTIONABLE_LOCAL 6 |
-| `scoped-render-target` (scoped render targets) | 3 | 0 | ACTIONABLE_LOCAL 3 |
-| `shader-effect-factory` (shader-effect factories) | 6 | 0 | ACTIONABLE_LOCAL 6 |
+| `render-target-pool` (render-target pools) | 6 | 6 | BOUND 6 |
+| `scoped-render-target` (scoped render targets) | 3 | 3 | BOUND 3 |
+| `shader-effect-factory` (shader-effect factories) | 6 | 6 | BOUND 6 |
 | `shadow-map` (directional shadow maps) | 20 | 0 | ACTIONABLE_LOCAL 20 |
 | `skybox` (the skybox) | 14 | 0 | ACTIONABLE_LOCAL 14 |
 | `spatial-upscale` (spatial upscaling) | 8 | 0 | ACTIONABLE_LOCAL 8 |
@@ -496,7 +497,7 @@ is BOUND or carries its own written non-binding reason.
 | `cna_auto_exposure_ext_set_exposure_range` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_auto_exposure_ext_set_key_value` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_auto_exposure_ext_update` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_blit_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the blit pass: the exact source-to-destination copy) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_blit_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | `cna_bloom_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_bloom_pass_extract_channel` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_bloom_pass_get_intensity` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -819,10 +820,10 @@ is BOUND or carries its own written non-binding reason.
 | `cna_frustum_culler_ext_is_sphere_visible` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_frustum_culler_ext_set_camera` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_frustum_culler_ext_set_view_projection` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_fullscreen_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_fullscreen_pass_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_fullscreen_pass_draw` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_fullscreen_pass_draw_over_current_target` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_fullscreen_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
+| `cna_fullscreen_pass_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
+| `cna_fullscreen_pass_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
+| `cna_fullscreen_pass_draw_over_current_target` | engine_layer.h | BOUND | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
 | `cna_fxaa_pass_copy_fragment_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_fxaa_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_fxaa_pass_edge_threshold_for_quality` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1078,29 +1079,29 @@ is BOUND or carries its own written non-binding reason.
 | `cna_pbr_material_extensions_set_transmission_factor` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_pbr_material_extensions_set_transmission_texture` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (PBR materials: the PBR material value, its texture slots and its transparency mode) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_point_light_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_add_owned_pass` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_add_pass` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_apply` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_clear` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_copy_pass_timing_name` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_get_pass_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_get_pass_timing` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_get_pass_timing_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_get_target_pool` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_is_gpu_timing_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_reset_targets` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_chain_set_gpu_timing_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_context_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_effect_pass_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_post_process_chain_add_owned_pass` | engine_layer.h | DELIBERATE_NON_BINDING | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
+| `cna_post_process_chain_add_pass` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_apply` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_clear` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_copy_pass_timing_name` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_get_pass_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_get_pass_timing` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_get_pass_timing_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_get_target_pool` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_is_gpu_timing_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_reset_targets` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_chain_set_gpu_timing_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
+| `cna_post_process_context_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
+| `cna_post_process_effect_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | `cna_post_process_effect_pass_create_owning` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_effect_pass_get_effect` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_effect_pass_set_effect` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_pass_apply` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_pass_copy_name` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_pass_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_post_process_pass_is_supported` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_post_process_effect_pass_get_effect` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
+| `cna_post_process_effect_pass_set_effect` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
+| `cna_post_process_pass_apply` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
+| `cna_post_process_pass_copy_name` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
+| `cna_post_process_pass_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
+| `cna_post_process_pass_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | `cna_punctual_light_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_render_pipeline_add_user_pass` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_render_pipeline_begin` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1139,21 +1140,21 @@ is BOUND or carries its own written non-binding reason.
 | `cna_render_pipeline_settings_ext_apply_render_quality_preset` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_render_pipeline_settings_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_render_pipeline_settings_ext_normalize` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_target_pool_acquire` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_target_pool_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_target_pool_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_target_pool_get_estimated_bytes` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_target_pool_get_target_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_target_pool_reset` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_scoped_render_target_begin` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_scoped_render_target_end` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_scoped_render_target_get_has_recorded_previous` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_shader_effect_factory_acquire` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_shader_effect_factory_clear` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_shader_effect_factory_contains` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_shader_effect_factory_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_shader_effect_factory_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_shader_effect_factory_get_compile_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_render_target_pool_acquire` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
+| `cna_render_target_pool_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
+| `cna_render_target_pool_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
+| `cna_render_target_pool_get_estimated_bytes` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
+| `cna_render_target_pool_get_target_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
+| `cna_render_target_pool_reset` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
+| `cna_scoped_render_target_begin` | engine_layer.h | BOUND | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
+| `cna_scoped_render_target_end` | engine_layer.h | BOUND | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
+| `cna_scoped_render_target_get_has_recorded_previous` | engine_layer.h | BOUND | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
+| `cna_shader_effect_factory_acquire` | engine_layer.h | BOUND | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
+| `cna_shader_effect_factory_clear` | engine_layer.h | BOUND | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
+| `cna_shader_effect_factory_contains` | engine_layer.h | BOUND | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
+| `cna_shader_effect_factory_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
+| `cna_shader_effect_factory_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
+| `cna_shader_effect_factory_get_compile_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
 | `cna_shadow_cascade_state_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_shadow_map_apply_caster` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_shadow_map_apply_skinned_caster` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -1339,12 +1340,12 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 15 | In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 14 | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 14 | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 14 | In the selected engine-layer extension family (the post-process chain: the ordered chain that applies passes and owns their intermediate targets) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 14 | In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (the clustered shadow budget: which clustered lights get a shadow map inside a fixed budget) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (weighted blended transparency: order-independent transparency) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 12 | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
@@ -1367,28 +1368,28 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (the area-light BRDF table: the generated LTC table area lights sample) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (the clustered light upload buffer: the GPU buffer a clustered assignment uploads into) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 9 | In the selected engine-layer extension family (the transparent draw list: back-to-front sorted transparent submission) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 8 | In the selected engine-layer extension family (the compute cluster assignment: the compute-shader path that assigns lights to clusters on the GPU) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 8 | In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 8 | In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 7 | In the selected engine-layer extension family (area lights: the area-light value and its analytic shading terms) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 7 | In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 6 | In the selected engine-layer extension family (the glTF material bridge: the bridge that turns a glTF material source into a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 6 | In the selected engine-layer extension family (render-target pools: the pooled intermediate targets a post-process chain draws through) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 6 | In the selected engine-layer extension family (shader-effect factories: effects built from shader source rather than from a compiled asset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
+| CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 5 | In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 5 | In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | XNA_BACKING | BOUND | 5 | imported: the selected profile reaches this route |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 5 | In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (full-screen drawing: the full-screen triangle every post-process pass draws) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (PBR effects: the rigid and skinned effects that render a PBR material) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 3 | In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 3 | In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | XNA_BACKING | BOUND | 3 | imported: GamerServicesComponent is the one selected member of this family |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 3 | In the selected engine-layer extension family (scoped render targets: the save/restore bracket around a render-target change) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (the ASCII pass: the ASCII-art post-process pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 2 | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
@@ -1396,8 +1397,10 @@ is BOUND or carries its own written non-binding reason.
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (PBR material extensions: the glTF material extensions a PBR material carries, and thin-film iridescence) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 1 | In the selected engine-layer extension family (the blit pass: the exact source-to-destination copy) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 1 | In the selected engine-layer extension family (clustered light values: the clustered light value structure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 1 | In the selected engine-layer extension family (device shadow-sampling capability: whether the device can sample a depth texture as a shadow comparison) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects compute memory-barrier mask -- the containment test for the barrier bit mask a compute dispatch orders |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 | A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API. |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 1 | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 1 | In the selected engine-layer extension family (post-process passes: the shared pass vocabulary and the context a pass is applied in) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |

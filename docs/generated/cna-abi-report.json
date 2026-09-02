@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1084,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1084,
+    "BOUND_FUNCTIONS": 1125,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1125,
     "C_LAYOUT_MEASUREMENTS": 1605,
     "CTYPES_LAYOUT_MEASUREMENTS": 1605,
     "MISSING_SYMBOLS": 0,
@@ -1092,7 +1092,48 @@
     "cna_gpu_timer_get_last_milliseconds",
     "cna_gpu_timer_get_sample_count",
     "cna_gpu_timer_is_open",
-    "cna_gpu_timer_destroy"
+    "cna_gpu_timer_destroy",
+    "cna_render_target_pool_create",
+    "cna_render_target_pool_acquire",
+    "cna_render_target_pool_reset",
+    "cna_render_target_pool_get_target_count",
+    "cna_render_target_pool_get_estimated_bytes",
+    "cna_render_target_pool_destroy",
+    "cna_shader_effect_factory_create",
+    "cna_shader_effect_factory_acquire",
+    "cna_shader_effect_factory_contains",
+    "cna_shader_effect_factory_get_compile_count",
+    "cna_shader_effect_factory_clear",
+    "cna_shader_effect_factory_destroy",
+    "cna_scoped_render_target_begin",
+    "cna_scoped_render_target_get_has_recorded_previous",
+    "cna_scoped_render_target_end",
+    "cna_fullscreen_pass_create",
+    "cna_fullscreen_pass_draw",
+    "cna_fullscreen_pass_draw_over_current_target",
+    "cna_fullscreen_pass_destroy",
+    "cna_post_process_context_init",
+    "cna_blit_pass_create",
+    "cna_post_process_effect_pass_create",
+    "cna_post_process_effect_pass_get_effect",
+    "cna_post_process_effect_pass_set_effect",
+    "cna_post_process_pass_apply",
+    "cna_post_process_pass_copy_name",
+    "cna_post_process_pass_is_supported",
+    "cna_post_process_pass_destroy",
+    "cna_post_process_chain_create",
+    "cna_post_process_chain_destroy",
+    "cna_post_process_chain_add_pass",
+    "cna_post_process_chain_clear",
+    "cna_post_process_chain_get_pass_count",
+    "cna_post_process_chain_apply",
+    "cna_post_process_chain_reset_targets",
+    "cna_post_process_chain_get_target_pool",
+    "cna_post_process_chain_is_gpu_timing_enabled",
+    "cna_post_process_chain_set_gpu_timing_enabled",
+    "cna_post_process_chain_get_pass_timing_count",
+    "cna_post_process_chain_get_pass_timing",
+    "cna_post_process_chain_copy_pass_timing_name"
   ],
   "functionManifest": [
     {
@@ -12571,6 +12612,433 @@
       ],
       "arity": 1,
       "ownership": "consumes GPU timer"
+    },
+    {
+      "symbol": "cna_render_target_pool_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned pool; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_render_target_pool_acquire",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_uint",
+        "c_uint",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "owned VIEW of a pool-owned target; released with cna_render_target_destroy, which does not dispose the pooled target. The pool refuses reset and destruction while any view is outstanding"
+    },
+    {
+      "symbol": "cna_render_target_pool_reset",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed pool; refused while a borrowed view is outstanding"
+    },
+    {
+      "symbol": "cna_render_target_pool_get_target_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed pool"
+    },
+    {
+      "symbol": "cna_render_target_pool_get_estimated_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed pool"
+    },
+    {
+      "symbol": "cna_render_target_pool_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes pool; refused while a borrowed view is outstanding"
+    },
+    {
+      "symbol": "cna_shader_effect_factory_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned factory; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_shader_effect_factory_acquire",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "CNA_StringView",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned VIEW of a factory-owned effect; released with cna_effect_destroy. The factory refuses clear and destruction while any view is outstanding"
+    },
+    {
+      "symbol": "cna_shader_effect_factory_contains",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed factory"
+    },
+    {
+      "symbol": "cna_shader_effect_factory_get_compile_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed factory"
+    },
+    {
+      "symbol": "cna_shader_effect_factory_clear",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed factory; refused while a borrowed effect view is outstanding"
+    },
+    {
+      "symbol": "cna_shader_effect_factory_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes factory; refused while a borrowed effect view is outstanding"
+    },
+    {
+      "symbol": "cna_scoped_render_target_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned active scope; borrows the device and the destination"
+    },
+    {
+      "symbol": "cna_scoped_render_target_get_has_recorded_previous",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed scope"
+    },
+    {
+      "symbol": "cna_scoped_render_target_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes scope; must be the innermost scope on its device"
+    },
+    {
+      "symbol": "cna_fullscreen_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned full-screen pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_fullscreen_pass_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "pointer<CNA_SamplerState>"
+      ],
+      "arity": 7,
+      "ownership": "borrowed pass; source, destination and effect are borrowed for the call"
+    },
+    {
+      "symbol": "cna_fullscreen_pass_draw_over_current_target",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "pointer<CNA_SamplerState>"
+      ],
+      "arity": 6,
+      "ownership": "borrowed pass; source and effect are borrowed for the call"
+    },
+    {
+      "symbol": "cna_fullscreen_pass_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes full-screen pass"
+    },
+    {
+      "symbol": "cna_post_process_context_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PostProcessContext>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_blit_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_post_process_effect_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned pass; the effect is BORROWED and must outlive the pass"
+    },
+    {
+      "symbol": "cna_post_process_effect_pass_get_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the effect is borrowed from the pass and must not be destroyed"
+    },
+    {
+      "symbol": "cna_post_process_effect_pass_set_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed pass; the new effect is BORROWED and the old one is not released"
+    },
+    {
+      "symbol": "cna_post_process_pass_apply",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PostProcessContext>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed pass; every handle in the context is borrowed for the call"
+    },
+    {
+      "symbol": "cna_post_process_pass_copy_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_post_process_pass_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed pass and device"
+    },
+    {
+      "symbol": "cna_post_process_pass_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes pass, and the effect it owns if it owns one"
+    },
+    {
+      "symbol": "cna_post_process_chain_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned chain; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_post_process_chain_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes chain and every pass it owns; borrowed passes survive it"
+    },
+    {
+      "symbol": "cna_post_process_chain_add_pass",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed chain; the pass stays the caller's and must outlive its membership"
+    },
+    {
+      "symbol": "cna_post_process_chain_clear",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed chain; drops every pass it borrows, and would release any it owned"
+    },
+    {
+      "symbol": "cna_post_process_chain_get_pass_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed chain"
+    },
+    {
+      "symbol": "cna_post_process_chain_apply",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PostProcessContext>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed chain; every handle in the context is borrowed for the call"
+    },
+    {
+      "symbol": "cna_post_process_chain_reset_targets",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed chain; releases its pooled intermediates"
+    },
+    {
+      "symbol": "cna_post_process_chain_get_target_pool",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the chain's pool; the chain refuses destruction while it is out"
+    },
+    {
+      "symbol": "cna_post_process_chain_is_gpu_timing_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed chain"
+    },
+    {
+      "symbol": "cna_post_process_chain_set_gpu_timing_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed chain; a renderer without timers accepts and stays off"
+    },
+    {
+      "symbol": "cna_post_process_chain_get_pass_timing_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed chain"
+    },
+    {
+      "symbol": "cna_post_process_chain_get_pass_timing",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_PassTimingEXT>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed chain"
+    },
+    {
+      "symbol": "cna_post_process_chain_copy_pass_timing_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; two-call size/copy protocol"
     }
   ],
   "missingSymbols": [],

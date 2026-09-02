@@ -418,18 +418,20 @@ class GpuTimerTests(unittest.TestCase):
                     return
                 observed["open_before"] = timer.is_open
                 observed["samples_before"] = timer.sample_count
-                with timer.measure():
-                    observed["open_during"] = timer.is_open
-                    device.Clear(Color.CornflowerBlue)
-                observed["open_after"] = timer.is_open
-                collected = False
-                for _ in range(2048):
-                    if timer.poll():
-                        collected = True
-                        break
-                observed["collected"] = collected
-                observed["samples_after"] = timer.sample_count
-                observed["milliseconds"] = timer.last_milliseconds
+                samples = []
+                for _ in range(6):
+                    with timer.measure():
+                        observed["open_during"] = timer.is_open
+                        device.Clear(Color.CornflowerBlue)
+                    observed["open_after"] = timer.is_open
+                    collected = False
+                    for _ in range(4096):
+                        if timer.poll():
+                            collected = True
+                            break
+                    samples.append((collected, timer.sample_count,
+                                    timer.last_milliseconds))
+                observed["samples"] = samples
 
         observed = in_game(body)
         if not observed["supported"]:
@@ -438,12 +440,24 @@ class GpuTimerTests(unittest.TestCase):
         self.assertFalse(observed["open_before"])
         self.assertTrue(observed["open_during"])
         self.assertFalse(observed["open_after"])
-        self.assertTrue(observed["collected"], "no timer result arrived after 2048 polls")
-        self.assertEqual(observed["samples_after"], observed["samples_before"] + 1)
-        milliseconds = observed["milliseconds"]
-        self.assertIsInstance(milliseconds, float)
-        self.assertGreaterEqual(milliseconds, 0.0)
-        self.assertLess(milliseconds, 60_000.0)
+        samples = observed["samples"]
+        self.assertEqual(len(samples), 6)
+        for index, (collected, count, milliseconds) in enumerate(samples):
+            with self.subTest(measurement=index):
+                self.assertTrue(collected, "no timer result arrived after 4096 polls")
+                self.assertEqual(count, observed["samples_before"] + index + 1)
+                self.assertIsInstance(milliseconds, float)
+        # ENGINE-003. The first collected duration is exactly (2**32 - 1)
+        # nanoseconds, which is an unsigned 32-bit underflow rather than a
+        # measurement: nothing clears a 4x4 back buffer for 4.29 seconds. It is
+        # pinned rather than tolerated, so the day CNA fixes it this fails and
+        # docs/engine-upstream-findings.md gets re-measured.
+        self.assertAlmostEqual(samples[0][2], (2 ** 32 - 1) / 1e6, places=6)
+        for index, (_collected, _count, milliseconds) in enumerate(samples[1:], start=1):
+            with self.subTest(measurement=index):
+                self.assertGreater(milliseconds, 0.0)
+                self.assertLess(milliseconds, 1000.0,
+                                "a 4x4 clear did not take a second")
 
 
 @requires_engine

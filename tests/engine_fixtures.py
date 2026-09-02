@@ -103,3 +103,48 @@ def in_game(body):
     if not game.done:
         raise AssertionError("Draw never ran")
     return observed
+
+
+def over_frames(body, frames: int = 8):
+    """Runs ``body(game, device, observed, frame)`` once per frame, ``frames`` times.
+
+    Some engine state only advances across frames rather than inside one: a GPU
+    timer query the chain opened in one frame is collected in a later one, so a
+    measurement taken entirely inside a single ``Draw`` would see it as absent
+    and conclude the feature does not work. ``frame`` counts from one.
+    """
+    observed: dict = {}
+    failure: list[BaseException] = []
+
+    class Probe(Game):
+        def __init__(self) -> None:
+            super().__init__()
+            self.manager = GraphicsDeviceManager(self)
+            self.frame = 0
+
+        def Draw(self, gameTime) -> None:
+            if failure or self.frame >= frames:
+                self.Exit()
+                return
+            self.frame += 1
+            try:
+                body(self, self.GraphicsDevice, observed, self.frame)
+            except BaseException as error:
+                failure.append(error)
+            if self.frame >= frames:
+                self.Exit()
+
+        def Update(self, gameTime) -> None:
+            if failure:
+                self.Exit()
+
+    game = Probe()
+    try:
+        game.Run()
+    finally:
+        game.Dispose()
+    if failure:
+        raise failure[0]
+    if game.frame < frames:
+        raise AssertionError(f"only {game.frame} of {frames} frames ran")
+    return observed

@@ -45,10 +45,15 @@ Importing this module needs no native library. Constructing anything in it does.
 
 from __future__ import annotations
 
-from . import compute, errors
+from . import compute, errors, postprocess
 from .compute import (
     ComputeShader, GpuTimer, ImageAccess, MemoryBarrier, StorageBuffer,
     barrier_contains,
+)
+from .postprocess import (
+    BlitPass, EffectPass, FullscreenPass, PassTiming, PostProcessChain,
+    PostProcessContext, PostProcessPass, RenderTargetPool, RenderTargetScope,
+    ShaderEffectFactory, bind_render_target,
 )
 from .errors import (
     ComputeShaderCompileError, EngineArgumentError, EngineDisposedError,
@@ -59,6 +64,7 @@ from .errors import (
 __all__ = [
     "compute",
     "errors",
+    "postprocess",
     "layer_version",
     "layer_version_string",
     "is_available",
@@ -69,6 +75,17 @@ __all__ = [
     "MemoryBarrier",
     "StorageBuffer",
     "barrier_contains",
+    "BlitPass",
+    "EffectPass",
+    "FullscreenPass",
+    "PassTiming",
+    "PostProcessChain",
+    "PostProcessContext",
+    "PostProcessPass",
+    "RenderTargetPool",
+    "RenderTargetScope",
+    "ShaderEffectFactory",
+    "bind_render_target",
     "ComputeShaderCompileError",
     "EngineArgumentError",
     "EngineDisposedError",
