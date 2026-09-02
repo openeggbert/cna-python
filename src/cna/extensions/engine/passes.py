@@ -252,12 +252,15 @@ class ColorGradePass(_ConfiguredPass):
     def lut(self) -> "Texture2D | None":
         """The strip lookup table, or ``None``.
 
-        The object handed back is the one that was assigned; CNA answers with
-        the handle it already holds rather than a new borrow.
+        The object handed back is the one that was assigned; a handle CNA
+        answers with that is not the one it was given is a fresh counted view
+        and is released here, which is the pattern across this whole layer.
         """
-        handle = _support.out_handle("cna_color_grade_pass_get_lut",
-                                     self._handle.argument)
-        return self._lut if handle else None
+        expected = 0 if self._lut is None else int(self._lut._require_handle())
+        present = _support.borrowed_view("cna_color_grade_pass_get_lut",
+                                         (self._handle.argument,), expected,
+                                         "cna_texture2d_destroy")
+        return self._lut if present else None
 
     @lut.setter
     def lut(self, value: "Texture2D | None") -> None:
@@ -267,10 +270,16 @@ class ColorGradePass(_ConfiguredPass):
 
     @property
     def volume_lut(self) -> "Texture3D | None":
-        """The volume lookup table, or ``None``."""
-        handle = _support.out_handle("cna_color_grade_pass_get_volume_lut",
-                                     self._handle.argument)
-        return self._volume_lut if handle else None
+        """The volume lookup table, or ``None``.
+
+        Released on the same terms as :attr:`lut`.
+        """
+        expected = (0 if self._volume_lut is None
+                    else int(self._volume_lut._require_handle()))
+        present = _support.borrowed_view("cna_color_grade_pass_get_volume_lut",
+                                         (self._handle.argument,), expected,
+                                         "cna_texture3d_destroy")
+        return self._volume_lut if present else None
 
     @volume_lut.setter
     def volume_lut(self, value: "Texture3D | None") -> None:

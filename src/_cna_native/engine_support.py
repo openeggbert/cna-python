@@ -124,6 +124,24 @@ def call(operation: str, *arguments: object) -> None:
         raise _translate(error) from None
 
 
+def size_call(operation: str, *arguments: object) -> None:
+    """Runs the sizing half of a two-call protocol whose count is not a byte count.
+
+    ``CNA_RESULT_BUFFER_TOO_SMALL`` is the expected answer for a non-empty
+    output and success for an empty one; anything else is a real failure. The
+    text protocol in :func:`copied_text` handles its own sizing; this is for the
+    routes that copy a range of *values* instead.
+    """
+    library = get_library()
+    result = int(getattr(library, operation)(*arguments))
+    if result in (0, _BUFFER_TOO_SMALL):
+        return
+    try:
+        library.check(result, operation)
+    except NativeError as error:
+        raise _translate(error) from None
+
+
 def call_result(operation: str, *arguments: object) -> int:
     """Invokes one route and returns its raw result without raising.
 
@@ -212,6 +230,30 @@ def out_handle(operation: str, *arguments: object) -> int:
     handle = c.c_uint64()
     call(operation, *arguments, c.byref(handle))
     return int(handle.value)
+
+
+def borrowed_view(operation: str, arguments: Iterable[object], expected: int,
+                  release: str) -> bool:
+    """Asks CNA for a handle and releases it when it is a fresh counted view.
+
+    Measured across the whole engine layer: a route that answers with a handle
+    almost always answers with a **new** one, which must be released or the
+    object that owns it -- and then the game -- cannot be destroyed. A few
+    answer with the handle they were given, which must *not* be released,
+    because destroying it would take the caller's own object with it.
+
+    Comparing against the handle this binding supplied decides which case
+    applies without having to guess, and without a table that could go stale
+    when CNA changes one route. Returns whether the route reported a handle at
+    all, which is the only part of the answer a caller needs -- the object it
+    refers to is the one they already hold.
+    """
+    handle = out_handle(operation, *tuple(arguments))
+    if handle == 0:
+        return False
+    if handle != expected:
+        call(release, c.c_uint64(handle))
+    return True
 
 
 def out_struct(structure: type, version: int, operation: str, *arguments: object):

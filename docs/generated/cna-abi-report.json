@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1530,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1530,
+    "BOUND_FUNCTIONS": 1654,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1654,
     "C_LAYOUT_MEASUREMENTS": 1706,
     "CTYPES_LAYOUT_MEASUREMENTS": 1706,
     "MISSING_SYMBOLS": 0,
@@ -1538,7 +1538,131 @@
     "cna_ascii_post_process_effect_get_quantize_mode",
     "cna_ascii_post_process_effect_set_quantize_mode",
     "cna_ascii_post_process_effect_get_last_grid_dimensions",
-    "cna_ascii_post_process_effect_destroy"
+    "cna_ascii_post_process_effect_destroy",
+    "cna_contact_shadow_pass_create",
+    "cna_contact_shadow_pass_get_light_direction",
+    "cna_contact_shadow_pass_set_light_direction",
+    "cna_contact_shadow_pass_get_max_distance",
+    "cna_contact_shadow_pass_set_max_distance",
+    "cna_contact_shadow_pass_get_step_count",
+    "cna_contact_shadow_pass_set_step_count",
+    "cna_contact_shadow_pass_get_thickness",
+    "cna_contact_shadow_pass_set_thickness",
+    "cna_contact_shadow_pass_get_intensity",
+    "cna_contact_shadow_pass_set_intensity",
+    "cna_contact_shadow_pass_get_bias",
+    "cna_contact_shadow_pass_set_bias",
+    "cna_contact_shadow_pass_copy_fallback_reason",
+    "cna_contact_shadow_pass_is_occluded",
+    "cna_contact_shadow_pass_copy_occlusion_test_glsl",
+    "cna_contact_shadow_pass_combine_visibility",
+    "cna_ssr_pass_create",
+    "cna_ssr_pass_get_max_distance",
+    "cna_ssr_pass_set_max_distance",
+    "cna_ssr_pass_get_step_count",
+    "cna_ssr_pass_set_step_count",
+    "cna_ssr_pass_get_thickness",
+    "cna_ssr_pass_set_thickness",
+    "cna_ssr_pass_get_depth_bias",
+    "cna_ssr_pass_set_depth_bias",
+    "cna_ssr_pass_get_roughness_blur",
+    "cna_ssr_pass_set_roughness_blur",
+    "cna_ssr_pass_get_edge_fade",
+    "cna_ssr_pass_set_edge_fade",
+    "cna_ssr_pass_get_intensity",
+    "cna_ssr_pass_set_intensity",
+    "cna_ssao_pass_create",
+    "cna_ssao_pass_get_radius",
+    "cna_ssao_pass_set_radius",
+    "cna_ssao_pass_get_intensity",
+    "cna_ssao_pass_set_intensity",
+    "cna_ssao_pass_get_sample_count",
+    "cna_ssao_pass_set_sample_count",
+    "cna_ssao_pass_get_half_resolution",
+    "cna_ssao_pass_set_half_resolution",
+    "cna_depth_of_field_pass_create",
+    "cna_depth_of_field_pass_get_focus_distance",
+    "cna_depth_of_field_pass_set_focus_distance",
+    "cna_depth_of_field_pass_get_focal_length",
+    "cna_depth_of_field_pass_set_focal_length",
+    "cna_depth_of_field_pass_get_f_number",
+    "cna_depth_of_field_pass_set_f_number",
+    "cna_depth_of_field_pass_get_max_radius",
+    "cna_depth_of_field_pass_set_max_radius",
+    "cna_ssao_pass_reset_targets",
+    "cna_ssao_pass_copy_kernel",
+    "cna_ssao_pass_copy_occlusion_glsl",
+    "cna_ssao_pass_sample_count_for_quality",
+    "cna_depth_of_field_pass_circle_of_confusion_millimetres",
+    "cna_aerial_perspective_pass_create",
+    "cna_aerial_perspective_pass_get_sun_direction",
+    "cna_aerial_perspective_pass_set_sun_direction",
+    "cna_aerial_perspective_pass_get_turbidity",
+    "cna_aerial_perspective_pass_set_turbidity",
+    "cna_aerial_perspective_pass_get_intensity",
+    "cna_aerial_perspective_pass_set_intensity",
+    "cna_aerial_perspective_pass_get_scale_height",
+    "cna_aerial_perspective_pass_set_scale_height",
+    "cna_volumetric_fog_pass_create",
+    "cna_volumetric_fog_pass_get_density",
+    "cna_volumetric_fog_pass_set_density",
+    "cna_volumetric_fog_pass_get_anisotropy",
+    "cna_volumetric_fog_pass_set_anisotropy",
+    "cna_volumetric_fog_pass_get_range",
+    "cna_volumetric_fog_pass_set_range",
+    "cna_height_fog_pass_create",
+    "cna_height_fog_pass_get_color",
+    "cna_height_fog_pass_set_color",
+    "cna_height_fog_pass_get_density",
+    "cna_height_fog_pass_set_density",
+    "cna_height_fog_pass_get_falloff",
+    "cna_height_fog_pass_set_falloff",
+    "cna_height_fog_pass_get_base_height",
+    "cna_height_fog_pass_set_base_height",
+    "cna_light_shaft_pass_create",
+    "cna_light_shaft_pass_get_light_screen_position",
+    "cna_light_shaft_pass_set_light_screen_position",
+    "cna_light_shaft_pass_get_threshold",
+    "cna_light_shaft_pass_set_threshold",
+    "cna_light_shaft_pass_get_intensity",
+    "cna_light_shaft_pass_set_intensity",
+    "cna_light_shaft_pass_get_decay",
+    "cna_light_shaft_pass_set_decay",
+    "cna_aerial_perspective_pass_copy_fallback_reason",
+    "cna_aerial_perspective_pass_air_mass_for_distance",
+    "cna_aerial_perspective_pass_transmittance",
+    "cna_height_fog_pass_optical_depth",
+    "cna_volumetric_fog_pass_set_light",
+    "cna_motion_blur_pass_create",
+    "cna_motion_blur_pass_get_strength",
+    "cna_motion_blur_pass_set_strength",
+    "cna_motion_blur_pass_get_max_distance",
+    "cna_motion_blur_pass_set_max_distance",
+    "cna_skybox_create",
+    "cna_skybox_destroy",
+    "cna_skybox_is_supported",
+    "cna_skybox_draw",
+    "cna_skybox_get_environment",
+    "cna_skybox_set_environment",
+    "cna_skybox_get_yaw",
+    "cna_skybox_set_yaw",
+    "cna_skybox_get_intensity",
+    "cna_skybox_set_intensity",
+    "cna_skybox_get_tint",
+    "cna_skybox_set_tint",
+    "cna_skybox_compute_view_ray",
+    "cna_atmospheric_sky_create",
+    "cna_atmospheric_sky_destroy",
+    "cna_atmospheric_sky_is_supported",
+    "cna_atmospheric_sky_draw",
+    "cna_atmospheric_sky_get_sun_direction",
+    "cna_atmospheric_sky_set_sun_direction",
+    "cna_atmospheric_sky_get_turbidity",
+    "cna_atmospheric_sky_set_turbidity",
+    "cna_atmospheric_sky_get_intensity",
+    "cna_atmospheric_sky_set_intensity",
+    "cna_atmospheric_sky_copy_model_glsl",
+    "cna_atmospheric_sky_radiance"
   ],
   "functionManifest": [
     {
@@ -17594,6 +17718,1283 @@
       ],
       "arity": 1,
       "ownership": "releases the counted borrow cna_ascii_pass_get_effect handed out"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned contact shadow pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_get_light_direction",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed contact shadow pass"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_set_light_direction",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed contact shadow pass; copies the value"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_get_max_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed contact shadow pass"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_set_max_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed contact shadow pass; copies the value"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_get_step_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed contact shadow pass"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_set_step_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed contact shadow pass; copies the value"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_get_thickness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed contact shadow pass"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_set_thickness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed contact shadow pass; copies the value"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed contact shadow pass"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed contact shadow pass; copies the value"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_get_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed contact shadow pass"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_set_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed contact shadow pass; copies the value"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_copy_fallback_reason",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_is_occluded",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_copy_occlusion_test_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_contact_shadow_pass_combine_visibility",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_ssr_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SSR pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_ssr_pass_get_max_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSR pass"
+    },
+    {
+      "symbol": "cna_ssr_pass_set_max_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSR pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssr_pass_get_step_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSR pass"
+    },
+    {
+      "symbol": "cna_ssr_pass_set_step_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSR pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssr_pass_get_thickness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSR pass"
+    },
+    {
+      "symbol": "cna_ssr_pass_set_thickness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSR pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssr_pass_get_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSR pass"
+    },
+    {
+      "symbol": "cna_ssr_pass_set_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSR pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssr_pass_get_roughness_blur",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSR pass"
+    },
+    {
+      "symbol": "cna_ssr_pass_set_roughness_blur",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSR pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssr_pass_get_edge_fade",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSR pass"
+    },
+    {
+      "symbol": "cna_ssr_pass_set_edge_fade",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSR pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssr_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSR pass"
+    },
+    {
+      "symbol": "cna_ssr_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSR pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssao_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned SSAO pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_ssao_pass_get_radius",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSAO pass"
+    },
+    {
+      "symbol": "cna_ssao_pass_set_radius",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSAO pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssao_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSAO pass"
+    },
+    {
+      "symbol": "cna_ssao_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSAO pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssao_pass_get_sample_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSAO pass"
+    },
+    {
+      "symbol": "cna_ssao_pass_set_sample_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSAO pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssao_pass_get_half_resolution",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed SSAO pass"
+    },
+    {
+      "symbol": "cna_ssao_pass_set_half_resolution",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed SSAO pass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned depth of field pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_get_focus_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed depth of field pass"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_set_focus_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed depth of field pass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_get_focal_length",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed depth of field pass"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_set_focal_length",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed depth of field pass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_get_f_number",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed depth of field pass"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_set_f_number",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed depth of field pass; copies the value"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_get_max_radius",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed depth of field pass"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_set_max_radius",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed depth of field pass; copies the value"
+    },
+    {
+      "symbol": "cna_ssao_pass_reset_targets",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed SSAO pass"
+    },
+    {
+      "symbol": "cna_ssao_pass_copy_kernel",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; copies the sample kernel as values"
+    },
+    {
+      "symbol": "cna_ssao_pass_copy_occlusion_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "c_ubyte",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_ssao_pass_sample_count_for_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_depth_of_field_pass_circle_of_confusion_millimetres",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned aerial perspective pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_get_sun_direction",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed aerial perspective pass"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_set_sun_direction",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed aerial perspective pass; copies the value"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_get_turbidity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed aerial perspective pass"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_set_turbidity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed aerial perspective pass; copies the value"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed aerial perspective pass"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed aerial perspective pass; copies the value"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_get_scale_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed aerial perspective pass"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_set_scale_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed aerial perspective pass; copies the value"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned volumetric fog pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_get_density",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volumetric fog pass"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_set_density",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed volumetric fog pass; copies the value"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_get_anisotropy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volumetric fog pass"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_set_anisotropy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed volumetric fog pass; copies the value"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_get_range",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volumetric fog pass"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_set_range",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed volumetric fog pass; copies the value"
+    },
+    {
+      "symbol": "cna_height_fog_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned height fog pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_height_fog_pass_get_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed height fog pass"
+    },
+    {
+      "symbol": "cna_height_fog_pass_set_color",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed height fog pass; copies the value"
+    },
+    {
+      "symbol": "cna_height_fog_pass_get_density",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed height fog pass"
+    },
+    {
+      "symbol": "cna_height_fog_pass_set_density",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed height fog pass; copies the value"
+    },
+    {
+      "symbol": "cna_height_fog_pass_get_falloff",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed height fog pass"
+    },
+    {
+      "symbol": "cna_height_fog_pass_set_falloff",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed height fog pass; copies the value"
+    },
+    {
+      "symbol": "cna_height_fog_pass_get_base_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed height fog pass"
+    },
+    {
+      "symbol": "cna_height_fog_pass_set_base_height",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed height fog pass; copies the value"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned light shaft pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_get_light_screen_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector2>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed light shaft pass"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_set_light_screen_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector2>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed light shaft pass; copies the value"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_get_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed light shaft pass"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_set_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed light shaft pass; copies the value"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed light shaft pass"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed light shaft pass; copies the value"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_get_decay",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed light shaft pass"
+    },
+    {
+      "symbol": "cna_light_shaft_pass_set_decay",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed light shaft pass; copies the value"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_copy_fallback_reason",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_air_mass_for_distance",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_aerial_perspective_pass_transmittance",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_height_fog_pass_optical_depth",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 7,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_volumetric_fog_pass_set_light",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed pass; the shadow map is BORROWED for every later apply"
+    },
+    {
+      "symbol": "cna_motion_blur_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned motion blur pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_motion_blur_pass_get_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed motion blur pass"
+    },
+    {
+      "symbol": "cna_motion_blur_pass_set_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed motion blur pass; copies the value"
+    },
+    {
+      "symbol": "cna_motion_blur_pass_get_max_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed motion blur pass"
+    },
+    {
+      "symbol": "cna_motion_blur_pass_set_max_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed motion blur pass; copies the value"
+    },
+    {
+      "symbol": "cna_skybox_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned skybox; the environment cube is BORROWED and must outlive it"
+    },
+    {
+      "symbol": "cna_skybox_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes skybox"
+    },
+    {
+      "symbol": "cna_skybox_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed skybox"
+    },
+    {
+      "symbol": "cna_skybox_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 5,
+      "ownership": "borrowed skybox; draws to whatever target is bound"
+    },
+    {
+      "symbol": "cna_skybox_get_environment",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the handle is the one that was set and is not a new borrow"
+    },
+    {
+      "symbol": "cna_skybox_set_environment",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed skybox; the cube is BORROWED and must outlive it"
+    },
+    {
+      "symbol": "cna_skybox_get_yaw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed skybox"
+    },
+    {
+      "symbol": "cna_skybox_set_yaw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed skybox; copies the value"
+    },
+    {
+      "symbol": "cna_skybox_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed skybox"
+    },
+    {
+      "symbol": "cna_skybox_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed skybox; copies the value"
+    },
+    {
+      "symbol": "cna_skybox_get_tint",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed skybox"
+    },
+    {
+      "symbol": "cna_skybox_set_tint",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed skybox; copies the value"
+    },
+    {
+      "symbol": "cna_skybox_compute_view_ray",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 6,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned atmospheric sky; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes atmospheric sky"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed atmospheric sky"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 5,
+      "ownership": "borrowed sky; draws to whatever target is bound"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_get_sun_direction",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed atmospheric sky"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_set_sun_direction",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed atmospheric sky; copies the value"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_get_turbidity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed atmospheric sky"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_set_turbidity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed atmospheric sky; copies the value"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed atmospheric sky"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed atmospheric sky; copies the value"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_copy_model_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_atmospheric_sky_radiance",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
     }
   ],
   "missingSymbols": [],

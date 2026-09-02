@@ -762,11 +762,12 @@ class ShadowReceiver:
         This is the same pattern as ENGINE-002 in
         ``docs/engine-upstream-findings.md``.
         """
-        handle = _support.out_handle("cna_effect_get_shadow_map_ext", self._handle)
-        if not handle:
-            return None
-        _support.call("cna_render_target_destroy", c.c_uint64(handle))
-        return self._shadow_texture
+        expected = (0 if self._shadow_texture is None
+                    else int(self._shadow_texture._require_handle()))
+        present = _support.borrowed_view("cna_effect_get_shadow_map_ext",
+                                         (self._handle,), expected,
+                                         "cna_render_target_destroy")
+        return self._shadow_texture if present else None
 
     @shadow_map.setter
     def shadow_map(self, value) -> None:

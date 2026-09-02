@@ -1428,6 +1428,66 @@
       },
       "evidence": "cna_spatial_upscale_pass_* (8 routes)",
       "notes": "State round-trips, an upscale to the same size is reported as the identity so a caller can skip it, and a draw onto a target cleared to black leaves it not black -- which is weaker than a predicted filter kernel and is what a scaling filter admits to."
+    },
+    {
+      "operation": "Screen-space effect state",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_ssao_pass_*, cna_ssr_pass_*, cna_motion_blur_pass_*, cna_depth_of_field_pass_*, cna_contact_shadow_pass_* (60 routes); tests/test_engine_atmosphere.py",
+      "notes": "Nine passes answer to nine different names. Three measured bounds are now documented at the properties rather than assumed: SSR's roughness blur clamps to a quarter and its edge fade to a half, depth of field's maximum radius clamps to a quarter and is therefore a fraction of the screen rather than a pixel count, and several setters ignore a non-positive value instead of refusing it -- so the previous value survives."
+    },
+    {
+      "operation": "SSR step-count bounds",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "measured"
+      },
+      "evidence": "cna_ssr_pass_set_step_count stores what it is given; the trace clamps",
+      "notes": "The header declares a minimum and a maximum the trace takes 'whatever it is told', and the setter does not clamp: setting one reads back one, and the clamp happens where the ray march runs. The property says so, and the test asserts what CNA does rather than what the constants might suggest."
+    },
+    {
+      "operation": "SSAO sample kernel",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_ssao_pass_copy_kernel; tests/test_engine_atmosphere.py",
+      "notes": "A kernel is the one part of SSAO checkable without rendering, and every offset is inside the unit hemisphere, non-zero, and distinct from the others. Its length is CNA's rather than the sample count -- asking for the sample count answers BUFFER_TOO_SMALL, which is the right refusal and the reason the size is asked for first."
+    },
+    {
+      "operation": "Atmospheric model",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_atmospheric_sky_radiance, the aerial-perspective pair, cna_height_fog_pass_optical_depth",
+      "notes": "A horizon ray crosses more air than a vertical one; more air transmits less and what survives reddens, because blue scatters most; fog accumulates with distance and density and thins with height; the sky is brighter toward the sun and changes with turbidity. Each is a physical prediction rather than a stored value, and the turbidity comparison is relative because a zenith radiance is a number near 1e-5."
+    },
+    {
+      "operation": "Sky and skybox rendering",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_atmospheric_sky_* and cna_skybox_* (26 routes)",
+      "notes": "The sky draws over a target cleared to black and leaves it not black. A skybox borrows its cube: closing the skybox leaves the cube usable, which the test asserts after the with-block. CNA's ownership-transferring setter is deliberately not used, for the same reason as the other transfers."
+    },
+    {
+      "operation": "Engine counted views, systematically",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "_cna_native.engine_support.borrowed_view; every handle-returning getter in the package",
+      "notes": "Rather than a table of which routes hand out a fresh view -- which would go stale the day CNA changes one -- every getter compares the handle it gets against the handle this binding supplied and releases only a different one. That is what makes reading a property any number of times leak nothing while never destroying the caller's own object."
     }
   ]
 }

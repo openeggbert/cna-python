@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1530,
-    "DIRECT_CALL_SITE": 1436,
+    "BOUND_ROUTES": 1654,
+    "DIRECT_CALL_SITE": 1560,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
     "REACHED_BY_NAME_TEMPLATE": 15,
     "ADMITTED_WITH_REASON": 37,
@@ -1282,13 +1282,15 @@
       "src/Microsoft/Xna/Framework/Graphics/_resources.py:400"
     ],
     "cna_texture2d_destroy": [
-      "src/Microsoft/Xna/Framework/Graphics/_resources.py:270"
+      "src/Microsoft/Xna/Framework/Graphics/_resources.py:270",
+      "src/cna/extensions/engine/passes.py:262"
     ],
     "cna_texture3d_create": [
       "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:43"
     ],
     "cna_texture3d_destroy": [
-      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:44"
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:44",
+      "src/cna/extensions/engine/passes.py:281"
     ],
     "cna_texture3d_get_info": [
       "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:52"
@@ -1303,7 +1305,8 @@
       "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:104"
     ],
     "cna_texturecube_destroy": [
-      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:105"
+      "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:105",
+      "src/cna/extensions/engine/atmosphere.py:514"
     ],
     "cna_texturecube_get_info": [
       "src/Microsoft/Xna/Framework/Graphics/_texture_volume.py:113"
@@ -1325,7 +1328,7 @@
     ],
     "cna_effect_destroy": [
       "src/Microsoft/Xna/Framework/Graphics/_effects.py:316",
-      "src/cna/extensions/engine/postprocess.py:560"
+      "src/cna/extensions/engine/postprocess.py:559"
     ],
     "cna_effect_apply": [
       "src/Microsoft/Xna/Framework/Graphics/_effects.py:340"
@@ -1848,7 +1851,7 @@
     ],
     "cna_render_target_destroy": [
       "src/Microsoft/Xna/Framework/Graphics/_render_targets.py:100",
-      "src/cna/extensions/engine/shadows.py:768"
+      "src/cna/extensions/engine/shadows.py:769"
     ],
     "cna_graphics_device_set_render_target2d": [
       "src/Microsoft/Xna/Framework/Graphics/_device.py:776"
@@ -3562,7 +3565,7 @@
       "src/_cna_native/engine_support.py:73"
     ],
     "cna_engine_layer_copy_version_string": [
-      "src/cna/extensions/engine/__init__.py:281"
+      "src/cna/extensions/engine/__init__.py:322"
     ],
     "cna_graphics_memory_barrier_has": [
       "src/cna/extensions/engine/compute.py:80"
@@ -3734,10 +3737,10 @@
       "src/cna/extensions/engine/postprocess.py:531"
     ],
     "cna_post_process_effect_pass_get_effect": [
-      "src/cna/extensions/engine/postprocess.py:556"
+      "src/cna/extensions/engine/postprocess.py:557"
     ],
     "cna_post_process_effect_pass_set_effect": [
-      "src/cna/extensions/engine/postprocess.py:570"
+      "src/cna/extensions/engine/postprocess.py:569"
     ],
     "cna_post_process_pass_apply": [
       "src/cna/extensions/engine/postprocess.py:489"
@@ -3749,47 +3752,48 @@
       "src/cna/extensions/engine/postprocess.py:481"
     ],
     "cna_post_process_pass_destroy": [
+      "src/cna/extensions/engine/atmosphere.py:114",
       "src/cna/extensions/engine/passes.py:183",
       "src/cna/extensions/engine/postprocess.py:505"
     ],
     "cna_post_process_chain_create": [
-      "src/cna/extensions/engine/postprocess.py:603"
+      "src/cna/extensions/engine/postprocess.py:602"
     ],
     "cna_post_process_chain_destroy": [
-      "src/cna/extensions/engine/postprocess.py:604"
+      "src/cna/extensions/engine/postprocess.py:603"
     ],
     "cna_post_process_chain_add_pass": [
-      "src/cna/extensions/engine/postprocess.py:619"
+      "src/cna/extensions/engine/postprocess.py:618"
     ],
     "cna_post_process_chain_clear": [
-      "src/cna/extensions/engine/postprocess.py:625"
+      "src/cna/extensions/engine/postprocess.py:624"
     ],
     "cna_post_process_chain_get_pass_count": [
-      "src/cna/extensions/engine/postprocess.py:631"
+      "src/cna/extensions/engine/postprocess.py:630"
     ],
     "cna_post_process_chain_apply": [
-      "src/cna/extensions/engine/postprocess.py:639"
+      "src/cna/extensions/engine/postprocess.py:638"
     ],
     "cna_post_process_chain_reset_targets": [
-      "src/cna/extensions/engine/postprocess.py:644"
+      "src/cna/extensions/engine/postprocess.py:643"
     ],
     "cna_post_process_chain_get_target_pool": [
-      "src/cna/extensions/engine/postprocess.py:655"
+      "src/cna/extensions/engine/postprocess.py:654"
     ],
     "cna_post_process_chain_is_gpu_timing_enabled": [
-      "src/cna/extensions/engine/postprocess.py:661"
+      "src/cna/extensions/engine/postprocess.py:660"
     ],
     "cna_post_process_chain_set_gpu_timing_enabled": [
-      "src/cna/extensions/engine/postprocess.py:674"
+      "src/cna/extensions/engine/postprocess.py:673"
     ],
     "cna_post_process_chain_get_pass_timing_count": [
-      "src/cna/extensions/engine/postprocess.py:690"
+      "src/cna/extensions/engine/postprocess.py:689"
     ],
     "cna_post_process_chain_get_pass_timing": [
-      "src/cna/extensions/engine/postprocess.py:695"
+      "src/cna/extensions/engine/postprocess.py:694"
     ],
     "cna_post_process_chain_copy_pass_timing_name": [
-      "src/cna/extensions/engine/postprocess.py:698"
+      "src/cna/extensions/engine/postprocess.py:697"
     ],
     "cna_directional_light_ext_init": [
       "src/cna/extensions/engine/values.py:136"
@@ -3867,6 +3871,7 @@
       "src/cna/extensions/engine/shadows.py:106"
     ],
     "cna_shadow_map_destroy": [
+      "src/cna/extensions/engine/pipeline.py:461",
       "src/cna/extensions/engine/shadows.py:298"
     ],
     "cna_spot_shadow_map_create": [
@@ -4041,46 +4046,46 @@
       "src/cna/extensions/engine/shadows.py:477"
     ],
     "cna_effect_set_shadow_map_ext": [
-      "src/cna/extensions/engine/shadows.py:774"
+      "src/cna/extensions/engine/shadows.py:775"
     ],
     "cna_effect_get_shadow_map_ext": [
-      "src/cna/extensions/engine/shadows.py:765"
+      "src/cna/extensions/engine/shadows.py:767"
     ],
     "cna_effect_set_light_view_projection_ext": [
-      "src/cna/extensions/engine/shadows.py:788"
+      "src/cna/extensions/engine/shadows.py:789"
     ],
     "cna_effect_get_light_view_projection_ext": [
-      "src/cna/extensions/engine/shadows.py:781"
+      "src/cna/extensions/engine/shadows.py:782"
     ],
     "cna_effect_set_shadows_enabled_ext": [
-      "src/cna/extensions/engine/shadows.py:798"
+      "src/cna/extensions/engine/shadows.py:799"
     ],
     "cna_effect_is_shadows_enabled_ext": [
-      "src/cna/extensions/engine/shadows.py:794"
+      "src/cna/extensions/engine/shadows.py:795"
     ],
     "cna_effect_set_shadow_depth_bias_ext": [
-      "src/cna/extensions/engine/shadows.py:808"
+      "src/cna/extensions/engine/shadows.py:809"
     ],
     "cna_effect_get_shadow_depth_bias_ext": [
-      "src/cna/extensions/engine/shadows.py:804"
+      "src/cna/extensions/engine/shadows.py:805"
     ],
     "cna_effect_set_shadow_filter_radius_ext": [
-      "src/cna/extensions/engine/shadows.py:818"
+      "src/cna/extensions/engine/shadows.py:819"
     ],
     "cna_effect_get_shadow_filter_radius_ext": [
-      "src/cna/extensions/engine/shadows.py:814"
+      "src/cna/extensions/engine/shadows.py:815"
     ],
     "cna_effect_set_shadow_cascades_ext": [
-      "src/cna/extensions/engine/shadows.py:833"
+      "src/cna/extensions/engine/shadows.py:834"
     ],
     "cna_effect_get_shadow_cascades_ext": [
-      "src/cna/extensions/engine/shadows.py:825"
+      "src/cna/extensions/engine/shadows.py:826"
     ],
     "cna_effect_set_punctual_light_ext": [
-      "src/cna/extensions/engine/shadows.py:847"
+      "src/cna/extensions/engine/shadows.py:848"
     ],
     "cna_effect_get_punctual_light_ext": [
-      "src/cna/extensions/engine/shadows.py:839"
+      "src/cna/extensions/engine/shadows.py:840"
     ],
     "cna_pbr_effect_apply_material": [
       "src/cna/extensions/engine/pbr.py:683"
@@ -4605,10 +4610,10 @@
       "src/cna/extensions/engine/pipeline.py:373"
     ],
     "cna_render_pipeline_begin": [
-      "src/cna/extensions/engine/pipeline.py:524"
+      "src/cna/extensions/engine/pipeline.py:533"
     ],
     "cna_render_pipeline_end": [
-      "src/cna/extensions/engine/pipeline.py:535"
+      "src/cna/extensions/engine/pipeline.py:544"
     ],
     "cna_render_pipeline_add_user_pass": [
       "src/cna/extensions/engine/pipeline.py:421"
@@ -4623,10 +4628,10 @@
       "src/cna/extensions/engine/pipeline.py:406"
     ],
     "cna_render_pipeline_set_transparent_scene": [
-      "src/cna/extensions/engine/pipeline.py:474"
+      "src/cna/extensions/engine/pipeline.py:483"
     ],
     "cna_render_pipeline_set_shadow_scene": [
-      "src/cna/extensions/engine/pipeline.py:499"
+      "src/cna/extensions/engine/pipeline.py:508"
     ],
     "cna_render_pipeline_set_camera": [
       "src/cna/extensions/engine/pipeline.py:381"
@@ -4635,58 +4640,58 @@
       "src/cna/extensions/engine/pipeline.py:389"
     ],
     "cna_render_pipeline_copy_transparency_fallback_reason_ext": [
-      "src/cna/extensions/engine/pipeline.py:619"
+      "src/cna/extensions/engine/pipeline.py:628"
     ],
     "cna_render_pipeline_set_gpu_timing_enabled_ext": [
-      "src/cna/extensions/engine/pipeline.py:512"
+      "src/cna/extensions/engine/pipeline.py:521"
     ],
     "cna_render_pipeline_is_gpu_timing_enabled_ext": [
-      "src/cna/extensions/engine/pipeline.py:507"
+      "src/cna/extensions/engine/pipeline.py:516"
     ],
     "cna_render_pipeline_did_skybox_draw": [
-      "src/cna/extensions/engine/pipeline.py:554"
+      "src/cna/extensions/engine/pipeline.py:563"
     ],
     "cna_render_pipeline_did_shadow_pass_run": [
-      "src/cna/extensions/engine/pipeline.py:560"
+      "src/cna/extensions/engine/pipeline.py:569"
     ],
     "cna_render_pipeline_get_shadow_map": [
-      "src/cna/extensions/engine/pipeline.py:451"
+      "src/cna/extensions/engine/pipeline.py:459"
     ],
     "cna_render_pipeline_get_scene_target": [
-      "src/cna/extensions/engine/pipeline.py:602"
+      "src/cna/extensions/engine/pipeline.py:611"
     ],
     "cna_render_pipeline_get_scene_target_format": [
-      "src/cna/extensions/engine/pipeline.py:589"
+      "src/cna/extensions/engine/pipeline.py:598"
     ],
     "cna_render_pipeline_is_using_scene_target": [
-      "src/cna/extensions/engine/pipeline.py:582"
+      "src/cna/extensions/engine/pipeline.py:591"
     ],
     "cna_render_pipeline_get_last_frame_pass_count": [
-      "src/cna/extensions/engine/pipeline.py:566"
+      "src/cna/extensions/engine/pipeline.py:575"
     ],
     "cna_render_pipeline_get_gpu_memory_estimate_bytes": [
-      "src/cna/extensions/engine/pipeline.py:572"
+      "src/cna/extensions/engine/pipeline.py:581"
     ],
     "cna_render_pipeline_get_statistics": [
-      "src/cna/extensions/engine/pipeline.py:547"
+      "src/cna/extensions/engine/pipeline.py:556"
     ],
     "cna_render_pipeline_release_device_resources_ext": [
-      "src/cna/extensions/engine/pipeline.py:652"
+      "src/cna/extensions/engine/pipeline.py:661"
     ],
     "cna_render_pipeline_get_pass_timing_count_ext": [
-      "src/cna/extensions/engine/pipeline.py:627"
+      "src/cna/extensions/engine/pipeline.py:636"
     ],
     "cna_render_pipeline_get_pass_timing_ext": [
-      "src/cna/extensions/engine/pipeline.py:632"
+      "src/cna/extensions/engine/pipeline.py:641"
     ],
     "cna_render_pipeline_copy_pass_timing_name_ext": [
-      "src/cna/extensions/engine/pipeline.py:635"
+      "src/cna/extensions/engine/pipeline.py:644"
     ],
     "cna_render_pipeline_get_skybox": [
-      "src/cna/extensions/engine/pipeline.py:437"
+      "src/cna/extensions/engine/pipeline.py:439"
     ],
     "cna_render_pipeline_set_skybox": [
-      "src/cna/extensions/engine/pipeline.py:444"
+      "src/cna/extensions/engine/pipeline.py:447"
     ],
     "cna_bloom_pass_create": [
       "src/cna/extensions/engine/passes.py:191"
@@ -4710,97 +4715,97 @@
       "src/cna/extensions/engine/passes.py:198"
     ],
     "cna_lens_flare_pass_create": [
-      "src/cna/extensions/engine/passes.py:324"
-    ],
-    "cna_lens_flare_pass_get_threshold": [
-      "src/cna/extensions/engine/passes.py:326"
-    ],
-    "cna_lens_flare_pass_set_threshold": [
-      "src/cna/extensions/engine/passes.py:327"
-    ],
-    "cna_lens_flare_pass_get_intensity": [
-      "src/cna/extensions/engine/passes.py:329"
-    ],
-    "cna_lens_flare_pass_set_intensity": [
-      "src/cna/extensions/engine/passes.py:330"
-    ],
-    "cna_lens_flare_pass_get_dispersal": [
-      "src/cna/extensions/engine/passes.py:332"
-    ],
-    "cna_lens_flare_pass_set_dispersal": [
       "src/cna/extensions/engine/passes.py:333"
     ],
+    "cna_lens_flare_pass_get_threshold": [
+      "src/cna/extensions/engine/passes.py:335"
+    ],
+    "cna_lens_flare_pass_set_threshold": [
+      "src/cna/extensions/engine/passes.py:336"
+    ],
+    "cna_lens_flare_pass_get_intensity": [
+      "src/cna/extensions/engine/passes.py:338"
+    ],
+    "cna_lens_flare_pass_set_intensity": [
+      "src/cna/extensions/engine/passes.py:339"
+    ],
+    "cna_lens_flare_pass_get_dispersal": [
+      "src/cna/extensions/engine/passes.py:341"
+    ],
+    "cna_lens_flare_pass_set_dispersal": [
+      "src/cna/extensions/engine/passes.py:342"
+    ],
     "cna_fxaa_pass_create": [
-      "src/cna/extensions/engine/passes.py:286"
+      "src/cna/extensions/engine/passes.py:295"
     ],
     "cna_fxaa_pass_get_edge_threshold": [
-      "src/cna/extensions/engine/passes.py:288"
-    ],
-    "cna_fxaa_pass_set_edge_threshold": [
-      "src/cna/extensions/engine/passes.py:289"
-    ],
-    "cna_spatial_upscale_pass_create": [
-      "src/cna/extensions/engine/passes.py:434"
-    ],
-    "cna_spatial_upscale_pass_destroy": [
-      "src/cna/extensions/engine/passes.py:436"
-    ],
-    "cna_spatial_upscale_pass_get_sharpness": [
-      "src/cna/extensions/engine/passes.py:438"
-    ],
-    "cna_spatial_upscale_pass_set_sharpness": [
-      "src/cna/extensions/engine/passes.py:439"
-    ],
-    "cna_spatial_upscale_pass_get_edge_adaptive": [
-      "src/cna/extensions/engine/passes.py:441"
-    ],
-    "cna_spatial_upscale_pass_set_edge_adaptive": [
-      "src/cna/extensions/engine/passes.py:442"
-    ],
-    "cna_chromatic_aberration_pass_create": [
       "src/cna/extensions/engine/passes.py:297"
     ],
+    "cna_fxaa_pass_set_edge_threshold": [
+      "src/cna/extensions/engine/passes.py:298"
+    ],
+    "cna_spatial_upscale_pass_create": [
+      "src/cna/extensions/engine/passes.py:443"
+    ],
+    "cna_spatial_upscale_pass_destroy": [
+      "src/cna/extensions/engine/passes.py:445"
+    ],
+    "cna_spatial_upscale_pass_get_sharpness": [
+      "src/cna/extensions/engine/passes.py:447"
+    ],
+    "cna_spatial_upscale_pass_set_sharpness": [
+      "src/cna/extensions/engine/passes.py:448"
+    ],
+    "cna_spatial_upscale_pass_get_edge_adaptive": [
+      "src/cna/extensions/engine/passes.py:450"
+    ],
+    "cna_spatial_upscale_pass_set_edge_adaptive": [
+      "src/cna/extensions/engine/passes.py:451"
+    ],
+    "cna_chromatic_aberration_pass_create": [
+      "src/cna/extensions/engine/passes.py:306"
+    ],
     "cna_chromatic_aberration_pass_get_strength": [
-      "src/cna/extensions/engine/passes.py:299"
+      "src/cna/extensions/engine/passes.py:308"
     ],
     "cna_chromatic_aberration_pass_set_strength": [
-      "src/cna/extensions/engine/passes.py:300"
+      "src/cna/extensions/engine/passes.py:309"
     ],
     "cna_film_grain_pass_create": [
-      "src/cna/extensions/engine/passes.py:313"
+      "src/cna/extensions/engine/passes.py:322"
     ],
     "cna_film_grain_pass_get_intensity": [
-      "src/cna/extensions/engine/passes.py:315"
+      "src/cna/extensions/engine/passes.py:324"
     ],
     "cna_film_grain_pass_set_intensity": [
-      "src/cna/extensions/engine/passes.py:316"
+      "src/cna/extensions/engine/passes.py:325"
     ],
     "cna_ascii_pass_create": [
-      "src/cna/extensions/engine/passes.py:395"
+      "src/cna/extensions/engine/passes.py:404"
     ],
     "cna_bloom_pass_reset_targets": [
       "src/cna/extensions/engine/passes.py:203"
     ],
     "cna_bloom_pass_iterations_for_quality": [
-      "src/cna/extensions/engine/passes.py:747"
+      "src/cna/extensions/engine/passes.py:756"
     ],
     "cna_bloom_pass_extract_channel": [
-      "src/cna/extensions/engine/passes.py:740"
+      "src/cna/extensions/engine/passes.py:749"
     ],
     "cna_fxaa_pass_copy_fragment_glsl": [
-      "src/cna/extensions/engine/passes.py:759"
+      "src/cna/extensions/engine/passes.py:768"
     ],
     "cna_fxaa_pass_edge_threshold_for_quality": [
-      "src/cna/extensions/engine/passes.py:753"
+      "src/cna/extensions/engine/passes.py:762"
     ],
     "cna_spatial_upscale_pass_draw": [
-      "src/cna/extensions/engine/passes.py:465"
+      "src/cna/extensions/engine/passes.py:474"
     ],
     "cna_spatial_upscale_pass_is_identity_scale": [
-      "src/cna/extensions/engine/passes.py:797"
+      "src/cna/extensions/engine/passes.py:806"
     ],
     "cna_ascii_pass_get_effect": [
-      "src/cna/extensions/engine/passes.py:410"
+      "src/cna/extensions/engine/passes.py:419"
     ],
     "cna_tonemap_pass_create": [
       "src/cna/extensions/engine/passes.py:210"
@@ -4836,22 +4841,22 @@
       "src/cna/extensions/engine/passes.py:222"
     ],
     "cna_tonemap_pass_tonemap_channel": [
-      "src/cna/extensions/engine/passes.py:769"
+      "src/cna/extensions/engine/passes.py:778"
     ],
     "cna_color_grade_pass_create": [
       "src/cna/extensions/engine/passes.py:236"
     ],
     "cna_color_grade_pass_get_lut": [
-      "src/cna/extensions/engine/passes.py:258"
+      "src/cna/extensions/engine/passes.py:260"
     ],
     "cna_color_grade_pass_set_lut": [
-      "src/cna/extensions/engine/passes.py:264"
+      "src/cna/extensions/engine/passes.py:267"
     ],
     "cna_color_grade_pass_get_volume_lut": [
-      "src/cna/extensions/engine/passes.py:271"
+      "src/cna/extensions/engine/passes.py:279"
     ],
     "cna_color_grade_pass_set_volume_lut": [
-      "src/cna/extensions/engine/passes.py:277"
+      "src/cna/extensions/engine/passes.py:286"
     ],
     "cna_color_grade_pass_get_interpolation": [
       "src/cna/extensions/engine/passes.py:243"
@@ -4866,145 +4871,518 @@
       "src/cna/extensions/engine/passes.py:248"
     ],
     "cna_color_grade_pass_lut_size_for_strip": [
-      "src/cna/extensions/engine/passes.py:778"
+      "src/cna/extensions/engine/passes.py:787"
     ],
     "cna_color_grade_pass_create_identity_lut": [
-      "src/cna/extensions/engine/passes.py:789"
+      "src/cna/extensions/engine/passes.py:798"
     ],
     "cna_hdr_display_output_create": [
-      "src/cna/extensions/engine/passes.py:593"
+      "src/cna/extensions/engine/passes.py:602"
     ],
     "cna_hdr_display_output_destroy": [
-      "src/cna/extensions/engine/passes.py:595"
-    ],
-    "cna_hdr_display_output_is_supported": [
-      "src/cna/extensions/engine/passes.py:600"
-    ],
-    "cna_hdr_display_output_get_color_space": [
-      "src/cna/extensions/engine/passes.py:603"
-    ],
-    "cna_hdr_display_output_set_color_space": [
       "src/cna/extensions/engine/passes.py:604"
     ],
+    "cna_hdr_display_output_is_supported": [
+      "src/cna/extensions/engine/passes.py:609"
+    ],
+    "cna_hdr_display_output_get_color_space": [
+      "src/cna/extensions/engine/passes.py:612"
+    ],
+    "cna_hdr_display_output_set_color_space": [
+      "src/cna/extensions/engine/passes.py:613"
+    ],
     "cna_hdr_display_output_get_paper_white_nits": [
-      "src/cna/extensions/engine/passes.py:607"
+      "src/cna/extensions/engine/passes.py:616"
     ],
     "cna_hdr_display_output_set_paper_white_nits": [
-      "src/cna/extensions/engine/passes.py:608"
+      "src/cna/extensions/engine/passes.py:617"
     ],
     "cna_hdr_display_output_get_peak_nits": [
-      "src/cna/extensions/engine/passes.py:610"
+      "src/cna/extensions/engine/passes.py:619"
     ],
     "cna_hdr_display_output_set_peak_nits": [
-      "src/cna/extensions/engine/passes.py:611"
+      "src/cna/extensions/engine/passes.py:620"
     ],
     "cna_hdr_display_output_draw": [
-      "src/cna/extensions/engine/passes.py:633"
+      "src/cna/extensions/engine/passes.py:642"
     ],
     "cna_hdr_display_output_encode_pq": [
-      "src/cna/extensions/engine/passes.py:806"
+      "src/cna/extensions/engine/passes.py:815"
     ],
     "cna_hdr_display_output_decode_pq": [
-      "src/cna/extensions/engine/passes.py:812"
+      "src/cna/extensions/engine/passes.py:821"
     ],
     "cna_hdr_display_output_rec709_to_rec2020": [
-      "src/cna/extensions/engine/passes.py:820"
+      "src/cna/extensions/engine/passes.py:829"
     ],
     "cna_hdr_display_output_roll_off": [
-      "src/cna/extensions/engine/passes.py:827"
+      "src/cna/extensions/engine/passes.py:836"
     ],
     "cna_hdr_display_output_encode": [
-      "src/cna/extensions/engine/passes.py:841"
+      "src/cna/extensions/engine/passes.py:850"
     ],
     "cna_auto_exposure_ext_create": [
-      "src/cna/extensions/engine/passes.py:653"
+      "src/cna/extensions/engine/passes.py:662"
     ],
     "cna_auto_exposure_ext_destroy": [
-      "src/cna/extensions/engine/passes.py:655"
+      "src/cna/extensions/engine/passes.py:664"
     ],
     "cna_auto_exposure_ext_measure_average_luminance": [
-      "src/cna/extensions/engine/passes.py:714"
+      "src/cna/extensions/engine/passes.py:723"
     ],
     "cna_auto_exposure_ext_update": [
-      "src/cna/extensions/engine/passes.py:721"
+      "src/cna/extensions/engine/passes.py:730"
     ],
     "cna_auto_exposure_ext_apply_to": [
-      "src/cna/extensions/engine/passes.py:731"
+      "src/cna/extensions/engine/passes.py:740"
     ],
     "cna_auto_exposure_ext_get_exposure": [
-      "src/cna/extensions/engine/passes.py:657"
+      "src/cna/extensions/engine/passes.py:666"
     ],
     "cna_auto_exposure_ext_set_exposure": [
-      "src/cna/extensions/engine/passes.py:658"
+      "src/cna/extensions/engine/passes.py:667"
     ],
     "cna_auto_exposure_ext_get_key_value": [
-      "src/cna/extensions/engine/passes.py:660"
+      "src/cna/extensions/engine/passes.py:669"
     ],
     "cna_auto_exposure_ext_set_key_value": [
-      "src/cna/extensions/engine/passes.py:661"
+      "src/cna/extensions/engine/passes.py:670"
     ],
     "cna_auto_exposure_ext_get_brightening_speed": [
-      "src/cna/extensions/engine/passes.py:683"
+      "src/cna/extensions/engine/passes.py:692"
     ],
     "cna_auto_exposure_ext_get_darkening_speed": [
-      "src/cna/extensions/engine/passes.py:689"
+      "src/cna/extensions/engine/passes.py:698"
     ],
     "cna_auto_exposure_ext_set_adaptation_speeds": [
-      "src/cna/extensions/engine/passes.py:699"
-    ],
-    "cna_auto_exposure_ext_set_exposure_range": [
       "src/cna/extensions/engine/passes.py:708"
     ],
+    "cna_auto_exposure_ext_set_exposure_range": [
+      "src/cna/extensions/engine/passes.py:717"
+    ],
     "cna_cube_lut_parse": [
-      "src/cna/extensions/engine/passes.py:497"
+      "src/cna/extensions/engine/passes.py:506"
     ],
     "cna_cube_lut_load_from_file": [
-      "src/cna/extensions/engine/passes.py:507"
+      "src/cna/extensions/engine/passes.py:516"
     ],
     "cna_cube_lut_destroy": [
-      "src/cna/extensions/engine/passes.py:490"
+      "src/cna/extensions/engine/passes.py:499"
     ],
     "cna_cube_lut_get_size": [
-      "src/cna/extensions/engine/passes.py:530"
+      "src/cna/extensions/engine/passes.py:539"
     ],
     "cna_cube_lut_copy_title": [
-      "src/cna/extensions/engine/passes.py:535"
+      "src/cna/extensions/engine/passes.py:544"
     ],
     "cna_cube_lut_get_domain_min": [
-      "src/cna/extensions/engine/passes.py:542"
+      "src/cna/extensions/engine/passes.py:551"
     ],
     "cna_cube_lut_get_domain_max": [
-      "src/cna/extensions/engine/passes.py:550"
+      "src/cna/extensions/engine/passes.py:559"
     ],
     "cna_cube_lut_is_unit_domain": [
-      "src/cna/extensions/engine/passes.py:557"
+      "src/cna/extensions/engine/passes.py:566"
     ],
     "cna_cube_lut_get_entry": [
-      "src/cna/extensions/engine/passes.py:562"
+      "src/cna/extensions/engine/passes.py:571"
     ],
     "cna_cube_lut_create_strip_texture": [
-      "src/cna/extensions/engine/passes.py:572"
+      "src/cna/extensions/engine/passes.py:581"
     ],
     "cna_cube_lut_create_volume_texture": [
-      "src/cna/extensions/engine/passes.py:578"
+      "src/cna/extensions/engine/passes.py:587"
     ],
     "cna_ascii_post_process_effect_get_cell_size": [
-      "src/cna/extensions/engine/passes.py:370"
+      "src/cna/extensions/engine/passes.py:379"
     ],
     "cna_ascii_post_process_effect_set_cell_size": [
-      "src/cna/extensions/engine/passes.py:377"
-    ],
-    "cna_ascii_post_process_effect_get_quantize_mode": [
-      "src/cna/extensions/engine/passes.py:361"
-    ],
-    "cna_ascii_post_process_effect_set_quantize_mode": [
-      "src/cna/extensions/engine/passes.py:362"
-    ],
-    "cna_ascii_post_process_effect_get_last_grid_dimensions": [
       "src/cna/extensions/engine/passes.py:386"
     ],
+    "cna_ascii_post_process_effect_get_quantize_mode": [
+      "src/cna/extensions/engine/passes.py:370"
+    ],
+    "cna_ascii_post_process_effect_set_quantize_mode": [
+      "src/cna/extensions/engine/passes.py:371"
+    ],
+    "cna_ascii_post_process_effect_get_last_grid_dimensions": [
+      "src/cna/extensions/engine/passes.py:395"
+    ],
     "cna_ascii_post_process_effect_destroy": [
-      "src/cna/extensions/engine/passes.py:412"
+      "src/cna/extensions/engine/passes.py:421"
+    ],
+    "cna_contact_shadow_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:251"
+    ],
+    "cna_contact_shadow_pass_get_light_direction": [
+      "src/cna/extensions/engine/atmosphere.py:254"
+    ],
+    "cna_contact_shadow_pass_set_light_direction": [
+      "src/cna/extensions/engine/atmosphere.py:255"
+    ],
+    "cna_contact_shadow_pass_get_max_distance": [
+      "src/cna/extensions/engine/atmosphere.py:257"
+    ],
+    "cna_contact_shadow_pass_set_max_distance": [
+      "src/cna/extensions/engine/atmosphere.py:258"
+    ],
+    "cna_contact_shadow_pass_get_step_count": [
+      "src/cna/extensions/engine/atmosphere.py:260"
+    ],
+    "cna_contact_shadow_pass_set_step_count": [
+      "src/cna/extensions/engine/atmosphere.py:261"
+    ],
+    "cna_contact_shadow_pass_get_thickness": [
+      "src/cna/extensions/engine/atmosphere.py:263"
+    ],
+    "cna_contact_shadow_pass_set_thickness": [
+      "src/cna/extensions/engine/atmosphere.py:264"
+    ],
+    "cna_contact_shadow_pass_get_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:266"
+    ],
+    "cna_contact_shadow_pass_set_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:267"
+    ],
+    "cna_contact_shadow_pass_get_bias": [
+      "src/cna/extensions/engine/atmosphere.py:269"
+    ],
+    "cna_contact_shadow_pass_set_bias": [
+      "src/cna/extensions/engine/atmosphere.py:269"
+    ],
+    "cna_contact_shadow_pass_copy_fallback_reason": [
+      "src/cna/extensions/engine/atmosphere.py:275"
+    ],
+    "cna_contact_shadow_pass_is_occluded": [
+      "src/cna/extensions/engine/atmosphere.py:572"
+    ],
+    "cna_contact_shadow_pass_copy_occlusion_test_glsl": [
+      "src/cna/extensions/engine/atmosphere.py:594"
+    ],
+    "cna_contact_shadow_pass_combine_visibility": [
+      "src/cna/extensions/engine/atmosphere.py:587"
+    ],
+    "cna_ssr_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:170"
+    ],
+    "cna_ssr_pass_get_max_distance": [
+      "src/cna/extensions/engine/atmosphere.py:172"
+    ],
+    "cna_ssr_pass_set_max_distance": [
+      "src/cna/extensions/engine/atmosphere.py:173"
+    ],
+    "cna_ssr_pass_get_step_count": [
+      "src/cna/extensions/engine/atmosphere.py:177"
+    ],
+    "cna_ssr_pass_set_step_count": [
+      "src/cna/extensions/engine/atmosphere.py:177"
+    ],
+    "cna_ssr_pass_get_thickness": [
+      "src/cna/extensions/engine/atmosphere.py:182"
+    ],
+    "cna_ssr_pass_set_thickness": [
+      "src/cna/extensions/engine/atmosphere.py:182"
+    ],
+    "cna_ssr_pass_get_depth_bias": [
+      "src/cna/extensions/engine/atmosphere.py:184"
+    ],
+    "cna_ssr_pass_set_depth_bias": [
+      "src/cna/extensions/engine/atmosphere.py:184"
+    ],
+    "cna_ssr_pass_get_roughness_blur": [
+      "src/cna/extensions/engine/atmosphere.py:186"
+    ],
+    "cna_ssr_pass_set_roughness_blur": [
+      "src/cna/extensions/engine/atmosphere.py:187"
+    ],
+    "cna_ssr_pass_get_edge_fade": [
+      "src/cna/extensions/engine/atmosphere.py:191"
+    ],
+    "cna_ssr_pass_set_edge_fade": [
+      "src/cna/extensions/engine/atmosphere.py:191"
+    ],
+    "cna_ssr_pass_get_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:194"
+    ],
+    "cna_ssr_pass_set_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:194"
+    ],
+    "cna_ssao_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:125"
+    ],
+    "cna_ssao_pass_get_radius": [
+      "src/cna/extensions/engine/atmosphere.py:127"
+    ],
+    "cna_ssao_pass_set_radius": [
+      "src/cna/extensions/engine/atmosphere.py:127"
+    ],
+    "cna_ssao_pass_get_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:129"
+    ],
+    "cna_ssao_pass_set_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:129"
+    ],
+    "cna_ssao_pass_get_sample_count": [
+      "src/cna/extensions/engine/atmosphere.py:131"
+    ],
+    "cna_ssao_pass_set_sample_count": [
+      "src/cna/extensions/engine/atmosphere.py:132"
+    ],
+    "cna_ssao_pass_get_half_resolution": [
+      "src/cna/extensions/engine/atmosphere.py:134"
+    ],
+    "cna_ssao_pass_set_half_resolution": [
+      "src/cna/extensions/engine/atmosphere.py:135"
+    ],
+    "cna_depth_of_field_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:222"
+    ],
+    "cna_depth_of_field_pass_get_focus_distance": [
+      "src/cna/extensions/engine/atmosphere.py:224"
+    ],
+    "cna_depth_of_field_pass_set_focus_distance": [
+      "src/cna/extensions/engine/atmosphere.py:225"
+    ],
+    "cna_depth_of_field_pass_get_focal_length": [
+      "src/cna/extensions/engine/atmosphere.py:229"
+    ],
+    "cna_depth_of_field_pass_set_focal_length": [
+      "src/cna/extensions/engine/atmosphere.py:230"
+    ],
+    "cna_depth_of_field_pass_get_f_number": [
+      "src/cna/extensions/engine/atmosphere.py:232"
+    ],
+    "cna_depth_of_field_pass_set_f_number": [
+      "src/cna/extensions/engine/atmosphere.py:233"
+    ],
+    "cna_depth_of_field_pass_get_max_radius": [
+      "src/cna/extensions/engine/atmosphere.py:235"
+    ],
+    "cna_depth_of_field_pass_set_max_radius": [
+      "src/cna/extensions/engine/atmosphere.py:236"
+    ],
+    "cna_ssao_pass_reset_targets": [
+      "src/cna/extensions/engine/atmosphere.py:140"
+    ],
+    "cna_ssao_pass_copy_kernel": [
+      "src/cna/extensions/engine/atmosphere.py:155"
+    ],
+    "cna_ssao_pass_copy_occlusion_glsl": [
+      "src/cna/extensions/engine/atmosphere.py:543"
+    ],
+    "cna_ssao_pass_sample_count_for_quality": [
+      "src/cna/extensions/engine/atmosphere.py:537"
+    ],
+    "cna_depth_of_field_pass_circle_of_confusion_millimetres": [
+      "src/cna/extensions/engine/atmosphere.py:556"
+    ],
+    "cna_aerial_perspective_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:286"
+    ],
+    "cna_aerial_perspective_pass_get_sun_direction": [
+      "src/cna/extensions/engine/atmosphere.py:289"
+    ],
+    "cna_aerial_perspective_pass_set_sun_direction": [
+      "src/cna/extensions/engine/atmosphere.py:290"
+    ],
+    "cna_aerial_perspective_pass_get_turbidity": [
+      "src/cna/extensions/engine/atmosphere.py:292"
+    ],
+    "cna_aerial_perspective_pass_set_turbidity": [
+      "src/cna/extensions/engine/atmosphere.py:293"
+    ],
+    "cna_aerial_perspective_pass_get_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:295"
+    ],
+    "cna_aerial_perspective_pass_set_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:296"
+    ],
+    "cna_aerial_perspective_pass_get_scale_height": [
+      "src/cna/extensions/engine/atmosphere.py:298"
+    ],
+    "cna_aerial_perspective_pass_set_scale_height": [
+      "src/cna/extensions/engine/atmosphere.py:299"
+    ],
+    "cna_volumetric_fog_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:363"
+    ],
+    "cna_volumetric_fog_pass_get_density": [
+      "src/cna/extensions/engine/atmosphere.py:369"
+    ],
+    "cna_volumetric_fog_pass_set_density": [
+      "src/cna/extensions/engine/atmosphere.py:370"
+    ],
+    "cna_volumetric_fog_pass_get_anisotropy": [
+      "src/cna/extensions/engine/atmosphere.py:372"
+    ],
+    "cna_volumetric_fog_pass_set_anisotropy": [
+      "src/cna/extensions/engine/atmosphere.py:373"
+    ],
+    "cna_volumetric_fog_pass_get_range": [
+      "src/cna/extensions/engine/atmosphere.py:375"
+    ],
+    "cna_volumetric_fog_pass_set_range": [
+      "src/cna/extensions/engine/atmosphere.py:376"
+    ],
+    "cna_height_fog_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:313"
+    ],
+    "cna_height_fog_pass_get_color": [
+      "src/cna/extensions/engine/atmosphere.py:315"
+    ],
+    "cna_height_fog_pass_set_color": [
+      "src/cna/extensions/engine/atmosphere.py:316"
+    ],
+    "cna_height_fog_pass_get_density": [
+      "src/cna/extensions/engine/atmosphere.py:318"
+    ],
+    "cna_height_fog_pass_set_density": [
+      "src/cna/extensions/engine/atmosphere.py:318"
+    ],
+    "cna_height_fog_pass_get_falloff": [
+      "src/cna/extensions/engine/atmosphere.py:320"
+    ],
+    "cna_height_fog_pass_set_falloff": [
+      "src/cna/extensions/engine/atmosphere.py:320"
+    ],
+    "cna_height_fog_pass_get_base_height": [
+      "src/cna/extensions/engine/atmosphere.py:322"
+    ],
+    "cna_height_fog_pass_set_base_height": [
+      "src/cna/extensions/engine/atmosphere.py:323"
+    ],
+    "cna_light_shaft_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:331"
+    ],
+    "cna_light_shaft_pass_get_light_screen_position": [
+      "src/cna/extensions/engine/atmosphere.py:346"
+    ],
+    "cna_light_shaft_pass_set_light_screen_position": [
+      "src/cna/extensions/engine/atmosphere.py:355"
+    ],
+    "cna_light_shaft_pass_get_threshold": [
+      "src/cna/extensions/engine/atmosphere.py:333"
+    ],
+    "cna_light_shaft_pass_set_threshold": [
+      "src/cna/extensions/engine/atmosphere.py:334"
+    ],
+    "cna_light_shaft_pass_get_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:336"
+    ],
+    "cna_light_shaft_pass_set_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:337"
+    ],
+    "cna_light_shaft_pass_get_decay": [
+      "src/cna/extensions/engine/atmosphere.py:339"
+    ],
+    "cna_light_shaft_pass_set_decay": [
+      "src/cna/extensions/engine/atmosphere.py:339"
+    ],
+    "cna_aerial_perspective_pass_copy_fallback_reason": [
+      "src/cna/extensions/engine/atmosphere.py:305"
+    ],
+    "cna_aerial_perspective_pass_air_mass_for_distance": [
+      "src/cna/extensions/engine/atmosphere.py:606"
+    ],
+    "cna_aerial_perspective_pass_transmittance": [
+      "src/cna/extensions/engine/atmosphere.py:619"
+    ],
+    "cna_height_fog_pass_optical_depth": [
+      "src/cna/extensions/engine/atmosphere.py:633"
+    ],
+    "cna_volumetric_fog_pass_set_light": [
+      "src/cna/extensions/engine/atmosphere.py:390"
+    ],
+    "cna_motion_blur_pass_create": [
+      "src/cna/extensions/engine/atmosphere.py:202"
+    ],
+    "cna_motion_blur_pass_get_strength": [
+      "src/cna/extensions/engine/atmosphere.py:204"
+    ],
+    "cna_motion_blur_pass_set_strength": [
+      "src/cna/extensions/engine/atmosphere.py:205"
+    ],
+    "cna_motion_blur_pass_get_max_distance": [
+      "src/cna/extensions/engine/atmosphere.py:207"
+    ],
+    "cna_motion_blur_pass_set_max_distance": [
+      "src/cna/extensions/engine/atmosphere.py:208"
+    ],
+    "cna_skybox_create": [
+      "src/cna/extensions/engine/atmosphere.py:467"
+    ],
+    "cna_skybox_destroy": [
+      "src/cna/extensions/engine/atmosphere.py:469",
+      "src/cna/extensions/engine/pipeline.py:441"
+    ],
+    "cna_skybox_is_supported": [
+      "src/cna/extensions/engine/atmosphere.py:482"
+    ],
+    "cna_skybox_draw": [
+      "src/cna/extensions/engine/atmosphere.py:526"
+    ],
+    "cna_skybox_get_environment": [
+      "src/cna/extensions/engine/atmosphere.py:512"
+    ],
+    "cna_skybox_set_environment": [
+      "src/cna/extensions/engine/atmosphere.py:519"
+    ],
+    "cna_skybox_get_yaw": [
+      "src/cna/extensions/engine/atmosphere.py:472"
+    ],
+    "cna_skybox_set_yaw": [
+      "src/cna/extensions/engine/atmosphere.py:472"
+    ],
+    "cna_skybox_get_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:474"
+    ],
+    "cna_skybox_set_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:474"
+    ],
+    "cna_skybox_get_tint": [
+      "src/cna/extensions/engine/atmosphere.py:476"
+    ],
+    "cna_skybox_set_tint": [
+      "src/cna/extensions/engine/atmosphere.py:476"
+    ],
+    "cna_skybox_compute_view_ray": [
+      "src/cna/extensions/engine/atmosphere.py:668"
+    ],
+    "cna_atmospheric_sky_create": [
+      "src/cna/extensions/engine/atmosphere.py:407"
+    ],
+    "cna_atmospheric_sky_destroy": [
+      "src/cna/extensions/engine/atmosphere.py:408"
+    ],
+    "cna_atmospheric_sky_is_supported": [
+      "src/cna/extensions/engine/atmosphere.py:423"
+    ],
+    "cna_atmospheric_sky_draw": [
+      "src/cna/extensions/engine/atmosphere.py:445"
+    ],
+    "cna_atmospheric_sky_get_sun_direction": [
+      "src/cna/extensions/engine/atmosphere.py:410"
+    ],
+    "cna_atmospheric_sky_set_sun_direction": [
+      "src/cna/extensions/engine/atmosphere.py:411"
+    ],
+    "cna_atmospheric_sky_get_turbidity": [
+      "src/cna/extensions/engine/atmosphere.py:413"
+    ],
+    "cna_atmospheric_sky_set_turbidity": [
+      "src/cna/extensions/engine/atmosphere.py:414"
+    ],
+    "cna_atmospheric_sky_get_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:416"
+    ],
+    "cna_atmospheric_sky_set_intensity": [
+      "src/cna/extensions/engine/atmosphere.py:417"
+    ],
+    "cna_atmospheric_sky_copy_model_glsl": [
+      "src/cna/extensions/engine/atmosphere.py:659"
+    ],
+    "cna_atmospheric_sky_radiance": [
+      "src/cna/extensions/engine/atmosphere.py:652"
     ]
   }
 }

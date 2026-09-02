@@ -553,12 +553,11 @@ class EffectPass(PostProcessPass):
         exactly leaks one handle per read. See ENGINE-002 in
         ``docs/engine-upstream-findings.md``.
         """
-        handle = _support.out_handle("cna_post_process_effect_pass_get_effect",
-                                     self._handle.argument)
-        if handle == _NO_HANDLE:
-            return None
-        _support.call("cna_effect_destroy", c.c_uint64(handle))
-        return self._effect
+        expected = 0 if self._effect is None else int(self._effect._require_handle())
+        present = _support.borrowed_view("cna_post_process_effect_pass_get_effect",
+                                         (self._handle.argument,), expected,
+                                         "cna_effect_destroy")
+        return self._effect if present else None
 
     @effect.setter
     def effect(self, value: "Effect | None") -> None:

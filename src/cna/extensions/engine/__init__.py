@@ -46,8 +46,8 @@ Importing this module needs no native library. Constructing anything in it does.
 from __future__ import annotations
 
 from . import (
-    compute, errors, passes, pbr, pipeline, postprocess, scene, shadows,
-    values,
+    atmosphere, compute, errors, passes, pbr, pipeline, postprocess, scene,
+    shadows, values,
 )
 from .compute import (
     ComputeShader, GpuTimer, ImageAccess, MemoryBarrier, StorageBuffer,
@@ -61,6 +61,17 @@ from .postprocess import (
     BlitPass, EffectPass, FullscreenPass, PassTiming, PostProcessChain,
     PostProcessContext, PostProcessPass, RenderTargetPool, RenderTargetScope,
     ShaderEffectFactory, bind_render_target,
+)
+from .atmosphere import (
+    AerialPerspectivePass, AtmosphericSky, ContactShadowPass,
+    DEPTH_OF_FIELD_SENSOR_HEIGHT_MILLIMETRES, DepthOfFieldPass, HeightFogPass,
+    LIGHT_SHAFT_STEP_COUNT, LightShaftPass, MotionBlurPass,
+    SSR_MAXIMUM_STEP_COUNT, SSR_MINIMUM_STEP_COUNT, Skybox, SsaoPass, SsrPass,
+    VOLUMETRIC_FOG_SLICE_COUNT, VOLUMETRIC_FOG_SLICE_RESOLUTION,
+    VolumetricFogPass, air_mass_for_distance, circle_of_confusion_millimetres,
+    combine_visibility, compute_skybox_view_ray, contact_shadow_occlusion_glsl,
+    is_occluded, optical_depth, sky_model_glsl, sky_radiance,
+    ssao_occlusion_glsl, ssao_sample_count_for, transmittance,
 )
 from .passes import (
     AsciiEffect, AsciiPass, AsciiQuantizeMode, AutoExposure, BloomPass,
@@ -106,6 +117,7 @@ from .errors import (
 )
 
 __all__ = [
+    "atmosphere",
     "compute",
     "errors",
     "passes",
@@ -151,6 +163,35 @@ __all__ = [
     "build_material",
     "thin_film_iridescence",
     "thin_film_iridescence_glsl",
+    "AerialPerspectivePass",
+    "AtmosphericSky",
+    "ContactShadowPass",
+    "DEPTH_OF_FIELD_SENSOR_HEIGHT_MILLIMETRES",
+    "DepthOfFieldPass",
+    "HeightFogPass",
+    "LIGHT_SHAFT_STEP_COUNT",
+    "LightShaftPass",
+    "MotionBlurPass",
+    "SSR_MAXIMUM_STEP_COUNT",
+    "SSR_MINIMUM_STEP_COUNT",
+    "Skybox",
+    "SsaoPass",
+    "SsrPass",
+    "VOLUMETRIC_FOG_SLICE_COUNT",
+    "VOLUMETRIC_FOG_SLICE_RESOLUTION",
+    "VolumetricFogPass",
+    "air_mass_for_distance",
+    "circle_of_confusion_millimetres",
+    "combine_visibility",
+    "compute_skybox_view_ray",
+    "contact_shadow_occlusion_glsl",
+    "is_occluded",
+    "optical_depth",
+    "sky_model_glsl",
+    "sky_radiance",
+    "ssao_occlusion_glsl",
+    "ssao_sample_count_for",
+    "transmittance",
     "AsciiEffect",
     "AsciiPass",
     "AsciiQuantizeMode",

@@ -400,12 +400,13 @@
       "match": {
         "names": [
           "cna_post_process_effect_pass_create_owning",
-          "cna_post_process_chain_add_owned_pass"
+          "cna_post_process_chain_add_owned_pass",
+          "cna_skybox_set_owned_environment"
         ]
       },
       "purpose": "MANAGED_BY_DESIGN",
       "status": "DELIBERATE_NON_BINDING",
-      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
       "boundReason": "not applicable: no C ownership transfer is imported",
       "boundIsError": true
     },

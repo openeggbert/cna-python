@@ -431,12 +431,15 @@ class RenderPipeline:
     def skybox(self):
         """The skybox the pipeline draws, or ``None``.
 
-        The object handed back is the one that was assigned; CNA answers with
-        the handle it already holds rather than a new borrow.
+        The object handed back is the one that was assigned; a handle CNA
+        answers with that is not the one it was given is a fresh counted view
+        and is released here.
         """
-        handle = _support.out_handle("cna_render_pipeline_get_skybox",
-                                     self._handle.argument)
-        return self._skybox if handle else None
+        expected = 0 if self._skybox is None else int(self._skybox._handle.value)
+        present = _support.borrowed_view("cna_render_pipeline_get_skybox",
+                                         (self._handle.argument,), expected,
+                                         "cna_skybox_destroy")
+        return self._skybox if present else None
 
     @skybox.setter
     def skybox(self, value) -> None:
@@ -447,10 +450,16 @@ class RenderPipeline:
 
     @property
     def shadow_map(self) -> "ShadowMap | None":
-        """The shadow map :meth:`set_shadow_scene` was given, or ``None``."""
-        handle = _support.out_handle("cna_render_pipeline_get_shadow_map",
-                                     self._handle.argument)
-        return self._shadow_map if handle else None
+        """The shadow map :meth:`set_shadow_scene` was given, or ``None``.
+
+        Released on the same terms as :attr:`skybox`.
+        """
+        expected = (0 if self._shadow_map is None
+                    else int(self._shadow_map._handle.value))
+        present = _support.borrowed_view("cna_render_pipeline_get_shadow_map",
+                                         (self._handle.argument,), expected,
+                                         "cna_shadow_map_destroy")
+        return self._shadow_map if present else None
 
     def _root(self, key: str, draw: Callable[[], None]):
         """Wraps a caller's draw as a trampoline and roots both."""

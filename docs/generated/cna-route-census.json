@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1530,
+    "BOUND_ROUTES": 1654,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -11,24 +11,24 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 870,
-    "ENGINE_BOUND": 482,
+    "ENGINE_BOUND": 606,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 387,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 262,
     "PURPOSE_XNA_BACKING": 1171,
-    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1824,
-    "PURPOSE_MANAGED_BY_DESIGN": 535,
+    "PURPOSE_CNA_EXTENSION_CANDIDATE": 1823,
+    "PURPOSE_MANAGED_BY_DESIGN": 536,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1530,
-    "STATUS_ACTIONABLE_LOCAL": 387,
+    "STATUS_BOUND": 1654,
+    "STATUS_ACTIONABLE_LOCAL": 262,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 2136,
+    "STATUS_DELIBERATE_NON_BINDING": 2137,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -416,12 +416,13 @@
       "match": {
         "names": [
           "cna_post_process_effect_pass_create_owning",
-          "cna_post_process_chain_add_owned_pass"
+          "cna_post_process_chain_add_owned_pass",
+          "cna_skybox_set_owned_environment"
         ]
       },
       "purpose": "MANAGED_BY_DESIGN",
       "status": "DELIBERATE_NON_BINDING",
-      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
       "boundReason": "not applicable: no C ownership transfer is imported",
       "boundIsError": true
     },
@@ -2548,133 +2549,133 @@
       "route": "cna_aerial_perspective_pass_air_mass_for_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_copy_fallback_reason",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_get_scale_height",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_get_sun_direction",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_get_turbidity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_set_scale_height",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_set_sun_direction",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_set_turbidity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_aerial_perspective_pass_transmittance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
       "rule": "engine-aerial-perspective",
       "family": "aerial-perspective",
       "familyTitle": "aerial perspective",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_album_collection_copy_type_name",
@@ -3725,133 +3726,133 @@
       "route": "cna_atmospheric_sky_copy_model_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_get_sun_direction",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_get_turbidity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_radiance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_set_sun_direction",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_atmospheric_sky_set_turbidity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
       "rule": "engine-atmospheric-sky",
       "family": "atmospheric-sky",
       "familyTitle": "the atmospheric sky",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_attitude_reading_copy_string",
@@ -11656,188 +11657,188 @@
       "route": "cna_contact_shadow_pass_combine_visibility",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_copy_fallback_reason",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_copy_occlusion_test_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_get_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_get_light_direction",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_get_max_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_get_step_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_get_thickness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_is_occluded",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_set_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_set_light_direction",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_set_max_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_set_step_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_contact_shadow_pass_set_thickness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
       "rule": "engine-contact-shadow",
       "family": "contact-shadow",
       "familyTitle": "contact shadows",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_content_manager_copy_asset_path",
@@ -14373,111 +14374,111 @@
       "route": "cna_depth_of_field_pass_circle_of_confusion_millimetres",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_get_f_number",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_get_focal_length",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_get_focus_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_get_max_radius",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_set_f_number",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_set_focal_length",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_set_focus_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_of_field_pass_set_max_radius",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
       "rule": "engine-depth-of-field",
       "family": "depth-of-field",
       "familyTitle": "depth of field",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_depth_stencil_state_init",
@@ -23899,111 +23900,111 @@
       "route": "cna_height_fog_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_get_base_height",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_get_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_get_density",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_get_falloff",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_optical_depth",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_set_base_height",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_set_color",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_set_density",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_set_falloff",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
       "rule": "engine-height-fog",
       "family": "height-fog",
       "familyTitle": "height fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_host_changed_event_info_init",
@@ -26066,100 +26067,100 @@
       "route": "cna_light_shaft_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_get_decay",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_get_light_screen_position",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_get_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_set_decay",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_set_light_screen_position",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_set_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
       "rule": "engine-light-shaft",
       "family": "light-shaft",
       "familyTitle": "light shafts",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_local_network_gamer_clear_packet_queue_ext",
@@ -30279,56 +30280,56 @@
       "route": "cna_motion_blur_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
       "rule": "engine-motion-blur",
       "family": "motion-blur",
       "familyTitle": "motion blur",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_motion_blur_pass_get_max_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
       "rule": "engine-motion-blur",
       "family": "motion-blur",
       "familyTitle": "motion blur",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_motion_blur_pass_get_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
       "rule": "engine-motion-blur",
       "family": "motion-blur",
       "familyTitle": "motion blur",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_motion_blur_pass_set_max_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
       "rule": "engine-motion-blur",
       "family": "motion-blur",
       "familyTitle": "motion blur",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_motion_blur_pass_set_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
       "rule": "engine-motion-blur",
       "family": "motion-blur",
       "familyTitle": "motion blur",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_motion_copy_type_name",
@@ -35340,7 +35341,7 @@
       "header": "engine_layer.h",
       "purpose": "MANAGED_BY_DESIGN",
       "status": "DELIBERATE_NON_BINDING",
-      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
       "rule": "engine-c-lifetime-transfer",
       "family": "post-process-chain",
       "familyTitle": "C ownership transfer Python does not need",
@@ -39189,155 +39190,155 @@
       "route": "cna_skybox_compute_view_ray",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_get_environment",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_get_tint",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_get_yaw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_set_environment",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_set_owned_environment",
       "header": "engine_layer.h",
-      "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
-      "rule": "engine-skybox",
-      "family": "skybox",
-      "familyTitle": "the skybox",
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+      "rule": "engine-c-lifetime-transfer",
+      "family": "post-process-chain",
+      "familyTitle": "C ownership transfer Python does not need",
       "bound": false
     },
     {
       "route": "cna_skybox_set_tint",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_skybox_set_yaw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
       "rule": "engine-skybox",
       "family": "skybox",
       "familyTitle": "the skybox",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_song_collection_copy_type_name",
@@ -40773,309 +40774,309 @@
       "route": "cna_ssao_pass_copy_kernel",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_copy_occlusion_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_get_half_resolution",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_get_radius",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_get_sample_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_reset_targets",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_sample_count_for_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_set_half_resolution",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_set_radius",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssao_pass_set_sample_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
       "rule": "engine-ssao",
       "family": "ssao",
       "familyTitle": "screen-space ambient occlusion",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_get_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_get_edge_fade",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_get_max_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_get_roughness_blur",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_get_step_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_get_thickness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_set_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_set_edge_fade",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_set_max_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_set_roughness_blur",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_set_step_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ssr_pass_set_thickness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
       "rule": "engine-ssr",
       "family": "ssr",
       "familyTitle": "screen-space reflections",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_storage_buffer_create",
@@ -46020,89 +46021,89 @@
       "route": "cna_volumetric_fog_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_volumetric_fog_pass_get_anisotropy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_volumetric_fog_pass_get_density",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_volumetric_fog_pass_get_range",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_volumetric_fog_pass_set_anisotropy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_volumetric_fog_pass_set_density",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_volumetric_fog_pass_set_light",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_volumetric_fog_pass_set_range",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
       "rule": "engine-volumetric-fog",
       "family": "volumetric-fog",
       "familyTitle": "volumetric fog",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_wave_bank_copy_type_name",
@@ -49501,133 +49502,133 @@
         "route": "cna_aerial_perspective_pass_air_mass_for_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_copy_fallback_reason",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_get_scale_height",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_get_sun_direction",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_get_turbidity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_set_scale_height",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_set_sun_direction",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_set_turbidity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_aerial_perspective_pass_transmittance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (aerial perspective: distance haze, its air mass and its transmittance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance",
         "rule": "engine-aerial-perspective",
         "family": "aerial-perspective",
         "familyTitle": "aerial perspective",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_area_light_brdf_table_copy_lookup_glsl",
@@ -49919,133 +49920,133 @@
         "route": "cna_atmospheric_sky_copy_model_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_get_sun_direction",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_get_turbidity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_radiance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_set_sun_direction",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_set_turbidity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the atmospheric sky: the analytic sky and its radiance) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance",
         "rule": "engine-atmospheric-sky",
         "family": "atmospheric-sky",
         "familyTitle": "the atmospheric sky",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_apply_to",
@@ -51987,188 +51988,188 @@
         "route": "cna_contact_shadow_pass_combine_visibility",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_copy_fallback_reason",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_copy_occlusion_test_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_get_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_get_light_direction",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_get_max_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_get_step_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_get_thickness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_is_occluded",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_set_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_set_light_direction",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_set_max_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_set_step_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_contact_shadow_pass_set_thickness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (contact shadows: the screen-space contact-shadow pass and its visibility combination) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination",
         "rule": "engine-contact-shadow",
         "family": "contact-shadow",
         "familyTitle": "contact shadows",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_copy_title",
@@ -53142,111 +53143,111 @@
         "route": "cna_depth_of_field_pass_circle_of_confusion_millimetres",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_get_f_number",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_get_focal_length",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_get_focus_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_get_max_radius",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_set_f_number",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_set_focal_length",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_set_focus_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_depth_of_field_pass_set_max_radius",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (depth of field: the depth-of-field pass and its circle of confusion) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion",
         "rule": "engine-depth-of-field",
         "family": "depth-of-field",
         "familyTitle": "depth of field",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_directional_light_ext_init",
@@ -54363,111 +54364,111 @@
         "route": "cna_height_fog_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_get_base_height",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_get_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_get_density",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_get_falloff",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_optical_depth",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_set_base_height",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_set_color",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_set_density",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_set_falloff",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (height fog: exponential height fog and its optical depth) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth",
         "rule": "engine-height-fog",
         "family": "height-fog",
         "familyTitle": "height fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_image_based_light_ext_init",
@@ -55298,100 +55299,100 @@
         "route": "cna_light_shaft_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_get_decay",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_get_light_screen_position",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_get_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_set_decay",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_set_light_screen_position",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_set_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light shafts: radial light shafts) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light shafts -- radial light shafts",
         "rule": "engine-light-shaft",
         "family": "light-shaft",
         "familyTitle": "light shafts",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_add_level",
@@ -55551,56 +55552,56 @@
         "route": "cna_motion_blur_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
         "rule": "engine-motion-blur",
         "family": "motion-blur",
         "familyTitle": "motion blur",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_motion_blur_pass_get_max_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
         "rule": "engine-motion-blur",
         "family": "motion-blur",
         "familyTitle": "motion blur",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_motion_blur_pass_get_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
         "rule": "engine-motion-blur",
         "family": "motion-blur",
         "familyTitle": "motion blur",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_motion_blur_pass_set_max_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
         "rule": "engine-motion-blur",
         "family": "motion-blur",
         "familyTitle": "motion blur",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_motion_blur_pass_set_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (motion blur: the velocity-driven motion-blur pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass",
         "rule": "engine-motion-blur",
         "family": "motion-blur",
         "familyTitle": "motion blur",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_particle_emitter_settings_init",
@@ -56641,7 +56642,7 @@
         "header": "engine_layer.h",
         "purpose": "MANAGED_BY_DESIGN",
         "status": "DELIBERATE_NON_BINDING",
-        "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect and a PostProcessChain holds its passes -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+        "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
         "rule": "engine-c-lifetime-transfer",
         "family": "post-process-chain",
         "familyTitle": "C ownership transfer Python does not need",
@@ -57740,155 +57741,155 @@
         "route": "cna_skybox_compute_view_ray",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_get_environment",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_get_tint",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_get_yaw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_set_environment",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_set_owned_environment",
         "header": "engine_layer.h",
-        "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
-        "rule": "engine-skybox",
-        "family": "skybox",
-        "familyTitle": "the skybox",
+        "purpose": "MANAGED_BY_DESIGN",
+        "status": "DELIBERATE_NON_BINDING",
+        "reason": "The C form of a unique_ptr parameter: it exists because C has no way to say \"keep this alive\", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated.",
+        "rule": "engine-c-lifetime-transfer",
+        "family": "post-process-chain",
+        "familyTitle": "C ownership transfer Python does not need",
         "bound": false
       },
       {
         "route": "cna_skybox_set_tint",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skybox_set_yaw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the skybox: the cube-map skybox) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the skybox -- the cube-map skybox",
         "rule": "engine-skybox",
         "family": "skybox",
         "familyTitle": "the skybox",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_create",
@@ -58169,309 +58170,309 @@
         "route": "cna_ssao_pass_copy_kernel",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_copy_occlusion_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_get_half_resolution",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_get_radius",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_get_sample_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_reset_targets",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_sample_count_for_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_set_half_resolution",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_set_radius",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_set_sample_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space ambient occlusion: the SSAO pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass",
         "rule": "engine-ssao",
         "family": "ssao",
         "familyTitle": "screen-space ambient occlusion",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_get_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_get_edge_fade",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_get_max_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_get_roughness_blur",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_get_step_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_get_thickness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_set_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_set_edge_fade",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_set_max_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_set_roughness_blur",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_set_step_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssr_pass_set_thickness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (screen-space reflections: the SSR pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects screen-space reflections -- the SSR pass",
         "rule": "engine-ssr",
         "family": "ssr",
         "familyTitle": "screen-space reflections",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_storage_buffer_create",
@@ -58840,89 +58841,89 @@
         "route": "cna_volumetric_fog_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_get_anisotropy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_get_density",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_get_range",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_set_anisotropy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_set_density",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_set_light",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_volumetric_fog_pass_set_range",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (volumetric fog: volumetric fog) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects volumetric fog -- volumetric fog",
         "rule": "engine-volumetric-fog",
         "family": "volumetric-fog",
         "familyTitle": "volumetric fog",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_weighted_blended_transparency_begin",
