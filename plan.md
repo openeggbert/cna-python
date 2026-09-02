@@ -73,6 +73,33 @@ asset-name special case is an acceptable way to make it green.
 - [x] Plant 35 defects across the family and kill all of them; four survivors on
   the first run were real test gaps and were closed.
 
+## Completed extension family: the engine layer
+
+- [x] Select `engine_layer.h` as the third public `cna.extensions` family and
+  replace the blanket "outside the selected extension profile" census rule
+  covering ~838 routes with per-family, per-route decisions.
+- [x] Bind 867 of its 870 routes, plus three dependency slices: five routes for
+  PBR effects and materials, eight for the ASCII effect, and two `models.h`
+  routes to project a strict `ModelMeshPart` into the native handle
+  level-of-detail and instancing demand. The three unbound routes are C
+  ownership transfers that would invalidate a live Python facade.
+- [x] Build `cna.extensions.engine` across fourteen modules: values, errors,
+  compute, post-processing, the concrete passes, atmosphere, PBR, shadows,
+  scene, the render pipeline, clustered lighting, light probes, culling and
+  instancing, and debug drawing.
+- [x] Keep `Microsoft.Xna.Framework` unchanged: no engine class or member enters
+  it, the dependency runs extension -> strict only, and only private members
+  were added to strict types (`Texture2D._view_of`, `RenderTarget2D._view_of`).
+- [x] Generate the engine ABI -- structures, constants, callbacks and their
+  parameter constness -- from the canonical headers rather than transcribing it,
+  and measure every structure with a compiler-backed probe.
+- [x] Qualify every family against an oracle other than its own getter, with the
+  oracles themselves gated by hand-worked cases that touch no native library.
+- [x] Plant 47 defects across the family and kill all of them; nine survivors on
+  the first run were real test gaps and were closed.
+- [x] Record eight upstream findings, each with a reproducer, expected against
+  actual, the local behaviour and an unblock condition.
+
 ## Current measured boundary
 
 - Reference/expected projection: 257/2,964 CLR types/members and 257/2,887
@@ -80,20 +107,21 @@ asset-name special case is an acceptable way to make it green.
 - Strict target: 257 types and 2,423 strict runtime members.
 - Diagnostics: zero. Every mismatch, leak, allowlist, and unmeasured category is
   zero. Normal and leak-only strict checks pass.
-- Native manifest: 1,048 imported routes, 1,048 compiler-verified prototypes,
-  1,219 C and 1,219 ctypes layout measurements, zero missing symbols, zero ABI
+- Native manifest: 1,917 imported routes, 1,917 compiler-verified prototypes,
+  1,672 C and 1,672 ctypes layout measurements, zero missing symbols, zero ABI
   mismatches.
-- Route census: 4,055 canonical routes, zero unreviewed, zero actionable-local.
-  Inside the selected CNB/CNJ family: 285 routes, 283 bound, zero unreviewed,
-  zero actionable-local.
+- Route census: 4,055 canonical routes, zero unreviewed, zero actionable-local,
+  zero rule contradictions, zero shadowed or dead rules. Inside the selected
+  CNB/CNJ family: 285 routes, 283 bound. Inside the selected engine family: 870
+  routes, 867 bound. Both zero unreviewed and zero actionable-local.
 - Behavior evidence: 181 PURE_XNA_DERIVED observations, 1,004 assertions, zero
   failures.
 - Runtime evidence: two artifacts. A non-windowed control and an OPENGLES3
   renderer on an isolated display, both with a real SDL3 mixer on a deterministic
   device. Every capability row names the artifact that produced it.
-- Extension profile: `cna.extensions.graphics` and `cna.extensions.content`,
-  163 public names, zero surface diagnostics, and no dependency from the XNA
-  namespace on either.
+- Extension profile: `cna.extensions.graphics`, `cna.extensions.content` and
+  `cna.extensions.engine`, 33 modules and 648 public names, zero surface
+  diagnostics, and no dependency from the XNA namespace on any of them.
 
 ## Invariants
 
@@ -115,7 +143,8 @@ Current work is maintenance, further platform qualification, upstream blocker
 reconciliation, packaging/release qualification, real-game compatibility
 testing, and deliberately selected extension families. Net, wider
 GamerServices/Avatar, Content Pipeline, Xbox, and Windows Phone remain unopened
-future-profile decisions; the engine layer, sensors and device services, and
-extended input remain unopened extension decisions, each recorded in the census
-with its reason. CNB/CNJ is no longer among them: it is open and finished, and
-`docs/cnb-cnj-extensions.md` is its evidence.
+future-profile decisions; sensors and device services, and extended input,
+remain unopened extension decisions, each recorded in the census with its
+reason. CNB/CNJ and the engine layer are no longer among them: both are open and
+finished, and `docs/cnb-cnj-extensions.md` and `docs/engine-extensions.md` are
+their evidence.

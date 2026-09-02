@@ -669,12 +669,20 @@ class ClusteredLightGridTests(unittest.TestCase):
 
 @requires_engine
 class ClusteredLightAssignmentTests(unittest.TestCase):
-    LIGHTS = (_point(Vector3(1.5, 0.25, -6.0), range_=4.0),
-              _spot(Vector3(0.0, 3.0, -9.0), Vector3(0.0, -1.0, 0.0)),
-              _point(Vector3(-8.0, -2.5, -30.0), range_=12.0))
+    @staticmethod
+    def lights():
+        """Built on demand, not in the class body.
+
+        ``ClusteredLight.default()`` reads CNA's own defaults, so evaluating one
+        while the class is being defined would make importing this module need a
+        native library -- and the suite must be importable without one.
+        """
+        return (_point(Vector3(1.5, 0.25, -6.0), range_=4.0),
+                _spot(Vector3(0.0, 3.0, -9.0), Vector3(0.0, -1.0, 0.0)),
+                _point(Vector3(-8.0, -2.5, -30.0), range_=12.0))
 
     def _assign(self, body, lights=None, view=None):
-        lights = self.LIGHTS if lights is None else lights
+        lights = self.lights() if lights is None else lights
         view = Matrix.Identity if view is None else view
 
         def run(game, device, observed):
@@ -728,7 +736,7 @@ class ClusteredLightAssignmentTests(unittest.TestCase):
                        offsets=assignment.offsets(), indices=assignment.indices())
 
         observed = self._assign(body)
-        self.assertEqual(observed["light_count"], len(self.LIGHTS))
+        self.assertEqual(observed["light_count"], len(self.lights()))
         self.assertEqual(observed["cluster_count"], TILES_X * TILES_Y * SLICES)
         self.assertEqual(observed["total"], len(observed["indices"]))
         self.assertEqual(len(observed["offsets"]), observed["cluster_count"] + 1)
@@ -909,24 +917,30 @@ class ClusteredLightAssignmentTests(unittest.TestCase):
 class ClusteredShadowPolicyTests(unittest.TestCase):
     #: Three shadow casters at increasing distance, plus one that asks for nothing.
     #: In range of the camera, so the falloff is non-zero and the ranking is real.
-    #: Deliberately varied: a white one, a green one and a blue one of the same
-    #: intensity (so a score that weighted the channels equally would agree with
-    #: one that follows the eye), one closer to the camera than a unit (so the
-    #: falloff's distance floor is exercised), and one that asks for nothing.
-    CASTERS = (_point(Vector3(1.0, 0.0, -2.0), range_=30.0, intensity=1.0,
-                      color=Vector3(1.0, 1.0, 1.0), casts_shadows=True),
-               _point(Vector3(4.0, 0.0, -4.0), range_=30.0, intensity=1.0,
-                      color=Vector3(0.0, 1.0, 0.0), casts_shadows=True),
-               _point(Vector3(9.0, 0.0, -9.0), range_=30.0, intensity=1.0,
-                      color=Vector3(0.0, 0.0, 1.0), casts_shadows=True),
-               _point(Vector3(0.25, 0.0, -0.5), range_=30.0, intensity=1.0,
-                      color=Vector3(1.0, 0.5, 0.25), casts_shadows=True),
-               _point(Vector3(2.0, 0.0, -3.0), range_=30.0, intensity=5.0,
-                      color=Vector3(1.0, 1.0, 1.0), casts_shadows=False))
     CAMERA = Vector3(0.0, 0.0, 0.0)
 
+    @staticmethod
+    def casters():
+        """Deliberately varied, and built on demand rather than in the class body.
+
+        A white light, a green one and a blue one of the same intensity, so a
+        score weighting the channels equally would agree with one that follows
+        the eye; one closer to the camera than a unit, so the falloff's distance
+        floor is exercised; and one that asks for no shadow at all.
+        """
+        return (_point(Vector3(1.0, 0.0, -2.0), range_=30.0, intensity=1.0,
+                       color=Vector3(1.0, 1.0, 1.0), casts_shadows=True),
+                _point(Vector3(4.0, 0.0, -4.0), range_=30.0, intensity=1.0,
+                       color=Vector3(0.0, 1.0, 0.0), casts_shadows=True),
+                _point(Vector3(9.0, 0.0, -9.0), range_=30.0, intensity=1.0,
+                       color=Vector3(0.0, 0.0, 1.0), casts_shadows=True),
+                _point(Vector3(0.25, 0.0, -0.5), range_=30.0, intensity=1.0,
+                       color=Vector3(1.0, 0.5, 0.25), casts_shadows=True),
+                _point(Vector3(2.0, 0.0, -3.0), range_=30.0, intensity=5.0,
+                       color=Vector3(1.0, 1.0, 1.0), casts_shadows=False))
+
     def _policy(self, body, budget=CLUSTERED_SHADOW_DEFAULT_BUDGET, lights=None):
-        lights = self.CASTERS if lights is None else lights
+        lights = self.casters() if lights is None else lights
 
         def run(game, device, observed):
             with ClusteredLightSet(device) as light_set, \
@@ -952,7 +966,7 @@ class ClusteredShadowPolicyTests(unittest.TestCase):
             out["scores"] = [policy.score(index) for index in range(len(lights))]
 
         scores = self._policy(body)["scores"]
-        for index, light in enumerate(self.CASTERS):
+        for index, light in enumerate(self.casters()):
             expected = (0.0 if not light.casts_shadows else
                         oracle.shadow_policy_score(light.color, light.intensity,
                                                    light.range_, light.position,
@@ -989,11 +1003,12 @@ class ClusteredShadowPolicyTests(unittest.TestCase):
             policy.select(lights, Matrix.Identity, PROJECTION, self.CAMERA)
             out["selected"] = policy.selected()
 
+        casters = self.casters()
         expected = max(
-            (index for index, light in enumerate(self.CASTERS) if light.casts_shadows),
+            (index for index, light in enumerate(casters) if light.casts_shadows),
             key=lambda index: oracle.shadow_policy_score(
-                self.CASTERS[index].color, self.CASTERS[index].intensity,
-                self.CASTERS[index].range_, self.CASTERS[index].position, self.CAMERA))
+                casters[index].color, casters[index].intensity,
+                casters[index].range_, casters[index].position, self.CAMERA))
         self.assertEqual(self._policy(body, budget=1)["selected"], (expected,))
 
     def test_a_budget_of_zero_grants_nothing_and_refuses_everything(self) -> None:
@@ -1538,8 +1553,11 @@ class PublishedGlslTests(unittest.TestCase):
 
 @requires_engine_gpu
 class ClusteredLightBufferTests(unittest.TestCase):
-    LIGHTS = (_point(Vector3(1.5, 0.25, -6.0), range_=4.0),
-              _spot(Vector3(0.0, 3.0, -9.0), Vector3(0.0, -1.0, 0.0)))
+    @staticmethod
+    def lights():
+        """Built on demand; see ClusteredLightAssignmentTests.lights."""
+        return (_point(Vector3(1.5, 0.25, -6.0), range_=4.0),
+                _spot(Vector3(0.0, 3.0, -9.0), Vector3(0.0, -1.0, 0.0)))
 
     def _uploaded(self, body):
         def run(game, device, observed):
@@ -1548,7 +1566,7 @@ class ClusteredLightBufferTests(unittest.TestCase):
                     ClusteredLightAssignment(device) as assignment, \
                     ClusteredLightBuffer(device) as buffer:
                 grid.set_projection(PROJECTION, NEAR, FAR)
-                for light in self.LIGHTS:
+                for light in self.lights():
                     lights.add(light)
                 assignment.assign(grid, Matrix.Identity, lights.bounds())
                 body(lights, grid, assignment, buffer, observed)
@@ -1661,9 +1679,12 @@ class ClusteredLightBufferTests(unittest.TestCase):
 
 @requires_engine_gpu
 class ClusteredLightComputeTests(unittest.TestCase):
-    LIGHTS = (_point(Vector3(1.5, 0.25, -6.0), range_=4.0),
-              _spot(Vector3(0.0, 3.0, -9.0), Vector3(0.0, -1.0, 0.0)),
-              _point(Vector3(-8.0, -2.5, -30.0), range_=12.0))
+    @staticmethod
+    def lights():
+        """Built on demand; see ClusteredLightAssignmentTests.lights."""
+        return (_point(Vector3(1.5, 0.25, -6.0), range_=4.0),
+                _spot(Vector3(0.0, 3.0, -9.0), Vector3(0.0, -1.0, 0.0)),
+                _point(Vector3(-8.0, -2.5, -30.0), range_=12.0))
 
     def _both_paths(self, body, stride=CLUSTERED_COMPUTE_DEFAULT_STRIDE):
         def run(game, device, observed):
@@ -1673,7 +1694,7 @@ class ClusteredLightComputeTests(unittest.TestCase):
                     ClusteredLightAssignment(device) as gpu, \
                     ClusteredLightCompute(device, stride) as compute:
                 grid.set_projection(PROJECTION, NEAR, FAR)
-                for light in self.LIGHTS:
+                for light in self.lights():
                     lights.add(light)
                 spheres = lights.bounds()
                 cpu.assign(grid, Matrix.Identity, spheres)
@@ -1703,7 +1724,7 @@ class ClusteredLightComputeTests(unittest.TestCase):
 
         observed = self._both_paths(body)
         spheres = []
-        for light in self.LIGHTS:
+        for light in self.lights():
             if light.kind is ClusteredLightKind.Point:
                 spheres.append(oracle.point_light_bounds(light.position, light.range_))
             else:

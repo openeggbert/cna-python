@@ -1848,6 +1848,16 @@
       },
       "evidence": "docs/generated/package-reproducibility.json",
       "notes": "Re-measured with the engine modules in the tree: the wheel is both byte and content reproducible, and the sdist is content reproducible but not byte reproducible because setuptools stamps PKG-INFO, setup.cfg and every directory entry with the wall clock whatever SOURCE_DATE_EPOCH says, and gzip records its own timestamp. Unchanged in kind from before the family was added; nothing here causes it and nothing here can fix it, so it is reported rather than claimed away."
+    },
+    {
+      "operation": "Every test module imports with no native library at all",
+      "status": "VERIFIED_MANAGED",
+      "byArtifact": {
+        "control": "verified",
+        "gpu": "verified"
+      },
+      "evidence": "python -m unittest discover with CNA_NATIVE_LIBRARY unset: 1148 tests, OK, 852 skipped",
+      "notes": "Found by the final qualification, not by inspection: three class bodies in the clustered tests built their light fixtures by calling ClusteredLight.default(), which reads CNA's own defaults -- so importing the module needed a library and the whole file failed to collect where none was configured. The fixtures are now built on demand. The suite collects and runs in full with no library, which is what makes 'this test skipped because the build has no engine layer' a measured statement rather than an accident of import order."
     }
   ]
 }
