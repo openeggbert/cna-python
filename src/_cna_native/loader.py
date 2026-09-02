@@ -28,6 +28,8 @@ from .cnb_manifest import (
     CURVE_CODEC_FUNCTION_MANIFEST,
     NATIVE_CONTENT_MANAGER_FUNCTION_MANIFEST,
 )
+from .devices_manifest import DEVICES_FUNCTION_MANIFEST
+from .input_manifest import INPUT_FUNCTION_MANIFEST
 from .engine_manifest import ENGINE_FUNCTION_MANIFEST
 from .media_manifest import MEDIA_FUNCTION_MANIFEST
 
@@ -646,6 +648,10 @@ FUNCTION_MANIFEST += (CNB_FUNCTION_MANIFEST + CURVE_CODEC_FUNCTION_MANIFEST
                       + NATIVE_CONTENT_MANAGER_FUNCTION_MANIFEST)
 # CNA's modern engine layer.  See `docs/engine-extensions.md`.
 FUNCTION_MANIFEST += ENGINE_FUNCTION_MANIFEST
+# CNA's sensors and device services.  See `docs/device-extensions.md`.
+FUNCTION_MANIFEST += DEVICES_FUNCTION_MANIFEST
+# CNA's extended input families.  See `docs/input-extensions.md`.
+FUNCTION_MANIFEST += INPUT_FUNCTION_MANIFEST
 
 
 def _resolve() -> Path:

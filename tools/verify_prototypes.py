@@ -32,7 +32,10 @@ sys.path.insert(0, str(ROOT / "tools"))
 from cna_headers import Declaration, parse_include_directory  # noqa: E402
 
 from _cna_native.loader import FUNCTION_MANIFEST  # noqa: E402
+from _cna_native import devices_abi as _devices_abi  # noqa: E402
 from _cna_native import engine_abi as _engine_abi  # noqa: E402
+from _cna_native import input_abi as _input_abi  # noqa: E402
+from _cna_native import online_abi as _online_abi  # noqa: E402
 
 #: Which parameters of a generated callback type are pointers to const.
 #:
@@ -41,8 +44,10 @@ from _cna_native import engine_abi as _engine_abi  # noqa: E402
 #: wherever that callback appears, and derived by the generator from the header
 #: rather than written down here.
 CALLBACK_CONST_PARAMETERS = {
-    getattr(_engine_abi, name): flags
-    for name, flags in _engine_abi.ENGINE_CALLBACK_CONST_PARAMETERS.items()
+    getattr(module, name): flags
+    for module, prefix in ((_engine_abi, "ENGINE"), (_devices_abi, "DEVICES"),
+                           (_input_abi, "INPUT"), (_online_abi, "ONLINE"))
+    for name, flags in getattr(module, f"{prefix}_CALLBACK_CONST_PARAMETERS").items()
 }
 
 
