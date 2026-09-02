@@ -78,7 +78,8 @@ TYPES = {
 #: compared against the value this binding uses.  A constant that drifts is a
 #: silent misreading of every file already written, so none of them is trusted
 #: from prose.
-CNB_CONSTANT_PREFIXES = ("CNA_CNB_", "CNA_CLIP_TARGET_SPACE_")
+CNB_CONSTANT_PREFIXES = ("CNA_CNB_", "CNA_CLIP_TARGET_SPACE_",
+                        "CNA_SURFACE_FORMAT_")
 
 
 def arguments() -> argparse.Namespace:

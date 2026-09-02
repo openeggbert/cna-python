@@ -82,6 +82,9 @@ from .format import (
     CONTAINER_MAJOR,
     CONTAINER_MINOR,
     CRC32C_SEED,
+    FORMAT_HEADER_CHECKSUM_COVERAGE,
+    FORMAT_HEADER_CHECKSUM_OFFSET,
+    FORMAT_HEADER_RESERVED_SIZE,
     FORMAT_HEADER_SIZE,
     FORMAT_MAGIC_SIZE,
     FORMAT_TOC_ENTRY_SIZE,
@@ -138,12 +141,13 @@ from .model import (
 from .primitives import CnbByteWriter, CnbKeyframe, CnbReader, CnbWriter
 from .textures import (
     CUBE_FACE_COUNT, MAX_TEXTURE_MIP_LEVELS, MAX_TEXTURE_REPRESENTATIONS,
-    TEXTURE_SCHEMA_VERSION, CnbTextureData, CnbTextureInfo, TextureChunk,
-    TextureFormat, decode_texture2d, decode_texture3d, decode_texture_cube,
+    TEXTURE_SCHEMA_VERSION, CnaSurfaceFormat, CnbTextureData, CnbTextureInfo,
+    TextureChunk, TextureFormat, decode_texture2d, decode_texture3d,
+    decode_texture_cube,
     encode_texture2d, encode_texture3d, encode_texture_cube, is_block_compressed,
     is_known_texture_format, texture_format_from_surface_format, texture_format_name,
     texture_format_to_surface_format, texture_format_unit_bytes,
-    texture_level_byte_size,
+    texture_level_byte_size, xna_surface_format,
 )
 
 __all__ = [
@@ -153,7 +157,9 @@ __all__ = [
     # container vocabulary
     "AssetType", "ChunkFlags", "Compression", "ContainerChunk", "CnbReadLimits",
     "CONTAINER_MAJOR", "CONTAINER_MINOR", "CRC32C_SEED",
-    "FORMAT_HEADER_SIZE", "FORMAT_MAGIC_SIZE", "FORMAT_TOC_ENTRY_SIZE",
+    "FORMAT_HEADER_CHECKSUM_COVERAGE", "FORMAT_HEADER_CHECKSUM_OFFSET",
+    "FORMAT_HEADER_RESERVED_SIZE", "FORMAT_HEADER_SIZE", "FORMAT_MAGIC_SIZE",
+    "FORMAT_TOC_ENTRY_SIZE",
     "asset_type_id_from_name", "asset_type_name", "chunk_id", "chunk_id_text",
     "compress", "compressed_size", "compression_name", "crc32c", "decompress",
     "format_magic", "has_magic", "is_compression_supported",
@@ -165,13 +171,14 @@ __all__ = [
     "CnbByteWriter", "CnbKeyframe", "CnbReader", "CnbWriter",
     # textures
     "CUBE_FACE_COUNT", "MAX_TEXTURE_MIP_LEVELS", "MAX_TEXTURE_REPRESENTATIONS",
-    "TEXTURE_SCHEMA_VERSION", "CnbTextureData", "CnbTextureInfo", "TextureChunk",
+    "TEXTURE_SCHEMA_VERSION", "CnaSurfaceFormat", "CnbTextureData",
+    "CnbTextureInfo", "TextureChunk",
     "TextureFormat", "decode_texture2d", "decode_texture3d", "decode_texture_cube",
     "encode_texture2d", "encode_texture3d", "encode_texture_cube",
     "is_block_compressed", "is_known_texture_format",
     "texture_format_from_surface_format", "texture_format_name",
     "texture_format_to_surface_format", "texture_format_unit_bytes",
-    "texture_level_byte_size",
+    "texture_level_byte_size", "xna_surface_format",
     # sound
     "MAX_AUDIO_SAMPLE_RATE", "SOUND_EFFECT_SCHEMA_VERSION", "AudioFormat",
     "CnbSoundEffectData", "CnbSoundEffectInfo", "SoundEffectChunk",

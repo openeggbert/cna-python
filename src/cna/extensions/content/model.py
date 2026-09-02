@@ -541,7 +541,22 @@ class CnbModelData:
         _support.call("cna_cnb_model_set_part", self._value, position, c.byref(info))
 
     def set_part_vertex_bytes(self, index: int, data: bytes) -> None:
-        """Sets one part's interleaved vertex bytes; stride times count must match."""
+        """Sets one part's interleaved vertex bytes.
+
+        ``vertex_stride * vertex_count`` must equal the byte count. CNA states
+        that rule and enforces it when the model is encoded; it is checked here
+        as well, because by encode time the diagnostic names a file rather than
+        the call that supplied the wrong buffer.
+        """
+        info = self._part_info(c.c_uint64(_support.checked(index, "uint64", "index")))
+        expected = _support.checked_product(
+            int(info.vertex_stride), int(info.vertex_count), "vertex stride * count")
+        actual = len(memoryview(data).cast("B"))
+        if actual != expected:
+            raise ValueError(
+                f"part {index} declares {info.vertex_count} vertices of "
+                f"{info.vertex_stride} bytes, so it needs exactly {expected} bytes, "
+                f"got {actual}")
         pointer, count, keep = _support.read_only_bytes(data, "data")
         _support.call("cna_cnb_model_set_part_vertex_bytes", self._value,
                       c.c_uint64(_support.checked(index, "uint64", "index")),
@@ -549,7 +564,21 @@ class CnbModelData:
         del keep
 
     def set_part_index_bytes(self, index: int, data: bytes) -> None:
-        """Sets one part's index bytes; element size times count must match."""
+        """Sets one part's index bytes.
+
+        ``index_element_size * index_count`` must equal the byte count, checked
+        here for the same reason :meth:`set_part_vertex_bytes` checks its own.
+        """
+        info = self._part_info(c.c_uint64(_support.checked(index, "uint64", "index")))
+        expected = _support.checked_product(
+            int(info.index_element_size), int(info.index_count),
+            "index element size * count")
+        actual = len(memoryview(data).cast("B"))
+        if actual != expected:
+            raise ValueError(
+                f"part {index} declares {info.index_count} indices of "
+                f"{info.index_element_size} bytes, so it needs exactly {expected} "
+                f"bytes, got {actual}")
         pointer, count, keep = _support.read_only_bytes(data, "data")
         _support.call("cna_cnb_model_set_part_index_bytes", self._value,
                       c.c_uint64(_support.checked(index, "uint64", "index")),
@@ -1154,8 +1183,16 @@ def build_model_from_cnj(cnj_path: "str | os.PathLike[str]", *,
 
     Useful to a tool that wants the graph rather than the file -- to inspect it,
     to check its references, or to re-encode it with different settings.
-    ``content_root`` is the directory sidecar references resolve against; ``None``
-    means the document's own parent directory.
+
+    ``content_root`` is the containment boundary, exactly as for
+    :func:`compile_cnj <cna.extensions.content.compile_cnj>`: a sidecar resolves
+    relative to the document's own directory and must stay inside this root.
+
+    Measured difference from :func:`compile_cnj
+    <cna.extensions.content.compile_cnj>`: this route does **not** record the
+    `.cnj` document itself among :attr:`CnbModelFromCnj.absorbed_files`, while
+    the compiler does. A build system that depends on the document being listed
+    should use the compiler.
     """
     path_view, keep_path = _support.string_view(os.fspath(cnj_path), "cnj_path")
     root_view, keep_root = _support.string_view(

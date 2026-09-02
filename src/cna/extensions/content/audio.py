@@ -158,8 +158,21 @@ class CnbSoundEffectData:
         """A description holding a **copy** of ``samples``.
 
         The sample bytes must be exactly
-        ``frame_count * audio_frame_bytes(format, channels)`` long.
+        ``frame_count * audio_frame_bytes(format, channels)`` long, which is
+        checked here rather than at encode time: the caller that built a
+        mismatched pair is the one that can fix it, and by encode time the
+        diagnostic would name a file. The measured native behaviour accepts the
+        mismatch and refuses later, so this enforces CNA's stated contract
+        earlier rather than adding one.
         """
+        frame_bytes = audio_frame_bytes(info.format, info.channels)
+        expected = _support.checked_product(
+            info.frame_count, frame_bytes, "frame_count * frame bytes")
+        actual = len(memoryview(samples).cast("B"))
+        if actual != expected:
+            raise ValueError(
+                f"{info.frame_count} frames of {info.channels}-channel "
+                f"{info.format.name} need exactly {expected} bytes, got {actual}")
         native = info._to_native()
         pointer, count, keep = _support.read_only_bytes(samples, "samples")
         handle = _support.out_handle(

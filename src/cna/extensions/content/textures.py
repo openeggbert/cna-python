@@ -29,6 +29,7 @@ __all__ = [
     "MAX_TEXTURE_MIP_LEVELS",
     "MAX_TEXTURE_REPRESENTATIONS",
     "TEXTURE_SCHEMA_VERSION",
+    "CnaSurfaceFormat",
     "CnbTextureData",
     "CnbTextureInfo",
     "TextureChunk",
@@ -46,6 +47,7 @@ __all__ = [
     "texture_format_to_surface_format",
     "texture_format_unit_bytes",
     "texture_level_byte_size",
+    "xna_surface_format",
 ]
 
 #: Faces a cube texture has, in the fixed order +X, -X, +Y, -Y, +Z, -Z.
@@ -102,6 +104,70 @@ class TextureFormat(IntEnum):
     Bc3Srgb = _abi.CNA_CNB_TEXTURE_FORMAT_BC3_SRGB
     Bc7 = _abi.CNA_CNB_TEXTURE_FORMAT_BC7
     Bc7Srgb = _abi.CNA_CNB_TEXTURE_FORMAT_BC7_SRGB
+
+
+class CnaSurfaceFormat(IntEnum):
+    """CNA's own runtime surface formats -- all of them, XNA's and CNA's.
+
+    The first twenty are exactly ``Microsoft.Xna.Framework.Graphics.SurfaceFormat``
+    and share its numbering. The seven ``Ext`` ones above them are CNA capability
+    that XNA 4.0 never had, so the strict projection deliberately does not
+    contain them and cannot be made to: a name in that namespace is a claim about
+    XNA. They are named here instead, which is what keeps
+    :func:`texture_format_to_surface_format` able to answer for every `.cnb`
+    format rather than only for the ones that happen to have an XNA counterpart.
+
+    :func:`xna_surface_format` is the explicit bridge into the strict enum, and
+    it answers ``None`` for exactly these seven.
+    """
+
+    Color = _abi.CNA_SURFACE_FORMAT_COLOR
+    Bgr565 = _abi.CNA_SURFACE_FORMAT_BGR565
+    Bgra5551 = _abi.CNA_SURFACE_FORMAT_BGRA5551
+    Bgra4444 = _abi.CNA_SURFACE_FORMAT_BGRA4444
+    Dxt1 = _abi.CNA_SURFACE_FORMAT_DXT1
+    Dxt3 = _abi.CNA_SURFACE_FORMAT_DXT3
+    Dxt5 = _abi.CNA_SURFACE_FORMAT_DXT5
+    NormalizedByte2 = _abi.CNA_SURFACE_FORMAT_NORMALIZED_BYTE2
+    NormalizedByte4 = _abi.CNA_SURFACE_FORMAT_NORMALIZED_BYTE4
+    Rgba1010102 = _abi.CNA_SURFACE_FORMAT_RGBA1010102
+    Rg32 = _abi.CNA_SURFACE_FORMAT_RG32
+    Rgba64 = _abi.CNA_SURFACE_FORMAT_RGBA64
+    Alpha8 = _abi.CNA_SURFACE_FORMAT_ALPHA8
+    Single = _abi.CNA_SURFACE_FORMAT_SINGLE
+    Vector2 = _abi.CNA_SURFACE_FORMAT_VECTOR2
+    Vector4 = _abi.CNA_SURFACE_FORMAT_VECTOR4
+    HalfSingle = _abi.CNA_SURFACE_FORMAT_HALF_SINGLE
+    HalfVector2 = _abi.CNA_SURFACE_FORMAT_HALF_VECTOR2
+    HalfVector4 = _abi.CNA_SURFACE_FORMAT_HALF_VECTOR4
+    HdrBlendable = _abi.CNA_SURFACE_FORMAT_HDR_BLENDABLE
+    ColorBgraExt = _abi.CNA_SURFACE_FORMAT_COLOR_BGRA_EXT
+    ColorSrgbExt = _abi.CNA_SURFACE_FORMAT_COLOR_SRGB_EXT
+    Dxt5SrgbExt = _abi.CNA_SURFACE_FORMAT_DXT5_SRGB_EXT
+    Bc7Ext = _abi.CNA_SURFACE_FORMAT_BC7_EXT
+    Bc7SrgbExt = _abi.CNA_SURFACE_FORMAT_BC7_SRGB_EXT
+    ByteExt = _abi.CNA_SURFACE_FORMAT_BYTE_EXT
+    UShortExt = _abi.CNA_SURFACE_FORMAT_USHORT_EXT
+
+
+#: The CNA surface formats the selected XNA 4.0 projection contains. Everything
+#: at or above the first ``Ext`` identity is CNA-only.
+_XNA_SURFACE_FORMAT_CEILING = _abi.CNA_SURFACE_FORMAT_COLOR_BGRA_EXT
+
+
+def xna_surface_format(surface_format: CnaSurfaceFormat | int) -> SurfaceFormat | None:
+    """The strict XNA ``SurfaceFormat`` for a CNA one, or ``None`` when there is none.
+
+    Seven of CNA's identities -- the ``Ext`` ones -- have no XNA 4.0 counterpart.
+    ``None`` is the honest answer for those: inventing a member of
+    ``Microsoft.Xna.Framework.Graphics.SurfaceFormat`` would be a claim about
+    XNA, and picking a nearby XNA format instead would silently change someone's
+    pixels.
+    """
+    value = _support.checked(int(surface_format), "uint32", "surface_format")
+    if value >= _XNA_SURFACE_FORMAT_CEILING:
+        return None
+    return SurfaceFormat(value)
 
 
 class TextureChunk(IntEnum):
@@ -195,20 +261,27 @@ def texture_level_byte_size(texture_format: TextureFormat | int, width: int, hei
         c.c_uint32(_support.checked(depth, "uint32", "depth")))
 
 
-def texture_format_to_surface_format(texture_format: TextureFormat | int) -> SurfaceFormat:
-    """Maps a CNB format identifier onto the runtime ``SurfaceFormat``.
+def texture_format_to_surface_format(
+        texture_format: TextureFormat | int) -> CnaSurfaceFormat:
+    """Maps a CNB format identifier onto CNA's runtime surface format.
 
-    The dependency runs extension -> strict, which is the allowed direction:
-    ``Microsoft.Xna.Framework.Graphics`` gains nothing and learns nothing from
-    this package existing.
+    The answer is a :class:`CnaSurfaceFormat` rather than a strict
+    ``SurfaceFormat`` because seven `.cnb` formats map to CNA identities XNA 4.0
+    never had. Use :func:`xna_surface_format` to cross into the strict enum,
+    where it answers ``None`` for exactly those seven.
     """
     value = c.c_uint32(_support.checked(int(texture_format), "uint32", "texture_format"))
-    return SurfaceFormat(
+    return CnaSurfaceFormat(
         _support.out_u32("cna_cnb_texture_format_to_surface_format", value))
 
 
-def texture_format_from_surface_format(surface_format: SurfaceFormat | int) -> TextureFormat:
-    """Maps a runtime ``SurfaceFormat`` onto its CNB format identifier."""
+def texture_format_from_surface_format(
+        surface_format: "CnaSurfaceFormat | SurfaceFormat | int") -> TextureFormat:
+    """Maps a runtime surface format onto its CNB format identifier.
+
+    Accepts either enum: the strict one is exactly the first twenty values of
+    CNA's and shares its numbering, so the two agree wherever both have a name.
+    """
     value = c.c_uint32(_support.checked(int(surface_format), "uint32", "surface_format"))
     return TextureFormat(
         _support.out_u32("cna_cnb_texture_format_from_surface_format", value))
@@ -239,7 +312,18 @@ class CnbTextureData:
 
         Add at least one representation with :meth:`add_representation` before
         encoding, and fill every one of its ``face_count * mip_count`` levels.
+
+        Every dimension must be at least 1. That is CNA's documented contract,
+        and it is enforced here rather than at encode time, where the diagnostic
+        would name a file instead of the call that got it wrong. The measured
+        native behaviour is more lenient -- ``cna_cnb_texture_data_create``
+        accepts a zero and the refusal arrives later -- so this is a Python
+        validation of CNA's own stated rule, not a rule of its own.
         """
+        for name, value in (("width", width), ("height", height), ("depth", depth),
+                            ("face_count", face_count), ("mip_count", mip_count)):
+            if _support.checked(value, "uint32", name) < 1:
+                raise ValueError(f"{name} must be at least 1, got {value}")
         handle = _support.out_handle(
             "cna_cnb_texture_data_create",
             c.c_uint32(_support.checked(width, "uint32", "width")),

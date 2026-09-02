@@ -10,10 +10,17 @@ There is no second `.cnj` parser here. CNA's compiler is the authority for what 
 `.cnj` means, including which sidecar paths it will and will not resolve; this
 module hands it a path and reports what it produced.
 
-Path handling is deliberately thin. Whatever ``content_root`` a caller passes is
-what CNA resolves sidecars against, and the wrapper adds no normalisation,
-no ``..`` collapsing and no symlink resolution of its own, because any of those
-would widen the trust boundary CNA defines rather than honour it.
+Path handling is deliberately thin: the wrapper adds no normalisation, no ``..``
+collapsing and no symlink resolution of its own, because any of those would widen
+the trust boundary CNA defines rather than honour it.
+
+**``content_root`` is a containment boundary, not a resolution base.** A sidecar
+always resolves relative to the `.cnj` document's own directory; ``content_root``
+is the directory the resolved path must stay inside, and an empty one means the
+document's parent. Measured against CNA 0.21, whose ``cnb.h`` prose says
+"directory sidecar references resolve against" -- the implementation
+(``ResolveCnjSourceFileSafely``) joins to the referring document and then checks
+containment, and that is what is documented here.
 """
 
 from __future__ import annotations
@@ -134,12 +141,18 @@ def compile_cnj(cnj_path: "str | os.PathLike[str]", *,
     ``SoundEffect``. Any other type is refused by name rather than silently
     producing an empty file.
 
-    ``content_root`` is the directory sidecar references resolve against;
-    ``None`` means the document's own parent directory, which is where every CNA
-    content tool writes them. ``content_name`` is the logical asset name recorded
-    in the debug ``CMET`` chunk, defaulting to the document's stem -- it is a
-    *content* name, so passing an absolute machine path here would bake this
-    machine's layout into a shipped file.
+    ``content_root`` is the **containment boundary**: a sidecar resolves relative
+    to the document's own directory either way, and the resolved path must end up
+    inside this root. ``None`` means the document's own parent directory, which
+    is where every CNA content tool writes sidecars and which therefore refuses
+    every ``..`` that leaves it. Passing a wider root is how a project whose
+    documents and sources live in sibling directories opts into that layout,
+    deliberately and once.
+
+    ``content_name`` is the logical asset name recorded in the debug ``CMET``
+    chunk, defaulting to the document's stem -- it is a *content* name, so
+    passing an absolute machine path here would bake this machine's layout into a
+    shipped file.
     """
     path_view, keep_path = _support.string_view(os.fspath(cnj_path), "cnj_path")
     root_view, keep_root = _support.string_view(

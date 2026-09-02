@@ -25,6 +25,9 @@ __all__ = [
     "Compression",
     "ContainerChunk",
     "CnbReadLimits",
+    "FORMAT_HEADER_CHECKSUM_COVERAGE",
+    "FORMAT_HEADER_CHECKSUM_OFFSET",
+    "FORMAT_HEADER_RESERVED_SIZE",
     "FORMAT_HEADER_SIZE",
     "FORMAT_MAGIC_SIZE",
     "FORMAT_TOC_ENTRY_SIZE",
@@ -56,6 +59,12 @@ FORMAT_MAGIC_SIZE = _abi.CNA_CNB_FORMAT_MAGIC_SIZE
 FORMAT_HEADER_SIZE = _abi.CNA_CNB_FORMAT_HEADER_SIZE
 #: Bytes one table-of-contents entry occupies.
 FORMAT_TOC_ENTRY_SIZE = _abi.CNA_CNB_FORMAT_TOC_ENTRY_SIZE
+#: Leading header bytes the header checksum covers.
+FORMAT_HEADER_CHECKSUM_COVERAGE = _abi.CNA_CNB_FORMAT_HEADER_CHECKSUM_COVERAGE
+#: Byte offset of the header checksum field.
+FORMAT_HEADER_CHECKSUM_OFFSET = _abi.CNA_CNB_FORMAT_HEADER_CHECKSUM_OFFSET
+#: Reserved, must-be-zero bytes at the end of the header.
+FORMAT_HEADER_RESERVED_SIZE = _abi.CNA_CNB_FORMAT_HEADER_RESERVED_SIZE
 #: Container major version this CNA generation reads and writes.
 CONTAINER_MAJOR = _abi.CNA_CNB_FORMAT_CONTAINER_MAJOR
 #: Container minor version this CNA generation writes.
