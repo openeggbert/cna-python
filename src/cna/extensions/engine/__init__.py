@@ -45,7 +45,7 @@ Importing this module needs no native library. Constructing anything in it does.
 
 from __future__ import annotations
 
-from . import compute, errors, postprocess
+from . import compute, errors, postprocess, shadows, values
 from .compute import (
     ComputeShader, GpuTimer, ImageAccess, MemoryBarrier, StorageBuffer,
     barrier_contains,
@@ -54,6 +54,16 @@ from .postprocess import (
     BlitPass, EffectPass, FullscreenPass, PassTiming, PostProcessChain,
     PostProcessContext, PostProcessPass, RenderTargetPool, RenderTargetScope,
     ShaderEffectFactory, bind_render_target,
+)
+from .shadows import (
+    CascadedShadowMap, CubeShadowMap, ShadowMap, ShadowReceiver, SpotShadowMap,
+    compute_light_projection, compute_light_view, cube_shadow_map_size_for,
+    shadow_filter_radius_for, shadow_map_size_for, supports_shadow_sampling,
+)
+from .values import (
+    DirectionalLight, PointLight, PunctualLight, PunctualLightKind,
+    RenderQuality, ShadowCascadeState, ShadowQuality, SpotLight,
+    CUBE_SHADOW_FACE_COUNT, FRUSTUM_CORNER_COUNT, SHADOW_CASCADE_MAXIMUM,
 )
 from .errors import (
     ComputeShaderCompileError, EngineArgumentError, EngineDisposedError,
@@ -65,6 +75,8 @@ __all__ = [
     "compute",
     "errors",
     "postprocess",
+    "shadows",
+    "values",
     "layer_version",
     "layer_version_string",
     "is_available",
@@ -86,6 +98,28 @@ __all__ = [
     "RenderTargetScope",
     "ShaderEffectFactory",
     "bind_render_target",
+    "CascadedShadowMap",
+    "CubeShadowMap",
+    "ShadowMap",
+    "ShadowReceiver",
+    "SpotShadowMap",
+    "compute_light_projection",
+    "compute_light_view",
+    "cube_shadow_map_size_for",
+    "shadow_filter_radius_for",
+    "shadow_map_size_for",
+    "supports_shadow_sampling",
+    "DirectionalLight",
+    "PointLight",
+    "PunctualLight",
+    "PunctualLightKind",
+    "RenderQuality",
+    "ShadowCascadeState",
+    "ShadowQuality",
+    "SpotLight",
+    "CUBE_SHADOW_FACE_COUNT",
+    "FRUSTUM_CORNER_COUNT",
+    "SHADOW_CASCADE_MAXIMUM",
     "ComputeShaderCompileError",
     "EngineArgumentError",
     "EngineDisposedError",

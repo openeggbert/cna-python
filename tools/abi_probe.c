@@ -34,6 +34,7 @@
 #include "CNA/C/cnb.h"
 #include "CNA/C/content.h"
 #include "CNA/C/engine_layer.h"
+#include "CNA/C/graphics_ext.h"
 
 #define TYPE(T) do { \
     printf("TYPE %s %zu %zu\n", #T, sizeof(T), alignof(T)); \

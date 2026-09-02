@@ -55,6 +55,7 @@ ENGINE_PRESENT = _engine_present()
 #: An engine test that needs a live GPU object needs both facts to hold.
 ENGINE_GPU = ENGINE_PRESENT and RENDERS
 
+requires_native = unittest.skipUnless(NATIVE, "needs a configured CNA library")
 requires_engine = unittest.skipUnless(
     ENGINE_PRESENT, "the loaded CNA build has no engine layer")
 requires_engine_gpu = unittest.skipUnless(

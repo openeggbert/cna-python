@@ -79,6 +79,24 @@ _DEFINE = re.compile(r"^#define\s+(CNA_[A-Za-z0-9_]+)\s+(.+?)\s*$", re.M)
 _FIELD = re.compile(r"^(?P<type>[A-Za-z_][A-Za-z0-9_ *]*?)\s*(?P<name>[A-Za-z_][A-Za-z0-9_]*)"
                     r"(?:\[(?P<array>[^\]]+)\])?\s*$")
 _OFFSETOF = re.compile(r"offsetof\s*\(\s*(CNA_[A-Za-z0-9_]+)\s*,\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)")
+_CAMEL_BOUNDARY = re.compile(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
+
+
+def _member_prefixes(alias: str) -> tuple[str, ...]:
+    """The ``#define`` prefixes an identity's members are spelled with.
+
+    ``CNA_ShadowQuality`` names ``CNA_SHADOW_QUALITY_*`` and
+    ``CNA_AlphaModeEXT`` names ``CNA_ALPHA_MODE_*_EXT`` -- the ``EXT`` moves to
+    the end of the member -- so both spellings are tried. Deriving them beats
+    listing them: an identity CNA adds is picked up without an edit here, and a
+    prefix that matches nothing simply contributes nothing.
+    """
+    body = alias[len("CNA_"):]
+    snake = _CAMEL_BOUNDARY.sub("_", body).upper()
+    prefixes = {f"CNA_{snake}_"}
+    if snake.endswith("_EXT"):
+        prefixes.add(f"CNA_{snake[:-len('_EXT')]}_")
+    return tuple(sorted(prefixes))
 
 
 class GenerationError(RuntimeError):
@@ -186,6 +204,18 @@ def generate(header: Path) -> tuple[str, str]:
             aliases.setdefault(name, "uint64_t")
     handles = _HANDLE_TYPEDEF.findall(text)
 
+    #: Every ``#define`` in every canonical header, so an identity declared
+    #: elsewhere can contribute its members. Without this the engine's own
+    #: header would give the *type* of a shadow quality and none of its values,
+    #: and the values would have to be hand-written -- which is exactly the
+    #: transcription this generator exists to remove.
+    neighbours: dict[str, str] = {}
+    for other in _dependency_headers(header):
+        if other == header:
+            continue
+        for name, body in _defines(other.read_text(encoding="utf-8")).items():
+            neighbours.setdefault(name, body)
+
     constants: dict[str, object] = {}
     #: A constant defined as a field offset cannot be evaluated before the
     #: structure exists, and re-deriving it by hand would be exactly the
@@ -252,6 +282,13 @@ def generate(header: Path) -> tuple[str, str]:
                      if (name in own_aliases or name in used) and not name.endswith("Handle"))
     for name in emitted:
         lines.append(f"{name} = {SCALARS[aliases[name]]}")
+    # The members of every identity above, from whichever header declares them.
+    for alias in emitted:
+        prefixes = _member_prefixes(alias)
+        for name, body in sorted(neighbours.items()):
+            if name in constants or not name.startswith(prefixes):
+                continue
+            constants[name] = _evaluate(body, constants)
     lines.append("")
     lines.append("#: Every opaque engine handle is a ``CNA_Handle``. The names are kept so a")
     lines.append("#: manifest entry can say which object a handle parameter refers to.")

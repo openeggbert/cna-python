@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1125,
+    "BOUND_ROUTES": 1222,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -11,17 +11,17 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 857,
-    "ENGINE_BOUND": 77,
+    "ENGINE_BOUND": 174,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 779,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 682,
     "PURPOSE_XNA_BACKING": 1175,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1819,
     "PURPOSE_MANAGED_BY_DESIGN": 536,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1125,
-    "STATUS_ACTIONABLE_LOCAL": 779,
+    "STATUS_BOUND": 1222,
+    "STATUS_ACTIONABLE_LOCAL": 682,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -6286,265 +6286,265 @@
       "route": "cna_cascaded_shadow_map_apply_to_receiver",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_compute_bounding_sphere",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_compute_frustum_corners",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_compute_split_distances",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_blend_band",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_cascade_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_cascade_matrix",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_cascade_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_caster_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_shadow_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_split_distance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_get_split_lambda",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_is_debug_tint_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_select_cascade",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_set_blend_band",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_set_debug_tint_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_set_split_lambda",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_snap_to_texel_grid",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cascaded_shadow_map_update",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
       "rule": "engine-cascaded-shadow-map",
       "family": "cascaded-shadow-map",
       "familyTitle": "cascaded shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_chromatic_aberration_pass_create",
@@ -12787,188 +12787,188 @@
       "route": "cna_cube_shadow_map_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_compute_face_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_compute_face_view",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_get_caster_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_get_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_get_light_position",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_get_light_range",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_get_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_get_shadow_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_get_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_set_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_size_for_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_update",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
       "rule": "engine-cube-shadow-map",
       "family": "cube-shadow-map",
       "familyTitle": "cube shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cue_apply_3d",
@@ -14514,12 +14514,12 @@
       "route": "cna_directional_light_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
       "rule": "engine-light-values",
       "family": "light-values",
       "familyTitle": "engine light values",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_directional_light_get_diffuse_color",
@@ -15449,12 +15449,12 @@
       "route": "cna_effect_get_light_view_projection_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_get_parameters",
@@ -15471,56 +15471,56 @@
       "route": "cna_effect_get_punctual_light_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_get_shadow_cascades_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_get_shadow_depth_bias_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_get_shadow_filter_radius_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_get_shadow_map_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_get_techniques",
@@ -15581,12 +15581,12 @@
       "route": "cna_effect_is_shadows_enabled_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_lights_enable_default",
@@ -16219,78 +16219,78 @@
       "route": "cna_effect_set_light_view_projection_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_set_punctual_light_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_set_shadow_cascades_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_set_shadow_depth_bias_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_set_shadow_filter_radius_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_set_shadow_map_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_set_shadows_enabled_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_technique_collection_add_default",
@@ -21939,12 +21939,12 @@
       "route": "cna_graphics_device_supports_shadow_sampling_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (device shadow-sampling capability: whether the device can sample a depth texture as a shadow comparison) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison",
       "rule": "engine-device-shadow-sampling",
       "family": "device-shadow-sampling",
       "familyTitle": "device shadow-sampling capability",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_device_supports_surface_format_as_render_target_ext",
@@ -35260,12 +35260,12 @@
       "route": "cna_point_light_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
       "rule": "engine-light-values",
       "family": "light-values",
       "familyTitle": "engine light values",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_point_multiply",
@@ -35953,12 +35953,12 @@
       "route": "cna_punctual_light_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
       "rule": "engine-light-values",
       "family": "light-values",
       "familyTitle": "engine light values",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_quality_of_service_init",
@@ -37845,232 +37845,232 @@
       "route": "cna_shadow_cascade_state_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
       "rule": "engine-light-values",
       "family": "light-values",
       "familyTitle": "engine light values",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_apply_caster",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_apply_skinned_caster",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_compute_light_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_compute_light_view",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_filter_radius_for_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_caster_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_filter_radius",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_light_view_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_shadow_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_get_skinned_caster_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_set_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_shadow_map_size_for_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
       "rule": "engine-shadow-map",
       "family": "shadow-map",
       "familyTitle": "directional shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_signed_in_gamer_award_achievement",
@@ -40309,188 +40309,188 @@
       "route": "cna_spot_light_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
       "rule": "engine-light-values",
       "family": "light-values",
       "familyTitle": "engine light values",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_compute_light_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_compute_light_view",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_caster_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_light_position",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_light_range",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_light_view_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_shadow_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_get_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_shadow_map_set_depth_bias",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
       "rule": "engine-spot-shadow-map",
       "family": "spot-shadow-map",
       "familyTitle": "spot shadow maps",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_sprite_batch_begin",
@@ -50192,265 +50192,265 @@
         "route": "cna_cascaded_shadow_map_apply_to_receiver",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_compute_bounding_sphere",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_compute_frustum_corners",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_compute_split_distances",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_blend_band",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_cascade_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_cascade_matrix",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_cascade_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_caster_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_shadow_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_split_distance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_get_split_lambda",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_is_debug_tint_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_select_cascade",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_set_blend_band",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_set_debug_tint_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_set_split_lambda",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_snap_to_texel_grid",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_update",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cascaded shadow maps: cascaded directional shadows, their splits and their texel snapping) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping",
         "rule": "engine-cascaded-shadow-map",
         "family": "cascaded-shadow-map",
         "familyTitle": "cascaded shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_chromatic_aberration_pass_create",
@@ -52172,188 +52172,188 @@
         "route": "cna_cube_shadow_map_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_compute_face_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_compute_face_view",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_get_caster_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_get_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_get_light_position",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_get_light_range",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_get_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_get_shadow_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_get_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_set_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_size_for_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_update",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube shadow maps: omnidirectional point-light shadows over six faces) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces",
         "rule": "engine-cube-shadow-map",
         "family": "cube-shadow-map",
         "familyTitle": "cube shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_bounding_sphere",
@@ -53129,12 +53129,12 @@
         "route": "cna_directional_light_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
         "rule": "engine-light-values",
         "family": "light-values",
         "familyTitle": "engine light values",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_get_image_based_light_ext",
@@ -53151,78 +53151,78 @@
         "route": "cna_effect_get_light_view_projection_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_get_punctual_light_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_get_shadow_cascades_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_get_shadow_depth_bias_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_get_shadow_filter_radius_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_get_shadow_map_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_is_shadows_enabled_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_image_based_light_ext",
@@ -53239,78 +53239,78 @@
         "route": "cna_effect_set_light_view_projection_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_punctual_light_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_shadow_cascades_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_shadow_depth_bias_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_shadow_filter_radius_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_shadow_map_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_shadows_enabled_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_engine_layer_copy_version_string",
@@ -54053,12 +54053,12 @@
         "route": "cna_graphics_device_supports_shadow_sampling_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (device shadow-sampling capability: whether the device can sample a depth texture as a shadow comparison) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison",
         "rule": "engine-device-shadow-sampling",
         "family": "device-shadow-sampling",
         "familyTitle": "device shadow-sampling capability",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_graphics_memory_barrier_has",
@@ -56462,12 +56462,12 @@
         "route": "cna_point_light_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
         "rule": "engine-light-values",
         "family": "light-values",
         "familyTitle": "engine light values",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_post_process_chain_add_owned_pass",
@@ -56726,12 +56726,12 @@
         "route": "cna_punctual_light_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
         "rule": "engine-light-values",
         "family": "light-values",
         "familyTitle": "engine light values",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_add_user_pass",
@@ -57309,232 +57309,232 @@
         "route": "cna_shadow_cascade_state_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
         "rule": "engine-light-values",
         "family": "light-values",
         "familyTitle": "engine light values",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_apply_caster",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_apply_skinned_caster",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_compute_light_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_compute_light_view",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_filter_radius_for_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_caster_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_filter_radius",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_light_view_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_shadow_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_get_skinned_caster_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_set_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_shadow_map_size_for_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (directional shadow maps: the single-cascade directional shadow map and its light matrices) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices",
         "rule": "engine-shadow-map",
         "family": "shadow-map",
         "familyTitle": "directional shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_skinned_pbr_effect_apply_material",
@@ -57804,188 +57804,188 @@
         "route": "cna_spot_light_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine light values: the engine's own light value structures and their canonical defaults) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults",
         "rule": "engine-light-values",
         "family": "light-values",
         "familyTitle": "engine light values",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_compute_light_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_compute_light_view",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_caster_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_light_position",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_light_range",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_light_view_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_shadow_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_get_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_shadow_map_set_depth_bias",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spot shadow maps: single-frustum spot-light shadows) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows",
         "rule": "engine-spot-shadow-map",
         "family": "spot-shadow-map",
         "familyTitle": "spot shadow maps",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ssao_pass_copy_kernel",

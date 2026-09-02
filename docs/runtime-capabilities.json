@@ -1088,6 +1088,86 @@
       },
       "evidence": "cna_post_process_chain_get_pass_timing*; ENGINE-004 for the flag; eight frames, seven samples",
       "notes": "Timing works: one sample per frame after the first, around 0.003 ms for a 4x4 blit. The flag is not observable until the chain has applied once, which is ENGINE-004 -- the header's documented read-back reports no timing on a device that is about to time. Measured across frames, because a query opened in one frame is collected in a later one."
+    },
+    {
+      "operation": "Engine light values",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "verified (no engine layer needed)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_directional_light_ext_init and its four siblings; tests/test_engine_shadows.py LightValueTests",
+      "notes": "The one piece of engine surface that answers on a build with no engine layer, which engine_layer.h promises and this measures on the artifact that has none. No default is written down in Python: each value type reads CNA's through its _init route, so a changed default cannot drift silently."
+    },
+    {
+      "operation": "Shadow quality presets",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_shadow_map_size_for_quality, cna_shadow_map_filter_radius_for_quality, cna_cube_shadow_map_size_for_quality",
+      "notes": "Sizes are powers of two, rise with quality, and a cube face is never larger than a flat map -- six faces cost six times one. The numbers are read from CNA rather than written down."
+    },
+    {
+      "operation": "Shadow matrix helpers",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_shadow_map_compute_light_view/projection, the four cascade helpers, the spot and cube helpers; tests/test_engine_shadows.py ShadowMatrixTests and CascadeMathTests",
+      "notes": "Compared against tests/engine_oracles.py, which computes the same matrices from the stated algorithm without calling CNA. The oracles are themselves gated by tests/test_engine_oracles.py against values worked by hand. Fixtures are asymmetric: a slanted light, a non-cubic off-origin box and non-round split planes, so a transpose or an axis swap fails."
+    },
+    {
+      "operation": "Directional shadow map",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_shadow_map_* (20 routes); tests/test_engine_shadows.py ShadowMapTests",
+      "notes": "An empty map reads as the far plane -- 1.0 in a Single target -- which is what keeps an unwritten texel from being an occluder at zero distance. The transform the pass computes is exactly the two pure helpers composed. Casting and sampling are asked separately."
+    },
+    {
+      "operation": "Cascaded shadow map",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_cascaded_shadow_map_* (24 routes); tests/test_engine_shadows.py CascadedShadowMapTests",
+      "notes": "Three cascades occupy one atlas three cascades wide. Splits increase, end on the far plane, match the pure helper for the same camera range, and four cascades give four different transforms. Deeper points select later cascades."
+    },
+    {
+      "operation": "Spot and cube shadow maps",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_spot_shadow_map_* and cna_cube_shadow_map_* (33 routes); tests/test_engine_shadows.py SpotAndCubeShadowMapTests",
+      "notes": "A spot map records the light it cast from and its transform is the two pure helpers composed. A cube map really is a TextureCube -- measured: it answers cna_texturecube_get_info and is released with cna_texturecube_destroy, unlike the other three, which are render targets. Its six face views look six different ways, which is the test a face-order swap fails."
+    },
+    {
+      "operation": "Shadow receiver effect state",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_effect_*_ext (14 routes); tests/test_engine_shadows.py ShadowReceiverTests",
+      "notes": "IShadowReceiverEXT is an interface C cannot implement, so what crosses is its operations. They are wrapped rather than added to Effect, because CNA-only state must not appear on a strict XNA type. Cascade state and punctual lights cross whole, with four distinct transforms and four distinct splits so a state that copied one entry over all of them would show."
+    },
+    {
+      "operation": "Engine counted-view lifetime",
+      "status": "BLOCKED_UPSTREAM",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "measured and worked around"
+      },
+      "evidence": "ENGINE-002 in docs/engine-upstream-findings.md",
+      "notes": "Every engine getter that answers with a handle returns a fresh counted view that must be released. One route documents the opposite and two document nothing. Objects that own a useful view hand it out once and dispose it on close; the rest release immediately. A test closes a map after reading its texture and its caster effect and proves both were released."
     }
   ]
 }

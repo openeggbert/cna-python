@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1125,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1125,
-    "C_LAYOUT_MEASUREMENTS": 1605,
-    "CTYPES_LAYOUT_MEASUREMENTS": 1605,
+    "BOUND_FUNCTIONS": 1222,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1222,
+    "C_LAYOUT_MEASUREMENTS": 1622,
+    "CTYPES_LAYOUT_MEASUREMENTS": 1622,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -1133,7 +1133,104 @@
     "cna_post_process_chain_set_gpu_timing_enabled",
     "cna_post_process_chain_get_pass_timing_count",
     "cna_post_process_chain_get_pass_timing",
-    "cna_post_process_chain_copy_pass_timing_name"
+    "cna_post_process_chain_copy_pass_timing_name",
+    "cna_directional_light_ext_init",
+    "cna_point_light_ext_init",
+    "cna_spot_light_ext_init",
+    "cna_punctual_light_ext_init",
+    "cna_shadow_cascade_state_ext_init",
+    "cna_graphics_device_supports_shadow_sampling_ext",
+    "cna_shadow_map_create",
+    "cna_shadow_map_is_supported",
+    "cna_shadow_map_begin",
+    "cna_shadow_map_end",
+    "cna_shadow_map_get_caster_effect",
+    "cna_shadow_map_get_skinned_caster_effect",
+    "cna_shadow_map_apply_caster",
+    "cna_shadow_map_apply_skinned_caster",
+    "cna_shadow_map_get_shadow_texture",
+    "cna_shadow_map_get_light_view_projection",
+    "cna_shadow_map_get_size",
+    "cna_shadow_map_get_quality",
+    "cna_shadow_map_get_depth_bias",
+    "cna_shadow_map_set_depth_bias",
+    "cna_shadow_map_get_filter_radius",
+    "cna_shadow_map_compute_light_view",
+    "cna_shadow_map_compute_light_projection",
+    "cna_shadow_map_size_for_quality",
+    "cna_shadow_map_filter_radius_for_quality",
+    "cna_shadow_map_destroy",
+    "cna_spot_shadow_map_create",
+    "cna_spot_shadow_map_is_supported",
+    "cna_spot_shadow_map_begin",
+    "cna_spot_shadow_map_end",
+    "cna_spot_shadow_map_get_shadow_texture",
+    "cna_spot_shadow_map_get_caster_effect",
+    "cna_spot_shadow_map_get_size",
+    "cna_spot_shadow_map_get_quality",
+    "cna_spot_shadow_map_get_light_view_projection",
+    "cna_spot_shadow_map_get_light_position",
+    "cna_spot_shadow_map_get_light_range",
+    "cna_spot_shadow_map_get_depth_bias",
+    "cna_spot_shadow_map_set_depth_bias",
+    "cna_spot_shadow_map_compute_light_view",
+    "cna_spot_shadow_map_compute_light_projection",
+    "cna_spot_shadow_map_destroy",
+    "cna_cascaded_shadow_map_create",
+    "cna_cascaded_shadow_map_is_supported",
+    "cna_cascaded_shadow_map_update",
+    "cna_cascaded_shadow_map_begin",
+    "cna_cascaded_shadow_map_end",
+    "cna_cascaded_shadow_map_get_cascade_count",
+    "cna_cascaded_shadow_map_get_cascade_size",
+    "cna_cascaded_shadow_map_get_shadow_texture",
+    "cna_cascaded_shadow_map_get_caster_effect",
+    "cna_cascaded_shadow_map_get_cascade_matrix",
+    "cna_cascaded_shadow_map_get_split_distance",
+    "cna_cascaded_shadow_map_get_blend_band",
+    "cna_cascaded_shadow_map_set_blend_band",
+    "cna_cascaded_shadow_map_is_debug_tint_enabled",
+    "cna_cascaded_shadow_map_set_debug_tint_enabled",
+    "cna_cascaded_shadow_map_select_cascade",
+    "cna_cascaded_shadow_map_get_split_lambda",
+    "cna_cascaded_shadow_map_set_split_lambda",
+    "cna_cascaded_shadow_map_compute_split_distances",
+    "cna_cascaded_shadow_map_compute_frustum_corners",
+    "cna_cascaded_shadow_map_compute_bounding_sphere",
+    "cna_cascaded_shadow_map_snap_to_texel_grid",
+    "cna_cascaded_shadow_map_destroy",
+    "cna_cube_shadow_map_create",
+    "cna_cube_shadow_map_is_supported",
+    "cna_cube_shadow_map_update",
+    "cna_cube_shadow_map_begin",
+    "cna_cube_shadow_map_end",
+    "cna_cube_shadow_map_get_shadow_texture",
+    "cna_cube_shadow_map_get_caster_effect",
+    "cna_cube_shadow_map_get_size",
+    "cna_cube_shadow_map_get_quality",
+    "cna_cube_shadow_map_get_light_position",
+    "cna_cube_shadow_map_get_light_range",
+    "cna_cube_shadow_map_get_depth_bias",
+    "cna_cube_shadow_map_set_depth_bias",
+    "cna_cube_shadow_map_compute_face_view",
+    "cna_cube_shadow_map_compute_face_projection",
+    "cna_cube_shadow_map_size_for_quality",
+    "cna_cube_shadow_map_destroy",
+    "cna_cascaded_shadow_map_apply_to_receiver",
+    "cna_effect_set_shadow_map_ext",
+    "cna_effect_get_shadow_map_ext",
+    "cna_effect_set_light_view_projection_ext",
+    "cna_effect_get_light_view_projection_ext",
+    "cna_effect_set_shadows_enabled_ext",
+    "cna_effect_is_shadows_enabled_ext",
+    "cna_effect_set_shadow_depth_bias_ext",
+    "cna_effect_get_shadow_depth_bias_ext",
+    "cna_effect_set_shadow_filter_radius_ext",
+    "cna_effect_get_shadow_filter_radius_ext",
+    "cna_effect_set_shadow_cascades_ext",
+    "cna_effect_get_shadow_cascades_ext",
+    "cna_effect_set_punctual_light_ext",
+    "cna_effect_get_punctual_light_ext"
   ],
   "functionManifest": [
     {
@@ -13039,6 +13136,987 @@
       ],
       "arity": 5,
       "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_directional_light_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_DirectionalLightEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_point_light_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PointLightEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_spot_light_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_SpotLightEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_punctual_light_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_PunctualLightEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_shadow_cascade_state_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ShadowCascadeStateEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_graphics_device_supports_shadow_sampling_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed graphics device"
+    },
+    {
+      "symbol": "cna_shadow_map_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned shadow map; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_shadow_map_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_DirectionalLightEXT>",
+        "pointer<CNA_BoundingBox>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_get_caster_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's caster effect; a distinct handle per call, released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_shadow_map_get_skinned_caster_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's skinned caster effect; released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_shadow_map_apply_caster",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_apply_skinned_caster",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 4,
+      "ownership": "borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_get_shadow_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's own target; released with cna_render_target_destroy, which does not dispose it. The map refuses destruction while one is outstanding"
+    },
+    {
+      "symbol": "cna_shadow_map_get_light_view_projection",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_get_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_get_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_get_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_set_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed shadow map; copies the value"
+    },
+    {
+      "symbol": "cna_shadow_map_get_filter_radius",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed shadow map"
+    },
+    {
+      "symbol": "cna_shadow_map_compute_light_view",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_DirectionalLightEXT>",
+        "pointer<CNA_BoundingBox>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_shadow_map_compute_light_projection",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_BoundingBox>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_shadow_map_size_for_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_shadow_map_filter_radius_for_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_shadow_map_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned spot shadow map; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpotLightEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_shadow_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's own target; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_caster_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's caster effect; released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_light_view_projection",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_light_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_light_range",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_get_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spot shadow map"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_set_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed spot shadow map; copies the value"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_compute_light_view",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_SpotLightEXT>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_compute_light_projection",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_SpotLightEXT>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_spot_shadow_map_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes spot shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned cascaded shadow map; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_update",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_DirectionalLightEXT>",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_cascade_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_cascade_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_shadow_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's own atlas; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_caster_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's caster effect; released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_cascade_matrix",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_split_distance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_blend_band",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_set_blend_band",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cascaded shadow map; copies the value"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_is_debug_tint_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_set_debug_tint_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cascaded shadow map; copies the value"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_select_cascade",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_get_split_lambda",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_set_split_lambda",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cascaded shadow map; copies the value"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_compute_split_distances",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "c_int",
+        "c_float",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_compute_frustum_corners",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_compute_bounding_sphere",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_snap_to_texel_grid",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_int",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes cascaded shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned cube shadow map; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_update",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PointLightEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_get_shadow_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's own cube; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_get_caster_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the map's caster effect; released with cna_effect_destroy"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_get_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_get_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_get_light_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_get_light_range",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_get_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube shadow map"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_set_depth_bias",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cube shadow map; copies the value"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_compute_face_view",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_compute_face_projection",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_size_for_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cube_shadow_map_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes cube shadow map"
+    },
+    {
+      "symbol": "cna_cascaded_shadow_map_apply_to_receiver",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed cascaded shadow map"
+    },
+    {
+      "symbol": "cna_effect_set_shadow_map_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; the shadow texture is BORROWED and must outlive the draws that use it"
+    },
+    {
+      "symbol": "cna_effect_get_shadow_map_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the handle is the texture the effect already holds and is not a new borrow"
+    },
+    {
+      "symbol": "cna_effect_set_light_view_projection_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_effect_get_light_view_projection_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_effect_set_shadows_enabled_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_effect_is_shadows_enabled_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_effect_set_shadow_depth_bias_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_effect_get_shadow_depth_bias_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_effect_set_shadow_filter_radius_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_effect_get_shadow_filter_radius_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_effect_set_shadow_cascades_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ShadowCascadeStateEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_effect_get_shadow_cascades_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ShadowCascadeStateEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
+    },
+    {
+      "symbol": "cna_effect_set_punctual_light_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PunctualLightEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the value"
+    },
+    {
+      "symbol": "cna_effect_get_punctual_light_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PunctualLightEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed effect"
     }
   ],
   "missingSymbols": [],
@@ -14568,6 +15646,10 @@
     "OFFSET:CNA_GpuCullableInstance:world": 8,
     "OFFSET:CNA_GpuCullableInstance:bounds": 72,
     "VALUE:CNA_POST_PROCESS_CONTEXT_SIZE_V1": 328,
+    "VALUE:CNA_ALPHA_MODE_BLEND_EXT": 2,
+    "VALUE:CNA_ALPHA_MODE_MASK_EXT": 1,
+    "VALUE:CNA_ALPHA_MODE_MAXIMUM_EXT": 2,
+    "VALUE:CNA_ALPHA_MODE_OPAQUE_EXT": 0,
     "VALUE:CNA_AREA_LIGHT_BRDF_TABLE_DEFAULT_SAMPLE_COUNT": 64,
     "VALUE:CNA_AREA_LIGHT_BRDF_TABLE_DEFAULT_SIZE": 32,
     "VALUE:CNA_AREA_LIGHT_QUAD_CORNER_COUNT": 4,
@@ -14640,9 +15722,22 @@
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_SPOT": 2,
     "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_FXAA_EDGE_THRESHOLD_EXT": 0.00100000005,
     "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_GAMMA_EXT": 0.00999999978,
+    "VALUE:CNA_RENDER_QUALITY_HIGH": 2,
+    "VALUE:CNA_RENDER_QUALITY_LOW": 0,
+    "VALUE:CNA_RENDER_QUALITY_MEDIUM": 1,
+    "VALUE:CNA_RENDER_QUALITY_ULTRA": 3,
     "VALUE:CNA_SHADOW_CASCADE_MAX_EXT": 4,
+    "VALUE:CNA_SHADOW_QUALITY_DISABLED": 0,
+    "VALUE:CNA_SHADOW_QUALITY_HIGH": 3,
+    "VALUE:CNA_SHADOW_QUALITY_LOW": 1,
+    "VALUE:CNA_SHADOW_QUALITY_MEDIUM": 2,
+    "VALUE:CNA_SHADOW_QUALITY_ULTRA": 4,
     "VALUE:CNA_SSR_PASS_MAX_STEP_COUNT_EXT": 64,
     "VALUE:CNA_SSR_PASS_MIN_STEP_COUNT_EXT": 4,
+    "VALUE:CNA_TONEMAPPING_MODE_ACES": 3,
+    "VALUE:CNA_TONEMAPPING_MODE_FILMIC": 2,
+    "VALUE:CNA_TONEMAPPING_MODE_NONE": 0,
+    "VALUE:CNA_TONEMAPPING_MODE_REINHARD": 1,
     "VALUE:CNA_TONEMAPPING_MODE_UNCHARTED2": 4,
     "VALUE:CNA_TRANSPARENCY_MODE_NONE": 0,
     "VALUE:CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT": 2,
@@ -14886,6 +15981,10 @@
     "VALUE:CNA_SURFACE_FORMAT_USHORT_EXT": 26,
     "VALUE:CNA_SURFACE_FORMAT_VECTOR2": 14,
     "VALUE:CNA_SURFACE_FORMAT_VECTOR4": 15,
+    "VALUE:CNA_ALPHA_MODE_BLEND_EXT": 2,
+    "VALUE:CNA_ALPHA_MODE_MASK_EXT": 1,
+    "VALUE:CNA_ALPHA_MODE_MAXIMUM_EXT": 2,
+    "VALUE:CNA_ALPHA_MODE_OPAQUE_EXT": 0,
     "VALUE:CNA_AREA_LIGHT_BRDF_TABLE_DEFAULT_SAMPLE_COUNT": 64,
     "VALUE:CNA_AREA_LIGHT_BRDF_TABLE_DEFAULT_SIZE": 32,
     "VALUE:CNA_AREA_LIGHT_QUAD_CORNER_COUNT": 4,
@@ -14959,9 +16058,22 @@
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_SPOT": 2,
     "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_FXAA_EDGE_THRESHOLD_EXT": 0.001,
     "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_GAMMA_EXT": 0.01,
+    "VALUE:CNA_RENDER_QUALITY_HIGH": 2,
+    "VALUE:CNA_RENDER_QUALITY_LOW": 0,
+    "VALUE:CNA_RENDER_QUALITY_MEDIUM": 1,
+    "VALUE:CNA_RENDER_QUALITY_ULTRA": 3,
     "VALUE:CNA_SHADOW_CASCADE_MAX_EXT": 4,
+    "VALUE:CNA_SHADOW_QUALITY_DISABLED": 0,
+    "VALUE:CNA_SHADOW_QUALITY_HIGH": 3,
+    "VALUE:CNA_SHADOW_QUALITY_LOW": 1,
+    "VALUE:CNA_SHADOW_QUALITY_MEDIUM": 2,
+    "VALUE:CNA_SHADOW_QUALITY_ULTRA": 4,
     "VALUE:CNA_SSR_PASS_MAX_STEP_COUNT_EXT": 64,
     "VALUE:CNA_SSR_PASS_MIN_STEP_COUNT_EXT": 4,
+    "VALUE:CNA_TONEMAPPING_MODE_ACES": 3,
+    "VALUE:CNA_TONEMAPPING_MODE_FILMIC": 2,
+    "VALUE:CNA_TONEMAPPING_MODE_NONE": 0,
+    "VALUE:CNA_TONEMAPPING_MODE_REINHARD": 1,
     "VALUE:CNA_TONEMAPPING_MODE_UNCHARTED2": 4,
     "VALUE:CNA_TRANSPARENCY_MODE_NONE": 0,
     "VALUE:CNA_TRANSPARENCY_MODE_ORDER_INDEPENDENT": 2,

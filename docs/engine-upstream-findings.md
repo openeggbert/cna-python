@@ -102,10 +102,18 @@ there -- and the test above is what will say so.
 
 ---
 
-## ENGINE-002 -- `cna_post_process_effect_pass_get_effect` leaks a counted view
+## ENGINE-002 -- every engine getter hands out a counted view, and one says not to release it
 
-**Status:** open. Worked around by releasing the view; it would otherwise stop a
+**Status:** open. Worked around by releasing every view; not doing so stops a
 game being destroyed.
+
+**The general shape.** Measured across the engine layer: **every route that
+answers with a handle returns a fresh, distinct, releasable handle on every
+call.** Asking twice gives two handles. This holds for a post-process pass's
+effect, a shadow map's texture, its caster effect, its skinned caster effect, a
+chain's target pool, a pool's acquired target, a factory's cached effect and an
+effect's shadow map. Most of the header documents it correctly. One route
+documents the opposite, and that one is the defect below.
 
 **Documented contract.** `engine_layer.h` says of the returned handle:
 
@@ -143,6 +151,24 @@ with `cna_effect_destroy` immediately, and returns the caller's own `Effect`
 object. Reading it any number of times leaks nothing. The reason is stated at
 the property rather than hidden, because a caller reading the C header would
 otherwise conclude the opposite.
+
+**A second route with the same shape, documented by omission.**
+`cna_effect_get_shadow_map_ext` also returns a new handle per call -- measured
+with both a `Texture2D` and a `RenderTarget2D` assigned, giving handles
+`4294967324`, `8589934620`, `12884901916` for three consecutive reads -- and
+each is released by `cna_render_target_destroy` whichever kind was set. The
+header says nothing either way there, so nothing contradicts the measurement;
+it is recorded because a caller reading only the header would leak. The same
+applies to `cna_shadow_map_get_caster_effect` and
+`cna_shadow_map_get_skinned_caster_effect`, which the header calls "borrowed
+from the map" without saying that the borrow is counted.
+
+**Local behaviour, generally.** Where the view is useful the object hands it out
+**once** and disposes it on `close`: `ShadowMap.shadow_texture` and
+`ShadowMap.caster_effect` return the same object however often they are read.
+Where the view carries nothing the caller does not already have -- an effect
+pass's effect, an effect's shadow map -- it is released immediately and the
+caller's own object is returned.
 
 **Unblock condition.** Either the header stops saying "do not destroy it", or
 the route stops counting the handle it returns. Neither changes this binding's
