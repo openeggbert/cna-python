@@ -16,7 +16,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from _cna_native import abi
 from _cna_native import cnb_abi
+from _cna_native import devices_abi
 from _cna_native import engine_abi
+from _cna_native import input_abi
+from _cna_native import online_abi
 from _cna_native.loader import FUNCTION_MANIFEST, QUALIFIED_ABI
 
 
@@ -73,6 +76,9 @@ TYPES = {
         cnb_abi.CNA_AnimationClipEXTDescriptor, cnb_abi.CNA_CurveKey,
         cnb_abi.CNA_ContentManagerCreateInfo,
         *engine_abi.ENGINE_STRUCTURES,
+        *devices_abi.DEVICES_STRUCTURES,
+        *input_abi.INPUT_STRUCTURES,
+        *online_abi.ONLINE_STRUCTURES,
     )
 }
 
@@ -82,6 +88,17 @@ TYPES = {
 #: from prose.
 CNB_CONSTANT_PREFIXES = ("CNA_CNB_", "CNA_CLIP_TARGET_SPACE_",
                         "CNA_SURFACE_FORMAT_")
+
+#: Every family ``tools/generate_family_abi.py`` generates, with the prefix its
+#: exported tables carry.  Listing the modules rather than the tables means a
+#: family that gains a structure, a callback or a constant is measured without
+#: an edit here.
+FAMILY_ABI_MODULES = (
+    (engine_abi, "ENGINE"),
+    (devices_abi, "DEVICES"),
+    (input_abi, "INPUT"),
+    (online_abi, "ONLINE"),
+)
 
 
 def arguments() -> argparse.Namespace:
@@ -156,13 +173,14 @@ def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
     for name in dir(cnb_abi):
         if name.startswith(CNB_CONSTANT_PREFIXES):
             result[f"VALUE:{name}"] = getattr(cnb_abi, name)
-    # Every engine constant the generator emitted, compared against the value the
+    # Every generated-family constant and callback, compared against the value the
     # C compiler computes from the same header.  A float lands on the FVALUE key.
-    for name in engine_abi.ENGINE_CALLBACKS:
-        result[f"VALUE:{name}"] = ctypes.sizeof(getattr(engine_abi, name))
-    for name in engine_abi.ENGINE_CONSTANTS:
-        value = getattr(engine_abi, name)
-        result[f"{'FVALUE' if isinstance(value, float) else 'VALUE'}:{name}"] = value
+    for module, prefix in FAMILY_ABI_MODULES:
+        for name in getattr(module, f"{prefix}_CALLBACKS"):
+            result[f"VALUE:{name}"] = ctypes.sizeof(getattr(module, name))
+        for name in getattr(module, f"{prefix}_CONSTANTS"):
+            value = getattr(module, name)
+            result[f"{'FVALUE' if isinstance(value, float) else 'VALUE'}:{name}"] = value
     for name, value in TYPES.items():
         result[f"SIZE:{name}"] = ctypes.sizeof(value)
         result[f"ALIGN:{name}"] = ctypes.alignment(value)

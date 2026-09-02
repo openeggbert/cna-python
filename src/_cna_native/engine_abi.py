@@ -1,12 +1,12 @@
 """Generated ctypes layouts and constants for CNA's ``engine_layer.h``.
 
-Do not edit. ``tools/generate_engine_abi.py`` derives this from the canonical
-header, and ``--check`` fails when the checked-in copy is not what the current
-header produces. Every size, alignment, field offset and constant here is
+Do not edit. ``tools/generate_family_abi.py`` derives this from the canonical
+headers, and ``--check`` fails when the checked-in copy is not what the current
+headers produce. Every size, alignment, field offset and constant here is
 re-measured against the C compiler by ``tools/audit_cna_abi.py``.
 
-Nothing in this module is public. ``cna.extensions.engine`` holds the public
-projection; a ctypes object never crosses that boundary.
+Nothing in this module is public. ``cna.extensions.engine`` holds the
+public projection; a ctypes object never crosses that boundary.
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from . import abi
 
 # --- scalar identities -----------------------------------------------------
 
-#: Fixed-width identities the engine layer declares as typedefs of a scalar.
+#: Fixed-width identities these headers declare as typedefs of a scalar.
 #: They are enums in spirit and integers in the ABI; the public projection
 #: turns them into Python enums, and this is only their width.
 CNA_AlphaModeEXT = c.c_uint32
@@ -35,8 +35,8 @@ CNA_ShadowQuality = c.c_uint32
 CNA_TonemappingMode = c.c_uint32
 CNA_TransparencyMode = c.c_uint32
 
-#: Every opaque engine handle is a ``CNA_Handle``. The names are kept so a
-#: manifest entry can say which object a handle parameter refers to.
+#: Every opaque handle in this family is a ``CNA_Handle``. The names are kept
+#: so a manifest entry can say which object a handle parameter refers to.
 ENGINE_HANDLE_TYPES = (
     "CNA_AreaLightBrdfTableHandle",
     "CNA_AtmosphericSkyHandle",
@@ -83,33 +83,6 @@ ENGINE_HANDLE_TYPES = (
     "CNA_WeightedBlendedTransparencyHandle",
 )
 
-
-#: Function pointers the engine layer hands to CNA. A Python callable
-#: bound to one of these must be rooted for as long as CNA can call it;
-#: the trampoline is what CNA holds, not the Python object.
-CNA_TransparentDrawCallback = c.CFUNCTYPE(c.c_uint32, c.c_void_p)
-CNA_RenderPipelineDrawCallback = c.CFUNCTYPE(c.c_uint32, c.c_void_p)
-CNA_LightProbeSceneDrawCallback = c.CFUNCTYPE(None, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix), c.c_void_p)
-
-#: Every generated callback type, for the ABI audit.
-ENGINE_CALLBACKS = (
-    "CNA_TransparentDrawCallback",
-    "CNA_RenderPipelineDrawCallback",
-    "CNA_LightProbeSceneDrawCallback",
-)
-
-#: Which of each callback's parameters are pointers to const.
-#:
-#: ``const`` is not an ABI property and ctypes cannot carry it, but C
-#: declaration compatibility distinguishes ``const T*`` from ``T*`` -- so
-#: the compiler-backed prototype gate needs it to spell a function-pointer
-#: parameter the way the canonical typedef does. Derived here rather than
-#: written down there, because it is a fact about the header.
-ENGINE_CALLBACK_CONST_PARAMETERS = {
-    "CNA_TransparentDrawCallback": (False,),
-    "CNA_RenderPipelineDrawCallback": (False,),
-    "CNA_LightProbeSceneDrawCallback": (True, True, False),
-}
 
 # --- constants -------------------------------------------------------------
 
@@ -233,7 +206,6 @@ class CNA_TextureTransformEXT(c.Structure):
         ("rotation", c.c_float),
     ]
 
-
 class CNA_PostProcessContext(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -257,7 +229,6 @@ class CNA_PostProcessContext(c.Structure):
         ("settings", c.c_void_p),
     ]
 
-
 class CNA_DirectionalLightEXT(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -268,7 +239,6 @@ class CNA_DirectionalLightEXT(c.Structure):
         ("casts_shadows", c.c_uint8),
         ("reserved", c.c_uint8 * 3),
     ]
-
 
 class CNA_PointLightEXT(c.Structure):
     _fields_ = [
@@ -281,7 +251,6 @@ class CNA_PointLightEXT(c.Structure):
         ("casts_shadows", c.c_uint8),
         ("reserved", c.c_uint8 * 3),
     ]
-
 
 class CNA_SpotLightEXT(c.Structure):
     _fields_ = [
@@ -297,7 +266,6 @@ class CNA_SpotLightEXT(c.Structure):
         ("casts_shadows", c.c_uint8),
         ("reserved", c.c_uint8 * 3),
     ]
-
 
 class CNA_PunctualLightEXT(c.Structure):
     _fields_ = [
@@ -317,7 +285,6 @@ class CNA_PunctualLightEXT(c.Structure):
         ("shadow_view_projection", abi.CNA_Matrix),
     ]
 
-
 class CNA_ShadowCascadeStateEXT(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -330,7 +297,6 @@ class CNA_ShadowCascadeStateEXT(c.Structure):
         ("debug_tint", c.c_uint8),
         ("reserved", c.c_uint8 * 3),
     ]
-
 
 class CNA_ClusteredLightEXT(c.Structure):
     _fields_ = [
@@ -348,14 +314,12 @@ class CNA_ClusteredLightEXT(c.Structure):
         ("outer_angle", c.c_float),
     ]
 
-
 class CNA_GltfMaterialTexturesEXT(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
         ("struct_version", c.c_uint32),
         ("slots", c.c_uint64 * 7),
     ]
-
 
 class CNA_GltfMaterialExtensionTexturesEXT(c.Structure):
     _fields_ = [
@@ -371,7 +335,6 @@ class CNA_GltfMaterialExtensionTexturesEXT(c.Structure):
         ("iridescence", c.c_uint64),
         ("iridescence_thickness", c.c_uint64),
     ]
-
 
 class CNA_GltfMaterialSourceEXT(c.Structure):
     _fields_ = [
@@ -394,7 +357,6 @@ class CNA_GltfMaterialSourceEXT(c.Structure):
         ("texture_transforms_ext", CNA_TextureTransformEXT * 7),
     ]
 
-
 class CNA_GltfMaterialExtensionSourceEXT(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -412,7 +374,6 @@ class CNA_GltfMaterialExtensionSourceEXT(c.Structure):
         ("iridescence_thickness_minimum_ext", c.c_float),
         ("iridescence_thickness_maximum_ext", c.c_float),
     ]
-
 
 class CNA_RenderPipelineSettingsEXT(c.Structure):
     _fields_ = [
@@ -468,7 +429,6 @@ class CNA_RenderPipelineSettingsEXT(c.Structure):
         ("reserved", c.c_uint8 * 4),
     ]
 
-
 class CNA_RenderPipelineFrameStatisticsEXT(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -481,7 +441,6 @@ class CNA_RenderPipelineFrameStatisticsEXT(c.Structure):
         ("gpu_memory_estimate_bytes", c.c_uint64),
     ]
 
-
 class CNA_PassTimingEXT(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -490,7 +449,6 @@ class CNA_PassTimingEXT(c.Structure):
         ("reserved", c.c_uint8 * 4),
         ("milliseconds", c.c_double),
     ]
-
 
 class CNA_ImageBasedLightEXT(c.Structure):
     _fields_ = [
@@ -502,7 +460,6 @@ class CNA_ImageBasedLightEXT(c.Structure):
         ("prefiltered_mip_count", c.c_int32),
         ("intensity", c.c_float),
     ]
-
 
 class CNA_AreaLightEXT(c.Structure):
     _fields_ = [
@@ -519,7 +476,6 @@ class CNA_AreaLightEXT(c.Structure):
         ("range", c.c_float),
     ]
 
-
 class CNA_AreaLightBrdfTerms(c.Structure):
     _fields_ = [
         ("struct_size", c.c_uint32),
@@ -529,7 +485,6 @@ class CNA_AreaLightBrdfTerms(c.Structure):
         ("average_tangent", c.c_float),
         ("average_normal", c.c_float),
     ]
-
 
 class CNA_ParticleEmitterSettings(c.Structure):
     _fields_ = [
@@ -551,14 +506,12 @@ class CNA_ParticleEmitterSettings(c.Structure):
         ("end_size", c.c_float),
     ]
 
-
 class CNA_Particle(c.Structure):
     _fields_ = [
         ("position", abi.CNA_Vector4),
         ("velocity", abi.CNA_Vector4),
         ("state", abi.CNA_Vector4),
     ]
-
 
 class CNA_LodLevelEXT(c.Structure):
     _fields_ = [
@@ -567,7 +520,6 @@ class CNA_LodLevelEXT(c.Structure):
         ("reserved0", c.c_uint32),
     ]
 
-
 class CNA_IndirectDrawArguments(c.Structure):
     _fields_ = [
         ("vertex_count", c.c_uint32),
@@ -575,7 +527,6 @@ class CNA_IndirectDrawArguments(c.Structure):
         ("first_vertex", c.c_uint32),
         ("base_instance", c.c_uint32),
     ]
-
 
 class CNA_IndirectDrawIndexedArguments(c.Structure):
     _fields_ = [
@@ -586,13 +537,11 @@ class CNA_IndirectDrawIndexedArguments(c.Structure):
         ("base_instance", c.c_uint32),
     ]
 
-
 class CNA_BoundingBox(c.Structure):
     _fields_ = [
         ("min", abi.CNA_Vector3),
         ("max", abi.CNA_Vector3),
     ]
-
 
 class CNA_GpuCullableInstance(c.Structure):
     _fields_ = [
@@ -601,7 +550,6 @@ class CNA_GpuCullableInstance(c.Structure):
         ("world", abi.CNA_Matrix),
         ("bounds", CNA_BoundingBox),
     ]
-
 
 class CNA_PbrMaterialEXT(c.Structure):
     _fields_ = [
@@ -635,19 +583,44 @@ class CNA_PbrMaterialEXT(c.Structure):
         ("texture_transforms", CNA_TextureTransformEXT * 7),
     ]
 
-
 class CNA_BoundingSphere(c.Structure):
     _fields_ = [
         ("center", abi.CNA_Vector3),
         ("radius", c.c_float),
     ]
 
-
 class CNA_BoundingFrustum(c.Structure):
     _fields_ = [
         ("matrix", abi.CNA_Matrix),
     ]
 
+
+#: Function pointers this family hands to CNA. A Python callable
+#: bound to one of these must be rooted for as long as CNA can call it;
+#: the trampoline is what CNA holds, not the Python object.
+CNA_TransparentDrawCallback = c.CFUNCTYPE(c.c_uint32, c.c_void_p)
+CNA_RenderPipelineDrawCallback = c.CFUNCTYPE(c.c_uint32, c.c_void_p)
+CNA_LightProbeSceneDrawCallback = c.CFUNCTYPE(None, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix), c.c_void_p)
+
+#: Every generated callback type, for the ABI audit.
+ENGINE_CALLBACKS = (
+    "CNA_TransparentDrawCallback",
+    "CNA_RenderPipelineDrawCallback",
+    "CNA_LightProbeSceneDrawCallback",
+)
+
+#: Which of each callback's parameters are pointers to const.
+#:
+#: ``const`` is not an ABI property and ctypes cannot carry it, but C
+#: declaration compatibility distinguishes ``const T*`` from ``T*`` -- so
+#: the compiler-backed prototype gate needs it to spell a function-pointer
+#: parameter the way the canonical typedef does. Derived here rather than
+#: written down there, because it is a fact about the header.
+ENGINE_CALLBACK_CONST_PARAMETERS = {
+    "CNA_TransparentDrawCallback": (False,),
+    "CNA_RenderPipelineDrawCallback": (False,),
+    "CNA_LightProbeSceneDrawCallback": (True, True, False),
+}
 
 # --- constants derived from a generated layout ------------------------------
 

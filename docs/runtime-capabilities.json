@@ -1346,7 +1346,7 @@
         "control": "verified",
         "gpu": "verified"
       },
-      "evidence": "tools/generate_engine_abi.py emits float constants at single precision; tools/audit_cna_abi.py compares them at that width",
+      "evidence": "tools/generate_family_abi.py emits float constants at single precision; tools/audit_cna_abi.py compares them at that width",
       "notes": "A constant declared 0.01F in a header is 0.009999999776482582, and a Python 0.01 is a different, larger number. Emitting the double would make a caller comparing a value CNA produced against the constant find it one unit in the last place too small -- which is exactly how the render pipeline's gamma floor was caught."
     },
     {

@@ -1,32 +1,36 @@
 #!/usr/bin/env python3
-"""Derives the engine layer's ctypes structures and constants from the header.
+"""Derives a native family's ctypes structures and constants from its headers.
 
-`engine_layer.h` declares 23 structures and 82 frozen constants. A hand-written
-transcription of those can omit a field without anything noticing until the day
-CNA reads past what Python allocated, and it can carry a constant that CNA has
-since changed. So none of it is hand-written: this reads the canonical header and
-emits both halves of the measurement.
+A hand-written transcription of a structure can omit a field without anything
+noticing until the day CNA reads past what Python allocated, and it can carry a
+constant that CNA has since changed. So none of it is hand-written: this reads
+the canonical headers and emits both halves of the measurement.
 
-Two files come out, and they are checked in so a reviewer sees the diff when CNA
-changes:
+One family is one entry in :data:`FAMILIES`. Two files come out per family, both
+checked in so a reviewer sees the diff when CNA changes:
 
-``src/_cna_native/engine_abi.py``
+``src/_cna_native/<family>_abi.py``
     The ctypes structures, the scalar identities, and every constant.
-``tools/engine_abi_probe.inc``
+``tools/<family>_abi_probe.inc``
     A C fragment ``tools/abi_probe.c`` includes, which prints the size and
     alignment of every structure, the offset of every field, and the value of
     every constant, as the C compiler sees them.
 
 The generator is not the authority either: what it emits is compared against the
 compiler's own measurement by ``tools/audit_cna_abi.py``, and ``--check`` proves
-the checked-in files are what the current header produces. A field the parser
+the checked-in files are what the current headers produce. A field the parser
 missed would therefore have to be missing from the header as well.
+
+A family may span several headers -- sensors and device services are one family
+in two headers -- and a structure one family already measures is imported by the
+next rather than measured twice under two names.
 """
 
 from __future__ import annotations
 
 import argparse
 import ctypes
+from dataclasses import dataclass
 from pathlib import Path
 import re
 import sys
@@ -36,8 +40,58 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from cna_headers import parse_header, strip_comments  # noqa: E402
 
-ABI_PATH = ROOT / "src/_cna_native/engine_abi.py"
-PROBE_PATH = ROOT / "tools/engine_abi_probe.inc"
+SRC = ROOT / "src/_cna_native"
+
+
+@dataclass(frozen=True)
+class Family:
+    """One native family: the headers it spans and the names it emits under."""
+
+    identifier: str
+    headers: tuple[str, ...]
+    #: Constant families whose names no identity typedef points at, so they
+    #: cannot be derived from one. The values still come from the canonical
+    #: header and are still measured by the C probe.
+    extra_constant_prefixes: tuple[str, ...] = ()
+    #: Earlier families whose structures this one embeds. They are imported
+    #: rather than re-declared, so one layout is never measured twice.
+    imports: tuple[str, ...] = ()
+
+    @property
+    def prefix(self) -> str:
+        return self.identifier.upper()
+
+    @property
+    def module_path(self) -> Path:
+        return SRC / f"{self.identifier}_abi.py"
+
+    @property
+    def probe_path(self) -> Path:
+        return ROOT / f"tools/{self.identifier}_abi_probe.inc"
+
+
+#: Every family this generator owns, in the order they must be generated: a
+#: family may import the structures of one declared before it.
+FAMILIES = (
+    Family("engine", ("engine_layer.h",),
+           extra_constant_prefixes=("CNA_PBR_TEXTURE_", "CNA_ASCII_QUANTIZE_MODE_")),
+    Family("devices", ("sensors.h", "devices.h")),
+    Family("input", ("input_text.h", "input_cursor.h", "input_joystick.h",
+                     "input_haptics.h", "input_devices.h"),
+           imports=("devices",)),
+    Family("online", ("net.h", "net_gamers.h", "net_sessions.h", "gamer_services.h"),
+           imports=("devices",)),
+)
+
+FAMILIES_BY_ID = {family.identifier: family for family in FAMILIES}
+
+#: What each family's generated module is private to, for its docstring.
+PUBLIC_SURFACE = {
+    "engine": "``cna.extensions.engine``",
+    "devices": "``cna.extensions.devices``",
+    "input": "``cna.extensions.input``",
+    "online": "``Microsoft.Xna.Framework.Net`` and ``Microsoft.Xna.Framework.GamerServices``",
+}
 
 #: C spellings this generator can render, and what they are in ctypes.  A type
 #: outside this table stops the generator rather than being guessed: an engine
@@ -77,16 +131,23 @@ def _already_measured() -> dict[str, str]:
             and issubclass(getattr(_abi, name), _ctypes.Structure)}
 
 
-#: Structures other canonical headers declare that the XNA boundary already
-#: measures. They are imported rather than re-declared, so one layout is never
-#: measured twice under one name.
-IMPORTED = _already_measured()
+#: Structures another family already measures, rebuilt for each family before it
+#: is generated.  ``_ctype`` reads it, which is why it is a module-level table
+#: rather than a parameter threaded through every helper.
+IMPORTED: dict[str, str] = {}
 
-#: Constant families the engine needs whose names are not derivable from an
-#: identity typedef. ``CNA_PBR_TEXTURE_*`` numbers the slots of an array field
-#: rather than being an enum of its own, so no typedef points at it; the values
-#: still come from the canonical header and are still measured by the C probe.
-EXTRA_CONSTANT_PREFIXES = ("CNA_PBR_TEXTURE_", "CNA_ASCII_QUANTIZE_MODE_")
+
+def _measured_by(module_name: str, alias: str) -> dict[str, str]:
+    """Every structure an already-generated family module declares."""
+    import ctypes as _ctypes
+    import importlib
+
+    sys.path.insert(0, str(ROOT / "src"))
+    module = importlib.import_module(f"_cna_native.{module_name}")
+    return {name: f"{alias}.{name}" for name in dir(module)
+            if name.startswith("CNA_")
+            and isinstance(getattr(module, name), type)
+            and issubclass(getattr(module, name), _ctypes.Structure)}
 
 _STRUCT = re.compile(r"typedef struct (CNA_[A-Za-z0-9_]+)\s*\{(.*?)\}\s*\1\s*;", re.S)
 _SCALAR_TYPEDEF = re.compile(r"^typedef\s+(uint32_t|int32_t|uint64_t|float)\s+(CNA_[A-Za-z0-9_]+)\s*;",
@@ -246,8 +307,20 @@ def _field_documentation(raw: str) -> dict[str, dict[str, str]]:
     return documentation
 
 
-def generate(header: Path) -> tuple[str, str]:
-    raw = header.read_text(encoding="utf-8")
+def generate(family: Family, include: Path) -> tuple[str, str]:
+    headers = [include / "CNA/C" / name for name in family.headers]
+    for header in headers:
+        if not header.is_file():
+            raise FileNotFoundError(header)
+    header = headers[0]
+    imported = _already_measured()
+    import_lines = ["from . import abi"]
+    for name in family.imports:
+        imported.update(_measured_by(f"{name}_abi", f"{name}_abi"))
+        import_lines.append(f"from . import {name}_abi")
+    IMPORTED.clear()
+    IMPORTED.update(imported)
+    raw = "\n".join(path.read_text(encoding="utf-8") for path in headers)
     text = strip_comments(raw)
     aliases: dict[str, str] = {}
     bodies: dict[str, str] = {}
@@ -283,6 +356,25 @@ def generate(header: Path) -> tuple[str, str]:
         for name, body in _defines(other.read_text(encoding="utf-8")).items():
             neighbours.setdefault(name, body)
 
+    #: Neighbour constants resolved to values, so a ``#define`` in this family's
+    #: headers may name one another header declares.  ``CNA_POWER_STATE_MAXIMUM``
+    #: is the case that matters: the host's power state and a controller's are
+    #: one identity, declared by ``input_gamepad.h`` and only bounded here.
+    #: These are resolution inputs, not emitted constants.
+    neighbour_values: dict[str, object] = {}
+    outstanding = dict(neighbours)
+    while outstanding:
+        progressed = False
+        for name in sorted(outstanding):
+            try:
+                neighbour_values[name] = _evaluate(outstanding[name], neighbour_values)
+            except GenerationError:
+                continue
+            del outstanding[name]
+            progressed = True
+        if not progressed:
+            break
+
     constants: dict[str, object] = {}
     #: A constant defined as a field offset cannot be evaluated before the
     #: structure exists, and re-deriving it by hand would be exactly the
@@ -294,7 +386,7 @@ def generate(header: Path) -> tuple[str, str]:
         if offset is not None:
             derived[name] = f"{offset.group(1)}.{offset.group(2)}.offset"
             continue
-        constants[name] = _evaluate(body, constants)
+        constants[name] = _evaluate(body, {**neighbour_values, **constants})
 
     structures: list[tuple[str, list[tuple[str, str, str | None]]]] = []
     for name, body in _STRUCT.findall(text):
@@ -306,7 +398,7 @@ def generate(header: Path) -> tuple[str, str]:
     # or compares one takes it by pointer, and it is declared in graphics_ext.h.
     # Finding it by walking the routes rather than naming it here means the next
     # such type arrives without an edit.
-    for declaration in parse_header(header):
+    for declaration in [row for path in headers for row in parse_header(path)]:
         for parameter in declaration.parameters:
             spelling = parameter.type_text
             for prefix in ("const ", "struct "):
@@ -356,27 +448,28 @@ def generate(header: Path) -> tuple[str, str]:
         place(name)
     structures = ordered
 
+    spelled = ", ".join(f"``{name}``" for name in family.headers)
     lines = [
-        '"""Generated ctypes layouts and constants for CNA\'s ``engine_layer.h``.',
+        f'"""Generated ctypes layouts and constants for CNA\'s {spelled}.',
         "",
-        "Do not edit. ``tools/generate_engine_abi.py`` derives this from the canonical",
-        "header, and ``--check`` fails when the checked-in copy is not what the current",
-        "header produces. Every size, alignment, field offset and constant here is",
+        "Do not edit. ``tools/generate_family_abi.py`` derives this from the canonical",
+        "headers, and ``--check`` fails when the checked-in copy is not what the current",
+        "headers produce. Every size, alignment, field offset and constant here is",
         "re-measured against the C compiler by ``tools/audit_cna_abi.py``.",
         "",
-        "Nothing in this module is public. ``cna.extensions.engine`` holds the public",
-        "projection; a ctypes object never crosses that boundary.",
+        f"Nothing in this module is public. {PUBLIC_SURFACE[family.identifier]} holds the",
+        "public projection; a ctypes object never crosses that boundary.",
         '"""',
         "",
         "from __future__ import annotations",
         "",
         "import ctypes as c",
         "",
-        "from . import abi",
+        *(f"{line}" for line in import_lines),
         "",
         "# --- scalar identities -----------------------------------------------------",
         "",
-        "#: Fixed-width identities the engine layer declares as typedefs of a scalar.",
+        "#: Fixed-width identities these headers declare as typedefs of a scalar.",
         "#: They are enums in spirit and integers in the ABI; the public projection",
         "#: turns them into Python enums, and this is only their width.",
     ]
@@ -388,7 +481,8 @@ def generate(header: Path) -> tuple[str, str]:
     # The members of every identity above, from whichever header declares them,
     # plus the families that have no identity to be derived from.
     wanted = {name: body for prefixes in
-              [_member_prefixes(alias) for alias in emitted] + [EXTRA_CONSTANT_PREFIXES]
+              [_member_prefixes(alias) for alias in emitted]
+              + [family.extra_constant_prefixes]
               for name, body in neighbours.items()
               if name not in constants and name.startswith(prefixes)}
     # One constant may be defined as another -- `CNA_PBR_TEXTURE_MAXIMUM` is the
@@ -398,7 +492,7 @@ def generate(header: Path) -> tuple[str, str]:
         progressed = False
         for name in sorted(wanted):
             try:
-                constants[name] = _evaluate(wanted[name], constants)
+                constants[name] = _evaluate(wanted[name], {**neighbour_values, **constants})
             except GenerationError:
                 continue
             del wanted[name]
@@ -406,48 +500,13 @@ def generate(header: Path) -> tuple[str, str]:
         if not progressed:
             raise GenerationError(f"unresolvable constants: {sorted(wanted)}")
     lines.append("")
-    lines.append("#: Every opaque engine handle is a ``CNA_Handle``. The names are kept so a")
-    lines.append("#: manifest entry can say which object a handle parameter refers to.")
-    lines.append(f"ENGINE_HANDLE_TYPES = (")
+    lines.append("#: Every opaque handle in this family is a ``CNA_Handle``. The names are kept")
+    lines.append("#: so a manifest entry can say which object a handle parameter refers to.")
+    lines.append(f"{family.prefix}_HANDLE_TYPES = (")
     for name in sorted(handles):
         lines.append(f'    "{name}",')
     lines.append(")")
     lines.append("")
-    if callbacks:
-        lines.append("")
-        lines.append("#: Function pointers the engine layer hands to CNA. A Python callable")
-        lines.append("#: bound to one of these must be rooted for as long as CNA can call it;")
-        lines.append("#: the trampoline is what CNA holds, not the Python object.")
-        for name, returns, parameters in callbacks:
-            rendered = ", ".join(
-                _ctype(" ".join(part.split()[:-1]) if len(part.split()) > 1 else part,
-                       aliases, typed_pointers=True)
-                for part in parameters) or ""
-            spelling = _ctype(returns, aliases)
-            lines.append(f"{name} = c.CFUNCTYPE({spelling}"
-                         + (f", {rendered}" if rendered else "") + ")")
-        lines.append("")
-        lines.append("#: Every generated callback type, for the ABI audit.")
-        lines.append("ENGINE_CALLBACKS = (")
-        for name, _returns, _parameters in callbacks:
-            lines.append(f"    \"{name}\",")
-        lines.append(")")
-        lines.append("")
-        lines.append("#: Which of each callback's parameters are pointers to const.")
-        lines.append("#:")
-        lines.append("#: ``const`` is not an ABI property and ctypes cannot carry it, but C")
-        lines.append("#: declaration compatibility distinguishes ``const T*`` from ``T*`` -- so")
-        lines.append("#: the compiler-backed prototype gate needs it to spell a function-pointer")
-        lines.append("#: parameter the way the canonical typedef does. Derived here rather than")
-        lines.append("#: written down there, because it is a fact about the header.")
-        lines.append("ENGINE_CALLBACK_CONST_PARAMETERS = {")
-        for name, _returns, parameters in callbacks:
-            flags = tuple(
-                " ".join(part.split()[:-1] if len(part.split()) > 1 else part.split())
-                .strip().startswith("const ")
-                for part in parameters)
-            lines.append(f"    \"{name}\": {flags!r},")
-        lines.append("}")
     lines.append("")
     lines.append("# --- constants -------------------------------------------------------------")
     lines.append("")
@@ -479,7 +538,44 @@ def generate(header: Path) -> tuple[str, str]:
             lines.append(f'        ("{field}", {rendered}),')
         lines.append("    ]")
         lines.append("")
-        lines.append("")
+        callback_lines: list[str] = []
+    if callbacks:
+        callback_lines.append("")
+        callback_lines.append("#: Function pointers this family hands to CNA. A Python callable")
+        callback_lines.append("#: bound to one of these must be rooted for as long as CNA can call it;")
+        callback_lines.append("#: the trampoline is what CNA holds, not the Python object.")
+        for name, returns, parameters in callbacks:
+            rendered = ", ".join(
+                _ctype(" ".join(part.split()[:-1]) if len(part.split()) > 1 else part,
+                       aliases, typed_pointers=True)
+                for part in parameters) or ""
+            spelling = _ctype(returns, aliases)
+            callback_lines.append(f"{name} = c.CFUNCTYPE({spelling}"
+                         + (f", {rendered}" if rendered else "") + ")")
+        callback_lines.append("")
+        callback_lines.append("#: Every generated callback type, for the ABI audit.")
+        callback_lines.append(f"{family.prefix}_CALLBACKS = (")
+        for name, _returns, _parameters in callbacks:
+            callback_lines.append(f"    \"{name}\",")
+        callback_lines.append(")")
+        callback_lines.append("")
+        callback_lines.append("#: Which of each callback's parameters are pointers to const.")
+        callback_lines.append("#:")
+        callback_lines.append("#: ``const`` is not an ABI property and ctypes cannot carry it, but C")
+        callback_lines.append("#: declaration compatibility distinguishes ``const T*`` from ``T*`` -- so")
+        callback_lines.append("#: the compiler-backed prototype gate needs it to spell a function-pointer")
+        callback_lines.append("#: parameter the way the canonical typedef does. Derived here rather than")
+        callback_lines.append("#: written down there, because it is a fact about the header.")
+        callback_lines.append(f"{family.prefix}_CALLBACK_CONST_PARAMETERS = {{")
+        for name, _returns, parameters in callbacks:
+            flags = tuple(
+                " ".join(part.split()[:-1] if len(part.split()) > 1 else part.split())
+                .strip().startswith("const ")
+                for part in parameters)
+            callback_lines.append(f"    \"{name}\": {flags!r},")
+        callback_lines.append("}")
+    lines.extend(callback_lines)
+    lines.append("")
     lines.append("# --- constants derived from a generated layout ------------------------------")
     lines.append("")
     for name in sorted(derived):
@@ -488,7 +584,7 @@ def generate(header: Path) -> tuple[str, str]:
     lines.append("#: Each structure field's own ``@brief`` from the canonical header, so a")
     lines.append("#: public projection documents a field with CNA's own words rather than a")
     lines.append("#: second summary that can drift from it.")
-    lines.append("ENGINE_FIELD_DOCUMENTATION = {")
+    lines.append(f"{family.prefix}_FIELD_DOCUMENTATION = {{")
     documentation = _field_documentation(raw)
     for name, _fields_of in structures:
         fields = documentation.get(name)
@@ -502,23 +598,23 @@ def generate(header: Path) -> tuple[str, str]:
     lines.append("}")
     lines.append("")
     lines.append("#: Every generated structure, in declaration order, for the ABI audit.")
-    lines.append("ENGINE_STRUCTURES = (")
+    lines.append(f"{family.prefix}_STRUCTURES = (")
     for name, _ in structures:
         lines.append(f"    {name},")
     lines.append(")")
     lines.append("")
     lines.append("#: Every generated constant, for the ABI audit to re-read from C.")
-    lines.append("ENGINE_CONSTANTS = (")
+    lines.append(f"{family.prefix}_CONSTANTS = (")
     for name in sorted(set(constants) | set(derived)):
         lines.append(f'    "{name}",')
     lines.append(")")
     module = "\n".join(lines) + "\n"
 
     probe = [
-        "// Generated by tools/generate_engine_abi.py. Do not edit.",
-        "// Included by tools/abi_probe.c so the C compiler measures every engine",
-        "// structure and every engine constant rather than this binding asserting them.",
-        "#define ENGINE_ABI_PROBE() do { \\",
+        "// Generated by tools/generate_family_abi.py. Do not edit.",
+        f"// Included by tools/abi_probe.c so the C compiler measures every {family.identifier}",
+        "// structure and every constant rather than this binding asserting them.",
+        f"#define {family.prefix}_ABI_PROBE() do {{ \\",
     ]
     for name, fields in structures:
         probe.append(f"    TYPE({name}); \\")
@@ -540,30 +636,36 @@ def generate(header: Path) -> tuple[str, str]:
 def arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--cna-root", required=True)
+    parser.add_argument("--family", action="append", choices=sorted(FAMILIES_BY_ID),
+                        help="generate only this family; repeatable, default all")
     parser.add_argument("--check", action="store_true",
-                        help="fail when the checked-in files differ from the header")
+                        help="fail when the checked-in files differ from the headers")
     return parser.parse_args()
 
 
 def main() -> int:
     args = arguments()
-    header = Path(args.cna_root).resolve() / "modules/c-api/include/CNA/C/engine_layer.h"
-    if not header.is_file():
-        raise FileNotFoundError(header)
-    module, probe = generate(header)
+    include = Path(args.cna_root).resolve() / "modules/c-api/include"
+    selected = [FAMILIES_BY_ID[name] for name in args.family] if args.family else list(FAMILIES)
     written = 0
-    for path, content in ((ABI_PATH, module), (PROBE_PATH, probe)):
-        current = path.read_text(encoding="utf-8") if path.is_file() else None
-        if current == content:
-            continue
-        if args.check:
-            print(f"STALE {path.relative_to(ROOT)} is not what {header.name} produces")
-            return 1
-        path.write_text(content, encoding="utf-8")
-        written += 1
-    print(f"ENGINE_ABI_GENERATED={0 if args.check else written}")
-    print(f"ENGINE_ABI_UP_TO_DATE={'yes' if args.check else 'regenerated'}")
-    return 0
+    stale = 0
+    for family in selected:
+        module, probe = generate(family, include)
+        for path, content in ((family.module_path, module), (family.probe_path, probe)):
+            current = path.read_text(encoding="utf-8") if path.is_file() else None
+            if current == content:
+                continue
+            if args.check:
+                print(f"STALE {path.relative_to(ROOT)} is not what "
+                      f"{', '.join(family.headers)} produces")
+                stale += 1
+                continue
+            path.write_text(content, encoding="utf-8")
+            written += 1
+    print(f"FAMILY_ABI_FAMILIES={len(selected)}")
+    print(f"FAMILY_ABI_GENERATED={written}")
+    print(f"FAMILY_ABI_STALE={stale}")
+    return 1 if stale else 0
 
 
 if __name__ == "__main__":
