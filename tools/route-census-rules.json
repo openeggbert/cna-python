@@ -7,7 +7,10 @@
     "ACTIONABLE_LOCAL means: needed by a selected deliverable and implementable now.",
     "A capability CNA offers that this product has not selected is a deliberate",
     "non-binding, not an outstanding task; binding a route with no consumer is not",
-    "progress."
+    "progress.",
+    "cnb.h is a selected family: its routes are ACTIONABLE_LOCAL until bound, which",
+    "is what makes an unbound one a task rather than a decision. The two exceptions",
+    "carry their own rule and their own reason."
   ],
   "rules": [
     {
@@ -95,6 +98,67 @@
       "status": "ACTIONABLE_LOCAL",
       "reason": "Renderer identity and capability reporting is the selected first extension family; evidence must name the backend that produced it.",
       "boundReason": "imported: runtime capability evidence names the backend that produced it"
+    },
+    {
+      "id": "cnb-checked-arithmetic",
+      "match": {
+        "names": [
+          "cna_cnb_checked_add",
+          "cna_cnb_checked_multiply"
+        ]
+      },
+      "purpose": "NOT_USEFUL_FOR_PYTHON",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width.",
+      "boundIsError": true,
+      "boundReason": "not applicable: Python's own arithmetic is exact"
+    },
+    {
+      "id": "cnb-content",
+      "match": {
+        "headers": [
+          "cnb.h"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNB/CNJ extension family and reachable from cna.extensions.content, but not yet imported. Every remaining cnb.h route is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.content projects CNA's own compiled content format"
+    },
+    {
+      "id": "cnb-curve-codec-dependency",
+      "match": {
+        "names": [
+          "cna_curve_create",
+          "cna_curve_destroy",
+          "cna_curve_get_keys",
+          "cna_curve_get_pre_loop",
+          "cna_curve_set_pre_loop",
+          "cna_curve_get_post_loop",
+          "cna_curve_set_post_loop",
+          "cna_curve_key_collection_destroy",
+          "cna_curve_key_collection_get_count",
+          "cna_curve_key_collection_get",
+          "cna_curve_key_collection_add"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal curve.h slice the CNB curve codec needs: cna_cnb_encode_curve takes a native Curve handle and cna_cnb_decode_curve produces one, so the codec is unreachable from a managed-only Microsoft.Xna.Framework.Curve. A dependency of the selected CNB profile, not a decision to bind curve.h.",
+      "boundReason": "imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns"
+    },
+    {
+      "id": "cnb-loader-content-manager-dependency",
+      "match": {
+        "names": [
+          "cna_content_manager_create",
+          "cna_content_manager_destroy"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal content.h slice the CNB loader registry needs: cna_cnb_loader_invoke takes a content manager and refuses without one, measured rather than assumed, so a registered loader could otherwise be resolved and never run. Exactly create and destroy; no load, cache or root-directory route is bound, and this manager shares nothing with Microsoft.Xna.Framework.Content.ContentManager.",
+      "boundReason": "imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands"
     },
     {
       "id": "clr-type-name",
@@ -212,18 +276,6 @@
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "DELIBERATE_NON_BINDING",
       "reason": "CNA's modern engine layer is outside the selected XNA profile and outside the selected extension profile; opening it is a separate product decision, and it must never leak into Microsoft.Xna.Framework.",
-      "boundReason": "imported: the selected profile reaches this route"
-    },
-    {
-      "id": "cnb-content",
-      "match": {
-        "headers": [
-          "cnb.h"
-        ]
-      },
-      "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "CNA-native compiled content is extension-owned; the strict XNA ContentManager stays managed XNB and must not silently prefer another format.",
       "boundReason": "imported: the selected profile reaches this route"
     },
     {

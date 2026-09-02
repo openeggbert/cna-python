@@ -5,17 +5,21 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=765
+BOUND_ROUTES=1048
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
+CNB_CNJ_ROUTES=285
+CNB_CNJ_BOUND=283
+CNB_CNJ_UNREVIEWED=0
+SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 PURPOSE_XNA_BACKING=1175
-PURPOSE_CNA_EXTENSION_CANDIDATE=1791
-PURPOSE_MANAGED_BY_DESIGN=566
+PURPOSE_CNA_EXTENSION_CANDIDATE=1801
+PURPOSE_MANAGED_BY_DESIGN=554
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
-PURPOSE_NOT_USEFUL_FOR_PYTHON=108
-STATUS_BOUND=765
+PURPOSE_NOT_USEFUL_FOR_PYTHON=110
+STATUS_BOUND=1048
 STATUS_ACTIONABLE_LOCAL=0
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
@@ -23,7 +27,7 @@ STATUS_BLOCKED_PLATFORM=0
 STATUS_BLOCKED_HARDWARE=0
 STATUS_BLOCKED_FIXTURE=0
 STATUS_LANGUAGE_MAPPING_LIMITATION=0
-STATUS_DELIBERATE_NON_BINDING=3288
+STATUS_DELIBERATE_NON_BINDING=3005
 STATUS_UNREVIEWED=0
 ```
 
@@ -31,16 +35,314 @@ STATUS_UNREVIEWED=0
 
 | Purpose | Status | Routes |
 |---|---|---:|
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 1770 |
+| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 1497 |
 | XNA_BACKING | BOUND | 727 |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 549 |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 537 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 446 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
-| NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 108 |
-| CNA_EXTENSION_CANDIDATE | BOUND | 21 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 304 |
+| NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 |
+
+## The selected CNB/CNJ extension family
+
+`cnb.h` plus the two dependency slices its codecs and loader registry need.
+Every route here is BOUND or carries its own written non-binding reason.
+
+| Status | Routes |
+|---|---:|
+| BOUND | 283 |
+| DELIBERATE_NON_BINDING | 2 |
+
+| Route | Header | Status | Reason |
+|---|---|---|---|
+| `cna_cnb_animation_clip_copy_keyframes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_animation_clip_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_animation_clip_get` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_animation_clip_get_track` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_asset_type_id_from_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_audio_frame_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_build_model_from_cnj` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_copy_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_create` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_create_from_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_get_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_take` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_f32` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_f64` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_i32` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_keyframe` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_string` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_u16` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_u32` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_u64` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_u8` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_byte_writer_write_zeros` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_checked_add` | cnb.h | DELIBERATE_NON_BINDING | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
+| `cna_cnb_checked_multiply` | cnb.h | DELIBERATE_NON_BINDING | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
+| `cna_cnb_chunk_entry_is_mandatory` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_copy_absorbed_file` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_copy_asset_type_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_copy_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_copy_external_reference` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_get_absorbed_file_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_get_absorbed_file_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_get_asset_type_id` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_get_asset_type_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_get_external_reference_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_cnj_result_get_external_reference_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_compile_cnj` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_asset_type_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_audio_format_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_chunk_id_string` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_compressed` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_compression_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_decompressed` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_format_magic` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_logical_name_problem` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_copy_texture_format_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_crc32c` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_crc32c_continue` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_crc32c_portable` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_crc32c_uses_hardware` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_animation_clip` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_curve` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_dds_as_texture_cube` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_model` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_song_duration_milliseconds` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_song_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_song_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_song_stream_reference` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_song_stream_reference_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_sound_effect` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_sprite_font` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_texture2d` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_texture3d` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_texture_cube` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_video` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_video_stream_reference` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_video_stream_reference_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_decode_wav_as_sound_effect` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_copy_chunk_data` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_copy_external_reference_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_copy_metadata_asset_type_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_copy_metadata_content_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_copy_origin` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_find_all` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_find_single` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_asset_schema_version` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_asset_type_id` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_chunk` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_chunk_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_container_major` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_container_minor` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_external_reference` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_external_reference_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_external_reference_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_limits` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_metadata` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_metadata_asset_type_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_metadata_content_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_get_origin_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_open_chunk` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_parse` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_parse_file` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_read_embedded_texture2d` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_require_asset` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_require_mandatory_chunks_understood` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_document_require_single` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_animation_clip` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_curve` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_model` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_song` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_sound_effect` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_sprite_font` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_texture2d` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_texture3d` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_texture_cube` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_encode_video` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_asset_type_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_audio_format_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_chunk_id_string_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_compressed_byte_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_compression_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_logical_name_problem_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_texture_format_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_texture_format_unit_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_get_texture_level_byte_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_has_magic` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_import_dds_as_texture_cube` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_import_image_as_texture2d` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_import_wav_as_sound_effect` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_is_block_compressed_texture_format` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_is_compression_supported` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_is_custom_asset_type_id` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_is_known_texture_format` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_is_well_formed_chunk_id` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_is_well_formed_utf8` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_invoke` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_clear` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_copy_registered_type_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_find` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_get_registered_type_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_is_registered` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_register` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_register_builtins` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_remove` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_loader_registry_resolve_for_document` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_make_chunk_id` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_add_animation` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_add_bone` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_add_light` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_add_mesh` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_add_morph_target` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_add_morph_weight_key` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_add_part` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_clear_morph` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_clear_skeleton` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_animation_keyframes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_animation_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_bone_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_material_texture` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_mesh_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_mesh_part_indices` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_morph_target_deltas` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_morph_weight_key_values` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_morph_weights` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_part_external_effect` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_part_index_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_part_name` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_part_vertex_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_skeleton_hierarchy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_copy_skeleton_matrices` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_create` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_copy_absorbed_file` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_copy_external_reference` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_get_absorbed_file_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_get_absorbed_file_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_get_external_reference_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_get_external_reference_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_from_cnj_take_model` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_animation` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_animation_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_animation_track` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_bone` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_bone_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_info` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_light` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_material` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_material_sampler` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_material_texture_coordinate_set` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_material_texture_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_material_texture_transform` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_mesh` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_mesh_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_morph` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_morph_weight_key` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_part` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_part_external_effect_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_part_name_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_get_skeleton` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_has_morph` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_flags` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_material` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_material_sampler` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_material_texture` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_material_texture_coordinate_set` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_material_texture_transform` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_morph` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_morph_target_deltas` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_morph_weights` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_part` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_part_index_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_part_vertex_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_model_set_skeleton` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_read_limits_init` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_copy_context` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_copy_string` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_create` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_fail` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_get_context_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_get_position` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_get_remaining` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_get_size` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_bytes` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_f32` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_f64` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_i32` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_keyframe` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_seconds` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_string` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_u16` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_u32` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_u64` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_read_u8` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_require_exhausted` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_reader_skip` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sound_effect_data_copy_samples` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sound_effect_data_create` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sound_effect_data_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sound_effect_data_get_info` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_add_glyph` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_copy_atlas` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_create` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_get_glyph` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_get_info` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_set_atlas` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_set_glyph` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_sprite_font_data_set_info` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_add_representation` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_copy_level` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_create` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_create_rgba8` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_get_info` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_get_level_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_get_level_dimensions` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_get_representation_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_get_representation_format` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_select_representation` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_data_set_level` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_format_from_surface_format` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_texture_format_to_surface_format` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_add_chunk` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_add_external_reference` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_append_embedded_texture2d` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_build` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_clear_external_references` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_create` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_destroy` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_get_limits` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_get_schema_chunk_count` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_set_compression` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_set_limits` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_set_metadata` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_cnb_writer_write_to_file` | cnb.h | BOUND | imported: cna.extensions.content projects CNA's own compiled content format |
+| `cna_content_manager_create` | content.h | BOUND | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
+| `cna_content_manager_destroy` | content.h | BOUND | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
+| `cna_curve_create` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_destroy` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_get_keys` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_get_post_loop` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_get_pre_loop` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_key_collection_add` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_key_collection_destroy` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_key_collection_get` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_key_collection_get_count` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_set_post_loop` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
+| `cna_curve_set_pre_loop` | curve.h | BOUND | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
 
 ## Reasons
 
@@ -48,23 +350,26 @@ STATUS_UNREVIEWED=0
 |---|---|---:|---|
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 838 | CNA's modern engine layer is outside the selected XNA profile and outside the selected extension profile; opening it is a separate product decision, and it must never leak into Microsoft.Xna.Framework. |
 | XNA_BACKING | BOUND | 719 | imported: the selected 257-type XNA projection reaches this route |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 447 | XNA value types are implemented natively in Python against pinned XNA-derived behaviour; a per-operation C call would add a boundary crossing without adding behaviour. |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 446 | In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer. |
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 271 | CNA-native compiled content is extension-owned; the strict XNA ContentManager stays managed XNB and must not silently prefer another format. |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 436 | XNA value types are implemented natively in Python against pinned XNA-derived behaviour; a per-operation C call would add a boundary crossing without adding behaviour. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 270 | imported: cna.extensions.content projects CNA's own compiled content format |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 239 | The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 213 | The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 177 | Sensors and device services are CNA-only capabilities outside the selected XNA profile and outside the selected extension profile. |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 175 | Microsoft.Xna.Framework.Net is not in the selected 257-type profile; opening it requires a deliberate future-profile decision. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 119 | XNA 4.0 has no haptics, joystick, text-input or cursor API; these are CNA-only input families and belong to the extension profile rather than to the XNA namespace. |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 108 | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 92 | Microsoft.Xna.Framework.Content is the managed XNB reader table, cache, rollback and Unload; a CNA-native content manager is a second cache domain and belongs to the extension profile. |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 90 | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 90 | Microsoft.Xna.Framework.Content is the managed XNB reader table, cache, rollback and Unload; a CNA-native content manager is a second cache domain and belongs to the extension profile. |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 89 | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 35 | Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 25 | Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: runtime capability evidence names the backend that produced it |
 | MANAGED_BY_DESIGN | BOUND | 17 | imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 12 | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
 | XNA_BACKING | BOUND | 5 | imported: the selected profile reaches this route |
 | XNA_BACKING | BOUND | 3 | imported: GamerServicesComponent is the one selected member of this family |
+| NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 2 | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 | A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API. |

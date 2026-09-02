@@ -11,6 +11,9 @@ promises:
   CNA handle into public view;
 * every public name is documented, because an extension has no reference
   implementation to consult;
+* no public signature *names* a native handle or a ctypes type, which a runtime
+  check alone cannot see: an annotation is part of the published contract even
+  when the value never crosses at runtime;
 * the XNA namespace does not depend on the extension profile, so a program that
   never imports ``cna`` behaves identically.
 
@@ -35,6 +38,18 @@ SOURCE = ROOT / "src"
 sys.path.insert(0, str(SOURCE))
 
 EXTENSION_ROOT = "cna"
+
+#: Spellings that must never appear in a public annotation.  A raw CNA handle is
+#: a ``uint64`` and a ctypes object is an implementation detail; either one named
+#: in a signature is a promise this surface does not intend to keep, whatever the
+#: runtime value happens to be.
+FORBIDDEN_ANNOTATIONS = (
+    "ctypes", "c_uint64", "c_void_p", "c_char_p", "CNA_", "NativeHandle",
+    "_cna_native", "CnbDocumentHandle", "CNA_Handle",
+)
+
+#: Public attribute names that would hand a caller a raw handle directly.
+FORBIDDEN_PUBLIC_ATTRIBUTES = ("handle", "native_handle", "raw_handle", "cdll", "library")
 XNA_ROOT = SOURCE / "Microsoft"
 PRIVATE_NATIVE = "_cna_native"
 
@@ -64,8 +79,70 @@ def _public_names(module: object) -> list[str]:
     return [name for name in dir(module) if not name.startswith("_")]
 
 
+def _annotation_leaks(path: Path, tree: ast.AST) -> list[dict[str, object]]:
+    """Finds a native spelling inside a public signature or public attribute.
+
+    Only public names are examined: a private helper is allowed to say exactly
+    what it takes, and hiding that would make the implementation less honest
+    rather than the surface safer.
+    """
+    leaks: list[dict[str, object]] = []
+
+    def public(name: str) -> bool:
+        return not name.startswith("_")
+
+    def check(where: str, node: ast.AST | None, line: int) -> None:
+        if node is None:
+            return
+        text = ast.unparse(node)
+        for spelling in FORBIDDEN_ANNOTATIONS:
+            if spelling in text:
+                leaks.append({"where": where, "annotation": text, "line": line})
+                return
+
+    def walk_function(node, owner: str) -> None:
+        if not public(node.name):
+            return
+        arguments = list(node.args.posonlyargs) + list(node.args.args) + list(node.args.kwonlyargs)
+        for argument in arguments:
+            check(f"{owner}{node.name}({argument.arg})", argument.annotation, node.lineno)
+        check(f"{owner}{node.name}() -> ", node.returns, node.lineno)
+
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            walk_function(node, "")
+        elif isinstance(node, ast.ClassDef) and public(node.name):
+            for item in node.body:
+                if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    walk_function(item, f"{node.name}.")
+                elif isinstance(item, ast.AnnAssign) and isinstance(item.target, ast.Name):
+                    if public(item.target.id):
+                        check(f"{node.name}.{item.target.id}", item.annotation, item.lineno)
+        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+            if public(node.target.id):
+                check(node.target.id, node.annotation, node.lineno)
+    return leaks
+
+
+def _handle_attribute_leaks(module: object, name: str) -> list[dict[str, str]]:
+    """Finds a public attribute whose *name* offers a raw handle."""
+    leaks: list[dict[str, str]] = []
+    for attribute in _public_names(module):
+        value = getattr(module, attribute, None)
+        if not isinstance(value, type):
+            continue
+        for member in dir(value):
+            if member.startswith("_"):
+                continue
+            if member.lower() in FORBIDDEN_PUBLIC_ATTRIBUTES:
+                leaks.append({"name": f"{name}.{attribute}.{member}", "kind": "raw handle"})
+    return leaks
+
+
 def audit() -> dict[str, object]:
     ctypes_leaks: list[dict[str, str]] = []
+    handle_leaks: list[dict[str, str]] = []
+    annotation_leaks: list[dict[str, object]] = []
     native_leaks: list[dict[str, str]] = []
     undocumented: list[str] = []
     signatures: dict[str, str] = {}
@@ -75,6 +152,12 @@ def audit() -> dict[str, object]:
         module = importlib.import_module(name)
         if not (module.__doc__ or "").strip():
             undocumented.append(name)
+        handle_leaks.extend(_handle_attribute_leaks(module, name))
+        source = getattr(module, "__file__", None)
+        if source:
+            path = Path(source)
+            for leak in _annotation_leaks(path, ast.parse(path.read_text(encoding="utf-8"))):
+                annotation_leaks.append({"module": name, **leak})
         for attribute in _public_names(module):
             value = getattr(module, attribute, None)
             qualified = f"{name}.{attribute}"
@@ -127,10 +210,13 @@ def audit() -> dict[str, object]:
         "PRIVATE_NATIVE_LEAK": len(native_leaks),
         "UNDOCUMENTED_PUBLIC": len(undocumented),
         "XNA_NAMESPACE_CONTAMINATION": len(contamination),
+        "PUBLIC_RAW_HANDLE_LEAK": len(handle_leaks),
+        "PUBLIC_NATIVE_ANNOTATION_LEAK": len(annotation_leaks),
     }
     summary["EXTENSION_SURFACE_DIAGNOSTICS"] = (
         summary["PUBLIC_CTYPES_LEAK"] + summary["PRIVATE_NATIVE_LEAK"]
         + summary["UNDOCUMENTED_PUBLIC"] + summary["XNA_NAMESPACE_CONTAMINATION"]
+        + summary["PUBLIC_RAW_HANDLE_LEAK"] + summary["PUBLIC_NATIVE_ANNOTATION_LEAK"]
     )
     return {
         "schemaVersion": 1,
@@ -138,6 +224,8 @@ def audit() -> dict[str, object]:
         "modules": modules,
         "signatures": signatures,
         "ctypesLeaks": ctypes_leaks,
+        "rawHandleLeaks": handle_leaks,
+        "nativeAnnotationLeaks": annotation_leaks,
         "privateNativeLeaks": native_leaks,
         "undocumented": undocumented,
         "xnaContamination": contamination,
@@ -159,6 +247,11 @@ def main() -> int:
         print(f"PRIVATE_NATIVE_LEAK {leak['name']} from {leak['module']}")
     for name in report["undocumented"]:
         print(f"UNDOCUMENTED {name}")
+    for leak in report["rawHandleLeaks"]:
+        print(f"RAW_HANDLE_LEAK {leak['name']}")
+    for leak in report["nativeAnnotationLeaks"]:
+        print(f"NATIVE_ANNOTATION_LEAK {leak['module']}:{leak['line']} "
+              f"{leak['where']}: {leak['annotation']}")
     for item in report["xnaContamination"]:
         print(f"XNA_CONTAMINATION {item['file']}:{item.get('line')} imports {item.get('imports')}")
     return 1 if report["summary"]["EXTENSION_SURFACE_DIAGNOSTICS"] else 0

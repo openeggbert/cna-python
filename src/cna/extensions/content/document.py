@@ -32,6 +32,7 @@ from .format import (
     _limits_pointer,
 )
 from .primitives import CnbReader
+from .textures import CnbTextureData
 
 __all__ = ["CnbChunk", "CnbDocument", "CnbExternalReference", "CnbMetadata"]
 
@@ -373,6 +374,20 @@ class CnbDocument:
         """Every ``XREF`` entry, in the order the schema's own indices expect."""
         return tuple(self.external_reference(index)
                      for index in range(self.external_reference_count))
+
+    def read_embedded_texture2d(self, label: str) -> CnbTextureData:
+        """Reads back a texture embedded by
+        :meth:`CnbWriter.append_embedded_texture2d
+        <cna.extensions.content.CnbWriter.append_embedded_texture2d>`.
+
+        ``label`` must be the string the writer was given; it names the owner in
+        diagnostics. The caller owns and closes what comes back.
+        """
+        view, keep = _support.string_view(label, "label")
+        handle = _support.out_handle(
+            "cna_cnb_document_read_embedded_texture2d", self._value, view)
+        del keep
+        return CnbTextureData._adopt(handle)
 
     def __iter__(self) -> Iterator[CnbChunk]:
         return iter(self.chunks)

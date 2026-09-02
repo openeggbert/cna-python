@@ -54,6 +54,21 @@ STATUSES = (
 
 RULES_PATH = ROOT / "tools/route-census-rules.json"
 
+#: The extension family this product has selected, and the two rules that carry
+#: its dependencies out of other headers.  The selected family is reported
+#: separately because "zero actionable overall" and "zero actionable inside the
+#: family we opened" are different claims, and only the second one is what
+#: finishing a family means.
+SELECTED_FAMILY_HEADERS = ("cnb.h",)
+SELECTED_FAMILY_RULES = (
+    "cnb-curve-codec-dependency",
+    "cnb-loader-content-manager-dependency",
+)
+
+
+def in_selected_family(row: dict) -> bool:
+    return row["header"] in SELECTED_FAMILY_HEADERS or row["rule"] in SELECTED_FAMILY_RULES
+
 
 def _matches(rule: dict, name: str, header: str) -> bool:
     match = rule["match"]
@@ -135,6 +150,26 @@ def render_markdown(rows: list[dict], summary: dict) -> str:
     for (purpose, status), count in sorted(pairs.items(), key=lambda item: (-item[1], item[0])):
         lines.append(f"| {purpose} | {status} | {count} |")
     lines.append("")
+    lines.append("## The selected CNB/CNJ extension family")
+    lines.append("")
+    lines.append("`cnb.h` plus the two dependency slices its codecs and loader registry need.")
+    lines.append("Every route here is BOUND or carries its own written non-binding reason.")
+    lines.append("")
+    lines.append("| Status | Routes |")
+    lines.append("|---|---:|")
+    family = [row for row in rows if in_selected_family(row)]
+    family_counts: dict[str, int] = {}
+    for row in family:
+        family_counts[row["status"]] = family_counts.get(row["status"], 0) + 1
+    for status, count in sorted(family_counts.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"| {status} | {count} |")
+    lines.append("")
+    lines.append("| Route | Header | Status | Reason |")
+    lines.append("|---|---|---|---|")
+    for row in sorted(family, key=lambda item: item["route"]):
+        lines.append(f"| `{row['route']}` | {row['header']} | {row['status']} | "
+                     f"{row['reason']} |")
+    lines.append("")
     lines.append("## Reasons")
     lines.append("")
     lines.append("| Purpose | Status | Routes | Reason |")
@@ -176,12 +211,19 @@ def main() -> int:
         counts[f"PURPOSE_{row['purpose']}"] = counts.get(f"PURPOSE_{row['purpose']}", 0) + 1
         counts[f"STATUS_{row['status']}"] = counts.get(f"STATUS_{row['status']}", 0) + 1
 
+    family = [row for row in rows if in_selected_family(row)]
     summary = {
         "CANONICAL_ROUTES": len(declarations),
         "BOUND_ROUTES": len(bound),
         "BOUND_NOT_IN_HEADERS": len(missing),
         "UNREVIEWED": len(unreviewed),
         "RULE_CONTRADICTIONS": len(contradictions),
+        "CNB_CNJ_ROUTES": len(family),
+        "CNB_CNJ_BOUND": sum(1 for row in family if row["bound"]),
+        "CNB_CNJ_UNREVIEWED": sum(1 for row in family
+                                  if row["status"] == "UNREVIEWED"),
+        "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": sum(
+            1 for row in family if row["status"] == "ACTIONABLE_LOCAL"),
         **{key: counts.get(key, 0) for key in
            [f"PURPOSE_{value}" for value in PURPOSES] + [f"STATUS_{value}" for value in STATUSES]},
     }
@@ -191,6 +233,7 @@ def main() -> int:
         "summary": summary,
         "rules": rules,
         "routes": rows,
+        "selectedFamily": [row for row in rows if in_selected_family(row)],
         "boundNotInHeaders": missing,
         "ruleContradictions": contradictions,
     }

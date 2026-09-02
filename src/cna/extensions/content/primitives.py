@@ -26,6 +26,7 @@ from _cna_native import cnb_abi as _abi
 from _cna_native import cnb_support as _support
 
 from .format import ChunkFlags, CnbReadLimits, Compression, _limits_pointer
+from .textures import CnbTextureData
 
 __all__ = ["CnbByteWriter", "CnbKeyframe", "CnbReader", "CnbWriter"]
 
@@ -522,6 +523,29 @@ class CnbWriter:
         """
         native = limits._to_native()
         _support.call("cna_cnb_writer_set_limits", self._value, c.byref(native))
+
+    def append_embedded_texture2d(self, texture: CnbTextureData, label: str) -> None:
+        """Embeds a 2D texture's chunks in a document of a *different* asset type.
+
+        This is what lets a schema carry an image without a second copy of the
+        texture layout: the pixels are stored with exactly the chunks, strides,
+        alignment and validation a standalone 2D texture would use, inside this
+        file. CNA's own ``SpriteFont`` schema is built on it, and a game's own
+        schema can be.
+
+        Embedding is the right default only when the image belongs to exactly one
+        asset. A shared texture should be an external reference instead --
+        :meth:`add_external_reference` -- so a content manager loads it once.
+
+        ``label`` names the owner in diagnostics, for example ``"SpriteFont"``,
+        and must be the same string
+        :meth:`CnbDocument.read_embedded_texture2d
+        <cna.extensions.content.CnbDocument.read_embedded_texture2d>` is given.
+        """
+        view, keep = _support.string_view(label, "label")
+        _support.call("cna_cnb_writer_append_embedded_texture2d", self._value,
+                      texture._value, view)
+        del keep
 
     def build(self) -> bytes:
         """Assembles the finished `.cnb` image.

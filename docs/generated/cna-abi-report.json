@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 744,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 744,
-    "C_LAYOUT_MEASUREMENTS": 775,
-    "CTYPES_LAYOUT_MEASUREMENTS": 775,
+    "BOUND_FUNCTIONS": 1048,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1048,
+    "C_LAYOUT_MEASUREMENTS": 1192,
+    "CTYPES_LAYOUT_MEASUREMENTS": 1192,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -54,6 +54,27 @@
     "cna_game_set_inactive_sleep_time_ticks",
     "cna_game_destroy",
     "cna_framework_dispatcher_update",
+    "cna_graphics_renderer_get_selected_ext",
+    "cna_graphics_renderer_get_active_ext",
+    "cna_graphics_renderer_get_is_latched_ext",
+    "cna_graphics_renderer_get_current_name_size",
+    "cna_graphics_renderer_copy_current_name",
+    "cna_graphics_renderer_get_current_type",
+    "cna_graphics_renderer_get_available_count_ext",
+    "cna_graphics_renderer_copy_available_ext",
+    "cna_graphics_renderer_get_is_available_ext",
+    "cna_graphics_renderer_try_parse_name_ext",
+    "cna_graphics_renderer_set_preferred_ext",
+    "cna_graphics_renderer_set_preferred_by_name_ext",
+    "cna_graphics_renderer_set_fallback_chain_ext",
+    "cna_graphics_renderer_set_automatic_fallback_ext",
+    "cna_graphics_renderer_get_automatic_fallback_ext",
+    "cna_graphics_renderer_get_fallback_count_ext",
+    "cna_graphics_renderer_get_fallback_at_ext",
+    "cna_graphics_renderer_fallback_get_message_size_ext",
+    "cna_graphics_renderer_fallback_copy_message_ext",
+    "cna_graphics_renderer_fallback_reason_get_name_size_ext",
+    "cna_graphics_renderer_fallback_reason_copy_name_ext",
     "cna_sound_effect_create_pcm16_range_ext",
     "cna_sound_effect_create_from_encoded_ext",
     "cna_sound_effect_get_duration_ticks",
@@ -210,6 +231,8 @@
     "cna_graphics_device_get_reference_stencil",
     "cna_graphics_device_set_reference_stencil",
     "cna_graphics_device_clear_options",
+    "cna_graphics_device_create",
+    "cna_graphics_device_destroy",
     "cna_graphics_device_present",
     "cna_graphics_device_reset",
     "cna_graphics_device_reset_with_parameters",
@@ -420,16 +443,13 @@
     "cna_vertex_declaration_create",
     "cna_vertex_declaration_create_with_stride",
     "cna_vertex_declaration_destroy",
-    "cna_vertex_declaration_get_stride",
-    "cna_vertex_declaration_copy_elements",
     "cna_vertex_buffer_create",
     "cna_vertex_buffer_destroy",
     "cna_vertex_buffer_get_info",
-    "cna_vertex_buffer_copy_declaration_elements",
-    "cna_vertex_buffer_set_data",
-    "cna_vertex_buffer_get_data",
     "cna_vertex_buffer_set_data_raw",
     "cna_vertex_buffer_set_data_raw_at",
+    "cna_vertex_buffer_set_data_raw_with_options",
+    "cna_vertex_buffer_set_data_raw_at_with_options",
     "cna_vertex_buffer_get_data_raw",
     "cna_index_buffer_create",
     "cna_index_buffer_destroy",
@@ -452,6 +472,8 @@
     "cna_graphics_device_draw_user_indexed_primitives",
     "cna_render_target2d_create",
     "cna_render_target_get_info",
+    "cna_render_target_subscribe_content_lost",
+    "cna_render_target_unsubscribe_content_lost",
     "cna_render_target_destroy",
     "cna_graphics_device_set_render_target2d",
     "cna_graphics_device_set_render_targets",
@@ -459,8 +481,6 @@
     "cna_graphics_device_copy_render_targets",
     "cna_sprite_font_create",
     "cna_sprite_font_get_info",
-    "cna_sprite_font_copy_characters",
-    "cna_sprite_font_copy_glyphs",
     "cna_sprite_font_set_default_character",
     "cna_sprite_font_set_line_spacing",
     "cna_sprite_font_set_spacing",
@@ -468,6 +488,7 @@
     "cna_sprite_font_destroy",
     "cna_sprite_batch_create",
     "cna_sprite_batch_begin",
+    "cna_sprite_batch_submit_many",
     "cna_sprite_batch_submit_scaled_many",
     "cna_sprite_batch_end",
     "cna_sprite_batch_destroy",
@@ -601,7 +622,6 @@
     "cna_media_player_subscribe_media_state_changed_ext",
     "cna_media_player_unsubscribe_ext",
     "cna_media_player_raise_active_song_changed_ext",
-    "cna_media_player_raise_media_state_changed_ext",
     "cna_media_queue_get_count",
     "cna_media_queue_get_active_song_index",
     "cna_media_queue_set_active_song_index",
@@ -712,6 +732,7 @@
     "cna_video_player_get_volume",
     "cna_video_player_set_volume",
     "cna_video_player_get_texture",
+    "cna_video_player_get_frame_ext",
     "cna_video_player_play",
     "cna_video_player_stop",
     "cna_video_player_pause",
@@ -752,7 +773,290 @@
     "cna_picture_album_collection_get_at",
     "cna_picture_album_collection_get_is_disposed",
     "cna_picture_album_collection_dispose",
-    "cna_picture_album_collection_destroy"
+    "cna_picture_album_collection_destroy",
+    "cna_cnb_read_limits_init",
+    "cna_cnb_copy_format_magic",
+    "cna_cnb_make_chunk_id",
+    "cna_cnb_get_chunk_id_string_size",
+    "cna_cnb_copy_chunk_id_string",
+    "cna_cnb_is_well_formed_chunk_id",
+    "cna_cnb_asset_type_id_from_name",
+    "cna_cnb_is_custom_asset_type_id",
+    "cna_cnb_get_asset_type_name_size",
+    "cna_cnb_copy_asset_type_name",
+    "cna_cnb_get_logical_name_problem_size",
+    "cna_cnb_copy_logical_name_problem",
+    "cna_cnb_crc32c",
+    "cna_cnb_crc32c_continue",
+    "cna_cnb_crc32c_uses_hardware",
+    "cna_cnb_crc32c_portable",
+    "cna_cnb_is_compression_supported",
+    "cna_cnb_get_compression_name_size",
+    "cna_cnb_copy_compression_name",
+    "cna_cnb_get_compressed_byte_count",
+    "cna_cnb_copy_compressed",
+    "cna_cnb_copy_decompressed",
+    "cna_cnb_chunk_entry_is_mandatory",
+    "cna_cnb_has_magic",
+    "cna_cnb_document_parse",
+    "cna_cnb_document_parse_file",
+    "cna_cnb_document_destroy",
+    "cna_cnb_document_get_origin_size",
+    "cna_cnb_document_copy_origin",
+    "cna_cnb_document_get_container_major",
+    "cna_cnb_document_get_container_minor",
+    "cna_cnb_document_get_asset_type_id",
+    "cna_cnb_document_get_asset_schema_version",
+    "cna_cnb_document_get_chunk_count",
+    "cna_cnb_document_get_chunk",
+    "cna_cnb_document_copy_chunk_data",
+    "cna_cnb_document_open_chunk",
+    "cna_cnb_document_find_all",
+    "cna_cnb_document_find_single",
+    "cna_cnb_document_require_single",
+    "cna_cnb_document_require_mandatory_chunks_understood",
+    "cna_cnb_document_get_metadata",
+    "cna_cnb_document_get_metadata_asset_type_name_size",
+    "cna_cnb_document_copy_metadata_asset_type_name",
+    "cna_cnb_document_get_metadata_content_name_size",
+    "cna_cnb_document_copy_metadata_content_name",
+    "cna_cnb_document_get_external_reference_count",
+    "cna_cnb_document_get_external_reference",
+    "cna_cnb_document_get_external_reference_name_size",
+    "cna_cnb_document_copy_external_reference_name",
+    "cna_cnb_document_require_asset",
+    "cna_cnb_document_get_limits",
+    "cna_cnb_reader_create",
+    "cna_cnb_reader_destroy",
+    "cna_cnb_reader_get_remaining",
+    "cna_cnb_reader_get_position",
+    "cna_cnb_reader_get_size",
+    "cna_cnb_reader_get_context_size",
+    "cna_cnb_reader_copy_context",
+    "cna_cnb_reader_read_u8",
+    "cna_cnb_reader_read_u16",
+    "cna_cnb_reader_read_u32",
+    "cna_cnb_reader_read_u64",
+    "cna_cnb_reader_read_i32",
+    "cna_cnb_reader_read_f32",
+    "cna_cnb_reader_read_f64",
+    "cna_cnb_reader_read_string",
+    "cna_cnb_reader_copy_string",
+    "cna_cnb_reader_read_count",
+    "cna_cnb_reader_read_bytes",
+    "cna_cnb_reader_skip",
+    "cna_cnb_reader_require_exhausted",
+    "cna_cnb_reader_fail",
+    "cna_cnb_is_well_formed_utf8",
+    "cna_cnb_byte_writer_create",
+    "cna_cnb_byte_writer_create_from_bytes",
+    "cna_cnb_byte_writer_destroy",
+    "cna_cnb_byte_writer_write_u8",
+    "cna_cnb_byte_writer_write_u16",
+    "cna_cnb_byte_writer_write_u32",
+    "cna_cnb_byte_writer_write_u64",
+    "cna_cnb_byte_writer_write_i32",
+    "cna_cnb_byte_writer_write_f32",
+    "cna_cnb_byte_writer_write_f64",
+    "cna_cnb_byte_writer_write_string",
+    "cna_cnb_byte_writer_write_bytes",
+    "cna_cnb_byte_writer_write_zeros",
+    "cna_cnb_byte_writer_get_size",
+    "cna_cnb_byte_writer_copy_bytes",
+    "cna_cnb_byte_writer_take",
+    "cna_cnb_writer_create",
+    "cna_cnb_writer_destroy",
+    "cna_cnb_writer_set_metadata",
+    "cna_cnb_writer_add_external_reference",
+    "cna_cnb_writer_clear_external_references",
+    "cna_cnb_writer_add_chunk",
+    "cna_cnb_writer_get_schema_chunk_count",
+    "cna_cnb_writer_set_compression",
+    "cna_cnb_writer_set_limits",
+    "cna_cnb_writer_get_limits",
+    "cna_cnb_writer_build",
+    "cna_cnb_writer_write_to_file",
+    "cna_cnb_is_known_texture_format",
+    "cna_cnb_get_texture_format_name_size",
+    "cna_cnb_copy_texture_format_name",
+    "cna_cnb_is_block_compressed_texture_format",
+    "cna_cnb_get_texture_format_unit_bytes",
+    "cna_cnb_get_texture_level_byte_size",
+    "cna_cnb_texture_format_to_surface_format",
+    "cna_cnb_texture_format_from_surface_format",
+    "cna_cnb_texture_data_create",
+    "cna_cnb_texture_data_create_rgba8",
+    "cna_cnb_texture_data_destroy",
+    "cna_cnb_texture_data_get_info",
+    "cna_cnb_texture_data_get_level_dimensions",
+    "cna_cnb_texture_data_add_representation",
+    "cna_cnb_texture_data_get_representation_count",
+    "cna_cnb_texture_data_get_representation_format",
+    "cna_cnb_texture_data_get_level_count",
+    "cna_cnb_texture_data_set_level",
+    "cna_cnb_texture_data_copy_level",
+    "cna_cnb_texture_data_select_representation",
+    "cna_cnb_encode_texture2d",
+    "cna_cnb_encode_texture_cube",
+    "cna_cnb_encode_texture3d",
+    "cna_cnb_decode_texture2d",
+    "cna_cnb_decode_texture_cube",
+    "cna_cnb_decode_texture3d",
+    "cna_cnb_writer_append_embedded_texture2d",
+    "cna_cnb_document_read_embedded_texture2d",
+    "cna_cnb_model_create",
+    "cna_cnb_model_destroy",
+    "cna_cnb_model_get_info",
+    "cna_cnb_model_set_flags",
+    "cna_cnb_model_add_bone",
+    "cna_cnb_model_get_bone",
+    "cna_cnb_model_get_bone_name_size",
+    "cna_cnb_model_copy_bone_name",
+    "cna_cnb_model_add_part",
+    "cna_cnb_model_get_part",
+    "cna_cnb_model_set_part",
+    "cna_cnb_model_get_part_name_size",
+    "cna_cnb_model_copy_part_name",
+    "cna_cnb_model_get_part_external_effect_size",
+    "cna_cnb_model_copy_part_external_effect",
+    "cna_cnb_model_set_part_vertex_bytes",
+    "cna_cnb_model_copy_part_vertex_bytes",
+    "cna_cnb_model_set_part_index_bytes",
+    "cna_cnb_model_copy_part_index_bytes",
+    "cna_cnb_model_get_material",
+    "cna_cnb_model_set_material",
+    "cna_cnb_model_get_material_texture_size",
+    "cna_cnb_model_copy_material_texture",
+    "cna_cnb_model_set_material_texture",
+    "cna_cnb_model_get_material_texture_coordinate_set",
+    "cna_cnb_model_set_material_texture_coordinate_set",
+    "cna_cnb_model_get_material_texture_transform",
+    "cna_cnb_model_set_material_texture_transform",
+    "cna_cnb_model_get_material_sampler",
+    "cna_cnb_model_set_material_sampler",
+    "cna_cnb_model_has_morph",
+    "cna_cnb_model_get_morph",
+    "cna_cnb_model_set_morph",
+    "cna_cnb_model_clear_morph",
+    "cna_cnb_model_add_morph_target",
+    "cna_cnb_model_set_morph_target_deltas",
+    "cna_cnb_model_copy_morph_target_deltas",
+    "cna_cnb_model_set_morph_weights",
+    "cna_cnb_model_copy_morph_weights",
+    "cna_cnb_model_add_morph_weight_key",
+    "cna_cnb_model_get_morph_weight_key",
+    "cna_cnb_model_copy_morph_weight_key_values",
+    "cna_cnb_model_add_mesh",
+    "cna_cnb_model_get_mesh",
+    "cna_cnb_model_get_mesh_name_size",
+    "cna_cnb_model_copy_mesh_name",
+    "cna_cnb_model_copy_mesh_part_indices",
+    "cna_cnb_model_set_skeleton",
+    "cna_cnb_model_clear_skeleton",
+    "cna_cnb_model_get_skeleton",
+    "cna_cnb_model_copy_skeleton_hierarchy",
+    "cna_cnb_model_copy_skeleton_matrices",
+    "cna_cnb_model_add_animation",
+    "cna_cnb_model_get_animation_name_size",
+    "cna_cnb_model_copy_animation_name",
+    "cna_cnb_model_get_animation",
+    "cna_cnb_model_get_animation_track",
+    "cna_cnb_model_copy_animation_keyframes",
+    "cna_cnb_model_add_light",
+    "cna_cnb_model_get_light",
+    "cna_cnb_encode_model",
+    "cna_cnb_decode_model",
+    "cna_cnb_build_model_from_cnj",
+    "cna_cnb_model_from_cnj_destroy",
+    "cna_cnb_model_from_cnj_take_model",
+    "cna_cnb_model_from_cnj_get_absorbed_file_count",
+    "cna_cnb_model_from_cnj_get_absorbed_file_size",
+    "cna_cnb_model_from_cnj_copy_absorbed_file",
+    "cna_cnb_model_from_cnj_get_external_reference_count",
+    "cna_cnb_model_from_cnj_get_external_reference_size",
+    "cna_cnb_model_from_cnj_copy_external_reference",
+    "cna_cnb_sprite_font_data_create",
+    "cna_cnb_sprite_font_data_destroy",
+    "cna_cnb_sprite_font_data_get_info",
+    "cna_cnb_sprite_font_data_set_info",
+    "cna_cnb_sprite_font_data_add_glyph",
+    "cna_cnb_sprite_font_data_get_glyph",
+    "cna_cnb_sprite_font_data_set_glyph",
+    "cna_cnb_sprite_font_data_set_atlas",
+    "cna_cnb_sprite_font_data_copy_atlas",
+    "cna_cnb_encode_sprite_font",
+    "cna_cnb_decode_sprite_font",
+    "cna_cnb_audio_frame_bytes",
+    "cna_cnb_get_audio_format_name_size",
+    "cna_cnb_copy_audio_format_name",
+    "cna_cnb_sound_effect_data_create",
+    "cna_cnb_sound_effect_data_destroy",
+    "cna_cnb_sound_effect_data_get_info",
+    "cna_cnb_sound_effect_data_copy_samples",
+    "cna_cnb_encode_sound_effect",
+    "cna_cnb_decode_sound_effect",
+    "cna_cnb_encode_song",
+    "cna_cnb_decode_song_duration_milliseconds",
+    "cna_cnb_decode_song_stream_reference_size",
+    "cna_cnb_decode_song_stream_reference",
+    "cna_cnb_decode_song_name_size",
+    "cna_cnb_decode_song_name",
+    "cna_cnb_encode_video",
+    "cna_cnb_decode_video",
+    "cna_cnb_decode_video_stream_reference_size",
+    "cna_cnb_decode_video_stream_reference",
+    "cna_cnb_encode_curve",
+    "cna_cnb_decode_curve",
+    "cna_cnb_encode_animation_clip",
+    "cna_cnb_decode_animation_clip",
+    "cna_cnb_animation_clip_destroy",
+    "cna_cnb_animation_clip_get",
+    "cna_cnb_animation_clip_get_track",
+    "cna_cnb_animation_clip_copy_keyframes",
+    "cna_cnb_reader_read_seconds",
+    "cna_cnb_reader_read_keyframe",
+    "cna_cnb_byte_writer_write_keyframe",
+    "cna_cnb_loader_registry_register",
+    "cna_cnb_loader_registry_remove",
+    "cna_cnb_loader_registry_clear",
+    "cna_cnb_loader_registry_is_registered",
+    "cna_cnb_loader_registry_find",
+    "cna_cnb_loader_registry_get_registered_type_name_size",
+    "cna_cnb_loader_registry_copy_registered_type_name",
+    "cna_cnb_loader_registry_resolve_for_document",
+    "cna_cnb_loader_registry_register_builtins",
+    "cna_cnb_loader_destroy",
+    "cna_cnb_loader_invoke",
+    "cna_cnb_import_image_as_texture2d",
+    "cna_cnb_import_dds_as_texture_cube",
+    "cna_cnb_decode_dds_as_texture_cube",
+    "cna_cnb_decode_wav_as_sound_effect",
+    "cna_cnb_import_wav_as_sound_effect",
+    "cna_cnb_compile_cnj",
+    "cna_cnb_cnj_result_destroy",
+    "cna_cnb_cnj_result_get_asset_type_id",
+    "cna_cnb_cnj_result_get_asset_type_name_size",
+    "cna_cnb_cnj_result_copy_asset_type_name",
+    "cna_cnb_cnj_result_copy_bytes",
+    "cna_cnb_cnj_result_get_absorbed_file_count",
+    "cna_cnb_cnj_result_get_absorbed_file_size",
+    "cna_cnb_cnj_result_copy_absorbed_file",
+    "cna_cnb_cnj_result_get_external_reference_count",
+    "cna_cnb_cnj_result_get_external_reference_size",
+    "cna_cnb_cnj_result_copy_external_reference",
+    "cna_curve_create",
+    "cna_curve_destroy",
+    "cna_curve_get_keys",
+    "cna_curve_get_pre_loop",
+    "cna_curve_set_pre_loop",
+    "cna_curve_get_post_loop",
+    "cna_curve_set_post_loop",
+    "cna_curve_key_collection_destroy",
+    "cna_curve_key_collection_get_count",
+    "cna_curve_key_collection_get",
+    "cna_curve_key_collection_add",
+    "cna_content_manager_create",
+    "cna_content_manager_destroy"
   ],
   "functionManifest": [
     {
@@ -1218,6 +1522,212 @@
       "ownership": "borrowed game"
     },
     {
+      "symbol": "cna_graphics_renderer_get_selected_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_uint>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_active_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_uint>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_is_latched_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_current_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_copy_current_name",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_current_type",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_uint>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_available_count_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_copy_available_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_uint>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_is_available_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_try_parse_name_ext",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_uint>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_set_preferred_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint"
+      ],
+      "arity": 1,
+      "ownership": "process-wide selection"
+    },
+    {
+      "symbol": "cna_graphics_renderer_set_preferred_by_name_ext",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView"
+      ],
+      "arity": 1,
+      "ownership": "process-wide selection"
+    },
+    {
+      "symbol": "cna_graphics_renderer_set_fallback_chain_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_uint>",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "copies the chain; process-wide selection"
+    },
+    {
+      "symbol": "cna_graphics_renderer_set_automatic_fallback_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ubyte"
+      ],
+      "arity": 1,
+      "ownership": "process-wide selection"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_automatic_fallback_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_fallback_count_ext",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_get_fallback_at_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_GraphicsRendererFallbackRecord>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_fallback_get_message_size_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_fallback_copy_message_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_fallback_reason_get_name_size_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output"
+    },
+    {
+      "symbol": "cna_graphics_renderer_fallback_reason_copy_name_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output"
+    },
+    {
       "symbol": "cna_sound_effect_create_pcm16_range_ext",
       "return": "c_uint",
       "parameters": [
@@ -1527,7 +2037,7 @@
         "pointer<CNA_AudioEmitter>"
       ],
       "arity": 4,
-      "ownership": "copies listeners/emitter; one listener only in ABI 0.7"
+      "ownership": "copies listeners/emitter; any positive listener count since ABI 0.9"
     },
     {
       "symbol": "cna_dynamic_sound_effect_instance_create",
@@ -2877,6 +3387,27 @@
       ],
       "arity": 5,
       "ownership": "borrowed device"
+    },
+    {
+      "symbol": "cna_graphics_device_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_uint",
+        "pointer<CNA_PresentationParameters>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned GraphicsDevice"
+    },
+    {
+      "symbol": "cna_graphics_device_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes a caller-created GraphicsDevice"
     },
     {
       "symbol": "cna_graphics_device_present",
@@ -5058,28 +5589,6 @@
       "ownership": "consumes declaration"
     },
     {
-      "symbol": "cna_vertex_declaration_get_stride",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong",
-        "pointer<c_int>"
-      ],
-      "arity": 2,
-      "ownership": "caller output"
-    },
-    {
-      "symbol": "cna_vertex_declaration_copy_elements",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong",
-        "pointer<CNA_VertexElement>",
-        "c_ulong",
-        "pointer<c_ulong>"
-      ],
-      "arity": 4,
-      "ownership": "caller output"
-    },
-    {
       "symbol": "cna_vertex_buffer_create",
       "return": "c_uint",
       "parameters": [
@@ -5110,43 +5619,6 @@
       "ownership": "caller output"
     },
     {
-      "symbol": "cna_vertex_buffer_copy_declaration_elements",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong",
-        "pointer<CNA_VertexElement>",
-        "c_ulong",
-        "pointer<c_ulong>"
-      ],
-      "arity": 4,
-      "ownership": "caller output"
-    },
-    {
-      "symbol": "cna_vertex_buffer_set_data",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong",
-        "pointer<CNA_VertexBufferTransfer>",
-        "c_void_p",
-        "c_ulong"
-      ],
-      "arity": 4,
-      "ownership": "copies typed vertices"
-    },
-    {
-      "symbol": "cna_vertex_buffer_get_data",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong",
-        "pointer<CNA_VertexBufferTransfer>",
-        "c_void_p",
-        "c_ulong",
-        "pointer<c_ulong>"
-      ],
-      "arity": 5,
-      "ownership": "caller output"
-    },
-    {
       "symbol": "cna_vertex_buffer_set_data_raw",
       "return": "c_uint",
       "parameters": [
@@ -5172,6 +5644,35 @@
       ],
       "arity": 6,
       "ownership": "copies vertex bytes"
+    },
+    {
+      "symbol": "cna_vertex_buffer_set_data_raw_with_options",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_void_p",
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "c_uint"
+      ],
+      "arity": 6,
+      "ownership": "copies vertex bytes with a streaming hint"
+    },
+    {
+      "symbol": "cna_vertex_buffer_set_data_raw_at_with_options",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_void_p",
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "c_uint"
+      ],
+      "arity": 7,
+      "ownership": "copies vertex bytes into a buffer window with a streaming hint"
     },
     {
       "symbol": "cna_vertex_buffer_get_data_raw",
@@ -5427,6 +5928,27 @@
       "ownership": "caller output"
     },
     {
+      "symbol": "cna_render_target_subscribe_content_lost",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned registration"
+    },
+    {
+      "symbol": "cna_render_target_unsubscribe_content_lost",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes registration"
+    },
+    {
       "symbol": "cna_render_target_destroy",
       "return": "c_uint",
       "parameters": [
@@ -5499,30 +6021,6 @@
       "ownership": "caller output"
     },
     {
-      "symbol": "cna_sprite_font_copy_characters",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong",
-        "pointer<c_ushort>",
-        "c_ulong",
-        "pointer<c_ulong>"
-      ],
-      "arity": 4,
-      "ownership": "caller output"
-    },
-    {
-      "symbol": "cna_sprite_font_copy_glyphs",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong",
-        "pointer<CNA_SpriteFontGlyph>",
-        "c_ulong",
-        "pointer<c_ulong>"
-      ],
-      "arity": 4,
-      "ownership": "caller output"
-    },
-    {
       "symbol": "cna_sprite_font_set_default_character",
       "return": "c_uint",
       "parameters": [
@@ -5592,6 +6090,17 @@
       ],
       "arity": 2,
       "ownership": "borrowed sprite batch"
+    },
+    {
+      "symbol": "cna_sprite_batch_submit_many",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpriteCommand>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "copies destination-rectangle commands"
     },
     {
       "symbol": "cna_sprite_batch_submit_scaled_many",
@@ -6968,15 +7477,6 @@
       "ownership": "borrowed handle"
     },
     {
-      "symbol": "cna_media_player_raise_media_state_changed_ext",
-      "return": "c_uint",
-      "parameters": [
-        "c_ulong"
-      ],
-      "arity": 1,
-      "ownership": "borrowed handle"
-    },
-    {
       "symbol": "cna_media_queue_get_count",
       "return": "c_uint",
       "parameters": [
@@ -8109,6 +8609,16 @@
       "ownership": "borrowed transient texture"
     },
     {
+      "symbol": "cna_video_player_get_frame_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_VideoFrameEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed frame texture plus its monotonic decode generation"
+    },
+    {
       "symbol": "cna_video_player_play",
       "return": "c_uint",
       "parameters": [
@@ -8505,12 +9015,3153 @@
       ],
       "arity": 1,
       "ownership": "destroys collection handle"
+    },
+    {
+      "symbol": "cna_cnb_read_limits_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_CnbReadLimits>"
+      ],
+      "arity": 1,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_format_magic",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_make_chunk_id",
+      "return": "c_uint",
+      "parameters": [
+        "c_ubyte",
+        "c_ubyte",
+        "c_ubyte",
+        "c_ubyte",
+        "pointer<c_uint>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_chunk_id_string_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_chunk_id_string",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_is_well_formed_chunk_id",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_asset_type_id_from_name",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_is_custom_asset_type_id",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_asset_type_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_asset_type_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_logical_name_problem_size",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_logical_name_problem",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_crc32c",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_crc32c_continue",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_crc32c_uses_hardware",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>"
+      ],
+      "arity": 1,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_crc32c_portable",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_is_compression_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_compression_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_compression_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_compressed_byte_count",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "c_uint",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_compressed",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "c_uint",
+        "c_int",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_decompressed",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "c_uint",
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 8,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_chunk_entry_is_mandatory",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_CnbChunkEntry>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_has_magic",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_document_parse",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<CNA_CnbReadLimits>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned document; copies the file bytes"
+    },
+    {
+      "symbol": "cna_cnb_document_parse_file",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<CNA_CnbReadLimits>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned document; copies the file bytes"
+    },
+    {
+      "symbol": "cna_cnb_document_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes document; refused while a chunk reader still borrows it"
+    },
+    {
+      "symbol": "cna_cnb_document_get_origin_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_copy_origin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_container_major",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ushort>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_container_minor",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ushort>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_asset_type_id",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_asset_schema_version",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_chunk_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_chunk",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbChunkEntry>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_copy_chunk_data",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_open_chunk",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned reader that borrows the document until it is destroyed"
+    },
+    {
+      "symbol": "cna_cnb_document_find_all",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_find_single",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ubyte>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_require_single",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_require_mandatory_chunks_understood",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_metadata",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbMetadata>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_metadata_asset_type_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_copy_metadata_asset_type_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_metadata_content_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_copy_metadata_content_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_external_reference_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_external_reference",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<CNA_CnbExternalReference>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_external_reference_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_copy_external_reference_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_require_asset",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_uint"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_document_get_limits",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbReadLimits>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_reader_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<CNA_CnbReadLimits>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned reader; copies the bytes it is given"
+    },
+    {
+      "symbol": "cna_cnb_reader_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes reader; releases any document borrow"
+    },
+    {
+      "symbol": "cna_cnb_reader_get_remaining",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_get_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_get_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_get_context_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_copy_context",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_u8",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_u16",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ushort>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_u32",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_u64",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_i32",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_f32",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_f64",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_double>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_string",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_copy_string",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_uint>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_skip",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_require_exhausted",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_fail",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_is_well_formed_utf8",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned byte writer"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_create_from_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned byte writer; copies the initial bytes"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes byte writer"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_u8",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_u16",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ushort"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_u32",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_u64",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_i32",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_f32",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_f64",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_double"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_string",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_zeros",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_get_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed byte writer"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_copy_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed byte writer"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_take",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; empties the writer on success and takes nothing on refusal"
+    },
+    {
+      "symbol": "cna_cnb_writer_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned container writer"
+    },
+    {
+      "symbol": "cna_cnb_writer_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes container writer"
+    },
+    {
+      "symbol": "cna_cnb_writer_set_metadata",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "CNA_StringView"
+      ],
+      "arity": 3,
+      "ownership": "borrowed container writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_writer_add_external_reference",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbExternalReference>",
+        "CNA_StringView"
+      ],
+      "arity": 3,
+      "ownership": "borrowed container writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_writer_clear_external_references",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed container writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_writer_add_chunk",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "c_uint",
+        "c_uint"
+      ],
+      "arity": 6,
+      "ownership": "borrowed container writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_writer_get_schema_chunk_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed container writer"
+    },
+    {
+      "symbol": "cna_cnb_writer_set_compression",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed container writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_writer_set_limits",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbReadLimits>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed container writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_writer_get_limits",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbReadLimits>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed container writer"
+    },
+    {
+      "symbol": "cna_cnb_writer_build",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed container writer"
+    },
+    {
+      "symbol": "cna_cnb_writer_write_to_file",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed container writer"
+    },
+    {
+      "symbol": "cna_cnb_is_known_texture_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_texture_format_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_texture_format_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_is_block_compressed_texture_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_texture_format_unit_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_texture_level_byte_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_texture_format_to_surface_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_texture_format_from_surface_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "owned texture data; copies any pixels it is given"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_create_rgba8",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_uint",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned texture data; copies any pixels it is given"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes texture data"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbTextureInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_get_level_dimensions",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_uint>",
+        "pointer<c_uint>",
+        "pointer<c_uint>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_add_representation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed texture data; copies the payload"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_get_representation_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_get_representation_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_get_level_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_set_level",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong"
+      ],
+      "arity": 5,
+      "ownership": "borrowed texture data; copies the payload"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_copy_level",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_texture_data_select_representation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ubyte>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; the predicate is call-scoped and never retained"
+    },
+    {
+      "symbol": "cna_cnb_encode_texture2d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_encode_texture_cube",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_encode_texture3d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed texture data"
+    },
+    {
+      "symbol": "cna_cnb_decode_texture2d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned texture data; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_decode_texture_cube",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned texture data; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_decode_texture3d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned texture data; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_writer_append_embedded_texture2d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CNA_StringView"
+      ],
+      "arity": 3,
+      "ownership": "borrowed container writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_document_read_embedded_texture2d",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned texture data; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_model_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned model data"
+    },
+    {
+      "symbol": "cna_cnb_model_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbModelInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_flags",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte",
+        "c_ubyte"
+      ],
+      "arity": 3,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_add_bone",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_int",
+        "pointer<c_float>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_bone",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbModelBone>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_bone_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_bone_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_add_part",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbModelPartInfo>",
+        "CNA_StringView",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_part",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbModelPartInfo>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_part",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbModelPartInfo>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_part_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_part_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_part_external_effect_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_part_external_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_part_vertex_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_part_vertex_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_part_index_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_part_index_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_material",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbMaterialInfo>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_material",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbMaterialInfo>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_material_texture_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_material_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_material_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "CNA_StringView"
+      ],
+      "arity": 4,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_material_texture_coordinate_set",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_material_texture_coordinate_set",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 4,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_material_texture_transform",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbTextureTransform>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_material_texture_transform",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbTextureTransform>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_material_sampler",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbSamplerState>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_material_sampler",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbSamplerState>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_has_morph",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_morph",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbMorphInfo>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_morph",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbMorphInfo>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_clear_morph",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_add_morph_target",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_set_morph_target_deltas",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "pointer<c_float>",
+        "c_ulong"
+      ],
+      "arity": 6,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_morph_target_deltas",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_morph_weights",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_float>",
+        "c_ulong"
+      ],
+      "arity": 4,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_morph_weights",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_add_morph_weight_key",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_double",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 10,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_morph_weight_key",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbMorphWeightKeyInfo>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_morph_weight_key_values",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_uint",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_add_mesh",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "c_int",
+        "pointer<c_uint>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_mesh",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbMeshInfo>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_mesh_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_mesh_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_mesh_part_indices",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_uint>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_set_skeleton",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_float>",
+        "pointer<c_float>",
+        "pointer<c_float>"
+      ],
+      "arity": 6,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_clear_skeleton",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_skeleton",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbSkeletonInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_skeleton_hierarchy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_skeleton_matrices",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "pointer<c_float>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_add_animation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<CNA_AnimationClipEXTDescriptor>",
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_animation_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_animation_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_animation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_double>",
+        "pointer<c_ulong>",
+        "pointer<c_uint>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_get_animation_track",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_int>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_copy_animation_keyframes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_KeyframeEXT>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_model_add_light",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbModelLight>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed model data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_model_get_light",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_CnbModelLight>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_encode_model",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed model data"
+    },
+    {
+      "symbol": "cna_cnb_decode_model",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned model data; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_build_model_from_cnj",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned compile result"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes compile result"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_take_model",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "transfers the model out of the result exactly once; the result keeps none"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_get_absorbed_file_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_get_absorbed_file_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_copy_absorbed_file",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_get_external_reference_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_get_external_reference_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_model_from_cnj_copy_external_reference",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned sprite font data"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes sprite font data"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbSpriteFontInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed sprite font data"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_set_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbSpriteFontInfo>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed sprite font data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_add_glyph",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpriteFontGlyph>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed sprite font data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_get_glyph",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_SpriteFontGlyph>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed sprite font data"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_set_glyph",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_SpriteFontGlyph>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed sprite font data; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_set_atlas",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed font; copies the atlas rather than adopting the handle"
+    },
+    {
+      "symbol": "cna_cnb_sprite_font_data_copy_atlas",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned texture data holding a copy of the atlas; borrowed font"
+    },
+    {
+      "symbol": "cna_cnb_encode_sprite_font",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed sprite font data"
+    },
+    {
+      "symbol": "cna_cnb_decode_sprite_font",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned sprite font data; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_audio_frame_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_uint",
+        "pointer<c_uint>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_get_audio_format_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_copy_audio_format_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_cnb_sound_effect_data_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_CnbSoundEffectInfo>",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned sound data; copies the samples"
+    },
+    {
+      "symbol": "cna_cnb_sound_effect_data_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes sound data"
+    },
+    {
+      "symbol": "cna_cnb_sound_effect_data_get_info",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbSoundEffectInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed sound data"
+    },
+    {
+      "symbol": "cna_cnb_sound_effect_data_copy_samples",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed sound data"
+    },
+    {
+      "symbol": "cna_cnb_encode_sound_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed sound data"
+    },
+    {
+      "symbol": "cna_cnb_decode_sound_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned sound data; borrows its source for the call only"
+    },
+    {
+      "symbol": "cna_cnb_encode_song",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "CNA_StringView",
+        "c_uint",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_song_duration_milliseconds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_song_stream_reference_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_song_stream_reference",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_song_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_song_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_encode_video",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<CNA_CnbVideoInfo>",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_video",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_CnbVideoInfo>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_video_stream_reference_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_decode_video_stream_reference",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed document or borrowed input strings"
+    },
+    {
+      "symbol": "cna_cnb_encode_curve",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed native curve"
+    },
+    {
+      "symbol": "cna_cnb_decode_curve",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned native curve; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_encode_animation_clip",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_AnimationClipEXTDescriptor>",
+        "c_uint",
+        "CNA_StringView",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output; borrows the descriptor for the call only"
+    },
+    {
+      "symbol": "cna_cnb_decode_animation_clip",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned animation clip; borrowed document"
+    },
+    {
+      "symbol": "cna_cnb_animation_clip_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes animation clip"
+    },
+    {
+      "symbol": "cna_cnb_animation_clip_get",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_double>",
+        "pointer<c_ulong>",
+        "pointer<c_uint>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed animation clip"
+    },
+    {
+      "symbol": "cna_cnb_animation_clip_get_track",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_int>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed animation clip"
+    },
+    {
+      "symbol": "cna_cnb_animation_clip_copy_keyframes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_KeyframeEXT>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed animation clip"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_seconds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_double>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_reader_read_keyframe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_KeyframeEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed reader"
+    },
+    {
+      "symbol": "cna_cnb_byte_writer_write_keyframe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_KeyframeEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed byte writer; copies the value"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_register",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "CNA_StringView",
+        "CFunctionType",
+        "c_void_p"
+      ],
+      "arity": 4,
+      "ownership": "process-global registration; the callback and its context must outlive it"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_remove",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "process-global registration; withdraws it"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_clear",
+      "return": "c_uint",
+      "parameters": [],
+      "arity": 0,
+      "ownership": "process-global registration; withdraws it"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_is_registered",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; process-global registry"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_find",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ubyte>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned loader copy; process-global registry"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_get_registered_type_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; process-global registry"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_copy_registered_type_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; process-global registry"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_resolve_for_document",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned loader copy; process-global registry"
+    },
+    {
+      "symbol": "cna_cnb_loader_registry_register_builtins",
+      "return": "c_uint",
+      "parameters": [],
+      "arity": 0,
+      "ownership": "process-global registration; idempotent"
+    },
+    {
+      "symbol": "cna_cnb_loader_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes loader copy"
+    },
+    {
+      "symbol": "cna_cnb_loader_invoke",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_void_p>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; the object pointer is never dereferenced, copied or freed by CNA"
+    },
+    {
+      "symbol": "cna_cnb_import_image_as_texture2d",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<CNA_CnbImageImportOptions>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned texture data; borrows its source for the call only"
+    },
+    {
+      "symbol": "cna_cnb_import_dds_as_texture_cube",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned texture data; borrows its source for the call only"
+    },
+    {
+      "symbol": "cna_cnb_decode_dds_as_texture_cube",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned texture data; borrows its source for the call only"
+    },
+    {
+      "symbol": "cna_cnb_decode_wav_as_sound_effect",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned sound data; borrows its source for the call only"
+    },
+    {
+      "symbol": "cna_cnb_import_wav_as_sound_effect",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned sound data; borrows its source for the call only"
+    },
+    {
+      "symbol": "cna_cnb_compile_cnj",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "CNA_StringView",
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_get_asset_type_id",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_get_asset_type_name_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_copy_asset_type_name",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_copy_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_get_absorbed_file_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_get_absorbed_file_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_copy_absorbed_file",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_get_external_reference_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_get_external_reference_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_cnb_cnj_result_copy_external_reference",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed compile result"
+    },
+    {
+      "symbol": "cna_curve_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned native curve, built only to feed the CNB curve codec"
+    },
+    {
+      "symbol": "cna_curve_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes native curve"
+    },
+    {
+      "symbol": "cna_curve_get_keys",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned collection view that retains its curve"
+    },
+    {
+      "symbol": "cna_curve_get_pre_loop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed native curve"
+    },
+    {
+      "symbol": "cna_curve_set_pre_loop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed native curve; copies the value"
+    },
+    {
+      "symbol": "cna_curve_get_post_loop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed native curve"
+    },
+    {
+      "symbol": "cna_curve_set_post_loop",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed native curve; copies the value"
+    },
+    {
+      "symbol": "cna_curve_key_collection_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes collection view"
+    },
+    {
+      "symbol": "cna_curve_key_collection_get_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed native curve"
+    },
+    {
+      "symbol": "cna_curve_key_collection_get",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_CurveKey>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed native curve"
+    },
+    {
+      "symbol": "cna_curve_key_collection_add",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_CurveKey"
+      ],
+      "arity": 2,
+      "ownership": "borrowed native curve; copies the value"
+    },
+    {
+      "symbol": "cna_content_manager_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ContentManagerCreateInfo>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned content manager; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_content_manager_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes content manager; must run on the game creation thread"
     }
   ],
   "missingSymbols": [],
   "mismatches": [],
   "c": {
-    "VALUE:CNA_ABI_VERSION": 1792,
+    "VALUE:CNA_ABI_VERSION": 5376,
     "VALUE:POINTER_WIDTH": 8,
     "VALUE:CNA_Bool": 1,
     "VALUE:CNA_Result": 4,
@@ -8670,6 +12321,15 @@
     "OFFSET:CNA_VisualizationData:struct_version": 4,
     "OFFSET:CNA_VisualizationData:frequencies": 8,
     "OFFSET:CNA_VisualizationData:samples": 1032,
+    "SIZE:CNA_VideoFrameEXT": 40,
+    "ALIGN:CNA_VideoFrameEXT": 8,
+    "OFFSET:CNA_VideoFrameEXT:struct_size": 0,
+    "OFFSET:CNA_VideoFrameEXT:struct_version": 4,
+    "OFFSET:CNA_VideoFrameEXT:texture": 8,
+    "OFFSET:CNA_VideoFrameEXT:generation": 16,
+    "OFFSET:CNA_VideoFrameEXT:presentation_time": 24,
+    "OFFSET:CNA_VideoFrameEXT:available": 32,
+    "VALUE:CNA_VIDEO_FRAME_EXT_STRUCT_VERSION": 1,
     "SIZE:CNA_Quaternion": 16,
     "ALIGN:CNA_Quaternion": 4,
     "OFFSET:CNA_Quaternion:x": 0,
@@ -9164,6 +12824,18 @@
     "OFFSET:CNA_SpriteBatchBeginInfo:struct_version": 4,
     "OFFSET:CNA_SpriteBatchBeginInfo:sort_mode": 8,
     "OFFSET:CNA_SpriteBatchBeginInfo:reserved": 12,
+    "SIZE:CNA_SpriteCommand": 72,
+    "ALIGN:CNA_SpriteCommand": 8,
+    "OFFSET:CNA_SpriteCommand:struct_size": 0,
+    "OFFSET:CNA_SpriteCommand:struct_version": 4,
+    "OFFSET:CNA_SpriteCommand:texture": 8,
+    "OFFSET:CNA_SpriteCommand:destination": 16,
+    "OFFSET:CNA_SpriteCommand:source": 32,
+    "OFFSET:CNA_SpriteCommand:color": 48,
+    "OFFSET:CNA_SpriteCommand:rotation": 52,
+    "OFFSET:CNA_SpriteCommand:origin": 56,
+    "OFFSET:CNA_SpriteCommand:effects": 64,
+    "OFFSET:CNA_SpriteCommand:layer_depth": 68,
     "SIZE:CNA_SpriteScaledCommand": 72,
     "ALIGN:CNA_SpriteScaledCommand": 8,
     "OFFSET:CNA_SpriteScaledCommand:struct_size": 0,
@@ -9284,10 +12956,406 @@
     "OFFSET:CNA_GestureSample:position": 32,
     "OFFSET:CNA_GestureSample:position2": 40,
     "OFFSET:CNA_GestureSample:delta": 48,
-    "OFFSET:CNA_GestureSample:delta2": 56
+    "OFFSET:CNA_GestureSample:delta2": 56,
+    "VALUE:CNA_CLIP_TARGET_SPACE_JOINT_PALETTE_EXT": 0,
+    "VALUE:CNA_CLIP_TARGET_SPACE_MAXIMUM_EXT": 1,
+    "VALUE:CNA_CLIP_TARGET_SPACE_SCENE_NODE_EXT": 1,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_CHUNK_HEADER": 1212957505,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_CHUNK_KEYS": 1263289153,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_CHUNK_TRACKS": 1414284097,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_ANIMATION_KEY_STRIDE": 48,
+    "VALUE:CNA_CNB_ANIMATION_TRACK_STRIDE": 12,
+    "VALUE:CNA_CNB_ASSET_TYPE_ANIMATION_CLIP": 6,
+    "VALUE:CNA_CNB_ASSET_TYPE_CURVE": 7,
+    "VALUE:CNA_CNB_ASSET_TYPE_CUSTOM_RANGE_FIRST": 2147483648,
+    "VALUE:CNA_CNB_ASSET_TYPE_EFFECT": 11,
+    "VALUE:CNA_CNB_ASSET_TYPE_INVALID": 0,
+    "VALUE:CNA_CNB_ASSET_TYPE_MODEL": 5,
+    "VALUE:CNA_CNB_ASSET_TYPE_RESERVED_RANGE_FIRST": 1073741824,
+    "VALUE:CNA_CNB_ASSET_TYPE_SONG": 9,
+    "VALUE:CNA_CNB_ASSET_TYPE_SOUND_EFFECT": 8,
+    "VALUE:CNA_CNB_ASSET_TYPE_SPRITE_FONT": 4,
+    "VALUE:CNA_CNB_ASSET_TYPE_TEXTURE2D": 1,
+    "VALUE:CNA_CNB_ASSET_TYPE_TEXTURE3D": 2,
+    "VALUE:CNA_CNB_ASSET_TYPE_TEXTURE_CUBE": 3,
+    "VALUE:CNA_CNB_ASSET_TYPE_VIDEO": 10,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_ADPCM": 4,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_MAXIMUM": 5,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_PCM16": 1,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_PCM8": 2,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_PCM_FLOAT32": 3,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_UNKNOWN": 0,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_VORBIS": 5,
+    "VALUE:CNA_CNB_CHUNK_ENTRY_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_CHUNK_FLAG_ALL": 1,
+    "VALUE:CNA_CNB_CHUNK_FLAG_MANDATORY": 1,
+    "VALUE:CNA_CNB_CHUNK_FLAG_NONE": 0,
+    "VALUE:CNA_CNB_COMPRESSION_DEFLATE": 3,
+    "VALUE:CNA_CNB_COMPRESSION_LZ4": 1,
+    "VALUE:CNA_CNB_COMPRESSION_MAXIMUM": 3,
+    "VALUE:CNA_CNB_COMPRESSION_NONE": 0,
+    "VALUE:CNA_CNB_COMPRESSION_ZSTD": 2,
+    "VALUE:CNA_CNB_CONTAINER_CHUNK_EXTERNAL_REFERENCES": 1178948184,
+    "VALUE:CNA_CNB_CONTAINER_CHUNK_METADATA": 1413827907,
+    "VALUE:CNA_CNB_CRC32C_SEED": 0,
+    "VALUE:CNA_CNB_CURVE_CHUNK_HEADER": 1213616707,
+    "VALUE:CNA_CNB_CURVE_CHUNK_KEYS": 1263948355,
+    "VALUE:CNA_CNB_CURVE_KEY_STRIDE": 20,
+    "VALUE:CNA_CNB_CURVE_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_EFFECT_KIND_BASIC": 0,
+    "VALUE:CNA_CNB_EFFECT_KIND_DUAL_TEXTURE": 2,
+    "VALUE:CNA_CNB_EFFECT_KIND_EXTERNAL": 5,
+    "VALUE:CNA_CNB_EFFECT_KIND_MAXIMUM": 5,
+    "VALUE:CNA_CNB_EFFECT_KIND_PBR": 3,
+    "VALUE:CNA_CNB_EFFECT_KIND_SKINNED": 1,
+    "VALUE:CNA_CNB_EFFECT_KIND_SKINNED_PBR": 4,
+    "VALUE:CNA_CNB_EXTERNAL_REFERENCE_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_FORMAT_CONTAINER_MAJOR": 1,
+    "VALUE:CNA_CNB_FORMAT_CONTAINER_MINOR": 0,
+    "VALUE:CNA_CNB_FORMAT_DEFAULT_TOC_OFFSET": 64,
+    "VALUE:CNA_CNB_FORMAT_HEADER_CHECKSUM_COVERAGE": 44,
+    "VALUE:CNA_CNB_FORMAT_HEADER_CHECKSUM_OFFSET": 44,
+    "VALUE:CNA_CNB_FORMAT_HEADER_RESERVED_SIZE": 16,
+    "VALUE:CNA_CNB_FORMAT_HEADER_SIZE": 64,
+    "VALUE:CNA_CNB_FORMAT_MAGIC_SIZE": 4,
+    "VALUE:CNA_CNB_FORMAT_TOC_ENTRY_SIZE": 48,
+    "VALUE:CNA_CNB_IMAGE_IMPORT_OPTIONS_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MATERIAL_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_BASE_COLOR": 0,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_EMISSIVE": 4,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_MAXIMUM": 7,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_METALLIC_ROUGHNESS": 3,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_NORMAL": 2,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_OCCLUSION": 5,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_SECOND": 1,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_SPECULAR": 6,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_SPECULAR_COLOR": 7,
+    "VALUE:CNA_CNB_MAX_AUDIO_SAMPLE_RATE": 384000,
+    "VALUE:CNA_CNB_MAX_SPRITE_FONT_GLYPHS": 65536,
+    "VALUE:CNA_CNB_MAX_TEXTURE_MIP_LEVELS": 16,
+    "VALUE:CNA_CNB_MAX_TEXTURE_REPRESENTATIONS": 8,
+    "VALUE:CNA_CNB_MAX_VIDEO_DIMENSION": 65536,
+    "VALUE:CNA_CNB_MEDIA_CHUNK_SONG_HEADER": 1212632659,
+    "VALUE:CNA_CNB_MEDIA_CHUNK_VIDEO_HEADER": 1212434774,
+    "VALUE:CNA_CNB_MEDIA_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_MESH_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_METADATA_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_BONE_STRIDE": 72,
+    "VALUE:CNA_CNB_MODEL_BONE_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_CHUNK_ANIMATIONS": 1296974157,
+    "VALUE:CNA_CNB_MODEL_CHUNK_BONES": 1313817165,
+    "VALUE:CNA_CNB_MODEL_CHUNK_HEADER": 1212957773,
+    "VALUE:CNA_CNB_MODEL_CHUNK_INDEX_DATA": 1480870221,
+    "VALUE:CNA_CNB_MODEL_CHUNK_LIGHTS": 1414089805,
+    "VALUE:CNA_CNB_MODEL_CHUNK_MATERIALS": 1413565773,
+    "VALUE:CNA_CNB_MODEL_CHUNK_MESHES": 1213418829,
+    "VALUE:CNA_CNB_MODEL_CHUNK_MORPH_DATA": 1347571021,
+    "VALUE:CNA_CNB_MODEL_CHUNK_SKELETON": 1280004941,
+    "VALUE:CNA_CNB_MODEL_CHUNK_STRINGS": 1381258061,
+    "VALUE:CNA_CNB_MODEL_CHUNK_VERTEX_DATA": 1481922125,
+    "VALUE:CNA_CNB_MODEL_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_MATERIAL_STRIDE": 368,
+    "VALUE:CNA_CNB_MODEL_MESH_STRIDE": 16,
+    "VALUE:CNA_CNB_MODEL_PART_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_PART_STRIDE": 56,
+    "VALUE:CNA_CNB_MODEL_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_MORPH_DELTA_MAXIMUM": 2,
+    "VALUE:CNA_CNB_MORPH_DELTA_NORMAL": 1,
+    "VALUE:CNA_CNB_MORPH_DELTA_POSITION": 0,
+    "VALUE:CNA_CNB_MORPH_DELTA_TANGENT": 2,
+    "VALUE:CNA_CNB_MORPH_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MORPH_KEY_IN_TANGENT": 1,
+    "VALUE:CNA_CNB_MORPH_KEY_MAXIMUM": 2,
+    "VALUE:CNA_CNB_MORPH_KEY_OUT_TANGENT": 2,
+    "VALUE:CNA_CNB_MORPH_KEY_WEIGHTS": 0,
+    "VALUE:CNA_CNB_MORPH_WEIGHT_KEY_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_NO_INDEX": 4294967295,
+    "VALUE:CNA_CNB_READ_LIMITS_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SKELETON_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_BIND_POSE": 0,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_INVERSE_BIND_POSE": 1,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_MAXIMUM": 2,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_ROOT_PREFIX": 2,
+    "VALUE:CNA_CNB_SONG_HEADER_FIXED_STRIDE": 8,
+    "VALUE:CNA_CNB_SOUND_EFFECT_CHUNK_DATA": 1145328961,
+    "VALUE:CNA_CNB_SOUND_EFFECT_CHUNK_HEADER": 1212437825,
+    "VALUE:CNA_CNB_SOUND_EFFECT_HEADER_STRIDE": 28,
+    "VALUE:CNA_CNB_SOUND_EFFECT_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SOUND_EFFECT_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHARACTER_STRIDE": 4,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_CHARACTERS": 1380010051,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_CROPPING": 1347375683,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_GLYPH_BOUNDS": 1348029511,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_HEADER": 1414418246,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_KERNING": 1314014539,
+    "VALUE:CNA_CNB_SPRITE_FONT_HEADER_STRIDE": 24,
+    "VALUE:CNA_CNB_SPRITE_FONT_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SPRITE_FONT_KERNING_STRIDE": 12,
+    "VALUE:CNA_CNB_SPRITE_FONT_RECTANGLE_STRIDE": 16,
+    "VALUE:CNA_CNB_SPRITE_FONT_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_TEXTURE_CHUNK_HEADER": 1213744468,
+    "VALUE:CNA_CNB_TEXTURE_CHUNK_PAYLOAD": 1146635604,
+    "VALUE:CNA_CNB_TEXTURE_CHUNK_REPRESENTATIONS": 1381516628,
+    "VALUE:CNA_CNB_TEXTURE_CUBE_FACE_COUNT": 6,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_ALPHA8": 7,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC1": 22,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC2": 23,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC3": 24,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC3_SRGB": 25,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC7": 26,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC7_SRGB": 27,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGR565": 4,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGRA4444": 6,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGRA5551": 5,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGRA8": 2,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_HDR_BLENDABLE": 21,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_MAXIMUM": 27,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R16": 9,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R16_FLOAT": 18,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R32_FLOAT": 15,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R8": 8,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG16": 10,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG16_FLOAT": 19,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG32_FLOAT": 16,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG8_SNORM": 12,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGB10_A2": 14,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA16": 11,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA16_FLOAT": 20,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA32_FLOAT": 17,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA8": 1,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA8_SNORM": 13,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA8_SRGB": 3,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_UNKNOWN": 0,
+    "VALUE:CNA_CNB_TEXTURE_HEADER_STRIDE": 24,
+    "VALUE:CNA_CNB_TEXTURE_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_TEXTURE_REPRESENTATION_STRIDE": 24,
+    "VALUE:CNA_CNB_TEXTURE_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_TEXTURE_SLOT_COUNT": 7,
+    "VALUE:CNA_CNB_VIDEO_HEADER_STRIDE": 24,
+    "VALUE:CNA_CNB_VIDEO_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CnbTextureFormatSupportedFn": 8,
+    "VALUE:CNA_CnbLoaderCallback": 8,
+    "SIZE:CNA_CnbReadLimits": 48,
+    "ALIGN:CNA_CnbReadLimits": 8,
+    "OFFSET:CNA_CnbReadLimits:struct_size": 0,
+    "OFFSET:CNA_CnbReadLimits:struct_version": 4,
+    "OFFSET:CNA_CnbReadLimits:max_file_size": 8,
+    "OFFSET:CNA_CnbReadLimits:max_chunk_size": 16,
+    "OFFSET:CNA_CnbReadLimits:max_total_uncompressed_size": 24,
+    "OFFSET:CNA_CnbReadLimits:max_chunk_count": 32,
+    "OFFSET:CNA_CnbReadLimits:max_string_bytes": 36,
+    "OFFSET:CNA_CnbReadLimits:max_array_element_count": 40,
+    "OFFSET:CNA_CnbReadLimits:max_chunk_alignment": 44,
+    "SIZE:CNA_CnbChunkEntry": 56,
+    "ALIGN:CNA_CnbChunkEntry": 8,
+    "OFFSET:CNA_CnbChunkEntry:struct_size": 0,
+    "OFFSET:CNA_CnbChunkEntry:struct_version": 4,
+    "OFFSET:CNA_CnbChunkEntry:offset": 8,
+    "OFFSET:CNA_CnbChunkEntry:stored_size": 16,
+    "OFFSET:CNA_CnbChunkEntry:uncompressed_size": 24,
+    "OFFSET:CNA_CnbChunkEntry:type": 32,
+    "OFFSET:CNA_CnbChunkEntry:flags": 36,
+    "OFFSET:CNA_CnbChunkEntry:checksum": 40,
+    "OFFSET:CNA_CnbChunkEntry:compression": 44,
+    "OFFSET:CNA_CnbChunkEntry:alignment": 48,
+    "OFFSET:CNA_CnbChunkEntry:reserved": 52,
+    "SIZE:CNA_CnbExternalReference": 16,
+    "ALIGN:CNA_CnbExternalReference": 4,
+    "OFFSET:CNA_CnbExternalReference:struct_size": 0,
+    "OFFSET:CNA_CnbExternalReference:struct_version": 4,
+    "OFFSET:CNA_CnbExternalReference:flags": 8,
+    "OFFSET:CNA_CnbExternalReference:expected_asset_type_id": 12,
+    "SIZE:CNA_CnbMetadata": 16,
+    "ALIGN:CNA_CnbMetadata": 4,
+    "OFFSET:CNA_CnbMetadata:struct_size": 0,
+    "OFFSET:CNA_CnbMetadata:struct_version": 4,
+    "OFFSET:CNA_CnbMetadata:present": 8,
+    "OFFSET:CNA_CnbMetadata:reserved": 9,
+    "OFFSET:CNA_CnbMetadata:flags": 12,
+    "SIZE:CNA_CnbTextureInfo": 32,
+    "ALIGN:CNA_CnbTextureInfo": 4,
+    "OFFSET:CNA_CnbTextureInfo:struct_size": 0,
+    "OFFSET:CNA_CnbTextureInfo:struct_version": 4,
+    "OFFSET:CNA_CnbTextureInfo:width": 8,
+    "OFFSET:CNA_CnbTextureInfo:height": 12,
+    "OFFSET:CNA_CnbTextureInfo:depth": 16,
+    "OFFSET:CNA_CnbTextureInfo:face_count": 20,
+    "OFFSET:CNA_CnbTextureInfo:mip_count": 24,
+    "OFFSET:CNA_CnbTextureInfo:representation_count": 28,
+    "SIZE:CNA_CnbTextureTransform": 20,
+    "ALIGN:CNA_CnbTextureTransform": 4,
+    "OFFSET:CNA_CnbTextureTransform:offset_x": 0,
+    "OFFSET:CNA_CnbTextureTransform:offset_y": 4,
+    "OFFSET:CNA_CnbTextureTransform:scale_x": 8,
+    "OFFSET:CNA_CnbTextureTransform:scale_y": 12,
+    "OFFSET:CNA_CnbTextureTransform:rotation": 16,
+    "SIZE:CNA_CnbSamplerState": 16,
+    "ALIGN:CNA_CnbSamplerState": 4,
+    "OFFSET:CNA_CnbSamplerState:filter": 0,
+    "OFFSET:CNA_CnbSamplerState:address_u": 4,
+    "OFFSET:CNA_CnbSamplerState:address_v": 8,
+    "OFFSET:CNA_CnbSamplerState:declared": 12,
+    "OFFSET:CNA_CnbSamplerState:reserved": 13,
+    "SIZE:CNA_CnbModelLight": 24,
+    "ALIGN:CNA_CnbModelLight": 4,
+    "OFFSET:CNA_CnbModelLight:direction": 0,
+    "OFFSET:CNA_CnbModelLight:diffuse_color": 12,
+    "SIZE:CNA_CnbModelInfo": 56,
+    "ALIGN:CNA_CnbModelInfo": 8,
+    "OFFSET:CNA_CnbModelInfo:struct_size": 0,
+    "OFFSET:CNA_CnbModelInfo:struct_version": 4,
+    "OFFSET:CNA_CnbModelInfo:bone_count": 8,
+    "OFFSET:CNA_CnbModelInfo:part_count": 16,
+    "OFFSET:CNA_CnbModelInfo:mesh_count": 24,
+    "OFFSET:CNA_CnbModelInfo:animation_count": 32,
+    "OFFSET:CNA_CnbModelInfo:light_count": 40,
+    "OFFSET:CNA_CnbModelInfo:has_skeleton": 48,
+    "OFFSET:CNA_CnbModelInfo:applies_gltf_lighting_policy": 49,
+    "OFFSET:CNA_CnbModelInfo:has_bone_hierarchy": 50,
+    "OFFSET:CNA_CnbModelInfo:reserved": 51,
+    "SIZE:CNA_CnbModelBone": 80,
+    "ALIGN:CNA_CnbModelBone": 4,
+    "OFFSET:CNA_CnbModelBone:struct_size": 0,
+    "OFFSET:CNA_CnbModelBone:struct_version": 4,
+    "OFFSET:CNA_CnbModelBone:parent": 8,
+    "OFFSET:CNA_CnbModelBone:reserved": 12,
+    "OFFSET:CNA_CnbModelBone:transform": 16,
+    "SIZE:CNA_CnbModelPartInfo": 40,
+    "ALIGN:CNA_CnbModelPartInfo": 4,
+    "OFFSET:CNA_CnbModelPartInfo:struct_size": 0,
+    "OFFSET:CNA_CnbModelPartInfo:struct_version": 4,
+    "OFFSET:CNA_CnbModelPartInfo:vertex_stride": 8,
+    "OFFSET:CNA_CnbModelPartInfo:vertex_count": 12,
+    "OFFSET:CNA_CnbModelPartInfo:index_count": 16,
+    "OFFSET:CNA_CnbModelPartInfo:index_element_size": 20,
+    "OFFSET:CNA_CnbModelPartInfo:primitive_topology": 24,
+    "OFFSET:CNA_CnbModelPartInfo:primitive_count": 28,
+    "OFFSET:CNA_CnbModelPartInfo:effect_kind": 32,
+    "OFFSET:CNA_CnbModelPartInfo:vertex_color_enabled": 36,
+    "OFFSET:CNA_CnbModelPartInfo:unlit": 37,
+    "OFFSET:CNA_CnbModelPartInfo:reserved": 38,
+    "SIZE:CNA_CnbMaterialInfo": 84,
+    "ALIGN:CNA_CnbMaterialInfo": 4,
+    "OFFSET:CNA_CnbMaterialInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMaterialInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMaterialInfo:base_color_factor": 8,
+    "OFFSET:CNA_CnbMaterialInfo:emissive_factor": 24,
+    "OFFSET:CNA_CnbMaterialInfo:specular_color_factor": 36,
+    "OFFSET:CNA_CnbMaterialInfo:metallic_factor": 48,
+    "OFFSET:CNA_CnbMaterialInfo:roughness_factor": 52,
+    "OFFSET:CNA_CnbMaterialInfo:ior": 56,
+    "OFFSET:CNA_CnbMaterialInfo:specular_factor": 60,
+    "OFFSET:CNA_CnbMaterialInfo:normal_scale": 64,
+    "OFFSET:CNA_CnbMaterialInfo:occlusion_strength": 68,
+    "OFFSET:CNA_CnbMaterialInfo:alpha_cutoff": 72,
+    "OFFSET:CNA_CnbMaterialInfo:alpha_mode": 76,
+    "OFFSET:CNA_CnbMaterialInfo:double_sided": 80,
+    "OFFSET:CNA_CnbMaterialInfo:reserved": 81,
+    "SIZE:CNA_CnbMorphInfo": 48,
+    "ALIGN:CNA_CnbMorphInfo": 8,
+    "OFFSET:CNA_CnbMorphInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMorphInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMorphInfo:vertex_count": 8,
+    "OFFSET:CNA_CnbMorphInfo:reserved": 12,
+    "OFFSET:CNA_CnbMorphInfo:target_count": 16,
+    "OFFSET:CNA_CnbMorphInfo:weight_count": 24,
+    "OFFSET:CNA_CnbMorphInfo:weight_track_key_count": 32,
+    "OFFSET:CNA_CnbMorphInfo:recompute_flat_normals": 40,
+    "OFFSET:CNA_CnbMorphInfo:weight_track_step_interpolation": 41,
+    "OFFSET:CNA_CnbMorphInfo:weight_track_cubic_spline": 42,
+    "OFFSET:CNA_CnbMorphInfo:reserved2": 43,
+    "SIZE:CNA_CnbMeshInfo": 24,
+    "ALIGN:CNA_CnbMeshInfo": 8,
+    "OFFSET:CNA_CnbMeshInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMeshInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMeshInfo:parent_bone": 8,
+    "OFFSET:CNA_CnbMeshInfo:reserved": 12,
+    "OFFSET:CNA_CnbMeshInfo:part_index_count": 16,
+    "SIZE:CNA_CnbSkeletonInfo": 24,
+    "ALIGN:CNA_CnbSkeletonInfo": 8,
+    "OFFSET:CNA_CnbSkeletonInfo:struct_size": 0,
+    "OFFSET:CNA_CnbSkeletonInfo:struct_version": 4,
+    "OFFSET:CNA_CnbSkeletonInfo:joint_count": 8,
+    "OFFSET:CNA_CnbSkeletonInfo:has_root_prefix": 16,
+    "OFFSET:CNA_CnbSkeletonInfo:reserved": 17,
+    "SIZE:CNA_CnbMorphWeightKeyInfo": 40,
+    "ALIGN:CNA_CnbMorphWeightKeyInfo": 8,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:time_seconds": 8,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:weight_count": 16,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:in_tangent_count": 24,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:out_tangent_count": 32,
+    "SIZE:CNA_CnbSpriteFontInfo": 32,
+    "ALIGN:CNA_CnbSpriteFontInfo": 8,
+    "OFFSET:CNA_CnbSpriteFontInfo:struct_size": 0,
+    "OFFSET:CNA_CnbSpriteFontInfo:struct_version": 4,
+    "OFFSET:CNA_CnbSpriteFontInfo:glyph_count": 8,
+    "OFFSET:CNA_CnbSpriteFontInfo:line_spacing": 16,
+    "OFFSET:CNA_CnbSpriteFontInfo:spacing": 20,
+    "OFFSET:CNA_CnbSpriteFontInfo:default_character": 24,
+    "OFFSET:CNA_CnbSpriteFontInfo:has_default_character": 26,
+    "OFFSET:CNA_CnbSpriteFontInfo:reserved": 27,
+    "SIZE:CNA_CnbSoundEffectInfo": 32,
+    "ALIGN:CNA_CnbSoundEffectInfo": 4,
+    "OFFSET:CNA_CnbSoundEffectInfo:struct_size": 0,
+    "OFFSET:CNA_CnbSoundEffectInfo:struct_version": 4,
+    "OFFSET:CNA_CnbSoundEffectInfo:format": 8,
+    "OFFSET:CNA_CnbSoundEffectInfo:sample_rate": 12,
+    "OFFSET:CNA_CnbSoundEffectInfo:channels": 16,
+    "OFFSET:CNA_CnbSoundEffectInfo:frame_count": 20,
+    "OFFSET:CNA_CnbSoundEffectInfo:loop_start": 24,
+    "OFFSET:CNA_CnbSoundEffectInfo:loop_length": 28,
+    "SIZE:CNA_CnbVideoInfo": 32,
+    "ALIGN:CNA_CnbVideoInfo": 4,
+    "OFFSET:CNA_CnbVideoInfo:struct_size": 0,
+    "OFFSET:CNA_CnbVideoInfo:struct_version": 4,
+    "OFFSET:CNA_CnbVideoInfo:duration_milliseconds": 8,
+    "OFFSET:CNA_CnbVideoInfo:width": 12,
+    "OFFSET:CNA_CnbVideoInfo:height": 16,
+    "OFFSET:CNA_CnbVideoInfo:frames_per_second": 20,
+    "OFFSET:CNA_CnbVideoInfo:soundtrack_type": 24,
+    "OFFSET:CNA_CnbVideoInfo:reserved": 28,
+    "SIZE:CNA_CnbImageImportOptions": 12,
+    "ALIGN:CNA_CnbImageImportOptions": 4,
+    "OFFSET:CNA_CnbImageImportOptions:struct_size": 0,
+    "OFFSET:CNA_CnbImageImportOptions:struct_version": 4,
+    "OFFSET:CNA_CnbImageImportOptions:color_key": 8,
+    "OFFSET:CNA_CnbImageImportOptions:has_color_key": 11,
+    "SIZE:CNA_KeyframeEXT": 48,
+    "ALIGN:CNA_KeyframeEXT": 8,
+    "OFFSET:CNA_KeyframeEXT:time_seconds": 0,
+    "OFFSET:CNA_KeyframeEXT:translation": 8,
+    "OFFSET:CNA_KeyframeEXT:rotation": 20,
+    "OFFSET:CNA_KeyframeEXT:scale": 36,
+    "SIZE:CNA_BoneTrackEXTDescriptor": 24,
+    "ALIGN:CNA_BoneTrackEXTDescriptor": 8,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:bone_index": 0,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:reserved": 4,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:keyframes": 8,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:keyframe_count": 16,
+    "SIZE:CNA_AnimationClipEXTDescriptor": 24,
+    "ALIGN:CNA_AnimationClipEXTDescriptor": 8,
+    "OFFSET:CNA_AnimationClipEXTDescriptor:duration_seconds": 0,
+    "OFFSET:CNA_AnimationClipEXTDescriptor:tracks": 8,
+    "OFFSET:CNA_AnimationClipEXTDescriptor:track_count": 16,
+    "SIZE:CNA_CurveKey": 20,
+    "ALIGN:CNA_CurveKey": 4,
+    "OFFSET:CNA_CurveKey:position": 0,
+    "OFFSET:CNA_CurveKey:value": 4,
+    "OFFSET:CNA_CurveKey:tangent_in": 8,
+    "OFFSET:CNA_CurveKey:tangent_out": 12,
+    "OFFSET:CNA_CurveKey:continuity": 16,
+    "SIZE:CNA_ContentManagerCreateInfo": 32,
+    "ALIGN:CNA_ContentManagerCreateInfo": 8,
+    "OFFSET:CNA_ContentManagerCreateInfo:struct_size": 0,
+    "OFFSET:CNA_ContentManagerCreateInfo:struct_version": 4,
+    "OFFSET:CNA_ContentManagerCreateInfo:root_directory": 8,
+    "OFFSET:CNA_ContentManagerCreateInfo:reserved": 24
   },
   "ctypes": {
-    "VALUE:CNA_ABI_VERSION": 1792,
+    "VALUE:CNA_ABI_VERSION": 5376,
     "VALUE:POINTER_WIDTH": 8,
     "VALUE:CNA_Bool": 1,
     "VALUE:CNA_Result": 4,
@@ -9307,6 +13375,7 @@
     "VALUE:CNA_MediaSourceType": 4,
     "VALUE:CNA_VideoSoundtrackType": 4,
     "VALUE:CNA_VISUALIZATION_DATA_SIZE": 256,
+    "VALUE:CNA_VIDEO_FRAME_EXT_STRUCT_VERSION": 1,
     "VALUE:CNA_MEDIA_STATE_STOPPED": 0,
     "VALUE:CNA_MEDIA_STATE_PLAYING": 1,
     "VALUE:CNA_MEDIA_STATE_PAUSED": 2,
@@ -9315,6 +13384,185 @@
     "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC": 0,
     "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_DIALOG": 1,
     "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC_AND_DIALOG": 2,
+    "VALUE:CNA_CnbTextureFormatSupportedFn": 8,
+    "VALUE:CNA_CnbLoaderCallback": 8,
+    "VALUE:CNA_CLIP_TARGET_SPACE_JOINT_PALETTE_EXT": 0,
+    "VALUE:CNA_CLIP_TARGET_SPACE_MAXIMUM_EXT": 1,
+    "VALUE:CNA_CLIP_TARGET_SPACE_SCENE_NODE_EXT": 1,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_CHUNK_HEADER": 1212957505,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_CHUNK_KEYS": 1263289153,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_CHUNK_TRACKS": 1414284097,
+    "VALUE:CNA_CNB_ANIMATION_CLIP_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_ANIMATION_KEY_STRIDE": 48,
+    "VALUE:CNA_CNB_ANIMATION_TRACK_STRIDE": 12,
+    "VALUE:CNA_CNB_ASSET_TYPE_ANIMATION_CLIP": 6,
+    "VALUE:CNA_CNB_ASSET_TYPE_CURVE": 7,
+    "VALUE:CNA_CNB_ASSET_TYPE_CUSTOM_RANGE_FIRST": 2147483648,
+    "VALUE:CNA_CNB_ASSET_TYPE_EFFECT": 11,
+    "VALUE:CNA_CNB_ASSET_TYPE_INVALID": 0,
+    "VALUE:CNA_CNB_ASSET_TYPE_MODEL": 5,
+    "VALUE:CNA_CNB_ASSET_TYPE_RESERVED_RANGE_FIRST": 1073741824,
+    "VALUE:CNA_CNB_ASSET_TYPE_SONG": 9,
+    "VALUE:CNA_CNB_ASSET_TYPE_SOUND_EFFECT": 8,
+    "VALUE:CNA_CNB_ASSET_TYPE_SPRITE_FONT": 4,
+    "VALUE:CNA_CNB_ASSET_TYPE_TEXTURE2D": 1,
+    "VALUE:CNA_CNB_ASSET_TYPE_TEXTURE3D": 2,
+    "VALUE:CNA_CNB_ASSET_TYPE_TEXTURE_CUBE": 3,
+    "VALUE:CNA_CNB_ASSET_TYPE_VIDEO": 10,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_ADPCM": 4,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_MAXIMUM": 5,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_PCM16": 1,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_PCM8": 2,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_PCM_FLOAT32": 3,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_UNKNOWN": 0,
+    "VALUE:CNA_CNB_AUDIO_FORMAT_VORBIS": 5,
+    "VALUE:CNA_CNB_CHUNK_ENTRY_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_CHUNK_FLAG_ALL": 1,
+    "VALUE:CNA_CNB_CHUNK_FLAG_MANDATORY": 1,
+    "VALUE:CNA_CNB_CHUNK_FLAG_NONE": 0,
+    "VALUE:CNA_CNB_COMPRESSION_DEFLATE": 3,
+    "VALUE:CNA_CNB_COMPRESSION_LZ4": 1,
+    "VALUE:CNA_CNB_COMPRESSION_MAXIMUM": 3,
+    "VALUE:CNA_CNB_COMPRESSION_NONE": 0,
+    "VALUE:CNA_CNB_COMPRESSION_ZSTD": 2,
+    "VALUE:CNA_CNB_CONTAINER_CHUNK_EXTERNAL_REFERENCES": 1178948184,
+    "VALUE:CNA_CNB_CONTAINER_CHUNK_METADATA": 1413827907,
+    "VALUE:CNA_CNB_CRC32C_SEED": 0,
+    "VALUE:CNA_CNB_CURVE_CHUNK_HEADER": 1213616707,
+    "VALUE:CNA_CNB_CURVE_CHUNK_KEYS": 1263948355,
+    "VALUE:CNA_CNB_CURVE_KEY_STRIDE": 20,
+    "VALUE:CNA_CNB_CURVE_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_EFFECT_KIND_BASIC": 0,
+    "VALUE:CNA_CNB_EFFECT_KIND_DUAL_TEXTURE": 2,
+    "VALUE:CNA_CNB_EFFECT_KIND_EXTERNAL": 5,
+    "VALUE:CNA_CNB_EFFECT_KIND_MAXIMUM": 5,
+    "VALUE:CNA_CNB_EFFECT_KIND_PBR": 3,
+    "VALUE:CNA_CNB_EFFECT_KIND_SKINNED": 1,
+    "VALUE:CNA_CNB_EFFECT_KIND_SKINNED_PBR": 4,
+    "VALUE:CNA_CNB_EXTERNAL_REFERENCE_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_FORMAT_CONTAINER_MAJOR": 1,
+    "VALUE:CNA_CNB_FORMAT_CONTAINER_MINOR": 0,
+    "VALUE:CNA_CNB_FORMAT_DEFAULT_TOC_OFFSET": 64,
+    "VALUE:CNA_CNB_FORMAT_HEADER_CHECKSUM_COVERAGE": 44,
+    "VALUE:CNA_CNB_FORMAT_HEADER_CHECKSUM_OFFSET": 44,
+    "VALUE:CNA_CNB_FORMAT_HEADER_RESERVED_SIZE": 16,
+    "VALUE:CNA_CNB_FORMAT_HEADER_SIZE": 64,
+    "VALUE:CNA_CNB_FORMAT_MAGIC_SIZE": 4,
+    "VALUE:CNA_CNB_FORMAT_TOC_ENTRY_SIZE": 48,
+    "VALUE:CNA_CNB_IMAGE_IMPORT_OPTIONS_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MATERIAL_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_BASE_COLOR": 0,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_EMISSIVE": 4,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_MAXIMUM": 7,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_METALLIC_ROUGHNESS": 3,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_NORMAL": 2,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_OCCLUSION": 5,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_SECOND": 1,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_SPECULAR": 6,
+    "VALUE:CNA_CNB_MATERIAL_TEXTURE_SPECULAR_COLOR": 7,
+    "VALUE:CNA_CNB_MAX_AUDIO_SAMPLE_RATE": 384000,
+    "VALUE:CNA_CNB_MAX_SPRITE_FONT_GLYPHS": 65536,
+    "VALUE:CNA_CNB_MAX_TEXTURE_MIP_LEVELS": 16,
+    "VALUE:CNA_CNB_MAX_TEXTURE_REPRESENTATIONS": 8,
+    "VALUE:CNA_CNB_MAX_VIDEO_DIMENSION": 65536,
+    "VALUE:CNA_CNB_MEDIA_CHUNK_SONG_HEADER": 1212632659,
+    "VALUE:CNA_CNB_MEDIA_CHUNK_VIDEO_HEADER": 1212434774,
+    "VALUE:CNA_CNB_MEDIA_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_MESH_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_METADATA_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_BONE_STRIDE": 72,
+    "VALUE:CNA_CNB_MODEL_BONE_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_CHUNK_ANIMATIONS": 1296974157,
+    "VALUE:CNA_CNB_MODEL_CHUNK_BONES": 1313817165,
+    "VALUE:CNA_CNB_MODEL_CHUNK_HEADER": 1212957773,
+    "VALUE:CNA_CNB_MODEL_CHUNK_INDEX_DATA": 1480870221,
+    "VALUE:CNA_CNB_MODEL_CHUNK_LIGHTS": 1414089805,
+    "VALUE:CNA_CNB_MODEL_CHUNK_MATERIALS": 1413565773,
+    "VALUE:CNA_CNB_MODEL_CHUNK_MESHES": 1213418829,
+    "VALUE:CNA_CNB_MODEL_CHUNK_MORPH_DATA": 1347571021,
+    "VALUE:CNA_CNB_MODEL_CHUNK_SKELETON": 1280004941,
+    "VALUE:CNA_CNB_MODEL_CHUNK_STRINGS": 1381258061,
+    "VALUE:CNA_CNB_MODEL_CHUNK_VERTEX_DATA": 1481922125,
+    "VALUE:CNA_CNB_MODEL_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_MATERIAL_STRIDE": 368,
+    "VALUE:CNA_CNB_MODEL_MESH_STRIDE": 16,
+    "VALUE:CNA_CNB_MODEL_PART_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MODEL_PART_STRIDE": 56,
+    "VALUE:CNA_CNB_MODEL_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_MORPH_DELTA_MAXIMUM": 2,
+    "VALUE:CNA_CNB_MORPH_DELTA_NORMAL": 1,
+    "VALUE:CNA_CNB_MORPH_DELTA_POSITION": 0,
+    "VALUE:CNA_CNB_MORPH_DELTA_TANGENT": 2,
+    "VALUE:CNA_CNB_MORPH_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_MORPH_KEY_IN_TANGENT": 1,
+    "VALUE:CNA_CNB_MORPH_KEY_MAXIMUM": 2,
+    "VALUE:CNA_CNB_MORPH_KEY_OUT_TANGENT": 2,
+    "VALUE:CNA_CNB_MORPH_KEY_WEIGHTS": 0,
+    "VALUE:CNA_CNB_MORPH_WEIGHT_KEY_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_NO_INDEX": 4294967295,
+    "VALUE:CNA_CNB_READ_LIMITS_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SKELETON_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_BIND_POSE": 0,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_INVERSE_BIND_POSE": 1,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_MAXIMUM": 2,
+    "VALUE:CNA_CNB_SKELETON_MATRIX_ROOT_PREFIX": 2,
+    "VALUE:CNA_CNB_SONG_HEADER_FIXED_STRIDE": 8,
+    "VALUE:CNA_CNB_SOUND_EFFECT_CHUNK_DATA": 1145328961,
+    "VALUE:CNA_CNB_SOUND_EFFECT_CHUNK_HEADER": 1212437825,
+    "VALUE:CNA_CNB_SOUND_EFFECT_HEADER_STRIDE": 28,
+    "VALUE:CNA_CNB_SOUND_EFFECT_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SOUND_EFFECT_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHARACTER_STRIDE": 4,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_CHARACTERS": 1380010051,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_CROPPING": 1347375683,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_GLYPH_BOUNDS": 1348029511,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_HEADER": 1414418246,
+    "VALUE:CNA_CNB_SPRITE_FONT_CHUNK_KERNING": 1314014539,
+    "VALUE:CNA_CNB_SPRITE_FONT_HEADER_STRIDE": 24,
+    "VALUE:CNA_CNB_SPRITE_FONT_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_SPRITE_FONT_KERNING_STRIDE": 12,
+    "VALUE:CNA_CNB_SPRITE_FONT_RECTANGLE_STRIDE": 16,
+    "VALUE:CNA_CNB_SPRITE_FONT_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_TEXTURE_CHUNK_HEADER": 1213744468,
+    "VALUE:CNA_CNB_TEXTURE_CHUNK_PAYLOAD": 1146635604,
+    "VALUE:CNA_CNB_TEXTURE_CHUNK_REPRESENTATIONS": 1381516628,
+    "VALUE:CNA_CNB_TEXTURE_CUBE_FACE_COUNT": 6,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_ALPHA8": 7,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC1": 22,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC2": 23,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC3": 24,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC3_SRGB": 25,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC7": 26,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BC7_SRGB": 27,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGR565": 4,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGRA4444": 6,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGRA5551": 5,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_BGRA8": 2,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_HDR_BLENDABLE": 21,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_MAXIMUM": 27,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R16": 9,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R16_FLOAT": 18,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R32_FLOAT": 15,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_R8": 8,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG16": 10,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG16_FLOAT": 19,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG32_FLOAT": 16,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RG8_SNORM": 12,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGB10_A2": 14,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA16": 11,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA16_FLOAT": 20,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA32_FLOAT": 17,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA8": 1,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA8_SNORM": 13,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_RGBA8_SRGB": 3,
+    "VALUE:CNA_CNB_TEXTURE_FORMAT_UNKNOWN": 0,
+    "VALUE:CNA_CNB_TEXTURE_HEADER_STRIDE": 24,
+    "VALUE:CNA_CNB_TEXTURE_INFO_STRUCT_VERSION": 1,
+    "VALUE:CNA_CNB_TEXTURE_REPRESENTATION_STRIDE": 24,
+    "VALUE:CNA_CNB_TEXTURE_SCHEMA_VERSION": 1,
+    "VALUE:CNA_CNB_TEXTURE_SLOT_COUNT": 7,
+    "VALUE:CNA_CNB_VIDEO_HEADER_STRIDE": 24,
+    "VALUE:CNA_CNB_VIDEO_INFO_STRUCT_VERSION": 1,
     "SIZE:CNA_StringView": 16,
     "ALIGN:CNA_StringView": 8,
     "SIZE:CNA_ErrorInfo": 24,
@@ -9351,6 +13599,8 @@
     "ALIGN:CNA_CueInfo": 4,
     "SIZE:CNA_VisualizationData": 2056,
     "ALIGN:CNA_VisualizationData": 4,
+    "SIZE:CNA_VideoFrameEXT": 40,
+    "ALIGN:CNA_VideoFrameEXT": 8,
     "SIZE:CNA_Quaternion": 16,
     "ALIGN:CNA_Quaternion": 4,
     "SIZE:CNA_Matrix": 64,
@@ -9453,6 +13703,8 @@
     "ALIGN:CNA_EffectAnnotationInfo": 4,
     "SIZE:CNA_SpriteBatchBeginInfo": 16,
     "ALIGN:CNA_SpriteBatchBeginInfo": 4,
+    "SIZE:CNA_SpriteCommand": 72,
+    "ALIGN:CNA_SpriteCommand": 8,
     "SIZE:CNA_SpriteScaledCommand": 72,
     "ALIGN:CNA_SpriteScaledCommand": 8,
     "SIZE:CNA_KeyboardState": 40,
@@ -9473,6 +13725,56 @@
     "ALIGN:CNA_TouchState": 4,
     "SIZE:CNA_GestureSample": 64,
     "ALIGN:CNA_GestureSample": 8,
+    "SIZE:CNA_CnbReadLimits": 48,
+    "ALIGN:CNA_CnbReadLimits": 8,
+    "SIZE:CNA_CnbChunkEntry": 56,
+    "ALIGN:CNA_CnbChunkEntry": 8,
+    "SIZE:CNA_CnbExternalReference": 16,
+    "ALIGN:CNA_CnbExternalReference": 4,
+    "SIZE:CNA_CnbMetadata": 16,
+    "ALIGN:CNA_CnbMetadata": 4,
+    "SIZE:CNA_CnbTextureInfo": 32,
+    "ALIGN:CNA_CnbTextureInfo": 4,
+    "SIZE:CNA_CnbTextureTransform": 20,
+    "ALIGN:CNA_CnbTextureTransform": 4,
+    "SIZE:CNA_CnbSamplerState": 16,
+    "ALIGN:CNA_CnbSamplerState": 4,
+    "SIZE:CNA_CnbModelLight": 24,
+    "ALIGN:CNA_CnbModelLight": 4,
+    "SIZE:CNA_CnbModelInfo": 56,
+    "ALIGN:CNA_CnbModelInfo": 8,
+    "SIZE:CNA_CnbModelBone": 80,
+    "ALIGN:CNA_CnbModelBone": 4,
+    "SIZE:CNA_CnbModelPartInfo": 40,
+    "ALIGN:CNA_CnbModelPartInfo": 4,
+    "SIZE:CNA_CnbMaterialInfo": 84,
+    "ALIGN:CNA_CnbMaterialInfo": 4,
+    "SIZE:CNA_CnbMorphInfo": 48,
+    "ALIGN:CNA_CnbMorphInfo": 8,
+    "SIZE:CNA_CnbMeshInfo": 24,
+    "ALIGN:CNA_CnbMeshInfo": 8,
+    "SIZE:CNA_CnbSkeletonInfo": 24,
+    "ALIGN:CNA_CnbSkeletonInfo": 8,
+    "SIZE:CNA_CnbMorphWeightKeyInfo": 40,
+    "ALIGN:CNA_CnbMorphWeightKeyInfo": 8,
+    "SIZE:CNA_CnbSpriteFontInfo": 32,
+    "ALIGN:CNA_CnbSpriteFontInfo": 8,
+    "SIZE:CNA_CnbSoundEffectInfo": 32,
+    "ALIGN:CNA_CnbSoundEffectInfo": 4,
+    "SIZE:CNA_CnbVideoInfo": 32,
+    "ALIGN:CNA_CnbVideoInfo": 4,
+    "SIZE:CNA_CnbImageImportOptions": 12,
+    "ALIGN:CNA_CnbImageImportOptions": 4,
+    "SIZE:CNA_KeyframeEXT": 48,
+    "ALIGN:CNA_KeyframeEXT": 8,
+    "SIZE:CNA_BoneTrackEXTDescriptor": 24,
+    "ALIGN:CNA_BoneTrackEXTDescriptor": 8,
+    "SIZE:CNA_AnimationClipEXTDescriptor": 24,
+    "ALIGN:CNA_AnimationClipEXTDescriptor": 8,
+    "SIZE:CNA_CurveKey": 20,
+    "ALIGN:CNA_CurveKey": 4,
+    "SIZE:CNA_ContentManagerCreateInfo": 32,
+    "ALIGN:CNA_ContentManagerCreateInfo": 8,
     "OFFSET:CNA_StringView:data": 0,
     "OFFSET:CNA_StringView:byte_length": 8,
     "OFFSET:CNA_ErrorInfo:struct_size": 0,
@@ -9569,6 +13871,12 @@
     "OFFSET:CNA_VisualizationData:struct_version": 4,
     "OFFSET:CNA_VisualizationData:frequencies": 8,
     "OFFSET:CNA_VisualizationData:samples": 1032,
+    "OFFSET:CNA_VideoFrameEXT:struct_size": 0,
+    "OFFSET:CNA_VideoFrameEXT:struct_version": 4,
+    "OFFSET:CNA_VideoFrameEXT:texture": 8,
+    "OFFSET:CNA_VideoFrameEXT:generation": 16,
+    "OFFSET:CNA_VideoFrameEXT:presentation_time": 24,
+    "OFFSET:CNA_VideoFrameEXT:available": 32,
     "OFFSET:CNA_Quaternion:x": 0,
     "OFFSET:CNA_Quaternion:y": 4,
     "OFFSET:CNA_Quaternion:z": 8,
@@ -9961,6 +14269,16 @@
     "OFFSET:CNA_SpriteBatchBeginInfo:struct_version": 4,
     "OFFSET:CNA_SpriteBatchBeginInfo:sort_mode": 8,
     "OFFSET:CNA_SpriteBatchBeginInfo:reserved": 12,
+    "OFFSET:CNA_SpriteCommand:struct_size": 0,
+    "OFFSET:CNA_SpriteCommand:struct_version": 4,
+    "OFFSET:CNA_SpriteCommand:texture": 8,
+    "OFFSET:CNA_SpriteCommand:destination": 16,
+    "OFFSET:CNA_SpriteCommand:source": 32,
+    "OFFSET:CNA_SpriteCommand:color": 48,
+    "OFFSET:CNA_SpriteCommand:rotation": 52,
+    "OFFSET:CNA_SpriteCommand:origin": 56,
+    "OFFSET:CNA_SpriteCommand:effects": 64,
+    "OFFSET:CNA_SpriteCommand:layer_depth": 68,
     "OFFSET:CNA_SpriteScaledCommand:struct_size": 0,
     "OFFSET:CNA_SpriteScaledCommand:struct_version": 4,
     "OFFSET:CNA_SpriteScaledCommand:texture": 8,
@@ -10061,6 +14379,173 @@
     "OFFSET:CNA_GestureSample:position": 32,
     "OFFSET:CNA_GestureSample:position2": 40,
     "OFFSET:CNA_GestureSample:delta": 48,
-    "OFFSET:CNA_GestureSample:delta2": 56
+    "OFFSET:CNA_GestureSample:delta2": 56,
+    "OFFSET:CNA_CnbReadLimits:struct_size": 0,
+    "OFFSET:CNA_CnbReadLimits:struct_version": 4,
+    "OFFSET:CNA_CnbReadLimits:max_file_size": 8,
+    "OFFSET:CNA_CnbReadLimits:max_chunk_size": 16,
+    "OFFSET:CNA_CnbReadLimits:max_total_uncompressed_size": 24,
+    "OFFSET:CNA_CnbReadLimits:max_chunk_count": 32,
+    "OFFSET:CNA_CnbReadLimits:max_string_bytes": 36,
+    "OFFSET:CNA_CnbReadLimits:max_array_element_count": 40,
+    "OFFSET:CNA_CnbReadLimits:max_chunk_alignment": 44,
+    "OFFSET:CNA_CnbChunkEntry:struct_size": 0,
+    "OFFSET:CNA_CnbChunkEntry:struct_version": 4,
+    "OFFSET:CNA_CnbChunkEntry:offset": 8,
+    "OFFSET:CNA_CnbChunkEntry:stored_size": 16,
+    "OFFSET:CNA_CnbChunkEntry:uncompressed_size": 24,
+    "OFFSET:CNA_CnbChunkEntry:type": 32,
+    "OFFSET:CNA_CnbChunkEntry:flags": 36,
+    "OFFSET:CNA_CnbChunkEntry:checksum": 40,
+    "OFFSET:CNA_CnbChunkEntry:compression": 44,
+    "OFFSET:CNA_CnbChunkEntry:alignment": 48,
+    "OFFSET:CNA_CnbChunkEntry:reserved": 52,
+    "OFFSET:CNA_CnbExternalReference:struct_size": 0,
+    "OFFSET:CNA_CnbExternalReference:struct_version": 4,
+    "OFFSET:CNA_CnbExternalReference:flags": 8,
+    "OFFSET:CNA_CnbExternalReference:expected_asset_type_id": 12,
+    "OFFSET:CNA_CnbMetadata:struct_size": 0,
+    "OFFSET:CNA_CnbMetadata:struct_version": 4,
+    "OFFSET:CNA_CnbMetadata:present": 8,
+    "OFFSET:CNA_CnbMetadata:reserved": 9,
+    "OFFSET:CNA_CnbMetadata:flags": 12,
+    "OFFSET:CNA_CnbTextureInfo:struct_size": 0,
+    "OFFSET:CNA_CnbTextureInfo:struct_version": 4,
+    "OFFSET:CNA_CnbTextureInfo:width": 8,
+    "OFFSET:CNA_CnbTextureInfo:height": 12,
+    "OFFSET:CNA_CnbTextureInfo:depth": 16,
+    "OFFSET:CNA_CnbTextureInfo:face_count": 20,
+    "OFFSET:CNA_CnbTextureInfo:mip_count": 24,
+    "OFFSET:CNA_CnbTextureInfo:representation_count": 28,
+    "OFFSET:CNA_CnbTextureTransform:offset_x": 0,
+    "OFFSET:CNA_CnbTextureTransform:offset_y": 4,
+    "OFFSET:CNA_CnbTextureTransform:scale_x": 8,
+    "OFFSET:CNA_CnbTextureTransform:scale_y": 12,
+    "OFFSET:CNA_CnbTextureTransform:rotation": 16,
+    "OFFSET:CNA_CnbSamplerState:filter": 0,
+    "OFFSET:CNA_CnbSamplerState:address_u": 4,
+    "OFFSET:CNA_CnbSamplerState:address_v": 8,
+    "OFFSET:CNA_CnbSamplerState:declared": 12,
+    "OFFSET:CNA_CnbSamplerState:reserved": 13,
+    "OFFSET:CNA_CnbModelLight:direction": 0,
+    "OFFSET:CNA_CnbModelLight:diffuse_color": 12,
+    "OFFSET:CNA_CnbModelInfo:struct_size": 0,
+    "OFFSET:CNA_CnbModelInfo:struct_version": 4,
+    "OFFSET:CNA_CnbModelInfo:bone_count": 8,
+    "OFFSET:CNA_CnbModelInfo:part_count": 16,
+    "OFFSET:CNA_CnbModelInfo:mesh_count": 24,
+    "OFFSET:CNA_CnbModelInfo:animation_count": 32,
+    "OFFSET:CNA_CnbModelInfo:light_count": 40,
+    "OFFSET:CNA_CnbModelInfo:has_skeleton": 48,
+    "OFFSET:CNA_CnbModelInfo:applies_gltf_lighting_policy": 49,
+    "OFFSET:CNA_CnbModelInfo:has_bone_hierarchy": 50,
+    "OFFSET:CNA_CnbModelInfo:reserved": 51,
+    "OFFSET:CNA_CnbModelBone:struct_size": 0,
+    "OFFSET:CNA_CnbModelBone:struct_version": 4,
+    "OFFSET:CNA_CnbModelBone:parent": 8,
+    "OFFSET:CNA_CnbModelBone:reserved": 12,
+    "OFFSET:CNA_CnbModelBone:transform": 16,
+    "OFFSET:CNA_CnbModelPartInfo:struct_size": 0,
+    "OFFSET:CNA_CnbModelPartInfo:struct_version": 4,
+    "OFFSET:CNA_CnbModelPartInfo:vertex_stride": 8,
+    "OFFSET:CNA_CnbModelPartInfo:vertex_count": 12,
+    "OFFSET:CNA_CnbModelPartInfo:index_count": 16,
+    "OFFSET:CNA_CnbModelPartInfo:index_element_size": 20,
+    "OFFSET:CNA_CnbModelPartInfo:primitive_topology": 24,
+    "OFFSET:CNA_CnbModelPartInfo:primitive_count": 28,
+    "OFFSET:CNA_CnbModelPartInfo:effect_kind": 32,
+    "OFFSET:CNA_CnbModelPartInfo:vertex_color_enabled": 36,
+    "OFFSET:CNA_CnbModelPartInfo:unlit": 37,
+    "OFFSET:CNA_CnbModelPartInfo:reserved": 38,
+    "OFFSET:CNA_CnbMaterialInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMaterialInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMaterialInfo:base_color_factor": 8,
+    "OFFSET:CNA_CnbMaterialInfo:emissive_factor": 24,
+    "OFFSET:CNA_CnbMaterialInfo:specular_color_factor": 36,
+    "OFFSET:CNA_CnbMaterialInfo:metallic_factor": 48,
+    "OFFSET:CNA_CnbMaterialInfo:roughness_factor": 52,
+    "OFFSET:CNA_CnbMaterialInfo:ior": 56,
+    "OFFSET:CNA_CnbMaterialInfo:specular_factor": 60,
+    "OFFSET:CNA_CnbMaterialInfo:normal_scale": 64,
+    "OFFSET:CNA_CnbMaterialInfo:occlusion_strength": 68,
+    "OFFSET:CNA_CnbMaterialInfo:alpha_cutoff": 72,
+    "OFFSET:CNA_CnbMaterialInfo:alpha_mode": 76,
+    "OFFSET:CNA_CnbMaterialInfo:double_sided": 80,
+    "OFFSET:CNA_CnbMaterialInfo:reserved": 81,
+    "OFFSET:CNA_CnbMorphInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMorphInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMorphInfo:vertex_count": 8,
+    "OFFSET:CNA_CnbMorphInfo:reserved": 12,
+    "OFFSET:CNA_CnbMorphInfo:target_count": 16,
+    "OFFSET:CNA_CnbMorphInfo:weight_count": 24,
+    "OFFSET:CNA_CnbMorphInfo:weight_track_key_count": 32,
+    "OFFSET:CNA_CnbMorphInfo:recompute_flat_normals": 40,
+    "OFFSET:CNA_CnbMorphInfo:weight_track_step_interpolation": 41,
+    "OFFSET:CNA_CnbMorphInfo:weight_track_cubic_spline": 42,
+    "OFFSET:CNA_CnbMorphInfo:reserved2": 43,
+    "OFFSET:CNA_CnbMeshInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMeshInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMeshInfo:parent_bone": 8,
+    "OFFSET:CNA_CnbMeshInfo:reserved": 12,
+    "OFFSET:CNA_CnbMeshInfo:part_index_count": 16,
+    "OFFSET:CNA_CnbSkeletonInfo:struct_size": 0,
+    "OFFSET:CNA_CnbSkeletonInfo:struct_version": 4,
+    "OFFSET:CNA_CnbSkeletonInfo:joint_count": 8,
+    "OFFSET:CNA_CnbSkeletonInfo:has_root_prefix": 16,
+    "OFFSET:CNA_CnbSkeletonInfo:reserved": 17,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:struct_size": 0,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:struct_version": 4,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:time_seconds": 8,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:weight_count": 16,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:in_tangent_count": 24,
+    "OFFSET:CNA_CnbMorphWeightKeyInfo:out_tangent_count": 32,
+    "OFFSET:CNA_CnbSpriteFontInfo:struct_size": 0,
+    "OFFSET:CNA_CnbSpriteFontInfo:struct_version": 4,
+    "OFFSET:CNA_CnbSpriteFontInfo:glyph_count": 8,
+    "OFFSET:CNA_CnbSpriteFontInfo:line_spacing": 16,
+    "OFFSET:CNA_CnbSpriteFontInfo:spacing": 20,
+    "OFFSET:CNA_CnbSpriteFontInfo:default_character": 24,
+    "OFFSET:CNA_CnbSpriteFontInfo:has_default_character": 26,
+    "OFFSET:CNA_CnbSpriteFontInfo:reserved": 27,
+    "OFFSET:CNA_CnbSoundEffectInfo:struct_size": 0,
+    "OFFSET:CNA_CnbSoundEffectInfo:struct_version": 4,
+    "OFFSET:CNA_CnbSoundEffectInfo:format": 8,
+    "OFFSET:CNA_CnbSoundEffectInfo:sample_rate": 12,
+    "OFFSET:CNA_CnbSoundEffectInfo:channels": 16,
+    "OFFSET:CNA_CnbSoundEffectInfo:frame_count": 20,
+    "OFFSET:CNA_CnbSoundEffectInfo:loop_start": 24,
+    "OFFSET:CNA_CnbSoundEffectInfo:loop_length": 28,
+    "OFFSET:CNA_CnbVideoInfo:struct_size": 0,
+    "OFFSET:CNA_CnbVideoInfo:struct_version": 4,
+    "OFFSET:CNA_CnbVideoInfo:duration_milliseconds": 8,
+    "OFFSET:CNA_CnbVideoInfo:width": 12,
+    "OFFSET:CNA_CnbVideoInfo:height": 16,
+    "OFFSET:CNA_CnbVideoInfo:frames_per_second": 20,
+    "OFFSET:CNA_CnbVideoInfo:soundtrack_type": 24,
+    "OFFSET:CNA_CnbVideoInfo:reserved": 28,
+    "OFFSET:CNA_CnbImageImportOptions:struct_size": 0,
+    "OFFSET:CNA_CnbImageImportOptions:struct_version": 4,
+    "OFFSET:CNA_CnbImageImportOptions:color_key": 8,
+    "OFFSET:CNA_CnbImageImportOptions:has_color_key": 11,
+    "OFFSET:CNA_KeyframeEXT:time_seconds": 0,
+    "OFFSET:CNA_KeyframeEXT:translation": 8,
+    "OFFSET:CNA_KeyframeEXT:rotation": 20,
+    "OFFSET:CNA_KeyframeEXT:scale": 36,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:bone_index": 0,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:reserved": 4,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:keyframes": 8,
+    "OFFSET:CNA_BoneTrackEXTDescriptor:keyframe_count": 16,
+    "OFFSET:CNA_AnimationClipEXTDescriptor:duration_seconds": 0,
+    "OFFSET:CNA_AnimationClipEXTDescriptor:tracks": 8,
+    "OFFSET:CNA_AnimationClipEXTDescriptor:track_count": 16,
+    "OFFSET:CNA_CurveKey:position": 0,
+    "OFFSET:CNA_CurveKey:value": 4,
+    "OFFSET:CNA_CurveKey:tangent_in": 8,
+    "OFFSET:CNA_CurveKey:tangent_out": 12,
+    "OFFSET:CNA_CurveKey:continuity": 16,
+    "OFFSET:CNA_ContentManagerCreateInfo:struct_size": 0,
+    "OFFSET:CNA_ContentManagerCreateInfo:struct_version": 4,
+    "OFFSET:CNA_ContentManagerCreateInfo:root_directory": 8,
+    "OFFSET:CNA_ContentManagerCreateInfo:reserved": 24
   }
 }
