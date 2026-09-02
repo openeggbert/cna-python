@@ -1038,3 +1038,129 @@ class ProbeFaceViewTests(unittest.TestCase):
         seen = {tuple(round(value, 5) for value in oracle.probe_face_view(face, self.POSITION))
                 for face in range(6)}
         self.assertEqual(len(seen), 6)
+
+
+class FrustumPlaneTests(unittest.TestCase):
+    PROJECTION = Matrix.CreatePerspectiveFieldOfView(0.9773843811168246,
+                                                     1.7777777777777777, 0.35, 47.5)
+    VIEW = Matrix.CreateLookAt(Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, -1.0),
+                               Vector3(0.0, 1.0, 0.0))
+
+    def _planes(self):
+        return oracle.frustum_planes(Matrix.Multiply(self.VIEW, self.PROJECTION))
+
+    def test_there_are_six_and_each_normal_is_a_unit_vector(self) -> None:
+        planes = self._planes()
+        self.assertEqual(len(planes), 6)
+        for a, b, c, _d in planes:
+            self.assertAlmostEqual(math.sqrt(a * a + b * b + c * c), 1.0, places=6)
+
+    def test_the_near_and_far_planes_sit_at_the_two_distances(self) -> None:
+        """A point exactly on each plane satisfies that plane's equation.
+
+        Compared against a tolerance that scales with the distance, because the
+        projection matrix the planes come out of holds single-precision floats:
+        an absolute bound tight enough for the near plane at 0.35 would be
+        asserting float32 rounding at the far plane at 47.5.
+        """
+        near, far = self._planes()[0], self._planes()[1]
+        for plane, z in ((near, -0.35), (far, -47.5)):
+            a, b, c, d = plane
+            self.assertAlmostEqual(a * 0.0 + b * 0.0 + c * z + d, 0.0,
+                                   delta=abs(z) * 1e-5 + 1e-6)
+
+    def test_the_normals_point_inward(self) -> None:
+        """A point well inside the frustum is on the positive side of all six."""
+        planes = self._planes()
+        for a, b, c, d in planes:
+            self.assertGreater(a * 0.0 + b * 0.0 + c * -5.0 + d, 0.0)
+
+    def test_a_box_in_front_is_visible_and_one_behind_is_not(self) -> None:
+        planes = self._planes()
+        self.assertTrue(oracle.box_is_visible(planes, Vector3(-1.0, -1.0, -5.0),
+                                              Vector3(1.0, 1.0, -4.0)))
+        self.assertFalse(oracle.box_is_visible(planes, Vector3(-1.0, -1.0, 5.0),
+                                               Vector3(1.0, 1.0, 6.0)))
+        self.assertFalse(oracle.box_is_visible(planes, Vector3(100.0, 100.0, -5.0),
+                                               Vector3(101.0, 101.0, -4.0)))
+
+    def test_a_box_straddling_the_near_plane_is_visible(self) -> None:
+        planes = self._planes()
+        self.assertTrue(oracle.box_is_visible(planes, Vector3(-1.0, -1.0, -1.0),
+                                              Vector3(1.0, 1.0, 1.0)))
+
+    def test_a_sphere_is_visible_when_it_reaches_in(self) -> None:
+        planes = self._planes()
+        self.assertFalse(oracle.sphere_is_visible(planes, Vector3(0.0, 0.0, 5.0), 1.0))
+        # The same centre with a radius that reaches back past the near plane.
+        self.assertTrue(oracle.sphere_is_visible(planes, Vector3(0.0, 0.0, 5.0), 20.0))
+
+    def test_a_sphere_beyond_the_far_plane_is_not_visible(self) -> None:
+        planes = self._planes()
+        self.assertFalse(oracle.sphere_is_visible(planes, Vector3(0.0, 0.0, -100.0),
+                                                  1.0))
+        self.assertTrue(oracle.sphere_is_visible(planes, Vector3(0.0, 0.0, -47.0), 1.0))
+
+
+class LodSelectionTests(unittest.TestCase):
+    THRESHOLDS = [5.0, 25.0, 100.0]
+
+    def test_a_threshold_is_an_upper_bound(self) -> None:
+        """A distance exactly at a threshold has *left* that level."""
+        self.assertEqual(oracle.lod_select_by_distance(self.THRESHOLDS, 4.999), 0)
+        self.assertEqual(oracle.lod_select_by_distance(self.THRESHOLDS, 5.0), 1)
+        self.assertEqual(oracle.lod_select_by_distance(self.THRESHOLDS, 25.0), 2)
+        self.assertEqual(oracle.lod_select_by_distance(self.THRESHOLDS, 99.999), 2)
+
+    def test_past_every_threshold_no_level_covers_it(self) -> None:
+        self.assertEqual(oracle.lod_select_by_distance(self.THRESHOLDS, 100.0), -1)
+        self.assertEqual(oracle.lod_select_by_distance(self.THRESHOLDS, 1e9), -1)
+
+    def test_an_empty_group_selects_nothing(self) -> None:
+        self.assertEqual(oracle.lod_select_by_distance([], 1.0), -1)
+
+    def test_the_screen_space_comparison_turns_around(self) -> None:
+        """Projected size falls with distance; the list order does not change."""
+        thresholds = [100.0, 25.0, 5.0]
+        self.assertEqual(oracle.lod_select_by_screen_space(thresholds, 200.0), 0)
+        self.assertEqual(oracle.lod_select_by_screen_space(thresholds, 100.0), 0)
+        self.assertEqual(oracle.lod_select_by_screen_space(thresholds, 99.0), 1)
+        self.assertEqual(oracle.lod_select_by_screen_space(thresholds, 4.0), -1)
+
+    def test_the_projected_radius_halves_as_distance_doubles(self) -> None:
+        near = oracle.lod_projected_radius_pixels(1.5, 0.9773843811168246, 720.0, 10.0)
+        far = oracle.lod_projected_radius_pixels(1.5, 0.9773843811168246, 720.0, 20.0)
+        self.assertAlmostEqual(near / far, 2.0, places=4)
+
+    def test_the_projected_radius_at_a_worked_case(self) -> None:
+        """A 90-degree field of view makes the half-extent twice the distance.
+
+        radius 1, height 100, distance 1: 1 * 100 / (2 * tan(45) * 1) = 50.
+        """
+        self.assertAlmostEqual(
+            oracle.lod_projected_radius_pixels(1.0, math.pi / 2.0, 100.0, 1.0),
+            50.0, places=3)
+
+    def test_at_or_behind_the_eye_it_is_as_large_as_it_gets(self) -> None:
+        for distance in (0.0, -1.0):
+            value = oracle.lod_projected_radius_pixels(1.5, 0.9, 720.0, distance)
+            self.assertGreater(value, 1e30)
+
+    def test_hysteresis_holds_the_neighbour_and_only_the_neighbour(self) -> None:
+        # Moving 0 -> 1 with the boundary at 5 and the value at 6: inside a
+        # margin of 2, so the previous level holds.
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 1, 0, 6.0, 2.0), 0)
+        # Further out, the change is real.
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 1, 0, 20.0, 2.0), 1)
+        # Two levels at once is never sticky.
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 2, 0, 6.0, 2.0), 2)
+
+    def test_no_margin_and_no_previous_level_are_never_sticky(self) -> None:
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 1, 0, 6.0, 0.0), 1)
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 1, -1, 6.0, 2.0), 1)
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 1, 1, 6.0, 2.0), 1)
+
+    def test_it_is_sticky_going_down_as_well_as_up(self) -> None:
+        """The boundary is the lower level's, whichever way the value crosses it."""
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 0, 1, 4.0, 2.0), 1)
+        self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 0, 1, 1.0, 2.0), 0)

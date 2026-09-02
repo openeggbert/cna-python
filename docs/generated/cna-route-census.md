@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1835
+BOUND_ROUTES=1894
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -15,24 +15,24 @@ CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
 SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 ENGINE_ROUTES=870
-ENGINE_BOUND=787
+ENGINE_BOUND=844
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=80
+SELECTED_ENGINE_ACTIONABLE_LOCAL=23
 PURPOSE_XNA_BACKING=1171
 PURPOSE_CNA_EXTENSION_CANDIDATE=1822
 PURPOSE_MANAGED_BY_DESIGN=537
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1835
-STATUS_ACTIONABLE_LOCAL=80
+STATUS_BOUND=1894
+STATUS_ACTIONABLE_LOCAL=23
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
 STATUS_BLOCKED_HARDWARE=0
 STATUS_BLOCKED_FIXTURE=0
 STATUS_LANGUAGE_MAPPING_LIMITATION=0
-STATUS_DELIBERATE_NON_BINDING=2138
+STATUS_DELIBERATE_NON_BINDING=2136
 STATUS_UNREVIEWED=0
 ```
 
@@ -40,14 +40,14 @@ STATUS_UNREVIEWED=0
 
 | Purpose | Status | Routes |
 |---|---|---:|
-| CNA_EXTENSION_CANDIDATE | BOUND | 1091 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1150 |
 | XNA_BACKING | BOUND | 727 |
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 651 |
+| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 649 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 520 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 80 |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 23 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 |
@@ -358,8 +358,8 @@ is BOUND or carries its own written non-binding reason.
 
 | Status | Routes |
 |---|---:|
-| BOUND | 787 |
-| ACTIONABLE_LOCAL | 80 |
+| BOUND | 844 |
+| ACTIONABLE_LOCAL | 23 |
 | DELIBERATE_NON_BINDING | 3 |
 
 ### By sub-family
@@ -399,24 +399,24 @@ is BOUND or carries its own written non-binding reason.
 | `engine-identity` (engine-layer identity) | 2 | 2 | BOUND 2 |
 | `environment-processor` (the environment processor) | 13 | 13 | BOUND 13 |
 | `film-grain` (film grain) | 3 | 3 | BOUND 3 |
-| `frustum-culler` (frustum culling) | 10 | 0 | ACTIONABLE_LOCAL 10 |
+| `frustum-culler` (frustum culling) | 10 | 10 | BOUND 10 |
 | `fullscreen-pass` (full-screen drawing) | 4 | 4 | BOUND 4 |
 | `fxaa` (FXAA) | 5 | 5 | BOUND 5 |
 | `gltf-material-bridge` (the glTF material bridge) | 6 | 6 | BOUND 6 |
-| `gpu-instance-culler` (GPU instance culling) | 11 | 0 | ACTIONABLE_LOCAL 11 |
+| `gpu-instance-culler` (GPU instance culling) | 11 | 11 | BOUND 11 |
 | `gpu-timer` (GPU timers) | 11 | 11 | BOUND 11 |
 | `hdr-display-output` (HDR display output) | 15 | 15 | BOUND 15 |
 | `height-fog` (height fog) | 10 | 10 | BOUND 10 |
 | `image-based-light` (image-based lighting) | 2 | 2 | BOUND 2 |
-| `indirect-draw` (indirect draws) | 4 | 0 | ACTIONABLE_LOCAL 4 |
-| `instanced-renderer` (instanced rendering) | 18 | 0 | ACTIONABLE_LOCAL 18 |
+| `indirect-draw` (indirect draws) | 4 | 4 | BOUND 4 |
+| `instanced-renderer` (instanced rendering) | 18 | 18 | BOUND 18 |
 | `lens-flare` (lens flare) | 7 | 7 | BOUND 7 |
 | `light-probe` (light probes) | 19 | 19 | BOUND 19 |
 | `light-probe-baker` (the light probe baker) | 13 | 13 | BOUND 13 |
 | `light-probe-volume` (light probe volumes) | 14 | 14 | BOUND 14 |
 | `light-shaft` (light shafts) | 9 | 9 | BOUND 9 |
 | `light-values` (engine light values) | 5 | 5 | BOUND 5 |
-| `lod-group` (level of detail) | 14 | 0 | ACTIONABLE_LOCAL 14 |
+| `lod-group` (level of detail) | 14 | 14 | BOUND 14 |
 | `motion-blur` (motion blur) | 5 | 5 | BOUND 5 |
 | `particles` (particle systems) | 24 | 24 | BOUND 24 |
 | `pbr-effect` (PBR effects) | 9 | 9 | BOUND 9 |
@@ -819,16 +819,16 @@ is BOUND or carries its own written non-binding reason.
 | `cna_film_grain_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
 | `cna_film_grain_pass_get_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
 | `cna_film_grain_pass_set_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
-| `cna_frustum_culler_ext_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_cull_boxes` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_cull_spheres` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_cull_transforms` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_get_frustum` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_is_box_visible` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_is_sphere_visible` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_set_camera` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_frustum_culler_ext_set_view_projection` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_frustum_culler_ext_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_cull_boxes` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_cull_spheres` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_cull_transforms` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_get_frustum` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_is_box_visible` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_is_sphere_visible` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_set_camera` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
+| `cna_frustum_culler_ext_set_view_projection` | engine_layer.h | BOUND | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
 | `cna_fullscreen_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
 | `cna_fullscreen_pass_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
 | `cna_fullscreen_pass_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
@@ -844,17 +844,17 @@ is BOUND or carries its own written non-binding reason.
 | `cna_gltf_material_extension_textures_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
 | `cna_gltf_material_source_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
 | `cna_gltf_material_textures_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
-| `cna_gpu_cullable_instance_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_copy_instance_lookup_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_copy_unsupported_reason` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_cull` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_draw` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_get_instance_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_is_supported` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_read_visible_count_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_gpu_instance_culler_set_instances` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_gpu_cullable_instance_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_copy_instance_lookup_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_copy_unsupported_reason` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_cull` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_get_instance_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_read_visible_count_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
+| `cna_gpu_instance_culler_set_instances` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
 | `cna_gpu_timer_begin` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries |
 | `cna_gpu_timer_copy_unsupported_reason` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries |
 | `cna_gpu_timer_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries |
@@ -866,8 +866,8 @@ is BOUND or carries its own written non-binding reason.
 | `cna_gpu_timer_is_result_available` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries |
 | `cna_gpu_timer_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries |
 | `cna_gpu_timer_poll` | engine_layer.h | BOUND | imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries |
-| `cna_graphics_device_draw_indexed_primitives_indirect_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_graphics_device_draw_primitives_indirect_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_graphics_device_draw_indexed_primitives_indirect_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer |
+| `cna_graphics_device_draw_primitives_indirect_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer |
 | `cna_graphics_device_supports_shadow_sampling_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison |
 | `cna_graphics_memory_barrier_has` | engine_layer.h | BOUND | imported: cna.extensions.engine projects compute memory-barrier mask -- the containment test for the barrier bit mask a compute dispatch orders |
 | `cna_hdr_display_output_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions |
@@ -897,26 +897,26 @@ is BOUND or carries its own written non-binding reason.
 | `cna_height_fog_pass_set_falloff` | engine_layer.h | BOUND | imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth |
 | `cna_image_based_light_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
 | `cna_image_based_light_ext_is_valid` | engine_layer.h | BOUND | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
-| `cna_indirect_draw_arguments_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_indirect_draw_indexed_arguments_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_copy_instance_elements` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_copy_tint_elements` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_did_last_draw_instance` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_draw` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_get_instance_capacity` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_get_instance_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_get_instance_stride` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_get_last_draw_call_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_get_tint_stride` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_is_fallback_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_is_instancing_supported` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_is_tints_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_set_fallback_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_set_instance_tints` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_set_instances` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_instanced_renderer_ext_set_tints_enabled` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_indirect_draw_arguments_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer |
+| `cna_indirect_draw_indexed_arguments_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer |
+| `cna_instanced_renderer_ext_copy_instance_elements` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_copy_tint_elements` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_did_last_draw_instance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_get_instance_capacity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_get_instance_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_get_instance_stride` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_get_last_draw_call_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_get_tint_stride` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_is_fallback_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_is_instancing_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_is_tints_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_set_fallback_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_set_instance_tints` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_set_instances` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
+| `cna_instanced_renderer_ext_set_tints_enabled` | engine_layer.h | BOUND | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
 | `cna_lens_flare_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
 | `cna_lens_flare_pass_get_dispersal` | engine_layer.h | BOUND | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
 | `cna_lens_flare_pass_get_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
@@ -979,20 +979,20 @@ is BOUND or carries its own written non-binding reason.
 | `cna_light_shaft_pass_set_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light shafts -- radial light shafts |
 | `cna_light_shaft_pass_set_light_screen_position` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light shafts -- radial light shafts |
 | `cna_light_shaft_pass_set_threshold` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light shafts -- radial light shafts |
-| `cna_lod_group_ext_add_level` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_clear` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_copy_levels` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_get_hysteresis` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_get_selection_mode` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_projected_radius_pixels` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_reset_hysteresis` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_select` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_select_index` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_set_hysteresis` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_set_screen_space_parameters` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_lod_group_ext_set_selection_mode` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_lod_group_ext_add_level` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_clear` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_copy_levels` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_get_hysteresis` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_get_selection_mode` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_projected_radius_pixels` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_reset_hysteresis` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_select` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_select_index` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_set_hysteresis` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_set_screen_space_parameters` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| `cna_lod_group_ext_set_selection_mode` | engine_layer.h | BOUND | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
 | `cna_motion_blur_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass |
 | `cna_motion_blur_pass_get_max_distance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass |
 | `cna_motion_blur_pass_get_strength` | engine_layer.h | BOUND | imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass |
@@ -1323,7 +1323,7 @@ is BOUND or carries its own written non-binding reason.
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 436 | XNA value types are implemented natively in Python against pinned XNA-derived behaviour; a per-operation C call would add a boundary crossing without adding behaviour. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 270 | imported: cna.extensions.content projects CNA's own compiled content format |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 239 | The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated. |
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 213 | The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it. |
+| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 211 | The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 177 | Sensors and device services are CNA-only capabilities outside the selected XNA profile and outside the selected extension profile. |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 175 | Microsoft.Xna.Framework.Net is not in the selected 257-type profile; opening it requires a deliberate future-profile decision. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 119 | XNA 4.0 has no haptics, joystick, text-input or cursor API; these are CNA-only input families and belong to the extension profile rather than to the XNA namespace. |
@@ -1341,7 +1341,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: runtime capability evidence names the backend that produced it |
 | CNA_EXTENSION_CANDIDATE | BOUND | 20 | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
 | CNA_EXTENSION_CANDIDATE | BOUND | 19 | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 18 | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 18 | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
 | MANAGED_BY_DESIGN | BOUND | 17 | imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable |
 | CNA_EXTENSION_CANDIDATE | BOUND | 17 | imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 17 | Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows. |
@@ -1353,7 +1353,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects screen-space reflections -- the SSR pass |
 | CNA_EXTENSION_CANDIDATE | BOUND | 14 | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 14 | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 14 | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
@@ -1372,11 +1372,11 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table |
 | CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples |
 | CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 11 | In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling |
 | CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: cna.extensions.engine projects GPU timers -- GPU-side elapsed-time queries |
 | CNA_EXTENSION_CANDIDATE | BOUND | 10 | imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations |
 | CNA_EXTENSION_CANDIDATE | BOUND | 10 | imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 10 | In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 10 | imported: cna.extensions.engine projects frustum culling -- CPU frustum culling |
 | CNA_EXTENSION_CANDIDATE | BOUND | 10 | imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth |
 | CNA_EXTENSION_CANDIDATE | BOUND | 10 | imported: cna.extensions.engine projects GPU storage buffers -- the shader-storage buffer a compute dispatch reads and writes |
 | CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects the area-light BRDF table -- the generated LTC table area lights sample |
@@ -1399,7 +1399,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline |
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset |
@@ -1414,6 +1414,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
+| CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: level of detail and instancing take a native mesh-part handle, which strict XNA's managed ModelMeshPart does not have |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects clustered light values -- the clustered light value structure |

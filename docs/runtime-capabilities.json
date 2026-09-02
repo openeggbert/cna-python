@@ -1688,6 +1688,76 @@
       },
       "evidence": "docs/engine-upstream-findings.md ENGINE-007; tests/test_engine_probes.py::PureEnvironmentHelperTests",
       "notes": "cube_face_direction does not refuse a face outside zero to five: the switch's default branch is the -Z face, so six is five and minus one is five. That matches what engine_layer.h documents -- only a null output is refused -- so it is pinned rather than reported, because a loop with an off-by-one would sample one face twice instead of failing. importance_sample_ggx uses the normal as supplied and normalises only the result, so a normal of length 0.99 tilts the sample by thirteen times the rounding error; that is ENGINE-007, and the binding states the requirement rather than silently normalising, because normalising would make the Python function disagree with the GLSL CNA publishes beside it."
+    },
+    {
+      "operation": "Level-of-detail selection and its hysteresis",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_culling.py::LodGroupTests; tests/engine_oracles.py lod_select_by_distance, lod_apply_hysteresis, lod_projected_radius_pixels",
+      "notes": "Thresholds are added out of order, so a group that failed to sort would answer differently from the oracle at every distance. A threshold is measured to be an upper bound -- a distance exactly at one has left that level -- and past every threshold nothing is selected rather than the coarsest. Hysteresis is sticky only across the boundary with the immediate neighbour and only inside the margin, which is asserted with a value that holds and one that does not. The screen-space mode reverses the comparison and re-sorts the levels so index zero still means finest, and both modes are checked against the oracle over the same group."
+    },
+    {
+      "operation": "CPU frustum culling against independently extracted planes",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_culling.py::FrustumCullerTests; tests/engine_oracles.py frustum_planes",
+      "notes": "The six planes are extracted a second time by combining rows of the view-projection and normalising, and every box and sphere answer is compared with the positive-vertex test over them -- under an axis-aligned camera and again under one that is neither at the origin nor looking down an axis. cull_transforms is measured to *keep* a transform that has no matching bound, so passing fewer bounds than transforms means 'these are always drawn' rather than an error."
+    },
+    {
+      "operation": "Hardware instancing, and which path a draw took",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_culling.py::InstancedRendererTests, ::InstanceStreamLayoutTests",
+      "notes": "last_draw_call_count is the number that says which path ran -- one for the instanced draw, one per instance for the fallback, zero for nothing -- so the test asserts the count that matches is_instancing_supported rather than asserting a capability it cannot control. The published vertex layout is checked element for element: four Vector4 rows at texture-coordinate usages one to four, because a vertex attribute is at most four wide and a matrix is four of them, with the stride equal to the last offset plus sixteen."
+    },
+    {
+      "operation": "GPU instance culling agrees with the CPU frustum test",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_culling.py::GpuInstanceCullerTests",
+      "notes": "Five boxes are laid out so that some are inside the frustum and some are not -- asserted, so a fixture that culled everything or nothing could not pass silently -- and the count the GPU compacted is compared with the count the independent plane test keeps. The culler needs four capabilities and names the first missing one rather than only reporting that something is; the test asserts a non-empty reason whenever it is unsupported."
+    },
+    {
+      "operation": "Indirect draws and their argument layout",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "partly (argument defaults only)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_culling.py::IndirectDrawArgumentTests, ::IndirectDrawTests",
+      "notes": "The two argument structures have no version or size header, because the GPU reads their bytes verbatim and the layout is the contract; the packed bytes are unpacked with struct and compared word for word, and base_vertex is asserted to be the one signed field. Both draws are exercised for real, and the state each needs -- a bound vertex buffer, an applied effect, and an index buffer for the indexed one -- is measured by asserting the text CNA refuses with."
+    },
+    {
+      "operation": "The minimal models.h slice level of detail and instancing need",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tools/route-census-rules.json engine-model-part-dependency; cna.extensions.engine.culling",
+      "notes": "Two routes, cna_model_mesh_part_create and its destroy. Both engine constructors take a CNA_ModelMeshPartHandle and strict XNA's ModelMeshPart is a managed object with no native handle, so without them two families are unreachable. The native part is built from the strict part's own vertex buffer, index buffer and offsets, so it describes the same geometry rather than a copy; it is private to whichever engine object needed it and released with it, and no native model, mesh or part is public anywhere."
+    },
+    {
+      "operation": "A cullable instance's canonical world is zero, not identity",
+      "status": "BLOCKED_UPSTREAM",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "docs/engine-upstream-findings.md ENGINE-008; tests/test_engine_culling.py::GpuInstanceCullerTests::test_the_default_instance_has_a_zero_world_and_not_an_identity",
+      "notes": "engine_layer.h documents 'an identity world and an empty box'. The box is right and the matrix is all zeros, which is not a wrong position but a degenerate transform: every vertex of every instance maps to the origin, with a correct cull and an invisible draw and no error anywhere. Handed back unchanged, because default() in this package reports what CNA's defaults are; substituting an identity would make it a transcription and hide the defect. The trap is stated at the method and the test asserts both the zero and that it is not the identity."
     }
   ]
 }

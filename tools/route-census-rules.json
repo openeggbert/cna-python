@@ -1591,6 +1591,21 @@
       "boundReason": "imported: the selected 257-type XNA projection reaches this route"
     },
     {
+      "id": "engine-model-part-dependency",
+      "family": "lod-group",
+      "familyTitle": "the minimal slice level of detail and instancing cannot work without",
+      "match": {
+        "names": [
+          "cna_model_mesh_part_create",
+          "cna_model_mesh_part_destroy"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal models.h slice the selected level-of-detail and instancing families cannot work without. cna_lod_group_ext_add_level and cna_instanced_renderer_ext_create both take a CNA_ModelMeshPartHandle, and strict XNA's ModelMeshPart is a managed object with no native handle at all -- CNA's native model runtime is a separate concept this binding deliberately does not bind (see native-models). Exactly create and destroy: the native part is built from the strict part's own vertex buffer, index buffer and offsets, so it describes the same geometry rather than a copy, and it is private to whichever engine object needed it. No native model, mesh or part is public. A dependency of the selected engine profile, not a decision to bind models.h.",
+      "boundReason": "imported: level of detail and instancing take a native mesh-part handle, which strict XNA's managed ModelMeshPart does not have"
+    },
+    {
       "id": "native-models",
       "match": {
         "headers": [

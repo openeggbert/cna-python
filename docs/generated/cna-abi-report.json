@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1835,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1835,
+    "BOUND_FUNCTIONS": 1894,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1894,
     "C_LAYOUT_MEASUREMENTS": 1672,
     "CTYPES_LAYOUT_MEASUREMENTS": 1672,
     "MISSING_SYMBOLS": 0,
@@ -1843,7 +1843,66 @@
     "cna_environment_processor_importance_sample_ggx",
     "cna_environment_processor_face_direction",
     "cna_environment_processor_direction_to_equirectangular",
-    "cna_environment_processor_destroy"
+    "cna_environment_processor_destroy",
+    "cna_lod_group_ext_create",
+    "cna_lod_group_ext_add_level",
+    "cna_lod_group_ext_clear",
+    "cna_lod_group_ext_copy_levels",
+    "cna_lod_group_ext_select_index",
+    "cna_lod_group_ext_select",
+    "cna_lod_group_ext_get_hysteresis",
+    "cna_lod_group_ext_set_hysteresis",
+    "cna_lod_group_ext_reset_hysteresis",
+    "cna_lod_group_ext_get_selection_mode",
+    "cna_lod_group_ext_set_selection_mode",
+    "cna_lod_group_ext_set_screen_space_parameters",
+    "cna_lod_group_ext_projected_radius_pixels",
+    "cna_lod_group_ext_destroy",
+    "cna_frustum_culler_ext_create",
+    "cna_frustum_culler_ext_set_view_projection",
+    "cna_frustum_culler_ext_set_camera",
+    "cna_frustum_culler_ext_get_frustum",
+    "cna_frustum_culler_ext_is_box_visible",
+    "cna_frustum_culler_ext_is_sphere_visible",
+    "cna_frustum_culler_ext_cull_boxes",
+    "cna_frustum_culler_ext_cull_spheres",
+    "cna_frustum_culler_ext_cull_transforms",
+    "cna_frustum_culler_ext_destroy",
+    "cna_instanced_renderer_ext_create",
+    "cna_instanced_renderer_ext_copy_instance_elements",
+    "cna_instanced_renderer_ext_get_instance_stride",
+    "cna_instanced_renderer_ext_copy_tint_elements",
+    "cna_instanced_renderer_ext_get_tint_stride",
+    "cna_instanced_renderer_ext_set_instances",
+    "cna_instanced_renderer_ext_set_instance_tints",
+    "cna_instanced_renderer_ext_is_tints_enabled",
+    "cna_instanced_renderer_ext_set_tints_enabled",
+    "cna_instanced_renderer_ext_draw",
+    "cna_instanced_renderer_ext_is_instancing_supported",
+    "cna_instanced_renderer_ext_is_fallback_enabled",
+    "cna_instanced_renderer_ext_set_fallback_enabled",
+    "cna_instanced_renderer_ext_get_instance_count",
+    "cna_instanced_renderer_ext_get_instance_capacity",
+    "cna_instanced_renderer_ext_get_last_draw_call_count",
+    "cna_instanced_renderer_ext_did_last_draw_instance",
+    "cna_instanced_renderer_ext_destroy",
+    "cna_gpu_cullable_instance_init",
+    "cna_gpu_instance_culler_create",
+    "cna_gpu_instance_culler_is_supported",
+    "cna_gpu_instance_culler_copy_unsupported_reason",
+    "cna_gpu_instance_culler_set_instances",
+    "cna_gpu_instance_culler_get_instance_count",
+    "cna_gpu_instance_culler_cull",
+    "cna_gpu_instance_culler_draw",
+    "cna_gpu_instance_culler_read_visible_count_ext",
+    "cna_gpu_instance_culler_copy_instance_lookup_glsl",
+    "cna_gpu_instance_culler_destroy",
+    "cna_indirect_draw_arguments_init",
+    "cna_indirect_draw_indexed_arguments_init",
+    "cna_graphics_device_draw_primitives_indirect_ext",
+    "cna_graphics_device_draw_indexed_primitives_indirect_ext",
+    "cna_model_mesh_part_create",
+    "cna_model_mesh_part_destroy"
   ],
   "functionManifest": [
     {
@@ -21129,6 +21188,629 @@
       ],
       "arity": 1,
       "ownership": "consumes the processor; the textures it produced outlive it"
+    },
+    {
+      "symbol": "cna_lod_group_ext_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned LOD group; needs no device, because selection is arithmetic"
+    },
+    {
+      "symbol": "cna_lod_group_ext_add_level",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed group; retains the mesh part and re-sorts the levels"
+    },
+    {
+      "symbol": "cna_lod_group_ext_clear",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed group; drops every level and forgets the last selection"
+    },
+    {
+      "symbol": "cna_lod_group_ext_copy_levels",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_LodLevelEXT>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol; the part handles are borrowed"
+    },
+    {
+      "symbol": "cna_lod_group_ext_select_index",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed group; remembers the choice, so it is not a pure function"
+    },
+    {
+      "symbol": "cna_lod_group_ext_select",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "BORROWED mesh part; the group keeps owning it, and it is never released here"
+    },
+    {
+      "symbol": "cna_lod_group_ext_get_hysteresis",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed group"
+    },
+    {
+      "symbol": "cna_lod_group_ext_set_hysteresis",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed group; a non-positive margin becomes zero rather than being refused"
+    },
+    {
+      "symbol": "cna_lod_group_ext_reset_hysteresis",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed group; forgets the last selection"
+    },
+    {
+      "symbol": "cna_lod_group_ext_get_selection_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed group"
+    },
+    {
+      "symbol": "cna_lod_group_ext_set_selection_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed group; re-sorts the levels and forgets the last selection"
+    },
+    {
+      "symbol": "cna_lod_group_ext_set_screen_space_parameters",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 4,
+      "ownership": "borrowed group; copies all three"
+    },
+    {
+      "symbol": "cna_lod_group_ext_projected_radius_pixels",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed group"
+    },
+    {
+      "symbol": "cna_lod_group_ext_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the group; the parts it retained are released"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned culler; needs no device, because a frustum test is arithmetic"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_set_view_projection",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed culler; copies the matrix and re-derives six planes"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_set_camera",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed culler; multiplies the two and copies the product"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_get_frustum",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingFrustum>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; copies the frustum's own planes and corners"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_is_box_visible",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingBox>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; the box is borrowed for the call"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_is_sphere_visible",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingSphere>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; the sphere is borrowed for the call"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_cull_boxes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingBox>",
+        "c_ulong",
+        "pointer<c_ulong>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output; two-call size/copy protocol over visible indices"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_cull_spheres",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingSphere>",
+        "c_ulong",
+        "pointer<c_ulong>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "caller output; two-call size/copy protocol over visible indices"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_cull_transforms",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "c_ulong",
+        "pointer<CNA_BoundingBox>",
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 8,
+      "ownership": "caller output; two-call size/copy protocol over surviving transforms"
+    },
+    {
+      "symbol": "cna_frustum_culler_ext_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the culler"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned renderer; retains the mesh part and borrows the device for the call"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_copy_instance_elements",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_VertexElement>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol; no object behind it"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_get_instance_stride",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_int>"
+      ],
+      "arity": 1,
+      "ownership": "pure function over caller-owned output; the same for every renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_copy_tint_elements",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_VertexElement>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol; no object behind it"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_get_tint_stride",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_int>"
+      ],
+      "arity": 1,
+      "ownership": "pure function over caller-owned output; the same for every renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_set_instances",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed renderer; copies every transform into its own buffer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_set_instance_tints",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Color>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed renderer; copies every colour into its own buffer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_is_tints_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_set_tints_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed renderer; re-uploads if it changed"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed renderer; the effect is borrowed for the call"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_is_instancing_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_is_fallback_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_set_fallback_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed renderer; copies the flag"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_get_instance_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_get_instance_capacity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_get_last_draw_call_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_did_last_draw_instance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed renderer"
+    },
+    {
+      "symbol": "cna_instanced_renderer_ext_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the renderer; the mesh part it retained is released"
+    },
+    {
+      "symbol": "cna_gpu_cullable_instance_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_GpuCullableInstance>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned culler; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed culler"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_copy_unsupported_reason",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_set_instances",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_GpuCullableInstance>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed culler; copies every instance into its own storage buffer"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_get_instance_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed culler"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_cull",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_int",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 6,
+      "ownership": "borrowed culler; dispatches compute and writes its own draw arguments"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed culler; issues the indirect draw the cull wrote"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_read_visible_count_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; reads the command buffer back, which stalls the pipeline"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_copy_instance_lookup_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol; no object behind it"
+    },
+    {
+      "symbol": "cna_gpu_instance_culler_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the culler"
+    },
+    {
+      "symbol": "cna_indirect_draw_arguments_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_IndirectDrawArguments>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_indirect_draw_indexed_arguments_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_IndirectDrawIndexedArguments>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_graphics_device_draw_primitives_indirect_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 4,
+      "ownership": "borrowed device and buffer; the GPU reads the counts, not the caller"
+    },
+    {
+      "symbol": "cna_graphics_device_draw_indexed_primitives_indirect_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint",
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 4,
+      "ownership": "borrowed device and buffer; the GPU reads the counts, not the caller"
+    },
+    {
+      "symbol": "cna_model_mesh_part_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 7,
+      "ownership": "owned native part; retains the caller's vertex and index buffers"
+    },
+    {
+      "symbol": "cna_model_mesh_part_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the native part"
     }
   ],
   "missingSymbols": [],

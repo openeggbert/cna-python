@@ -821,3 +821,130 @@ def probe_face_view(face: int, position: Vector3) -> Matrix:
     target = Vector3(position.X + forward.X, position.Y + forward.Y,
                      position.Z + forward.Z)
     return Matrix.CreateLookAt(position, target, up)
+
+
+# --- culling, level of detail and instancing -----------------------------------
+
+
+def frustum_planes(view_projection: Matrix):
+    """The six inward-facing planes of a view-projection, as ``(a, b, c, d)``.
+
+    Extracted by adding and subtracting rows of the matrix, which is where the
+    planes come from: a clip-space coordinate is inside when ``-w <= x <= w``,
+    and each of those six inequalities is one row combination. Normalised so the
+    signed distance a plane reports is a real distance rather than a scaled one.
+
+    Row-vector convention, matching XNA: near is the third row, far is the
+    fourth minus the third, and left/right/bottom/top are the fourth plus or
+    minus the first and second.
+    """
+    m = list(view_projection)
+
+    def row(index: int):
+        return m[index], m[index + 4], m[index + 8], m[index + 12]
+
+    x, y, z, w = row(0), row(1), row(2), row(3)
+    raw = [
+        z,                                       # near
+        tuple(a - b for a, b in zip(w, z)),      # far
+        tuple(a + b for a, b in zip(w, x)),      # left
+        tuple(a - b for a, b in zip(w, x)),      # right
+        tuple(a + b for a, b in zip(w, y)),      # bottom
+        tuple(a - b for a, b in zip(w, y)),      # top
+    ]
+    planes = []
+    for a, b, c, d in raw:
+        length = math.sqrt(a * a + b * b + c * c)
+        if length == 0.0:
+            planes.append((a, b, c, d))
+        else:
+            planes.append((a / length, b / length, c / length, d / length))
+    return planes
+
+
+def box_is_visible(planes, minimum: Vector3, maximum: Vector3) -> bool:
+    """Whether an axis-aligned box is on the inside of every plane.
+
+    The positive-vertex test: for each plane, the corner furthest along its
+    normal is the last one to leave, so if that corner is outside the box is
+    entirely outside. Conservative at the corners of the frustum, which is what
+    every renderer does and what CNA does.
+    """
+    for a, b, c, d in planes:
+        x = maximum.X if a >= 0.0 else minimum.X
+        y = maximum.Y if b >= 0.0 else minimum.Y
+        z = maximum.Z if c >= 0.0 else minimum.Z
+        if a * x + b * y + c * z + d < 0.0:
+            return False
+    return True
+
+
+def sphere_is_visible(planes, centre: Vector3, radius: float) -> bool:
+    """Whether a sphere is on the inside of every plane, to within its radius."""
+    for a, b, c, d in planes:
+        if a * centre.X + b * centre.Y + c * centre.Z + d < -radius:
+            return False
+    return True
+
+
+def lod_projected_radius_pixels(radius: float, vertical_fov: float,
+                                viewport_height: float, distance: float) -> float:
+    """How many pixels an object of that radius covers at that distance.
+
+    The view's half-extent at the distance is ``2 * tan(fov / 2) * distance``,
+    and the radius is that fraction of the viewport. At or behind the eye the
+    projection is meaningless, and the honest answer is "as large as it gets",
+    which selects the finest level rather than none.
+    """
+    if distance <= 0.0:
+        return float(ctypes.c_float(3.4028234663852886e38).value)
+    return f32(radius * viewport_height / f32(2.0 * math.tan(vertical_fov * 0.5)
+                                              * distance))
+
+
+def lod_select_by_distance(thresholds, distance: float) -> int:
+    """The first level whose threshold the distance has not yet passed.
+
+    Upper bound, not lower: a distance exactly at a level's threshold has left
+    that level, so the boundary belongs to the next one. ``-1`` when the
+    distance is past every threshold and no level covers it.
+    """
+    for index, threshold in enumerate(thresholds):
+        if distance < threshold:
+            return index
+    return -1
+
+
+def lod_select_by_screen_space(thresholds, pixels: float) -> int:
+    """The first level whose pixel threshold the projected size still clears.
+
+    The comparison turns around because projected size falls as distance rises,
+    while the list order does not: index zero is the finest level in both modes,
+    which is what lets hysteresis and the returned index be mode-independent.
+    """
+    for index, threshold in enumerate(thresholds):
+        if pixels >= threshold:
+            return index
+    return -1
+
+
+def lod_apply_hysteresis(thresholds, candidate: int, last: int, value: float,
+                         margin: float) -> int:
+    """Holds the previous level when the new one is only just better.
+
+    Only the boundary between the remembered level and its immediate neighbour
+    is sticky, and only inside the margin: a value that has moved several levels
+    is a real change rather than a wobble, and holding it back would be worse
+    than the flicker this prevents.
+    """
+    if margin <= 0.0 or last < 0 or candidate == last:
+        return candidate
+    if last >= len(thresholds):
+        return candidate
+    step = 1 if candidate > last else -1
+    if candidate != last + step:
+        return candidate
+    boundary_index = last if step > 0 else candidate
+    if boundary_index >= len(thresholds):
+        return candidate
+    return last if abs(value - thresholds[boundary_index]) < margin else candidate

@@ -1912,6 +1912,189 @@ ENGINE_PROBE_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
      "consumes the processor; the textures it produced outlive it"),
 )
 
+#: Deciding what to draw, and drawing many of it at once: level-of-detail
+#: selection, CPU frustum culling, hardware instancing, GPU culling that writes
+#: its own draw arguments, and the indirect draws that read them.
+ENGINE_CULLING_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
+    # -- level of detail -------------------------------------------------------
+    ("cna_lod_group_ext_create", c.c_uint32, [c.POINTER(c.c_uint64)],
+     "owned LOD group; needs no device, because selection is arithmetic"),
+    ("cna_lod_group_ext_add_level", c.c_uint32, [c.c_uint64, c.c_float, c.c_uint64],
+     "borrowed group; retains the mesh part and re-sorts the levels"),
+    ("cna_lod_group_ext_clear", c.c_uint32, [c.c_uint64],
+     "borrowed group; drops every level and forgets the last selection"),
+    ("cna_lod_group_ext_copy_levels", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_LodLevelEXT), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol; the part handles are borrowed"),
+    ("cna_lod_group_ext_select_index", c.c_uint32,
+     [c.c_uint64, c.c_float, c.POINTER(c.c_int32)],
+     "borrowed group; remembers the choice, so it is not a pure function"),
+    ("cna_lod_group_ext_select", c.c_uint32, [c.c_uint64, c.c_float, c.POINTER(c.c_uint64)],
+     "BORROWED mesh part; the group keeps owning it, and it is never released here"),
+    ("cna_lod_group_ext_get_hysteresis", c.c_uint32, [c.c_uint64, c.POINTER(c.c_float)],
+     "caller output; borrowed group"),
+    ("cna_lod_group_ext_set_hysteresis", c.c_uint32, [c.c_uint64, c.c_float],
+     "borrowed group; a non-positive margin becomes zero rather than being refused"),
+    ("cna_lod_group_ext_reset_hysteresis", c.c_uint32, [c.c_uint64],
+     "borrowed group; forgets the last selection"),
+    ("cna_lod_group_ext_get_selection_mode", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint32)],
+     "caller output; borrowed group"),
+    ("cna_lod_group_ext_set_selection_mode", c.c_uint32, [c.c_uint64, c.c_uint32],
+     "borrowed group; re-sorts the levels and forgets the last selection"),
+    ("cna_lod_group_ext_set_screen_space_parameters", c.c_uint32,
+     [c.c_uint64, c.c_float, c.c_float, c.c_float],
+     "borrowed group; copies all three"),
+    ("cna_lod_group_ext_projected_radius_pixels", c.c_uint32,
+     [c.c_uint64, c.c_float, c.POINTER(c.c_float)],
+     "caller output; borrowed group"),
+    ("cna_lod_group_ext_destroy", c.c_uint32, [c.c_uint64],
+     "consumes the group; the parts it retained are released"),
+
+    # -- CPU frustum culling ---------------------------------------------------
+    ("cna_frustum_culler_ext_create", c.c_uint32, [c.POINTER(c.c_uint64)],
+     "owned culler; needs no device, because a frustum test is arithmetic"),
+    ("cna_frustum_culler_ext_set_view_projection", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Matrix)],
+     "borrowed culler; copies the matrix and re-derives six planes"),
+    ("cna_frustum_culler_ext_set_camera", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix)],
+     "borrowed culler; multiplies the two and copies the product"),
+    ("cna_frustum_culler_ext_get_frustum", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_BoundingFrustum)],
+     "caller output; copies the frustum's own planes and corners"),
+    ("cna_frustum_culler_ext_is_box_visible", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_BoundingBox), c.POINTER(c.c_uint8)],
+     "caller output; the box is borrowed for the call"),
+    ("cna_frustum_culler_ext_is_sphere_visible", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_BoundingSphere), c.POINTER(c.c_uint8)],
+     "caller output; the sphere is borrowed for the call"),
+    ("cna_frustum_culler_ext_cull_boxes", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_BoundingBox), c.c_uint64, c.POINTER(c.c_uint64),
+      c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol over visible indices"),
+    ("cna_frustum_culler_ext_cull_spheres", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_BoundingSphere), c.c_uint64, c.POINTER(c.c_uint64),
+      c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol over visible indices"),
+    ("cna_frustum_culler_ext_cull_transforms", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Matrix), c.c_uint64, c.POINTER(engine.CNA_BoundingBox),
+      c.c_uint64, c.POINTER(abi.CNA_Matrix), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol over surviving transforms"),
+    ("cna_frustum_culler_ext_destroy", c.c_uint32, [c.c_uint64],
+     "consumes the culler"),
+
+    # -- hardware instancing ---------------------------------------------------
+    ("cna_instanced_renderer_ext_create", c.c_uint32,
+     [c.c_uint64, c.c_uint64, c.POINTER(c.c_uint64)],
+     "owned renderer; retains the mesh part and borrows the device for the call"),
+    ("cna_instanced_renderer_ext_copy_instance_elements", c.c_uint32,
+     [c.POINTER(abi.CNA_VertexElement), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol; no object behind it"),
+    ("cna_instanced_renderer_ext_get_instance_stride", c.c_uint32, [c.POINTER(c.c_int32)],
+     "pure function over caller-owned output; the same for every renderer"),
+    ("cna_instanced_renderer_ext_copy_tint_elements", c.c_uint32,
+     [c.POINTER(abi.CNA_VertexElement), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol; no object behind it"),
+    ("cna_instanced_renderer_ext_get_tint_stride", c.c_uint32, [c.POINTER(c.c_int32)],
+     "pure function over caller-owned output; the same for every renderer"),
+    ("cna_instanced_renderer_ext_set_instances", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Matrix), c.c_uint64],
+     "borrowed renderer; copies every transform into its own buffer"),
+    ("cna_instanced_renderer_ext_set_instance_tints", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Color), c.c_uint64],
+     "borrowed renderer; copies every colour into its own buffer"),
+    ("cna_instanced_renderer_ext_is_tints_enabled", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed renderer"),
+    ("cna_instanced_renderer_ext_set_tints_enabled", c.c_uint32, [c.c_uint64, c.c_uint8],
+     "borrowed renderer; re-uploads if it changed"),
+    ("cna_instanced_renderer_ext_draw", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed renderer; the effect is borrowed for the call"),
+    ("cna_instanced_renderer_ext_is_instancing_supported", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed renderer"),
+    ("cna_instanced_renderer_ext_is_fallback_enabled", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed renderer"),
+    ("cna_instanced_renderer_ext_set_fallback_enabled", c.c_uint32, [c.c_uint64, c.c_uint8],
+     "borrowed renderer; copies the flag"),
+    ("cna_instanced_renderer_ext_get_instance_count", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_int32)],
+     "caller output; borrowed renderer"),
+    ("cna_instanced_renderer_ext_get_instance_capacity", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_int32)],
+     "caller output; borrowed renderer"),
+    ("cna_instanced_renderer_ext_get_last_draw_call_count", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_int32)],
+     "caller output; borrowed renderer"),
+    ("cna_instanced_renderer_ext_did_last_draw_instance", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed renderer"),
+    ("cna_instanced_renderer_ext_destroy", c.c_uint32, [c.c_uint64],
+     "consumes the renderer; the mesh part it retained is released"),
+
+    # -- GPU culling and the indirect draws it writes --------------------------
+    ("cna_gpu_cullable_instance_init", c.c_uint32,
+     [c.POINTER(engine.CNA_GpuCullableInstance)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_gpu_instance_culler_create", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "owned culler; borrows the graphics device for the call"),
+    ("cna_gpu_instance_culler_is_supported", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed culler"),
+    ("cna_gpu_instance_culler_copy_unsupported_reason", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol"),
+    ("cna_gpu_instance_culler_set_instances", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_GpuCullableInstance), c.c_uint64],
+     "borrowed culler; copies every instance into its own storage buffer"),
+    ("cna_gpu_instance_culler_get_instance_count", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_int32)],
+     "caller output; borrowed culler"),
+    ("cna_gpu_instance_culler_cull", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix), c.c_int32,
+      c.c_int32, c.c_int32],
+     "borrowed culler; dispatches compute and writes its own draw arguments"),
+    ("cna_gpu_instance_culler_draw", c.c_uint32, [c.c_uint64, c.c_uint32],
+     "borrowed culler; issues the indirect draw the cull wrote"),
+    ("cna_gpu_instance_culler_read_visible_count_ext", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_int32)],
+     "caller output; reads the command buffer back, which stalls the pipeline"),
+    ("cna_gpu_instance_culler_copy_instance_lookup_glsl", c.c_uint32,
+     [c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol; no object behind it"),
+    ("cna_gpu_instance_culler_destroy", c.c_uint32, [c.c_uint64],
+     "consumes the culler"),
+
+    ("cna_indirect_draw_arguments_init", c.c_uint32,
+     [c.POINTER(engine.CNA_IndirectDrawArguments)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_indirect_draw_indexed_arguments_init", c.c_uint32,
+     [c.POINTER(engine.CNA_IndirectDrawIndexedArguments)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_graphics_device_draw_primitives_indirect_ext", c.c_uint32,
+     [c.c_uint64, c.c_uint32, c.c_uint64, c.c_int32],
+     "borrowed device and buffer; the GPU reads the counts, not the caller"),
+    ("cna_graphics_device_draw_indexed_primitives_indirect_ext", c.c_uint32,
+     [c.c_uint64, c.c_uint32, c.c_uint64, c.c_int32],
+     "borrowed device and buffer; the GPU reads the counts, not the caller"),
+)
+
+#: The minimal ``models.h`` slice level-of-detail and instancing cannot work
+#: without. Both take a ``CNA_ModelMeshPartHandle``, and strict XNA's
+#: ``ModelMeshPart`` is a managed object with no native handle at all -- the
+#: native model runtime is a separate concept CNA-Python deliberately does not
+#: bind. These two project a strict part into the handle those routes demand and
+#: release it again; nothing else in ``models.h`` is imported, and no native
+#: model, mesh or part is ever public.
+ENGINE_MODEL_DEPENDENCY_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
+    ("cna_model_mesh_part_create", c.c_uint32,
+     [c.c_uint64, c.c_uint64, c.c_int32, c.c_int32, c.c_int32, c.c_int32,
+      c.POINTER(c.c_uint64)],
+     "owned native part; retains the caller's vertex and index buffers"),
+    ("cna_model_mesh_part_destroy", c.c_uint32, [c.c_uint64],
+     "consumes the native part"),
+)
+
 #: Every engine route this binding imports, in one tuple for the loader.
 ENGINE_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ENGINE_IDENTITY_MANIFEST
@@ -1927,6 +2110,8 @@ ENGINE_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     + ENGINE_ATMOSPHERE_MANIFEST
     + ENGINE_CLUSTERED_MANIFEST
     + ENGINE_PROBE_MANIFEST
+    + ENGINE_CULLING_MANIFEST
+    + ENGINE_MODEL_DEPENDENCY_MANIFEST
 )
 
 # ``engine`` is imported for the structures later slices pass by pointer; the

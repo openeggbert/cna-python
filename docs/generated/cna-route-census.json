@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1835,
+    "BOUND_ROUTES": 1894,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,24 +12,24 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 870,
-    "ENGINE_BOUND": 787,
+    "ENGINE_BOUND": 844,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 80,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 23,
     "PURPOSE_XNA_BACKING": 1171,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1822,
     "PURPOSE_MANAGED_BY_DESIGN": 537,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1835,
-    "STATUS_ACTIONABLE_LOCAL": 80,
+    "STATUS_BOUND": 1894,
+    "STATUS_ACTIONABLE_LOCAL": 23,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 2138,
+    "STATUS_DELIBERATE_NON_BINDING": 2136,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -1606,6 +1606,21 @@
       "status": "DELIBERATE_NON_BINDING",
       "reason": "In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer.",
       "boundReason": "imported: the selected 257-type XNA projection reaches this route"
+    },
+    {
+      "id": "engine-model-part-dependency",
+      "family": "lod-group",
+      "familyTitle": "the minimal slice level of detail and instancing cannot work without",
+      "match": {
+        "names": [
+          "cna_model_mesh_part_create",
+          "cna_model_mesh_part_destroy"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal models.h slice the selected level-of-detail and instancing families cannot work without. cna_lod_group_ext_add_level and cna_instanced_renderer_ext_create both take a CNA_ModelMeshPartHandle, and strict XNA's ModelMeshPart is a managed object with no native handle at all -- CNA's native model runtime is a separate concept this binding deliberately does not bind (see native-models). Exactly create and destroy: the native part is built from the strict part's own vertex buffer, index buffer and offsets, so it describes the same geometry rather than a copy, and it is private to whichever engine object needed it. No native model, mesh or part is public. A dependency of the selected engine profile, not a decision to bind models.h.",
+      "boundReason": "imported: level of detail and instancing take a native mesh-part handle, which strict XNA's managed ModelMeshPart does not have"
     },
     {
       "id": "native-models",
@@ -17091,111 +17106,111 @@
       "route": "cna_frustum_culler_ext_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_cull_boxes",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_cull_spheres",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_cull_transforms",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_get_frustum",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_is_box_visible",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_is_sphere_visible",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_set_camera",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_frustum_culler_ext_set_view_projection",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
       "rule": "engine-frustum-culler",
       "family": "frustum-culler",
       "familyTitle": "frustum culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fullscreen_pass_create",
@@ -20028,122 +20043,122 @@
       "route": "cna_gpu_cullable_instance_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_copy_instance_lookup_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_copy_unsupported_reason",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_cull",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_get_instance_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_read_visible_count_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_instance_culler_set_instances",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
       "rule": "engine-gpu-instance-culler",
       "family": "gpu-instance-culler",
       "familyTitle": "GPU instance culling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_gpu_timer_begin",
@@ -20633,12 +20648,12 @@
       "route": "cna_graphics_device_draw_indexed_primitives_indirect_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
       "rule": "engine-indirect-draw",
       "family": "indirect-draw",
       "familyTitle": "indirect draws",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_device_draw_instanced_primitives",
@@ -20666,12 +20681,12 @@
       "route": "cna_graphics_device_draw_primitives_indirect_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
       "rule": "engine-indirect-draw",
       "family": "indirect-draw",
       "familyTitle": "indirect draws",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_graphics_device_draw_user_indexed_primitives",
@@ -24142,23 +24157,23 @@
       "route": "cna_indirect_draw_arguments_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
       "rule": "engine-indirect-draw",
       "family": "indirect-draw",
       "familyTitle": "indirect draws",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_indirect_draw_indexed_arguments_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
       "rule": "engine-indirect-draw",
       "family": "indirect-draw",
       "familyTitle": "indirect draws",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_input_device_info_equals",
@@ -24428,199 +24443,199 @@
       "route": "cna_instanced_renderer_ext_copy_instance_elements",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_copy_tint_elements",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_did_last_draw_instance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_get_instance_capacity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_get_instance_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_get_instance_stride",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_get_last_draw_call_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_get_tint_stride",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_is_fallback_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_is_instancing_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_is_tints_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_set_fallback_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_set_instance_tints",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_set_instances",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_instanced_renderer_ext_set_tints_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
       "rule": "engine-instanced-renderer",
       "family": "instanced-renderer",
       "familyTitle": "instanced rendering",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_invite_accepted_event_info_init",
@@ -26386,155 +26401,155 @@
       "route": "cna_lod_group_ext_add_level",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_clear",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_copy_levels",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_get_hysteresis",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_get_selection_mode",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_projected_radius_pixels",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_reset_hysteresis",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_select",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_select_index",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_set_hysteresis",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_set_screen_space_parameters",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lod_group_ext_set_selection_mode",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
       "rule": "engine-lod-group",
       "family": "lod-group",
       "familyTitle": "level of detail",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_logger_debug",
@@ -29642,12 +29657,12 @@
       "route": "cna_model_mesh_part_create",
       "header": "models.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it.",
-      "rule": "native-models",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: level of detail and instancing take a native mesh-part handle, which strict XNA's managed ModelMeshPart does not have",
+      "rule": "engine-model-part-dependency",
+      "family": "lod-group",
+      "familyTitle": "the minimal slice level of detail and instancing cannot work without",
+      "bound": true
     },
     {
       "route": "cna_model_mesh_part_create_default",
@@ -29664,12 +29679,12 @@
       "route": "cna_model_mesh_part_destroy",
       "header": "models.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it.",
-      "rule": "native-models",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: level of detail and instancing take a native mesh-part handle, which strict XNA's managed ModelMeshPart does not have",
+      "rule": "engine-model-part-dependency",
+      "family": "lod-group",
+      "familyTitle": "the minimal slice level of detail and instancing cannot work without",
+      "bound": true
     },
     {
       "route": "cna_model_mesh_part_get_effect",
@@ -53627,111 +53642,111 @@
         "route": "cna_frustum_culler_ext_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_cull_boxes",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_cull_spheres",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_cull_transforms",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_get_frustum",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_is_box_visible",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_is_sphere_visible",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_set_camera",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_set_view_projection",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (frustum culling: CPU frustum culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects frustum culling -- CPU frustum culling",
         "rule": "engine-frustum-culler",
         "family": "frustum-culler",
         "familyTitle": "frustum culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fullscreen_pass_create",
@@ -53902,122 +53917,122 @@
         "route": "cna_gpu_cullable_instance_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_copy_instance_lookup_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_copy_unsupported_reason",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_cull",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_get_instance_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_read_visible_count_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_instance_culler_set_instances",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (GPU instance culling: compute-driven instance culling) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects GPU instance culling -- compute-driven instance culling",
         "rule": "engine-gpu-instance-culler",
         "family": "gpu-instance-culler",
         "familyTitle": "GPU instance culling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gpu_timer_begin",
@@ -54144,23 +54159,23 @@
         "route": "cna_graphics_device_draw_indexed_primitives_indirect_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
         "rule": "engine-indirect-draw",
         "family": "indirect-draw",
         "familyTitle": "indirect draws",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_graphics_device_draw_primitives_indirect_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
         "rule": "engine-indirect-draw",
         "family": "indirect-draw",
         "familyTitle": "indirect draws",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_graphics_device_supports_shadow_sampling_ext",
@@ -54485,221 +54500,221 @@
         "route": "cna_indirect_draw_arguments_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
         "rule": "engine-indirect-draw",
         "family": "indirect-draw",
         "familyTitle": "indirect draws",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_indirect_draw_indexed_arguments_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer",
         "rule": "engine-indirect-draw",
         "family": "indirect-draw",
         "familyTitle": "indirect draws",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_copy_instance_elements",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_copy_tint_elements",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_did_last_draw_instance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_get_instance_capacity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_get_instance_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_get_instance_stride",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_get_last_draw_call_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_get_tint_stride",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_is_fallback_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_is_instancing_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_is_tints_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_set_fallback_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_set_instance_tints",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_set_instances",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_instanced_renderer_ext_set_tints_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer",
         "rule": "engine-instanced-renderer",
         "family": "instanced-renderer",
         "familyTitle": "instanced rendering",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lens_flare_pass_create",
@@ -55387,155 +55402,155 @@
         "route": "cna_lod_group_ext_add_level",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_clear",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_copy_levels",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_get_hysteresis",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_get_selection_mode",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_projected_radius_pixels",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_reset_hysteresis",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_select",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_select_index",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_set_hysteresis",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_set_screen_space_parameters",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lod_group_ext_set_selection_mode",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one",
         "rule": "engine-lod-group",
         "family": "lod-group",
         "familyTitle": "level of detail",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_motion_blur_pass_create",

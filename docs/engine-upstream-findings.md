@@ -414,6 +414,53 @@ asserts the difference, so it fails the day CNA starts normalising.
 normalisation inside the route. The first is enough; the second would change the
 published GLSL's contract too.
 
+## ENGINE-008 -- a cullable instance's canonical world is zero, not identity
+
+**Status:** open. The value is handed back as CNA gives it; the trap is stated
+at the property and pinned by a test.
+
+**Documented contract.** `engine_layer.h`, of
+`cna_gpu_cullable_instance_init`:
+
+> @param out_instance Receives an instance with an **identity** world and an
+> empty box.
+
+**Actual result.** The world comes back all zero. Measured on the GPU artifact:
+
+```text
+cna_gpu_cullable_instance_init                 -> 0
+  world  -> [0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0]
+  bounds -> min == max == (0, 0, 0)   (the empty box, as documented)
+```
+
+The bounds are right; the matrix is not. The C layer builds a default-initialised
+`CNA::Graphics::GpuCullableInstance`, whose `World` is a
+`Microsoft::Xna::Framework::Matrix` with no initialiser -- and an XNA matrix's
+default value is all zeros, not the identity. The documentation describes what
+the type *should* default to rather than what it does.
+
+**Why it matters.** A zero world matrix is not a wrong position, it is a
+degenerate transform: every vertex of every instance maps to the origin. A
+caller who builds from the documented defaults and sets only `bounds` -- which is
+exactly what "receives an instance with an identity world" invites -- gets a
+correct cull and an invisible draw, with no error anywhere.
+
+**Affected Python operation.**
+`cna.extensions.engine.GpuCullableInstance.default`.
+
+**Local behaviour.** The zero matrix is handed back unchanged. `default()` in
+this package means "CNA's own canonical defaults, read rather than transcribed",
+and substituting an identity would turn it into a transcription and hide the
+defect from anyone reading the value. The trap is stated in the method's own
+documentation instead, and
+`tests/test_engine_culling.py::GpuInstanceCullerTests::test_the_default_instance_has_a_zero_world_and_not_an_identity`
+asserts the zero *and* asserts it is not the identity, so it fails the day CNA
+fixes it.
+
+**Unblock condition.** `GpuCullableInstance::World` initialised to
+`Matrix::Identity`, or the C layer setting it. The Python API does not change
+when it is; the pinning test does.
+
 ---
 
 Findings are added as each engine family is qualified. A family that has not
