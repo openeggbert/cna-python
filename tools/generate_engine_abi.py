@@ -432,6 +432,22 @@ def generate(header: Path) -> tuple[str, str]:
         for name, _returns, _parameters in callbacks:
             lines.append(f"    \"{name}\",")
         lines.append(")")
+        lines.append("")
+        lines.append("#: Which of each callback's parameters are pointers to const.")
+        lines.append("#:")
+        lines.append("#: ``const`` is not an ABI property and ctypes cannot carry it, but C")
+        lines.append("#: declaration compatibility distinguishes ``const T*`` from ``T*`` -- so")
+        lines.append("#: the compiler-backed prototype gate needs it to spell a function-pointer")
+        lines.append("#: parameter the way the canonical typedef does. Derived here rather than")
+        lines.append("#: written down there, because it is a fact about the header.")
+        lines.append("ENGINE_CALLBACK_CONST_PARAMETERS = {")
+        for name, _returns, parameters in callbacks:
+            flags = tuple(
+                " ".join(part.split()[:-1] if len(part.split()) > 1 else part.split())
+                .strip().startswith("const ")
+                for part in parameters)
+            lines.append(f"    \"{name}\": {flags!r},")
+        lines.append("}")
     lines.append("")
     lines.append("# --- constants -------------------------------------------------------------")
     lines.append("")

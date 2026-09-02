@@ -32,6 +32,18 @@ sys.path.insert(0, str(ROOT / "tools"))
 from cna_headers import Declaration, parse_include_directory  # noqa: E402
 
 from _cna_native.loader import FUNCTION_MANIFEST  # noqa: E402
+from _cna_native import engine_abi as _engine_abi  # noqa: E402
+
+#: Which parameters of a generated callback type are pointers to const.
+#:
+#: A function-pointer parameter's own parameters carry ``const`` in the canonical
+#: typedef, and ctypes cannot. Keyed by the callback type object so it applies
+#: wherever that callback appears, and derived by the generator from the header
+#: rather than written down here.
+CALLBACK_CONST_PARAMETERS = {
+    getattr(_engine_abi, name): flags
+    for name, flags in _engine_abi.ENGINE_CALLBACK_CONST_PARAMETERS.items()
+}
 
 
 _SCALARS = {
@@ -65,7 +77,14 @@ def render_ctype(value: object) -> str:
     if isinstance(value, type) and issubclass(value, ctypes._Pointer):  # type: ignore[attr-defined]
         return f"{render_ctype(value._type_)}*"
     if isinstance(value, type) and issubclass(value, ctypes._CFuncPtr):  # type: ignore[attr-defined]
-        arguments = ", ".join(render_ctype(item) for item in value._argtypes_) or "void"
+        constness = CALLBACK_CONST_PARAMETERS.get(value, ())
+        rendered = []
+        for index, item in enumerate(value._argtypes_):
+            text = render_ctype(item)
+            if index < len(constness) and constness[index] and text.endswith("*"):
+                text = f"const {text}"
+            rendered.append(text)
+        arguments = ", ".join(rendered) or "void"
         return f"{render_ctype(value._restype_)} (*)({arguments})"
     if isinstance(value, type) and issubclass(value, (ctypes.Structure, ctypes.Union)):
         return value.__name__

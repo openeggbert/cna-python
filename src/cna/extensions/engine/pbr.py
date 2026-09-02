@@ -607,6 +607,53 @@ class _PbrEffectBase:
         return self._effect
 
     @property
+    def image_based_light(self):
+        """The environment lighting this effect shades with, or ``None``.
+
+        Returns a :class:`~cna.extensions.engine.ImageBasedLight` carrying the
+        caller's own texture objects rather than new facades: CNA hands back
+        three *counted borrows*, which are released here immediately. Following
+        ``engine_layer.h`` and holding them would keep three textures alive per
+        read, and the failure would surface as the owning game refusing to be
+        destroyed -- ENGINE-002 again, three handles at a time.
+
+        ``None`` when no image-based light has been assigned, which CNA reports
+        by refusing the read rather than by answering with an empty structure.
+        """
+        from .probes import ImageBasedLight
+
+        value = _support.in_struct(_engine.CNA_ImageBasedLightEXT, 1)
+        if _support.call_result("cna_effect_get_image_based_light_ext",
+                                self._effect._require_handle(), c.byref(value)) != 0:
+            return None
+        stored = self._textures.get("image_based_light")
+        for handle, destroy in ((value.irradiance, "cna_texturecube_destroy"),
+                                (value.prefiltered_specular, "cna_texturecube_destroy"),
+                                (value.brdf_lut, "cna_texture2d_destroy")):
+            if handle:
+                _support.call(destroy, c.c_uint64(handle))
+        if stored is None:
+            return None
+        from dataclasses import replace
+
+        return replace(stored, prefiltered_mip_count=int(value.prefiltered_mip_count),
+                       intensity=float(value.intensity))
+
+    @image_based_light.setter
+    def image_based_light(self, value) -> None:
+        """Gives the effect three textures to sample. All three are borrowed."""
+        from .probes import ImageBasedLight
+
+        if not isinstance(value, ImageBasedLight):
+            raise TypeError("image_based_light must be an ImageBasedLight")
+        native = value._native()
+        _support.call("cna_effect_set_image_based_light_ext",
+                      self._effect._require_handle(), c.byref(native))
+        # The caller's own objects, beside the handles CNA stores, so reading the
+        # property back answers with what was assigned.
+        self._textures["image_based_light"] = value
+
+    @property
     def is_disposed(self) -> bool:
         """True once the underlying effect has been disposed."""
         return bool(self._effect.IsDisposed)

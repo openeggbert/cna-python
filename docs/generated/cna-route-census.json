@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1770,
+    "BOUND_ROUTES": 1835,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,17 +12,17 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 870,
-    "ENGINE_BOUND": 722,
+    "ENGINE_BOUND": 787,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 145,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 80,
     "PURPOSE_XNA_BACKING": 1171,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1822,
     "PURPOSE_MANAGED_BY_DESIGN": 537,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1770,
-    "STATUS_ACTIONABLE_LOCAL": 145,
+    "STATUS_BOUND": 1835,
+    "STATUS_ACTIONABLE_LOCAL": 80,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -6894,23 +6894,23 @@
       "route": "cna_clustered_forward_effect_set_light_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_light_probe_volume",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
       "rule": "engine-clustered-forward-effect",
       "family": "clustered-forward-effect",
       "familyTitle": "the clustered forward effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clustered_forward_effect_set_material_extensions",
@@ -15452,12 +15452,12 @@
       "route": "cna_effect_get_image_based_light_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_get_is_compiled_ext",
@@ -16233,12 +16233,12 @@
       "route": "cna_effect_set_image_based_light_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
       "rule": "engine-effect-engine-bindings",
       "family": "effect-engine-bindings",
       "familyTitle": "engine state on an effect",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_effect_set_light_view_projection_ext",
@@ -16750,144 +16750,144 @@
       "route": "cna_environment_processor_convert_equirectangular",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_direction_to_equirectangular",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_face_direction",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_generate_brdf_lut",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_generate_irradiance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_generate_prefiltered_specular",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_generate_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_hammersley",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_importance_sample_ggx",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_mip_for_roughness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_environment_processor_roughness_for_mip",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
       "rule": "engine-environment-processor",
       "family": "environment-processor",
       "familyTitle": "the environment processor",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_error_copy_last_message",
@@ -24010,23 +24010,23 @@
       "route": "cna_image_based_light_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples",
       "rule": "engine-image-based-light",
       "family": "image-based-light",
       "familyTitle": "image-based lighting",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_image_based_light_ext_is_valid",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples",
       "rule": "engine-image-based-light",
       "family": "image-based-light",
       "familyTitle": "image-based lighting",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_index_buffer_copy_type_name",
@@ -25550,507 +25550,507 @@
       "route": "cna_light_probe_baker_bake_light",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_bake_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_bake_visibility",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_create_with_face_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_face_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_face_view",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_get_face_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_get_far_plane",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_get_near_plane",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_set_planes",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
       "rule": "engine-light-probe-baker",
       "family": "light-probe-baker",
       "familyTitle": "the light probe baker",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_copy_coefficients",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_copy_evaluation_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_copy_from",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_create_at",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_equals",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_get_coefficient",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_get_position",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_get_visibility_mean",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_get_visibility_mean_squared",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_has_visibility",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_irradiance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_is_zero",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_scale",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_set_coefficient",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_set_position",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_set_visibility",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_ext_visibility_weight",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
       "rule": "engine-light-probe",
       "family": "light-probe",
       "familyTitle": "light probes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_contains",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_get_bounds",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_get_count_x",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_get_count_y",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_get_count_z",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_get_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_get_probe_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_get_probe_position",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_irradiance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_is_zero",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_sample_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_volume_ext_set_probe",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
       "rule": "engine-light-probe-volume",
       "family": "light-probe-volume",
       "familyTitle": "light probe volumes",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_shaft_pass_create",
@@ -50844,23 +50844,23 @@
         "route": "cna_clustered_forward_effect_set_light_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_light_probe_volume",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer",
         "rule": "engine-clustered-forward-effect",
         "family": "clustered-forward-effect",
         "familyTitle": "the clustered forward effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_set_material_extensions",
@@ -53253,12 +53253,12 @@
         "route": "cna_effect_get_image_based_light_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_get_light_view_projection_ext",
@@ -53341,12 +53341,12 @@
         "route": "cna_effect_set_image_based_light_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL",
         "rule": "engine-effect-engine-bindings",
         "family": "effect-engine-bindings",
         "familyTitle": "engine state on an effect",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_effect_set_light_view_projection_ext",
@@ -53451,144 +53451,144 @@
         "route": "cna_environment_processor_convert_equirectangular",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_direction_to_equirectangular",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_face_direction",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_generate_brdf_lut",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_generate_irradiance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_generate_prefiltered_specular",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_generate_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_hammersley",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_importance_sample_ggx",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_mip_for_roughness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_environment_processor_roughness_for_mip",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation",
         "rule": "engine-environment-processor",
         "family": "environment-processor",
         "familyTitle": "the environment processor",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_film_grain_pass_create",
@@ -54463,23 +54463,23 @@
         "route": "cna_image_based_light_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples",
         "rule": "engine-image-based-light",
         "family": "image-based-light",
         "familyTitle": "image-based lighting",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_image_based_light_ext_is_valid",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples",
         "rule": "engine-image-based-light",
         "family": "image-based-light",
         "familyTitle": "image-based lighting",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_indirect_draw_arguments_init",
@@ -54782,507 +54782,507 @@
         "route": "cna_light_probe_baker_bake_light",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_bake_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_bake_visibility",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_create_with_face_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_face_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_face_view",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_get_face_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_get_far_plane",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_get_near_plane",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_set_planes",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene",
         "rule": "engine-light-probe-baker",
         "family": "light-probe-baker",
         "familyTitle": "the light probe baker",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_copy_coefficients",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_copy_evaluation_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_copy_from",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_create_at",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_equals",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_get_coefficient",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_get_position",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_get_visibility_mean",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_get_visibility_mean_squared",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_has_visibility",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_irradiance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_is_zero",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_scale",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_set_coefficient",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_set_position",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_set_visibility",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_ext_visibility_weight",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe",
         "rule": "engine-light-probe",
         "family": "light-probe",
         "familyTitle": "light probes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_contains",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_get_bounds",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_get_count_x",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_get_count_y",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_get_count_z",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_get_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_get_probe_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_get_probe_position",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_irradiance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_is_zero",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_sample_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_volume_ext_set_probe",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation",
         "rule": "engine-light-probe-volume",
         "family": "light-probe-volume",
         "familyTitle": "light probe volumes",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_shaft_pass_create",

@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1770
+BOUND_ROUTES=1835
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -15,17 +15,17 @@ CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
 SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 ENGINE_ROUTES=870
-ENGINE_BOUND=722
+ENGINE_BOUND=787
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=145
+SELECTED_ENGINE_ACTIONABLE_LOCAL=80
 PURPOSE_XNA_BACKING=1171
 PURPOSE_CNA_EXTENSION_CANDIDATE=1822
 PURPOSE_MANAGED_BY_DESIGN=537
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1770
-STATUS_ACTIONABLE_LOCAL=145
+STATUS_BOUND=1835
+STATUS_ACTIONABLE_LOCAL=80
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
@@ -40,14 +40,14 @@ STATUS_UNREVIEWED=0
 
 | Purpose | Status | Routes |
 |---|---|---:|
-| CNA_EXTENSION_CANDIDATE | BOUND | 1026 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1091 |
 | XNA_BACKING | BOUND | 727 |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 651 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 520 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 145 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 80 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 |
@@ -358,8 +358,8 @@ is BOUND or carries its own written non-binding reason.
 
 | Status | Routes |
 |---|---:|
-| BOUND | 722 |
-| ACTIONABLE_LOCAL | 145 |
+| BOUND | 787 |
+| ACTIONABLE_LOCAL | 80 |
 | DELIBERATE_NON_BINDING | 3 |
 
 ### By sub-family
@@ -380,7 +380,7 @@ is BOUND or carries its own written non-binding reason.
 | `cluster-buffer` (the clustered light upload buffer) | 9 | 9 | BOUND 9 |
 | `cluster-compute` (the compute cluster assignment) | 8 | 8 | BOUND 8 |
 | `cluster-grid` (the cluster grid) | 15 | 15 | BOUND 15 |
-| `clustered-forward-effect` (the clustered forward effect) | 29 | 27 | ACTIONABLE_LOCAL 2, BOUND 27 |
+| `clustered-forward-effect` (the clustered forward effect) | 29 | 29 | BOUND 29 |
 | `clustered-light-set` (the clustered light set) | 15 | 15 | BOUND 15 |
 | `clustered-light-values` (clustered light values) | 1 | 1 | BOUND 1 |
 | `clustered-shadow-policy` (the clustered shadow budget) | 13 | 13 | BOUND 13 |
@@ -395,9 +395,9 @@ is BOUND or carries its own written non-binding reason.
 | `depth-normal-prepass` (the depth/normal prepass) | 27 | 27 | BOUND 27 |
 | `depth-of-field` (depth of field) | 10 | 10 | BOUND 10 |
 | `device-shadow-sampling` (device shadow-sampling capability) | 1 | 1 | BOUND 1 |
-| `effect-engine-bindings` (engine state on an effect) | 16 | 14 | ACTIONABLE_LOCAL 2, BOUND 14 |
+| `effect-engine-bindings` (engine state on an effect) | 16 | 16 | BOUND 16 |
 | `engine-identity` (engine-layer identity) | 2 | 2 | BOUND 2 |
-| `environment-processor` (the environment processor) | 13 | 0 | ACTIONABLE_LOCAL 13 |
+| `environment-processor` (the environment processor) | 13 | 13 | BOUND 13 |
 | `film-grain` (film grain) | 3 | 3 | BOUND 3 |
 | `frustum-culler` (frustum culling) | 10 | 0 | ACTIONABLE_LOCAL 10 |
 | `fullscreen-pass` (full-screen drawing) | 4 | 4 | BOUND 4 |
@@ -407,13 +407,13 @@ is BOUND or carries its own written non-binding reason.
 | `gpu-timer` (GPU timers) | 11 | 11 | BOUND 11 |
 | `hdr-display-output` (HDR display output) | 15 | 15 | BOUND 15 |
 | `height-fog` (height fog) | 10 | 10 | BOUND 10 |
-| `image-based-light` (image-based lighting) | 2 | 0 | ACTIONABLE_LOCAL 2 |
+| `image-based-light` (image-based lighting) | 2 | 2 | BOUND 2 |
 | `indirect-draw` (indirect draws) | 4 | 0 | ACTIONABLE_LOCAL 4 |
 | `instanced-renderer` (instanced rendering) | 18 | 0 | ACTIONABLE_LOCAL 18 |
 | `lens-flare` (lens flare) | 7 | 7 | BOUND 7 |
-| `light-probe` (light probes) | 19 | 0 | ACTIONABLE_LOCAL 19 |
-| `light-probe-baker` (the light probe baker) | 13 | 0 | ACTIONABLE_LOCAL 13 |
-| `light-probe-volume` (light probe volumes) | 14 | 0 | ACTIONABLE_LOCAL 14 |
+| `light-probe` (light probes) | 19 | 19 | BOUND 19 |
+| `light-probe-baker` (the light probe baker) | 13 | 13 | BOUND 13 |
+| `light-probe-volume` (light probe volumes) | 14 | 14 | BOUND 14 |
 | `light-shaft` (light shafts) | 9 | 9 | BOUND 9 |
 | `light-values` (engine light values) | 5 | 5 | BOUND 5 |
 | `lod-group` (level of detail) | 14 | 0 | ACTIONABLE_LOCAL 14 |
@@ -566,8 +566,8 @@ is BOUND or carries its own written non-binding reason.
 | `cna_clustered_forward_effect_set_area_light` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
 | `cna_clustered_forward_effect_set_base_color` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
 | `cna_clustered_forward_effect_set_ior` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
-| `cna_clustered_forward_effect_set_light_probe` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_clustered_forward_effect_set_light_probe_volume` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_clustered_forward_effect_set_light_probe` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
+| `cna_clustered_forward_effect_set_light_probe_volume` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
 | `cna_clustered_forward_effect_set_material_extensions` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
 | `cna_clustered_forward_effect_set_metallic` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
 | `cna_clustered_forward_effect_set_opaque_frame` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
@@ -785,7 +785,7 @@ is BOUND or carries its own written non-binding reason.
 | `cna_depth_of_field_pass_set_focus_distance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion |
 | `cna_depth_of_field_pass_set_max_radius` | engine_layer.h | BOUND | imported: cna.extensions.engine projects depth of field -- the depth-of-field pass and its circle of confusion |
 | `cna_directional_light_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults |
-| `cna_effect_get_image_based_light_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_effect_get_image_based_light_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_get_light_view_projection_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_get_punctual_light_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_get_shadow_cascades_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
@@ -793,7 +793,7 @@ is BOUND or carries its own written non-binding reason.
 | `cna_effect_get_shadow_filter_radius_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_get_shadow_map_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_is_shadows_enabled_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
-| `cna_effect_set_image_based_light_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_effect_set_image_based_light_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_set_light_view_projection_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_set_punctual_light_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_effect_set_shadow_cascades_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
@@ -803,19 +803,19 @@ is BOUND or carries its own written non-binding reason.
 | `cna_effect_set_shadows_enabled_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | `cna_engine_layer_copy_version_string` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
 | `cna_engine_layer_get_version` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
-| `cna_environment_processor_convert_equirectangular` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_direction_to_equirectangular` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_face_direction` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_generate_brdf_lut` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_generate_irradiance` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_generate_prefiltered_specular` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_generate_probe` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_hammersley` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_importance_sample_ggx` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_mip_for_roughness` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_environment_processor_roughness_for_mip` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_environment_processor_convert_equirectangular` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_direction_to_equirectangular` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_face_direction` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_generate_brdf_lut` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_generate_irradiance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_generate_prefiltered_specular` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_generate_probe` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_hammersley` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_importance_sample_ggx` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_mip_for_roughness` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| `cna_environment_processor_roughness_for_mip` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
 | `cna_film_grain_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
 | `cna_film_grain_pass_get_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
 | `cna_film_grain_pass_set_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
@@ -895,8 +895,8 @@ is BOUND or carries its own written non-binding reason.
 | `cna_height_fog_pass_set_color` | engine_layer.h | BOUND | imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth |
 | `cna_height_fog_pass_set_density` | engine_layer.h | BOUND | imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth |
 | `cna_height_fog_pass_set_falloff` | engine_layer.h | BOUND | imported: cna.extensions.engine projects height fog -- exponential height fog and its optical depth |
-| `cna_image_based_light_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_image_based_light_ext_is_valid` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_image_based_light_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
+| `cna_image_based_light_ext_is_valid` | engine_layer.h | BOUND | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
 | `cna_indirect_draw_arguments_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_indirect_draw_indexed_arguments_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | `cna_instanced_renderer_ext_copy_instance_elements` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
@@ -924,52 +924,52 @@ is BOUND or carries its own written non-binding reason.
 | `cna_lens_flare_pass_set_dispersal` | engine_layer.h | BOUND | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
 | `cna_lens_flare_pass_set_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
 | `cna_lens_flare_pass_set_threshold` | engine_layer.h | BOUND | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
-| `cna_light_probe_baker_bake_light` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_bake_probe` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_bake_visibility` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_create_with_face_size` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_face_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_face_view` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_get_face_size` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_get_far_plane` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_get_near_plane` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_is_supported` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_baker_set_planes` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_copy_coefficients` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_copy_evaluation_glsl` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_copy_from` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_create_at` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_equals` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_get_coefficient` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_get_position` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_get_visibility_mean` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_get_visibility_mean_squared` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_has_visibility` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_irradiance` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_is_zero` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_scale` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_set_coefficient` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_set_position` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_set_visibility` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_ext_visibility_weight` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_contains` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_get_bounds` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_get_count_x` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_get_count_y` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_get_count_z` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_get_probe` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_get_probe_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_get_probe_position` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_irradiance` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_is_zero` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_sample_probe` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_light_probe_volume_ext_set_probe` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_light_probe_baker_bake_light` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_bake_probe` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_bake_visibility` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_create_with_face_size` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_face_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_face_view` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_get_face_size` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_get_far_plane` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_get_near_plane` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_baker_set_planes` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
+| `cna_light_probe_ext_copy_coefficients` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_copy_evaluation_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_copy_from` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_create_at` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_equals` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_get_coefficient` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_get_position` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_get_visibility_mean` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_get_visibility_mean_squared` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_has_visibility` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_irradiance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_is_zero` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_scale` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_set_coefficient` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_set_position` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_set_visibility` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_ext_visibility_weight` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| `cna_light_probe_volume_ext_contains` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_get_bounds` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_get_count_x` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_get_count_y` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_get_count_z` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_get_probe` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_get_probe_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_get_probe_position` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_irradiance` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_is_zero` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_sample_probe` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
+| `cna_light_probe_volume_ext_set_probe` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
 | `cna_light_shaft_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light shafts -- radial light shafts |
 | `cna_light_shaft_pass_get_decay` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light shafts -- radial light shafts |
 | `cna_light_shaft_pass_get_intensity` | engine_layer.h | BOUND | imported: cna.extensions.engine projects light shafts -- radial light shafts |
@@ -1333,31 +1333,31 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 63 | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 35 | Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 33 | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
-| CNA_EXTENSION_CANDIDATE | BOUND | 27 | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
+| CNA_EXTENSION_CANDIDATE | BOUND | 29 | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
 | CNA_EXTENSION_CANDIDATE | BOUND | 27 | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
 | CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping |
 | CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 21 | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: runtime capability evidence names the backend that produced it |
 | CNA_EXTENSION_CANDIDATE | BOUND | 20 | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 19 | In the selected engine-layer extension family (light probes: one spherical-harmonic irradiance probe) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 19 | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 18 | In the selected engine-layer extension family (instanced rendering: the instanced renderer and its instance buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | MANAGED_BY_DESIGN | BOUND | 17 | imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable |
 | CNA_EXTENSION_CANDIDATE | BOUND | 17 | imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 17 | Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 17 | imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces |
+| CNA_EXTENSION_CANDIDATE | BOUND | 16 | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
 | CNA_EXTENSION_CANDIDATE | BOUND | 16 | imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects screen-space reflections -- the SSR pass |
-| CNA_EXTENSION_CANDIDATE | BOUND | 14 | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 14 | In the selected engine-layer extension family (light probe volumes: a grid of probes and its interpolation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 14 | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 14 | In the selected engine-layer extension family (level of detail: LOD levels and the projected size that selects one) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (the environment processor: irradiance, prefiltered specular and BRDF LUT generation) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 13 | In the selected engine-layer extension family (the light probe baker: the GPU bake that fills a probe from a scene) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
+| CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the light probe baker -- the GPU bake that fills a probe from a scene |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the post-process chain -- the ordered chain that applies passes and owns their intermediate targets |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the skybox -- the cube-map skybox |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects screen-space ambient occlusion -- the SSAO pass |
@@ -1409,13 +1409,11 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 2 | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (engine state on an effect: the engine-layer state a stock effect accepts: shadow map, punctual light and IBL) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | In the selected engine-layer extension family (image-based lighting: the IBL value an effect samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects clustered light values -- the clustered light value structure |

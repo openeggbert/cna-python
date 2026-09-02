@@ -367,6 +367,53 @@ day either the documentation or the implementation changes.
 parameter to `graphics_device` or teaching `GetBorrowedGraphicsDevice` to resolve
 a game handle would settle it; the first matches what the other constructors do.
 
+## ENGINE-007 -- `importance_sample_ggx` needs a unit normal and does not say so
+
+**Status:** open, and a documentation gap rather than a defect. Pinned by a
+test; the public API states the requirement.
+
+**Documented contract.** `engine_layer.h`, of
+`cna_environment_processor_importance_sample_ggx`:
+
+> @param normal The surface normal to build the basis around.
+
+Nothing about its length, and nothing that refuses one.
+
+**Actual result.** The vector is used as supplied. The tangent frame is built
+from it, the sampled local direction is combined with it, and only the *result*
+is normalised -- so a normal whose length is not one tilts the sample. Measured
+on the GPU artifact, over sixteen sequence points at roughness 0.3, comparing
+the same call with `(0.3, 0.8, -0.5)` and with that vector normalised:
+
+```text
+normal as given, length 0.98995   worst angle from the reference   4.9e-3 rad
+normal normalised, length 1.0     worst angle from the reference   3.7e-4 rad
+```
+
+The second figure is single-precision rounding. The first is thirteen times
+larger and is the length leaking into the direction.
+
+**Why it matters.** A normal read from an interpolated vertex attribute, or one
+built from a cross product, is routinely 0.99-something. The route answers with
+a plausible direction rather than an error, so the mistake surfaces as a
+prefiltered environment that is slightly wrong at every texel and never as a
+failure.
+
+**Affected Python operation.**
+`cna.extensions.engine.importance_sample_ggx`.
+
+**Local behaviour.** The requirement is stated at the function, in the terms
+above. It is *not* silently corrected: normalising in the binding would make the
+Python function answer differently from the GLSL CNA publishes beside it, and
+the whole point of exposing this one is that a caller's own shader and the CPU
+evaluation can be compared.
+`tests/test_engine_probes.py::PureEnvironmentHelperTests::test_the_normal_is_used_as_given_and_not_normalised_first`
+asserts the difference, so it fails the day CNA starts normalising.
+
+**Unblock condition.** Either a sentence in the parameter's documentation or a
+normalisation inside the route. The first is enough; the second would change the
+published GLSL's contract too.
+
 ---
 
 Findings are added as each engine family is qualified. A family that has not

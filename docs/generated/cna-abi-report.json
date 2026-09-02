@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1770,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1770,
+    "BOUND_FUNCTIONS": 1835,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1835,
     "C_LAYOUT_MEASUREMENTS": 1672,
     "CTYPES_LAYOUT_MEASUREMENTS": 1672,
     "MISSING_SYMBOLS": 0,
@@ -1778,7 +1778,72 @@
     "cna_area_light_brdf_table_get_generation_milliseconds",
     "cna_area_light_brdf_table_evaluate",
     "cna_area_light_brdf_table_copy_lookup_glsl",
-    "cna_area_light_brdf_table_destroy"
+    "cna_area_light_brdf_table_destroy",
+    "cna_light_probe_ext_create",
+    "cna_light_probe_ext_create_at",
+    "cna_light_probe_ext_copy_from",
+    "cna_light_probe_ext_get_position",
+    "cna_light_probe_ext_set_position",
+    "cna_light_probe_ext_get_coefficient",
+    "cna_light_probe_ext_set_coefficient",
+    "cna_light_probe_ext_copy_coefficients",
+    "cna_light_probe_ext_irradiance",
+    "cna_light_probe_ext_set_visibility",
+    "cna_light_probe_ext_get_visibility_mean",
+    "cna_light_probe_ext_get_visibility_mean_squared",
+    "cna_light_probe_ext_has_visibility",
+    "cna_light_probe_ext_visibility_weight",
+    "cna_light_probe_ext_is_zero",
+    "cna_light_probe_ext_scale",
+    "cna_light_probe_ext_equals",
+    "cna_light_probe_ext_copy_evaluation_glsl",
+    "cna_light_probe_ext_destroy",
+    "cna_light_probe_volume_ext_create",
+    "cna_light_probe_volume_ext_get_bounds",
+    "cna_light_probe_volume_ext_get_count_x",
+    "cna_light_probe_volume_ext_get_count_y",
+    "cna_light_probe_volume_ext_get_count_z",
+    "cna_light_probe_volume_ext_get_probe_count",
+    "cna_light_probe_volume_ext_get_probe_position",
+    "cna_light_probe_volume_ext_get_probe",
+    "cna_light_probe_volume_ext_set_probe",
+    "cna_light_probe_volume_ext_contains",
+    "cna_light_probe_volume_ext_sample_probe",
+    "cna_light_probe_volume_ext_irradiance",
+    "cna_light_probe_volume_ext_is_zero",
+    "cna_light_probe_volume_ext_destroy",
+    "cna_light_probe_baker_create",
+    "cna_light_probe_baker_create_with_face_size",
+    "cna_light_probe_baker_is_supported",
+    "cna_light_probe_baker_get_face_size",
+    "cna_light_probe_baker_face_count",
+    "cna_light_probe_baker_get_near_plane",
+    "cna_light_probe_baker_get_far_plane",
+    "cna_light_probe_baker_set_planes",
+    "cna_light_probe_baker_face_view",
+    "cna_light_probe_baker_bake_probe",
+    "cna_light_probe_baker_bake_light",
+    "cna_light_probe_baker_bake_visibility",
+    "cna_light_probe_baker_destroy",
+    "cna_image_based_light_ext_init",
+    "cna_image_based_light_ext_is_valid",
+    "cna_effect_get_image_based_light_ext",
+    "cna_effect_set_image_based_light_ext",
+    "cna_clustered_forward_effect_set_light_probe",
+    "cna_clustered_forward_effect_set_light_probe_volume",
+    "cna_environment_processor_create",
+    "cna_environment_processor_convert_equirectangular",
+    "cna_environment_processor_generate_irradiance",
+    "cna_environment_processor_generate_prefiltered_specular",
+    "cna_environment_processor_generate_brdf_lut",
+    "cna_environment_processor_generate_probe",
+    "cna_environment_processor_mip_for_roughness",
+    "cna_environment_processor_roughness_for_mip",
+    "cna_environment_processor_hammersley",
+    "cna_environment_processor_importance_sample_ggx",
+    "cna_environment_processor_face_direction",
+    "cna_environment_processor_direction_to_equirectangular",
+    "cna_environment_processor_destroy"
   ],
   "functionManifest": [
     {
@@ -20358,6 +20423,712 @@
       ],
       "arity": 1,
       "ownership": "consumes the table"
+    },
+    {
+      "symbol": "cna_light_probe_ext_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_ulong>"
+      ],
+      "arity": 1,
+      "ownership": "owned probe; needs no device, because a probe is nine numbers"
+    },
+    {
+      "symbol": "cna_light_probe_ext_create_at",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned probe; copies the position"
+    },
+    {
+      "symbol": "cna_light_probe_ext_copy_from",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed destination and source; copies every value"
+    },
+    {
+      "symbol": "cna_light_probe_ext_get_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_set_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed probe; copies the value"
+    },
+    {
+      "symbol": "cna_light_probe_ext_get_coefficient",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_set_coefficient",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed probe; copies the value"
+    },
+    {
+      "symbol": "cna_light_probe_ext_copy_coefficients",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol over the nine coefficients"
+    },
+    {
+      "symbol": "cna_light_probe_ext_irradiance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_set_visibility",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 4,
+      "ownership": "borrowed probe; stores both moments, flooring the second"
+    },
+    {
+      "symbol": "cna_light_probe_ext_get_visibility_mean",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_get_visibility_mean_squared",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_has_visibility",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_visibility_weight",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_is_zero",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed probe"
+    },
+    {
+      "symbol": "cna_light_probe_ext_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed probe; a negative factor is ignored rather than refused"
+    },
+    {
+      "symbol": "cna_light_probe_ext_equals",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; both probes borrowed"
+    },
+    {
+      "symbol": "cna_light_probe_ext_copy_evaluation_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol; no object behind it"
+    },
+    {
+      "symbol": "cna_light_probe_ext_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the probe"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_create",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_BoundingBox>",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned volume; copies the box"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_get_bounds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingBox>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_get_count_x",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_get_count_y",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_get_count_z",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_get_probe_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_get_probe_position",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; the position is the grid's, not the probe's"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_get_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_ulong"
+      ],
+      "arity": 5,
+      "ownership": "fills the caller's probe; no handle is created or transferred"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_set_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_ulong"
+      ],
+      "arity": 5,
+      "ownership": "borrowed volume; copies the probe and overrides its position"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_contains",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_sample_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "fills the caller's probe; no handle is created or transferred"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_irradiance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_is_zero",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed volume"
+    },
+    {
+      "symbol": "cna_light_probe_volume_ext_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the volume"
+    },
+    {
+      "symbol": "cna_light_probe_baker_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned baker; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_light_probe_baker_create_with_face_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "owned baker; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_light_probe_baker_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed baker"
+    },
+    {
+      "symbol": "cna_light_probe_baker_get_face_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed baker"
+    },
+    {
+      "symbol": "cna_light_probe_baker_face_count",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_int>"
+      ],
+      "arity": 1,
+      "ownership": "pure function over caller-owned output; the same for every baker"
+    },
+    {
+      "symbol": "cna_light_probe_baker_get_near_plane",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed baker"
+    },
+    {
+      "symbol": "cna_light_probe_baker_get_far_plane",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed baker"
+    },
+    {
+      "symbol": "cna_light_probe_baker_set_planes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 3,
+      "ownership": "borrowed baker; copies both values"
+    },
+    {
+      "symbol": "cna_light_probe_baker_face_view",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; borrowed baker"
+    },
+    {
+      "symbol": "cna_light_probe_baker_bake_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "CFunctionType",
+        "c_void_p",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "owned probe; the callback is TRANSIENT_CALLBACK_VIEW, rooted for the call only"
+    },
+    {
+      "symbol": "cna_light_probe_baker_bake_light",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p"
+      ],
+      "arity": 4,
+      "ownership": "borrowed baker and volume; writes every probe in the volume"
+    },
+    {
+      "symbol": "cna_light_probe_baker_bake_visibility",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p"
+      ],
+      "arity": 4,
+      "ownership": "borrowed baker and volume; writes every probe's visibility"
+    },
+    {
+      "symbol": "cna_light_probe_baker_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the baker"
+    },
+    {
+      "symbol": "cna_image_based_light_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ImageBasedLightEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_image_based_light_ext_is_valid",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_ImageBasedLightEXT>",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_effect_get_image_based_light_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ImageBasedLightEXT>"
+      ],
+      "arity": 2,
+      "ownership": "THREE COUNTED BORROWS in one structure; each released with its own destroy"
+    },
+    {
+      "symbol": "cna_effect_set_image_based_light_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_ImageBasedLightEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; retains all three textures"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_light_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; copies the probe's values"
+    },
+    {
+      "symbol": "cna_clustered_forward_effect_set_light_probe_volume",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed effect; retains the caller's volume"
+    },
+    {
+      "symbol": "cna_environment_processor_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned processor; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_environment_processor_convert_equirectangular",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "OWNED cube map; the processor does not release what it produced"
+    },
+    {
+      "symbol": "cna_environment_processor_generate_irradiance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "OWNED cube map; the processor does not release what it produced"
+    },
+    {
+      "symbol": "cna_environment_processor_generate_prefiltered_specular",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 6,
+      "ownership": "OWNED cube map; the processor does not release what it produced"
+    },
+    {
+      "symbol": "cna_environment_processor_generate_brdf_lut",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "OWNED 2D texture; the processor does not release what it produced"
+    },
+    {
+      "symbol": "cna_environment_processor_generate_probe",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "owned probe; the environment is borrowed for the call"
+    },
+    {
+      "symbol": "cna_environment_processor_mip_for_roughness",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_int",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_environment_processor_roughness_for_mip",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_int",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_environment_processor_hammersley",
+      "return": "c_uint",
+      "parameters": [
+        "c_int",
+        "c_int",
+        "pointer<c_float>",
+        "pointer<c_float>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned output; nothing is retained"
+    },
+    {
+      "symbol": "cna_environment_processor_importance_sample_ggx",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_environment_processor_face_direction",
+      "return": "c_uint",
+      "parameters": [
+        "c_int",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 4,
+      "ownership": "pure function over caller-owned output; nothing is retained"
+    },
+    {
+      "symbol": "cna_environment_processor_direction_to_equirectangular",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "pointer<c_float>",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_environment_processor_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the processor; the textures it produced outlive it"
     }
   ],
   "missingSymbols": [],

@@ -98,6 +98,19 @@ ENGINE_CALLBACKS = (
     "CNA_LightProbeSceneDrawCallback",
 )
 
+#: Which of each callback's parameters are pointers to const.
+#:
+#: ``const`` is not an ABI property and ctypes cannot carry it, but C
+#: declaration compatibility distinguishes ``const T*`` from ``T*`` -- so
+#: the compiler-backed prototype gate needs it to spell a function-pointer
+#: parameter the way the canonical typedef does. Derived here rather than
+#: written down there, because it is a fact about the header.
+ENGINE_CALLBACK_CONST_PARAMETERS = {
+    "CNA_TransparentDrawCallback": (False,),
+    "CNA_RenderPipelineDrawCallback": (False,),
+    "CNA_LightProbeSceneDrawCallback": (True, True, False),
+}
+
 # --- constants -------------------------------------------------------------
 
 CNA_ALPHA_MODE_BLEND_EXT = 2

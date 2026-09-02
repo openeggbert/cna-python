@@ -607,3 +607,217 @@ def area_light_quad(shape: int, position: Vector3, right_axis: Vector3,
                     position.Z + right.Z + up.Z),
             Vector3(position.X - right.X + up.X, position.Y - right.Y + up.Y,
                     position.Z - right.Z + up.Z))
+
+
+# --- light probes -------------------------------------------------------------
+
+#: Ramamoorthi and Hanrahan's constants: the cosine lobe's own spherical-harmonic
+#: coefficients, folded together with the basis normalisation. Their result is
+#: that irradiance needs only nine terms, because convolving anything with a
+#: cosine lobe leaves almost nothing above second order.
+SH_C1, SH_C2, SH_C3, SH_C4, SH_C5 = 0.429043, 0.511664, 0.743125, 0.886227, 0.247708
+
+
+def sh_irradiance(coefficients, normal: Vector3) -> Vector3:
+    """Irradiance arriving at a surface facing ``normal``, from nine coefficients.
+
+    The second-order evaluation written out per channel. Floored at zero per
+    channel, because a projection can go slightly negative where the environment
+    is dark and the fit overshoots, and negative irradiance is light being
+    *removed* from a surface.
+    """
+    unit = normalized(normal)
+    if unit.X == 0.0 and unit.Y == 0.0 and unit.Z == 0.0:
+        unit = Vector3(0.0, 1.0, 0.0)
+    channels = []
+    for axis in ("X", "Y", "Z"):
+        at = [getattr(value, axis) for value in coefficients]
+        value = (SH_C4 * at[0]
+                 + 2.0 * SH_C2 * (at[1] * unit.Y + at[2] * unit.Z + at[3] * unit.X)
+                 + 2.0 * SH_C1 * (at[4] * unit.X * unit.Y + at[5] * unit.Y * unit.Z
+                                  + at[7] * unit.X * unit.Z)
+                 + SH_C3 * at[6] * unit.Z * unit.Z - SH_C5 * at[6]
+                 + SH_C1 * at[8] * (unit.X * unit.X - unit.Y * unit.Y))
+        channels.append(max(value, 0.0))
+    return Vector3(*channels)
+
+
+def probe_visibility_weight(means, mean_squares, direction: Vector3,
+                            distance: float) -> float:
+    """How much a probe is trusted to be lighting a point that far away.
+
+    Chebyshev's inequality, exactly as a variance shadow map uses it: a flat wall
+    has almost no variance and cuts off sharply, a cluttered direction has a lot
+    and fades. The six axis moments are blended by the squared component of the
+    direction along each axis rather than snapped to the nearest one -- snapping
+    makes the weight jump as a surface turns, and a discontinuity in an ambient
+    term is more visible than the leak it was fixing.
+
+    A probe with nothing recorded is trusted rather than discarded, and so is a
+    point closer than the mean: there is nothing between it and the probe.
+    """
+    if not any(mean > 0.0 for mean in means):
+        return 1.0
+    if not distance > 0.0:
+        return 1.0
+    unit = normalized(direction)
+    if unit.X == 0.0 and unit.Y == 0.0 and unit.Z == 0.0:
+        unit = Vector3(0.0, 1.0, 0.0)
+    components = (max(unit.X, 0.0), max(-unit.X, 0.0), max(unit.Y, 0.0),
+                  max(-unit.Y, 0.0), max(unit.Z, 0.0), max(-unit.Z, 0.0))
+    total = mean = mean_squared = 0.0
+    for index, component in enumerate(components):
+        if means[index] <= 0.0:
+            continue
+        weight = component * component
+        if weight <= 0.0:
+            continue
+        total += weight
+        mean += means[index] * weight
+        mean_squared += mean_squares[index] * weight
+    if not total > 0.0:
+        return 1.0
+    mean /= total
+    mean_squared /= total
+    if distance <= mean:
+        return 1.0
+    variance = max(mean_squared - mean * mean, 0.0)
+    gap = distance - mean
+    return min(max(variance / (variance + gap * gap), 0.0), 1.0)
+
+
+def probe_volume_index(count_x: int, count_y: int, x: int, y: int, z: int) -> int:
+    """Where one probe sits in the volume's flat array. X fastest, then Y, then Z."""
+    return (z * count_y + y) * count_x + x
+
+
+def probe_volume_position(minimum: Vector3, maximum: Vector3, counts, index) -> Vector3:
+    """The world position the grid gives one probe.
+
+    Evenly spaced from the box's minimum to its maximum *inclusive*, so a grid
+    of one probe on an axis sits at that axis's minimum rather than at its
+    centre -- there is no interval to be in the middle of.
+    """
+    def along(step: int, count: int, low: float, high: float) -> float:
+        if count <= 1:
+            return low
+        return low + (high - low) * step / (count - 1)
+
+    return Vector3(along(index[0], counts[0], minimum.X, maximum.X),
+                   along(index[1], counts[1], minimum.Y, maximum.Y),
+                   along(index[2], counts[2], minimum.Z, maximum.Z))
+
+
+def hammersley(index: int, count: int) -> tuple[float, float]:
+    """The i-th point of the Hammersley sequence over ``count`` points.
+
+    The first coordinate walks the interval at the centre of each cell; the
+    second is the van der Corput radical inverse in base two -- the bits of the
+    index reflected about the binary point. Written here as an actual bit
+    reversal of the low 32 bits rather than as the same five-line shift-and-mask
+    idiom, so a wrong mask in either place cannot agree with the other.
+    """
+    first = (index + 0.5) / count if count > 0 else 0.0
+    bits = index & 0xFFFFFFFF
+    reversed_bits = int(f"{bits:032b}"[::-1], 2)
+    return f32(first), f32(reversed_bits * 2.3283064365386963e-10)
+
+
+def build_basis(normal: Vector3) -> tuple[Vector3, Vector3]:
+    """A tangent and bitangent for a normal, the way CNA chooses them."""
+    up = (Vector3(0.0, 0.0, 1.0) if abs(normal.Z) < 0.999
+          else Vector3(1.0, 0.0, 0.0))
+    tangent = normalized(_cross(up, normal))
+    return tangent, _cross(normal, tangent)
+
+
+def _cross(a: Vector3, b: Vector3) -> Vector3:
+    return Vector3(a.Y * b.Z - a.Z * b.Y, a.Z * b.X - a.X * b.Z, a.X * b.Y - a.Y * b.X)
+
+
+def importance_sample_ggx(x: float, y: float, normal: Vector3,
+                          roughness: float) -> Vector3:
+    """A half-vector drawn from the GGX distribution around ``normal``.
+
+    Every step is rounded to single precision, because the mapping is
+    ill-conditioned where the distribution is narrow: at roughness 0.05 the
+    denominator ``1 + (alpha**2 - 1) * y`` is a difference of numbers close to
+    one, and a double-precision oracle disagrees with a correct single-precision
+    implementation in the fourth decimal for that reason alone.
+    """
+    alpha = f32(max(f32(roughness * roughness), 1e-4))
+    phi = f32(2.0 * math.pi * x)
+    cos_theta = f32(math.sqrt(f32(f32(1.0 - y)
+                                  / f32(1.0 + f32(f32(alpha * alpha) - 1.0) * y))))
+    sin_theta = f32(math.sqrt(max(0.0, f32(1.0 - f32(cos_theta * cos_theta)))))
+    local = (f32(math.cos(phi) * sin_theta), f32(math.sin(phi) * sin_theta), cos_theta)
+    tangent, bitangent = build_basis(normal)
+    return normalized(Vector3(
+        tangent.X * local[0] + bitangent.X * local[1] + normal.X * local[2],
+        tangent.Y * local[0] + bitangent.Y * local[1] + normal.Y * local[2],
+        tangent.Z * local[0] + bitangent.Z * local[1] + normal.Z * local[2]))
+
+
+def mip_for_roughness(roughness: float, mip_count: int) -> float:
+    """Which mip level of a prefiltered specular cube a roughness reads from."""
+    if mip_count <= 1:
+        return 0.0
+    return min(max(roughness, 0.0), 1.0) * (mip_count - 1)
+
+
+def roughness_for_mip(mip: float, mip_count: int) -> float:
+    """The roughness one mip level was filtered for -- the inverse of the above."""
+    if mip_count <= 1:
+        return 0.0
+    return min(max(mip / (mip_count - 1), 0.0), 1.0)
+
+
+def cube_face_direction(face: int, u: float, v: float) -> Vector3:
+    """The world direction a cube face's texel looks along.
+
+    ``v`` runs *down* the face, which is the cube-map convention and the
+    opposite of what a texture coordinate usually means.
+    """
+    a = u * 2.0 - 1.0
+    b = 1.0 - v * 2.0
+    direction = {
+        0: Vector3(1.0, b, -a),
+        1: Vector3(-1.0, b, a),
+        2: Vector3(a, 1.0, -b),
+        3: Vector3(a, -1.0, b),
+        4: Vector3(a, b, 1.0),
+    }.get(face, Vector3(-a, b, -1.0))
+    return normalized(direction)
+
+
+def direction_to_equirectangular(direction: Vector3) -> tuple[float, float]:
+    """Where a direction lands in a panorama, as texture coordinates.
+
+    ``atan2(x, -z)`` puts -Z at the centre of the image, which is where a
+    panorama's front is and where a viewer looking straight ahead expects to be.
+    """
+    unit = normalized(direction)
+    if unit.X == 0.0 and unit.Y == 0.0 and unit.Z == 0.0:
+        unit = direction
+    longitude = math.atan2(unit.X, -unit.Z)
+    latitude = math.asin(min(max(unit.Y, -1.0), 1.0))
+    return longitude / (2.0 * math.pi) + 0.5, 0.5 - latitude / math.pi
+
+
+#: The forward and up axis each cube face of a probe capture looks along.
+PROBE_FACE_AXES = (
+    (Vector3(1.0, 0.0, 0.0), Vector3(0.0, 1.0, 0.0)),
+    (Vector3(-1.0, 0.0, 0.0), Vector3(0.0, 1.0, 0.0)),
+    (Vector3(0.0, 1.0, 0.0), Vector3(0.0, 0.0, 1.0)),
+    (Vector3(0.0, -1.0, 0.0), Vector3(0.0, 0.0, 1.0)),
+    (Vector3(0.0, 0.0, 1.0), Vector3(0.0, 1.0, 0.0)),
+    (Vector3(0.0, 0.0, -1.0), Vector3(0.0, 1.0, 0.0)),
+)
+
+
+def probe_face_view(face: int, position: Vector3) -> Matrix:
+    """The view matrix a probe capture uses for one cube face."""
+    forward, up = PROBE_FACE_AXES[face]
+    target = Vector3(position.X + forward.X, position.Y + forward.Y,
+                     position.Z + forward.Z)
+    return Matrix.CreateLookAt(position, target, up)

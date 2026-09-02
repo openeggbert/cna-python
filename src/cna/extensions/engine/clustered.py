@@ -802,7 +802,7 @@ class ClusteredForwardEffect(_EngineObject):
     be rather than a value to interpolate through.
     """
 
-    __slots__ = ("_opaque_frame", "_brdf_table")
+    __slots__ = ("_opaque_frame", "_brdf_table", "_light_probe_volume")
     _DESTROY = "cna_clustered_forward_effect_destroy"
 
     def __init__(self, device: "GraphicsDevice") -> None:
@@ -814,6 +814,8 @@ class ClusteredForwardEffect(_EngineObject):
         #: set rather than a second facade over a borrowed handle.
         self._opaque_frame: object = None
         self._brdf_table: AreaLightBrdfTable | None = None
+        #: A retained volume, kept alive for as long as the effect can sample it.
+        self._light_probe_volume: object = None
 
     @property
     def is_supported(self) -> bool:
@@ -1002,14 +1004,45 @@ class ClusteredForwardEffect(_EngineObject):
         return _support.out_bool("cna_clustered_forward_effect_has_light_probe",
                                  self._handle.argument)
 
+    def set_light_probe(self, probe) -> None:
+        """Shades ambient light from one probe's nine coefficients.
+
+        The probe's *values* are copied, so changing it afterwards does not
+        change what the effect shades with; assign it again to update.
+        """
+        from .probes import LightProbe
+
+        if not isinstance(probe, LightProbe):
+            raise TypeError("probe must be a LightProbe")
+        _support.call("cna_clustered_forward_effect_set_light_probe",
+                      self._handle.argument, probe._handle.argument)
+        self._light_probe_volume = None
+
+    def set_light_probe_volume(self, volume) -> None:
+        """Shades ambient light from a grid, sampled at each object's own origin.
+
+        The volume is *retained* rather than copied -- CNA samples it once per
+        draw, at the world matrix's translation -- so the effect keeps a
+        reference and the caller must not close it while the effect can draw.
+        """
+        from .probes import LightProbeVolume
+
+        if not isinstance(volume, LightProbeVolume):
+            raise TypeError("volume must be a LightProbeVolume")
+        _support.call("cna_clustered_forward_effect_set_light_probe_volume",
+                      self._handle.argument, volume._handle.argument)
+        self._light_probe_volume = volume
+
     def clear_light_probe(self) -> None:
         """Drops the light probe and the probe volume."""
         _support.call("cna_clustered_forward_effect_clear_light_probe",
                       self._handle.argument)
+        self._light_probe_volume = None
 
     def close(self) -> None:
         self._brdf_table = None
         self._opaque_frame = None
+        self._light_probe_volume = None
         super().close()
 
 

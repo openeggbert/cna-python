@@ -699,3 +699,342 @@ class AreaLightQuadTests(unittest.TestCase):
         self.assertLess(corners[0].X, corners[1].X)
         self.assertLess(corners[1].Y, corners[2].Y)
         self.assertGreater(corners[2].X, corners[3].X)
+
+
+class SphericalHarmonicTests(unittest.TestCase):
+    @staticmethod
+    def _only(index: int, value: float = 1.0):
+        return [Vector3(value, value, value) if i == index else Vector3(0.0, 0.0, 0.0)
+                for i in range(9)]
+
+    def test_a_constant_environment_gives_the_same_irradiance_everywhere(self) -> None:
+        """The band-zero term alone is 0.886227 times the coefficient, whatever the normal."""
+        probe = self._only(0)
+        for normal in (Vector3(0.0, 1.0, 0.0), Vector3(1.0, 0.0, 0.0),
+                       Vector3(-0.3, 0.5, 0.81)):
+            value = oracle.sh_irradiance(probe, normal)
+            self.assertAlmostEqual(value.X, 0.886227, places=6)
+            self.assertAlmostEqual(value.Y, value.X, places=9)
+
+    def test_the_three_first_band_terms_pick_out_their_own_axis(self) -> None:
+        """Coefficient 1 is Y, 2 is Z and 3 is X, each scaled by 2 * 0.511664."""
+        for index, axis in ((1, "Y"), (2, "Z"), (3, "X")):
+            normal = Vector3(*(1.0 if name == axis else 0.0 for name in "XYZ"))
+            value = oracle.sh_irradiance(self._only(index), normal)
+            self.assertAlmostEqual(value.X, 2.0 * 0.511664, places=6, msg=f"band {index}")
+            # And nothing along the other two axes.
+            for other in "XYZ":
+                if other == axis:
+                    continue
+                off = Vector3(*(1.0 if name == other else 0.0 for name in "XYZ"))
+                self.assertEqual(oracle.sh_irradiance(self._only(index), off).X, 0.0)
+
+    def test_negative_irradiance_is_floored_rather_than_returned(self) -> None:
+        """A fit can overshoot where the environment is dark; light is not removed."""
+        value = oracle.sh_irradiance(self._only(3, -1.0), Vector3(1.0, 0.0, 0.0))
+        self.assertEqual((value.X, value.Y, value.Z), (0.0, 0.0, 0.0))
+
+    def test_a_zero_probe_gives_nothing(self) -> None:
+        value = oracle.sh_irradiance([Vector3(0.0, 0.0, 0.0)] * 9, Vector3(0.0, 1.0, 0.0))
+        self.assertEqual((value.X, value.Y, value.Z), (0.0, 0.0, 0.0))
+
+    def test_the_normal_is_normalised_first(self) -> None:
+        probe = self._only(3)
+        short = oracle.sh_irradiance(probe, Vector3(0.5, 0.0, 0.0))
+        unit = oracle.sh_irradiance(probe, Vector3(1.0, 0.0, 0.0))
+        self.assertAlmostEqual(short.X, unit.X, places=6)
+
+    def test_channels_are_independent(self) -> None:
+        probe = [Vector3(1.0, 0.0, 0.0)] + [Vector3(0.0, 0.0, 0.0)] * 8
+        value = oracle.sh_irradiance(probe, Vector3(0.0, 1.0, 0.0))
+        self.assertGreater(value.X, 0.0)
+        self.assertEqual((value.Y, value.Z), (0.0, 0.0))
+
+
+class VisibilityWeightTests(unittest.TestCase):
+    NONE = [0.0] * 6
+
+    def test_a_probe_with_nothing_recorded_is_trusted(self) -> None:
+        self.assertEqual(oracle.probe_visibility_weight(
+            self.NONE, self.NONE, Vector3(1.0, 0.0, 0.0), 5.0), 1.0)
+
+    def test_a_point_nearer_than_the_wall_is_trusted(self) -> None:
+        means = [4.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        squares = [17.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.assertEqual(oracle.probe_visibility_weight(
+            means, squares, Vector3(1.0, 0.0, 0.0), 3.0), 1.0)
+        self.assertEqual(oracle.probe_visibility_weight(
+            means, squares, Vector3(1.0, 0.0, 0.0), 4.0), 1.0)
+
+    def test_past_the_wall_the_weight_is_chebyshevs_bound(self) -> None:
+        """mean 4, mean square 17: variance 1, gap 2, so 1 / (1 + 4) = 0.2."""
+        means = [4.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        squares = [17.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.assertAlmostEqual(oracle.probe_visibility_weight(
+            means, squares, Vector3(1.0, 0.0, 0.0), 6.0), 0.2, places=6)
+
+    def test_a_flat_wall_cuts_off_sharply_and_clutter_fades(self) -> None:
+        flat = oracle.probe_visibility_weight(
+            [4.0] + [0.0] * 5, [16.0001] + [0.0] * 5, Vector3(1.0, 0.0, 0.0), 6.0)
+        cluttered = oracle.probe_visibility_weight(
+            [4.0] + [0.0] * 5, [40.0] + [0.0] * 5, Vector3(1.0, 0.0, 0.0), 6.0)
+        self.assertLess(flat, 0.01)
+        self.assertGreater(cluttered, flat)
+
+    def test_the_opposite_axis_is_not_consulted(self) -> None:
+        """+X recorded, and a direction pointing at -X finds nothing to test against."""
+        means = [4.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        squares = [17.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.assertEqual(oracle.probe_visibility_weight(
+            means, squares, Vector3(-1.0, 0.0, 0.0), 100.0), 1.0)
+
+    def test_the_weight_moves_smoothly_as_a_direction_turns(self) -> None:
+        """Blended rather than snapped: a jump in an ambient term is very visible.
+
+        Continuity is checked by refining the step rather than against a fixed
+        bound on the difference: a steep ramp and a step discontinuity both show
+        large differences at one resolution, and only the ramp's shrink when the
+        angle between samples is halved.
+        """
+        means = [4.0, 0.0, 0.0, 0.0, 20.0, 0.0]
+        squares = [17.0, 0.0, 0.0, 0.0, 401.0, 0.0]
+
+        def sweep(steps: int):
+            return [oracle.probe_visibility_weight(
+                means, squares,
+                Vector3(math.cos(step * (math.pi / 2.0) / steps), 0.0,
+                        math.sin(step * (math.pi / 2.0) / steps)), 8.0)
+                for step in range(steps + 1)]
+
+        coarse = sweep(20)
+        self.assertEqual(coarse, sorted(coarse))
+        widest = max(abs(b - a) for a, b in zip(coarse, coarse[1:]))
+        for refinement in (40, 80, 160):
+            values = sweep(refinement)
+            narrower = max(abs(b - a) for a, b in zip(values, values[1:]))
+            self.assertLess(narrower, widest * 0.75,
+                            f"halving the step from {refinement // 2} did not "
+                            f"shrink the largest difference")
+            widest = narrower
+        # And it really does reach both ends rather than sitting on a plateau.
+        self.assertLess(coarse[0], 0.2)
+        self.assertGreater(coarse[-1], 0.8)
+
+    def test_a_non_positive_distance_is_trusted(self) -> None:
+        means = [4.0] + [0.0] * 5
+        squares = [17.0] + [0.0] * 5
+        for distance in (0.0, -3.0):
+            self.assertEqual(oracle.probe_visibility_weight(
+                means, squares, Vector3(1.0, 0.0, 0.0), distance), 1.0)
+
+
+class ProbeVolumeGeometryTests(unittest.TestCase):
+    def test_the_flat_index_runs_x_fastest(self) -> None:
+        listed = [oracle.probe_volume_index(2, 3, x, y, z)
+                  for z in range(2) for y in range(3) for x in range(2)]
+        self.assertEqual(listed, list(range(12)))
+
+    def test_probes_span_the_box_inclusively(self) -> None:
+        minimum, maximum = Vector3(-2.0, 0.0, 1.0), Vector3(6.0, 3.0, 9.0)
+        first = oracle.probe_volume_position(minimum, maximum, (3, 2, 5), (0, 0, 0))
+        last = oracle.probe_volume_position(minimum, maximum, (3, 2, 5), (2, 1, 4))
+        self.assertEqual((first.X, first.Y, first.Z), (-2.0, 0.0, 1.0))
+        self.assertEqual((last.X, last.Y, last.Z), (6.0, 3.0, 9.0))
+
+    def test_the_middle_of_three_is_the_middle_of_the_box(self) -> None:
+        middle = oracle.probe_volume_position(
+            Vector3(-2.0, 0.0, 1.0), Vector3(6.0, 3.0, 9.0), (3, 3, 3), (1, 1, 1))
+        self.assertAlmostEqual(middle.X, 2.0, places=6)
+        self.assertAlmostEqual(middle.Y, 1.5, places=6)
+        self.assertAlmostEqual(middle.Z, 5.0, places=6)
+
+    def test_one_probe_on_an_axis_sits_at_its_minimum(self) -> None:
+        """There is no interval to be in the middle of."""
+        only = oracle.probe_volume_position(
+            Vector3(-2.0, 0.0, 1.0), Vector3(6.0, 3.0, 9.0), (1, 1, 1), (0, 0, 0))
+        self.assertEqual((only.X, only.Y, only.Z), (-2.0, 0.0, 1.0))
+
+
+class HammersleyTests(unittest.TestCase):
+    def test_the_radical_inverse_of_the_first_eight_indices(self) -> None:
+        """0, 1/2, 1/4, 3/4, 1/8, 5/8, 3/8, 7/8 -- written out, not computed."""
+        expected = [0.0, 0.5, 0.25, 0.75, 0.125, 0.625, 0.375, 0.875]
+        for index, want in enumerate(expected):
+            self.assertAlmostEqual(oracle.hammersley(index, 8)[1], want, places=6,
+                                   msg=f"index {index}")
+
+    def test_the_first_coordinate_walks_cell_centres(self) -> None:
+        values = [oracle.hammersley(index, 4)[0] for index in range(4)]
+        for value, want in zip(values, [0.125, 0.375, 0.625, 0.875]):
+            self.assertAlmostEqual(value, want, places=6)
+
+    def test_both_coordinates_stay_inside_the_unit_square(self) -> None:
+        for index in range(64):
+            x, y = oracle.hammersley(index, 64)
+            self.assertTrue(0.0 <= x <= 1.0 and 0.0 <= y <= 1.0, f"index {index}")
+
+    def test_the_sequence_fills_the_interval_evenly_at_every_prefix(self) -> None:
+        """The whole reason to prefer it to a random pair."""
+        for count in (4, 8, 16, 32):
+            seen = sorted(oracle.hammersley(index, count)[1] for index in range(count))
+            gaps = [b - a for a, b in zip(seen, seen[1:])]
+            self.assertAlmostEqual(max(gaps), 1.0 / count, places=5, msg=f"{count}")
+
+    def test_a_count_of_zero_does_not_divide_by_zero(self) -> None:
+        self.assertEqual(oracle.hammersley(0, 0)[0], 0.0)
+
+
+class ImportanceSampleTests(unittest.TestCase):
+    NORMAL = oracle.normalized(Vector3(0.3, 0.8, -0.5))
+
+    def test_every_sample_is_a_unit_vector(self) -> None:
+        for index in range(32):
+            x, y = oracle.hammersley(index, 32)
+            direction = oracle.importance_sample_ggx(x, y, self.NORMAL, 0.4)
+            length = math.sqrt(direction.X ** 2 + direction.Y ** 2 + direction.Z ** 2)
+            self.assertAlmostEqual(length, 1.0, places=5, msg=f"index {index}")
+
+    def test_a_mirror_samples_almost_along_the_normal(self) -> None:
+        for index in range(16):
+            x, y = oracle.hammersley(index, 16)
+            direction = oracle.importance_sample_ggx(x, y, self.NORMAL, 0.0)
+            dot = (direction.X * self.NORMAL.X + direction.Y * self.NORMAL.Y
+                   + direction.Z * self.NORMAL.Z)
+            self.assertGreater(dot, 0.999, f"index {index}")
+
+    def test_a_rougher_surface_spreads_further_from_the_normal(self) -> None:
+        def mean_dot(roughness: float) -> float:
+            total = 0.0
+            for index in range(32):
+                x, y = oracle.hammersley(index, 32)
+                d = oracle.importance_sample_ggx(x, y, self.NORMAL, roughness)
+                total += (d.X * self.NORMAL.X + d.Y * self.NORMAL.Y
+                          + d.Z * self.NORMAL.Z)
+            return total / 32.0
+
+        values = [mean_dot(r / 5.0) for r in range(1, 6)]
+        self.assertEqual(values, sorted(values, reverse=True))
+
+    def test_every_sample_is_in_the_normals_hemisphere(self) -> None:
+        for index in range(32):
+            x, y = oracle.hammersley(index, 32)
+            d = oracle.importance_sample_ggx(x, y, self.NORMAL, 1.0)
+            self.assertGreaterEqual(
+                d.X * self.NORMAL.X + d.Y * self.NORMAL.Y + d.Z * self.NORMAL.Z, -1e-5)
+
+
+class MipRoughnessTests(unittest.TestCase):
+    def test_the_two_invert_each_other(self) -> None:
+        for step in range(11):
+            roughness = step / 10.0
+            mip = oracle.mip_for_roughness(roughness, 6)
+            self.assertAlmostEqual(oracle.roughness_for_mip(mip, 6), roughness, places=6)
+
+    def test_the_ends_are_the_ends(self) -> None:
+        self.assertEqual(oracle.mip_for_roughness(0.0, 6), 0.0)
+        self.assertEqual(oracle.mip_for_roughness(1.0, 6), 5.0)
+
+    def test_both_clamp_outside_their_range(self) -> None:
+        self.assertEqual(oracle.mip_for_roughness(-1.0, 6), 0.0)
+        self.assertEqual(oracle.mip_for_roughness(2.0, 6), 5.0)
+        self.assertEqual(oracle.roughness_for_mip(-1.0, 6), 0.0)
+        self.assertEqual(oracle.roughness_for_mip(99.0, 6), 1.0)
+
+    def test_a_single_mip_has_no_range_to_map_onto(self) -> None:
+        self.assertEqual(oracle.mip_for_roughness(0.5, 1), 0.0)
+        self.assertEqual(oracle.roughness_for_mip(0.5, 1), 0.0)
+        self.assertEqual(oracle.mip_for_roughness(0.5, 0), 0.0)
+
+
+class CubeFaceTests(unittest.TestCase):
+    def test_each_face_centre_looks_along_its_own_axis(self) -> None:
+        centres = {0: (1.0, 0.0, 0.0), 1: (-1.0, 0.0, 0.0), 2: (0.0, 1.0, 0.0),
+                   3: (0.0, -1.0, 0.0), 4: (0.0, 0.0, 1.0), 5: (0.0, 0.0, -1.0)}
+        for face, expected in centres.items():
+            direction = oracle.cube_face_direction(face, 0.5, 0.5)
+            for value, want in zip((direction.X, direction.Y, direction.Z), expected):
+                self.assertAlmostEqual(value, want, places=6, msg=f"face {face}")
+
+    def test_every_direction_is_a_unit_vector(self) -> None:
+        for face in range(6):
+            for u in (0.0, 0.25, 0.5, 1.0):
+                for v in (0.0, 0.5, 1.0):
+                    d = oracle.cube_face_direction(face, u, v)
+                    length = math.sqrt(d.X ** 2 + d.Y ** 2 + d.Z ** 2)
+                    self.assertAlmostEqual(length, 1.0, places=6)
+
+    def test_v_runs_down_the_face(self) -> None:
+        """The cube-map convention, and the opposite of a texture coordinate."""
+        top = oracle.cube_face_direction(4, 0.5, 0.0)
+        bottom = oracle.cube_face_direction(4, 0.5, 1.0)
+        self.assertGreater(top.Y, bottom.Y)
+
+    def test_the_six_faces_cover_six_different_directions(self) -> None:
+        centres = {tuple(round(v, 5) for v in
+                         (lambda d: (d.X, d.Y, d.Z))(oracle.cube_face_direction(f, .5, .5)))
+                   for f in range(6)}
+        self.assertEqual(len(centres), 6)
+
+
+class EquirectangularTests(unittest.TestCase):
+    def test_minus_z_is_the_centre_of_the_image(self) -> None:
+        """Where a panorama's front is, and where a viewer looks at load time."""
+        u, v = oracle.direction_to_equirectangular(Vector3(0.0, 0.0, -1.0))
+        self.assertAlmostEqual(u, 0.5, places=6)
+        self.assertAlmostEqual(v, 0.5, places=6)
+
+    def test_up_and_down_are_the_top_and_bottom_rows(self) -> None:
+        self.assertAlmostEqual(
+            oracle.direction_to_equirectangular(Vector3(0.0, 1.0, 0.0))[1], 0.0,
+            places=6)
+        self.assertAlmostEqual(
+            oracle.direction_to_equirectangular(Vector3(0.0, -1.0, 0.0))[1], 1.0,
+            places=6)
+
+    def test_a_quarter_turn_moves_a_quarter_of_the_way_across(self) -> None:
+        self.assertAlmostEqual(
+            oracle.direction_to_equirectangular(Vector3(1.0, 0.0, 0.0))[0], 0.75,
+            places=6)
+        self.assertAlmostEqual(
+            oracle.direction_to_equirectangular(Vector3(-1.0, 0.0, 0.0))[0], 0.25,
+            places=6)
+
+    def test_every_direction_lands_inside_the_image(self) -> None:
+        for face in range(6):
+            for u in (0.1, 0.5, 0.9):
+                for v in (0.1, 0.5, 0.9):
+                    s, t = oracle.direction_to_equirectangular(
+                        oracle.cube_face_direction(face, u, v))
+                    self.assertTrue(0.0 <= s <= 1.0 and 0.0 <= t <= 1.0)
+
+    def test_length_does_not_matter(self) -> None:
+        short = oracle.direction_to_equirectangular(Vector3(0.1, 0.2, -0.3))
+        long = oracle.direction_to_equirectangular(Vector3(10.0, 20.0, -30.0))
+        for a, b in zip(short, long):
+            self.assertAlmostEqual(a, b, places=6)
+
+
+class ProbeFaceViewTests(unittest.TestCase):
+    POSITION = Vector3(2.0, -1.0, 4.0)
+
+    def test_each_view_looks_along_its_face_axis(self) -> None:
+        """The third column of the upper 3x3 is the camera's backward direction."""
+        for face, (forward, _up) in enumerate(oracle.PROBE_FACE_AXES):
+            values = list(oracle.probe_face_view(face, self.POSITION))
+            backward = (values[2], values[6], values[10])
+            for value, want in zip(backward, (-forward.X, -forward.Y, -forward.Z)):
+                self.assertAlmostEqual(value, want, places=5, msg=f"face {face}")
+
+    def test_the_view_puts_the_capture_point_at_the_origin(self) -> None:
+        for face in range(6):
+            view = oracle.probe_face_view(face, self.POSITION)
+            here = oracle.transform_coordinate(
+                (self.POSITION.X, self.POSITION.Y, self.POSITION.Z), view)
+            self.assertAlmostEqual(here.X, 0.0, places=5)
+            self.assertAlmostEqual(here.Y, 0.0, places=5)
+            self.assertAlmostEqual(here.Z, 0.0, places=5)
+
+    def test_the_six_views_are_all_different(self) -> None:
+        seen = {tuple(round(value, 5) for value in oracle.probe_face_view(face, self.POSITION))
+                for face in range(6)}
+        self.assertEqual(len(seen), 6)
