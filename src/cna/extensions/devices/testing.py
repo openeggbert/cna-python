@@ -221,7 +221,8 @@ def sensor_dispatch_exception_count(game: "Game", kind: type) -> int:
 def last_sensor_dispatch_exception_message(game: "Game", kind: type) -> str:
     """CNA's message for the most recent handler exception during a dispatch."""
     prefix = _kind_probe(kind)._prefix
-    return _support.copied_text(
+    return _support.sized_text(
+        f"{prefix}_get_last_dispatch_exception_message_size_for_tests_ext",
         f"{prefix}_copy_last_dispatch_exception_message_for_tests_ext",
         (_dev.game_handle(game, "sensor dispatch"),), "dispatch exception message")
 

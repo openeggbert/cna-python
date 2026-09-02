@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1917,
-    "DIRECT_CALL_SITE": 1823,
+    "BOUND_ROUTES": 2626,
+    "DIRECT_CALL_SITE": 2529,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
-    "REACHED_BY_NAME_TEMPLATE": 15,
+    "REACHED_BY_NAME_TEMPLATE": 18,
     "ADMITTED_WITH_REASON": 37,
     "UNJUSTIFIED_BOUND_WITHOUT_CALL_SITE": 0,
     "STALE_ADMISSIONS": 0
@@ -26,7 +26,10 @@
     "cna_storage_container_get_directory_name_count": "src/Microsoft/Xna/Framework/Storage/_storage.py:501 (family 'cna_storage_container_get_*')",
     "cna_storage_container_copy_directory_name": "src/Microsoft/Xna/Framework/Storage/_storage.py:502 (family 'cna_storage_container_copy_*')",
     "cna_storage_container_get_file_name_count": "src/Microsoft/Xna/Framework/Storage/_storage.py:501 (family 'cna_storage_container_get_*')",
-    "cna_storage_container_copy_file_name": "src/Microsoft/Xna/Framework/Storage/_storage.py:502 (family 'cna_storage_container_copy_*')"
+    "cna_storage_container_copy_file_name": "src/Microsoft/Xna/Framework/Storage/_storage.py:502 (family 'cna_storage_container_copy_*')",
+    "cna_input_devices_get_keyboard_name_size_at": "src/cna/extensions/input/devices.py:129 (family 'cna_input_devices_get_*')",
+    "cna_input_devices_get_mouse_name_size_at": "src/cna/extensions/input/devices.py:129 (family 'cna_input_devices_get_*')",
+    "cna_input_devices_get_touch_device_name_size_at": "src/cna/extensions/input/devices.py:129 (family 'cna_input_devices_get_*')"
   },
   "observedAtRuntime": [
     "cna_album_collection_destroy",
@@ -578,13 +581,13 @@
   "consumers": {
     "cna_get_abi_version": [],
     "cna_error_get_last_info": [
-      "src/_cna_native/loader.py:751"
+      "src/_cna_native/loader.py:761"
     ],
     "cna_error_get_last_message_size": [
-      "src/_cna_native/loader.py:754"
+      "src/_cna_native/loader.py:764"
     ],
     "cna_error_copy_last_message": [
-      "src/_cna_native/loader.py:758"
+      "src/_cna_native/loader.py:768"
     ],
     "cna_game_create": [
       "src/Microsoft/Xna/Framework/_game.py:196"
@@ -1962,13 +1965,16 @@
       "src/Microsoft/Xna/Framework/Graphics/_queries.py:22"
     ],
     "cna_gamer_services_dispatcher_set_window_handle": [
-      "src/Microsoft/Xna/Framework/GamerServices/_component.py:18"
+      "src/Microsoft/Xna/Framework/GamerServices/_component.py:18",
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:292"
     ],
     "cna_gamer_services_dispatcher_initialize": [
-      "src/Microsoft/Xna/Framework/GamerServices/_component.py:22"
+      "src/Microsoft/Xna/Framework/GamerServices/_component.py:22",
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:307"
     ],
     "cna_gamer_services_dispatcher_update": [
-      "src/Microsoft/Xna/Framework/GamerServices/_component.py:30"
+      "src/Microsoft/Xna/Framework/GamerServices/_component.py:30",
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:312"
     ],
     "cna_touch_get_capabilities": [
       "src/Microsoft/Xna/Framework/Input/Touch/_touch.py:359"
@@ -2274,16 +2280,20 @@
       "src/Microsoft/Xna/Framework/Media/_player.py:255"
     ],
     "cna_media_player_program_exit_ext": [
-      "src/Microsoft/Xna/Framework/Media/_runtime.py:133"
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:133",
+      "resolved from a constant prefix"
     ],
     "cna_media_player_subscribe_active_song_changed_ext": [
-      "src/Microsoft/Xna/Framework/Media/_runtime.py:110"
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:110",
+      "resolved from a constant prefix"
     ],
     "cna_media_player_subscribe_media_state_changed_ext": [
-      "src/Microsoft/Xna/Framework/Media/_runtime.py:112"
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:112",
+      "resolved from a constant prefix"
     ],
     "cna_media_player_unsubscribe_ext": [
-      "src/Microsoft/Xna/Framework/Media/_runtime.py:75"
+      "src/Microsoft/Xna/Framework/Media/_runtime.py:75",
+      "resolved from a constant prefix"
     ],
     "cna_media_player_raise_active_song_changed_ext": [],
     "cna_media_queue_get_count": [
@@ -4212,10 +4222,12 @@
       "src/cna/extensions/engine/pbr.py:526"
     ],
     "cna_pbr_material_extensions_get_clearcoat_roughness_texture": [
-      "src/cna/extensions/engine/pbr.py:529"
+      "src/cna/extensions/engine/pbr.py:529",
+      "resolved from a constant prefix"
     ],
     "cna_pbr_material_extensions_set_clearcoat_roughness_texture": [
-      "src/cna/extensions/engine/pbr.py:530"
+      "src/cna/extensions/engine/pbr.py:530",
+      "resolved from a constant prefix"
     ],
     "cna_pbr_material_extensions_get_clearcoat_normal_texture": [
       "src/cna/extensions/engine/pbr.py:533"
@@ -4230,10 +4242,12 @@
       "src/cna/extensions/engine/pbr.py:538"
     ],
     "cna_pbr_material_extensions_get_sheen_roughness_texture": [
-      "src/cna/extensions/engine/pbr.py:541"
+      "src/cna/extensions/engine/pbr.py:541",
+      "resolved from a constant prefix"
     ],
     "cna_pbr_material_extensions_set_sheen_roughness_texture": [
-      "src/cna/extensions/engine/pbr.py:542"
+      "src/cna/extensions/engine/pbr.py:542",
+      "resolved from a constant prefix"
     ],
     "cna_pbr_material_extensions_get_transmission_texture": [
       "src/cna/extensions/engine/pbr.py:545"
@@ -6176,6 +6190,2130 @@
     ],
     "cna_ascii_post_process_effect_draw": [
       "src/cna/extensions/engine/passes.py:422"
+    ],
+    "cna_accelerometer_copy_last_dispatch_exception_message_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_create": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_destroy": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_dispatch_to_instances_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_dispose": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_current_value": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_dispatch_exception_count_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_is_data_valid": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_is_supported": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_last_dispatch_exception_message_size_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_state": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_subsystem_held_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_get_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_inject_synthetic_update_ext": [
+      "src/cna/extensions/devices/testing.py:101"
+    ],
+    "cna_accelerometer_is_sensor_connected_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_copy_string": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_equals": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_event_info_copy_string": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_event_info_equals": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_event_info_get_hash_code": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_event_info_get_string_size": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_event_info_init_from_values": [
+      "src/cna/extensions/devices/sensors.py:271"
+    ],
+    "cna_accelerometer_reading_get_hash_code": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_get_string_size": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_reading_init_from_values": [
+      "src/cna/extensions/devices/sensors.py:118"
+    ],
+    "cna_accelerometer_register_started_instance_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_set_disposal_cleanup_hook_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_set_event_watch_registration_failure_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_set_started_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_set_supported_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_set_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_start": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_stop": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_subscribe_current_value_changed": [
+      "resolved from a constant prefix"
+    ],
+    "cna_accelerometer_subscribe_reading_changed": [
+      "src/cna/extensions/devices/sensors.py:568"
+    ],
+    "cna_accelerometer_unregister_started_instance_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_create": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_destroy": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_dispose": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_get_current_value": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_get_is_data_valid": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_get_is_supported": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_get_state": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_get_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_inject_calibration_request_ext": [
+      "src/cna/extensions/devices/testing.py:129"
+    ],
+    "cna_compass_inject_synthetic_update_ext": [
+      "src/cna/extensions/devices/testing.py:116"
+    ],
+    "cna_compass_reading_copy_string": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_reading_equals": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_reading_get_hash_code": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_reading_get_string_size": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_reading_init_from_values": [
+      "src/cna/extensions/devices/sensors.py:213"
+    ],
+    "cna_compass_set_test_backend_ext": [
+      "src/cna/extensions/devices/testing.py:142"
+    ],
+    "cna_compass_set_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_start": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_stop": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_subscribe_calibrate": [
+      "resolved from a constant prefix"
+    ],
+    "cna_compass_subscribe_current_value_changed": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_copy_last_dispatch_exception_message_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_create": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_destroy": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_dispatch_to_instances_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_dispose": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_current_value": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_dispatch_exception_count_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_is_data_valid": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_is_supported": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_last_dispatch_exception_message_size_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_state": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_subsystem_held_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_get_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_inject_synthetic_update_ext": [
+      "src/cna/extensions/devices/testing.py:108"
+    ],
+    "cna_gyroscope_is_sensor_connected_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_reading_copy_string": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_reading_equals": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_reading_get_hash_code": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_reading_get_string_size": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_reading_init_from_values": [
+      "src/cna/extensions/devices/sensors.py:139"
+    ],
+    "cna_gyroscope_register_started_instance_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_set_disposal_cleanup_hook_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_set_event_watch_registration_failure_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_set_started_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_set_supported_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_set_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_start": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_stop": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_subscribe_current_value_changed": [
+      "resolved from a constant prefix"
+    ],
+    "cna_gyroscope_unregister_started_instance_for_tests_ext": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_create": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_destroy": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_dispose": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_get_current_value": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_get_is_attitude_north_referenced_ext": [
+      "src/cna/extensions/devices/sensors.py:625"
+    ],
+    "cna_motion_get_is_data_valid": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_get_is_supported": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_get_state": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_get_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_inject_calibration_request_ext": [
+      "src/cna/extensions/devices/testing.py:135"
+    ],
+    "cna_motion_inject_synthetic_update_ext": [
+      "src/cna/extensions/devices/testing.py:123"
+    ],
+    "cna_motion_reading_copy_string": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_reading_equals": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_reading_get_hash_code": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_reading_get_string_size": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_reading_init_from_values": [
+      "src/cna/extensions/devices/sensors.py:243"
+    ],
+    "cna_motion_set_test_backend_ext": [
+      "src/cna/extensions/devices/testing.py:151"
+    ],
+    "cna_motion_set_time_between_updates_ticks": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_start": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_stop": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_subscribe_calibrate": [
+      "resolved from a constant prefix"
+    ],
+    "cna_motion_subscribe_current_value_changed": [
+      "resolved from a constant prefix"
+    ],
+    "cna_attitude_reading_copy_string": [
+      "resolved from a constant prefix"
+    ],
+    "cna_attitude_reading_equals": [
+      "resolved from a constant prefix"
+    ],
+    "cna_attitude_reading_get_hash_code": [
+      "resolved from a constant prefix"
+    ],
+    "cna_attitude_reading_get_string_size": [
+      "resolved from a constant prefix"
+    ],
+    "cna_attitude_reading_init_from_values": [
+      "src/cna/extensions/devices/sensors.py:182"
+    ],
+    "cna_sensor_unsubscribe_ext": [
+      "src/cna/extensions/devices/sensors.py:521"
+    ],
+    "cna_sensors_get_last_error_id_ext": [
+      "src/cna/extensions/devices/sensors.py:339"
+    ],
+    "cna_camera_copy_name_at_ext": [
+      "src/cna/extensions/devices/camera.py:69"
+    ],
+    "cna_camera_create": [
+      "src/cna/extensions/devices/camera.py:104"
+    ],
+    "cna_camera_create_with_test_backend_ext": [
+      "src/cna/extensions/devices/testing.py:291"
+    ],
+    "cna_camera_destroy": [
+      "src/cna/extensions/devices/camera.py:106"
+    ],
+    "cna_camera_get_count_ext": [
+      "src/cna/extensions/devices/camera.py:61"
+    ],
+    "cna_camera_get_frame_height_ext": [
+      "src/cna/extensions/devices/camera.py:126"
+    ],
+    "cna_camera_get_frame_width_ext": [
+      "src/cna/extensions/devices/camera.py:121"
+    ],
+    "cna_camera_get_info_at_ext": [
+      "src/cna/extensions/devices/camera.py:77"
+    ],
+    "cna_camera_get_is_supported_ext": [
+      "src/cna/extensions/devices/camera.py:55"
+    ],
+    "cna_camera_get_name_size_at_ext": [
+      "src/cna/extensions/devices/camera.py:69"
+    ],
+    "cna_camera_get_state_ext": [
+      "src/cna/extensions/devices/camera.py:116"
+    ],
+    "cna_camera_set_test_frame_ext": [
+      "src/cna/extensions/devices/testing.py:319"
+    ],
+    "cna_camera_set_test_state_ext": [
+      "src/cna/extensions/devices/testing.py:326"
+    ],
+    "cna_camera_try_acquire_frame_ext": [
+      "src/cna/extensions/devices/camera.py:139"
+    ],
+    "cna_devices_clipboard_set_text_ext": [
+      "src/cna/extensions/devices/host.py:172"
+    ],
+    "cna_devices_ext_is_available": [
+      "src/_cna_native/devices_support.py:58"
+    ],
+    "cna_display_info_get_content_scale_ext": [
+      "src/cna/extensions/devices/host.py:98"
+    ],
+    "cna_display_info_get_safe_area_ext": [
+      "src/cna/extensions/devices/host.py:107"
+    ],
+    "cna_environment_get_device_type": [
+      "src/cna/extensions/devices/host.py:93"
+    ],
+    "cna_locale_copy_country_at_ext": [
+      "src/cna/extensions/devices/host.py:128"
+    ],
+    "cna_locale_copy_language_at_ext": [
+      "src/cna/extensions/devices/host.py:125"
+    ],
+    "cna_locale_get_country_size_at_ext": [
+      "src/cna/extensions/devices/host.py:127"
+    ],
+    "cna_locale_get_language_size_at_ext": [
+      "src/cna/extensions/devices/host.py:124"
+    ],
+    "cna_locale_get_preferred_count_ext": [
+      "src/cna/extensions/devices/host.py:119"
+    ],
+    "cna_power_get_battery_percent_ext": [
+      "src/cna/extensions/devices/host.py:137"
+    ],
+    "cna_power_get_seconds_remaining_ext": [
+      "src/cna/extensions/devices/host.py:138"
+    ],
+    "cna_power_get_state_ext": [
+      "src/cna/extensions/devices/host.py:136"
+    ],
+    "cna_system_info_get_logical_cpu_core_count_ext": [
+      "src/cna/extensions/devices/host.py:148"
+    ],
+    "cna_system_info_get_system_ram_megabytes_ext": [
+      "src/cna/extensions/devices/host.py:149"
+    ],
+    "cna_url_launcher_open_ext": [
+      "src/cna/extensions/devices/host.py:183"
+    ],
+    "cna_file_dialog_get_is_supported_ext": [
+      "src/cna/extensions/devices/dialogs.py:78"
+    ],
+    "cna_file_dialog_set_test_backend_ext": [
+      "src/cna/extensions/devices/testing.py:349"
+    ],
+    "cna_file_dialog_show_open_file_ext": [
+      "src/cna/extensions/devices/dialogs.py:153"
+    ],
+    "cna_file_dialog_show_open_folder_ext": [
+      "src/cna/extensions/devices/dialogs.py:172"
+    ],
+    "cna_file_dialog_show_save_file_ext": [
+      "src/cna/extensions/devices/dialogs.py:163"
+    ],
+    "cna_message_box_get_is_supported_ext": [
+      "src/cna/extensions/devices/dialogs.py:84"
+    ],
+    "cna_message_box_get_test_log_ext": [
+      "src/cna/extensions/devices/testing.py:366"
+    ],
+    "cna_message_box_set_test_backend_ext": [
+      "src/cna/extensions/devices/testing.py:357"
+    ],
+    "cna_message_box_show_ext": [
+      "src/cna/extensions/devices/dialogs.py:199"
+    ],
+    "cna_message_box_show_simple_ext": [
+      "src/cna/extensions/devices/dialogs.py:209"
+    ],
+    "cna_system_tray_add_entry": [
+      "src/cna/extensions/devices/dialogs.py:261"
+    ],
+    "cna_system_tray_click_entry_for_tests_ext": [
+      "src/cna/extensions/devices/testing.py:383"
+    ],
+    "cna_system_tray_create": [
+      "src/cna/extensions/devices/dialogs.py:226"
+    ],
+    "cna_system_tray_create_with_test_backend_ext": [
+      "src/cna/extensions/devices/testing.py:376"
+    ],
+    "cna_system_tray_destroy": [
+      "src/cna/extensions/devices/dialogs.py:231"
+    ],
+    "cna_system_tray_get_entry_checked": [
+      "src/cna/extensions/devices/dialogs.py:278"
+    ],
+    "cna_system_tray_get_entry_enabled": [
+      "src/cna/extensions/devices/dialogs.py:288"
+    ],
+    "cna_system_tray_get_is_supported_ext": [
+      "src/cna/extensions/devices/dialogs.py:90"
+    ],
+    "cna_system_tray_set_entry_checked": [
+      "src/cna/extensions/devices/dialogs.py:283"
+    ],
+    "cna_system_tray_set_entry_enabled": [
+      "src/cna/extensions/devices/dialogs.py:293"
+    ],
+    "cna_system_tray_set_entry_label": [
+      "src/cna/extensions/devices/dialogs.py:274"
+    ],
+    "cna_system_tray_set_tooltip": [
+      "src/cna/extensions/devices/dialogs.py:270"
+    ],
+    "cna_vibrate_controller_copy_device_name_ext": [
+      "src/cna/extensions/devices/vibration.py:89"
+    ],
+    "cna_vibrate_controller_get_device_name_size_ext": [
+      "src/cna/extensions/devices/vibration.py:88"
+    ],
+    "cna_vibrate_controller_get_is_supported_ext": [
+      "src/cna/extensions/devices/vibration.py:82"
+    ],
+    "cna_vibrate_controller_get_test_log_ext": [
+      "src/cna/extensions/devices/testing.py:409"
+    ],
+    "cna_vibrate_controller_set_test_backend_ext": [
+      "src/cna/extensions/devices/testing.py:399"
+    ],
+    "cna_vibrate_controller_start": [
+      "src/cna/extensions/devices/vibration.py:96"
+    ],
+    "cna_vibrate_controller_start_left_right_ext": [
+      "src/cna/extensions/devices/vibration.py:118"
+    ],
+    "cna_vibrate_controller_start_with_intensity_ext": [
+      "src/cna/extensions/devices/vibration.py:104"
+    ],
+    "cna_vibrate_controller_stop": [
+      "src/cna/extensions/devices/vibration.py:127"
+    ],
+    "cna_clipboard_copy_text": [
+      "src/cna/extensions/input/clipboard.py:49"
+    ],
+    "cna_clipboard_get_has_text": [
+      "src/cna/extensions/input/clipboard.py:31"
+    ],
+    "cna_clipboard_get_text_size": [
+      "src/cna/extensions/input/clipboard.py:43"
+    ],
+    "cna_clipboard_set_text": [
+      "src/cna/extensions/input/clipboard.py:61"
+    ],
+    "cna_text_input_get_window_handle_ext": [
+      "src/cna/extensions/input/text.py:153"
+    ],
+    "cna_text_input_is_active_ext": [
+      "src/cna/extensions/input/text.py:117"
+    ],
+    "cna_text_input_is_screen_keyboard_shown_ext": [
+      "src/cna/extensions/input/text.py:129"
+    ],
+    "cna_text_input_is_screen_keyboard_shown_for_window_ext": [
+      "src/cna/extensions/input/text.py:130"
+    ],
+    "cna_text_input_raise_text_editing_candidates_ext": [
+      "src/cna/extensions/input/testing.py:104"
+    ],
+    "cna_text_input_raise_text_editing_ext": [
+      "src/cna/extensions/input/testing.py:81"
+    ],
+    "cna_text_input_raise_text_input_ext": [
+      "src/cna/extensions/input/testing.py:55"
+    ],
+    "cna_text_input_reset_for_tests_ext": [
+      "src/cna/extensions/input/testing.py:113"
+    ],
+    "cna_text_input_set_input_rectangle_ext": [
+      "src/cna/extensions/input/text.py:147"
+    ],
+    "cna_text_input_set_window_handle_ext": [
+      "src/cna/extensions/input/testing.py:119"
+    ],
+    "cna_text_input_start_ext": [
+      "src/cna/extensions/input/text.py:104"
+    ],
+    "cna_text_input_start_with_type_ext": [
+      "src/cna/extensions/input/text.py:106"
+    ],
+    "cna_text_input_stop_ext": [
+      "src/cna/extensions/input/text.py:112"
+    ],
+    "cna_text_input_subscribe_text_editing_candidates_ext": [
+      "src/cna/extensions/input/text.py:212"
+    ],
+    "cna_text_input_subscribe_text_editing_ext": [
+      "src/cna/extensions/input/text.py:190"
+    ],
+    "cna_text_input_subscribe_text_input_ext": [
+      "src/cna/extensions/input/text.py:179"
+    ],
+    "cna_text_input_unsubscribe_ext": [
+      "src/cna/extensions/input/text.py:82"
+    ],
+    "cna_mouse_cursor_create_ext": [
+      "src/cna/extensions/input/cursor.py:45"
+    ],
+    "cna_mouse_cursor_create_from_texture2d": [
+      "src/cna/extensions/input/cursor.py:76"
+    ],
+    "cna_mouse_cursor_destroy": [
+      "src/cna/extensions/input/cursor.py:46"
+    ],
+    "cna_mouse_cursor_dispose": [
+      "src/cna/extensions/input/cursor.py:86"
+    ],
+    "cna_mouse_cursor_get_stock_ext": [
+      "src/cna/extensions/input/cursor.py:58"
+    ],
+    "cna_mouse_set_cursor_ext": [
+      "src/cna/extensions/input/cursor.py:134"
+    ],
+    "cna_joystick_capabilities_equals": [
+      "src/cna/extensions/input/comparison.py:78"
+    ],
+    "cna_joystick_info_equals": [
+      "src/cna/extensions/input/comparison.py:52"
+    ],
+    "cna_joystick_state_copy_axes": [
+      "src/cna/extensions/input/joystick.py:106"
+    ],
+    "cna_joystick_state_copy_balls": [
+      "src/cna/extensions/input/joystick.py:127"
+    ],
+    "cna_joystick_state_copy_buttons": [
+      "src/cna/extensions/input/joystick.py:112"
+    ],
+    "cna_joystick_state_copy_hats": [
+      "src/cna/extensions/input/joystick.py:118"
+    ],
+    "cna_joystick_state_destroy": [
+      "src/cna/extensions/input/joystick.py:79"
+    ],
+    "cna_joystick_state_equals": [
+      "src/cna/extensions/input/joystick.py:137"
+    ],
+    "cna_joystick_state_get_axis_count": [
+      "src/cna/extensions/input/joystick.py:84"
+    ],
+    "cna_joystick_state_get_ball_count": [
+      "src/cna/extensions/input/joystick.py:89"
+    ],
+    "cna_joystick_state_get_button_count": [
+      "src/cna/extensions/input/joystick.py:94"
+    ],
+    "cna_joystick_state_get_hat_count": [
+      "src/cna/extensions/input/joystick.py:99"
+    ],
+    "cna_joysticks_capture_state": [
+      "src/cna/extensions/input/joystick.py:235"
+    ],
+    "cna_joysticks_copy_capabilities_guid": [
+      "src/cna/extensions/input/joystick.py:228"
+    ],
+    "cna_joysticks_copy_capabilities_name": [
+      "src/cna/extensions/input/joystick.py:225"
+    ],
+    "cna_joysticks_copy_name_at": [
+      "src/cna/extensions/input/joystick.py:191"
+    ],
+    "cna_joysticks_get_capabilities": [
+      "src/cna/extensions/input/joystick.py:216"
+    ],
+    "cna_joysticks_get_capabilities_guid_size": [
+      "src/cna/extensions/input/joystick.py:227"
+    ],
+    "cna_joysticks_get_capabilities_name_size": [
+      "src/cna/extensions/input/joystick.py:224"
+    ],
+    "cna_joysticks_get_count": [
+      "src/cna/extensions/input/joystick.py:184"
+    ],
+    "cna_joysticks_get_info_at": [
+      "src/cna/extensions/input/joystick.py:200"
+    ],
+    "cna_joysticks_get_name_size_at": [
+      "src/cna/extensions/input/joystick.py:191"
+    ],
+    "cna_joysticks_raise_connected_ext": [
+      "src/cna/extensions/input/testing.py:126"
+    ],
+    "cna_joysticks_raise_disconnected_ext": [
+      "src/cna/extensions/input/testing.py:133"
+    ],
+    "cna_joysticks_reset_for_tests_ext": [
+      "src/cna/extensions/input/testing.py:140"
+    ],
+    "cna_joysticks_subscribe_connected_ext": [
+      "src/cna/extensions/input/joystick.py:259"
+    ],
+    "cna_joysticks_subscribe_disconnected_ext": [
+      "src/cna/extensions/input/joystick.py:265"
+    ],
+    "cna_joysticks_unsubscribe_ext": [
+      "src/cna/extensions/input/joystick.py:173"
+    ],
+    "cna_haptic_capabilities_equals": [
+      "src/cna/extensions/input/comparison.py:118"
+    ],
+    "cna_haptic_device_copy_name": [
+      "src/cna/extensions/input/haptics.py:164"
+    ],
+    "cna_haptic_device_create_effect": [
+      "src/cna/extensions/input/haptics.py:215"
+    ],
+    "cna_haptic_device_destroy": [
+      "src/cna/extensions/input/haptics.py:156"
+    ],
+    "cna_haptic_device_destroy_effect": [
+      "src/cna/extensions/input/haptics.py:249"
+    ],
+    "cna_haptic_device_dispose": [
+      "src/cna/extensions/input/haptics.py:274"
+    ],
+    "cna_haptic_device_get_capabilities": [
+      "src/cna/extensions/input/haptics.py:176"
+    ],
+    "cna_haptic_device_get_effect_status": [
+      "src/cna/extensions/input/haptics.py:244"
+    ],
+    "cna_haptic_device_get_is_effect_supported": [
+      "src/cna/extensions/input/haptics.py:188"
+    ],
+    "cna_haptic_device_get_is_open": [
+      "src/cna/extensions/input/haptics.py:169"
+    ],
+    "cna_haptic_device_get_name_size": [
+      "src/cna/extensions/input/haptics.py:163"
+    ],
+    "cna_haptic_device_init_rumble": [
+      "src/cna/extensions/input/haptics.py:195"
+    ],
+    "cna_haptic_device_pause": [
+      "src/cna/extensions/input/haptics.py:265"
+    ],
+    "cna_haptic_device_play_rumble": [
+      "src/cna/extensions/input/haptics.py:201"
+    ],
+    "cna_haptic_device_resume": [
+      "src/cna/extensions/input/haptics.py:268"
+    ],
+    "cna_haptic_device_run_effect": [
+      "src/cna/extensions/input/haptics.py:228"
+    ],
+    "cna_haptic_device_set_autocenter": [
+      "src/cna/extensions/input/haptics.py:260"
+    ],
+    "cna_haptic_device_set_gain": [
+      "src/cna/extensions/input/haptics.py:255"
+    ],
+    "cna_haptic_device_stop_all_effects": [
+      "src/cna/extensions/input/haptics.py:238"
+    ],
+    "cna_haptic_device_stop_effect": [
+      "src/cna/extensions/input/haptics.py:234"
+    ],
+    "cna_haptic_device_stop_rumble": [
+      "src/cna/extensions/input/haptics.py:206"
+    ],
+    "cna_haptic_device_update_effect": [
+      "src/cna/extensions/input/haptics.py:222"
+    ],
+    "cna_haptic_direction_equals": [
+      "src/cna/extensions/input/comparison.py:94"
+    ],
+    "cna_haptic_effect_equals": [
+      "src/cna/extensions/input/comparison.py:127"
+    ],
+    "cna_haptics_copy_name_at": [
+      "src/cna/extensions/input/haptics.py:115"
+    ],
+    "cna_haptics_get_count": [
+      "src/cna/extensions/input/haptics.py:108"
+    ],
+    "cna_haptics_get_id_at": [
+      "src/cna/extensions/input/haptics.py:126"
+    ],
+    "cna_haptics_get_is_joystick_haptic": [
+      "src/cna/extensions/input/haptics.py:139"
+    ],
+    "cna_haptics_get_is_mouse_haptic": [
+      "src/cna/extensions/input/haptics.py:146"
+    ],
+    "cna_haptics_get_name_size_at": [
+      "src/cna/extensions/input/haptics.py:115"
+    ],
+    "cna_haptics_open": [
+      "src/cna/extensions/input/haptics.py:300"
+    ],
+    "cna_haptics_open_from_joystick": [
+      "src/cna/extensions/input/haptics.py:307"
+    ],
+    "cna_haptics_open_from_mouse": [
+      "src/cna/extensions/input/haptics.py:314"
+    ],
+    "cna_input_device_info_equals": [
+      "src/cna/extensions/input/comparison.py:143"
+    ],
+    "cna_input_devices_copy_keyboard_name_at": [
+      "resolved from constants"
+    ],
+    "cna_input_devices_copy_mouse_name_at": [
+      "resolved from constants"
+    ],
+    "cna_input_devices_copy_touch_device_name_at": [
+      "resolved from constants"
+    ],
+    "cna_input_devices_get_keyboard_count": [
+      "src/cna/extensions/input/devices.py:145",
+      "resolved from constants"
+    ],
+    "cna_input_devices_get_keyboard_info_at": [
+      "resolved from constants"
+    ],
+    "cna_input_devices_get_keyboard_name_size_at": [],
+    "cna_input_devices_get_mouse_count": [
+      "src/cna/extensions/input/devices.py:150",
+      "resolved from constants"
+    ],
+    "cna_input_devices_get_mouse_info_at": [
+      "resolved from constants"
+    ],
+    "cna_input_devices_get_mouse_name_size_at": [],
+    "cna_input_devices_get_touch_device_count": [
+      "src/cna/extensions/input/devices.py:155",
+      "resolved from constants"
+    ],
+    "cna_input_devices_get_touch_device_info_at": [
+      "resolved from constants"
+    ],
+    "cna_input_devices_get_touch_device_name_size_at": [],
+    "cna_input_devices_raise_keyboard_connected_ext": [
+      "src/cna/extensions/input/testing.py:146"
+    ],
+    "cna_input_devices_raise_keyboard_disconnected_ext": [
+      "src/cna/extensions/input/testing.py:153"
+    ],
+    "cna_input_devices_raise_mouse_connected_ext": [
+      "src/cna/extensions/input/testing.py:160"
+    ],
+    "cna_input_devices_raise_mouse_disconnected_ext": [
+      "src/cna/extensions/input/testing.py:167"
+    ],
+    "cna_input_devices_reset_for_tests_ext": [
+      "src/cna/extensions/input/testing.py:174"
+    ],
+    "cna_input_devices_subscribe_keyboard_connected_ext": [
+      "src/cna/extensions/input/devices.py:260"
+    ],
+    "cna_input_devices_subscribe_keyboard_disconnected_ext": [
+      "src/cna/extensions/input/devices.py:266"
+    ],
+    "cna_input_devices_subscribe_mouse_connected_ext": [
+      "src/cna/extensions/input/devices.py:271"
+    ],
+    "cna_input_devices_subscribe_mouse_disconnected_ext": [
+      "src/cna/extensions/input/devices.py:276"
+    ],
+    "cna_input_devices_unsubscribe_ext": [
+      "src/cna/extensions/input/devices.py:114"
+    ],
+    "cna_power_get_info": [
+      "src/cna/extensions/input/devices.py:233"
+    ],
+    "cna_sensor_info_equals": [
+      "src/cna/extensions/input/comparison.py:159"
+    ],
+    "cna_sensors_copy_name_at": [
+      "src/cna/extensions/input/devices.py:192"
+    ],
+    "cna_sensors_get_accelerometer": [
+      "src/cna/extensions/input/devices.py:216"
+    ],
+    "cna_sensors_get_count": [
+      "src/cna/extensions/input/devices.py:175"
+    ],
+    "cna_sensors_get_gyroscope": [
+      "src/cna/extensions/input/devices.py:221"
+    ],
+    "cna_sensors_get_info_at": [
+      "src/cna/extensions/input/devices.py:187"
+    ],
+    "cna_sensors_get_name_size_at": [
+      "src/cna/extensions/input/devices.py:191"
+    ],
+    "cna_packet_reader_create": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_reader_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:160"
+    ],
+    "cna_packet_reader_get_length": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_reader_get_position": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_reader_read_color": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:193"
+    ],
+    "cna_packet_reader_read_double": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:171"
+    ],
+    "cna_packet_reader_read_matrix": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:183"
+    ],
+    "cna_packet_reader_read_quaternion": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:187"
+    ],
+    "cna_packet_reader_read_single": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:168"
+    ],
+    "cna_packet_reader_read_vector2": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:174"
+    ],
+    "cna_packet_reader_read_vector3": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:177"
+    ],
+    "cna_packet_reader_read_vector4": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:180"
+    ],
+    "cna_packet_reader_set_data_ext": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:212"
+    ],
+    "cna_packet_reader_set_position": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_writer_copy_data_ext": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:295"
+    ],
+    "cna_packet_writer_create": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_writer_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:222"
+    ],
+    "cna_packet_writer_get_length": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_writer_get_position": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_writer_set_position": [
+      "resolved from a constant prefix"
+    ],
+    "cna_packet_writer_write_color": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:264"
+    ],
+    "cna_packet_writer_write_double": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:266"
+    ],
+    "cna_packet_writer_write_matrix": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:254"
+    ],
+    "cna_packet_writer_write_quaternion": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:259"
+    ],
+    "cna_packet_writer_write_single": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:279"
+    ],
+    "cna_packet_writer_write_vector2": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:237"
+    ],
+    "cna_packet_writer_write_vector3": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:242"
+    ],
+    "cna_packet_writer_write_vector4": [
+      "src/Microsoft/Xna/Framework/Net/_packets.py:247"
+    ],
+    "cna_network_session_properties_add": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:256"
+    ],
+    "cna_network_session_properties_clear": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:280"
+    ],
+    "cna_network_session_properties_contains": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:286"
+    ],
+    "cna_network_session_properties_copy_to": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:304"
+    ],
+    "cna_network_session_properties_create": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:197"
+    ],
+    "cna_network_session_properties_create_enumerator": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:313"
+    ],
+    "cna_network_session_properties_destroy": [
+      "src/cna/extensions/online/sessions.py:244"
+    ],
+    "cna_network_session_properties_get_count": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:209"
+    ],
+    "cna_network_session_properties_get_is_read_only": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:217"
+    ],
+    "cna_network_session_properties_get_item": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:222"
+    ],
+    "cna_network_session_properties_index_of": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:296"
+    ],
+    "cna_network_session_properties_insert": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:265"
+    ],
+    "cna_network_session_properties_remove": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:276"
+    ],
+    "cna_network_session_properties_remove_at": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:269"
+    ],
+    "cna_network_session_properties_set_item": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:249"
+    ],
+    "cna_network_session_property_enumerator_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:359"
+    ],
+    "cna_network_session_property_enumerator_get_current": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:341"
+    ],
+    "cna_network_session_property_enumerator_move_next": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:337"
+    ],
+    "cna_network_session_property_enumerator_reset": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:351"
+    ],
+    "cna_net_get_last_join_error": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:85"
+    ],
+    "cna_quality_of_service_init_measured": [
+      "src/Microsoft/Xna/Framework/Net/_values.py:157"
+    ],
+    "cna_available_network_session_collection_copy_session": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:498"
+    ],
+    "cna_available_network_session_collection_create_ext": [
+      "src/cna/extensions/online/sessions.py:234"
+    ],
+    "cna_available_network_session_collection_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:488"
+    ],
+    "cna_available_network_session_collection_dispose": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:486"
+    ],
+    "cna_available_network_session_collection_get_count": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:455"
+    ],
+    "cna_available_network_session_copy_connect_address_ext": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:424"
+    ],
+    "cna_available_network_session_copy_host_gamertag": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:396"
+    ],
+    "cna_available_network_session_copy_session_properties": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:417"
+    ],
+    "cna_available_network_session_create_ext": [
+      "src/cna/extensions/online/sessions.py:219"
+    ],
+    "cna_available_network_session_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:437"
+    ],
+    "cna_available_network_session_equals": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:380"
+    ],
+    "cna_available_network_session_get_connect_address_size_ext": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:423"
+    ],
+    "cna_available_network_session_get_connect_port_ext": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:428"
+    ],
+    "cna_available_network_session_get_current_gamer_count": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:402"
+    ],
+    "cna_available_network_session_get_host_gamertag_size": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:395"
+    ],
+    "cna_available_network_session_get_open_private_gamer_slots": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:412"
+    ],
+    "cna_available_network_session_get_open_public_gamer_slots": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:407"
+    ],
+    "cna_available_network_session_get_quality_of_service": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:445"
+    ],
+    "cna_available_network_session_get_session_type_ext": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:433"
+    ],
+    "cna_available_network_session_not_equals": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:386"
+    ],
+    "cna_network_session_add_local_gamer": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:933"
+    ],
+    "cna_network_session_add_remote_gamer_ext": [
+      "src/cna/extensions/online/sessions.py:89"
+    ],
+    "cna_network_session_copy_session_properties": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1038"
+    ],
+    "cna_network_session_create": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:680"
+    ],
+    "cna_network_session_create_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:713"
+    ],
+    "cna_network_session_create_with_local_gamers": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:699"
+    ],
+    "cna_network_session_create_with_local_gamers_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:734"
+    ],
+    "cna_network_session_create_with_properties": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:688"
+    ],
+    "cna_network_session_create_with_properties_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:722"
+    ],
+    "cna_network_session_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:898"
+    ],
+    "cna_network_session_dispose": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:885"
+    ],
+    "cna_network_session_end_game": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:916"
+    ],
+    "cna_network_session_find": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:762"
+    ],
+    "cna_network_session_find_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:776"
+    ],
+    "cna_network_session_find_gamer_by_id": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:937"
+    ],
+    "cna_network_session_find_with_local_gamers": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:768"
+    ],
+    "cna_network_session_find_with_local_gamers_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:783"
+    ],
+    "cna_network_session_get_active_action_count_ext": [
+      "src/cna/extensions/online/sessions.py:264"
+    ],
+    "cna_network_session_get_allow_host_migration": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1052"
+    ],
+    "cna_network_session_get_allow_join_in_progress": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1042"
+    ],
+    "cna_network_session_get_bytes_per_second_received": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1032"
+    ],
+    "cna_network_session_get_bytes_per_second_sent": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1027"
+    ],
+    "cna_network_session_get_gamer": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:532"
+    ],
+    "cna_network_session_get_gamer_count": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:523"
+    ],
+    "cna_network_session_get_host": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:958"
+    ],
+    "cna_network_session_get_instance_count_ext": [
+      "src/cna/extensions/online/sessions.py:250"
+    ],
+    "cna_network_session_get_is_everyone_ready": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:983"
+    ],
+    "cna_network_session_get_is_host": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:954"
+    ],
+    "cna_network_session_get_max_gamers": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:988"
+    ],
+    "cna_network_session_get_owned_gamer_count_ext": [
+      "src/cna/extensions/online/sessions.py:255"
+    ],
+    "cna_network_session_get_private_gamer_slots": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:997"
+    ],
+    "cna_network_session_get_session_state": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:950"
+    ],
+    "cna_network_session_get_session_type": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:945"
+    ],
+    "cna_network_session_get_simulated_latency_ticks": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1018"
+    ],
+    "cna_network_session_get_simulated_packet_loss": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1007"
+    ],
+    "cna_network_session_join": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:805"
+    ],
+    "cna_network_session_join_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:818"
+    ],
+    "cna_network_session_join_invited": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:830"
+    ],
+    "cna_network_session_join_invited_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:841"
+    ],
+    "cna_network_session_join_invited_with_local_gamers": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:834"
+    ],
+    "cna_network_session_join_invited_with_local_gamers_async": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:846"
+    ],
+    "cna_network_session_remove_gamer_ext": [
+      "src/cna/extensions/online/sessions.py:96"
+    ],
+    "cna_network_session_replace_session_properties": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:927"
+    ],
+    "cna_network_session_reset_ready": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:919"
+    ],
+    "cna_network_session_send_network_event_ext": [
+      "src/cna/extensions/online/sessions.py:180"
+    ],
+    "cna_network_session_set_allow_host_migration": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1057"
+    ],
+    "cna_network_session_set_allow_join_in_progress": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1047"
+    ],
+    "cna_network_session_set_max_gamers": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:992"
+    ],
+    "cna_network_session_set_private_gamer_slots": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1002"
+    ],
+    "cna_network_session_set_simulated_latency_ticks": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1022"
+    ],
+    "cna_network_session_set_simulated_packet_loss": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:1012"
+    ],
+    "cna_network_session_start_game": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:913"
+    ],
+    "cna_network_session_subscribe_game_ended": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:625"
+    ],
+    "cna_network_session_subscribe_game_started": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:622"
+    ],
+    "cna_network_session_subscribe_gamer_joined": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:614"
+    ],
+    "cna_network_session_subscribe_gamer_left": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:618"
+    ],
+    "cna_network_session_subscribe_host_changed": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:628"
+    ],
+    "cna_network_session_subscribe_invite_accepted": [
+      "src/cna/extensions/online/sessions.py:285"
+    ],
+    "cna_network_session_subscribe_session_ended": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:635"
+    ],
+    "cna_network_session_subscribe_write_arbitrated_leaderboard": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:640"
+    ],
+    "cna_network_session_subscribe_write_true_skill": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:642"
+    ],
+    "cna_network_session_subscribe_write_unarbitrated_leaderboard": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:643"
+    ],
+    "cna_network_session_unsubscribe": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:876"
+    ],
+    "cna_network_session_update": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:910"
+    ],
+    "cna_local_network_gamer_clear_packet_queue_ext": [
+      "src/cna/extensions/online/sessions.py:160"
+    ],
+    "cna_local_network_gamer_create_ext": [
+      "src/cna/extensions/online/sessions.py:77"
+    ],
+    "cna_local_network_gamer_enable_send_voice": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:202"
+    ],
+    "cna_local_network_gamer_enqueue_packet_ext": [
+      "src/cna/extensions/online/sessions.py:154"
+    ],
+    "cna_local_network_gamer_get_is_data_available": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:196"
+    ],
+    "cna_local_network_gamer_get_signed_in_gamer": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:112"
+    ],
+    "cna_local_network_gamer_receive_data": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:303"
+    ],
+    "cna_local_network_gamer_receive_data_at": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:304"
+    ],
+    "cna_local_network_gamer_receive_data_into_packet_reader": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:288"
+    ],
+    "cna_local_network_gamer_send_data": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:241"
+    ],
+    "cna_local_network_gamer_send_data_range": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:260"
+    ],
+    "cna_local_network_gamer_send_data_range_to": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:265"
+    ],
+    "cna_local_network_gamer_send_data_to": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:245"
+    ],
+    "cna_local_network_gamer_send_packet_writer": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:226"
+    ],
+    "cna_local_network_gamer_send_packet_writer_to": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:230"
+    ],
+    "cna_local_network_gamer_send_party_invites": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:206"
+    ],
+    "cna_network_gamer_copy_machine": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:128"
+    ],
+    "cna_network_gamer_create": [
+      "src/cna/extensions/online/sessions.py:69"
+    ],
+    "cna_network_gamer_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:106"
+    ],
+    "cna_network_gamer_get_has_left_session": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:180"
+    ],
+    "cna_network_gamer_get_has_voice": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:154"
+    ],
+    "cna_network_gamer_get_id": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:176"
+    ],
+    "cna_network_gamer_get_is_guest": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:167"
+    ],
+    "cna_network_gamer_get_is_host": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:133"
+    ],
+    "cna_network_gamer_get_is_local": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:137"
+    ],
+    "cna_network_gamer_get_is_muted_by_local_user": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:162"
+    ],
+    "cna_network_gamer_get_is_private_slot": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:141"
+    ],
+    "cna_network_gamer_get_is_ready": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:145"
+    ],
+    "cna_network_gamer_get_is_talking": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:158"
+    ],
+    "cna_network_gamer_get_roundtrip_ticks": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:171"
+    ],
+    "cna_network_gamer_get_session": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:122"
+    ],
+    "cna_network_gamer_set_has_left_session_ext": [
+      "src/cna/extensions/online/sessions.py:115"
+    ],
+    "cna_network_gamer_set_id_ext": [
+      "src/cna/extensions/online/sessions.py:103"
+    ],
+    "cna_network_gamer_set_is_host_ext": [
+      "src/cna/extensions/online/sessions.py:109"
+    ],
+    "cna_network_gamer_set_is_ready": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:149"
+    ],
+    "cna_network_gamer_set_machine": [
+      "src/cna/extensions/online/sessions.py:124"
+    ],
+    "cna_network_gamer_set_roundtrip_ticks_ext": [
+      "src/cna/extensions/online/sessions.py:131"
+    ],
+    "cna_network_machine_create": [
+      "src/cna/extensions/online/sessions.py:83"
+    ],
+    "cna_network_machine_destroy": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:346"
+    ],
+    "cna_network_machine_get_gamer": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:353"
+    ],
+    "cna_network_machine_get_gamer_count": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:351"
+    ],
+    "cna_network_machine_remove_from_session": [
+      "src/Microsoft/Xna/Framework/Net/_session.py:359"
+    ],
+    "cna_friend_collection_create_ext": [
+      "src/cna/extensions/online/gamers.py:112"
+    ],
+    "cna_friend_gamer_copy_presence": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:875"
+    ],
+    "cna_friend_gamer_create_ext": [
+      "src/cna/extensions/online/gamers.py:96"
+    ],
+    "cna_friend_gamer_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:871"
+    ],
+    "cna_friend_gamer_get_presence_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:875"
+    ],
+    "cna_gamer_begin_get_from_gamertag": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:460"
+    ],
+    "cna_gamer_begin_get_partner_token": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:931"
+    ],
+    "cna_gamer_begin_get_profile": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:439"
+    ],
+    "cna_gamer_collection_add": [
+      "src/cna/extensions/online/gamers.py:161"
+    ],
+    "cna_gamer_collection_clear": [
+      "src/cna/extensions/online/gamers.py:171"
+    ],
+    "cna_gamer_collection_contains": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:585"
+    ],
+    "cna_gamer_collection_copy_to": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:600"
+    ],
+    "cna_gamer_collection_create_enumerator": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:644"
+    ],
+    "cna_gamer_collection_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:960"
+    ],
+    "cna_gamer_collection_get_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:580"
+    ],
+    "cna_gamer_collection_get_count": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:568"
+    ],
+    "cna_gamer_collection_index_of": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:589"
+    ],
+    "cna_gamer_collection_remove": [
+      "src/cna/extensions/online/gamers.py:166"
+    ],
+    "cna_gamer_copy_display_name": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:377"
+    ],
+    "cna_gamer_copy_gamertag": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:371"
+    ],
+    "cna_gamer_copy_partner_token": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:472"
+    ],
+    "cna_gamer_copy_text": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:361"
+    ],
+    "cna_gamer_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:342"
+    ],
+    "cna_gamer_enumerator_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:673"
+    ],
+    "cna_gamer_enumerator_get_current": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:660"
+    ],
+    "cna_gamer_enumerator_move_next": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:655"
+    ],
+    "cna_gamer_enumerator_reset": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:626"
+    ],
+    "cna_gamer_get_display_name_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:376"
+    ],
+    "cna_gamer_get_from_gamertag": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:450"
+    ],
+    "cna_gamer_get_gamertag_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:370"
+    ],
+    "cna_gamer_get_partner_token_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:471"
+    ],
+    "cna_gamer_get_profile": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:433"
+    ],
+    "cna_gamer_get_signed_in_gamer_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:848"
+    ],
+    "cna_gamer_get_signed_in_gamer_at_player_index": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:838"
+    ],
+    "cna_gamer_get_signed_in_gamer_count": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:832"
+    ],
+    "cna_gamer_get_tag": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:393"
+    ],
+    "cna_gamer_get_text_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:361"
+    ],
+    "cna_gamer_profile_copy_motto": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:293"
+    ],
+    "cna_gamer_profile_copy_region_name": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:306"
+    ],
+    "cna_gamer_profile_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:261"
+    ],
+    "cna_gamer_profile_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:276"
+    ],
+    "cna_gamer_profile_get_motto_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:293"
+    ],
+    "cna_gamer_profile_get_picture_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:331"
+    ],
+    "cna_gamer_profile_get_region_name_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:306"
+    ],
+    "cna_gamer_set_display_name": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:384"
+    ],
+    "cna_gamer_set_signed_in_gamers_ext": [
+      "src/cna/extensions/online/gamers.py:84"
+    ],
+    "cna_gamer_set_tag": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:409"
+    ],
+    "cna_gamer_signed_in_contains": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:853"
+    ],
+    "cna_gamer_signed_in_index_of": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:856"
+    ],
+    "cna_gamer_unsubscribe_ext": [
+      "src/cna/extensions/online/gamers.py:229"
+    ],
+    "cna_signed_in_gamer_award_achievement": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:783"
+    ],
+    "cna_signed_in_gamer_begin_award_achievement": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:791"
+    ],
+    "cna_signed_in_gamer_begin_get_achievements": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:808"
+    ],
+    "cna_signed_in_gamer_copy_gamertag": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:720"
+    ],
+    "cna_signed_in_gamer_create_ext": [
+      "src/cna/extensions/online/gamers.py:64"
+    ],
+    "cna_signed_in_gamer_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:706"
+    ],
+    "cna_signed_in_gamer_get_achievements": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:802"
+    ],
+    "cna_signed_in_gamer_get_friends": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:779"
+    ],
+    "cna_signed_in_gamer_get_game_defaults": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:198"
+    ],
+    "cna_signed_in_gamer_get_gamertag_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:719"
+    ],
+    "cna_signed_in_gamer_get_is_guest": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:735"
+    ],
+    "cna_signed_in_gamer_get_is_signed_in_to_live": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:730"
+    ],
+    "cna_signed_in_gamer_get_party_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:739"
+    ],
+    "cna_signed_in_gamer_get_player_index": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:726"
+    ],
+    "cna_signed_in_gamer_get_presence": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:112"
+    ],
+    "cna_signed_in_gamer_get_privileges": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:151"
+    ],
+    "cna_signed_in_gamer_is_friend": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:761"
+    ],
+    "cna_signed_in_gamer_is_headset": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:774"
+    ],
+    "cna_signed_in_gamer_set_party_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:743"
+    ],
+    "cna_signed_in_gamer_set_presence": [
+      "src/Microsoft/Xna/Framework/GamerServices/_gamer.py:118"
+    ],
+    "cna_signed_in_gamer_set_presence_mode_string_ext": [
+      "src/cna/extensions/online/gamers.py:177"
+    ],
+    "cna_signed_in_gamer_subscribe_signed_in_ext": [
+      "src/cna/extensions/online/gamers.py:202"
+    ],
+    "cna_signed_in_gamer_subscribe_signed_out_ext": [
+      "src/cna/extensions/online/gamers.py:212"
+    ],
+    "cna_gamer_services_dispatcher_get_freed_gamer_count_ext": [
+      "src/cna/extensions/online/gamers.py:239"
+    ],
+    "cna_gamer_services_dispatcher_get_is_initialized": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:286"
+    ],
+    "cna_gamer_services_dispatcher_get_window_handle": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:290"
+    ],
+    "cna_gamer_services_dispatcher_subscribe_installing_title_update_ext": [
+      "src/cna/extensions/online/gamers.py:222"
+    ],
+    "cna_gamer_services_dispatcher_update_async": [
+      "src/cna/extensions/online/gamers.py:249"
+    ],
+    "cna_guide_begin_show_keyboard_input": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:166"
+    ],
+    "cna_guide_begin_show_message_box": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:130"
+    ],
+    "cna_guide_copy_pending_keyboard_input_description_ext": [
+      "src/cna/extensions/online/guide.py:73"
+    ],
+    "cna_guide_copy_pending_keyboard_input_display_text_ext": [
+      "src/cna/extensions/online/guide.py:77"
+    ],
+    "cna_guide_copy_pending_keyboard_input_title_ext": [
+      "src/cna/extensions/online/guide.py:69"
+    ],
+    "cna_guide_delay_notifications": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:261"
+    ],
+    "cna_guide_end_show_keyboard_input": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:187"
+    ],
+    "cna_guide_end_show_keyboard_input_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:182"
+    ],
+    "cna_guide_end_show_message_box": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:146"
+    ],
+    "cna_guide_get_has_pending_keyboard_input_ext": [
+      "src/cna/extensions/online/guide.py:65"
+    ],
+    "cna_guide_get_has_pending_message_box_ext": [
+      "src/cna/extensions/online/guide.py:57"
+    ],
+    "cna_guide_get_is_screen_saver_enabled": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:71"
+    ],
+    "cna_guide_get_is_trial_mode": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:86"
+    ],
+    "cna_guide_get_is_visible": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:76"
+    ],
+    "cna_guide_get_notification_position": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:80"
+    ],
+    "cna_guide_get_pending_keyboard_input_description_size_ext": [
+      "src/cna/extensions/online/guide.py:72"
+    ],
+    "cna_guide_get_pending_keyboard_input_display_text_size_ext": [
+      "src/cna/extensions/online/guide.py:76"
+    ],
+    "cna_guide_get_pending_keyboard_input_title_size_ext": [
+      "src/cna/extensions/online/guide.py:68"
+    ],
+    "cna_guide_get_pending_message_box_focus_button_ext": [
+      "src/cna/extensions/online/guide.py:60"
+    ],
+    "cna_guide_get_simulate_trial_mode": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:89"
+    ],
+    "cna_guide_render_pending_keyboard_input_ext": [
+      "src/cna/extensions/online/guide.py:104"
+    ],
+    "cna_guide_render_pending_message_box_ext": [
+      "src/cna/extensions/online/guide.py:96"
+    ],
+    "cna_guide_reset_pending_keyboard_input_ext": [
+      "src/cna/extensions/online/guide.py:115"
+    ],
+    "cna_guide_reset_pending_message_box_ext": [
+      "src/cna/extensions/online/guide.py:110"
+    ],
+    "cna_guide_set_is_screen_saver_enabled": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:72"
+    ],
+    "cna_guide_set_is_trial_mode": [
+      "src/cna/extensions/online/guide.py:144"
+    ],
+    "cna_guide_set_is_visible": [
+      "src/cna/extensions/online/guide.py:135"
+    ],
+    "cna_guide_set_notification_position": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:82"
+    ],
+    "cna_guide_set_simulate_trial_mode": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:90"
+    ],
+    "cna_guide_show_achievements_ext": [
+      "src/cna/extensions/online/guide.py:153"
+    ],
+    "cna_guide_show_compose_message": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:241"
+    ],
+    "cna_guide_show_friend_request": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:223"
+    ],
+    "cna_guide_show_friends": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:203"
+    ],
+    "cna_guide_show_game_invite": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:254"
+    ],
+    "cna_guide_show_game_invite_for_session": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:249"
+    ],
+    "cna_guide_show_gamer_card": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:233"
+    ],
+    "cna_guide_show_marketplace": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:219"
+    ],
+    "cna_guide_show_messages": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:199"
+    ],
+    "cna_guide_show_party": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:211"
+    ],
+    "cna_guide_show_party_sessions": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:215"
+    ],
+    "cna_guide_show_player_review": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:228"
+    ],
+    "cna_guide_show_players": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:207"
+    ],
+    "cna_guide_show_sign_in": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:193"
+    ],
+    "cna_guide_simulate_keyboard_input_cancel_ext": [
+      "src/cna/extensions/online/guide.py:126"
+    ],
+    "cna_guide_simulate_message_box_click_ext": [
+      "src/cna/extensions/online/guide.py:120"
+    ],
+    "cna_guide_was_keyboard_input_canceled_ext": [
+      "src/Microsoft/Xna/Framework/GamerServices/_guide.py:179"
+    ],
+    "cna_achievement_collection_add": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:230"
+    ],
+    "cna_achievement_collection_clear": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:247"
+    ],
+    "cna_achievement_collection_contains": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:210"
+    ],
+    "cna_achievement_collection_copy_to": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:254"
+    ],
+    "cna_achievement_collection_create_ext": [
+      "src/cna/extensions/online/gamers.py:152"
+    ],
+    "cna_achievement_collection_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:177"
+    ],
+    "cna_achievement_collection_get_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:205"
+    ],
+    "cna_achievement_collection_get_by_key": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:199"
+    ],
+    "cna_achievement_collection_get_count": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:189"
+    ],
+    "cna_achievement_collection_get_is_read_only": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:226"
+    ],
+    "cna_achievement_collection_index_of": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:214"
+    ],
+    "cna_achievement_collection_insert": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:234"
+    ],
+    "cna_achievement_collection_remove": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:239"
+    ],
+    "cna_achievement_collection_remove_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:243"
+    ],
+    "cna_achievement_copy_description": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:102"
+    ],
+    "cna_achievement_copy_how_to_earn": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:107"
+    ],
+    "cna_achievement_copy_key": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:94"
+    ],
+    "cna_achievement_copy_name": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:98"
+    ],
+    "cna_achievement_create_ext": [
+      "src/cna/extensions/online/gamers.py:136"
+    ],
+    "cna_achievement_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:137"
+    ],
+    "cna_achievement_equals": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:87"
+    ],
+    "cna_achievement_get_description_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:102"
+    ],
+    "cna_achievement_get_how_to_earn_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:107"
+    ],
+    "cna_achievement_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:82"
+    ],
+    "cna_achievement_get_key_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:94"
+    ],
+    "cna_achievement_get_name_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:98"
+    ],
+    "cna_achievement_get_picture_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:147"
+    ],
+    "cna_leaderboard_entry_create_ext": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:796"
+    ],
+    "cna_leaderboard_entry_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:568"
+    ],
+    "cna_leaderboard_entry_equals": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:585"
+    ],
+    "cna_leaderboard_entry_get_columns": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:580"
+    ],
+    "cna_leaderboard_entry_get_gamer": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:548"
+    ],
+    "cna_leaderboard_entry_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:557"
+    ],
+    "cna_leaderboard_entry_set_rating": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:562"
+    ],
+    "cna_leaderboard_entry_set_rating_changed_hook_ext": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:573"
+    ],
+    "cna_leaderboard_reader_begin_page_down": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:766"
+    ],
+    "cna_leaderboard_reader_begin_page_up": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:756"
+    ],
+    "cna_leaderboard_reader_begin_read": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:672"
+    ],
+    "cna_leaderboard_reader_begin_read_from_gamers": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:657"
+    ],
+    "cna_leaderboard_reader_begin_read_from_pivot": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:666"
+    ],
+    "cna_leaderboard_reader_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:737"
+    ],
+    "cna_leaderboard_reader_get_entry_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:725"
+    ],
+    "cna_leaderboard_reader_get_identity": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:698"
+    ],
+    "cna_leaderboard_reader_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:609"
+    ],
+    "cna_leaderboard_reader_page_down": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:750"
+    ],
+    "cna_leaderboard_reader_page_up": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:747"
+    ],
+    "cna_leaderboard_reader_read": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:644"
+    ],
+    "cna_leaderboard_reader_read_from_gamers": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:630"
+    ],
+    "cna_leaderboard_reader_read_from_pivot": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:638"
+    ],
+    "cna_property_dictionary_clear": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:426"
+    ],
+    "cna_property_dictionary_contains_key": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:301"
+    ],
+    "cna_property_dictionary_copy_key_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:450"
+    ],
+    "cna_property_dictionary_copy_string": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:334"
+    ],
+    "cna_property_dictionary_create_ext": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:267"
+    ],
+    "cna_property_dictionary_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:275"
+    ],
+    "cna_property_dictionary_get_count": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:289"
+    ],
+    "cna_property_dictionary_get_date_time_ticks": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:345"
+    ],
+    "cna_property_dictionary_get_double": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:329"
+    ],
+    "cna_property_dictionary_get_int32": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:317"
+    ],
+    "cna_property_dictionary_get_int64": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:321"
+    ],
+    "cna_property_dictionary_get_is_read_only": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:296"
+    ],
+    "cna_property_dictionary_get_key_size_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:449"
+    ],
+    "cna_property_dictionary_get_outcome": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:340"
+    ],
+    "cna_property_dictionary_get_single": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:325"
+    ],
+    "cna_property_dictionary_get_stream_size_ext": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:359"
+    ],
+    "cna_property_dictionary_get_string_size": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:333"
+    ],
+    "cna_property_dictionary_get_time_span_ticks": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:349"
+    ],
+    "cna_property_dictionary_remove": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:423"
+    ],
+    "cna_property_dictionary_set_date_time_ticks": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:379"
+    ],
+    "cna_property_dictionary_set_double": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:393"
+    ],
+    "cna_property_dictionary_set_int32": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:385"
+    ],
+    "cna_property_dictionary_set_int64": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:387"
+    ],
+    "cna_property_dictionary_set_outcome": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:376"
+    ],
+    "cna_property_dictionary_set_single": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:412"
+    ],
+    "cna_property_dictionary_set_string": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:397"
+    ],
+    "cna_property_dictionary_set_time_span_ticks": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:382"
+    ],
+    "cna_property_dictionary_try_get_value_kind_ext": [
+      "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py:311"
+    ],
+    "cna_avatar_animation_copy_real_clip_name_ext": [
+      "src/cna/extensions/online/avatars.py:60"
+    ],
+    "cna_avatar_animation_create": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:325"
+    ],
+    "cna_avatar_animation_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:385"
+    ],
+    "cna_avatar_animation_get_bone_transform_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:365"
+    ],
+    "cna_avatar_animation_get_expression": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:374"
+    ],
+    "cna_avatar_animation_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:337"
+    ],
+    "cna_avatar_animation_get_real_clip_name_size_ext": [
+      "src/cna/extensions/online/avatars.py:59"
+    ],
+    "cna_avatar_animation_preset_copy_clip_name_ext": [
+      "src/cna/extensions/online/avatars.py:45"
+    ],
+    "cna_avatar_animation_preset_get_clip_name_size_ext": [
+      "src/cna/extensions/online/avatars.py:44"
+    ],
+    "cna_avatar_animation_set_current_position": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:354"
+    ],
+    "cna_avatar_animation_set_real_clip_name_ext": [
+      "src/cna/extensions/online/avatars.py:67"
+    ],
+    "cna_avatar_animation_update": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:340"
+    ],
+    "cna_avatar_appearance_init_ext": [
+      "src/cna/extensions/online/avatars.py:83"
+    ],
+    "cna_avatar_body_type_copy_content_name_ext": [
+      "src/cna/extensions/online/avatars.py:53"
+    ],
+    "cna_avatar_body_type_get_content_name_size_ext": [
+      "src/cna/extensions/online/avatars.py:52"
+    ],
+    "cna_avatar_description_copy_description": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:302"
+    ],
+    "cna_avatar_description_create": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:230"
+    ],
+    "cna_avatar_description_create_random": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:255"
+    ],
+    "cna_avatar_description_create_random_for_body_type": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:257"
+    ],
+    "cna_avatar_description_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:282"
+    ],
+    "cna_avatar_description_get_from_gamer": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:268"
+    ],
+    "cna_avatar_description_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:248"
+    ],
+    "cna_avatar_description_subscribe_changed_ext": [
+      "src/cna/extensions/online/avatars.py:135"
+    ],
+    "cna_avatar_renderer_create": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:417"
+    ],
+    "cna_avatar_renderer_destroy": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:585"
+    ],
+    "cna_avatar_renderer_draw_animation": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:555"
+    ],
+    "cna_avatar_renderer_draw_bones": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:571"
+    ],
+    "cna_avatar_renderer_draw_real_ext": [
+      "src/cna/extensions/online/avatars.py:118"
+    ],
+    "cna_avatar_renderer_enable_real_rendering_ext": [
+      "src/cna/extensions/online/avatars.py:107"
+    ],
+    "cna_avatar_renderer_get_bind_pose_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:545"
+    ],
+    "cna_avatar_renderer_get_info": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:429"
+    ],
+    "cna_avatar_renderer_get_lighting": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:480"
+    ],
+    "cna_avatar_renderer_get_parent_bone_at": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:534"
+    ],
+    "cna_avatar_renderer_get_transforms": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:435"
+    ],
+    "cna_avatar_renderer_set_appearance_ext": [
+      "src/cna/extensions/online/avatars.py:93"
+    ],
+    "cna_avatar_renderer_set_lighting": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:489"
+    ],
+    "cna_avatar_renderer_set_transforms": [
+      "src/Microsoft/Xna/Framework/GamerServices/_avatar.py:443"
     ]
   }
 }

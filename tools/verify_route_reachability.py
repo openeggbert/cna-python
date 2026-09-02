@@ -29,11 +29,13 @@ from _cna_native.loader import FUNCTION_MANIFEST  # noqa: E402
 
 #: The manifest modules declare the routes. A bare route name in them is data, not
 #: a call, so only genuine attribute or getattr uses count there.
-DECLARATION_MODULES = {
-    SOURCE / "_cna_native/loader.py",
-    SOURCE / "_cna_native/media_manifest.py",
-    SOURCE / "_cna_native/cnb_manifest.py",
-    SOURCE / "_cna_native/engine_manifest.py",
+#:
+#: Discovered rather than listed. A family added to the binding brings a new
+#: ``*_manifest.py``, and a list that had to be edited for it would silently let
+#: every route in that family satisfy this gate with its own declaration -- which
+#: is exactly the hole this gate exists to close.
+DECLARATION_MODULES = {SOURCE / "_cna_native/loader.py"} | {
+    path for path in (SOURCE / "_cna_native").glob("*_manifest.py")
 }
 
 #: Underscores a name-template's constant head must contain before it is specific
@@ -211,6 +213,60 @@ class _TemplateResolver(ast.NodeVisitor):
                     self.resolved.setdefault(rendered, 0)
 
 
+class _ConstantPrefixResolver(ast.NodeVisitor):
+    """Resolves a route name built from a *constant prefix* and a constant tail.
+
+    The families opened in this repository name their routes
+    ``f"{self._prefix}_create"``, where ``_prefix`` is a class attribute set to a
+    literal such as ``"cna_accelerometer"``. The constant part is the tail rather
+    than the head, so the head-template rule above cannot see it -- and a family
+    written that way would otherwise look unreached even though every route is
+    called.
+
+    This is still call-graph analysis and not text matching. Only literals
+    actually assigned somewhere in the package are substituted, and only a result
+    that is a bound route is recorded, so a template can never reach a route
+    nobody wrote.
+    """
+
+    def __init__(self) -> None:
+        #: Per module: the ``cna_``-prefixed literals it contains, and the
+        #: single-substitution templates it builds. Both are module-scoped, so a
+        #: prefix written in one file cannot reach a template in another.
+        self.modules: list[tuple[set[str], list[tuple[ast.JoinedStr, int]]]] = []
+
+    def collect(self, tree: ast.AST) -> None:
+        literals = {node.value for node in ast.walk(tree)
+                    if isinstance(node, ast.Constant) and isinstance(node.value, str)
+                    and node.value.startswith("cna_")}
+        templates: list[tuple[ast.JoinedStr, int]] = []
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.JoinedStr) or not node.values:
+                continue
+            if sum(1 for value in node.values
+                   if isinstance(value, ast.FormattedValue)) != 1:
+                continue
+            templates.append((node, node.lineno))
+        if literals and templates:
+            self.modules.append((literals, templates))
+
+    def resolve(self, bound: set[str]) -> dict[str, int]:
+        found: dict[str, int] = {}
+        for literals, templates in self.modules:
+            for template, line in templates:
+                for literal in literals:
+                    parts: list[str] = []
+                    for value in template.values:
+                        if isinstance(value, ast.Constant) and isinstance(value.value, str):
+                            parts.append(value.value)
+                        else:
+                            parts.append(literal)
+                    rendered = "".join(parts)
+                    if rendered in bound:
+                        found.setdefault(rendered, line)
+        return found
+
+
 def _strip_docstrings(tree: ast.AST) -> None:
     for node in ast.walk(tree):
         if isinstance(node, (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
@@ -255,6 +311,14 @@ def analyse() -> dict[str, object]:
     resolver.resolve_stems(stem_templates)
     for name in resolver.resolved:
         consumers.setdefault(name, []).append("resolved from constants")
+
+    prefixes = _ConstantPrefixResolver()
+    for path, tree in trees:
+        if path in DECLARATION_MODULES:
+            continue
+        prefixes.collect(tree)
+    for name in prefixes.resolve(set(bound)):
+        consumers.setdefault(name, []).append("resolved from a constant prefix")
 
     reached_by_template: dict[str, str] = {}
     for name in bound:

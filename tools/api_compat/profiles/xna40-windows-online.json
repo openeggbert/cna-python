@@ -8,6 +8,13 @@
     "/usr/lib/mono/4.5"
   ],
   "coreAssemblyName": "mscorlib",
+  "pythonPackages": [
+    "Microsoft.Xna.Framework.GamerServices",
+    "Microsoft.Xna.Framework.Net"
+  ],
+  "siblingProfiles": [
+    "xna40-windows-runtime"
+  ],
   "referenceAssemblies": [
     "Microsoft.Xna.Framework.GamerServices.dll",
     "Microsoft.Xna.Framework.Net.dll",
@@ -20,5 +27,7 @@
   },
   "referenceTypes": 74,
   "referenceMembers": 676,
-  "allowlist": []
+  "allowlist": [],
+  "expectedPythonTypes": 74,
+  "expectedPythonMembers": 605
 }

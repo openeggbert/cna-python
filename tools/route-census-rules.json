@@ -2474,6 +2474,19 @@
       "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through"
     },
     {
+      "id": "gamer-services-canonical-component",
+      "match": {
+        "names": [
+          "cna_gamer_services_component_create"
+        ]
+      },
+      "purpose": "MANAGED_BY_DESIGN",
+      "status": "DELIBERATE_NON_BINDING",
+      "reason": "CNA's canonical gamer-services component pumps the dispatcher from the runtime side. GamerServicesComponent is a strict XNA GameComponent here, with Initialize and Update written in Python and already green in the Windows runtime profile; creating a second native component beside it would pump the dispatcher twice.",
+      "boundReason": "not applicable: the canonical component is not imported",
+      "boundIsError": true
+    },
+    {
       "id": "online-guide",
       "family": "guide",
       "familyTitle": "Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point",

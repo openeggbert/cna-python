@@ -1,10 +1,19 @@
 {
   "schemaVersion": 1,
   "keywordSuffix": "_",
-  "keywords": ["None"],
+  "keywords": [
+    "None"
+  ],
   "omit": [
-    {"kind": "field", "name": "value__", "ownerKind": "enum"},
-    {"kind": "method", "name": "Finalize"}
+    {
+      "kind": "field",
+      "name": "value__",
+      "ownerKind": "enum"
+    },
+    {
+      "kind": "method",
+      "name": "Finalize"
+    }
   ],
   "operators": {
     "op_UnaryNegation": "__neg__",
@@ -13,8 +22,8 @@
     "op_Addition": "__add__",
     "op_Subtraction": "__sub__",
     "op_Multiply": "__mul__",
-    "op_Division": "__truediv__"
-    ,"op_Implicit": "__init__"
+    "op_Division": "__truediv__",
+    "op_Implicit": "__init__"
   },
   "constructor": "__init__",
   "indexer": "__getitem__",
@@ -24,8 +33,10 @@
     "Microsoft.Xna.Framework.Graphics.ModelBoneCollection+Enumerator": "ModelBoneCollectionEnumerator",
     "Microsoft.Xna.Framework.Graphics.ModelEffectCollection+Enumerator": "ModelEffectCollectionEnumerator",
     "Microsoft.Xna.Framework.Graphics.ModelMeshCollection+Enumerator": "ModelMeshCollectionEnumerator",
-    "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator": "ModelMeshPartCollectionEnumerator"
-    ,"Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator": "TouchCollection.Enumerator"
+    "Microsoft.Xna.Framework.Graphics.ModelMeshPartCollection+Enumerator": "ModelMeshPartCollectionEnumerator",
+    "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator": "TouchCollection.Enumerator",
+    "Microsoft.Xna.Framework.GamerServices.GamerCollection`1": "GamerCollectionOfT",
+    "Microsoft.Xna.Framework.GamerServices.GamerCollection`1+GamerCollectionEnumerator": "GamerCollectionOfT.GamerCollectionEnumerator"
   },
   "typeMappings": {
     "System.ComponentModel.ITypeDescriptorContext": "object",
@@ -42,7 +53,8 @@
     "System.Uri": "str",
     "System.DateTime": "datetime",
     "System.Runtime.Serialization.SerializationInfo": "object",
-    "System.Runtime.Serialization.StreamingContext": "object"
+    "System.Runtime.Serialization.StreamingContext": "object",
+    "System.Globalization.RegionInfo": "str"
   },
   "memberTypeMappings": {
     "Microsoft.Xna.Framework.Audio.AudioCategory.Name": "str | None",
@@ -51,19 +63,19 @@
     "Microsoft.Xna.Framework.Audio.RendererDetail.FriendlyName": "str | None",
     "Microsoft.Xna.Framework.Audio.RendererDetail.RendererId": "str | None",
     "Microsoft.Xna.Framework.CurveKeyCollection.CopyTo.array": "MutableSequence[CurveKey]",
-    "Microsoft.Xna.Framework.Input.Touch.TouchCollection.CopyTo.array": "MutableSequence[TouchLocation]"
-    ,"Microsoft.Xna.Framework.Media.Album.Artist": "Artist | None"
-    ,"Microsoft.Xna.Framework.Media.Album.Genre": "Genre | None"
-    ,"Microsoft.Xna.Framework.Media.MediaLibrary.RootPictureAlbum": "PictureAlbum | None"
-    ,"Microsoft.Xna.Framework.Media.MediaLibrary.GetPictureFromToken.return": "Picture | None"
-    ,"Microsoft.Xna.Framework.Media.MediaQueue.ActiveSong": "Song | None"
-    ,"Microsoft.Xna.Framework.Media.Picture.Album": "PictureAlbum | None"
-    ,"Microsoft.Xna.Framework.Media.PictureAlbum.Parent": "PictureAlbum | None"
-    ,"Microsoft.Xna.Framework.Media.Song.Artist": "Artist | None"
-    ,"Microsoft.Xna.Framework.Media.Song.Album": "Album | None"
-    ,"Microsoft.Xna.Framework.Media.Song.Genre": "Genre | None"
-    ,"Microsoft.Xna.Framework.Media.VideoPlayer.Video": "Video | None"
-    ,"Microsoft.Xna.Framework.Media.VideoPlayer.GetTexture.return": "Texture2D | None"
+    "Microsoft.Xna.Framework.Input.Touch.TouchCollection.CopyTo.array": "MutableSequence[TouchLocation]",
+    "Microsoft.Xna.Framework.Media.Album.Artist": "Artist | None",
+    "Microsoft.Xna.Framework.Media.Album.Genre": "Genre | None",
+    "Microsoft.Xna.Framework.Media.MediaLibrary.RootPictureAlbum": "PictureAlbum | None",
+    "Microsoft.Xna.Framework.Media.MediaLibrary.GetPictureFromToken.return": "Picture | None",
+    "Microsoft.Xna.Framework.Media.MediaQueue.ActiveSong": "Song | None",
+    "Microsoft.Xna.Framework.Media.Picture.Album": "PictureAlbum | None",
+    "Microsoft.Xna.Framework.Media.PictureAlbum.Parent": "PictureAlbum | None",
+    "Microsoft.Xna.Framework.Media.Song.Artist": "Artist | None",
+    "Microsoft.Xna.Framework.Media.Song.Album": "Album | None",
+    "Microsoft.Xna.Framework.Media.Song.Genre": "Genre | None",
+    "Microsoft.Xna.Framework.Media.VideoPlayer.Video": "Video | None",
+    "Microsoft.Xna.Framework.Media.VideoPlayer.GetTexture.return": "Texture2D | None"
   },
   "baseMappings": {
     "System.Attribute": "object",
@@ -74,18 +86,39 @@
   "parameterOmissions": [
     {
       "ownerPrefix": "Microsoft.Xna.Framework.Design.",
-      "parameters": ["context"]
+      "parameters": [
+        "context"
+      ]
     },
     {
       "owner": "Microsoft.Xna.Framework.Design.MathTypeConverter",
       "member": "GetProperties",
-      "parameters": ["attributes"]
+      "parameters": [
+        "attributes"
+      ]
     }
   ],
   "languageMembers": [
-    "__copy__", "__deepcopy__", "__enter__", "__exit__", "__getitem__",
-    "__setitem__", "__iter__", "__repr__", "__str__", "__hash__",
-    "__eq__", "__ne__", "__add__", "__sub__", "__mul__", "__rmul__",
-    "__truediv__", "__neg__", "__len__", "__next__", "insert"
+    "__copy__",
+    "__deepcopy__",
+    "__enter__",
+    "__exit__",
+    "__getitem__",
+    "__setitem__",
+    "__iter__",
+    "__repr__",
+    "__str__",
+    "__hash__",
+    "__eq__",
+    "__ne__",
+    "__add__",
+    "__sub__",
+    "__mul__",
+    "__rmul__",
+    "__truediv__",
+    "__neg__",
+    "__len__",
+    "__next__",
+    "insert"
   ]
 }

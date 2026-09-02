@@ -113,10 +113,11 @@ class AccelerometerReading:
                    _vector(value.acceleration))
 
     def _to_native(self):
-        native = _dev.in_struct(_devices.CNA_AccelerometerReading, _VERSION)
-        native.timestamp = self.timestamp._to_native()
-        native.acceleration = _to_vector(self.acceleration, "acceleration")
-        return native
+        return _support.out_struct(
+            _devices.CNA_AccelerometerReading, _VERSION,
+            "cna_accelerometer_reading_init_from_values",
+            self.timestamp._to_native(),
+            _to_vector(self.acceleration, "acceleration"))
 
 
 @dataclass(frozen=True, slots=True)
@@ -132,10 +133,12 @@ class GyroscopeReading:
                    _vector(value.rotation_rate))
 
     def _to_native(self):
-        native = _dev.in_struct(_devices.CNA_GyroscopeReading, _VERSION)
-        native.timestamp = self.timestamp._to_native()
-        native.rotation_rate = _to_vector(self.rotation_rate, "rotation_rate")
-        return native
+        # CNA's constructor takes the rate first, which is the canonical order.
+        return _support.out_struct(
+            _devices.CNA_GyroscopeReading, _VERSION,
+            "cna_gyroscope_reading_init_from_values",
+            _to_vector(self.rotation_rate, "rotation_rate"),
+            self.timestamp._to_native())
 
 
 @dataclass(frozen=True, slots=True)
@@ -166,20 +169,20 @@ class AttitudeReading:
                    quaternion, matrix)
 
     def _to_native(self):
-        native = _dev.in_struct(_devices.CNA_AttitudeReading, _VERSION)
-        native.timestamp = self.timestamp._to_native()
-        native.pitch = real(self.pitch, "pitch")
-        native.roll = real(self.roll, "roll")
-        native.yaw = real(self.yaw, "yaw")
-        native.quaternion.x = float(self.quaternion.X)
-        native.quaternion.y = float(self.quaternion.Y)
-        native.quaternion.z = float(self.quaternion.Z)
-        native.quaternion.w = float(self.quaternion.W)
+        quaternion = _devices.abi.CNA_Quaternion()
+        quaternion.x, quaternion.y = float(self.quaternion.X), float(self.quaternion.Y)
+        quaternion.z, quaternion.w = float(self.quaternion.Z), float(self.quaternion.W)
+        matrix = _devices.abi.CNA_Matrix()
         for row in range(1, 5):
             for column in range(1, 5):
-                setattr(native.rotation_matrix, f"m{row}{column}",
+                setattr(matrix, f"m{row}{column}",
                         float(getattr(self.rotation_matrix, f"M{row}{column}")))
-        return native
+        return _support.out_struct(
+            _devices.CNA_AttitudeReading, _VERSION,
+            "cna_attitude_reading_init_from_values",
+            c.c_float(real(self.pitch, "pitch")), c.c_float(real(self.roll, "roll")),
+            c.c_float(real(self.yaw, "yaw")), quaternion, matrix,
+            self.timestamp._to_native())
 
 
 @dataclass(frozen=True, slots=True)
@@ -203,14 +206,16 @@ class CompassReading:
                    float(value.true_heading), _vector(value.magnetometer_reading))
 
     def _to_native(self):
-        native = _dev.in_struct(_devices.CNA_CompassReading, _VERSION)
-        native.timestamp = self.timestamp._to_native()
-        native.heading_accuracy = real(self.heading_accuracy, "heading_accuracy")
-        native.magnetic_heading = real(self.magnetic_heading, "magnetic_heading")
-        native.true_heading = real(self.true_heading, "true_heading")
-        native.magnetometer_reading = _to_vector(
-            self.magnetometer_reading, "magnetometer_reading")
-        return native
+        # CNA's constructor order is accuracy, magnetic, magnetometer, timestamp,
+        # true -- which is the canonical one, and is why it is not rearranged.
+        return _support.out_struct(
+            _devices.CNA_CompassReading, _VERSION,
+            "cna_compass_reading_init_from_values",
+            c.c_double(real(self.heading_accuracy, "heading_accuracy")),
+            c.c_double(real(self.magnetic_heading, "magnetic_heading")),
+            _to_vector(self.magnetometer_reading, "magnetometer_reading"),
+            self.timestamp._to_native(),
+            c.c_double(real(self.true_heading, "true_heading")))
 
 
 @dataclass(frozen=True, slots=True)
@@ -232,15 +237,13 @@ class MotionReading:
                    _vector(value.gravity))
 
     def _to_native(self):
-        native = _dev.in_struct(_devices.CNA_MotionReading, _VERSION)
-        native.timestamp = self.timestamp._to_native()
-        native.attitude = self.attitude._to_native()
-        native.device_acceleration = _to_vector(
-            self.device_acceleration, "device_acceleration")
-        native.device_rotation_rate = _to_vector(
-            self.device_rotation_rate, "device_rotation_rate")
-        native.gravity = _to_vector(self.gravity, "gravity")
-        return native
+        attitude = self.attitude._to_native()
+        return _support.out_struct(
+            _devices.CNA_MotionReading, _VERSION,
+            "cna_motion_reading_init_from_values", c.byref(attitude),
+            _to_vector(self.device_acceleration, "device_acceleration"),
+            _to_vector(self.device_rotation_rate, "device_rotation_rate"),
+            _to_vector(self.gravity, "gravity"), self.timestamp._to_native())
 
 
 @dataclass(frozen=True, slots=True)
@@ -263,12 +266,11 @@ class AccelerometerReadingEventInfo:
                    float(value.x), float(value.y), float(value.z))
 
     def _to_native(self):
-        native = _dev.in_struct(_devices.CNA_AccelerometerReadingEventInfo, _VERSION)
-        native.timestamp = self.timestamp._to_native()
-        native.x = real(self.x, "x")
-        native.y = real(self.y, "y")
-        native.z = real(self.z, "z")
-        return native
+        return _support.out_struct(
+            _devices.CNA_AccelerometerReadingEventInfo, _VERSION,
+            "cna_accelerometer_reading_event_info_init_from_values",
+            c.c_double(real(self.x, "x")), c.c_double(real(self.y, "y")),
+            c.c_double(real(self.z, "z")), self.timestamp._to_native())
 
 
 #: Which CNA route family answers for each reading type, for the three canonical
@@ -300,8 +302,9 @@ def reading_text(reading: object) -> str:
     """
     prefix = _routes(reading, "reading")
     native = reading._to_native()
-    return _support.copied_text(f"{prefix}_copy_string", (c.byref(native),),
-                                "reading text")
+    return _support.sized_text(f"{prefix}_get_string_size",
+                               f"{prefix}_copy_string", (c.byref(native),),
+                               "reading text")
 
 
 def readings_equal(left: object, right: object) -> bool:

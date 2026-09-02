@@ -121,10 +121,12 @@ def preferred_locales(game: "Game") -> list[Locale]:
     for index in range(count):
         position = c.c_uint64(index)
         result.append(Locale(
-            _support.copied_text("cna_locale_copy_language_at_ext",
-                                 (handle, position), "locale language"),
-            _support.copied_text("cna_locale_copy_country_at_ext",
-                                 (handle, position), "locale country")))
+            _support.sized_text("cna_locale_get_language_size_at_ext",
+                                "cna_locale_copy_language_at_ext",
+                                (handle, position), "locale language"),
+            _support.sized_text("cna_locale_get_country_size_at_ext",
+                                "cna_locale_copy_country_at_ext",
+                                (handle, position), "locale country")))
     return result
 
 

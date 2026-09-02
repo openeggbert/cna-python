@@ -202,6 +202,7 @@ def render(family: families.Family, include: Path,
            groups: dict[str, tuple[str, str]],
            landed: tuple[str, ...]) -> str:
     refused = refused_routes()
+    family_exclusions = FAMILY_EXCLUSIONS.get(family.identifier, {})
     aliases, handles = _resolve_aliases(include)
     structures = _known_structures(family)
     declarations: dict[str, Declaration] = {}
@@ -212,6 +213,8 @@ def render(family: families.Family, include: Path,
     claimed: dict[str, str] = {}
     for name in declarations:
         if _is_refused(name, refused) is not None:
+            claimed[name] = "<excluded>"
+        elif any(re.fullmatch(pattern, name) for pattern in family_exclusions):
             claimed[name] = "<excluded>"
     for group, (prefixes, _title) in groups.items():
         for pattern in prefixes.split():
@@ -364,11 +367,59 @@ INPUT_GROUPS: dict[str, tuple[str, str]] = {
         "#: accelerometer, gyro and power."),
 }
 
+#: Net, GamerServices and Avatar.  Unlike the two families above these back a
+#: selected *strict* profile rather than a CNA-only extension: the public names
+#: are ``Microsoft.Xna.Framework.Net`` and ``Microsoft.Xna.Framework.GamerServices``.
+ONLINE_GROUPS: dict[str, tuple[str, str]] = {
+    "packets": (
+        r"cna_packet_reader_\w+ cna_packet_writer_\w+",
+        "PacketReader and PacketWriter: the typed two sides of a network packet."),
+    "session_properties": (
+        r"cna_network_session_properties_\w+ cna_network_session_property_enumerator_\w+",
+        "NetworkSessionProperties: the searchable property list a session\n"
+        "#: advertises, and its enumerator."),
+    "quality_of_service": (
+        r"cna_quality_of_service_\w+ cna_net_get_\w+",
+        "QualityOfService, and the last join failure the network layer recorded."),
+    "session": (
+        r"cna_network_session_(?!properties_|property_|ended_event_)\w+ "
+        r"cna_available_network_session_\w+",
+        "NetworkSession and AvailableNetworkSession: creation, discovery, join,\n"
+        "#: rosters, state and events."),
+    "gamers": (
+        r"cna_network_gamer_\w+ cna_local_network_gamer_\w+ cna_network_machine_\w+",
+        "NetworkGamer, LocalNetworkGamer and NetworkMachine."),
+    "events": (
+        r"cna_game_ended_event_\w+ cna_game_started_event_\w+ cna_gamer_joined_event_\w+ "
+        r"cna_gamer_left_event_\w+ cna_host_changed_event_\w+ "
+        r"cna_network_session_ended_event_\w+ cna_write_leaderboards_event_\w+ "
+        r"cna_invite_accepted_event_\w+",
+        "The event payloads a session raises."),
+    "gamer": (
+        r"cna_gamer_begin_\w+ cna_gamer_collection_\w+ cna_gamer_copy_\w+ cna_gamer_destroy "
+        r"cna_gamer_enumerator_\w+ cna_gamer_get_\w+ cna_gamer_presence_\w+ "
+        r"cna_gamer_set_\w+ cna_gamer_signed_in_\w+ cna_gamer_unsubscribe_\w+ "
+        r"cna_gamer_profile_\w+ cna_signed_in_gamer_\w+ cna_friend_gamer_\w+ "
+        r"cna_friend_collection_\w+ cna_game_defaults_\w+",
+        "Gamer, SignedInGamer, GamerProfile, friends and the game defaults."),
+    "guide": (
+        r"cna_guide_\w+ cna_gamer_services_\w+",
+        "Guide, and the GamerServices component and dispatcher."),
+    "achievements": (
+        r"cna_achievement_\w+ cna_leaderboard_\w+ cna_property_dictionary_\w+ "
+        r"cna_write_leaderboards_\w+",
+        "Achievements, leaderboards and the typed property dictionary they use."),
+    "avatar": (
+        r"cna_avatar_\w+",
+        "AvatarDescription, AvatarAnimation, AvatarRenderer and their values."),
+}
+
 #: Which routes each family's manifest carries, and what the group is.  A group
 #: lands when its Python consumer does.
 GROUPS: dict[str, dict[str, tuple[str, str]]] = {
     "devices": DEVICES_GROUPS,
     "input": INPUT_GROUPS,
+    "online": ONLINE_GROUPS,
 }
 
 #: Which of a family's groups are imported today. A group is claimed by a rule
@@ -398,6 +449,30 @@ def refused_routes() -> dict[str, str]:
             for value in rule["match"].get(key, ()):
                 refused[f"{key}:{value}"] = rule["reason"]
     return refused
+
+
+#: Routes a family's manifest does not carry for a reason of its own, rather
+#: than because the census refuses them outright. Each is a decision with a
+#: written reason, and the census still classifies the route -- as
+#: DELIBERATE_NON_BINDING for the disposed flags, and as already BOUND for the
+#: three dispatcher routes the strict runtime profile imports.
+FAMILY_EXCLUSIONS: dict[str, dict[str, str]] = {
+    "online": {
+        r"cna_\w+_get_is_disposed":
+            "disposal is tracked deterministically by the Python ownership model, "
+            "which is authoritative earlier than CNA's flag and stays correct "
+            "after the handle is released",
+        r"cna_gamer_services_dispatcher_(initialize|set_window_handle|update)":
+            "already imported by the strict Windows runtime profile for "
+            "GamerServicesComponent; one route is bound once",
+        r"cna_gamer_services_component_create":
+            "CNA's canonical component pumps the dispatcher from the runtime "
+            "side. This projection's GamerServicesComponent is a strict XNA "
+            "GameComponent whose Initialize and Update are Python's, already "
+            "green in the Windows runtime profile; creating a second native "
+            "component beside it would pump the dispatcher twice",
+    },
+}
 
 
 def _is_refused(name: str, refused: dict[str, str]) -> str | None:

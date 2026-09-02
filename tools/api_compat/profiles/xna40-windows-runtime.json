@@ -8,6 +8,22 @@
     "/usr/lib/mono/4.5"
   ],
   "coreAssemblyName": "mscorlib",
+  "pythonPackages": [
+    "Microsoft.Xna.Framework",
+    "Microsoft.Xna.Framework.Audio",
+    "Microsoft.Xna.Framework.Design",
+    "Microsoft.Xna.Framework.Graphics",
+    "Microsoft.Xna.Framework.Graphics.PackedVector",
+    "Microsoft.Xna.Framework.Input",
+    "Microsoft.Xna.Framework.Input.Touch",
+    "Microsoft.Xna.Framework.Media",
+    "Microsoft.Xna.Framework.Content",
+    "Microsoft.Xna.Framework.GamerServices",
+    "Microsoft.Xna.Framework.Storage"
+  ],
+  "siblingProfiles": [
+    "xna40-windows-online"
+  ],
   "referenceAssemblies": [
     "Microsoft.Xna.Framework.dll",
     "Microsoft.Xna.Framework.Game.dll",

@@ -13,9 +13,8 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "src"))
 
 from verify import (  # noqa: E402
-    PACKAGES,
-    REFERENCE,
-    STUB_PATHS,
+    DEFAULT_PROFILE,
+    Profile,
     expected_callables,
     mapped_type,
     projected_type_name,
@@ -26,6 +25,14 @@ from verify import (  # noqa: E402
 
 
 HEADERS = {
+    "Microsoft.Xna.Framework.Net": [
+        "from datetime import timedelta",
+        "from enum import IntEnum",
+        "from typing import Any, Iterable, Iterator, MutableSequence, Sequence, overload",
+        "from .. import Color, Matrix, PlayerIndex, Quaternion, Vector2, Vector3, Vector4",
+        "from .._language import Event",
+        "from ..GamerServices import GamerCollectionOfT, SignedInGamer",
+    ],
     "Microsoft.Xna.Framework": [
         "from datetime import timedelta",
         "from enum import IntEnum, IntFlag",
@@ -71,7 +78,13 @@ HEADERS = {
         "from ..Graphics import Texture2D",
     ],
     "Microsoft.Xna.Framework.GamerServices": [
-        "from .. import Game, GameComponent, GameTime",
+        "from datetime import datetime, timedelta",
+        "from enum import IntEnum",
+        "from typing import Any, BinaryIO, Iterable, Iterator, MutableSequence, Sequence, TypeVar, overload",
+        "from .. import Color, Game, GameComponent, GameTime, Matrix, PlayerIndex, Vector3",
+        "from .._language import Event",
+        "",
+        "T = TypeVar(\"T\")",
     ],
     "Microsoft.Xna.Framework.Storage": [
         "from typing import BinaryIO, Callable, Final, overload",
@@ -228,6 +241,15 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
                 lines.append(f"    def __iter__(self) -> Iterator[{mapped_type(argument)}]: ...")
             if raw_member(target, "__len__") is not None:
                 lines.append("    def __len__(self) -> int: ...")
+        if interface_name.startswith("System.Collections.Generic.IDictionary`2["):
+            # A dictionary iterates its pairs, which is what its GetEnumerator
+            # yields; the key and value types are the interface's two arguments.
+            arguments = interface_name[interface_name.find("[") + 1:-1].split(",")
+            pair = ", ".join(mapped_type(value) for value in arguments)
+            if raw_member(target, "__iter__") is not None:
+                lines.append(f"    def __iter__(self) -> Iterator[tuple[{pair}]]: ...")
+            if raw_member(target, "__len__") is not None:
+                lines.append("    def __len__(self) -> int: ...")
     if (identity == "Microsoft.Xna.Framework.Input.Touch.TouchCollection+Enumerator"
             and raw_member(target, "__next__") is not None):
         lines.append("    def __next__(self) -> TouchLocation: ...")
@@ -247,12 +269,32 @@ def render_type(expected: dict, targets: dict[str, type], rules: dict,
 
 
 def main() -> int:
-    reference = json.loads(REFERENCE.read_text())
-    reference_by_name = {value["name"]: value for value in reference["types"]}
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--profile", default=DEFAULT_PROFILE)
+    arguments = parser.parse_args()
+    selected = Profile.load(arguments.profile)
+    # A package two profiles share carries both profiles' types, because XNA
+    # puts them in one namespace. Generating from either profile therefore
+    # writes the same file: the union is taken here rather than left to
+    # whichever profile ran last.
+    contracts = [selected.contract]
+    siblings = []
+    for identifier in selected.siblings:
+        sibling = Profile.load(identifier)
+        siblings.append(sibling)
+        contracts.append(sibling.contract)
+    reference_by_name = {value["name"]: value
+                         for contract in contracts for value in contract["types"]}
     rules = json.loads((HERE / "mapping-rules.json").read_text())
-    targets, _ = target_types()
-    by_package: dict[str, list[dict]] = {package: [] for package in PACKAGES}
-    for expected in reference["types"]:
+    targets, _ = target_types(selected)
+    for sibling in siblings:
+        found, _ = target_types(sibling)
+        targets.update(found)
+    stub_paths = selected.stub_paths
+    by_package: dict[str, list[dict]] = {package: [] for package in selected.packages}
+    for expected in [value for contract in contracts for value in contract["types"]]:
         identity = expected["name"]
         if identity not in targets:
             continue
@@ -275,8 +317,8 @@ def main() -> int:
                 ))
             lines.extend(rendered)
             lines.append("")
-        STUB_PATHS[package].write_text("\n".join(lines).rstrip() + "\n")
-        print(f"WROTE={STUB_PATHS[package].relative_to(ROOT)}")
+        stub_paths[package].write_text("\n".join(lines).rstrip() + "\n")
+        print(f"WROTE={stub_paths[package].relative_to(ROOT)}")
     return 0
 
 

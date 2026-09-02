@@ -30,6 +30,7 @@ from .cnb_manifest import (
 )
 from .devices_manifest import DEVICES_FUNCTION_MANIFEST
 from .input_manifest import INPUT_FUNCTION_MANIFEST
+from .online_manifest import ONLINE_FUNCTION_MANIFEST
 from .engine_manifest import ENGINE_FUNCTION_MANIFEST
 from .media_manifest import MEDIA_FUNCTION_MANIFEST
 
@@ -652,6 +653,9 @@ FUNCTION_MANIFEST += ENGINE_FUNCTION_MANIFEST
 FUNCTION_MANIFEST += DEVICES_FUNCTION_MANIFEST
 # CNA's extended input families.  See `docs/input-extensions.md`.
 FUNCTION_MANIFEST += INPUT_FUNCTION_MANIFEST
+# XNA's Net, GamerServices and Avatar runtime -- the `xna40-windows-online`
+# strict profile rather than a CNA-only extension.  See `docs/online-profile.md`.
+FUNCTION_MANIFEST += ONLINE_FUNCTION_MANIFEST
 
 
 def _resolve() -> Path:

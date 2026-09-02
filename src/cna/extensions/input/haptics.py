@@ -111,8 +111,8 @@ def haptic_count(game: "Game") -> int:
 
 def haptic_name(game: "Game", index: int) -> str:
     """The name of the haptic device at ``index``."""
-    return _support.copied_text(
-        "cna_haptics_copy_name_at",
+    return _support.sized_text(
+        "cna_haptics_get_name_size_at", "cna_haptics_copy_name_at",
         (_in.game_handle(game, "haptics"),
          c.c_uint32(checked(index, "uint32", "index"))), "haptic device name")
 
@@ -160,8 +160,9 @@ class HapticDevice:
 
     @property
     def name(self) -> str:
-        return _support.copied_text("cna_haptic_device_copy_name",
-                                    (self._handle.argument,), "haptic device name")
+        return _support.sized_text("cna_haptic_device_get_name_size",
+                                   "cna_haptic_device_copy_name",
+                                   (self._handle.argument,), "haptic device name")
 
     @property
     def is_open(self) -> bool:

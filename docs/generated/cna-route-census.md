@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1917
+BOUND_ROUTES=2626
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -18,13 +18,25 @@ ENGINE_ROUTES=870
 ENGINE_BOUND=867
 ENGINE_UNREVIEWED=0
 SELECTED_ENGINE_ACTIONABLE_LOCAL=0
-PURPOSE_XNA_BACKING=1171
+DEVICES_ROUTES=206
+DEVICES_BOUND=177
+DEVICES_UNREVIEWED=0
+SELECTED_DEVICES_ACTIONABLE_LOCAL=0
+INPUT_ROUTES=126
+INPUT_BOUND=119
+INPUT_UNREVIEWED=0
+SELECTED_INPUT_ACTIONABLE_LOCAL=0
+ONLINE_ROUTES=437
+ONLINE_BOUND=416
+ONLINE_UNREVIEWED=0
+SELECTED_ONLINE_ACTIONABLE_LOCAL=0
+PURPOSE_XNA_BACKING=1584
 PURPOSE_CNA_EXTENSION_CANDIDATE=1822
-PURPOSE_MANAGED_BY_DESIGN=537
+PURPOSE_MANAGED_BY_DESIGN=538
 PURPOSE_TOOLING_ONLY=1
-PURPOSE_OUT_OF_SELECTED_PROFILE=414
+PURPOSE_OUT_OF_SELECTED_PROFILE=0
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1917
+STATUS_BOUND=2626
 STATUS_ACTIONABLE_LOCAL=0
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
@@ -32,7 +44,7 @@ STATUS_BLOCKED_PLATFORM=0
 STATUS_BLOCKED_HARDWARE=0
 STATUS_BLOCKED_FIXTURE=0
 STATUS_LANGUAGE_MAPPING_LIMITATION=0
-STATUS_DELIBERATE_NON_BINDING=2136
+STATUS_DELIBERATE_NON_BINDING=1427
 STATUS_UNREVIEWED=0
 ```
 
@@ -40,12 +52,11 @@ STATUS_UNREVIEWED=0
 
 | Purpose | Status | Routes |
 |---|---|---:|
-| CNA_EXTENSION_CANDIDATE | BOUND | 1173 |
-| XNA_BACKING | BOUND | 727 |
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 649 |
-| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 520 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1469 |
+| XNA_BACKING | BOUND | 1140 |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 521 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
-| OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
+| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 353 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
@@ -1312,6 +1323,881 @@ is BOUND or carries its own written non-binding reason.
 | `cna_weighted_blended_transparency_resolve` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
 | `cna_weighted_blended_transparency_weight` | engine_layer.h | BOUND | imported: cna.extensions.engine projects weighted blended transparency -- order-independent transparency |
 
+## The selected CNA's sensors and device services extension family
+
+`sensors.h` and `devices.h`, grouped into named sub-families. There is no
+blanket rule: a route no sub-family claims is UNREVIEWED and fails the gate.
+Every route here is BOUND or carries its own written non-binding reason.
+
+| Status | Routes |
+|---|---:|
+| BOUND | 177 |
+| DELIBERATE_NON_BINDING | 29 |
+
+### By sub-family
+
+| Sub-family | Routes | Bound | Statuses |
+|---|---:|---:|---|
+| `accelerometer` (the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend) | 36 | 36 | BOUND 36 |
+| `camera` (camera enumeration, the deterministic frame backend, and frame acquisition) | 14 | 14 | BOUND 14 |
+| `clipboard` (the host clipboard as a device service) | 1 | 1 | BOUND 1 |
+| `compass` (the compass sensor: magnetic and true heading, accuracy, and calibration requests) | 21 | 21 | BOUND 21 |
+| `device-availability` (whether the device-services extension is present in this build at all) | 1 | 1 | BOUND 1 |
+| `display` (display metrics a game reads: content scale and the safe area) | 2 | 2 | BOUND 2 |
+| `environment` (the host device class the process is running on) | 1 | 1 | BOUND 1 |
+| `file-dialog` (native file and folder dialogs, and the test backend that answers them without opening one) | 5 | 5 | BOUND 5 |
+| `gyroscope` (the gyroscope sensor: angular rotation rate and its state machine) | 30 | 30 | BOUND 30 |
+| `locales` (the host's ordered preferred-locale list) | 5 | 5 | BOUND 5 |
+| `message-box` (native message boxes, their button model, and the test backend that logs instead of showing one) | 5 | 5 | BOUND 5 |
+| `motion` (the fused motion sensor: attitude, gravity, acceleration and rotation rate) | 22 | 22 | BOUND 22 |
+| `power` (battery state, charge percentage and remaining time, including their unavailable sentinels) | 3 | 3 | BOUND 3 |
+| `sensor-shared` (the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription) | 7 | 7 | BOUND 7 |
+| `system-info` (logical CPU count and installed RAM) | 2 | 2 | BOUND 2 |
+| `system-tray` (the system tray icon, its entries, and the test backend that clicks them) | 12 | 12 | BOUND 12 |
+| `url-launcher` (handing a URL to the host browser) | 1 | 1 | BOUND 1 |
+| `vibration` (controller vibration: support, intensity, duration and the test log that records it) | 9 | 9 | BOUND 9 |
+
+| Route | Header | Status | Reason |
+|---|---|---|---|
+| `cna_accelerometer_copy_last_dispatch_exception_message_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_accelerometer_create` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_destroy` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_dispatch_to_instances_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_dispose` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_current_value` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_dispatch_exception_count_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_is_data_valid` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_is_supported` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_last_dispatch_exception_message_size_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_state` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_subsystem_held_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_accelerometer_inject_synthetic_update_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_is_sensor_connected_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_copy_string` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_accelerometer_reading_equals` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_event_info_copy_string` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_event_info_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_accelerometer_reading_event_info_equals` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_event_info_get_hash_code` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_event_info_get_string_size` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_event_info_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_accelerometer_reading_event_info_init` | sensors.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_accelerometer_reading_event_info_init_from_values` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_get_hash_code` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_get_string_size` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_reading_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_accelerometer_reading_init` | sensors.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_accelerometer_reading_init_from_values` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_register_started_instance_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_set_disposal_cleanup_hook_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_set_event_watch_registration_failure_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_set_started_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_set_supported_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_set_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_start` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_stop` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_subscribe_current_value_changed` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_subscribe_reading_changed` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_accelerometer_unregister_started_instance_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
+| `cna_attitude_reading_copy_string` | sensors.h | BOUND | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| `cna_attitude_reading_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_attitude_reading_equals` | sensors.h | BOUND | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| `cna_attitude_reading_get_hash_code` | sensors.h | BOUND | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| `cna_attitude_reading_get_string_size` | sensors.h | BOUND | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| `cna_attitude_reading_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_attitude_reading_init` | sensors.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_attitude_reading_init_from_values` | sensors.h | BOUND | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| `cna_calibration_event_info_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_calibration_event_info_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_camera_copy_name_at_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_create` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_create_with_test_backend_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_destroy` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_device_info_init` | devices.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_camera_get_count_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_get_frame_height_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_get_frame_width_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_get_info_at_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_get_is_supported_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_get_name_size_at_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_get_state_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_set_test_frame_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_set_test_state_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_camera_try_acquire_frame_ext` | devices.h | BOUND | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
+| `cna_compass_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_compass_create` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_destroy` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_dispose` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_get_current_value` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_get_is_data_valid` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_get_is_supported` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_get_state` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_get_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_compass_inject_calibration_request_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_inject_synthetic_update_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_reading_copy_string` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_reading_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_compass_reading_equals` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_reading_get_hash_code` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_reading_get_string_size` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_reading_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_compass_reading_init` | sensors.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_compass_reading_init_from_values` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_set_test_backend_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_set_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_start` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_stop` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_subscribe_calibrate` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_compass_subscribe_current_value_changed` | sensors.h | BOUND | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
+| `cna_devices_clipboard_set_text_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the host clipboard as a device service |
+| `cna_devices_ext_is_available` | devices.h | BOUND | imported: cna.extensions.devices projects whether the device-services extension is present in this build at all |
+| `cna_display_info_get_content_scale_ext` | devices.h | BOUND | imported: cna.extensions.devices projects display metrics a game reads: content scale and the safe area |
+| `cna_display_info_get_safe_area_ext` | devices.h | BOUND | imported: cna.extensions.devices projects display metrics a game reads: content scale and the safe area |
+| `cna_environment_get_device_type` | devices.h | BOUND | imported: cna.extensions.devices projects the host device class the process is running on |
+| `cna_file_dialog_get_is_supported_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native file and folder dialogs, and the test backend that answers them without opening one |
+| `cna_file_dialog_set_test_backend_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native file and folder dialogs, and the test backend that answers them without opening one |
+| `cna_file_dialog_show_open_file_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native file and folder dialogs, and the test backend that answers them without opening one |
+| `cna_file_dialog_show_open_folder_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native file and folder dialogs, and the test backend that answers them without opening one |
+| `cna_file_dialog_show_save_file_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native file and folder dialogs, and the test backend that answers them without opening one |
+| `cna_gyroscope_copy_last_dispatch_exception_message_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_gyroscope_create` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_destroy` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_dispatch_to_instances_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_dispose` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_current_value` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_dispatch_exception_count_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_is_data_valid` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_is_supported` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_last_dispatch_exception_message_size_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_state` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_subsystem_held_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_gyroscope_inject_synthetic_update_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_is_sensor_connected_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_reading_copy_string` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_reading_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_gyroscope_reading_equals` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_reading_get_hash_code` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_reading_get_string_size` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_reading_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_gyroscope_reading_init` | sensors.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_gyroscope_reading_init_from_values` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_register_started_instance_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_set_disposal_cleanup_hook_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_set_event_watch_registration_failure_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_set_started_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_set_supported_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_set_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_start` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_stop` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_subscribe_current_value_changed` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_gyroscope_unregister_started_instance_for_tests_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
+| `cna_locale_copy_country_at_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the host's ordered preferred-locale list |
+| `cna_locale_copy_language_at_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the host's ordered preferred-locale list |
+| `cna_locale_get_country_size_at_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the host's ordered preferred-locale list |
+| `cna_locale_get_language_size_at_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the host's ordered preferred-locale list |
+| `cna_locale_get_preferred_count_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the host's ordered preferred-locale list |
+| `cna_message_box_get_is_supported_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native message boxes, their button model, and the test backend that logs instead of showing one |
+| `cna_message_box_get_test_log_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native message boxes, their button model, and the test backend that logs instead of showing one |
+| `cna_message_box_set_test_backend_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native message boxes, their button model, and the test backend that logs instead of showing one |
+| `cna_message_box_show_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native message boxes, their button model, and the test backend that logs instead of showing one |
+| `cna_message_box_show_simple_ext` | devices.h | BOUND | imported: cna.extensions.devices projects native message boxes, their button model, and the test backend that logs instead of showing one |
+| `cna_motion_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_motion_create` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_destroy` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_dispose` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_get_current_value` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_get_is_attitude_north_referenced_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_get_is_data_valid` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_get_is_supported` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_get_state` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_get_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_motion_inject_calibration_request_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_inject_synthetic_update_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_reading_copy_string` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_reading_copy_type_name` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_motion_reading_equals` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_reading_get_hash_code` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_reading_get_string_size` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_reading_get_type_name_size` | sensors.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_motion_reading_init` | sensors.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_motion_reading_init_from_values` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_set_test_backend_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_set_time_between_updates_ticks` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_start` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_stop` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_subscribe_calibrate` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_motion_subscribe_current_value_changed` | sensors.h | BOUND | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| `cna_power_get_battery_percent_ext` | devices.h | BOUND | imported: cna.extensions.devices projects battery state, charge percentage and remaining time, including their unavailable sentinels |
+| `cna_power_get_seconds_remaining_ext` | devices.h | BOUND | imported: cna.extensions.devices projects battery state, charge percentage and remaining time, including their unavailable sentinels |
+| `cna_power_get_state_ext` | devices.h | BOUND | imported: cna.extensions.devices projects battery state, charge percentage and remaining time, including their unavailable sentinels |
+| `cna_sensor_unsubscribe_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| `cna_sensors_get_last_error_id_ext` | sensors.h | BOUND | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| `cna_system_info_get_logical_cpu_core_count_ext` | devices.h | BOUND | imported: cna.extensions.devices projects logical CPU count and installed RAM |
+| `cna_system_info_get_system_ram_megabytes_ext` | devices.h | BOUND | imported: cna.extensions.devices projects logical CPU count and installed RAM |
+| `cna_system_tray_add_entry` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_click_entry_for_tests_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_create` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_create_with_test_backend_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_destroy` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_get_entry_checked` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_get_entry_enabled` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_get_is_supported_ext` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_set_entry_checked` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_set_entry_enabled` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_set_entry_label` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_system_tray_set_tooltip` | devices.h | BOUND | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
+| `cna_url_launcher_open_ext` | devices.h | BOUND | imported: cna.extensions.devices projects handing a URL to the host browser |
+| `cna_vibrate_controller_copy_device_name_ext` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_get_device_name_size_ext` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_get_is_supported_ext` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_get_test_log_ext` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_set_test_backend_ext` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_start` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_start_left_right_ext` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_start_with_intensity_ext` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+| `cna_vibrate_controller_stop` | devices.h | BOUND | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
+
+## The selected CNA's extended input families extension family
+
+`input_text.h`, `input_cursor.h`, `input_joystick.h`, `input_haptics.h` and
+`input_devices.h`, grouped into named sub-families. There is no blanket rule.
+Every route here is BOUND or carries its own written non-binding reason.
+
+| Status | Routes |
+|---|---:|
+| BOUND | 119 |
+| DELIBERATE_NON_BINDING | 7 |
+
+### By sub-family
+
+| Sub-family | Routes | Bound | Statuses |
+|---|---:|---:|---|
+| `cursor` (mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one) | 6 | 6 | BOUND 6 |
+| `gamepad-sensors` (sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power) | 8 | 8 | BOUND 8 |
+| `haptics` (haptic devices: capabilities, rumble, and the full effect model) | 33 | 33 | BOUND 33 |
+| `input-clipboard` (the clipboard as an input service, distinct from the device-services clipboard route) | 4 | 4 | BOUND 4 |
+| `input-device-enumeration` (keyboard, mouse and touch device enumeration and their connect/disconnect events) | 23 | 23 | BOUND 23 |
+| `joystick` (raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug) | 28 | 28 | BOUND 28 |
+| `text-input` (text input and IME composition: committed text, editing updates, candidate lists and the input rectangle) | 17 | 17 | BOUND 17 |
+
+| Route | Header | Status | Reason |
+|---|---|---|---|
+| `cna_clipboard_copy_text` | input_devices.h | BOUND | imported: cna.extensions.input projects the clipboard as an input service, distinct from the device-services clipboard route |
+| `cna_clipboard_get_has_text` | input_devices.h | BOUND | imported: cna.extensions.input projects the clipboard as an input service, distinct from the device-services clipboard route |
+| `cna_clipboard_get_text_size` | input_devices.h | BOUND | imported: cna.extensions.input projects the clipboard as an input service, distinct from the device-services clipboard route |
+| `cna_clipboard_set_text` | input_devices.h | BOUND | imported: cna.extensions.input projects the clipboard as an input service, distinct from the device-services clipboard route |
+| `cna_haptic_capabilities_equals` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_capabilities_init` | input_haptics.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_haptic_device_copy_name` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_create_effect` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_destroy` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_destroy_effect` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_dispose` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_get_capabilities` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_get_effect_status` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_get_is_effect_supported` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_get_is_open` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_get_name_size` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_init_rumble` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_pause` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_play_rumble` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_resume` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_run_effect` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_set_autocenter` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_set_gain` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_stop_all_effects` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_stop_effect` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_stop_rumble` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_device_update_effect` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_direction_equals` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_direction_init` | input_haptics.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_haptic_effect_equals` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptic_effect_init` | input_haptics.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_haptics_copy_name_at` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_get_count` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_get_id_at` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_get_is_joystick_haptic` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_get_is_mouse_haptic` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_get_name_size_at` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_open` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_open_from_joystick` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_haptics_open_from_mouse` | input_haptics.h | BOUND | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
+| `cna_input_device_info_equals` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_device_info_init` | input_devices.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_input_devices_copy_keyboard_name_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_copy_mouse_name_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_copy_touch_device_name_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_keyboard_count` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_keyboard_info_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_keyboard_name_size_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_mouse_count` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_mouse_info_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_mouse_name_size_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_touch_device_count` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_touch_device_info_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_get_touch_device_name_size_at` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_raise_keyboard_connected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_raise_keyboard_disconnected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_raise_mouse_connected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_raise_mouse_disconnected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_reset_for_tests_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_subscribe_keyboard_connected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_subscribe_keyboard_disconnected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_subscribe_mouse_connected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_subscribe_mouse_disconnected_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_input_devices_unsubscribe_ext` | input_devices.h | BOUND | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| `cna_joystick_capabilities_equals` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_capabilities_init` | input_joystick.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_joystick_info_equals` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_info_init` | input_joystick.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_joystick_state_copy_axes` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_copy_balls` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_copy_buttons` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_copy_hats` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_destroy` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_equals` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_get_axis_count` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_get_ball_count` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_get_button_count` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joystick_state_get_hat_count` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_capture_state` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_copy_capabilities_guid` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_copy_capabilities_name` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_copy_name_at` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_get_capabilities` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_get_capabilities_guid_size` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_get_capabilities_name_size` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_get_count` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_get_info_at` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_get_name_size_at` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_raise_connected_ext` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_raise_disconnected_ext` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_reset_for_tests_ext` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_subscribe_connected_ext` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_subscribe_disconnected_ext` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_joysticks_unsubscribe_ext` | input_joystick.h | BOUND | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| `cna_mouse_cursor_create_ext` | input_cursor.h | BOUND | imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one |
+| `cna_mouse_cursor_create_from_texture2d` | input_cursor.h | BOUND | imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one |
+| `cna_mouse_cursor_destroy` | input_cursor.h | BOUND | imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one |
+| `cna_mouse_cursor_dispose` | input_cursor.h | BOUND | imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one |
+| `cna_mouse_cursor_get_stock_ext` | input_cursor.h | BOUND | imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one |
+| `cna_mouse_set_cursor_ext` | input_cursor.h | BOUND | imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one |
+| `cna_power_get_info` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_sensor_info_equals` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_sensor_info_init` | input_devices.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_sensors_copy_name_at` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_sensors_get_accelerometer` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_sensors_get_count` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_sensors_get_gyroscope` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_sensors_get_info_at` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_sensors_get_name_size_at` | input_devices.h | BOUND | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
+| `cna_text_input_get_window_handle_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_is_active_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_is_screen_keyboard_shown_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_is_screen_keyboard_shown_for_window_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_raise_text_editing_candidates_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_raise_text_editing_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_raise_text_input_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_reset_for_tests_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_set_input_rectangle_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_set_window_handle_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_start_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_start_with_type_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_stop_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_subscribe_text_editing_candidates_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_subscribe_text_editing_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_subscribe_text_input_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+| `cna_text_input_unsubscribe_ext` | input_text.h | BOUND | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
+
+## The selected XNA's Net, GamerServices and Avatar runtime extension family
+
+`net.h`, `net_gamers.h`, `net_sessions.h` and `gamer_services.h`, grouped into
+named sub-families. These back a selected *strict* profile rather than a CNA-only
+extension: the public names are `Microsoft.Xna.Framework.Net` and
+`Microsoft.Xna.Framework.GamerServices`, measured against the three reference
+assemblies the `xna40-windows-online` profile pins.
+
+| Status | Routes |
+|---|---:|
+| BOUND | 416 |
+| DELIBERATE_NON_BINDING | 21 |
+
+### By sub-family
+
+| Sub-family | Routes | Bound | Statuses |
+|---|---:|---:|---|
+| `achievements` (Achievement and AchievementCollection) | 27 | 27 | BOUND 27 |
+| `available-session` (AvailableNetworkSession and its collection: what discovery returns) | 20 | 20 | BOUND 20 |
+| `avatar-animation` (AvatarAnimation and the preset clips: bone transforms, expression and playback position) | 12 | 12 | BOUND 12 |
+| `avatar-description` (AvatarDescription: the byte description, its validity, random generation and the gamer it came from) | 11 | 11 | BOUND 11 |
+| `avatar-renderer` (AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing) | 14 | 14 | BOUND 14 |
+| `friends` (FriendGamer and FriendCollection) | 5 | 5 | BOUND 5 |
+| `gamer` (Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval) | 38 | 38 | BOUND 38 |
+| `gamer-profile` (GamerProfile: motto, region, picture and the numbers behind them) | 7 | 7 | BOUND 7 |
+| `gamer-services-runtime` (the GamerServices component and dispatcher this package already drives for the strict profile) | 5 | 5 | BOUND 5 |
+| `guide` (Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point) | 46 | 46 | BOUND 46 |
+| `leaderboards` (LeaderboardIdentity, LeaderboardEntry and LeaderboardReader) | 22 | 22 | BOUND 22 |
+| `local-network-gamer` (LocalNetworkGamer: the send and receive surface of a gamer this machine owns) | 16 | 16 | BOUND 16 |
+| `net-errors` (the last join failure the network layer recorded) | 1 | 1 | BOUND 1 |
+| `network-gamer` (NetworkGamer: identity, session membership and per-gamer state) | 21 | 21 | BOUND 21 |
+| `network-machine` (NetworkMachine: the gamers a single machine contributes to a session) | 5 | 5 | BOUND 5 |
+| `network-session` (NetworkSession: creation, discovery, join, gamer collections, state and events) | 64 | 64 | BOUND 64 |
+| `packet-reader` (PacketReader: the typed read side of a network packet) | 14 | 14 | BOUND 14 |
+| `packet-writer` (PacketWriter: the typed write side of a network packet) | 14 | 14 | BOUND 14 |
+| `property-dictionary` (the typed property dictionary leaderboards and gamer state are written through) | 28 | 28 | BOUND 28 |
+| `quality-of-service` (QualityOfService: the measured bandwidth and latency of a discovered session) | 1 | 1 | BOUND 1 |
+| `session-properties` (NetworkSessionProperties: the searchable property list a session advertises) | 19 | 19 | BOUND 19 |
+| `signed-in-gamer` (SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events) | 23 | 23 | BOUND 23 |
+
+| Route | Header | Status | Reason |
+|---|---|---|---|
+| `cna_achievement_collection_add` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_clear` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_contains` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_copy_to` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_create_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_get_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_get_by_key` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_get_count` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_get_is_disposed` | gamer_services.h | DELIBERATE_NON_BINDING | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
+| `cna_achievement_collection_get_is_read_only` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_index_of` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_insert` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_remove` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_collection_remove_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_copy_description` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_copy_how_to_earn` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_copy_key` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_copy_name` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_create_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_equals` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_get_description_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_get_how_to_earn_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_get_key_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_get_name_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_achievement_get_picture_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
+| `cna_available_network_session_collection_copy_session` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_collection_create_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_collection_destroy` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_collection_dispose` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_collection_get_count` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_collection_get_is_disposed` | net_sessions.h | DELIBERATE_NON_BINDING | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
+| `cna_available_network_session_copy_connect_address_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_copy_host_gamertag` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_copy_session_properties` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_create_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_destroy` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_equals` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_connect_address_size_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_connect_port_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_current_gamer_count` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_host_gamertag_size` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_open_private_gamer_slots` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_open_public_gamer_slots` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_quality_of_service` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_get_session_type_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_available_network_session_not_equals` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
+| `cna_avatar_animation_copy_real_clip_name_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_create` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_get_bone_transform_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_get_expression` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_get_real_clip_name_size_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_preset_copy_clip_name_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_preset_get_clip_name_size_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_set_current_position` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_set_real_clip_name_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_animation_update` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
+| `cna_avatar_appearance_init_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_body_type_copy_content_name_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_body_type_get_content_name_size_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_copy_description` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_create` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_create_random` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_create_random_for_body_type` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_get_from_gamer` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_description_subscribe_changed_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
+| `cna_avatar_expression_init` | gamer_services.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_avatar_renderer_create` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_draw_animation` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_draw_bones` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_draw_real_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_enable_real_rendering_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_get_bind_pose_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_get_lighting` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_get_parent_bone_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_get_transforms` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_set_appearance_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_set_lighting` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_avatar_renderer_set_transforms` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| `cna_friend_collection_create_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects FriendGamer and FriendCollection |
+| `cna_friend_collection_get_is_disposed` | gamer_services.h | DELIBERATE_NON_BINDING | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
+| `cna_friend_gamer_copy_presence` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects FriendGamer and FriendCollection |
+| `cna_friend_gamer_create_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects FriendGamer and FriendCollection |
+| `cna_friend_gamer_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects FriendGamer and FriendCollection |
+| `cna_friend_gamer_get_presence_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects FriendGamer and FriendCollection |
+| `cna_game_defaults_init` | gamer_services.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_game_ended_event_info_init` | net_gamers.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_game_started_event_info_init` | net_gamers.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_gamer_begin_get_from_gamertag` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_begin_get_partner_token` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_begin_get_profile` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_add` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_clear` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_contains` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_copy_to` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_create_enumerator` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_get_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_get_count` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_index_of` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_collection_remove` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_copy_display_name` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_copy_gamertag` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_copy_partner_token` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_copy_text` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_enumerator_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_enumerator_get_current` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_enumerator_move_next` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_enumerator_reset` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_display_name_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_from_gamertag` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_gamertag_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_is_disposed` | gamer_services.h | DELIBERATE_NON_BINDING | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
+| `cna_gamer_get_partner_token_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_profile` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_signed_in_gamer_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_signed_in_gamer_at_player_index` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_signed_in_gamer_count` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_tag` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_get_text_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_joined_event_info_init` | net_gamers.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_gamer_left_event_info_init` | net_gamers.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_gamer_presence_init` | gamer_services.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_gamer_profile_copy_motto` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
+| `cna_gamer_profile_copy_region_name` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
+| `cna_gamer_profile_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
+| `cna_gamer_profile_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
+| `cna_gamer_profile_get_motto_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
+| `cna_gamer_profile_get_picture_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
+| `cna_gamer_profile_get_region_name_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
+| `cna_gamer_services_component_create` | gamer_services.h | DELIBERATE_NON_BINDING | CNA's canonical gamer-services component pumps the dispatcher from the runtime side. GamerServicesComponent is a strict XNA GameComponent here, with Initialize and Update written in Python and already green in the Windows runtime profile; creating a second native component beside it would pump the dispatcher twice. |
+| `cna_gamer_services_dispatcher_get_freed_gamer_count_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the GamerServices component and dispatcher this package already drives for the strict profile |
+| `cna_gamer_services_dispatcher_get_is_initialized` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the GamerServices component and dispatcher this package already drives for the strict profile |
+| `cna_gamer_services_dispatcher_get_window_handle` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the GamerServices component and dispatcher this package already drives for the strict profile |
+| `cna_gamer_services_dispatcher_initialize` | gamer_services.h | BOUND | imported: GamerServicesComponent is the one selected member of this family |
+| `cna_gamer_services_dispatcher_set_window_handle` | gamer_services.h | BOUND | imported: GamerServicesComponent is the one selected member of this family |
+| `cna_gamer_services_dispatcher_subscribe_installing_title_update_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the GamerServices component and dispatcher this package already drives for the strict profile |
+| `cna_gamer_services_dispatcher_update` | gamer_services.h | BOUND | imported: GamerServicesComponent is the one selected member of this family |
+| `cna_gamer_services_dispatcher_update_async` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the GamerServices component and dispatcher this package already drives for the strict profile |
+| `cna_gamer_set_display_name` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_set_signed_in_gamers_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_set_tag` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_signed_in_contains` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_signed_in_index_of` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_gamer_unsubscribe_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| `cna_guide_begin_show_keyboard_input` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_begin_show_message_box` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_copy_pending_keyboard_input_description_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_copy_pending_keyboard_input_display_text_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_copy_pending_keyboard_input_title_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_delay_notifications` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_end_show_keyboard_input` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_end_show_keyboard_input_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_end_show_message_box` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_has_pending_keyboard_input_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_has_pending_message_box_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_is_screen_saver_enabled` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_is_trial_mode` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_is_visible` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_notification_position` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_pending_keyboard_input_description_size_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_pending_keyboard_input_display_text_size_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_pending_keyboard_input_title_size_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_pending_message_box_focus_button_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_get_simulate_trial_mode` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_render_pending_keyboard_input_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_render_pending_message_box_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_reset_pending_keyboard_input_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_reset_pending_message_box_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_set_is_screen_saver_enabled` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_set_is_trial_mode` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_set_is_visible` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_set_notification_position` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_set_simulate_trial_mode` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_achievements_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_compose_message` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_friend_request` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_friends` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_game_invite` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_game_invite_for_session` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_gamer_card` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_marketplace` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_messages` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_party` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_party_sessions` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_player_review` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_players` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_show_sign_in` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_simulate_keyboard_input_cancel_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_simulate_message_box_click_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_guide_was_keyboard_input_canceled_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| `cna_host_changed_event_info_init` | net_gamers.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_invite_accepted_event_info_init` | gamer_services.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_leaderboard_entry_create_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_entry_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_entry_equals` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_entry_get_columns` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_entry_get_gamer` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_entry_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_entry_set_rating` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_entry_set_rating_changed_hook_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_identity_init` | gamer_services.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_leaderboard_reader_begin_page_down` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_begin_page_up` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_begin_read` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_begin_read_from_gamers` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_begin_read_from_pivot` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_get_entry_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_get_identity` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_get_info` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_page_down` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_page_up` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_read` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_read_from_gamers` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_leaderboard_reader_read_from_pivot` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| `cna_local_network_gamer_clear_packet_queue_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_create_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_enable_send_voice` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_enqueue_packet_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_get_is_data_available` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_get_signed_in_gamer` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_receive_data` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_receive_data_at` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_receive_data_into_packet_reader` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_send_data` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_send_data_range` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_send_data_range_to` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_send_data_to` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_send_packet_writer` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_send_packet_writer_to` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_local_network_gamer_send_party_invites` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
+| `cna_net_get_last_join_error` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the last join failure the network layer recorded |
+| `cna_network_gamer_copy_machine` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_create` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_destroy` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_has_left_session` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_has_voice` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_id` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_is_guest` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_is_host` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_is_local` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_is_muted_by_local_user` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_is_private_slot` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_is_ready` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_is_talking` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_roundtrip_ticks` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_get_session` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_set_has_left_session_ext` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_set_id_ext` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_set_is_host_ext` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_set_is_ready` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_set_machine` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_gamer_set_roundtrip_ticks_ext` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| `cna_network_machine_create` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkMachine: the gamers a single machine contributes to a session |
+| `cna_network_machine_destroy` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkMachine: the gamers a single machine contributes to a session |
+| `cna_network_machine_get_gamer` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkMachine: the gamers a single machine contributes to a session |
+| `cna_network_machine_get_gamer_count` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkMachine: the gamers a single machine contributes to a session |
+| `cna_network_machine_remove_from_session` | net_gamers.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkMachine: the gamers a single machine contributes to a session |
+| `cna_network_session_add_local_gamer` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_add_remote_gamer_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_copy_session_properties` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_copy_type_name` | net_sessions.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_network_session_create` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_create_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_create_with_local_gamers` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_create_with_local_gamers_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_create_with_properties` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_create_with_properties_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_destroy` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_dispose` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_end_game` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_ended_event_info_init` | net_gamers.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_network_session_find` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_find_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_find_gamer_by_id` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_find_with_local_gamers` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_find_with_local_gamers_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_active_action_count_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_allow_host_migration` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_allow_join_in_progress` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_bytes_per_second_received` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_bytes_per_second_sent` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_gamer` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_gamer_count` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_host` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_instance_count_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_is_disposed` | net_sessions.h | DELIBERATE_NON_BINDING | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
+| `cna_network_session_get_is_everyone_ready` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_is_host` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_max_gamers` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_owned_gamer_count_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_private_gamer_slots` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_session_state` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_session_type` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_simulated_latency_ticks` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_simulated_packet_loss` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_get_type_name_size` | net_sessions.h | DELIBERATE_NON_BINDING | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
+| `cna_network_session_join` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_join_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_join_invited` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_join_invited_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_join_invited_with_local_gamers` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_join_invited_with_local_gamers_async` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_properties_add` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_clear` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_contains` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_copy_to` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_create` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_create_enumerator` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_destroy` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_get_count` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_get_is_read_only` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_get_item` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_index_of` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_insert` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_remove` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_remove_at` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_properties_set_item` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_property_enumerator_destroy` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_property_enumerator_get_current` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_property_enumerator_move_next` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_property_enumerator_reset` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
+| `cna_network_session_remove_gamer_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_replace_session_properties` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_reset_ready` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_send_network_event_ext` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_set_allow_host_migration` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_set_allow_join_in_progress` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_set_max_gamers` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_set_private_gamer_slots` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_set_simulated_latency_ticks` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_set_simulated_packet_loss` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_start_game` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_game_ended` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_game_started` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_gamer_joined` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_gamer_left` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_host_changed` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_invite_accepted` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_session_ended` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_write_arbitrated_leaderboard` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_write_true_skill` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_subscribe_write_unarbitrated_leaderboard` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_unsubscribe` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_network_session_update` | net_sessions.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
+| `cna_packet_reader_create` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_destroy` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_get_length` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_get_position` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_color` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_double` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_matrix` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_quaternion` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_single` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_vector2` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_vector3` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_read_vector4` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_set_data_ext` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_reader_set_position` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| `cna_packet_writer_copy_data_ext` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_create` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_destroy` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_get_length` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_get_position` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_set_position` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_color` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_double` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_matrix` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_quaternion` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_single` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_vector2` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_vector3` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_packet_writer_write_vector4` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
+| `cna_property_dictionary_clear` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_contains_key` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_copy_key_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_copy_string` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_create_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_count` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_date_time_ticks` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_double` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_int32` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_int64` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_is_read_only` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_key_size_at` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_outcome` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_single` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_stream_size_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_string_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_get_time_span_ticks` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_remove` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_date_time_ticks` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_double` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_int32` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_int64` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_outcome` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_single` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_string` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_set_time_span_ticks` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_property_dictionary_try_get_value_kind_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| `cna_quality_of_service_init` | net.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| `cna_quality_of_service_init_measured` | net.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects QualityOfService: the measured bandwidth and latency of a discovered session |
+| `cna_signed_in_gamer_award_achievement` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_begin_award_achievement` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_begin_get_achievements` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_copy_gamertag` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_create_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_destroy` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_achievements` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_friends` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_game_defaults` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_gamertag_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_is_guest` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_is_signed_in_to_live` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_party_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_player_index` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_presence` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_get_privileges` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_is_friend` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_is_headset` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_set_party_size` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_set_presence` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_set_presence_mode_string_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_subscribe_signed_in_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_signed_in_gamer_subscribe_signed_out_ext` | gamer_services.h | BOUND | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| `cna_write_leaderboards_event_info_init` | net_gamers.h | DELIBERATE_NON_BINDING | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+
 ## Reasons
 
 | Purpose | Status | Routes | Reason |
@@ -1320,38 +2206,57 @@ is BOUND or carries its own written non-binding reason.
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 | In a family that backs the selected XNA profile, but outside the exact member set the 257-type projection defines; binding it would add native surface with no XNA consumer. |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 436 | XNA value types are implemented natively in Python against pinned XNA-derived behaviour; a per-operation C call would add a boundary crossing without adding behaviour. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 270 | imported: cna.extensions.content projects CNA's own compiled content format |
-| OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 239 | The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 211 | The strict XNA Model graph is the managed XNB one by design; CNA's native model runtime is a separate extension concept and does not replace it. |
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 177 | Sensors and device services are CNA-only capabilities outside the selected XNA profile and outside the selected extension profile. |
-| OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 175 | Microsoft.Xna.Framework.Net is not in the selected 257-type profile; opening it requires a deliberate future-profile decision. |
-| CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 119 | XNA 4.0 has no haptics, joystick, text-input or cursor API; these are CNA-only input families and belong to the extension profile rather than to the XNA namespace. |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 108 | The CLR type name is not XNA public surface; Python names its own types, and ToString is projected separately where XNA defines it. |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 90 | Microsoft.Xna.Framework.Content is the managed XNB reader table, cache, rollback and Unload; a CNA-native content manager is a second cache domain and belongs to the extension profile. |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 69 | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
+| XNA_BACKING | BOUND | 64 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events |
 | CNA_EXTENSION_CANDIDATE | BOUND | 63 | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
+| XNA_BACKING | BOUND | 46 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point |
+| XNA_BACKING | BOUND | 38 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval |
+| CNA_EXTENSION_CANDIDATE | BOUND | 36 | imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 35 | Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 33 | imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model |
 | CNA_EXTENSION_CANDIDATE | BOUND | 33 | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| CNA_EXTENSION_CANDIDATE | BOUND | 30 | imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine |
 | CNA_EXTENSION_CANDIDATE | BOUND | 29 | imported: cna.extensions.engine projects the clustered forward effect -- the forward effect that shades from a clustered light buffer |
+| CNA_EXTENSION_CANDIDATE | BOUND | 28 | imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug |
+| XNA_BACKING | BOUND | 28 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through |
+| XNA_BACKING | BOUND | 27 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection |
 | CNA_EXTENSION_CANDIDATE | BOUND | 27 | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
 | CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping |
 | CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
+| CNA_EXTENSION_CANDIDATE | BOUND | 23 | imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events |
+| XNA_BACKING | BOUND | 23 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events |
+| XNA_BACKING | BOUND | 22 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader |
+| CNA_EXTENSION_CANDIDATE | BOUND | 22 | imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate |
+| CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests |
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: runtime capability evidence names the backend that produced it |
+| XNA_BACKING | BOUND | 21 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state |
+| XNA_BACKING | BOUND | 20 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns |
 | CNA_EXTENSION_CANDIDATE | BOUND | 20 | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
 | CNA_EXTENSION_CANDIDATE | BOUND | 19 | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
+| XNA_BACKING | BOUND | 19 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises |
 | CNA_EXTENSION_CANDIDATE | BOUND | 18 | imported: cna.extensions.engine projects instanced rendering -- the instanced renderer and its instance buffer |
 | MANAGED_BY_DESIGN | BOUND | 17 | imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable |
 | CNA_EXTENSION_CANDIDATE | BOUND | 17 | imported: cna.extensions.engine projects contact shadows -- the screen-space contact-shadow pass and its visibility combination |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 17 | Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 17 | imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces |
+| CNA_EXTENSION_CANDIDATE | BOUND | 17 | imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle |
 | CNA_EXTENSION_CANDIDATE | BOUND | 16 | imported: cna.extensions.engine projects engine state on an effect -- the engine-layer state a stock effect accepts: shadow map, punctual light and IBL |
+| XNA_BACKING | BOUND | 16 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns |
 | CNA_EXTENSION_CANDIDATE | BOUND | 16 | imported: cna.extensions.engine projects spot shadow maps -- single-frustum spot-light shadows |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects the cluster grid -- the view-frustum cluster subdivision and its logarithmic depth slices |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects the clustered light set -- the collection of clustered light values a grid consumes |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions |
 | CNA_EXTENSION_CANDIDATE | BOUND | 15 | imported: cna.extensions.engine projects screen-space reflections -- the SSR pass |
+| XNA_BACKING | BOUND | 14 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing |
+| CNA_EXTENSION_CANDIDATE | BOUND | 14 | imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition |
 | CNA_EXTENSION_CANDIDATE | BOUND | 14 | imported: cna.extensions.engine projects light probe volumes -- a grid of probes and its interpolation |
 | CNA_EXTENSION_CANDIDATE | BOUND | 14 | imported: cna.extensions.engine projects level of detail -- LOD levels and the projected size that selects one |
+| XNA_BACKING | BOUND | 14 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet |
+| XNA_BACKING | BOUND | 14 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the clustered shadow budget -- which clustered lights get a shadow map inside a fixed budget |
 | CNA_EXTENSION_CANDIDATE | BOUND | 13 | imported: cna.extensions.engine projects the environment processor -- irradiance, prefiltered specular and BRDF LUT generation |
@@ -1363,10 +2268,13 @@ is BOUND or carries its own written non-binding reason.
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 12 | Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects aerial perspective -- distance haze, its air mass and its transmittance |
 | CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance |
+| XNA_BACKING | BOUND | 12 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position |
 | CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects the cluster light assignment -- which lights land in which cluster |
 | CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects compute shaders -- compute programs, their bindings and their dispatch |
 | CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects decals -- projected decals |
+| CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them |
 | CNA_EXTENSION_CANDIDATE | BOUND | 12 | imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve |
+| XNA_BACKING | BOUND | 11 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from |
 | CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table |
 | CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples |
 | CNA_EXTENSION_CANDIDATE | BOUND | 11 | imported: the CNB curve codec builds a native curve from managed keys and reads one back, destroying it before either function returns |
@@ -1381,20 +2289,32 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into |
 | CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects light shafts -- radial light shafts |
 | CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
+| CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects volumetric fog -- volumetric fog |
 | CNA_EXTENSION_CANDIDATE | BOUND | 7 | imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms |
+| CNA_EXTENSION_CANDIDATE | BOUND | 7 | imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription |
+| XNA_BACKING | BOUND | 7 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them |
 | CNA_EXTENSION_CANDIDATE | BOUND | 7 | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
+| CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults |
+| CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.devices projects native file and folder dialogs, and the test backend that answers them without opening one |
+| XNA_BACKING | BOUND | 5 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects FriendGamer and FriendCollection |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing |
+| XNA_BACKING | BOUND | 5 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the GamerServices component and dispatcher this package already drives for the strict profile |
+| CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.devices projects the host's ordered preferred-locale list |
+| CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.devices projects native message boxes, their button model, and the test backend that logs instead of showing one |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass |
+| XNA_BACKING | BOUND | 5 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkMachine: the gamers a single machine contributes to a session |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.input projects the clipboard as an input service, distinct from the device-services clipboard route |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects indirect draws -- draw commands whose arguments live in a buffer |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
@@ -1403,20 +2323,30 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects film grain -- the stochastic grain pass |
 | XNA_BACKING | BOUND | 3 | imported: GamerServicesComponent is the one selected member of this family |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 3 | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.devices projects battery state, charge percentage and remaining time, including their unavailable sentinels |
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 2 | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
+| CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.devices projects display metrics a game reads: content scale and the safe area |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
 | XNA_BACKING | BOUND | 2 | imported: a GraphicsDevice a caller constructs and disposes is XNA public surface, distinct from the Game's borrowed one |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: level of detail and instancing take a native mesh-part handle, which strict XNA's managed ModelMeshPart does not have |
 | XNA_BACKING | BOUND | 2 | imported: RenderTarget2D and RenderTargetCube raise ContentLost, and the subscription is what delivers it |
+| CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.devices projects logical CPU count and installed RAM |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects clustered light values -- the clustered light value structure |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.devices projects the host clipboard as a device service |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.devices projects whether the device-services extension is present in this build at all |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.devices projects the host device class the process is running on |
+| MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 1 | CNA's canonical gamer-services component pumps the dispatcher from the runtime side. GamerServicesComponent is a strict XNA GameComponent here, with Initialize and Update written in Python and already green in the Windows runtime profile; creating a second native component beside it would pump the dispatcher twice. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects compute memory-barrier mask -- the containment test for the barrier bit mask a compute dispatch orders |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 | A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API. |
+| XNA_BACKING | BOUND | 1 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the last join failure the network layer recorded |
+| XNA_BACKING | BOUND | 1 | imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects QualityOfService: the measured bandwidth and latency of a discovered session |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.devices projects handing a URL to the host browser |
 | XNA_BACKING | BOUND | 1 | imported: VideoPlayer.GetTexture needs the frame generation to tell XNA's two alternating frame textures apart |

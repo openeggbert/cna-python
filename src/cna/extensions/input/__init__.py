@@ -39,7 +39,14 @@ Importing this module needs no native library. Constructing anything in it does.
 
 from __future__ import annotations
 
-from . import clipboard, cursor, devices, errors, haptics, joystick, text, values
+from . import (
+    clipboard, comparison, cursor, devices, errors, haptics, joystick, text, values,
+)
+from .comparison import (
+    haptic_capabilities_equal, haptic_direction_equal, haptic_effect_equal,
+    input_device_info_equal, joystick_capabilities_equal, joystick_info_equal,
+    sensor_info_equal,
+)
 from .clipboard import (
     clipboard_has_text, clipboard_text, clipboard_text_byte_length,
     set_clipboard_text,
@@ -80,8 +87,12 @@ from .values import (
 )
 
 __all__ = [
-    "clipboard", "cursor", "devices", "errors", "haptics", "joystick", "text",
-    "values",
+    "clipboard", "comparison", "cursor", "devices", "errors", "haptics",
+    "joystick", "text", "values",
+    # comparison
+    "haptic_capabilities_equal", "haptic_direction_equal", "haptic_effect_equal",
+    "input_device_info_equal", "joystick_capabilities_equal", "joystick_info_equal",
+    "sensor_info_equal",
     # clipboard
     "clipboard_has_text", "clipboard_text", "clipboard_text_byte_length",
     "set_clipboard_text",

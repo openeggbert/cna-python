@@ -85,9 +85,10 @@ def is_vibration_supported(game: "Game") -> bool:
 
 def vibration_device_name(game: "Game") -> str:
     """The vibration device's name; empty when there is none."""
-    return _support.copied_text("cna_vibrate_controller_copy_device_name_ext",
-                                (_dev.game_handle(game, "vibration"),),
-                                "vibration device name")
+    return _support.sized_text("cna_vibrate_controller_get_device_name_size_ext",
+                               "cna_vibrate_controller_copy_device_name_ext",
+                               (_dev.game_handle(game, "vibration"),),
+                               "vibration device name")
 
 
 def start_vibration(game: "Game", duration_ticks: int) -> None:

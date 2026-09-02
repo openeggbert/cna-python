@@ -188,8 +188,9 @@ def device_sensors(game: "Game") -> list[SensorInfo]:
             handle, position)
         result.append(SensorInfo(
             int(native.id), SensorType(int(native.type)),
-            _support.copied_text("cna_sensors_copy_name_at", (handle, position),
-                                 "sensor name")))
+            _support.sized_text("cna_sensors_get_name_size_at",
+                                "cna_sensors_copy_name_at", (handle, position),
+                                "sensor name")))
     return result
 
 

@@ -187,8 +187,8 @@ def joystick_count(game: "Game") -> int:
 
 def joystick_name(game: "Game", index: int) -> str:
     """The name of the joystick at ``index``, by enumeration order."""
-    return _support.copied_text(
-        "cna_joysticks_copy_name_at",
+    return _support.sized_text(
+        "cna_joysticks_get_name_size_at", "cna_joysticks_copy_name_at",
         (_in.game_handle(game, "joysticks"),
          c.c_uint32(checked(index, "uint32", "index"))), "joystick name")
 
@@ -221,10 +221,12 @@ def joystick_capabilities(game: "Game", joystick_id: int) -> JoystickCapabilitie
         int(native.ball_count), JoystickType(int(native.type)),
         PowerState(int(native.power_state)),
         None if percent < 0 else percent, bool(native.is_connected),
-        _support.copied_text("cna_joysticks_copy_capabilities_name",
-                             (handle, identity), "joystick name"),
-        _support.copied_text("cna_joysticks_copy_capabilities_guid",
-                             (handle, identity), "joystick guid"))
+        _support.sized_text("cna_joysticks_get_capabilities_name_size",
+                            "cna_joysticks_copy_capabilities_name",
+                            (handle, identity), "joystick name"),
+        _support.sized_text("cna_joysticks_get_capabilities_guid_size",
+                            "cna_joysticks_copy_capabilities_guid",
+                            (handle, identity), "joystick guid"))
 
 
 def capture_joystick_state(game: "Game", joystick_id: int) -> JoystickState:

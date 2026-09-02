@@ -103,8 +103,14 @@ class DateTimeOffsetTests(unittest.TestCase):
             DateTimeOffset(LARGE_TICKS, 1).offset
 
 
+@requires_devices
 class ReadingConversionTests(unittest.TestCase):
-    """Structure conversion, which needs no library because it touches no route."""
+    """Structure conversion through CNA's own constructors.
+
+    These need a library: a reading is built by the canonical
+    ``*_init_from_values`` route rather than by assigning the structure's fields,
+    so CNA decides what a reading *is* and this projection only carries it.
+    """
 
     def test_every_reading_survives_a_native_round_trip(self) -> None:
         cases = [

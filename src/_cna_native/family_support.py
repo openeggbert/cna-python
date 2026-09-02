@@ -147,6 +147,11 @@ class Support:
     def out_bool(self, operation: str, *arguments: object) -> bool:
         return self.out_u8(operation, *arguments) != 0
 
+    def out_u16(self, operation: str, *arguments: object) -> int:
+        value = c.c_uint16()
+        self.call(operation, *arguments, c.byref(value))
+        return int(value.value)
+
     def out_u32(self, operation: str, *arguments: object) -> int:
         value = c.c_uint32()
         self.call(operation, *arguments, c.byref(value))
@@ -224,6 +229,30 @@ class Support:
         buffer = c.create_string_buffer(size.value)
         written = c.c_uint64()
         self.call(operation, *arguments, buffer, c.c_uint64(size.value),
+                  c.byref(written))
+        raw = bytes(buffer.raw[: written.value])
+        try:
+            return raw.decode("utf-8")
+        except UnicodeDecodeError as error:
+            raise ValueError(f"{what} is not well-formed UTF-8") from error
+
+    def sized_text(self, size_operation: str, copy_operation: str,
+                   arguments: Iterable[object], what: str) -> str:
+        """The two-call protocol where CNA declares a *separate* size route.
+
+        :func:`copied_text` asks the copy route twice, which every copy route
+        supports. Where CNA also declares a size route, asking it is the
+        protocol as documented -- and it is the only thing that keeps the two
+        halves in step when a future CNA changes one of them.
+        """
+        arguments = tuple(arguments)
+        size = c.c_uint64()
+        self.call(size_operation, *arguments, c.byref(size))
+        if size.value == 0:
+            return ""
+        buffer = c.create_string_buffer(size.value)
+        written = c.c_uint64()
+        self.call(copy_operation, *arguments, buffer, c.c_uint64(size.value),
                   c.byref(written))
         raw = bytes(buffer.raw[: written.value])
         try:

@@ -370,6 +370,158 @@ MUTATIONS = [
      "        if _active is self and not force:",
      "        if False:",
      "tests.test_input_extensions"),
+
+    # --- the online profile: gamers ------------------------------------------
+    ("signed-in collection: read the count of the wrong collection",
+     "src/Microsoft/Xna/Framework/GamerServices/_gamer.py",
+     "        return _support.out_i32(\"cna_gamer_get_signed_in_gamer_count\")",
+     "        return 1",
+     "tests.test_online_profile"),
+    ("signed-in collection: report an absent player index as the first gamer",
+     "src/Microsoft/Xna/Framework/GamerServices/_gamer.py",
+     "            if not present.value:\n                return None",
+     "            if False:\n                return None",
+     "tests.test_online_profile"),
+    ("gamer tag: keep the Python object and never tell CNA",
+     "src/Microsoft/Xna/Framework/GamerServices/_gamer.py",
+     "        _support.call(\"cna_gamer_set_tag\", self._gamer_handle,\n"
+     "                      c.c_uint64(0 if value is None else id(value) & 0xFFFFFFFFFFFFFFFF))",
+     "        pass",
+     "tests.test_online_profile"),
+    ("network gamer: answer an empty gamertag instead of naming the missing route",
+     "src/Microsoft/Xna/Framework/Net/_session.py",
+     "        raise NotImplementedError(\n"
+     "            \"a remote NetworkGamer's inherited Gamer members have no route to \"",
+     "        return c.c_uint64(0)\n"
+     "        raise NotImplementedError(\n"
+     "            \"a remote NetworkGamer's inherited Gamer members have no route to \"",
+     "tests.test_online_profile"),
+    ("presence: write the mode where the value belongs",
+     "src/Microsoft/Xna/Framework/GamerServices/_gamer.py",
+     "        native.presence_mode = int(mode)\n"
+     "        native.presence_value = checked(value, \"int32\", \"PresenceValue\")",
+     "        native.presence_mode = checked(value, \"int32\", \"PresenceValue\")\n"
+     "        native.presence_value = int(mode)",
+     "tests.test_online_profile"),
+
+    # --- the online profile: sessions and packets ----------------------------
+    ("session rosters: read every roster with the all-gamers identity",
+     "src/Microsoft/Xna/Framework/Net/_session.py",
+     "        self._roster = roster",
+     "        self._roster = _ROSTER_ALL",
+     "tests.test_online_profile"),
+    ("session: report the state before the update that delivers it",
+     "src/Microsoft/Xna/Framework/Net/_session.py",
+     "    def Update(self) -> None:\n"
+     "        _support.call(\"cna_network_session_update\", self._value)",
+     "    def Update(self) -> None:\n        pass",
+     "tests.test_online_profile"),
+    ("session events: unsubscribe nothing when the session is disposed",
+     "src/Microsoft/Xna/Framework/Net/_session.py",
+     "        for registration in self._registrations:\n"
+     "            _support.call(\"cna_network_session_unsubscribe\", c.c_uint64(registration))",
+     "        pass",
+     "tests.test_online_profile"),
+    ("session events: subscribe once per handler instead of once per event",
+     "src/Microsoft/Xna/Framework/Net/_session.py",
+     "        trampoline = self._callbacks.root(event, factory, adapt)",
+     "        trampoline = self._callbacks.root(object(), factory, adapt)",
+     "tests.test_online_profile"),
+    # Removing the rewind outright is an *equivalent* mutation and is not
+    # planted: CNA rewinds on its own, measured on both ``set_data`` and a
+    # session receive, on a reader that had already been drained. The line
+    # states the contract rather than repairing a defect, so what is planted is
+    # a position that is wrong -- which is what the contract actually forbids.
+    ("packet reader: leave the position where the write ended",
+     "src/Microsoft/Xna/Framework/Net/_packets.py",
+     "        self.Position = 0",
+     "        self.Position = self.Length",
+     "tests.test_online_profile"),
+    ("packet writer: send a float through the wide route",
+     "src/Microsoft/Xna/Framework/Net/_packets.py",
+     "        _support.call(\"cna_packet_writer_write_single\", self._value,\n"
+     "                      c.c_float(float(value)))",
+     "        _support.call(\"cna_packet_writer_write_double\", self._value,\n"
+     "                      c.c_double(float(value)))",
+     "tests.test_online_profile"),
+    ("packet writer: write a bool as a number",
+     "src/Microsoft/Xna/Framework/Net/_packets.py",
+     "        if isinstance(value, bool):\n"
+     "            raise TypeError(\"a packet value may not be a bool\")",
+     "        pass",
+     "tests.test_online_profile"),
+    ("send data: accept an offset and count outside the array",
+     "src/Microsoft/Xna/Framework/Net/_session.py",
+     "            if offset < 0 or count < 0 or offset + count > len(payload):",
+     "            if False:",
+     "tests.test_online_profile"),
+    ("enqueue: name the sender in the field CNA does not read",
+     "src/cna/extensions/online/sessions.py",
+     "    info.gamer = 0 if sender is None else sender._value.value",
+     "    info.sender = 0 if sender is None else sender._value.value",
+     "tests.test_online_profile"),
+    ("session properties: store an unset slot as zero",
+     "src/Microsoft/Xna/Framework/Net/_values.py",
+     "        return int(value.value) if value.has_value else None",
+     "        return int(value.value)",
+     "tests.test_online_profile"),
+
+    # --- the online profile: values and time ---------------------------------
+    ("achievement: read the earned timestamp through a double",
+     "src/Microsoft/Xna/Framework/GamerServices/_gamer.py",
+     "    microseconds = (int(ticks) - _UNIX_EPOCH_TICKS) // _TICKS_PER_MICROSECOND",
+     "    microseconds = int((float(ticks) - _UNIX_EPOCH_TICKS) / _TICKS_PER_MICROSECOND)",
+     "tests.test_online_profile"),
+    ("property dictionary: read every value as an int32",
+     "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py",
+     "        return readers[kind](key)",
+     "        return self.GetValueInt32(key)",
+     "tests.test_online_profile"),
+    ("property dictionary: store a long rating as an int32",
+     "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py",
+     "            route = (\"cna_property_dictionary_set_int32\"\n"
+     "                     if -0x80000000 <= value <= 0x7FFFFFFF\n"
+     "                     else \"cna_property_dictionary_set_int64\")",
+     "            route = \"cna_property_dictionary_set_int32\"",
+     "tests.test_online_profile"),
+    ("property dictionary: accept a bool as a column",
+     "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py",
+     "        if isinstance(value, bool):\n"
+     "            raise TypeError(\"a property value may not be a bool\")",
+     "        pass",
+     "tests.test_online_profile"),
+    ("leaderboard writer: answer a fresh row every time",
+     "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py",
+     "        entry = self._entries.get(key)\n        if entry is None:",
+     "        entry = None\n        if entry is None:",
+     "tests.test_online_profile"),
+    ("leaderboard rating: narrow it to 32 bits",
+     "src/Microsoft/Xna/Framework/GamerServices/_leaderboards.py",
+     "                      c.c_int64(checked(value, \"int64\", \"Rating\")))",
+     "                      c.c_int64(c.c_int32(checked(value, \"int64\", \"Rating\")).value))",
+     "tests.test_online_profile"),
+    ("avatar description: report a truncated byte array",
+     "src/Microsoft/Xna/Framework/GamerServices/_avatar.py",
+     "        return [int(buffer[index]) for index in range(int(written.value))]",
+     "        return [int(buffer[index]) for index in range(int(written.value) - 1)]",
+     "tests.test_online_profile"),
+    ("guide: report the pending request even after it is answered",
+     "src/cna/extensions/online/guide.py",
+     "    if not _support.out_bool(\"cna_guide_get_has_pending_message_box_ext\"):\n"
+     "        return None",
+     "    if False:\n        return None",
+     "tests.test_online_profile"),
+    ("guide: answer a cancelled keyboard input with an empty string",
+     "src/Microsoft/Xna/Framework/GamerServices/_guide.py",
+     "        if _support.out_bool(\"cna_guide_was_keyboard_input_canceled_ext\"):\n"
+     "            return None",
+     "        if False:\n            return None",
+     "tests.test_online_profile"),
+    ("guide: let the platform's trial mode answer the title's override",
+     "src/Microsoft/Xna/Framework/GamerServices/_guide.py",
+     "        lambda owner: _support.out_bool(\"cna_guide_get_simulate_trial_mode\"),",
+     "        lambda owner: _support.out_bool(\"cna_guide_get_is_trial_mode\"),",
+     "tests.test_online_profile"),
 ]
 
 

@@ -65,8 +65,8 @@ def camera_count(game: "Game") -> int:
 def camera_name(game: "Game", index: int) -> str:
     """The name of one enumerated camera."""
     handle = _dev.game_handle(game, "camera name")
-    return _support.copied_text(
-        "cna_camera_copy_name_at_ext",
+    return _support.sized_text(
+        "cna_camera_get_name_size_at_ext", "cna_camera_copy_name_at_ext",
         (handle, c.c_uint64(checked(index, "uint64", "index"))), "camera name")
 
 

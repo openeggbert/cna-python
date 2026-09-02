@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
-"""Strict runtime-structure verifier for the normative XNA-to-Python mapping."""
+"""Strict runtime-structure verifier for the normative XNA-to-Python mapping.
+
+One verifier, several **profiles**. A profile is a data file naming the
+reference assemblies it was measured from, the contract those produced, the
+Python packages that carry it, and the profiles it shares those packages with.
+``--profile`` selects one; the default is the Windows runtime, so every existing
+invocation means exactly what it meant before.
+
+Two profiles may share a Python package because XNA does: a Windows game that
+references ``Microsoft.Xna.Framework.Net.dll`` gets ``NetworkSession`` in the
+same namespace it already had ``Game`` in. Sharing is therefore *declared*, and
+a name that belongs to a declared sibling is reported as out of this profile
+rather than as unexpected -- while a name belonging to neither is still
+``UNEXPECTED_TYPE``. That distinction is what keeps "the Windows runtime profile
+is exact" a real claim after three more profiles exist.
+"""
 
 from __future__ import annotations
 
@@ -18,11 +33,63 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "src"
-REFERENCE = ROOT / "tools/api_compat/reference/xna40-windows-runtime-contract.json"
-PROFILE = ROOT / "tools/api_compat/profiles/xna40-windows-runtime.json"
+PROFILES = ROOT / "tools/api_compat/profiles"
+CONTRACTS = ROOT / "tools/api_compat/reference"
 RULES = ROOT / "tools/api_compat/mapping-rules.json"
 INVENTORY_JSON = ROOT / "docs/generated/missing-type-inventory.json"
 INVENTORY_MD = ROOT / "docs/generated/missing-type-inventory.md"
+
+#: The profile every invocation without ``--profile`` means.
+DEFAULT_PROFILE = "xna40-windows-runtime"
+
+
+@dataclass(frozen=True)
+class Profile:
+    """One strict profile, loaded from its data file."""
+
+    identifier: str
+    data: dict[str, Any]
+
+    @classmethod
+    def load(cls, identifier: str) -> "Profile":
+        path = PROFILES / f"{identifier}.json"
+        if not path.is_file():
+            raise SystemExit(f"no such profile: {identifier}")
+        return cls(identifier, json.loads(path.read_text()))
+
+    @property
+    def name(self) -> str:
+        return self.data["name"]
+
+    @property
+    def contract(self) -> dict[str, Any]:
+        return json.loads((CONTRACTS / self.data["contract"]).read_text())
+
+    @property
+    def packages(self) -> tuple[str, ...]:
+        return tuple(self.data["pythonPackages"])
+
+    @property
+    def siblings(self) -> tuple[str, ...]:
+        """Profiles that share this one's Python packages."""
+        return tuple(self.data.get("siblingProfiles", ()))
+
+    @property
+    def stub_paths(self) -> dict[str, Path]:
+        return {package: SRC / Path(*package.split(".")) / "__init__.pyi"
+                for package in self.packages}
+
+    def sibling_type_names(self) -> set[str]:
+        """Every type name a declared sibling profile owns.
+
+        Read from the siblings' own contracts rather than listed here, so a type
+        moving between two profiles cannot end up owned by both or by neither.
+        """
+        names: set[str] = set()
+        for identifier in self.siblings:
+            sibling = Profile.load(identifier)
+            names.update(entry["name"] for entry in sibling.contract["types"])
+        return names
 
 CATEGORIES = (
     "MISSING_TYPE", "MISSING_MEMBER", "UNEXPECTED_TYPE", "UNEXPECTED_MEMBER",
@@ -35,25 +102,6 @@ CATEGORIES = (
     "RAW_HANDLE_LEAK", "PUBLIC_NATIVE_FFI_LEAK", "ALLOWLIST_ENTRIES",
     "UNMEASURED_STRUCTURAL_CATEGORY",
 )
-
-PACKAGES = (
-    "Microsoft.Xna.Framework",
-    "Microsoft.Xna.Framework.Audio",
-    "Microsoft.Xna.Framework.Design",
-    "Microsoft.Xna.Framework.Graphics",
-    "Microsoft.Xna.Framework.Graphics.PackedVector",
-    "Microsoft.Xna.Framework.Input",
-    "Microsoft.Xna.Framework.Input.Touch",
-    "Microsoft.Xna.Framework.Media",
-    "Microsoft.Xna.Framework.Content",
-    "Microsoft.Xna.Framework.GamerServices",
-    "Microsoft.Xna.Framework.Storage",
-)
-
-STUB_PATHS = {
-    package: SRC / Path(*package.split(".")) / "__init__.pyi"
-    for package in PACKAGES
-}
 
 _RULE_DATA = json.loads(RULES.read_text())
 _TYPE_NAMES: dict[str, str] = _RULE_DATA.get("typeNames", {})
@@ -146,6 +194,8 @@ def parse_args() -> argparse.Namespace:
     mode.add_argument("--leak-only", action="store_true")
     parser.add_argument("--output")
     parser.add_argument("--inventory", action="store_true")
+    parser.add_argument("--profile", default=DEFAULT_PROFILE,
+                        help="which strict profile to verify")
     return parser.parse_args()
 
 
@@ -216,10 +266,10 @@ def _typevars_in(callable_value: StubCallable, declared: dict[str, TypeVarDeclar
     return tuple(name for name in declared if re.search(rf"\b{re.escape(name)}\b", text))
 
 
-def parse_stubs() -> tuple[dict[str, StubType], dict[str, TypeVarDeclaration]]:
+def parse_stubs(profile: Profile) -> tuple[dict[str, StubType], dict[str, TypeVarDeclaration]]:
     result: dict[str, StubType] = {}
     typevars: dict[str, TypeVarDeclaration] = {}
-    for package, path in STUB_PATHS.items():
+    for package, path in profile.stub_paths.items():
         tree = ast.parse(path.read_text(), filename=str(path))
         for node in tree.body:
             if not isinstance(node, (ast.Assign, ast.AnnAssign)):
@@ -482,13 +532,13 @@ def expected_arity(member: dict[str, Any]) -> int:
     return count
 
 
-def target_types() -> tuple[dict[str, type], list[dict[str, str]]]:
+def target_types(profile: Profile) -> tuple[dict[str, type], list[dict[str, str]]]:
     if str(SRC) not in sys.path:
         sys.path.insert(0, str(SRC))
     result: dict[str, type] = {}
     diagnostics: list[dict[str, str]] = []
     seen_objects: dict[int, str] = {}
-    for package_name in PACKAGES:
+    for package_name in profile.packages:
         package = importlib.import_module(package_name)
         for name in getattr(package, "__all__", ()):
             value = getattr(package, name)
@@ -748,31 +798,56 @@ def _stub_has_member(stub: StubType, name: str, stubs: dict[str, StubType], seen
     return False
 
 
+#: What a BCL interface a reference type declares requires of the *projection*.
+#:
+#: Only the Python protocol, never a CLR name the interface would add. XNA
+#: implements these interfaces two different ways and the difference is real:
+#: ``CurveKeyCollection`` implements ``ICollection<CurveKey>`` publicly, so
+#: ``Add`` and ``Remove`` are part of its surface and the reference lists them --
+#: which means the missing-member check already requires them.
+#: ``AchievementCollection`` implements ``IList<Achievement>`` *explicitly*, so
+#: they are not part of its surface, and a projection that added them would be
+#: claiming members XNA does not have. Requiring only the protocol is therefore
+#: both the weaker and the more accurate rule: the CLR half is covered where it
+#: belongs, and what is left is what a Python caller actually reaches for.
+#:
+#: ``__setitem__`` is deliberately absent from the two indexed entries: whether
+#: the indexer has a setter is a property of the reference's ``Item``, and the
+#: property check reads it there.
+_BCL_INTERFACE_MEMBERS: dict[str, tuple[str, ...]] = {
+    "System.IEquatable`1": ("Equals", "__eq__"),
+    "System.IDisposable": ("Dispose", "__enter__", "__exit__"),
+    "System.IServiceProvider": ("GetService",),
+    "System.IComparable`1": ("CompareTo",),
+    "System.Collections.Generic.IEnumerable`1": ("GetEnumerator", "__iter__"),
+    "System.Collections.Generic.IEnumerator`1": ("Current", "MoveNext", "Dispose",
+                                                 "__iter__"),
+    "System.Collections.Generic.ICollection`1": ("__iter__", "__len__"),
+    "System.Collections.Generic.IList`1": ("__getitem__", "__iter__", "__len__"),
+    "System.Collections.Generic.IDictionary`2": ("__getitem__", "__iter__", "__len__"),
+}
+
+
+def bcl_interface_members(base: str, expected: dict[str, Any],
+                          rules: dict[str, Any]) -> tuple[str, ...] | None:
+    """What ``base`` requires of ``expected``'s projection, or ``None``.
+
+    Also the source of truth for which names are *admitted* on the type: a
+    member the projection has to provide must not then be reported as an
+    unexpected one.
+    """
+    return _BCL_INTERFACE_MEMBERS.get(base)
+
+
 def compare_interface_contract(identity: str, expected: dict[str, Any], target: type,
                                stub: StubType, stubs: dict[str, StubType],
                                reference_by_name: dict[str, dict[str, Any]],
                                rules: dict[str, Any], diagnostics: list[dict[str, str]]) -> None:
     for interface in expected.get("directInterfaces", ()):
         base = interface.split("[", 1)[0]
-        if base.startswith("System.IEquatable`1"):
-            required = ("Equals", "__eq__")
-        elif base == "System.IDisposable":
-            required = ("Dispose", "__enter__", "__exit__")
-        elif base == "System.IServiceProvider":
-            required = ("GetService",)
-        elif base.startswith("System.Collections.Generic.IEnumerable`1"):
-            required = ("GetEnumerator", "__iter__")
-        elif base.startswith("System.Collections.Generic.ICollection`1"):
-            required = ("Count", "IsReadOnly", "Add", "Clear", "Contains", "CopyTo",
-                        "Remove", "GetEnumerator", "__iter__", "__len__")
-        elif base.startswith("System.IComparable`1"):
-            required = ("CompareTo",)
-        elif base.startswith("System.Collections.Generic.IEnumerator`1"):
-            required = ("Current", "MoveNext", "Dispose", "__iter__")
-        elif base.startswith("System.Collections.Generic.IList`1"):
-            required = ("Count", "IsReadOnly", "Add", "Clear", "Contains", "CopyTo",
-                        "Remove", "IndexOf", "Insert", "RemoveAt", "GetEnumerator",
-                        "__getitem__", "__setitem__", "__iter__", "__len__")
+        members = bcl_interface_members(base, expected, rules)
+        if members is not None:
+            required = members
         elif base == "Microsoft.Xna.Framework.Graphics.PackedVector.IPackedVector`1":
             required = ("PackedValue",)
             generic = _split_generic(interface)
@@ -848,17 +923,24 @@ def diagnose_broken_fixture(fixture: dict[str, Any]) -> set[str]:
     return categories
 
 
-def verify() -> dict[str, Any]:
-    reference = json.loads(REFERENCE.read_text())
-    profile = json.loads(PROFILE.read_text())
+def verify(selected: Profile) -> dict[str, Any]:
+    reference = selected.contract
+    profile = selected.data
     rules = json.loads(RULES.read_text())
-    targets, diagnostics = target_types()
-    stubs, typevars = parse_stubs()
+    targets, diagnostics = target_types(selected)
+    stubs, typevars = parse_stubs(selected)
     reference_by_name = {value["name"]: value for value in reference["types"]}
     expected_names = set(reference_by_name)
+    # A name a declared sibling profile owns is out of *this* profile, not
+    # unexpected: the two share a Python package because XNA shares a namespace.
+    # A name belonging to neither is still unexpected, which is what keeps this
+    # an exactness claim rather than a filter.
+    owned_elsewhere = selected.sibling_type_names()
 
-    for identity in sorted(set(targets) - expected_names):
+    for identity in sorted(set(targets) - expected_names - owned_elsewhere):
         add(diagnostics, "UNEXPECTED_TYPE", identity, "public type is absent from the pinned XNA profile")
+    for identity in sorted(set(targets) & owned_elsewhere):
+        del targets[identity]
 
     scoreboards: list[dict[str, Any]] = []
     target_member_count = 0
@@ -939,7 +1021,14 @@ def verify() -> dict[str, Any]:
             expected_public_names.add(name)
             grouped.setdefault(name, []).append(member)
         for interface_name in expected.get("directInterfaces", ()):
-            interface = reference_by_name.get(interface_name.split("[", 1)[0])
+            base_name = interface_name.split("[", 1)[0]
+            # A BCL interface's required members are admitted from the same table
+            # that requires them, so the two can never disagree about whether a
+            # name belongs on the type.
+            admitted = bcl_interface_members(base_name, expected, rules)
+            if admitted is not None:
+                expected_public_names.update(admitted)
+            interface = reference_by_name.get(base_name)
             if interface is None:
                 continue
             for member in interface["members"]:
@@ -1100,6 +1189,7 @@ def verify() -> dict[str, Any]:
         bucket["types"] += 1
         bucket["diagnostics"] += value["diagnostics"]
     summary = {
+        "PROFILE": selected.identifier,
         "REFERENCE_TYPES": len(reference["types"]),
         "REFERENCE_MEMBERS": sum(len(value["members"]) for value in reference["types"]),
         "EXPECTED_PYTHON_TYPES": profile["expectedPythonTypes"],
@@ -1114,9 +1204,9 @@ def verify() -> dict[str, Any]:
             "familyScoreboard": dict(sorted(family.items()))}
 
 
-def write_inventory(report: dict[str, Any]) -> None:
+def write_inventory(report: dict[str, Any], selected: Profile) -> None:
     missing = [value["type"] for value in report["diagnostics"] if value["category"] == "MISSING_TYPE"]
-    payload = {"profile": "XNA 4.0 Windows runtime", "missingTypeCount": len(missing), "types": missing}
+    payload = {"profile": selected.name, "missingTypeCount": len(missing), "types": missing}
     INVENTORY_JSON.parent.mkdir(parents=True, exist_ok=True)
     INVENTORY_JSON.write_text(json.dumps(payload, indent=2) + "\n")
     families: dict[str, list[str]] = {}
@@ -1137,11 +1227,12 @@ def print_summary(report: dict[str, Any]) -> None:
 
 def main() -> int:
     args = parse_args()
-    report = verify()
+    selected = Profile.load(args.profile)
+    report = verify(selected)
     if args.output:
         Path(args.output).write_text(json.dumps(report, indent=2) + "\n")
     if args.inventory:
-        write_inventory(report)
+        write_inventory(report, selected)
     print_summary(report)
     if args.leak_only:
         gate = ("UNEXPECTED_TYPE", "UNEXPECTED_MEMBER", "INTERNAL_TYPE_LEAK", "RAW_HANDLE_LEAK",
