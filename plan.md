@@ -281,6 +281,23 @@ asset-name special case is an acceptable way to make it green.
   unidentified name matches and zero candidates; zero unjustified blocks.
 - Falsifiability: 257 planted defects across eight families, all killed.
 
+## The stop condition, in one command
+
+`python3 tools/verify_stop_condition.py` reads what every gate wrote and answers
+whether the six opened scopes are finished: 45 counters, every one of which must
+be zero or an exact expected value, plus the four strict profiles' diagnostics
+and type counts. It fails if a report is missing, if a counter a gate used to
+report has disappeared, or if any number moved. `tests/test_stop_condition.py`
+plants each of those.
+
+```text
+STOP_CONDITION=held
+COUNTERS_CHECKED=45
+FAILURES=0
+MEASURED_PROFILES=4
+BLOCKED_PROFILES=1
+```
+
 ## Invariants
 
 1. CNA canonical C headers are authoritative at the native boundary; the C++

@@ -1,712 +1,425 @@
 # CNA-Python tactical handoff
 
-Date: 2026-09-02
+Date: 2026-09-02.
 
 ```text
-ABI_GENERATION=0.21.0
-STRICT_TOTAL_DIAGNOSTICS=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=0
-ENGINE_UNREVIEWED=0
+STOP_CONDITION=held
+COUNTERS_CHECKED=45
+FAILURES=0
+MEASURED_PROFILES=4
+BLOCKED_PROFILES=1
 GLOBAL_ACTIONABLE_LOCAL=0
 GLOBAL_UNREVIEWED=0
-EXTENSION_SURFACE_DIAGNOSTICS=0
-ABI_MISMATCHES=0
-UNJUSTIFIED_BOUND_WITHOUT_CALL_SITE=0
-REPOSITORY_MODE=maintenance/platform-qualification/selected-extension-families
+CONTENT_PIPELINE_ACTIONABLE_LOCAL=0
+DEFAULT_PROFILE_TYPES=257
+DEFAULT_PROFILE_MEMBERS=2423
+REPOSITORY_MODE=all-six-selected-scopes-closed
 ```
 
-The selected XNA 4.0 Windows runtime projection is unchanged and still closed.
-This session opened, built and closed one new extension family: CNA's engine
-layer. Every number below was re-measured today; none is quoted from the
-previous handoff.
+Every number below was re-measured today. One command reproduces the whole
+scoreboard: `python3 tools/verify_stop_condition.py`.
 
-## 1. Start state
+## 1. What this session was asked for, and what happened
 
-`931bf09 docs: close the CNB/CNJ family with re-measured numbers`, clean, on
-`develop`.
+Six scopes were opened by product decision, and every previous
+`DELIBERATE_OUT_OF_SCOPE`, `DELIBERATE_NON_BINDING`, `FUTURE_PROFILE` and
+`PRODUCT_DECISION_REQUIRED` covering them was revoked. All six are closed.
 
-Strict XNA closed at 257 types and 2,423 members with zero diagnostics. The CNA
-0.21.x ABI migration complete. CNB/CNJ open and finished. 1,048 imported routes.
-The engine layer covered by a single blanket census rule -- "engine layer is
-outside the selected extension profile" -- over roughly 838 routes, which is one
-decision standing in for hundreds.
+| scope | outcome |
+| --- | --- |
+| 1. Sensors and device services | `cna.extensions.devices`, 206 routes, 177 bound |
+| 2. Extended input | `cna.extensions.input`, 126 routes, 119 bound |
+| 3. Net, GamerServices, Avatar | `xna40-windows-online`, a second strict profile |
+| 4. XNA Content Pipeline | `xna40-windows-content-pipeline`, 128 types, no CNA route |
+| 5. Xbox 360 | `xna40-xbox360-runtime`, a surface profile, generated |
+| 6. Windows Phone | `BLOCKED_REFERENCE_ASSET`, measured, everything else done |
 
-## 2. Dependency and artifact identities
+Five commits, all local, nothing pushed:
 
 ```text
-cnanext            51d61ef42   unmodified by this session
-sharp-runtimenext  9cc96cd5    unmodified by this session
+dca69a3 feat: measure the Windows Phone block, and finish everything it does not block
+434a2b9 feat: open the Xbox 360 surface profile, and keep the four profiles apart
+9a44ed2 feat: project the whole XNA Content Pipeline, with no native boundary at all
+ea3eb74 feat: open XNA's online runtime as a second strict profile
+c0bd48f feat: finish cna.extensions.input with all 119 extended-input routes
 ```
 
-| | control | gpu |
-|---|---|---|
-| Build | `cmake-build-headless` | `cmake-build-opengles3` |
-| Renderer | `HEADLESS` | `OPENGLES3`, Mesa GL ES 3.2 (llvmpipe) |
-| Display | none | isolated Xvfb `:171`, `SDL_VIDEODRIVER=x11` |
-| Engine layer | absent | present, revision 2 |
-| sha256 | `94078be94dc1f1e6c8787c1cd17b08c9430d1e4bb5699947cd2b7aafee40281d` | `65ce46a49b754586e8a99406901a9627e38f4473b594c0266400db65e4d73da9` |
+## 2. The four measured profiles
 
-Neither was rebuilt. Both hashes match the previous handoff's.
+| profile | reference | mapped | strict target | diagnostics |
+| --- | --- | --- | --- | --- |
+| `xna40-windows-runtime` | 257 / 2,964 | 257 / 2,887 | 257 / 2,423 | 0 |
+| `xna40-windows-online` | 74 / 676 | 74 / 605 | 74 / 605 | 0 |
+| `xna40-windows-content-pipeline` | 128 / 743 | 128 / 598 | 128 / 598 | 0 |
+| `xna40-xbox360-runtime` | 318 / 3,577 | 318 / 2,986 | 318 / 2,986 | 0 |
 
-No window was ever placed on the physical desktop: every rendering run used the
-isolated display above, with `WAYLAND_DISPLAY` unset.
+Every contract is re-derived from its assemblies by
+`tools/api_compat/extract_reference.py`, and a test runs `--check` on each.
 
-## 3. Closed baseline, reproduced
+**The default Windows runtime profile is unchanged**: 257 types, 2,423 members,
+zero diagnostics, as it has been since before any of this. That is a gated
+number now -- `DEFAULT_PROFILE_DRIFT` in
+`tools/verify_profile_separation.py` -- and a planted change to it fails.
+
+## 3. How four profiles share two packages without leaking
+
+`Microsoft.Xna.Framework.GamerServices` and `.Net` hold both the runtime
+profile's `GamerServicesComponent` and the online profile's other 74 types,
+because XNA puts them in one namespace. The two profiles are **declared
+siblings**: each verifies against its own contract, a name a sibling owns is out
+of *this* profile rather than unexpected, and a name owned by neither is still
+`UNEXPECTED_TYPE`. Their type sets are disjoint.
+
+The Xbox profile cannot do that -- two profiles cannot both *be*
+`Microsoft.Xna.Framework` in one interpreter -- so it lives under
+`cna.profiles.xbox360` and declares a package-to-namespace map. The verifier
+reads it, which is why the identities it checks are XNA's and the imports are
+not.
+
+The Content Pipeline needs neither: it is a subpackage of
+`Microsoft.Xna.Framework.Content`, which is where XNA puts it, and Python
+imports a subpackage only when something asks for it.
+
+## 4. Route scoreboard
 
 ```text
-strict XNA        257 types, 2,423 members, ZERO_DIAGNOSTIC_TYPES=257
-                  --report, --check, --leak-only and the 7 verifier self-tests all clean
-                  STUB_RUNTIME_MISMATCHES=0
-ABI               MISSING_SYMBOLS=0  ABI_MISMATCHES=0
-                  PROTOTYPE_CONFLICTS=0  ABSENT_FROM_HEADERS=0  RENDER_FAILURES=0
-CNB/CNJ           285 routes, 283 bound, 0 unreviewed, 0 actionable-local
-                  35 planted defects, 35 killed, 0 survivors
-behaviour corpus  181 observations, 1,004 assertions, 0 failures
+CANONICAL_ROUTES        4055
+STATUS_BOUND            2626
+STATUS_UNREVIEWED          0
+STATUS_ACTIONABLE_LOCAL    0
 ```
 
-## 4. Extension product decision
+| family | routes | bound | unreviewed | actionable-local |
+| --- | --- | --- | --- | --- |
+| CNB/CNJ | 285 | 283 | 0 | 0 |
+| engine layer | 870 | 867 | 0 | 0 |
+| devices and sensors | 206 | 177 | 0 | 0 |
+| extended input | 126 | 119 | 0 | 0 |
+| online | 437 | 416 | 0 | 0 |
 
-**CNA-Python selects `engine_layer.h` as its third public `cna.extensions`
-family.** `cna.extensions.engine` joins `cna.extensions.graphics` and
-`cna.extensions.content`.
+The Content Pipeline binds none: CNA declares no content-pipeline header, and a
+content build reads files and writes files.
 
-`Microsoft.Xna.Framework` is untouched by it. No engine class or member enters
-that namespace -- a name there is a claim about XNA, and every one of these would
-be false. The dependency runs `cna.extensions.engine -> strict XNA` and never
-the reverse; a test in a fresh interpreter asserts importing XNA loads no `cna`
-module. The only strict-XNA changes are two private members added so a counted
-view can be adopted: `Texture2D._view_of` and `PbrMaterialExtensions._wrap`
-(the latter is in the extension package), mirroring the existing
-`RenderTarget2D._view_of`.
-
-Sensors and device services, extended input, and Net remain **unopened**. So do
-wider GamerServices/Avatar, the XNA Content Pipeline, Xbox and Windows Phone.
-See section 36.
-
-## 5. Engine route scoreboard
+## 5. The native boundary
 
 ```text
-engine_layer.h canonical routes           870   (live count from the headers)
-  selected extension candidates           867
-  bound                                   867
-  managed by design                         3
-  not useful for Python                     0
-  blocked upstream                          0
-  blocked renderer                          0
-  blocked architecture                      0
-  other blockers                            0
-  unreviewed                                0
-  actionable-local                          0
+BOUND_FUNCTIONS               2626
+PROTOTYPES_COMPILER_VERIFIED  2626
+C_LAYOUT_MEASUREMENTS         2518
+MISSING_SYMBOLS                  0
+PENDING_ROUTES                   1
+PENDING_ROUTES_NOT_IN_HEADERS    0
+STALE_PENDING_ROUTES             0
+ABI_MISMATCHES                   0
 ```
 
-The brief's estimate was 857 canonical routes with ~838 behind the blanket rule
-and 19 managed-by-design initialisers. The live header has 870; the blanket rule
-is gone, replaced by 76 per-family rules plus three dependency-slice rules and
-one exclusive ownership-transfer rule. Every initialiser the estimate counted as
-managed-by-design is in fact bound, because each is the only route that fills a
-value structure with CNA's own defaults and this package reads defaults rather
-than transcribing them.
+`PENDING_ROUTES` is new and is the only thing about the boundary that changed.
+See section 12.
 
-By group:
-
-| Group | Bound / routes |
-|---|---|
-| Pure helpers and capabilities | 12 / 12 |
-| Compute, storage, timer, indirect | 37 / 37 |
-| Post-processing foundation | 41 / 44 |
-| Shadows | 77 / 77 |
-| PBR and glTF materials | 96 / 96 |
-| Particles, decals, prepass, transparency | 85 / 85 |
-| Render pipeline | 37 / 37 |
-| Atmosphere, environment, IBL | 137 / 137 |
-| Light probes | 46 / 46 |
-| Clustered and area lighting | 117 / 117 |
-| LOD, culling, instancing | 53 / 53 |
-| HDR, auto exposure, tonemap | 62 / 62 |
-| Advanced post-process | 46 / 46 |
-| Debug draw | 21 / 21 |
-
-The three unbound routes are all in the post-processing foundation group and are
-listed in section 35.
-
-## 6. Public engine API
+## 6. Route reachability
 
 ```text
-modules                          14
-public names                    248
-extension modules overall        33
-public extension names overall  648
-PUBLIC_CTYPES_LEAK                0
-PRIVATE_NATIVE_LEAK               0
-UNDOCUMENTED_PUBLIC               0
-XNA_NAMESPACE_CONTAMINATION       0
-PUBLIC_RAW_HANDLE_LEAK            0
-PUBLIC_NATIVE_ANNOTATION_LEAK     0
-EXTENSION_SURFACE_DIAGNOSTICS     0
+BOUND_ROUTES                        2626
+DIRECT_CALL_SITE                    2529
+OBSERVED_CALLED_AT_RUNTIME           506
+REACHED_BY_NAME_TEMPLATE              18
+ADMITTED_WITH_REASON                  37
+UNJUSTIFIED_BOUND_WITHOUT_CALL_SITE    0
+STALE_ADMISSIONS                       0
 ```
 
-`values`, `errors`, `compute`, `postprocess`, `passes`, `atmosphere`, `pbr`,
-`shadows`, `scene`, `pipeline`, `clustered`, `probes`, `culling`, `debug`.
+A hole was found and closed here: the gate's list of *declaration* modules was
+hard-coded, so a generated manifest satisfied its own reachability and hid 247
+routes. The list is derived now, and all 247 were closed with real consumers --
+which is why the devices and input families changed in the online commit.
 
-No handle, ctypes object, private native type or private native annotation is
-reachable from any public name. All six diagnostics are planted and required to
-fail; so is the converse, that a *private* helper may name exactly what it takes.
-
-## 7. Pure and capability helpers
-
-`layer_version`, `layer_version_string`, `is_available`, the light and quality
-value types, and the capability predicates. Every default is read from CNA
-through its own `*_ext_init` route rather than written down, because a
-transcribed default survives CNA changing its mind.
-
-The measured asymmetry, stated at both properties: `AreaLight.is_valid` and both
-argument initialisers answer on a build with **no** engine layer, and
-`ClusteredLight.is_usable` does not -- that rule belongs to the light *set*.
-Documented that way in `engine_layer.h` and confirmed on the control artifact.
-
-## 8. Post-processing
-
-The pass vocabulary, the render-target pool, scoped targets, the shader-effect
-factory, fullscreen and blit passes, and the chain. Three counted-view leaks
-were found here and are the origin of ENGINE-002.
-
-## 9. Shadows
-
-Simple, cascaded, cube and spot shadow maps, and the receiver state an effect
-samples with. Every light view, light projection, cascade split, frustum corner,
-bounding sphere and texel snap is compared with an independent computation. A
-shadow-map clear reads as `(0, 0, 128)` because the target is
-`SurfaceFormat.Single` and that is float 1.0; the test decodes the bytes rather
-than trusting the colour.
-
-## 10. PBR and glTF materials
-
-`PbrEffect`, `SkinnedPbrEffect`, a 27-field material, the glTF extension set, the
-material bridge, and image-based lighting through `PbrEffect.image_based_light`.
-
-ENGINE-005 lives here: `apply_material` carries every scalar and not one of the
-seven texture slots. The public setter assigns the slots itself, says so, and a
-test drives the raw route and asserts the defect so it fails when CNA fixes it.
-
-## 11. Particles
-
-Emitter settings, the system, `step`, the hash and the random source, and the
-published GLSL. Emitter colours are `Vector4` and not `Color`; `active_count` is
-rate times lifetime capped by the pool; `reset` returns particles to the emitter.
-
-## 12. Decals
-
-The decal pass and `is_inside_decal_box`, the projection test a shader runs.
-
-## 13. Depth/normal prepass
-
-The prepass, its three depth encodings, packed-depth encode and decode, velocity
-encode and decode. The packing oracle computes in float32: the top channel is
-genuinely zero at that width, and a double oracle disagrees with a correct
-implementation.
-
-## 14. Render pipeline
-
-The whole-frame pipeline, its settings projected from the measured structure
-layout rather than a hand-written field list, frame statistics, and per-pass
-timings. ENGINE-004 lives here: a chain's GPU timing flag is not observable until
-it has run.
-
-## 15. Atmosphere, environment and IBL
-
-Sky, skybox, height fog, volumetric fog, aerial perspective, SSAO, SSR, depth of
-field, contact shadows, light shafts, motion blur, and the environment
-processor. Measured clamps that are not documented: SSR roughness blur at 0.25,
-edge fade at 0.5, DoF max radius at 0.25, several setters ignoring a non-positive
-value, and an SSR step count that is *not* clamped at set time -- the trace
-clamps instead, and the test asserts what CNA does rather than what would be
-tidier.
-
-## 16. Light probes
-
-Nine spherical-harmonic coefficients and six visibility moments per probe, a
-grid of them, the baker that captures one by drawing the scene six times, the
-environment processor that builds the IBL textures, and `ImageBasedLight`.
-
-Irradiance is compared with a second-order evaluation written from the
-Ramamoorthi-Hanrahan constants; visibility with Chebyshev's bound, whose
-continuity is checked by *refining the angular step* rather than against a fixed
-difference, because a steep ramp and a step discontinuity look alike at one
-resolution and only the ramp shrinks. The bake callback is rooted for the call
-and no longer, and an exception raised inside it is re-raised after the native
-call returns.
-
-ENGINE-007 lives here: `importance_sample_ggx` uses the normal as supplied.
-
-## 17. Clustered and area lighting
-
-The light set, the depth-sliced grid, the CPU and GPU assignments, the uploaded
-buffer, the shadow budget, the forward effect, area lights and the BRDF table.
-
-The assignment is compared **three** ways -- CNA's CPU sort, CNA's compute shader,
-and a full reimplementation in the oracles -- entry for entry rather than by
-totals, and under a view matrix that is not the identity. Slice boundaries are
-compared *exactly*: the float32 oracle matches CNA to the bit over six
-near/far/count combinations, and a double one is off by up to three units in the
-last place, which no approximate comparison at that magnitude could tell from a
-correct implementation.
-
-Cluster boxes are measured to be **conservative rather than a partition**: they
-meet exactly in depth and overlap across the screen, because an axis-aligned box
-around a frustum slab is as wide as that slab's far face. The first version of
-the test asserted a clean tiling, which is false.
-
-ENGINE-006 lives here: four constructors document a game and accept a device.
-
-## 18. LOD, culling and instancing
-
-Level-of-detail groups and their hysteresis, CPU frustum culling, hardware
-instancing with its per-instance fallback, GPU culling that writes its own draw
-arguments, and the two indirect draws that read them.
-
-The six frustum planes are extracted a second time by combining rows of the
-view-projection; every box and sphere answer is compared with the positive-vertex
-test over them, under an axis-aligned camera and again under one that is neither
-at the origin nor looking down an axis. `cull_transforms` is measured to *keep* a
-transform with no matching bound. A LOD threshold is an upper bound, and past
-every threshold nothing is selected rather than the coarsest level.
-
-ENGINE-008 lives here: a cullable instance's canonical world is zero.
-
-## 19. Compute, storage, timer and indirect
-
-All implemented, and all supported on the gpu artifact: compute shaders, storage
-buffers, the memory-barrier mask, GPU timers, and both indirect draws. No
-renderer block anywhere in this group.
-
-ENGINE-001 and ENGINE-003 live here. Measured renderer facts recorded rather than
-worked around: image binding is unsupported on this renderer, and the GPU
-instance culler reports which of its four required capabilities is missing rather
-than only that something is.
-
-The indirect draws need a bound vertex buffer and an applied effect, and CNA
-names which is missing; the test asserts the text rather than only the failure.
-
-## 20. HDR and auto exposure
-
-HDR display output, PQ encode and decode, Rec.709 to Rec.2020, the roll-off, auto
-exposure, tonemapping, colour grading and cube LUTs. Bloom extraction is a *soft
-knee*, not a cutoff, which the oracle models and the monotonicity claim was
-relaxed to match.
-
-## 21. Debug draw
-
-The line batch and its nine gizmos. Tested by counting rather than by looking:
-every shape's line count is exact and determined by its arguments, and the
-vertices are read back and checked against the geometry -- a box's twelve edges
-each join two corners differing on exactly one axis, a sphere's every vertex is
-on the sphere, a probe volume's crosses appear in the grid's own flat order.
-
-A spot-light gizmo is measured to be **two** cones, the outer angle and the
-inner; the first oracle said one and the test caught it.
-
-## 22. Advanced post-process
-
-Bloom, FXAA, film grain, chromatic aberration, lens flare, spatial upscale and
-the ASCII pass. The standalone `AsciiEffect` is the only way to quantise an
-arbitrary texture into an arbitrary rectangle. `last_grid_dimensions` is measured
-to describe the **source**, not the destination; the property's own documentation
-said the opposite and is corrected.
-
-## 23. Native model dependency
-
-`cna_lod_group_ext_add_level` and `cna_instanced_renderer_ext_create` take a
-`CNA_ModelMeshPartHandle`. Strict XNA's `ModelMeshPart` is a managed Python
-object with **no native handle at all**, and CNA's native model runtime is a
-separate concept this binding deliberately does not bind (census rule
-`native-models`).
-
-The decision: import exactly `cna_model_mesh_part_create` and
-`cna_model_mesh_part_destroy` and use them as a **private side-car**. A native
-part is built from the strict part's own vertex buffer, index buffer,
-`NumVertices`, `PrimitiveCount`, `StartIndex` and `VertexOffset`, so it describes
-the same geometry rather than a copy; XNA's part is always a triangle list and
-the native default is `PrimitiveType::TriangleList`, so the projection is
-faithful. It is owned by whichever engine object needed it and released with it.
-
-No native model, mesh or part is public. Every method takes and returns the
-caller's own `ModelMeshPart`. **The strict managed XNA Model graph is not
-replaced.**
-
-No architecture blocker remains in this area.
-
-## 24. Cross-header dependency slices
-
-| Slice | Header(s) | Routes | Why, and why minimal |
-|---|---|---|---|
-| `engine-pbr-dependency` | `graphics_ext.h`, `effects.h` | `cna_pbr_material_ext_init`, `cna_pbr_effect_create`, `cna_skinned_pbr_effect_create`, `cna_pbr_effect_set_texture`, `cna_pbr_effect_get_texture` | `engine_layer.h` declares no route that creates a `PbrEffect`, and the init route is the only one that fills a 27-field material with CNA's defaults. The texture pair exists solely because ENGINE-005 drops all seven slots; without it a PBR effect could never have a texture. |
-| `engine-ascii-dependency` | `graphics_ext.h` | the eight `cna_ascii_post_process_effect_*` routes | `cna_ascii_pass_get_effect` hands out the effect carrying cell size and quantize mode, and no engine-layer route reads or writes either. `create` and `draw` are the only way to quantise an arbitrary texture into an arbitrary rectangle. |
-| `engine-model-part-dependency` | `models.h` | `cna_model_mesh_part_create`, `cna_model_mesh_part_destroy` | Section 23. Two routes, both private, no public native part. |
-
-Each is a census rule with its own written reason, placed ahead of the
-header-scoped rule it would otherwise be absorbed by, and the shadowing gate
-added this session is what keeps that ordering honest.
-
-## 25. ABI
-
-| | before | after |
-|---|---|---|
-| Total bound routes | 1,048 | 1,917 |
-| Engine routes bound | 0 | 867 |
-| Compiler-proven prototypes | 1,048 | 1,917 |
-| C layout measurements | 1,219 | 1,672 |
-| ctypes layout measurements | 1,219 | 1,672 |
-| Missing symbols | 0 | 0 |
-| ABI mismatches | 0 | 0 |
-| Prototype conflicts | 0 | 0 |
-
-The engine ABI is **generated**, not transcribed: `tools/generate_engine_abi.py`
-derives 28 structures, 109 constants and 3 callback types from the canonical
-headers, together with a C probe that measures every offset and constant, and a
-`--check` mode the gates run. Float constants are emitted at single precision and
-the audit compares them at that width -- a header's `0.01F` is
-`0.009999999776482582`, and emitting the double would make a caller comparing
-CNA's own value against the constant find it one unit in the last place too
-small, which is exactly how the render pipeline's gamma floor was caught.
-
-The generator also derives which of each callback's parameters are pointers to
-const, because C declaration compatibility distinguishes `const T*` from `T*` and
-ctypes cannot carry it. Without that the first callback-taking route in this
-family failed the prototype gate correctly, with the gate having no way to know.
-
-## 26. Route reachability
+## 7. Content Pipeline coverage
 
 ```text
-BOUND_ROUTES                          1917
-DIRECT_CALL_SITE                      1823
-OBSERVED_CALLED_AT_RUNTIME             506
-REACHED_BY_NAME_TEMPLATE                15
-ADMITTED_WITH_REASON                    37
-UNJUSTIFIED_BOUND_WITHOUT_CALL_SITE      0
-STALE_ADMISSIONS                         0
+PROJECTED_MEMBERS                  667
+IMPLEMENTED                        623
+STATUS_ABSTRACT_BY_DESIGN           39
+STATUS_IMPLEMENTED_ERROR_PATH        1
+STATUS_BLOCKED_UPSTREAM              3
+STATUS_BLOCKED_FIXTURE               1
+UNREVIEWED                           0
+STALE_DECISIONS                      0
+CONTENT_PIPELINE_ACTIONABLE_LOCAL    0
 ```
 
-No route was imported speculatively. Every engine route has a production caller;
-none was admitted with a reason during this session. Shadow classes use explicit
-literal route dictionaries rather than f-string names, because the gate is
-AST-based and a name it cannot see is a route nothing can prove is called.
+`tools/verify_content_pipeline.py` reads every projected member's
+implementation; one that can raise `NotImplementedError` must appear in
+`tools/content-pipeline-decisions.json` with a status and a written reason. A
+member that refuses and is not declared is `UNREVIEWED`; a declaration whose
+member no longer refuses is `STALE`.
 
-## 27. Ownership and callbacks
-
-Every owned object is an explicit `close()` with a context manager, and there is
-no `__del__` anywhere: a finaliser running at an arbitrary point on an arbitrary
-thread is not a lifetime, and CNA objects are graphics-thread affine.
-
-**ENGINE-002 is the systemic finding of this session.** Every CNA engine getter
-that answers with a handle answers with a *fresh counted view*, whatever its
-documentation says, except when it hands back the handle it was given. Following
-the documentation exactly leaks one handle per read, and the failure surfaces as
-"only one C-owned CNA game may be active at a time" on an unrelated test.
-
-Solved once, in two shapes, neither of which is a table of affected routes:
-
-* `engine_support.borrowed_view` compares the answered handle against the one
-  this binding supplied and releases only a different one. For objects the
-  *caller* owns.
-* `_EngineObject._view` builds a facade once per key, caches it, and disposes it
-  when the owner closes. For objects CNA owns.
-
-Ownership classifications used: OWNED, BORROWED, COUNTED_BORROW, PARENT_OWNED,
-RETAINED_DEPENDENCY, TRANSIENT_CALLBACK_VIEW, PROCESS_GLOBAL. Every manifest
-entry carries its contract in its fourth column.
-
-Three callbacks: the render-pipeline draw, transparent-draw submission, and the
-light-probe bake. In each the trampoline is rooted for exactly as long as CNA can
-invoke it, and a Python exception is stored and re-raised *after* the native call
-returns. `test_an_exception_in_the_callback_reaches_the_caller_intact` asserts
-both the exception and that the baker still works afterwards.
-
-## 28. Mutation and falsifiability
+## 8. Profile separation
 
 ```text
-engine   PLANTED=47  KILLED=47  SURVIVED=0  INAPPLICABLE=0
-CNB/CNJ  PLANTED=35  KILLED=35  SURVIVED=0  INAPPLICABLE=0
+DEFAULT_PROFILE_TYPES                 257
+DEFAULT_PROFILE_MEMBERS              2423
+PLATFORM_PROFILES                       1
+DECLARED_REMOVALS                       1
+PLATFORM_LEAKS                          0
+WINDOWS_ONLY_REACHABLE_FROM_PLATFORM    0
+UNJUSTIFIED_REMOVALS                    0
+DEFAULT_PROFILE_DRIFT                   0
 ```
 
-The oracles are mutated too, deliberately: an oracle wrong in the same way as
-CNA would make a whole family agree on a defect.
-
-The first engine run killed 37 of 46 and left nine survivors. **Eight were real
-test gaps** and are closed: an approximate slice comparison that could not tell
-float from double, shadow-policy lights that were all white and none inside the
-falloff's distance floor, a zero-radius sphere never assigned, a disc quad never
-compared with CNA, a probe-volume flat index no test used, hysteresis never tried
-across two levels, and an ASCII destination rectangle invisible to every
-assertion. The ninth was an **equivalent mutation** -- reversing the low sixteen
-bits and shifting is identical to reversing thirty-two for every index the tests
-use -- and was replaced by two that do change the sequence.
-
-The gates are falsifiable too, each with a planted defect required to fail: all
-six extension-surface diagnostics, a bound route nothing calls, a stale
-admission, a rule shadowed by an earlier one, a rule that classifies nothing, and
-a route CNA does not have landing in `UNREVIEWED`.
-
-## 29. Upstream findings
-
-Eight, in `docs/engine-upstream-findings.md`, each with the CNA revision, a
-reproducer, expected against actual, the local behaviour and an unblock
-condition. All against CNA `51d61ef42`, ABI 0.21.0, engine layer revision 2.
-
-| | Finding | Local behaviour |
-|---|---|---|
-| ENGINE-001 | `cna_compute_shader_create` fails on source that does not compile, where the header says it succeeds and reports invalid | raises `ComputeShaderCompileError`, result 12 kept; six bad sources pinned |
-| ENGINE-002 | every engine getter hands out a counted view, and one says not to release it | `borrowed_view` and cached views; released on close |
-| ENGINE-003 | the first GPU-timer sample is an unsigned 32-bit underflow | the first sample is discarded, and the underflow is pinned |
-| ENGINE-004 | a chain's GPU timing flag is not observable until it has run | documented at the property; the test runs a frame first |
-| ENGINE-005 | `cna_pbr_effect_apply_material` carries every scalar and no texture | the setter assigns the seven slots itself, visibly |
-| ENGINE-006 | four clustered constructors document a game and accept a device | every class takes a `GraphicsDevice`; both handles driven in a test |
-| ENGINE-007 | `importance_sample_ggx` needs a unit normal and does not say so | stated at the function; *not* silently normalised, because that would make it disagree with the GLSL CNA publishes beside it |
-| ENGINE-008 | a cullable instance's canonical world is zero, not identity | handed back unchanged; the trap stated at `default()` |
-
-Each pinning test fails the day CNA fixes the defect.
-
-Nothing was fixed in `cnanext` or `sharp-runtimenext`; both are unmodified.
-
-## 30. Runtime capability registry
+## 9. Blocked profiles
 
 ```text
-CAPABILITIES=234
-VERIFIED_NATIVE=182
-VERIFIED_MANAGED=17
-BLOCKED_UPSTREAM=13
-BLOCKED_RENDERER=3
-BLOCKED_PLATFORM=5
-BLOCKED_HARDWARE=2
-BLOCKED_FIXTURE=6
-LANGUAGE_MAPPING_LIMITATION=3
-NOT_USEFUL_FOR_PYTHON=1
-DELIBERATE_OUT_OF_SCOPE=2
-ACTIONABLE_LOCAL=0
-ARTIFACTS=2
+BLOCKED_PROFILES        1
+UNJUSTIFIED_BLOCK       0
+BLOCK_WITHOUT_REASON    0
+STALE_BLOCK             0
+SEARCH_MISSING          0
 ```
 
-Grew from 140 rows to 234. Every row names the artifact that produced it, and no
-row claims a capability on an artifact that cannot answer for it.
+The one blocked profile is Windows Phone, and the block is a measurement:
+1,296,128 files examined across eight roots, thirty-six name matches, every one
+identified, zero candidates. See `docs/windowsphone-profile.md`.
 
-## 31. Defects found
-
-**In this binding, before it shipped.** Ten `cna.extensions.content`
-constructors published `_support.NativeHandle` in their `__init__` annotations,
-found the moment the surface gate stopped exempting every dunder; all ten now
-raise from `__init__` and adopt through a private `_wrap`. Three counted-view
-leaks in the post-process family, each surfacing as an unrelated game refusing to
-be destroyed. A stale material-extensions view kept after assignment, so reading
-a clearcoat factor back answered zero. Three engine test modules that could not
-be imported without a native library, found by the final qualification's
-no-library run.
-
-**In the tooling and verifiers.** The extension gate exempted every dunder, so
-`__init__` annotations went unchecked -- and it then found the ten leaks above.
-The reachability gate was blind to f-string route names. The ABI audit compared
-float constants at double width. The engine ABI generator duplicated four
-structures the XNA boundary already measures. The census never checked its rules
-against each other: an ownership-transfer rule was shadowed by a prefix rule, so
-a decision already made was reported as an outstanding task, and a dead `*_ext`
-catch-all would have turned every future route into a reviewed decision nobody
-made. Four census rules carried no bound reason. The CNB read-scaling check was
-measuring glibc's mmap threshold rather than the copy's complexity, and adding an
-unrelated test file was enough to flip it.
-
-**In the test suite.** Nine engine mutation survivors, eight of them real gaps.
-An oracle self-test that compared the two tiles straddling the screen centre,
-where both boundaries are zero whatever the projection, and therefore checked
-nothing.
-
-**CNA upstream.** Eight findings, section 29. None blocking.
-
-**Sharp Runtime.** None found; unmodified.
-
-**Stale docs and evidence.** `engine_layer.h` documents a spot-light gizmo, a
-cullable instance's defaults, a GGX normal, four constructor parameters and a
-cube-face range in terms that measurement contradicts or does not cover; each is
-either a numbered finding or pinned by a test. Inside this repository,
-`AsciiEffect.last_grid_dimensions` documented itself backwards and is corrected.
-
-## 32. Qualification
-
-Executed on this session's ending state.
+## 10. Extension surface
 
 ```text
-compileall (src, tools, tests)                              PASS
-
-strict verifier --report        257 zero-diagnostic types, all counters 0
-strict verifier --check         PASS
-strict verifier --leak-only     all counters 0
-strict verifier self-tests      7 tests, OK
-verify_stubs                    STUB_RUNTIME_MISMATCHES=0
-
-extension surface verifier      33 modules, 648 names, all 6 diagnostics 0
-behaviour corpus                181 observations, 1,004 assertions, 0 failures
-
-ABI audit                       1,917 signatures, 1,672 C and 1,672 ctypes layouts,
-                                MISSING_SYMBOLS=0, ABI_MISMATCHES=0
-prototype gate                  1,917 compiler-verified, 0 conflicts,
-                                0 absent from headers, 0 render failures
-engine ABI generator --check    up to date
-route census                    4,055 routes, 0 unreviewed, 0 actionable-local,
-                                0 contradictions, 0 shadowed or dead rules
-route reachability              0 unjustified, 0 stale admissions
-
-unittest, no native library     1,148 tests, OK, 852 skipped
-unittest, control artifact      1,148 tests, OK, 536 skipped
-unittest, gpu artifact          1,148 tests, OK,  14 skipped
-
-mutation, engine                47 planted, 47 killed, 0 survivors
-mutation, CNB/CNJ               35 planted, 35 killed, 0 survivors
+EXTENSION_MODULES               61
+PUBLIC_EXTENSION_NAMES        1126
+XNA_NAMESPACE_CONTAMINATION      0
+EXTENSION_SURFACE_DIAGNOSTICS    0
 ```
 
-Per-family engine suites on the gpu artifact: oracles 155, compute 23,
-postprocess 20, passes 29, atmosphere 30, pbr 27, shadows 31, scene 40,
-pipeline 19, clustered 154, probes 77, culling 60, debug 33 -- all OK.
+`cna.extensions.graphics`, `.content`, `.engine`, `.devices`, `.input`,
+`.online`. The dependency runs extension → strict, never the other way.
 
-**Skips, and why none of them is an unsupported GPU feature reported as a pass.**
+## 11. Tests
 
-* gpu artifact, 14 skipped: 12 need `CNA_PYTHON_LZX_FIXTURE_DIR` or
-  `CNA_PYTHON_COMPILED_EFFECT_FIXTURE`, which are optional authored fixtures this
-  environment does not have; 2 are the absence tests, which are only meaningful
-  on a build *without* an engine layer. Running with `CNA_SOURCE_ROOT` set turns
-  14 further skips into executed cross-checks against CNA's own tools.
-* control artifact, 536 skipped: 343 because the build has no engine layer, 183
-  because they need an engine layer *and* a rasterizer, 8 because it cannot
-  rasterize, 2 optional fixtures.
-* no library, 852 skipped: everything needing a configured library.
+| artifact | tests | skipped | result |
+| --- | --- | --- | --- |
+| no CNA library | 1,592 | 1,022 | OK |
+| `~/deps/cna-c-abi-0.21.0` (HEADLESS) | 1,592 | 644 | OK |
+| `~/deps/cna-c-abi-0.21.0-opengl33` (OPENGL33, Xvfb `:171`) | 1,592 | 636 | OK |
 
-No test was skipped because a GPU feature was unavailable. Every capability the
-gpu artifact lacks is recorded as a blocked capability row, not as a skip.
+`SDL_VIDEODRIVER=x11`, `WAYLAND_DISPLAY` unset for the rendering artifact.
 
-## 33. Template and package
+## 12. The artifacts changed under this session
 
-```text
-wheel      cna_python-0.1.0.dev0-py3-none-any.whl, 120 files
-sdist      cna_python-0.1.0.dev0.tar.gz, 271 files
-package audit                    every check PASS
-  FORBIDDEN_WHEEL_ENTRIES        0
-  FORBIDDEN_SDIST_ENTRIES        0
-  ABSOLUTE_DEVELOPER_PATHS       0
-  BUNDLED_NATIVE_LIBRARIES       0
-  MICROSOFT_OR_PROPRIETARY       0
-reproducibility
-  WHEEL_BYTE_REPRODUCIBLE        1
-  WHEEL_CONTENT_REPRODUCIBLE     1
-  SDIST_BYTE_REPRODUCIBLE        0    (setuptools and gzip timestamps; not ours)
-  SDIST_CONTENT_REPRODUCIBLE     1
+The two build trees this session began against --
+`cnanext/cmake-build-headless` (sha256 `94078be9…`) and
+`cmake-build-opengles3` (sha256 `65ce46a4…`), both built 2026-09-01 -- were
+**removed by another agent's rebuild while this session was running**. The
+online scope was qualified against them and those results stand; everything
+after was re-qualified against the pinned artifacts named in section 11.
+
+No artifact that remains exports
+`cna_network_session_replace_session_properties`. Seven were measured and all
+export 4,054 of the headers' 4,055 routes. The loader used to refuse any library
+missing a bound symbol, which is right for drift and wrong for a route CNA has
+declared and not yet built: it made the other 4,054 unusable. It now carries
+`_cna_native.loader.PENDING_ROUTES` -- one entry, with the measurement written
+into it -- and a route on that list binds to a stub that raises when *called*.
+Every other missing symbol still refuses the library, and
+`tests/test_pending_routes.py` requires that.
+
+**Nothing in cnanext was built, modified or cleaned.** cnanext has another
+agent's uncommitted changes to `Effect.cpp`, `EffectTests.cpp` and
+`ThirdPartyFNA3D.cmake`, and building there would have compiled them.
+
+## 13. Falsifiability
+
+| suite | planted | killed | survived |
+| --- | --- | --- | --- |
+| `tools/mutation/cnb_mutations.py` | 35 | 35 | 0 |
+| `tools/mutation/engine_mutations.py` | 47 | 47 | 0 |
+| `tools/mutation/device_mutations.py` (devices, input, online) | 76 | 76 | 0 |
+| `tools/mutation/pipeline_mutations.py` (pipeline, Xbox, phone) | 99 | 99 | 0 |
+
+**257 planted defects, 257 killed.** Thirty-four survived a first run and were
+real test gaps, every one closed. Three mutations were *withdrawn* as provably
+equivalent, each with the measurement that proves it recorded beside it: CNA
+rewinds a packet reader itself, swapping two equal DXT endpoints is a no-op, and
+a power-of-two resize never averages two source pixels.
+
+The device and input mutation suite needs a *rendering* artifact: run it with
+`CNA_NATIVE_LIBRARY` pointing at the OpenGL 3.3 build and `DISPLAY=:171`. Run
+without one it reports 28 false survivors, because the device layer is absent
+and every device test skips.
+
+## 14. Sensors and device services
+
+206 routes, 177 bound, eight modules. Exact `DateTimeOffset` with integer ticks,
+four sensors over one state machine, five reading structures built by CNA's own
+`*_init_from_values` constructors, the camera, host services, non-modal dialogs,
+vibration.
+
+Every result is `SYNTHETIC_BACKEND_VERIFIED`. No sensor was tilted, no camera
+opened, no motor spun, no window reached a desktop. `docs/device-extensions.md`.
+
+## 15. Extended input
+
+126 routes, 119 bound, ten modules: text input with surrogate pairing, cursors,
+joysticks, haptics, device enumeration, clipboard, comparison.
+`docs/input-extensions.md`.
+
+## 16. The online profile
+
+`xna40-windows-online`: 74 types, 605 members, zero diagnostics. 437 routes,
+416 bound; the 21 that are not carry a written reason each.
+
+Nothing signs anyone in. Creating a session needs a signed-in gamer, which is
+platform identity; CNA has a publication route a platform layer would call and
+this package never calls it from shipping code. Every result is
+`SYNTHETIC_SIGNED_IN_GAMER_VERIFIED`, never `REAL_PLATFORM_SIGN_IN_VERIFIED`.
+`docs/online-profile.md`.
+
+## 17. The Content Pipeline
+
+128 types, 598 members, zero diagnostics, and no CNA route at all.
+
+Every decoder it needs is written here: PNG (all five filters, palettes,
+transparency), BMP, TGA (plain and RLE), DDS (uncompressed and DXT), RIFF/WAVE
+with its `smpl` loop region, MPEG audio and ASF headers, DirectX `.x`. PIL and
+fontTools are installed on this machine and neither is used.
+
+The oracle is `Microsoft.Xna.Framework.Content.ContentManager`, in this
+repository, reading what the compiler writes. Thirteen value types, four list
+types, a texture and a whole model built from a `.x` file round-trip through it,
+the model inside a running `Game`. `docs/content-pipeline.md`.
+
+## 18. The Xbox 360 profile
+
+318 types, 2,986 members, zero diagnostics. A **surface** profile: importing
+from `cna.profiles.xbox360` gives exactly the names an Xbox build has, so a
+Windows-only name is an `ImportError` there. It is not an Xbox runtime; results
+are `XBOX_SURFACE_VERIFIED_ON_WINDOWS` and never `XBOX_HARDWARE_VERIFIED`.
+
+Generated by `tools/generate_platform_profile.py` from the contract: 316
+re-exports and nine narrowed types. `docs/xbox360-profile.md`.
+
+## 19. Windows Phone
+
+`BLOCKED_REFERENCE_ASSET`, and the block is measured rather than asserted. The
+machinery is parameterised, so the day the assemblies are under
+`~/deps/xna40-windowsphone-assemblies` the profile is three commands. Everything
+that does not depend on them is done: the XNB platform byte, the Reach limits,
+touch and the accelerometer. `docs/windowsphone-profile.md`.
+
+## 20. Upstream findings
+
+Five, in `docs/online-upstream-findings.md`, each with a reproducer and a test
+that fails the day CNA fixes it:
+
+1. A `Color` written into a packet cannot be read back: the writer packs four
+   bytes and `cna_packet_reader_read_color` consumes sixteen.
+2. `cna_avatar_description_create_random_for_body_type(MALE)` answers a Female
+   description.
+3. Network-gamer handles are rejected by every `cna_gamer_*` route, and
+   `net_gamers.h` has no gamertag route.
+4. A disposed session's handle can never be released.
+5. No CNA artifact exports
+   `cna_network_session_replace_session_properties` -- rewritten today with the
+   seven-artifact measurement.
+
+Eight further engine findings remain in `docs/engine-extensions.md`.
+
+## 21. Blockers recorded this session
+
+Each names what would unblock it, and each has a working path beside it.
+
+| blocker | why | unblocked by |
+| --- | --- | --- |
+| `EffectProcessor.Process` | no HLSL compiler; CNA's `effects.h` says it embeds none | a CNA route from effect source to bytecode |
+| `FontDescriptionProcessor.Process` | no TrueType rasterizer anywhere | a CNA route that rasterizes a font file |
+| `FbxImporter.Import` | FBX has no public specification | a CNA route that imports FBX |
+| `BuildXact.Execute` | the XACT tool is Windows-only and not redistributable | a CNA route that compiles an `.xap` |
+| `AudioContent.Data` for MP3/WMA | CNA decodes to a `SoundEffect` and exposes no PCM read-back | any route that copies a decoded effect's samples |
+| compressed XNB output | this repository has the LZX *decompressor* only | an LZX compressor |
+| Windows Phone profile | reference assemblies measured absent | the assemblies |
+| running on a console or a phone | no hardware, and CNA targets neither | hardware, and a CNA that targets it |
+
+## 22. Improvements to the shared gates
+
+Opening profiles with two-parameter generics, several indexers per type, generic
+methods and a second mscorlib found six real gaps in machinery that had been
+green for months:
+
+1. `!N` (a declaring type's generic parameter) and `!!N` (a member's) were
+   resolved against one list -- accidentally right for every single-parameter
+   generic until `ChildCollection<TParent, TChild>`.
+2. A type with two indexers had one checked and one missing from its stub. Five
+   runtime types really do accept a string key and their stubs said otherwise.
+3. An indexer's writability was read from one overload.
+4. Arity counted a keyword standing in for a type argument.
+5. `System.Collections.IList` had no interface projection.
+6. The two mscorlibs encode `where T : struct` differently, and counting the
+   difference made twenty-odd identical graphics signatures look platform
+   specific.
+
+## 23. New tools
+
+| tool | what it answers |
+| --- | --- |
+| `tools/verify_stop_condition.py` | are the six scopes finished? one command, 45 counters |
+| `tools/verify_content_pipeline.py` | does every projected member do something? |
+| `tools/verify_profile_separation.py` | do the profiles leak into each other? |
+| `tools/verify_blocked_profiles.py` | is a declared block still a block? |
+| `tools/generate_platform_profile.py` | generates a platform import root from its contract |
+| `tools/find_reference_assemblies.py` | are a profile's assemblies on this machine? |
+| `tools/cli_assembly.py` | what platform is this managed assembly for? |
+
+## 24. Qualification commands
+
+```sh
+export PYTHONPATH=$PWD/src:$PWD
+CNA=/rv/data/development/github.com/openeggbert/cnanext
+
+for p in xna40-windows-runtime xna40-windows-online \
+         xna40-windows-content-pipeline xna40-xbox360-runtime; do
+  python3 tools/api_compat/verify.py --profile "$p" --check
+done
+python3 tools/route_census.py --cna-root "$CNA" \
+  --output docs/generated/cna-route-census.json \
+  --markdown docs/generated/cna-route-census.md
+python3 tools/verify_route_reachability.py --output docs/generated/route-reachability.json
+python3 tools/verify_prototypes.py --cna-root "$CNA"
+python3 tools/audit_cna_abi.py --cna-root "$CNA" \
+  --library ~/deps/cna-c-abi-0.21.0/libcna_c_api.so \
+  --output docs/generated/cna-abi-report.json
+python3 tools/verify_extensions.py --output docs/generated/extension-surface-report.json
+python3 tools/verify_stubs.py
+python3 tools/verify_content_pipeline.py --output docs/generated/content-pipeline-coverage.json
+python3 tools/verify_profile_separation.py --output docs/generated/profile-separation.json
+python3 tools/verify_blocked_profiles.py --output docs/generated/blocked-profiles.json
+python3 tools/verify_stop_condition.py --output docs/generated/stop-condition.json
 ```
 
-The engine package ships: 14 modules under `cna/extensions/engine/` plus the
-three private `_cna_native` engine modules.
+## 25. Git
 
-The template gains `--verify-engine`, beside `--verify-cnb` and separate for the
-same reason. Device-free, four exact checks, and a build with no engine layer
-reports "absent" and exits cleanly, because conflating "absent" with "broken"
-would make the check worse than none.
+On `develop`, five commits ahead of `b384bf2`, working tree clean.
+**Nothing has been pushed**, and no push instruction has been given.
 
-Installed-wheel consumer, generated with no source checkout on its path, on both
-artifacts:
+## 26. What is left
 
-```text
-                        control        gpu
-IMPORT_PROBE            PASS           PASS
-COMPILE_PROBE           PASS           PASS
-SMOKE_60                PASS           PASS
-STABILITY_600           PASS           PASS
-EXTENSION_IMPORT        PASS           PASS
-CNB_SMOKE               PASS           PASS
-ENGINE_SMOKE            PASS           PASS
-ENGINE_LAYER            absent         present
-ABSOLUTE_DEVELOPER_PATHS       0              0
-SIBLING_SOURCE_DEPENDENCIES    0              0
-PYTHONPATH_SOURCE_DEPENDENCIES 0              0
-```
+There is no selected scope with outstanding work and no actionable-local route
+or member anywhere. What remains is not this session's:
 
-## 34. Git
+* **Waiting on CNA** -- the five online findings, the eight engine findings, the
+  six blockers in section 21 that name a CNA route.
+* **Waiting on hardware** -- a console, a phone, a device with real sensors.
+  Every claim about them is refused rather than approximated.
+* **Waiting on a file** -- the Windows Phone reference assemblies.
+* **Ordinary maintenance** -- packaging and release qualification, real-game
+  compatibility testing, re-qualification when a newer CNA artifact appears
+  (which will also retire `PENDING_ROUTES`).
 
-```text
-cna-python           develop  43f3af129d457e32aaa9956045d1090355be4283
-                     clean, 18 commits ahead of origin/develop, 0 behind
-                     pushed = NO
+## 27. If you pick this up
 
-cna-python-template  develop  fe84cd7c4b3b95450d5046cfa841ffc333d6a38b
-                     clean, 1 commit ahead of origin/develop, 0 behind
-                     pushed = NO
+Run `python3 tools/verify_stop_condition.py` first. If it says `held`, nothing
+below the line has regressed and you can start wherever you like. If it does
+not, it names the counter, the scope that owns it and the gate that wrote it.
 
-cnanext              51d61ef42   files modified by this session = 0
-sharp-runtimenext    9cc96cd5    files modified by this session = 0
-```
-
-No dependency was committed to, reset, reverted, cleaned or switched. No build
-artifact is staged; `dist/` and `build/` are ignored.
-
-## 35. Remaining selected engine work
-
-```text
-SELECTED_ENGINE_ACTIONABLE_LOCAL = 0
-ENGINE_UNREVIEWED                = 0
-GLOBAL_ACTIONABLE_LOCAL          = 0
-GLOBAL_UNREVIEWED                = 0
-STRICT_TOTAL_DIAGNOSTICS         = 0
-EXTENSION_SURFACE_DIAGNOSTICS    = 0
-ABI_MISMATCHES                   = 0
-UNJUSTIFIED_BOUND_WITHOUT_CALL_SITE = 0
-```
-
-Everything that remains unbound in the selected engine family is
-`MANAGED_BY_DESIGN` / `DELIBERATE_NON_BINDING`, and it is three routes:
-
-* `cna_post_process_effect_pass_create_owning`
-* `cna_post_process_chain_add_owned_pass`
-* `cna_skybox_set_owned_environment`
-
-Each is the C form of a `unique_ptr` parameter, existing because C has no way to
-say "keep this alive". They transfer ownership and **invalidate the caller's
-handle**. Python's reference already guarantees that lifetime, so binding them
-would cost capability rather than add it: CNA would invalidate a live `Effect`
-facade that could then no longer set a parameter. The borrowing constructors give
-the same guarantee with nothing invalidated. The rule is marked `boundIsError`,
-so importing one would be reported as a contradiction.
-
-No route in the family is BLOCKED_UPSTREAM, BLOCKED_RENDERER, BLOCKED_PLATFORM,
-BLOCKED_HARDWARE, BLOCKED_FIXTURE, BLOCKED_ARCHITECTURE, LANGUAGE_MAPPING_LIMITATION
-or NOT_USEFUL_FOR_PYTHON.
-
-## 36. Unopened future extension and profile families
-
-These are **product decisions**, not backlog. Each is recorded in
-`docs/generated/cna-route-census.md` with its reason, and opening any of them
-requires a new explicit decision.
-
-| Family | Standing decision |
-|---|---|
-| Sensors and device services | Unopened extension family. No XNA counterpart on the selected profile. |
-| Extended input | Unopened extension family. Beyond XNA 4.0's input surface. |
-| Net | Unopened future profile. XNA's networking is a Live-service surface with no CNA-side equivalent selected. |
-| Wider GamerServices / Avatar | Unopened future profile, beyond the sliver the selected profile already projects. |
-| XNA Content Pipeline | Unopened future profile. This binding projects the *runtime* content surface; the pipeline is a build-time product. |
-| Xbox | Unopened future profile. |
-| Windows Phone | Unopened future profile. |
-
-`graphics_ext.h` beyond the three dependency slices remains outside the selected
-profile as a whole-header decision, which is why a route added to it inherits
-that decision correctly rather than arriving unreviewed.
-
-## 37. Next frontier
-
-There is no remaining selected-scope work, and no genuine external engine blocker
-holds anything back: every one of the eight upstream findings has a local
-behaviour that ships, and none of them prevents a capability from working.
-
-What is left is one of two things, and neither is a local task:
-
-1. **Reconciliation with upstream.** When CNA fixes any of ENGINE-001 through
-   ENGINE-008, the pinning test for it fails by design. That is the signal to
-   remove the workaround and the pin together.
-2. **Another extension or profile family**, which requires a **new explicit
-   future product decision** from section 36. Nothing in this repository should
-   open one on its own initiative.
-
-Ordinary maintenance continues: further platform qualification, packaging and
-release work, and real-game compatibility testing.
+Then read the scope documents rather than the code: `docs/device-extensions.md`,
+`docs/input-extensions.md`, `docs/online-profile.md`,
+`docs/content-pipeline.md`, `docs/xbox360-profile.md`,
+`docs/windowsphone-profile.md`. Each one says what was decided, what was
+measured, and what was deliberately not done.

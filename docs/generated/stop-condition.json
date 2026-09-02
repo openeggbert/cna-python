@@ -1,0 +1,291 @@
+{
+ "schemaVersion": 1,
+ "summary": {
+  "COUNTERS_CHECKED": 45,
+  "FAILURES": 0,
+  "MEASURED_PROFILES": 4,
+  "BLOCKED_PROFILES": 1
+ },
+ "measuredProfiles": [
+  "xna40-windows-content-pipeline",
+  "xna40-windows-online",
+  "xna40-windows-runtime",
+  "xna40-xbox360-runtime"
+ ],
+ "blockedProfiles": [
+  "xna40-windowsphone-runtime"
+ ],
+ "counters": [
+  {
+   "scope": "route census",
+   "counter": "UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "route census",
+   "counter": "STATUS_UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "route census",
+   "counter": "STATUS_ACTIONABLE_LOCAL",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "route census",
+   "counter": "RULE_CONTRADICTIONS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "route census",
+   "counter": "RULE_SHADOWING_DIAGNOSTICS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "SELECTED_ENGINE_ACTIONABLE_LOCAL",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "SELECTED_DEVICES_ACTIONABLE_LOCAL",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "SELECTED_INPUT_ACTIONABLE_LOCAL",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "SELECTED_ONLINE_ACTIONABLE_LOCAL",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "CNB_CNJ_UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "ENGINE_UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "DEVICES_UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "INPUT_UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "selected families",
+   "counter": "ONLINE_UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "content pipeline",
+   "counter": "CONTENT_PIPELINE_ACTIONABLE_LOCAL",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "content pipeline",
+   "counter": "UNREVIEWED",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "content pipeline",
+   "counter": "STALE_DECISIONS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "content pipeline",
+   "counter": "DECISIONS_FOR_ABSENT_MEMBERS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "PLATFORM_LEAKS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "WINDOWS_ONLY_REACHABLE_FROM_PLATFORM",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "UNJUSTIFIED_REMOVALS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "DEFAULT_PROFILE_DRIFT",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "UNJUSTIFIED_BLOCK",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "BLOCK_WITHOUT_REASON",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "STALE_BLOCK",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "platform profiles",
+   "counter": "SEARCH_MISSING",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "native boundary",
+   "counter": "MISSING_SYMBOLS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "native boundary",
+   "counter": "ABI_MISMATCHES",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "native boundary",
+   "counter": "PENDING_ROUTES_NOT_IN_HEADERS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "native boundary",
+   "counter": "STALE_PENDING_ROUTES",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "native boundary",
+   "counter": "UNJUSTIFIED_BOUND_WITHOUT_CALL_SITE",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "native boundary",
+   "counter": "STALE_ADMISSIONS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "extension surface",
+   "counter": "EXTENSION_SURFACE_DIAGNOSTICS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "extension surface",
+   "counter": "XNA_NAMESPACE_CONTAMINATION",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "default surface",
+   "counter": "DEFAULT_PROFILE_TYPES",
+   "value": 257,
+   "wanted": 257
+  },
+  {
+   "scope": "default surface",
+   "counter": "DEFAULT_PROFILE_MEMBERS",
+   "value": 2423,
+   "wanted": 2423
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-windows-content-pipeline TOTAL_DIAGNOSTICS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-windows-content-pipeline types",
+   "value": 128,
+   "wanted": 128
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-windows-online TOTAL_DIAGNOSTICS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-windows-online types",
+   "value": 74,
+   "wanted": 74
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-windows-runtime TOTAL_DIAGNOSTICS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-windows-runtime types",
+   "value": 257,
+   "wanted": 257
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-xbox360-runtime TOTAL_DIAGNOSTICS",
+   "value": 0,
+   "wanted": 0
+  },
+  {
+   "scope": "strict profiles",
+   "counter": "xna40-xbox360-runtime types",
+   "value": 318,
+   "wanted": 318
+  }
+ ],
+ "failures": []
+}
