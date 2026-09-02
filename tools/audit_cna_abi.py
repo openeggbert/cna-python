@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from _cna_native import abi
+from _cna_native import cnb_abi
 from _cna_native.loader import FUNCTION_MANIFEST, QUALIFIED_ABI
 
 
@@ -57,8 +58,27 @@ TYPES = {
         abi.CNA_GamePadCapabilities,
         abi.CNA_TouchLocation, abi.CNA_TouchCapabilities, abi.CNA_TouchState,
         abi.CNA_GestureSample,
+        cnb_abi.CNA_CnbReadLimits, cnb_abi.CNA_CnbChunkEntry,
+        cnb_abi.CNA_CnbExternalReference, cnb_abi.CNA_CnbMetadata,
+        cnb_abi.CNA_CnbTextureInfo, cnb_abi.CNA_CnbTextureTransform,
+        cnb_abi.CNA_CnbSamplerState, cnb_abi.CNA_CnbModelLight,
+        cnb_abi.CNA_CnbModelInfo, cnb_abi.CNA_CnbModelBone,
+        cnb_abi.CNA_CnbModelPartInfo, cnb_abi.CNA_CnbMaterialInfo,
+        cnb_abi.CNA_CnbMorphInfo, cnb_abi.CNA_CnbMeshInfo,
+        cnb_abi.CNA_CnbSkeletonInfo, cnb_abi.CNA_CnbMorphWeightKeyInfo,
+        cnb_abi.CNA_CnbSpriteFontInfo, cnb_abi.CNA_CnbSoundEffectInfo,
+        cnb_abi.CNA_CnbVideoInfo, cnb_abi.CNA_CnbImageImportOptions,
+        cnb_abi.CNA_KeyframeEXT, cnb_abi.CNA_BoneTrackEXTDescriptor,
+        cnb_abi.CNA_AnimationClipEXTDescriptor, cnb_abi.CNA_CurveKey,
+        cnb_abi.CNA_ContentManagerCreateInfo,
     )
 }
+
+#: Every frozen `.cnb` wire constant, re-read from the header by the C probe and
+#: compared against the value this binding uses.  A constant that drifts is a
+#: silent misreading of every file already written, so none of them is trusted
+#: from prose.
+CNB_CONSTANT_PREFIXES = ("CNA_CNB_", "CNA_CLIP_TARGET_SPACE_")
 
 
 def arguments() -> argparse.Namespace:
@@ -122,7 +142,13 @@ def ctypes_measurements(c_values: dict[str, int]) -> dict[str, int]:
         "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC": 0,
         "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_DIALOG": 1,
         "VALUE:CNA_VIDEO_SOUNDTRACK_TYPE_MUSIC_AND_DIALOG": 2,
+        "VALUE:CNA_CnbTextureFormatSupportedFn":
+            ctypes.sizeof(cnb_abi.CNA_CnbTextureFormatSupportedFn),
+        "VALUE:CNA_CnbLoaderCallback": ctypes.sizeof(cnb_abi.CNA_CnbLoaderCallback),
     }
+    for name in dir(cnb_abi):
+        if name.startswith(CNB_CONSTANT_PREFIXES):
+            result[f"VALUE:{name}"] = getattr(cnb_abi, name)
     for name, value in TYPES.items():
         result[f"SIZE:{name}"] = ctypes.sizeof(value)
         result[f"ALIGN:{name}"] = ctypes.alignment(value)

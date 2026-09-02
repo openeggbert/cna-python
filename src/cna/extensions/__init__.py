@@ -12,12 +12,17 @@ Rules every family here follows:
 * Nothing here is reachable from ``Microsoft.Xna.Framework``, and nothing there
   changes because this package exists.
 
-Currently open: :mod:`cna.extensions.graphics` -- renderer identity, capability
-reporting and selection.
+Currently open:
+
+* :mod:`cna.extensions.graphics` -- renderer identity, capability reporting and
+  selection.
+* :mod:`cna.extensions.content` -- CNA's own `.cnb` compiled content format and
+  its `.cnj` source documents. The strict XNA ``ContentManager`` stays managed
+  XNB and is not changed by it.
 """
 
 from __future__ import annotations
 
-from . import graphics
+from . import content, graphics
 
-__all__ = ["graphics"]
+__all__ = ["content", "graphics"]

@@ -23,6 +23,11 @@ from threading import RLock
 
 from . import abi
 from .errors import NativeAbiMismatchError, NativeError, NativeLibraryError, NativeUnavailableError
+from .cnb_manifest import (
+    CNB_FUNCTION_MANIFEST,
+    CURVE_CODEC_FUNCTION_MANIFEST,
+    NATIVE_CONTENT_MANAGER_FUNCTION_MANIFEST,
+)
 from .media_manifest import MEDIA_FUNCTION_MANIFEST
 
 SUPPORTED_ABI_MAJOR = 0
@@ -634,6 +639,10 @@ FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
 )
 
 FUNCTION_MANIFEST += MEDIA_FUNCTION_MANIFEST
+# The CNA-native compiled-content extension family, and the minimal curve
+# slice its codec depends on.  See `docs/cnb-cnj-extensions.md`.
+FUNCTION_MANIFEST += (CNB_FUNCTION_MANIFEST + CURVE_CODEC_FUNCTION_MANIFEST
+                      + NATIVE_CONTENT_MANAGER_FUNCTION_MANIFEST)
 
 
 def _resolve() -> Path:

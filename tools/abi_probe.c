@@ -29,6 +29,10 @@
 #include "CNA/C/media_library.h"
 #include "CNA/C/media_player.h"
 #include "CNA/C/video.h"
+#include "CNA/C/models.h"
+#include "CNA/C/curve.h"
+#include "CNA/C/cnb.h"
+#include "CNA/C/content.h"
 
 #define TYPE(T) do { \
     printf("TYPE %s %zu %zu\n", #T, sizeof(T), alignof(T)); \
@@ -54,6 +58,20 @@ static CNA_Result begin_draw_callback(
 
 static void audio_event_callback(void* context) { (void)context; }
 static void media_player_event_callback(void* context) { (void)context; }
+
+static CNA_Bool format_supported_probe(CNA_CnbTextureFormat format, void* context)
+{
+    (void)format; (void)context;
+    return CNA_TRUE;
+}
+
+static CNA_Result cnb_loader_probe(
+    void* context, CNA_CnbDocumentHandle document, CNA_Handle content_manager,
+    CNA_StringView asset_name, void** out_object)
+{
+    (void)context; (void)document; (void)content_manager; (void)asset_name; (void)out_object;
+    return CNA_RESULT_SUCCESS;
+}
 
 int main(void) {
     printf("VALUE CNA_ABI_VERSION %u\n", (unsigned)CNA_ABI_VERSION);
@@ -171,5 +189,213 @@ int main(void) {
     TYPE(CNA_TouchCapabilities); FIELD(CNA_TouchCapabilities, struct_size); FIELD(CNA_TouchCapabilities, struct_version); FIELD(CNA_TouchCapabilities, is_connected); FIELD(CNA_TouchCapabilities, reserved); FIELD(CNA_TouchCapabilities, maximum_touch_count);
     TYPE(CNA_TouchState); FIELD(CNA_TouchState, struct_size); FIELD(CNA_TouchState, struct_version); FIELD(CNA_TouchState, is_connected); FIELD(CNA_TouchState, reserved); FIELD(CNA_TouchState, touch_count); FIELD(CNA_TouchState, touches);
     TYPE(CNA_GestureSample); FIELD(CNA_GestureSample, struct_size); FIELD(CNA_GestureSample, struct_version); FIELD(CNA_GestureSample, gesture_type); FIELD(CNA_GestureSample, finger_id_ext); FIELD(CNA_GestureSample, finger_id2_ext); FIELD(CNA_GestureSample, reserved); FIELD(CNA_GestureSample, timestamp_ticks); FIELD(CNA_GestureSample, position); FIELD(CNA_GestureSample, position2); FIELD(CNA_GestureSample, delta); FIELD(CNA_GestureSample, delta2);
+
+    /* --- cnb.h: the CNA-native compiled content family --- */
+    printf("VALUE CNA_CLIP_TARGET_SPACE_JOINT_PALETTE_EXT %llu\n", (unsigned long long)(CNA_CLIP_TARGET_SPACE_JOINT_PALETTE_EXT));
+    printf("VALUE CNA_CLIP_TARGET_SPACE_MAXIMUM_EXT %llu\n", (unsigned long long)(CNA_CLIP_TARGET_SPACE_MAXIMUM_EXT));
+    printf("VALUE CNA_CLIP_TARGET_SPACE_SCENE_NODE_EXT %llu\n", (unsigned long long)(CNA_CLIP_TARGET_SPACE_SCENE_NODE_EXT));
+    printf("VALUE CNA_CNB_ANIMATION_CLIP_CHUNK_HEADER %llu\n", (unsigned long long)(CNA_CNB_ANIMATION_CLIP_CHUNK_HEADER));
+    printf("VALUE CNA_CNB_ANIMATION_CLIP_CHUNK_KEYS %llu\n", (unsigned long long)(CNA_CNB_ANIMATION_CLIP_CHUNK_KEYS));
+    printf("VALUE CNA_CNB_ANIMATION_CLIP_CHUNK_TRACKS %llu\n", (unsigned long long)(CNA_CNB_ANIMATION_CLIP_CHUNK_TRACKS));
+    printf("VALUE CNA_CNB_ANIMATION_CLIP_SCHEMA_VERSION %llu\n", (unsigned long long)(CNA_CNB_ANIMATION_CLIP_SCHEMA_VERSION));
+    printf("VALUE CNA_CNB_ANIMATION_KEY_STRIDE %llu\n", (unsigned long long)(CNA_CNB_ANIMATION_KEY_STRIDE));
+    printf("VALUE CNA_CNB_ANIMATION_TRACK_STRIDE %llu\n", (unsigned long long)(CNA_CNB_ANIMATION_TRACK_STRIDE));
+    printf("VALUE CNA_CNB_ASSET_TYPE_ANIMATION_CLIP %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_ANIMATION_CLIP));
+    printf("VALUE CNA_CNB_ASSET_TYPE_CURVE %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_CURVE));
+    printf("VALUE CNA_CNB_ASSET_TYPE_CUSTOM_RANGE_FIRST %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_CUSTOM_RANGE_FIRST));
+    printf("VALUE CNA_CNB_ASSET_TYPE_EFFECT %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_EFFECT));
+    printf("VALUE CNA_CNB_ASSET_TYPE_INVALID %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_INVALID));
+    printf("VALUE CNA_CNB_ASSET_TYPE_MODEL %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_MODEL));
+    printf("VALUE CNA_CNB_ASSET_TYPE_RESERVED_RANGE_FIRST %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_RESERVED_RANGE_FIRST));
+    printf("VALUE CNA_CNB_ASSET_TYPE_SONG %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_SONG));
+    printf("VALUE CNA_CNB_ASSET_TYPE_SOUND_EFFECT %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_SOUND_EFFECT));
+    printf("VALUE CNA_CNB_ASSET_TYPE_SPRITE_FONT %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_SPRITE_FONT));
+    printf("VALUE CNA_CNB_ASSET_TYPE_TEXTURE2D %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_TEXTURE2D));
+    printf("VALUE CNA_CNB_ASSET_TYPE_TEXTURE3D %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_TEXTURE3D));
+    printf("VALUE CNA_CNB_ASSET_TYPE_TEXTURE_CUBE %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_TEXTURE_CUBE));
+    printf("VALUE CNA_CNB_ASSET_TYPE_VIDEO %llu\n", (unsigned long long)(CNA_CNB_ASSET_TYPE_VIDEO));
+    printf("VALUE CNA_CNB_AUDIO_FORMAT_ADPCM %llu\n", (unsigned long long)(CNA_CNB_AUDIO_FORMAT_ADPCM));
+    printf("VALUE CNA_CNB_AUDIO_FORMAT_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_AUDIO_FORMAT_MAXIMUM));
+    printf("VALUE CNA_CNB_AUDIO_FORMAT_PCM16 %llu\n", (unsigned long long)(CNA_CNB_AUDIO_FORMAT_PCM16));
+    printf("VALUE CNA_CNB_AUDIO_FORMAT_PCM8 %llu\n", (unsigned long long)(CNA_CNB_AUDIO_FORMAT_PCM8));
+    printf("VALUE CNA_CNB_AUDIO_FORMAT_PCM_FLOAT32 %llu\n", (unsigned long long)(CNA_CNB_AUDIO_FORMAT_PCM_FLOAT32));
+    printf("VALUE CNA_CNB_AUDIO_FORMAT_UNKNOWN %llu\n", (unsigned long long)(CNA_CNB_AUDIO_FORMAT_UNKNOWN));
+    printf("VALUE CNA_CNB_AUDIO_FORMAT_VORBIS %llu\n", (unsigned long long)(CNA_CNB_AUDIO_FORMAT_VORBIS));
+    printf("VALUE CNA_CNB_CHUNK_ENTRY_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_CHUNK_ENTRY_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_CHUNK_FLAG_ALL %llu\n", (unsigned long long)(CNA_CNB_CHUNK_FLAG_ALL));
+    printf("VALUE CNA_CNB_CHUNK_FLAG_MANDATORY %llu\n", (unsigned long long)(CNA_CNB_CHUNK_FLAG_MANDATORY));
+    printf("VALUE CNA_CNB_CHUNK_FLAG_NONE %llu\n", (unsigned long long)(CNA_CNB_CHUNK_FLAG_NONE));
+    printf("VALUE CNA_CNB_COMPRESSION_DEFLATE %llu\n", (unsigned long long)(CNA_CNB_COMPRESSION_DEFLATE));
+    printf("VALUE CNA_CNB_COMPRESSION_LZ4 %llu\n", (unsigned long long)(CNA_CNB_COMPRESSION_LZ4));
+    printf("VALUE CNA_CNB_COMPRESSION_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_COMPRESSION_MAXIMUM));
+    printf("VALUE CNA_CNB_COMPRESSION_NONE %llu\n", (unsigned long long)(CNA_CNB_COMPRESSION_NONE));
+    printf("VALUE CNA_CNB_COMPRESSION_ZSTD %llu\n", (unsigned long long)(CNA_CNB_COMPRESSION_ZSTD));
+    printf("VALUE CNA_CNB_CONTAINER_CHUNK_EXTERNAL_REFERENCES %llu\n", (unsigned long long)(CNA_CNB_CONTAINER_CHUNK_EXTERNAL_REFERENCES));
+    printf("VALUE CNA_CNB_CONTAINER_CHUNK_METADATA %llu\n", (unsigned long long)(CNA_CNB_CONTAINER_CHUNK_METADATA));
+    printf("VALUE CNA_CNB_CRC32C_SEED %llu\n", (unsigned long long)(CNA_CNB_CRC32C_SEED));
+    printf("VALUE CNA_CNB_CURVE_CHUNK_HEADER %llu\n", (unsigned long long)(CNA_CNB_CURVE_CHUNK_HEADER));
+    printf("VALUE CNA_CNB_CURVE_CHUNK_KEYS %llu\n", (unsigned long long)(CNA_CNB_CURVE_CHUNK_KEYS));
+    printf("VALUE CNA_CNB_CURVE_KEY_STRIDE %llu\n", (unsigned long long)(CNA_CNB_CURVE_KEY_STRIDE));
+    printf("VALUE CNA_CNB_CURVE_SCHEMA_VERSION %llu\n", (unsigned long long)(CNA_CNB_CURVE_SCHEMA_VERSION));
+    printf("VALUE CNA_CNB_EFFECT_KIND_BASIC %llu\n", (unsigned long long)(CNA_CNB_EFFECT_KIND_BASIC));
+    printf("VALUE CNA_CNB_EFFECT_KIND_DUAL_TEXTURE %llu\n", (unsigned long long)(CNA_CNB_EFFECT_KIND_DUAL_TEXTURE));
+    printf("VALUE CNA_CNB_EFFECT_KIND_EXTERNAL %llu\n", (unsigned long long)(CNA_CNB_EFFECT_KIND_EXTERNAL));
+    printf("VALUE CNA_CNB_EFFECT_KIND_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_EFFECT_KIND_MAXIMUM));
+    printf("VALUE CNA_CNB_EFFECT_KIND_PBR %llu\n", (unsigned long long)(CNA_CNB_EFFECT_KIND_PBR));
+    printf("VALUE CNA_CNB_EFFECT_KIND_SKINNED %llu\n", (unsigned long long)(CNA_CNB_EFFECT_KIND_SKINNED));
+    printf("VALUE CNA_CNB_EFFECT_KIND_SKINNED_PBR %llu\n", (unsigned long long)(CNA_CNB_EFFECT_KIND_SKINNED_PBR));
+    printf("VALUE CNA_CNB_EXTERNAL_REFERENCE_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_EXTERNAL_REFERENCE_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_FORMAT_CONTAINER_MAJOR %llu\n", (unsigned long long)(CNA_CNB_FORMAT_CONTAINER_MAJOR));
+    printf("VALUE CNA_CNB_FORMAT_CONTAINER_MINOR %llu\n", (unsigned long long)(CNA_CNB_FORMAT_CONTAINER_MINOR));
+    printf("VALUE CNA_CNB_FORMAT_DEFAULT_TOC_OFFSET %llu\n", (unsigned long long)(CNA_CNB_FORMAT_DEFAULT_TOC_OFFSET));
+    printf("VALUE CNA_CNB_FORMAT_HEADER_CHECKSUM_COVERAGE %llu\n", (unsigned long long)(CNA_CNB_FORMAT_HEADER_CHECKSUM_COVERAGE));
+    printf("VALUE CNA_CNB_FORMAT_HEADER_CHECKSUM_OFFSET %llu\n", (unsigned long long)(CNA_CNB_FORMAT_HEADER_CHECKSUM_OFFSET));
+    printf("VALUE CNA_CNB_FORMAT_HEADER_RESERVED_SIZE %llu\n", (unsigned long long)(CNA_CNB_FORMAT_HEADER_RESERVED_SIZE));
+    printf("VALUE CNA_CNB_FORMAT_HEADER_SIZE %llu\n", (unsigned long long)(CNA_CNB_FORMAT_HEADER_SIZE));
+    printf("VALUE CNA_CNB_FORMAT_MAGIC_SIZE %llu\n", (unsigned long long)(CNA_CNB_FORMAT_MAGIC_SIZE));
+    printf("VALUE CNA_CNB_FORMAT_TOC_ENTRY_SIZE %llu\n", (unsigned long long)(CNA_CNB_FORMAT_TOC_ENTRY_SIZE));
+    printf("VALUE CNA_CNB_IMAGE_IMPORT_OPTIONS_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_IMAGE_IMPORT_OPTIONS_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_MATERIAL_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_BASE_COLOR %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_BASE_COLOR));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_EMISSIVE %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_EMISSIVE));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_MAXIMUM));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_METALLIC_ROUGHNESS %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_METALLIC_ROUGHNESS));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_NORMAL %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_NORMAL));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_OCCLUSION %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_OCCLUSION));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_SECOND %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_SECOND));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_SPECULAR %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_SPECULAR));
+    printf("VALUE CNA_CNB_MATERIAL_TEXTURE_SPECULAR_COLOR %llu\n", (unsigned long long)(CNA_CNB_MATERIAL_TEXTURE_SPECULAR_COLOR));
+    printf("VALUE CNA_CNB_MAX_AUDIO_SAMPLE_RATE %llu\n", (unsigned long long)(CNA_CNB_MAX_AUDIO_SAMPLE_RATE));
+    printf("VALUE CNA_CNB_MAX_SPRITE_FONT_GLYPHS %llu\n", (unsigned long long)(CNA_CNB_MAX_SPRITE_FONT_GLYPHS));
+    printf("VALUE CNA_CNB_MAX_TEXTURE_MIP_LEVELS %llu\n", (unsigned long long)(CNA_CNB_MAX_TEXTURE_MIP_LEVELS));
+    printf("VALUE CNA_CNB_MAX_TEXTURE_REPRESENTATIONS %llu\n", (unsigned long long)(CNA_CNB_MAX_TEXTURE_REPRESENTATIONS));
+    printf("VALUE CNA_CNB_MAX_VIDEO_DIMENSION %llu\n", (unsigned long long)(CNA_CNB_MAX_VIDEO_DIMENSION));
+    printf("VALUE CNA_CNB_MEDIA_CHUNK_SONG_HEADER %llu\n", (unsigned long long)(CNA_CNB_MEDIA_CHUNK_SONG_HEADER));
+    printf("VALUE CNA_CNB_MEDIA_CHUNK_VIDEO_HEADER %llu\n", (unsigned long long)(CNA_CNB_MEDIA_CHUNK_VIDEO_HEADER));
+    printf("VALUE CNA_CNB_MEDIA_SCHEMA_VERSION %llu\n", (unsigned long long)(CNA_CNB_MEDIA_SCHEMA_VERSION));
+    printf("VALUE CNA_CNB_MESH_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_MESH_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_METADATA_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_METADATA_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_MODEL_BONE_STRIDE %llu\n", (unsigned long long)(CNA_CNB_MODEL_BONE_STRIDE));
+    printf("VALUE CNA_CNB_MODEL_BONE_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_MODEL_BONE_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_ANIMATIONS %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_ANIMATIONS));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_BONES %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_BONES));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_HEADER %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_HEADER));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_INDEX_DATA %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_INDEX_DATA));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_LIGHTS %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_LIGHTS));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_MATERIALS %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_MATERIALS));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_MESHES %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_MESHES));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_MORPH_DATA %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_MORPH_DATA));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_SKELETON %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_SKELETON));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_STRINGS %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_STRINGS));
+    printf("VALUE CNA_CNB_MODEL_CHUNK_VERTEX_DATA %llu\n", (unsigned long long)(CNA_CNB_MODEL_CHUNK_VERTEX_DATA));
+    printf("VALUE CNA_CNB_MODEL_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_MODEL_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_MODEL_MATERIAL_STRIDE %llu\n", (unsigned long long)(CNA_CNB_MODEL_MATERIAL_STRIDE));
+    printf("VALUE CNA_CNB_MODEL_MESH_STRIDE %llu\n", (unsigned long long)(CNA_CNB_MODEL_MESH_STRIDE));
+    printf("VALUE CNA_CNB_MODEL_PART_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_MODEL_PART_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_MODEL_PART_STRIDE %llu\n", (unsigned long long)(CNA_CNB_MODEL_PART_STRIDE));
+    printf("VALUE CNA_CNB_MODEL_SCHEMA_VERSION %llu\n", (unsigned long long)(CNA_CNB_MODEL_SCHEMA_VERSION));
+    printf("VALUE CNA_CNB_MORPH_DELTA_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_MORPH_DELTA_MAXIMUM));
+    printf("VALUE CNA_CNB_MORPH_DELTA_NORMAL %llu\n", (unsigned long long)(CNA_CNB_MORPH_DELTA_NORMAL));
+    printf("VALUE CNA_CNB_MORPH_DELTA_POSITION %llu\n", (unsigned long long)(CNA_CNB_MORPH_DELTA_POSITION));
+    printf("VALUE CNA_CNB_MORPH_DELTA_TANGENT %llu\n", (unsigned long long)(CNA_CNB_MORPH_DELTA_TANGENT));
+    printf("VALUE CNA_CNB_MORPH_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_MORPH_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_MORPH_KEY_IN_TANGENT %llu\n", (unsigned long long)(CNA_CNB_MORPH_KEY_IN_TANGENT));
+    printf("VALUE CNA_CNB_MORPH_KEY_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_MORPH_KEY_MAXIMUM));
+    printf("VALUE CNA_CNB_MORPH_KEY_OUT_TANGENT %llu\n", (unsigned long long)(CNA_CNB_MORPH_KEY_OUT_TANGENT));
+    printf("VALUE CNA_CNB_MORPH_KEY_WEIGHTS %llu\n", (unsigned long long)(CNA_CNB_MORPH_KEY_WEIGHTS));
+    printf("VALUE CNA_CNB_MORPH_WEIGHT_KEY_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_MORPH_WEIGHT_KEY_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_NO_INDEX %llu\n", (unsigned long long)(CNA_CNB_NO_INDEX));
+    printf("VALUE CNA_CNB_READ_LIMITS_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_READ_LIMITS_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_SKELETON_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_SKELETON_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_SKELETON_MATRIX_BIND_POSE %llu\n", (unsigned long long)(CNA_CNB_SKELETON_MATRIX_BIND_POSE));
+    printf("VALUE CNA_CNB_SKELETON_MATRIX_INVERSE_BIND_POSE %llu\n", (unsigned long long)(CNA_CNB_SKELETON_MATRIX_INVERSE_BIND_POSE));
+    printf("VALUE CNA_CNB_SKELETON_MATRIX_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_SKELETON_MATRIX_MAXIMUM));
+    printf("VALUE CNA_CNB_SKELETON_MATRIX_ROOT_PREFIX %llu\n", (unsigned long long)(CNA_CNB_SKELETON_MATRIX_ROOT_PREFIX));
+    printf("VALUE CNA_CNB_SONG_HEADER_FIXED_STRIDE %llu\n", (unsigned long long)(CNA_CNB_SONG_HEADER_FIXED_STRIDE));
+    printf("VALUE CNA_CNB_SOUND_EFFECT_CHUNK_DATA %llu\n", (unsigned long long)(CNA_CNB_SOUND_EFFECT_CHUNK_DATA));
+    printf("VALUE CNA_CNB_SOUND_EFFECT_CHUNK_HEADER %llu\n", (unsigned long long)(CNA_CNB_SOUND_EFFECT_CHUNK_HEADER));
+    printf("VALUE CNA_CNB_SOUND_EFFECT_HEADER_STRIDE %llu\n", (unsigned long long)(CNA_CNB_SOUND_EFFECT_HEADER_STRIDE));
+    printf("VALUE CNA_CNB_SOUND_EFFECT_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_SOUND_EFFECT_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_SOUND_EFFECT_SCHEMA_VERSION %llu\n", (unsigned long long)(CNA_CNB_SOUND_EFFECT_SCHEMA_VERSION));
+    printf("VALUE CNA_CNB_SPRITE_FONT_CHARACTER_STRIDE %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_CHARACTER_STRIDE));
+    printf("VALUE CNA_CNB_SPRITE_FONT_CHUNK_CHARACTERS %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_CHUNK_CHARACTERS));
+    printf("VALUE CNA_CNB_SPRITE_FONT_CHUNK_CROPPING %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_CHUNK_CROPPING));
+    printf("VALUE CNA_CNB_SPRITE_FONT_CHUNK_GLYPH_BOUNDS %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_CHUNK_GLYPH_BOUNDS));
+    printf("VALUE CNA_CNB_SPRITE_FONT_CHUNK_HEADER %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_CHUNK_HEADER));
+    printf("VALUE CNA_CNB_SPRITE_FONT_CHUNK_KERNING %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_CHUNK_KERNING));
+    printf("VALUE CNA_CNB_SPRITE_FONT_HEADER_STRIDE %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_HEADER_STRIDE));
+    printf("VALUE CNA_CNB_SPRITE_FONT_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_SPRITE_FONT_KERNING_STRIDE %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_KERNING_STRIDE));
+    printf("VALUE CNA_CNB_SPRITE_FONT_RECTANGLE_STRIDE %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_RECTANGLE_STRIDE));
+    printf("VALUE CNA_CNB_SPRITE_FONT_SCHEMA_VERSION %llu\n", (unsigned long long)(CNA_CNB_SPRITE_FONT_SCHEMA_VERSION));
+    printf("VALUE CNA_CNB_TEXTURE_CHUNK_HEADER %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_CHUNK_HEADER));
+    printf("VALUE CNA_CNB_TEXTURE_CHUNK_PAYLOAD %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_CHUNK_PAYLOAD));
+    printf("VALUE CNA_CNB_TEXTURE_CHUNK_REPRESENTATIONS %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_CHUNK_REPRESENTATIONS));
+    printf("VALUE CNA_CNB_TEXTURE_CUBE_FACE_COUNT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_CUBE_FACE_COUNT));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_ALPHA8 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_ALPHA8));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BC1 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BC1));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BC2 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BC2));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BC3 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BC3));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BC3_SRGB %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BC3_SRGB));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BC7 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BC7));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BC7_SRGB %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BC7_SRGB));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BGR565 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BGR565));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BGRA4444 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BGRA4444));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BGRA5551 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BGRA5551));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_BGRA8 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_BGRA8));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_HDR_BLENDABLE %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_HDR_BLENDABLE));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_MAXIMUM %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_MAXIMUM));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_R16 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_R16));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_R16_FLOAT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_R16_FLOAT));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_R32_FLOAT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_R32_FLOAT));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_R8 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_R8));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RG16 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RG16));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RG16_FLOAT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RG16_FLOAT));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RG32_FLOAT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RG32_FLOAT));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RG8_SNORM %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RG8_SNORM));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RGB10_A2 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RGB10_A2));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RGBA16 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RGBA16));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RGBA16_FLOAT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RGBA16_FLOAT));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RGBA32_FLOAT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RGBA32_FLOAT));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RGBA8 %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RGBA8));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RGBA8_SNORM %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RGBA8_SNORM));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_RGBA8_SRGB %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_RGBA8_SRGB));
+    printf("VALUE CNA_CNB_TEXTURE_FORMAT_UNKNOWN %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_FORMAT_UNKNOWN));
+    printf("VALUE CNA_CNB_TEXTURE_HEADER_STRIDE %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_HEADER_STRIDE));
+    printf("VALUE CNA_CNB_TEXTURE_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_INFO_STRUCT_VERSION));
+    printf("VALUE CNA_CNB_TEXTURE_REPRESENTATION_STRIDE %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_REPRESENTATION_STRIDE));
+    printf("VALUE CNA_CNB_TEXTURE_SCHEMA_VERSION %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_SCHEMA_VERSION));
+    printf("VALUE CNA_CNB_TEXTURE_SLOT_COUNT %llu\n", (unsigned long long)(CNA_CNB_TEXTURE_SLOT_COUNT));
+    printf("VALUE CNA_CNB_VIDEO_HEADER_STRIDE %llu\n", (unsigned long long)(CNA_CNB_VIDEO_HEADER_STRIDE));
+    printf("VALUE CNA_CNB_VIDEO_INFO_STRUCT_VERSION %llu\n", (unsigned long long)(CNA_CNB_VIDEO_INFO_STRUCT_VERSION));
+    CNA_CnbTextureFormatSupportedFn checked_format_supported = format_supported_probe;
+    printf("VALUE CNA_CnbTextureFormatSupportedFn %zu\n", sizeof(checked_format_supported));
+    CNA_CnbLoaderCallback checked_cnb_loader = cnb_loader_probe;
+    printf("VALUE CNA_CnbLoaderCallback %zu\n", sizeof(checked_cnb_loader));
+    TYPE(CNA_CnbReadLimits); FIELD(CNA_CnbReadLimits, struct_size); FIELD(CNA_CnbReadLimits, struct_version); FIELD(CNA_CnbReadLimits, max_file_size); FIELD(CNA_CnbReadLimits, max_chunk_size); FIELD(CNA_CnbReadLimits, max_total_uncompressed_size); FIELD(CNA_CnbReadLimits, max_chunk_count); FIELD(CNA_CnbReadLimits, max_string_bytes); FIELD(CNA_CnbReadLimits, max_array_element_count); FIELD(CNA_CnbReadLimits, max_chunk_alignment);
+    TYPE(CNA_CnbChunkEntry); FIELD(CNA_CnbChunkEntry, struct_size); FIELD(CNA_CnbChunkEntry, struct_version); FIELD(CNA_CnbChunkEntry, offset); FIELD(CNA_CnbChunkEntry, stored_size); FIELD(CNA_CnbChunkEntry, uncompressed_size); FIELD(CNA_CnbChunkEntry, type); FIELD(CNA_CnbChunkEntry, flags); FIELD(CNA_CnbChunkEntry, checksum); FIELD(CNA_CnbChunkEntry, compression); FIELD(CNA_CnbChunkEntry, alignment); FIELD(CNA_CnbChunkEntry, reserved);
+    TYPE(CNA_CnbExternalReference); FIELD(CNA_CnbExternalReference, struct_size); FIELD(CNA_CnbExternalReference, struct_version); FIELD(CNA_CnbExternalReference, flags); FIELD(CNA_CnbExternalReference, expected_asset_type_id);
+    TYPE(CNA_CnbMetadata); FIELD(CNA_CnbMetadata, struct_size); FIELD(CNA_CnbMetadata, struct_version); FIELD(CNA_CnbMetadata, present); FIELD(CNA_CnbMetadata, reserved); FIELD(CNA_CnbMetadata, flags);
+    TYPE(CNA_CnbTextureInfo); FIELD(CNA_CnbTextureInfo, struct_size); FIELD(CNA_CnbTextureInfo, struct_version); FIELD(CNA_CnbTextureInfo, width); FIELD(CNA_CnbTextureInfo, height); FIELD(CNA_CnbTextureInfo, depth); FIELD(CNA_CnbTextureInfo, face_count); FIELD(CNA_CnbTextureInfo, mip_count); FIELD(CNA_CnbTextureInfo, representation_count);
+    TYPE(CNA_CnbTextureTransform); FIELD(CNA_CnbTextureTransform, offset_x); FIELD(CNA_CnbTextureTransform, offset_y); FIELD(CNA_CnbTextureTransform, scale_x); FIELD(CNA_CnbTextureTransform, scale_y); FIELD(CNA_CnbTextureTransform, rotation);
+    TYPE(CNA_CnbSamplerState); FIELD(CNA_CnbSamplerState, filter); FIELD(CNA_CnbSamplerState, address_u); FIELD(CNA_CnbSamplerState, address_v); FIELD(CNA_CnbSamplerState, declared); FIELD(CNA_CnbSamplerState, reserved);
+    TYPE(CNA_CnbModelLight); FIELD(CNA_CnbModelLight, direction); FIELD(CNA_CnbModelLight, diffuse_color);
+    TYPE(CNA_CnbModelInfo); FIELD(CNA_CnbModelInfo, struct_size); FIELD(CNA_CnbModelInfo, struct_version); FIELD(CNA_CnbModelInfo, bone_count); FIELD(CNA_CnbModelInfo, part_count); FIELD(CNA_CnbModelInfo, mesh_count); FIELD(CNA_CnbModelInfo, animation_count); FIELD(CNA_CnbModelInfo, light_count); FIELD(CNA_CnbModelInfo, has_skeleton); FIELD(CNA_CnbModelInfo, applies_gltf_lighting_policy); FIELD(CNA_CnbModelInfo, has_bone_hierarchy); FIELD(CNA_CnbModelInfo, reserved);
+    TYPE(CNA_CnbModelBone); FIELD(CNA_CnbModelBone, struct_size); FIELD(CNA_CnbModelBone, struct_version); FIELD(CNA_CnbModelBone, parent); FIELD(CNA_CnbModelBone, reserved); FIELD(CNA_CnbModelBone, transform);
+    TYPE(CNA_CnbModelPartInfo); FIELD(CNA_CnbModelPartInfo, struct_size); FIELD(CNA_CnbModelPartInfo, struct_version); FIELD(CNA_CnbModelPartInfo, vertex_stride); FIELD(CNA_CnbModelPartInfo, vertex_count); FIELD(CNA_CnbModelPartInfo, index_count); FIELD(CNA_CnbModelPartInfo, index_element_size); FIELD(CNA_CnbModelPartInfo, primitive_topology); FIELD(CNA_CnbModelPartInfo, primitive_count); FIELD(CNA_CnbModelPartInfo, effect_kind); FIELD(CNA_CnbModelPartInfo, vertex_color_enabled); FIELD(CNA_CnbModelPartInfo, unlit); FIELD(CNA_CnbModelPartInfo, reserved);
+    TYPE(CNA_CnbMaterialInfo); FIELD(CNA_CnbMaterialInfo, struct_size); FIELD(CNA_CnbMaterialInfo, struct_version); FIELD(CNA_CnbMaterialInfo, base_color_factor); FIELD(CNA_CnbMaterialInfo, emissive_factor); FIELD(CNA_CnbMaterialInfo, specular_color_factor); FIELD(CNA_CnbMaterialInfo, metallic_factor); FIELD(CNA_CnbMaterialInfo, roughness_factor); FIELD(CNA_CnbMaterialInfo, ior); FIELD(CNA_CnbMaterialInfo, specular_factor); FIELD(CNA_CnbMaterialInfo, normal_scale); FIELD(CNA_CnbMaterialInfo, occlusion_strength); FIELD(CNA_CnbMaterialInfo, alpha_cutoff); FIELD(CNA_CnbMaterialInfo, alpha_mode); FIELD(CNA_CnbMaterialInfo, double_sided); FIELD(CNA_CnbMaterialInfo, reserved);
+    TYPE(CNA_CnbMorphInfo); FIELD(CNA_CnbMorphInfo, struct_size); FIELD(CNA_CnbMorphInfo, struct_version); FIELD(CNA_CnbMorphInfo, vertex_count); FIELD(CNA_CnbMorphInfo, reserved); FIELD(CNA_CnbMorphInfo, target_count); FIELD(CNA_CnbMorphInfo, weight_count); FIELD(CNA_CnbMorphInfo, weight_track_key_count); FIELD(CNA_CnbMorphInfo, recompute_flat_normals); FIELD(CNA_CnbMorphInfo, weight_track_step_interpolation); FIELD(CNA_CnbMorphInfo, weight_track_cubic_spline); FIELD(CNA_CnbMorphInfo, reserved2);
+    TYPE(CNA_CnbMeshInfo); FIELD(CNA_CnbMeshInfo, struct_size); FIELD(CNA_CnbMeshInfo, struct_version); FIELD(CNA_CnbMeshInfo, parent_bone); FIELD(CNA_CnbMeshInfo, reserved); FIELD(CNA_CnbMeshInfo, part_index_count);
+    TYPE(CNA_CnbSkeletonInfo); FIELD(CNA_CnbSkeletonInfo, struct_size); FIELD(CNA_CnbSkeletonInfo, struct_version); FIELD(CNA_CnbSkeletonInfo, joint_count); FIELD(CNA_CnbSkeletonInfo, has_root_prefix); FIELD(CNA_CnbSkeletonInfo, reserved);
+    TYPE(CNA_CnbMorphWeightKeyInfo); FIELD(CNA_CnbMorphWeightKeyInfo, struct_size); FIELD(CNA_CnbMorphWeightKeyInfo, struct_version); FIELD(CNA_CnbMorphWeightKeyInfo, time_seconds); FIELD(CNA_CnbMorphWeightKeyInfo, weight_count); FIELD(CNA_CnbMorphWeightKeyInfo, in_tangent_count); FIELD(CNA_CnbMorphWeightKeyInfo, out_tangent_count);
+    TYPE(CNA_CnbSpriteFontInfo); FIELD(CNA_CnbSpriteFontInfo, struct_size); FIELD(CNA_CnbSpriteFontInfo, struct_version); FIELD(CNA_CnbSpriteFontInfo, glyph_count); FIELD(CNA_CnbSpriteFontInfo, line_spacing); FIELD(CNA_CnbSpriteFontInfo, spacing); FIELD(CNA_CnbSpriteFontInfo, default_character); FIELD(CNA_CnbSpriteFontInfo, has_default_character); FIELD(CNA_CnbSpriteFontInfo, reserved);
+    TYPE(CNA_CnbSoundEffectInfo); FIELD(CNA_CnbSoundEffectInfo, struct_size); FIELD(CNA_CnbSoundEffectInfo, struct_version); FIELD(CNA_CnbSoundEffectInfo, format); FIELD(CNA_CnbSoundEffectInfo, sample_rate); FIELD(CNA_CnbSoundEffectInfo, channels); FIELD(CNA_CnbSoundEffectInfo, frame_count); FIELD(CNA_CnbSoundEffectInfo, loop_start); FIELD(CNA_CnbSoundEffectInfo, loop_length);
+    TYPE(CNA_CnbVideoInfo); FIELD(CNA_CnbVideoInfo, struct_size); FIELD(CNA_CnbVideoInfo, struct_version); FIELD(CNA_CnbVideoInfo, duration_milliseconds); FIELD(CNA_CnbVideoInfo, width); FIELD(CNA_CnbVideoInfo, height); FIELD(CNA_CnbVideoInfo, frames_per_second); FIELD(CNA_CnbVideoInfo, soundtrack_type); FIELD(CNA_CnbVideoInfo, reserved);
+    TYPE(CNA_CnbImageImportOptions); FIELD(CNA_CnbImageImportOptions, struct_size); FIELD(CNA_CnbImageImportOptions, struct_version); FIELD(CNA_CnbImageImportOptions, color_key); FIELD(CNA_CnbImageImportOptions, has_color_key);
+    TYPE(CNA_KeyframeEXT); FIELD(CNA_KeyframeEXT, time_seconds); FIELD(CNA_KeyframeEXT, translation); FIELD(CNA_KeyframeEXT, rotation); FIELD(CNA_KeyframeEXT, scale);
+    TYPE(CNA_BoneTrackEXTDescriptor); FIELD(CNA_BoneTrackEXTDescriptor, bone_index); FIELD(CNA_BoneTrackEXTDescriptor, reserved); FIELD(CNA_BoneTrackEXTDescriptor, keyframes); FIELD(CNA_BoneTrackEXTDescriptor, keyframe_count);
+    TYPE(CNA_AnimationClipEXTDescriptor); FIELD(CNA_AnimationClipEXTDescriptor, duration_seconds); FIELD(CNA_AnimationClipEXTDescriptor, tracks); FIELD(CNA_AnimationClipEXTDescriptor, track_count);
+    TYPE(CNA_CurveKey); FIELD(CNA_CurveKey, position); FIELD(CNA_CurveKey, value); FIELD(CNA_CurveKey, tangent_in); FIELD(CNA_CurveKey, tangent_out); FIELD(CNA_CurveKey, continuity);
+    TYPE(CNA_ContentManagerCreateInfo); FIELD(CNA_ContentManagerCreateInfo, struct_size); FIELD(CNA_ContentManagerCreateInfo, struct_version); FIELD(CNA_ContentManagerCreateInfo, root_directory); FIELD(CNA_ContentManagerCreateInfo, reserved);
     return 0;
 }
