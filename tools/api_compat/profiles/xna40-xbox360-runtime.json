@@ -1,0 +1,38 @@
+{
+  "id": "xna40-xbox360-runtime",
+  "name": "XNA 4.0 Xbox 360 runtime",
+  "platform": "XBOX360_RUNTIME",
+  "contract": "xna40-xbox360-runtime-contract.json",
+  "assemblyRoot": "~/deps/xna40-xbox360-assemblies",
+  "resolveDirectories": [
+    "~/deps/xna40-xbox360-assemblies"
+  ],
+  "coreAssemblyName": "mscorlib",
+  "referenceAssemblies": [
+    "Microsoft.Xna.Framework.dll",
+    "Microsoft.Xna.Framework.Game.dll",
+    "Microsoft.Xna.Framework.Graphics.dll",
+    "Microsoft.Xna.Framework.Storage.dll",
+    "Microsoft.Xna.Framework.Video.dll",
+    "Microsoft.Xna.Framework.Input.Touch.dll",
+    "Microsoft.Xna.Framework.Xact.dll",
+    "Microsoft.Xna.Framework.GamerServices.dll",
+    "Microsoft.Xna.Framework.Net.dll",
+    "Microsoft.Xna.Framework.Avatar.dll"
+  ],
+  "referenceSha256": {
+    "Microsoft.Xna.Framework.dll": "ba7260b4beca530a1f8591f7ee9d14a494a07330e0498c2eefe7ad827906e633",
+    "Microsoft.Xna.Framework.Game.dll": "12a60d001a5f50a3caaeec5b3e573a2088d578a91ac86febeeb08b06ca40a996",
+    "Microsoft.Xna.Framework.Graphics.dll": "7154610170315209f7bf41d00bb3eac0d091ec108a00fc7667b3b40a95ad875f",
+    "Microsoft.Xna.Framework.Storage.dll": "3e4df84d7307d52fc1e8fe50f55eedc2bc92eba8dfaa376729979f24a6282558",
+    "Microsoft.Xna.Framework.Video.dll": "39b262fadc0902e73f3f817327b9f68e38f03d62ce3cd6ac8ae0bee8572ed1ef",
+    "Microsoft.Xna.Framework.Input.Touch.dll": "d4d4c82fb902dfbc71fef81b2d1cd0a90804b30a65eee3a8edc4cf2041e6be81",
+    "Microsoft.Xna.Framework.Xact.dll": "ad4cdc6ada9d6dd6dad319fff92d0e15c2f124f841ea18944aaa5b7ce942127c",
+    "Microsoft.Xna.Framework.GamerServices.dll": "f6914968bd40660d417a56ec5e2618b9006f13c2a16b7cfd5ff745c364b72654",
+    "Microsoft.Xna.Framework.Net.dll": "1b425cecf9fd39e2dcc0071bee7795546a06fca9d137a9a5f1468098ca76af16",
+    "Microsoft.Xna.Framework.Avatar.dll": "fbcfa132db70dcb5157e3a8c4e1b53b14d6ba003a5c8408a0a6b5b75a22417a7"
+  },
+  "referenceTypes": 318,
+  "referenceMembers": 3577,
+  "allowlist": []
+}

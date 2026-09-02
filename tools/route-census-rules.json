@@ -13,7 +13,12 @@
     "carry their own rule and their own reason.",
     "engine_layer.h is a selected family. It has no blanket rule: every route is",
     "claimed by a named family, so a route CNA adds that no family covers becomes",
-    "UNREVIEWED and fails the gate rather than being absorbed as deliberate."
+    "UNREVIEWED and fails the gate rather than being absorbed as deliberate.",
+    "2026-09-02: six scopes were selected by explicit product decision. The four",
+    "blanket rules that stood in for hundreds of routes -- sensors-devices,",
+    "extended-input, net-profile and gamer-services-profile -- are gone, replaced by",
+    "per-sub-family rules. Like engine_layer.h, these families have no blanket rule:",
+    "a route no sub-family claims is UNREVIEWED and fails the gate."
   ],
   "rules": [
     {
@@ -1635,21 +1640,336 @@
       "boundReason": "imported: the selected profile reaches this route"
     },
     {
-      "id": "sensors-devices",
+      "id": "devices-accelerometer",
+      "family": "accelerometer",
+      "familyTitle": "the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend",
       "match": {
         "headers": [
           "sensors.h",
-          "devices.h",
-          "devices_ext.h"
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_accelerometer_"
         ]
       },
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Sensors and device services are CNA-only capabilities outside the selected XNA profile and outside the selected extension profile.",
-      "boundReason": "imported: the selected profile reaches this route"
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the accelerometer sensor: its three-axis reading, its state machine and its synthetic backend"
     },
     {
-      "id": "extended-input",
+      "id": "devices-compass",
+      "family": "compass",
+      "familyTitle": "the compass sensor: magnetic and true heading, accuracy, and calibration requests",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_compass_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the compass sensor: magnetic and true heading, accuracy, and calibration requests) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the compass sensor: magnetic and true heading, accuracy, and calibration requests"
+    },
+    {
+      "id": "devices-gyroscope",
+      "family": "gyroscope",
+      "familyTitle": "the gyroscope sensor: angular rotation rate and its state machine",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_gyroscope_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the gyroscope sensor: angular rotation rate and its state machine) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the gyroscope sensor: angular rotation rate and its state machine"
+    },
+    {
+      "id": "devices-motion",
+      "family": "motion",
+      "familyTitle": "the fused motion sensor: attitude, gravity, acceleration and rotation rate",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_motion_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the fused motion sensor: attitude, gravity, acceleration and rotation rate) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the fused motion sensor: attitude, gravity, acceleration and rotation rate"
+    },
+    {
+      "id": "devices-sensor-shared",
+      "family": "sensor-shared",
+      "familyTitle": "the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_attitude_reading_",
+          "cna_calibration_event_",
+          "cna_sensors_get_last_error",
+          "cna_sensor_unsubscribe_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the vocabulary every sensor shares: attitude readings, calibration events, error identity and unsubscription"
+    },
+    {
+      "id": "devices-camera",
+      "family": "camera",
+      "familyTitle": "camera enumeration, the deterministic frame backend, and frame acquisition",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_camera_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (camera enumeration, the deterministic frame backend, and frame acquisition) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects camera enumeration, the deterministic frame backend, and frame acquisition"
+    },
+    {
+      "id": "devices-clipboard",
+      "family": "clipboard",
+      "familyTitle": "the host clipboard as a device service",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_devices_clipboard_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the host clipboard as a device service) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the host clipboard as a device service"
+    },
+    {
+      "id": "devices-availability",
+      "family": "device-availability",
+      "familyTitle": "whether the device-services extension is present in this build at all",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_devices_ext_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (whether the device-services extension is present in this build at all) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects whether the device-services extension is present in this build at all"
+    },
+    {
+      "id": "devices-display",
+      "family": "display",
+      "familyTitle": "display metrics a game reads: content scale and the safe area",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_display_info_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (display metrics a game reads: content scale and the safe area) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects display metrics a game reads: content scale and the safe area"
+    },
+    {
+      "id": "devices-environment",
+      "family": "environment",
+      "familyTitle": "the host device class the process is running on",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_environment_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the host device class the process is running on) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the host device class the process is running on"
+    },
+    {
+      "id": "devices-file-dialog",
+      "family": "file-dialog",
+      "familyTitle": "native file and folder dialogs, and the test backend that answers them without opening one",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_file_dialog_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (native file and folder dialogs, and the test backend that answers them without opening one) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects native file and folder dialogs, and the test backend that answers them without opening one"
+    },
+    {
+      "id": "devices-locales",
+      "family": "locales",
+      "familyTitle": "the host's ordered preferred-locale list",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_locale_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the host's ordered preferred-locale list) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the host's ordered preferred-locale list"
+    },
+    {
+      "id": "devices-message-box",
+      "family": "message-box",
+      "familyTitle": "native message boxes, their button model, and the test backend that logs instead of showing one",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_message_box_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (native message boxes, their button model, and the test backend that logs instead of showing one) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects native message boxes, their button model, and the test backend that logs instead of showing one"
+    },
+    {
+      "id": "devices-power",
+      "family": "power",
+      "familyTitle": "battery state, charge percentage and remaining time, including their unavailable sentinels",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_power_get_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (battery state, charge percentage and remaining time, including their unavailable sentinels) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects battery state, charge percentage and remaining time, including their unavailable sentinels"
+    },
+    {
+      "id": "devices-system-info",
+      "family": "system-info",
+      "familyTitle": "logical CPU count and installed RAM",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_system_info_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (logical CPU count and installed RAM) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects logical CPU count and installed RAM"
+    },
+    {
+      "id": "devices-system-tray",
+      "family": "system-tray",
+      "familyTitle": "the system tray icon, its entries, and the test backend that clicks them",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_system_tray_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (the system tray icon, its entries, and the test backend that clicks them) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects the system tray icon, its entries, and the test backend that clicks them"
+    },
+    {
+      "id": "devices-url-launcher",
+      "family": "url-launcher",
+      "familyTitle": "handing a URL to the host browser",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_url_launcher_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (handing a URL to the host browser) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects handing a URL to the host browser"
+    },
+    {
+      "id": "devices-vibration",
+      "family": "vibration",
+      "familyTitle": "controller vibration: support, intensity, duration and the test log that records it",
+      "match": {
+        "headers": [
+          "sensors.h",
+          "devices.h"
+        ],
+        "prefixes": [
+          "cna_vibrate_controller_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's sensors and device services family (controller vibration: support, intensity, duration and the test log that records it) and reachable from cna.extensions.devices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.devices projects controller vibration: support, intensity, duration and the test log that records it"
+    },
+    {
+      "id": "input-text",
+      "family": "text-input",
+      "familyTitle": "text input and IME composition: committed text, editing updates, candidate lists and the input rectangle",
       "match": {
         "headers": [
           "input_haptics.h",
@@ -1657,12 +1977,604 @@
           "input_devices.h",
           "input_text.h",
           "input_cursor.h"
+        ],
+        "prefixes": [
+          "cna_text_input_"
         ]
       },
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "XNA 4.0 has no haptics, joystick, text-input or cursor API; these are CNA-only input families and belong to the extension profile rather than to the XNA namespace.",
-      "boundReason": "imported: the selected profile reaches this route"
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's extended input families family (text input and IME composition: committed text, editing updates, candidate lists and the input rectangle) and reachable from cna.extensions.input, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.input projects text input and IME composition: committed text, editing updates, candidate lists and the input rectangle"
+    },
+    {
+      "id": "input-cursor",
+      "family": "cursor",
+      "familyTitle": "mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one",
+      "match": {
+        "headers": [
+          "input_haptics.h",
+          "input_joystick.h",
+          "input_devices.h",
+          "input_text.h",
+          "input_cursor.h"
+        ],
+        "prefixes": [
+          "cna_mouse_cursor_",
+          "cna_mouse_set_cursor_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's extended input families family (mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one) and reachable from cna.extensions.input, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.input projects mouse cursors: stock cursors, cursors built from a Texture2D, and setting the active one"
+    },
+    {
+      "id": "input-joystick",
+      "family": "joystick",
+      "familyTitle": "raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug",
+      "match": {
+        "headers": [
+          "input_haptics.h",
+          "input_joystick.h",
+          "input_devices.h",
+          "input_text.h",
+          "input_cursor.h"
+        ],
+        "prefixes": [
+          "cna_joystick_",
+          "cna_joysticks_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's extended input families family (raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug) and reachable from cna.extensions.input, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.input projects raw joysticks: enumeration, capabilities, axis/ball/button/hat state and hotplug"
+    },
+    {
+      "id": "input-haptics",
+      "family": "haptics",
+      "familyTitle": "haptic devices: capabilities, rumble, and the full effect model",
+      "match": {
+        "headers": [
+          "input_haptics.h",
+          "input_joystick.h",
+          "input_devices.h",
+          "input_text.h",
+          "input_cursor.h"
+        ],
+        "prefixes": [
+          "cna_haptic_",
+          "cna_haptics_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's extended input families family (haptic devices: capabilities, rumble, and the full effect model) and reachable from cna.extensions.input, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.input projects haptic devices: capabilities, rumble, and the full effect model"
+    },
+    {
+      "id": "input-device-enumeration",
+      "family": "input-device-enumeration",
+      "familyTitle": "keyboard, mouse and touch device enumeration and their connect/disconnect events",
+      "match": {
+        "headers": [
+          "input_haptics.h",
+          "input_joystick.h",
+          "input_devices.h",
+          "input_text.h",
+          "input_cursor.h"
+        ],
+        "prefixes": [
+          "cna_input_device_",
+          "cna_input_devices_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's extended input families family (keyboard, mouse and touch device enumeration and their connect/disconnect events) and reachable from cna.extensions.input, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.input projects keyboard, mouse and touch device enumeration and their connect/disconnect events"
+    },
+    {
+      "id": "input-gamepad-sensors",
+      "family": "gamepad-sensors",
+      "familyTitle": "sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power",
+      "match": {
+        "headers": [
+          "input_haptics.h",
+          "input_joystick.h",
+          "input_devices.h",
+          "input_text.h",
+          "input_cursor.h"
+        ],
+        "prefixes": [
+          "cna_sensors_",
+          "cna_sensor_info_",
+          "cna_gamepad_get_accelerometer",
+          "cna_gamepad_get_gyro",
+          "cna_gamepad_get_power_info",
+          "cna_power_get_info"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's extended input families family (sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power) and reachable from cna.extensions.input, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.input projects sensors carried by an input device rather than by the host: gamepad accelerometer, gyro and power"
+    },
+    {
+      "id": "input-clipboard",
+      "family": "input-clipboard",
+      "familyTitle": "the clipboard as an input service, distinct from the device-services clipboard route",
+      "match": {
+        "headers": [
+          "input_haptics.h",
+          "input_joystick.h",
+          "input_devices.h",
+          "input_text.h",
+          "input_cursor.h"
+        ],
+        "prefixes": [
+          "cna_clipboard_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected CNA's extended input families family (the clipboard as an input service, distinct from the device-services clipboard route) and reachable from cna.extensions.input, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: cna.extensions.input projects the clipboard as an input service, distinct from the device-services clipboard route"
+    },
+    {
+      "id": "online-packet-reader",
+      "family": "packet-reader",
+      "familyTitle": "PacketReader: the typed read side of a network packet",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_packet_reader_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (PacketReader: the typed read side of a network packet) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketReader: the typed read side of a network packet"
+    },
+    {
+      "id": "online-packet-writer",
+      "family": "packet-writer",
+      "familyTitle": "PacketWriter: the typed write side of a network packet",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_packet_writer_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (PacketWriter: the typed write side of a network packet) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects PacketWriter: the typed write side of a network packet"
+    },
+    {
+      "id": "online-session-properties",
+      "family": "session-properties",
+      "familyTitle": "NetworkSessionProperties: the searchable property list a session advertises",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_network_session_properties_",
+          "cna_network_session_property_enumerator_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (NetworkSessionProperties: the searchable property list a session advertises) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSessionProperties: the searchable property list a session advertises"
+    },
+    {
+      "id": "online-quality-of-service",
+      "family": "quality-of-service",
+      "familyTitle": "QualityOfService: the measured bandwidth and latency of a discovered session",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_quality_of_service_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (QualityOfService: the measured bandwidth and latency of a discovered session) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects QualityOfService: the measured bandwidth and latency of a discovered session"
+    },
+    {
+      "id": "online-net-errors",
+      "family": "net-errors",
+      "familyTitle": "the last join failure the network layer recorded",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_net_get_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (the last join failure the network layer recorded) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the last join failure the network layer recorded"
+    },
+    {
+      "id": "online-network-session",
+      "family": "network-session",
+      "familyTitle": "NetworkSession: creation, discovery, join, gamer collections, state and events",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_network_session_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (NetworkSession: creation, discovery, join, gamer collections, state and events) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkSession: creation, discovery, join, gamer collections, state and events"
+    },
+    {
+      "id": "online-available-session",
+      "family": "available-session",
+      "familyTitle": "AvailableNetworkSession and its collection: what discovery returns",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_available_network_session_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (AvailableNetworkSession and its collection: what discovery returns) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvailableNetworkSession and its collection: what discovery returns"
+    },
+    {
+      "id": "online-network-gamer",
+      "family": "network-gamer",
+      "familyTitle": "NetworkGamer: identity, session membership and per-gamer state",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_network_gamer_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (NetworkGamer: identity, session membership and per-gamer state) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkGamer: identity, session membership and per-gamer state"
+    },
+    {
+      "id": "online-local-network-gamer",
+      "family": "local-network-gamer",
+      "familyTitle": "LocalNetworkGamer: the send and receive surface of a gamer this machine owns",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_local_network_gamer_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (LocalNetworkGamer: the send and receive surface of a gamer this machine owns) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LocalNetworkGamer: the send and receive surface of a gamer this machine owns"
+    },
+    {
+      "id": "online-network-machine",
+      "family": "network-machine",
+      "familyTitle": "NetworkMachine: the gamers a single machine contributes to a session",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_network_machine_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (NetworkMachine: the gamers a single machine contributes to a session) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects NetworkMachine: the gamers a single machine contributes to a session"
+    },
+    {
+      "id": "online-gamer",
+      "family": "gamer",
+      "familyTitle": "Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_gamer_begin_",
+          "cna_gamer_collection_",
+          "cna_gamer_copy_",
+          "cna_gamer_destroy",
+          "cna_gamer_enumerator_",
+          "cna_gamer_get_",
+          "cna_gamer_presence_",
+          "cna_gamer_set_",
+          "cna_gamer_signed_in_",
+          "cna_gamer_unsubscribe_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Gamer: gamertag, display name, tag, the signed-in collection and profile retrieval"
+    },
+    {
+      "id": "online-gamer-profile",
+      "family": "gamer-profile",
+      "familyTitle": "GamerProfile: motto, region, picture and the numbers behind them",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_gamer_profile_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (GamerProfile: motto, region, picture and the numbers behind them) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects GamerProfile: motto, region, picture and the numbers behind them"
+    },
+    {
+      "id": "online-signed-in-gamer",
+      "family": "signed-in-gamer",
+      "familyTitle": "SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_signed_in_gamer_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects SignedInGamer: privileges, presence, party, achievements, friends and the sign-in events"
+    },
+    {
+      "id": "online-friends",
+      "family": "friends",
+      "familyTitle": "FriendGamer and FriendCollection",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_friend_gamer_",
+          "cna_friend_collection_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (FriendGamer and FriendCollection) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects FriendGamer and FriendCollection"
+    },
+    {
+      "id": "online-achievements",
+      "family": "achievements",
+      "familyTitle": "Achievement and AchievementCollection",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_achievement_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (Achievement and AchievementCollection) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Achievement and AchievementCollection"
+    },
+    {
+      "id": "online-leaderboards",
+      "family": "leaderboards",
+      "familyTitle": "LeaderboardIdentity, LeaderboardEntry and LeaderboardReader",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_leaderboard_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (LeaderboardIdentity, LeaderboardEntry and LeaderboardReader) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects LeaderboardIdentity, LeaderboardEntry and LeaderboardReader"
+    },
+    {
+      "id": "online-property-dictionary",
+      "family": "property-dictionary",
+      "familyTitle": "the typed property dictionary leaderboards and gamer state are written through",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_property_dictionary_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (the typed property dictionary leaderboards and gamer state are written through) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the typed property dictionary leaderboards and gamer state are written through"
+    },
+    {
+      "id": "online-guide",
+      "family": "guide",
+      "familyTitle": "Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_guide_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects Guide: visibility, trial mode, notifications, keyboard input, message boxes and every ShowX entry point"
+    },
+    {
+      "id": "online-gamer-services-runtime",
+      "family": "gamer-services-runtime",
+      "familyTitle": "the GamerServices component and dispatcher this package already drives for the strict profile",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_gamer_services_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (the GamerServices component and dispatcher this package already drives for the strict profile) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects the GamerServices component and dispatcher this package already drives for the strict profile"
+    },
+    {
+      "id": "online-avatar-description",
+      "family": "avatar-description",
+      "familyTitle": "AvatarDescription: the byte description, its validity, random generation and the gamer it came from",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_avatar_description_",
+          "cna_avatar_body_type_",
+          "cna_avatar_appearance_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (AvatarDescription: the byte description, its validity, random generation and the gamer it came from) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarDescription: the byte description, its validity, random generation and the gamer it came from"
+    },
+    {
+      "id": "online-avatar-animation",
+      "family": "avatar-animation",
+      "familyTitle": "AvatarAnimation and the preset clips: bone transforms, expression and playback position",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_avatar_animation_",
+          "cna_avatar_expression_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (AvatarAnimation and the preset clips: bone transforms, expression and playback position) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarAnimation and the preset clips: bone transforms, expression and playback position"
+    },
+    {
+      "id": "online-avatar-renderer",
+      "family": "avatar-renderer",
+      "familyTitle": "AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing",
+      "match": {
+        "headers": [
+          "net.h",
+          "net_gamers.h",
+          "net_sessions.h",
+          "gamer_services.h"
+        ],
+        "prefixes": [
+          "cna_avatar_renderer_"
+        ]
+      },
+      "purpose": "XNA_BACKING",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "In the selected XNA's Net, GamerServices and Avatar runtime family (AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing) and reachable from Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices, but not yet imported. Every remaining route here is a task, not a decision.",
+      "boundReason": "imported: Microsoft.Xna.Framework.Net and Microsoft.Xna.Framework.GamerServices projects AvatarRenderer: bind pose, bone parents, world transforms, lighting and drawing"
     },
     {
       "id": "modern-graphics-extensions",
@@ -1686,32 +2598,6 @@
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "DELIBERATE_NON_BINDING",
       "reason": "Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported.",
-      "boundReason": "imported: the selected profile reaches this route"
-    },
-    {
-      "id": "net-profile",
-      "match": {
-        "headers": [
-          "net.h",
-          "net_gamers.h",
-          "net_sessions.h"
-        ]
-      },
-      "purpose": "OUT_OF_SELECTED_PROFILE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Microsoft.Xna.Framework.Net is not in the selected 257-type profile; opening it requires a deliberate future-profile decision.",
-      "boundReason": "imported: the selected profile reaches this route"
-    },
-    {
-      "id": "gamer-services-profile",
-      "match": {
-        "headers": [
-          "gamer_services.h"
-        ]
-      },
-      "purpose": "OUT_OF_SELECTED_PROFILE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "The selected profile ends at GamerServicesComponent; no Gamer, Guide, Avatar, achievement or leaderboard facade is projected, and none may be fabricated.",
       "boundReason": "imported: the selected profile reaches this route"
     }
   ],
@@ -1741,6 +2627,44 @@
         "engine-ascii-dependency"
       ],
       "description": "`engine_layer.h`, grouped into named sub-families. There is no blanket rule:\na route no sub-family claims is UNREVIEWED and fails the gate. Every route here\nis BOUND or carries its own written non-binding reason."
+    },
+    {
+      "id": "devices",
+      "label": "DEVICES",
+      "title": "CNA's sensors and device services",
+      "headers": [
+        "sensors.h",
+        "devices.h"
+      ],
+      "ruleIds": [],
+      "description": "`sensors.h` and `devices.h`, grouped into named sub-families. There is no\nblanket rule: a route no sub-family claims is UNREVIEWED and fails the gate.\nEvery route here is BOUND or carries its own written non-binding reason."
+    },
+    {
+      "id": "input",
+      "label": "INPUT",
+      "title": "CNA's extended input families",
+      "headers": [
+        "input_haptics.h",
+        "input_joystick.h",
+        "input_devices.h",
+        "input_text.h",
+        "input_cursor.h"
+      ],
+      "ruleIds": [],
+      "description": "`input_text.h`, `input_cursor.h`, `input_joystick.h`, `input_haptics.h` and\n`input_devices.h`, grouped into named sub-families. There is no blanket rule.\nEvery route here is BOUND or carries its own written non-binding reason."
+    },
+    {
+      "id": "online",
+      "label": "ONLINE",
+      "title": "XNA's Net, GamerServices and Avatar runtime",
+      "headers": [
+        "net.h",
+        "net_gamers.h",
+        "net_sessions.h",
+        "gamer_services.h"
+      ],
+      "ruleIds": [],
+      "description": "`net.h`, `net_gamers.h`, `net_sessions.h` and `gamer_services.h`, grouped into\nnamed sub-families. These back a selected *strict* profile rather than a CNA-only\nextension: the public names are `Microsoft.Xna.Framework.Net` and\n`Microsoft.Xna.Framework.GamerServices`, measured against the three reference\nassemblies the `xna40-windows-online` profile pins."
     }
   ]
 }

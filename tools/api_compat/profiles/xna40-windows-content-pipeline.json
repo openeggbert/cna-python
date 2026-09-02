@@ -1,0 +1,32 @@
+{
+  "id": "xna40-windows-content-pipeline",
+  "name": "XNA 4.0 Windows Content Pipeline",
+  "platform": "WINDOWS_CONTENT_PIPELINE",
+  "contract": "xna40-windows-content-pipeline-contract.json",
+  "assemblyRoot": "~/deps/xna40-windows-assemblies",
+  "resolveDirectories": [
+    "/usr/lib/mono/4.5"
+  ],
+  "coreAssemblyName": "mscorlib",
+  "referenceAssemblies": [
+    "Microsoft.Xna.Framework.Content.Pipeline.dll",
+    "Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll",
+    "Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll",
+    "Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll",
+    "Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll",
+    "Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll",
+    "Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll"
+  ],
+  "referenceSha256": {
+    "Microsoft.Xna.Framework.Content.Pipeline.dll": "1ea481da62eb9e66bad8589df83f173725e62d22362801e1264cd02347721c69",
+    "Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll": "1daca08f4e4f12da5ff095e7861e7702fd41f761a8c2ece5ee714894b7684165",
+    "Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll": "9f30ac3db23c14afce527ac18fdf29905dcd7bad48273a88b3040c918b789c8d",
+    "Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll": "01a22ab5ed7a08f0e4b7a856fe73b1e3fa12a8789026d43125bedb7edcf93f91",
+    "Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll": "3b418ce4a72f1d090563363530a9fc0859b0d6a9c637a500dab1a4901696eba6",
+    "Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll": "8768d9992c303af401fed6af20eb4d3548bed48a9c05f125f22e278b2fc0b492",
+    "Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll": "ccb90834938ee0ab129f0a9089cff8dcd7827759d05cd86ea97e70be1b1928e8"
+  },
+  "referenceTypes": 128,
+  "referenceMembers": 743,
+  "allowlist": []
+}
