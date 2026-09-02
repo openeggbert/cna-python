@@ -1393,7 +1393,6 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing |
-| XNA_BACKING | BOUND | 5 | imported: the selected profile reaches this route |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: cna.extensions.engine projects motion blur -- the velocity-driven motion-blur pass |
 | CNA_EXTENSION_CANDIDATE | BOUND | 5 | imported: the PBR family is unreachable without it -- see docs/engine-upstream-findings.md ENGINE-005 |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
@@ -1409,12 +1408,15 @@ is BOUND or carries its own written non-binding reason.
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 2 | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |
+| XNA_BACKING | BOUND | 2 | imported: a GraphicsDevice a caller constructs and disposes is XNA public surface, distinct from the Game's borrowed one |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 | CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects image-based lighting -- the IBL value an effect samples |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: level of detail and instancing take a native mesh-part handle, which strict XNA's managed ModelMeshPart does not have |
+| XNA_BACKING | BOUND | 2 | imported: RenderTarget2D and RenderTargetCube raise ContentLost, and the subscription is what delivers it |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects PBR material extensions -- the glTF material extensions a PBR material carries, and thin-film iridescence |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects the blit pass -- the exact source-to-destination copy |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects clustered light values -- the clustered light value structure |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects device shadow-sampling capability -- whether the device can sample a depth texture as a shadow comparison |
 | CNA_EXTENSION_CANDIDATE | BOUND | 1 | imported: cna.extensions.engine projects compute memory-barrier mask -- the containment test for the barrier bit mask a compute dispatch orders |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 | A CNA test seam for resetting process-global renderer selection; shipping it as public extension surface would publish a testing hook as product API. |
+| XNA_BACKING | BOUND | 1 | imported: VideoPlayer.GetTexture needs the frame generation to tell XNA's two alternating frame textures apart |

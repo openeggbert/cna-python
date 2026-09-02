@@ -25,7 +25,8 @@
       },
       "purpose": "XNA_BACKING",
       "status": "ACTIONABLE_LOCAL",
-      "reason": "Frame generation is what XNA's two alternating frame textures need for change detection; selected for the VideoPlayer.GetTexture projection."
+      "reason": "Frame generation is what XNA's two alternating frame textures need for change detection; selected for the VideoPlayer.GetTexture projection.",
+      "boundReason": "imported: VideoPlayer.GetTexture needs the frame generation to tell XNA's two alternating frame textures apart"
     },
     {
       "id": "render-target-content-lost",
@@ -37,7 +38,8 @@
       },
       "purpose": "XNA_BACKING",
       "status": "ACTIONABLE_LOCAL",
-      "reason": "RenderTarget2D/Cube ContentLost is XNA public surface and CNA now has the subscription; delivery only happens on renderers that can lose a device."
+      "reason": "RenderTarget2D/Cube ContentLost is XNA public surface and CNA now has the subscription; delivery only happens on renderers that can lose a device.",
+      "boundReason": "imported: RenderTarget2D and RenderTargetCube raise ContentLost, and the subscription is what delivers it"
     },
     {
       "id": "owned-graphics-device",
@@ -49,7 +51,8 @@
       },
       "purpose": "XNA_BACKING",
       "status": "ACTIONABLE_LOCAL",
-      "reason": "XNA's GraphicsDevice constructor and Dispose are public; CNA now has an owned device rather than only the Game's borrowed one."
+      "reason": "XNA's GraphicsDevice constructor and Dispose are public; CNA now has an owned device rather than only the Game's borrowed one.",
+      "boundReason": "imported: a GraphicsDevice a caller constructs and disposes is XNA public surface, distinct from the Game's borrowed one"
     },
     {
       "id": "graphics-device-resource-events",
@@ -61,7 +64,8 @@
       },
       "purpose": "XNA_BACKING",
       "status": "BLOCKED_UPSTREAM",
-      "reason": "CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated."
+      "reason": "CNA documents that no native object pointer crosses the ABI for these events, so XNA's ResourceCreatedEventArgs.Resource cannot be supplied and would have to be fabricated.",
+      "boundReason": "not applicable while blocked: no native object pointer crosses the ABI for these events, so ResourceCreatedEventArgs.Resource could only be fabricated"
     },
     {
       "id": "gamer-services-dispatcher",

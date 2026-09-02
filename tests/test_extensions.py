@@ -73,6 +73,73 @@ class ExtensionSeparationTests(unittest.TestCase):
             graphics.__all__.remove("undocumented_helper")
             del graphics.undocumented_helper
 
+    def test_gate_rejects_a_public_attribute_that_offers_a_raw_handle(self) -> None:
+        """A name is a promise: ``thing.handle`` says a caller may take one."""
+        class Leaky:
+            """A class that publishes its native handle by name."""
+
+            handle = 0
+
+        Leaky.__module__ = graphics.__name__
+        graphics.Leaky = Leaky
+        graphics.__all__.append("Leaky")
+        try:
+            summary = verify_extensions.audit()["summary"]
+            self.assertEqual(summary["PUBLIC_RAW_HANDLE_LEAK"], 1)
+            self.assertGreater(summary["EXTENSION_SURFACE_DIAGNOSTICS"], 0)
+        finally:
+            graphics.__all__.remove("Leaky")
+            del graphics.Leaky
+
+    def test_gate_rejects_a_native_spelling_in_a_public_signature(self) -> None:
+        """Including a constructor's, which is the signature a caller always reads.
+
+        Parsed rather than planted in a shipped file: the detector reads source,
+        so giving it source is what exercises it, and planting a real module
+        would say the same thing less safely.
+        """
+        import ast
+
+        source = "\n".join([
+            "class Thing:",
+            '    """A class whose constructor names a private native type."""',
+            "",
+            "    def __init__(self, handle: '_support.NativeHandle') -> None:",
+            "        pass",
+        ])
+        leaks = verify_extensions._annotation_leaks(Path("planted.py"),
+                                                    ast.parse(source))
+        self.assertEqual(len(leaks), 1)
+        self.assertEqual(leaks[0]["where"], "Thing.__init__(handle)")
+
+    def test_the_gate_allows_a_private_helper_to_say_what_it_takes(self) -> None:
+        """Hiding it there would make the implementation less honest rather than
+        the surface safer."""
+        import ast
+
+        source = "\n".join([
+            "class Thing:",
+            '    """A class whose private helper names a private native type."""',
+            "",
+            "    def _adopt(self, handle: '_support.NativeHandle') -> None:",
+            "        pass",
+            "",
+            "",
+            "def _helper(value: 'ctypes.c_uint64') -> None:",
+            "    pass",
+        ])
+        self.assertEqual(
+            verify_extensions._annotation_leaks(Path("planted.py"), ast.parse(source)),
+            [])
+
+    def test_the_gate_reads_every_engine_module(self) -> None:
+        """The family opened this session is inside the surface the gate walks."""
+        modules = set(verify_extensions.audit()["modules"])
+        for name in ("cna.extensions.engine", "cna.extensions.engine.clustered",
+                     "cna.extensions.engine.probes", "cna.extensions.engine.culling",
+                     "cna.extensions.engine.debug"):
+            self.assertIn(name, modules, name)
+
     def test_xna_namespace_never_imports_the_extension_profile(self) -> None:
         report = verify_extensions.audit()
         self.assertEqual(report["xnaContamination"], [])

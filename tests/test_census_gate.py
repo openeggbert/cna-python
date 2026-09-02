@@ -158,3 +158,104 @@ class ShippedRulesTests(unittest.TestCase):
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
+
+
+class NewRouteFalsifiability(unittest.TestCase):
+    """A route CNA adds tomorrow must arrive as a decision nobody has made yet.
+
+    ``UNREVIEWED`` is the one status the census may not ship, and it only means
+    anything if a route that nothing has considered actually lands there. These
+    check that with routes CNA does not have.
+    """
+
+    def _classify(self, name: str, header: str) -> dict:
+        import json
+
+        rules = json.loads(census.RULES_PATH.read_text(encoding="utf-8"))["rules"]
+        return census.classify({name: _Declaration(header)}, set(), rules)[0]
+
+    def test_a_new_engine_route_is_unreviewed(self) -> None:
+        row = self._classify("cna_brand_new_engine_thing_create", "engine_layer.h")
+        self.assertEqual(row["status"], "UNREVIEWED")
+        self.assertIsNone(row["rule"])
+
+    def test_a_new_route_in_a_header_nothing_claims_is_unreviewed(self) -> None:
+        row = self._classify("cna_brand_new_core_thing", "cna.h")
+        self.assertEqual(row["status"], "UNREVIEWED")
+
+    def test_a_new_route_in_a_header_with_a_whole_header_decision_inherits_it(self) -> None:
+        """The deliberate exception, named so it is a decision and not an oversight.
+
+        ``graphics_ext.h`` is outside the selected XNA 4.0 profile as a *header*,
+        with that written down, so a route added to it inherits the same
+        decision correctly. That is different in kind from a catch-all matching a
+        name *suffix* across twenty families, which is why one is kept and the
+        other was removed.
+        """
+        row = self._classify("cna_brand_new_thing_ext", "graphics_ext.h")
+        self.assertEqual(row["status"], "DELIBERATE_NON_BINDING")
+        self.assertEqual(row["rule"], "modern-graphics-extensions")
+
+    #: The suffix-only rules this repository has deliberately accepted, and why
+    #: each is a decision that really does cover everything it reaches.
+    ALLOWED_SUFFIX_RULES = {
+        "clr-type-name":
+            "two whole route-name tails naming one CLR concept, and an exclusive "
+            "claim the contradiction check polices",
+        "native-disposed-flag":
+            "one whole route-name tail naming one operation every CNA object has, "
+            "so a single decision about disposal really does cover all of them",
+        "value-struct-initialisers":
+            "three whole route-name tails naming one operation -- filling a "
+            "caller-owned value structure -- with an exclusive claim, and every "
+            "engine family that does import an initialiser claims it first",
+    }
+
+    def test_no_new_suffix_only_rule_appears_unnoticed(self) -> None:
+        """The shape that quietly reviewed routes nobody had looked at.
+
+        A suffix that is a *marker* rather than a whole operation says nothing
+        about which family a route belongs to, so a rule keyed on one classifies
+        whatever it happens to reach. Exactly that shipped -- a ``*_ext``
+        catch-all spanning twenty families -- and was found only when the
+        shadowing gate reported that it had been emptied by more specific rules.
+
+        A suffix rule scoped by a header, prefix or name can only reach what it
+        was aimed at, so it needs no argument. An unscoped one needs an argument,
+        and that argument lives here: adding one means editing this list, which
+        is the point.
+        """
+        import json
+
+        rules = json.loads(census.RULES_PATH.read_text(encoding="utf-8"))["rules"]
+        unscoped = {rule.get("id") for rule in rules
+                    if "suffixes" in rule["match"]
+                    and not set(rule["match"]) & {"headers", "prefixes", "names"}}
+        self.assertEqual(unscoped, set(self.ALLOWED_SUFFIX_RULES),
+                         "an unscoped suffix rule appeared or disappeared without "
+                         "its reason being written here")
+
+    def test_the_removed_catch_all_has_not_come_back(self) -> None:
+        """No rule matches every ``*_ext`` route again.
+
+        The one that did turned every route CNA might add later into a reviewed
+        decision nobody had made, which is what UNREVIEWED exists to prevent.
+        """
+        import json
+
+        rules = json.loads(census.RULES_PATH.read_text(encoding="utf-8"))["rules"]
+        for rule in rules:
+            match = rule["match"]
+            if set(match) & {"headers", "prefixes", "names"}:
+                continue
+            self.assertNotIn("_ext", match.get("suffixes", ()), rule.get("id"))
+
+    def test_every_shipped_rule_carries_a_written_reason(self) -> None:
+        import json
+
+        document = json.loads(census.RULES_PATH.read_text(encoding="utf-8"))
+        for rule in document["rules"]:
+            self.assertTrue((rule.get("reason") or "").strip(), rule.get("id"))
+            self.assertTrue((rule.get("boundReason") or "").strip(), rule.get("id"))
+            self.assertIn(rule["purpose"], census.PURPOSES, rule.get("id"))
+            self.assertIn(rule["status"], census.STATUSES, rule.get("id"))
