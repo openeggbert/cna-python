@@ -823,6 +823,92 @@ ENGINE_SCENE_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
      "caller output; two-call size/copy protocol"),
 )
 
+#: The render pipeline and the settings value that configures it.
+ENGINE_PIPELINE_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
+    ("cna_render_pipeline_settings_ext_init", c.c_uint32, [c.POINTER(engine.CNA_RenderPipelineSettingsEXT)],
+     "fills a caller-owned value structure with CNA's own defaults"),
+    ("cna_render_pipeline_settings_ext_normalize", c.c_uint32, [c.POINTER(engine.CNA_RenderPipelineSettingsEXT)],
+     "pure function over a caller-owned value; corrects it in place"),
+    ("cna_render_pipeline_settings_ext_apply_render_quality_preset", c.c_uint32, [c.POINTER(engine.CNA_RenderPipelineSettingsEXT)],
+     "pure function over a caller-owned value; corrects it in place"),
+    ("cna_render_pipeline_settings_ext_apply_from_string", c.c_uint32, [c.POINTER(engine.CNA_RenderPipelineSettingsEXT), abi.CNA_StringView, c.POINTER(c.c_int32)],
+     "pure function over a caller-owned value and borrowed text"),
+    ("cna_render_pipeline_create", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "owned render pipeline; borrows the graphics device for the call"),
+    ("cna_render_pipeline_destroy", c.c_uint32, [c.c_uint64],
+     "consumes render pipeline"),
+    ("cna_render_pipeline_get_settings", c.c_uint32, [c.c_uint64, c.POINTER(engine.CNA_RenderPipelineSettingsEXT)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_set_settings", c.c_uint32, [c.c_uint64, c.POINTER(engine.CNA_RenderPipelineSettingsEXT)],
+     "borrowed render pipeline; copies the value"),
+    ("cna_render_pipeline_resize", c.c_uint32, [c.c_uint64, c.c_int32, c.c_int32],
+     "borrowed render pipeline"),
+    ("cna_render_pipeline_begin", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Color)],
+     "borrowed render pipeline"),
+    ("cna_render_pipeline_end", c.c_uint32, [c.c_uint64],
+     "borrowed render pipeline"),
+    ("cna_render_pipeline_add_user_pass", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed pipeline; the pass stays the caller's and must outlive its "
+     "membership"),
+    ("cna_render_pipeline_clear_user_passes", c.c_uint32, [c.c_uint64],
+     "borrowed render pipeline"),
+    ("cna_render_pipeline_set_depth_normal_inputs", c.c_uint32, [c.c_uint64, c.c_uint64, c.c_uint64],
+     "borrowed pipeline; both textures are BORROWED for every later frame"),
+    ("cna_render_pipeline_set_velocity_input_ext", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed pipeline; the texture is BORROWED for every later frame"),
+    ("cna_render_pipeline_set_transparent_scene", c.c_uint32,
+     [c.c_uint64, engine.CNA_RenderPipelineDrawCallback, c.c_void_p],
+     "borrowed pipeline; the callback and its context are RETAINED until "
+     "replaced"),
+    ("cna_render_pipeline_set_shadow_scene", c.c_uint32,
+     [c.c_uint64, c.c_uint64, c.POINTER(engine.CNA_DirectionalLightEXT),
+      c.POINTER(engine.CNA_BoundingBox), engine.CNA_RenderPipelineDrawCallback,
+      c.c_void_p],
+     "borrowed pipeline; the shadow map, the callback and its context are "
+     "RETAINED"),
+    ("cna_render_pipeline_set_camera", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix), c.c_float, c.c_float],
+     "borrowed render pipeline; copies the value"),
+    ("cna_render_pipeline_set_skybox_camera", c.c_uint32, [c.c_uint64, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix)],
+     "borrowed render pipeline; copies the value"),
+    ("cna_render_pipeline_copy_transparency_fallback_reason_ext", c.c_uint32, [c.c_uint64, c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol"),
+    ("cna_render_pipeline_set_gpu_timing_enabled_ext", c.c_uint32, [c.c_uint64, c.c_uint8],
+     "borrowed render pipeline; copies the value"),
+    ("cna_render_pipeline_is_gpu_timing_enabled_ext", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_did_skybox_draw", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "borrowed render pipeline"),
+    ("cna_render_pipeline_did_shadow_pass_run", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "borrowed render pipeline"),
+    ("cna_render_pipeline_get_shadow_map", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; the handle is the one that was set and is not a new borrow"),
+    ("cna_render_pipeline_get_scene_target", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "COUNTED BORROW of the pipeline's scene target; released with "
+     "cna_render_target_destroy"),
+    ("cna_render_pipeline_get_scene_target_format", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint32)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_is_using_scene_target", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_get_last_frame_pass_count", c.c_uint32, [c.c_uint64, c.POINTER(c.c_int32)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_get_gpu_memory_estimate_bytes", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_get_statistics", c.c_uint32, [c.c_uint64, c.POINTER(engine.CNA_RenderPipelineFrameStatisticsEXT)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_release_device_resources_ext", c.c_uint32, [c.c_uint64],
+     "borrowed pipeline; releases every device resource it allocated"),
+    ("cna_render_pipeline_get_pass_timing_count_ext", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_get_pass_timing_ext", c.c_uint32, [c.c_uint64, c.c_uint64, c.POINTER(engine.CNA_PassTimingEXT)],
+     "caller output; borrowed render pipeline"),
+    ("cna_render_pipeline_copy_pass_timing_name_ext", c.c_uint32, [c.c_uint64, c.c_uint64, c.POINTER(c.c_char), c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol"),
+    ("cna_render_pipeline_get_skybox", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "caller output; the handle is the one that was set and is not a new borrow"),
+    ("cna_render_pipeline_set_skybox", c.c_uint32, [c.c_uint64, c.c_uint64],
+     "borrowed pipeline; the skybox is BORROWED and must outlive the pipeline"),
+)
+
 #: Every engine route this binding imports, in one tuple for the loader.
 ENGINE_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ENGINE_IDENTITY_MANIFEST
@@ -832,6 +918,7 @@ ENGINE_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     + ENGINE_PBR_MANIFEST
     + ENGINE_PBR_DEPENDENCY_MANIFEST
     + ENGINE_SCENE_MANIFEST
+    + ENGINE_PIPELINE_MANIFEST
 )
 
 # ``engine`` is imported for the structures later slices pass by pointer; the

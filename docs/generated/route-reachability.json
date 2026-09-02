@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1387,
-    "DIRECT_CALL_SITE": 1293,
+    "BOUND_ROUTES": 1424,
+    "DIRECT_CALL_SITE": 1330,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
     "REACHED_BY_NAME_TEMPLATE": 15,
     "ADMITTED_WITH_REASON": 37,
@@ -3562,7 +3562,7 @@
       "src/_cna_native/engine_support.py:73"
     ],
     "cna_engine_layer_copy_version_string": [
-      "src/cna/extensions/engine/__init__.py:218"
+      "src/cna/extensions/engine/__init__.py:229"
     ],
     "cna_graphics_memory_barrier_has": [
       "src/cna/extensions/engine/compute.py:80"
@@ -4575,6 +4575,117 @@
     ],
     "cna_particle_system_copy_particle_lookup_glsl": [
       "src/cna/extensions/engine/scene.py:326"
+    ],
+    "cna_render_pipeline_settings_ext_init": [
+      "src/cna/extensions/engine/pipeline.py:191"
+    ],
+    "cna_render_pipeline_settings_ext_normalize": [
+      "src/cna/extensions/engine/pipeline.py:212"
+    ],
+    "cna_render_pipeline_settings_ext_apply_render_quality_preset": [
+      "src/cna/extensions/engine/pipeline.py:216"
+    ],
+    "cna_render_pipeline_settings_ext_apply_from_string": [
+      "src/cna/extensions/engine/pipeline.py:228"
+    ],
+    "cna_render_pipeline_create": [
+      "src/cna/extensions/engine/pipeline.py:304"
+    ],
+    "cna_render_pipeline_destroy": [
+      "src/cna/extensions/engine/pipeline.py:305"
+    ],
+    "cna_render_pipeline_get_settings": [
+      "src/cna/extensions/engine/pipeline.py:355"
+    ],
+    "cna_render_pipeline_set_settings": [
+      "src/cna/extensions/engine/pipeline.py:363"
+    ],
+    "cna_render_pipeline_resize": [
+      "src/cna/extensions/engine/pipeline.py:373"
+    ],
+    "cna_render_pipeline_begin": [
+      "src/cna/extensions/engine/pipeline.py:524"
+    ],
+    "cna_render_pipeline_end": [
+      "src/cna/extensions/engine/pipeline.py:535"
+    ],
+    "cna_render_pipeline_add_user_pass": [
+      "src/cna/extensions/engine/pipeline.py:421"
+    ],
+    "cna_render_pipeline_clear_user_passes": [
+      "src/cna/extensions/engine/pipeline.py:427"
+    ],
+    "cna_render_pipeline_set_depth_normal_inputs": [
+      "src/cna/extensions/engine/pipeline.py:399"
+    ],
+    "cna_render_pipeline_set_velocity_input_ext": [
+      "src/cna/extensions/engine/pipeline.py:406"
+    ],
+    "cna_render_pipeline_set_transparent_scene": [
+      "src/cna/extensions/engine/pipeline.py:474"
+    ],
+    "cna_render_pipeline_set_shadow_scene": [
+      "src/cna/extensions/engine/pipeline.py:499"
+    ],
+    "cna_render_pipeline_set_camera": [
+      "src/cna/extensions/engine/pipeline.py:381"
+    ],
+    "cna_render_pipeline_set_skybox_camera": [
+      "src/cna/extensions/engine/pipeline.py:389"
+    ],
+    "cna_render_pipeline_copy_transparency_fallback_reason_ext": [
+      "src/cna/extensions/engine/pipeline.py:619"
+    ],
+    "cna_render_pipeline_set_gpu_timing_enabled_ext": [
+      "src/cna/extensions/engine/pipeline.py:512"
+    ],
+    "cna_render_pipeline_is_gpu_timing_enabled_ext": [
+      "src/cna/extensions/engine/pipeline.py:507"
+    ],
+    "cna_render_pipeline_did_skybox_draw": [
+      "src/cna/extensions/engine/pipeline.py:554"
+    ],
+    "cna_render_pipeline_did_shadow_pass_run": [
+      "src/cna/extensions/engine/pipeline.py:560"
+    ],
+    "cna_render_pipeline_get_shadow_map": [
+      "src/cna/extensions/engine/pipeline.py:451"
+    ],
+    "cna_render_pipeline_get_scene_target": [
+      "src/cna/extensions/engine/pipeline.py:602"
+    ],
+    "cna_render_pipeline_get_scene_target_format": [
+      "src/cna/extensions/engine/pipeline.py:589"
+    ],
+    "cna_render_pipeline_is_using_scene_target": [
+      "src/cna/extensions/engine/pipeline.py:582"
+    ],
+    "cna_render_pipeline_get_last_frame_pass_count": [
+      "src/cna/extensions/engine/pipeline.py:566"
+    ],
+    "cna_render_pipeline_get_gpu_memory_estimate_bytes": [
+      "src/cna/extensions/engine/pipeline.py:572"
+    ],
+    "cna_render_pipeline_get_statistics": [
+      "src/cna/extensions/engine/pipeline.py:547"
+    ],
+    "cna_render_pipeline_release_device_resources_ext": [
+      "src/cna/extensions/engine/pipeline.py:652"
+    ],
+    "cna_render_pipeline_get_pass_timing_count_ext": [
+      "src/cna/extensions/engine/pipeline.py:627"
+    ],
+    "cna_render_pipeline_get_pass_timing_ext": [
+      "src/cna/extensions/engine/pipeline.py:632"
+    ],
+    "cna_render_pipeline_copy_pass_timing_name_ext": [
+      "src/cna/extensions/engine/pipeline.py:635"
+    ],
+    "cna_render_pipeline_get_skybox": [
+      "src/cna/extensions/engine/pipeline.py:437"
+    ],
+    "cna_render_pipeline_set_skybox": [
+      "src/cna/extensions/engine/pipeline.py:444"
     ]
   }
 }

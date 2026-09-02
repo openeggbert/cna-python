@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1387,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1387,
+    "BOUND_FUNCTIONS": 1424,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1424,
     "C_LAYOUT_MEASUREMENTS": 1704,
     "CTYPES_LAYOUT_MEASUREMENTS": 1704,
     "MISSING_SYMBOLS": 0,
@@ -1395,7 +1395,44 @@
     "cna_particle_system_copy_particles_ext",
     "cna_particle_system_step",
     "cna_particle_system_random",
-    "cna_particle_system_copy_particle_lookup_glsl"
+    "cna_particle_system_copy_particle_lookup_glsl",
+    "cna_render_pipeline_settings_ext_init",
+    "cna_render_pipeline_settings_ext_normalize",
+    "cna_render_pipeline_settings_ext_apply_render_quality_preset",
+    "cna_render_pipeline_settings_ext_apply_from_string",
+    "cna_render_pipeline_create",
+    "cna_render_pipeline_destroy",
+    "cna_render_pipeline_get_settings",
+    "cna_render_pipeline_set_settings",
+    "cna_render_pipeline_resize",
+    "cna_render_pipeline_begin",
+    "cna_render_pipeline_end",
+    "cna_render_pipeline_add_user_pass",
+    "cna_render_pipeline_clear_user_passes",
+    "cna_render_pipeline_set_depth_normal_inputs",
+    "cna_render_pipeline_set_velocity_input_ext",
+    "cna_render_pipeline_set_transparent_scene",
+    "cna_render_pipeline_set_shadow_scene",
+    "cna_render_pipeline_set_camera",
+    "cna_render_pipeline_set_skybox_camera",
+    "cna_render_pipeline_copy_transparency_fallback_reason_ext",
+    "cna_render_pipeline_set_gpu_timing_enabled_ext",
+    "cna_render_pipeline_is_gpu_timing_enabled_ext",
+    "cna_render_pipeline_did_skybox_draw",
+    "cna_render_pipeline_did_shadow_pass_run",
+    "cna_render_pipeline_get_shadow_map",
+    "cna_render_pipeline_get_scene_target",
+    "cna_render_pipeline_get_scene_target_format",
+    "cna_render_pipeline_is_using_scene_target",
+    "cna_render_pipeline_get_last_frame_pass_count",
+    "cna_render_pipeline_get_gpu_memory_estimate_bytes",
+    "cna_render_pipeline_get_statistics",
+    "cna_render_pipeline_release_device_resources_ext",
+    "cna_render_pipeline_get_pass_timing_count_ext",
+    "cna_render_pipeline_get_pass_timing_ext",
+    "cna_render_pipeline_copy_pass_timing_name_ext",
+    "cna_render_pipeline_get_skybox",
+    "cna_render_pipeline_set_skybox"
   ],
   "functionManifest": [
     {
@@ -15980,6 +16017,387 @@
       ],
       "arity": 3,
       "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_render_pipeline_settings_ext_init",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_RenderPipelineSettingsEXT>"
+      ],
+      "arity": 1,
+      "ownership": "fills a caller-owned value structure with CNA's own defaults"
+    },
+    {
+      "symbol": "cna_render_pipeline_settings_ext_normalize",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_RenderPipelineSettingsEXT>"
+      ],
+      "arity": 1,
+      "ownership": "pure function over a caller-owned value; corrects it in place"
+    },
+    {
+      "symbol": "cna_render_pipeline_settings_ext_apply_render_quality_preset",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_RenderPipelineSettingsEXT>"
+      ],
+      "arity": 1,
+      "ownership": "pure function over a caller-owned value; corrects it in place"
+    },
+    {
+      "symbol": "cna_render_pipeline_settings_ext_apply_from_string",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_RenderPipelineSettingsEXT>",
+        "CNA_StringView",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over a caller-owned value and borrowed text"
+    },
+    {
+      "symbol": "cna_render_pipeline_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned render pipeline; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_render_pipeline_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_settings",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderPipelineSettingsEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_settings",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderPipelineSettingsEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed render pipeline; copies the value"
+    },
+    {
+      "symbol": "cna_render_pipeline_resize",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Color>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_add_user_pass",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed pipeline; the pass stays the caller's and must outlive its membership"
+    },
+    {
+      "symbol": "cna_render_pipeline_clear_user_passes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_depth_normal_inputs",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 3,
+      "ownership": "borrowed pipeline; both textures are BORROWED for every later frame"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_velocity_input_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed pipeline; the texture is BORROWED for every later frame"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_transparent_scene",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CFunctionType",
+        "c_void_p"
+      ],
+      "arity": 3,
+      "ownership": "borrowed pipeline; the callback and its context are RETAINED until replaced"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_shadow_scene",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_DirectionalLightEXT>",
+        "pointer<CNA_BoundingBox>",
+        "CFunctionType",
+        "c_void_p"
+      ],
+      "arity": 6,
+      "ownership": "borrowed pipeline; the shadow map, the callback and its context are RETAINED"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_camera",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 5,
+      "ownership": "borrowed render pipeline; copies the value"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_skybox_camera",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed render pipeline; copies the value"
+    },
+    {
+      "symbol": "cna_render_pipeline_copy_transparency_fallback_reason_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_gpu_timing_enabled_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed render pipeline; copies the value"
+    },
+    {
+      "symbol": "cna_render_pipeline_is_gpu_timing_enabled_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_did_skybox_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_did_shadow_pass_run",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_shadow_map",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the handle is the one that was set and is not a new borrow"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_scene_target",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the pipeline's scene target; released with cna_render_target_destroy"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_scene_target_format",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_is_using_scene_target",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_last_frame_pass_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_gpu_memory_estimate_bytes",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_statistics",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderPipelineFrameStatisticsEXT>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_release_device_resources_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed pipeline; releases every device resource it allocated"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_pass_timing_count_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_pass_timing_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_PassTimingEXT>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed render pipeline"
+    },
+    {
+      "symbol": "cna_render_pipeline_copy_pass_timing_name_ext",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_render_pipeline_get_skybox",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the handle is the one that was set and is not a new borrow"
+    },
+    {
+      "symbol": "cna_render_pipeline_set_skybox",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed pipeline; the skybox is BORROWED and must outlive the pipeline"
     }
   ],
   "missingSymbols": [],
@@ -18012,8 +18430,8 @@
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_NONE": 0,
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_POINT": 1,
     "VALUE:CNA_PUNCTUAL_LIGHT_KIND_EXT_SPOT": 2,
-    "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_FXAA_EDGE_THRESHOLD_EXT": 0.001,
-    "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_GAMMA_EXT": 0.01,
+    "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_FXAA_EDGE_THRESHOLD_EXT": 0.0010000000474974513,
+    "FVALUE:CNA_RENDER_PIPELINE_MINIMUM_GAMMA_EXT": 0.009999999776482582,
     "VALUE:CNA_RENDER_QUALITY_HIGH": 2,
     "VALUE:CNA_RENDER_QUALITY_LOW": 0,
     "VALUE:CNA_RENDER_QUALITY_MEDIUM": 1,

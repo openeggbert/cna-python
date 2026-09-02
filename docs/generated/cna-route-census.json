@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1387,
+    "BOUND_ROUTES": 1424,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -11,17 +11,17 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 862,
-    "ENGINE_BOUND": 339,
+    "ENGINE_BOUND": 376,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 522,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 485,
     "PURPOSE_XNA_BACKING": 1171,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1824,
     "PURPOSE_MANAGED_BY_DESIGN": 535,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1387,
-    "STATUS_ACTIONABLE_LOCAL": 522,
+    "STATUS_BOUND": 1424,
+    "STATUS_ACTIONABLE_LOCAL": 485,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -36820,408 +36820,408 @@
       "route": "cna_render_pipeline_add_user_pass",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_clear_user_passes",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_copy_pass_timing_name_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_copy_transparency_fallback_reason_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_did_shadow_pass_run",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_did_skybox_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_gpu_memory_estimate_bytes",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_last_frame_pass_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_pass_timing_count_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_pass_timing_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_scene_target",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_scene_target_format",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_settings",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_shadow_map",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_skybox",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_get_statistics",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_is_gpu_timing_enabled_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_is_using_scene_target",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_release_device_resources_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_resize",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_camera",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_depth_normal_inputs",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_gpu_timing_enabled_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_settings",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_shadow_scene",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_skybox",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_skybox_camera",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_transparent_scene",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_set_velocity_input_ext",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
       "rule": "engine-render-pipeline",
       "family": "render-pipeline",
       "familyTitle": "the render pipeline",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_settings_ext_apply_from_string",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
       "rule": "engine-render-pipeline-settings",
       "family": "render-pipeline-settings",
       "familyTitle": "render pipeline settings",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_settings_ext_apply_render_quality_preset",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
       "rule": "engine-render-pipeline-settings",
       "family": "render-pipeline-settings",
       "familyTitle": "render pipeline settings",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_settings_ext_init",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
       "rule": "engine-render-pipeline-settings",
       "family": "render-pipeline-settings",
       "familyTitle": "render pipeline settings",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_settings_ext_normalize",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
       "rule": "engine-render-pipeline-settings",
       "family": "render-pipeline-settings",
       "familyTitle": "render pipeline settings",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_render_pipeline_settings_init",
@@ -56801,408 +56801,408 @@
         "route": "cna_render_pipeline_add_user_pass",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_clear_user_passes",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_copy_pass_timing_name_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_copy_transparency_fallback_reason_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_did_shadow_pass_run",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_did_skybox_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_gpu_memory_estimate_bytes",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_last_frame_pass_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_pass_timing_count_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_pass_timing_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_scene_target",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_scene_target_format",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_settings",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_shadow_map",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_skybox",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_get_statistics",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_is_gpu_timing_enabled_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_is_using_scene_target",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_release_device_resources_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_resize",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_camera",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_depth_normal_inputs",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_gpu_timing_enabled_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_settings",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_shadow_scene",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_skybox",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_skybox_camera",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_transparent_scene",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_set_velocity_input_ext",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports",
         "rule": "engine-render-pipeline",
         "family": "render-pipeline",
         "familyTitle": "the render pipeline",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_settings_ext_apply_from_string",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
         "rule": "engine-render-pipeline-settings",
         "family": "render-pipeline-settings",
         "familyTitle": "render pipeline settings",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_settings_ext_apply_render_quality_preset",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
         "rule": "engine-render-pipeline-settings",
         "family": "render-pipeline-settings",
         "familyTitle": "render pipeline settings",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_settings_ext_init",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
         "rule": "engine-render-pipeline-settings",
         "family": "render-pipeline-settings",
         "familyTitle": "render pipeline settings",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_pipeline_settings_ext_normalize",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline",
         "rule": "engine-render-pipeline-settings",
         "family": "render-pipeline-settings",
         "familyTitle": "render pipeline settings",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_render_target_pool_acquire",

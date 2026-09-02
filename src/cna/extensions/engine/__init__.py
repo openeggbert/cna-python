@@ -45,10 +45,14 @@ Importing this module needs no native library. Constructing anything in it does.
 
 from __future__ import annotations
 
-from . import compute, errors, pbr, postprocess, scene, shadows, values
+from . import compute, errors, pbr, pipeline, postprocess, scene, shadows, values
 from .compute import (
     ComputeShader, GpuTimer, ImageAccess, MemoryBarrier, StorageBuffer,
     barrier_contains,
+)
+from .pipeline import (
+    FrameStatistics, MINIMUM_FXAA_EDGE_THRESHOLD, MINIMUM_GAMMA, RenderPipeline,
+    RenderPipelineSettings, TonemappingMode,
 )
 from .postprocess import (
     BlitPass, EffectPass, FullscreenPass, PassTiming, PostProcessChain,
@@ -90,6 +94,7 @@ __all__ = [
     "compute",
     "errors",
     "pbr",
+    "pipeline",
     "postprocess",
     "scene",
     "shadows",
@@ -130,6 +135,12 @@ __all__ = [
     "build_material",
     "thin_film_iridescence",
     "thin_film_iridescence_glsl",
+    "FrameStatistics",
+    "MINIMUM_FXAA_EDGE_THRESHOLD",
+    "MINIMUM_GAMMA",
+    "RenderPipeline",
+    "RenderPipelineSettings",
+    "TonemappingMode",
     "DecalPass",
     "DepthEncoding",
     "DepthNormalPrepass",

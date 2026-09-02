@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1387
+BOUND_ROUTES=1424
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -14,17 +14,17 @@ CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
 SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 ENGINE_ROUTES=862
-ENGINE_BOUND=339
+ENGINE_BOUND=376
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=522
+SELECTED_ENGINE_ACTIONABLE_LOCAL=485
 PURPOSE_XNA_BACKING=1171
 PURPOSE_CNA_EXTENSION_CANDIDATE=1824
 PURPOSE_MANAGED_BY_DESIGN=535
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1387
-STATUS_ACTIONABLE_LOCAL=522
+STATUS_BOUND=1424
+STATUS_ACTIONABLE_LOCAL=485
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
@@ -40,10 +40,10 @@ STATUS_UNREVIEWED=0
 | Purpose | Status | Routes |
 |---|---|---:|
 | XNA_BACKING | BOUND | 727 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 680 |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 659 |
-| CNA_EXTENSION_CANDIDATE | BOUND | 643 |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 522 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 518 |
+| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 485 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
@@ -357,8 +357,8 @@ is BOUND or carries its own written non-binding reason.
 
 | Status | Routes |
 |---|---:|
-| ACTIONABLE_LOCAL | 522 |
-| BOUND | 339 |
+| ACTIONABLE_LOCAL | 485 |
+| BOUND | 376 |
 | DELIBERATE_NON_BINDING | 1 |
 
 ### By sub-family
@@ -423,8 +423,8 @@ is BOUND or carries its own written non-binding reason.
 | `pbr-material-extensions` (PBR material extensions) | 2 | 2 | BOUND 2 |
 | `post-process-chain` (C ownership transfer Python does not need) | 14 | 13 | BOUND 13, DELIBERATE_NON_BINDING 1 |
 | `post-process-pass` (post-process passes) | 9 | 8 | ACTIONABLE_LOCAL 1, BOUND 8 |
-| `render-pipeline` (the render pipeline) | 33 | 0 | ACTIONABLE_LOCAL 33 |
-| `render-pipeline-settings` (render pipeline settings) | 4 | 0 | ACTIONABLE_LOCAL 4 |
+| `render-pipeline` (the render pipeline) | 33 | 33 | BOUND 33 |
+| `render-pipeline-settings` (render pipeline settings) | 4 | 4 | BOUND 4 |
 | `render-target-pool` (render-target pools) | 6 | 6 | BOUND 6 |
 | `scoped-render-target` (scoped render targets) | 3 | 3 | BOUND 3 |
 | `shader-effect-factory` (shader-effect factories) | 6 | 6 | BOUND 6 |
@@ -1107,43 +1107,43 @@ is BOUND or carries its own written non-binding reason.
 | `cna_post_process_pass_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | `cna_post_process_pass_is_supported` | engine_layer.h | BOUND | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | `cna_punctual_light_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects engine light values -- the engine's own light value structures and their canonical defaults |
-| `cna_render_pipeline_add_user_pass` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_begin` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_clear_user_passes` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_copy_pass_timing_name_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_copy_transparency_fallback_reason_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_did_shadow_pass_run` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_did_skybox_draw` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_end` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_gpu_memory_estimate_bytes` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_last_frame_pass_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_pass_timing_count_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_pass_timing_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_scene_target` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_scene_target_format` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_settings` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_shadow_map` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_skybox` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_get_statistics` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_is_gpu_timing_enabled_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_is_using_scene_target` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_release_device_resources_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_resize` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_camera` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_depth_normal_inputs` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_gpu_timing_enabled_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_settings` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_shadow_scene` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_skybox` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_skybox_camera` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_transparent_scene` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_set_velocity_input_ext` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_settings_ext_apply_from_string` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_settings_ext_apply_render_quality_preset` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_settings_ext_init` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_render_pipeline_settings_ext_normalize` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_render_pipeline_add_user_pass` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_begin` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_clear_user_passes` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_copy_pass_timing_name_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_copy_transparency_fallback_reason_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_did_shadow_pass_run` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_did_skybox_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_end` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_gpu_memory_estimate_bytes` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_last_frame_pass_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_pass_timing_count_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_pass_timing_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_scene_target` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_scene_target_format` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_settings` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_shadow_map` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_skybox` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_get_statistics` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_is_gpu_timing_enabled_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_is_using_scene_target` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_release_device_resources_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_resize` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_camera` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_depth_normal_inputs` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_gpu_timing_enabled_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_settings` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_shadow_scene` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_skybox` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_skybox_camera` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_transparent_scene` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_set_velocity_input_ext` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
+| `cna_render_pipeline_settings_ext_apply_from_string` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline |
+| `cna_render_pipeline_settings_ext_apply_render_quality_preset` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline |
+| `cna_render_pipeline_settings_ext_init` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline |
+| `cna_render_pipeline_settings_ext_normalize` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline |
 | `cna_render_target_pool_acquire` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
 | `cna_render_target_pool_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
 | `cna_render_target_pool_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
@@ -1323,7 +1323,7 @@ is BOUND or carries its own written non-binding reason.
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 69 | These fill a caller-owned C value structure that Python already constructs directly through its measured ctypes layout. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 63 | imported: cna.extensions.engine projects PBR materials -- the PBR material value, its texture slots and its transparency mode |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 35 | Process-wide CNA services beyond the XNA surface belong to the extension profile; only the routes the selected profile needs are imported. |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 33 | In the selected engine-layer extension family (the render pipeline: the frame the pipeline drives and the statistics it reports) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 33 | imported: cna.extensions.engine projects the render pipeline -- the frame the pipeline drives and the statistics it reports |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 29 | In the selected engine-layer extension family (the clustered forward effect: the forward effect that shades from a clustered light buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 27 | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 25 | Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows. |
@@ -1391,7 +1391,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects full-screen drawing -- the full-screen triangle every post-process pass draws |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (indirect draws: draw commands whose arguments live in a buffer) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects PBR effects -- the rigid and skinned effects that render a PBR material |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 4 | In the selected engine-layer extension family (render pipeline settings: the settings value that configures a render pipeline) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 4 | imported: cna.extensions.engine projects render pipeline settings -- the settings value that configures a render pipeline |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 3 | In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 3 | In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
 | XNA_BACKING | BOUND | 3 | imported: GamerServicesComponent is the one selected member of this family |

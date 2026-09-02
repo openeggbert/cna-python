@@ -26,6 +26,7 @@ missed would therefore have to be missing from the header as well.
 from __future__ import annotations
 
 import argparse
+import ctypes
 from pathlib import Path
 import re
 import sys
@@ -84,6 +85,14 @@ _HANDLE_TYPEDEF = re.compile(r"^typedef\s+CNA_Handle\s+(CNA_[A-Za-z0-9_]+)\s*;",
 _DEFINE = re.compile(r"^#define\s+(CNA_[A-Za-z0-9_]+)\s+(.+?)\s*$", re.M)
 _FIELD = re.compile(r"^(?P<type>[A-Za-z_][A-Za-z0-9_ *]*?)\s*(?P<name>[A-Za-z_][A-Za-z0-9_]*)"
                     r"(?:\[(?P<array>[^\]]+)\])?\s*$")
+_DOC_STRUCT = re.compile(
+    r"typedef struct (CNA_[A-Za-z0-9_]+)\s*\{(.*?)\}\s*\1\s*;", re.S)
+_BRIEF = re.compile(r"@brief\s+(.*?)(?:\*/|\n\s*\*\s*\n)", re.S)
+#: One documented field: its comment block and the declaration that follows.
+#: Matched as a pair rather than by splitting the body on semicolons, because a
+#: ``@brief`` may contain one -- and the fields whose documentation says the most
+#: are exactly the ones that do.
+_DOCUMENTED_FIELD = re.compile(r"/\*\*(.*?)\*/\s*([^;{}]*?);", re.S)
 _CALLBACK = re.compile(
     r"typedef\s+(CNA_Result|void)\s*\(\s*\*\s*(CNA_[A-Za-z0-9_]+)\s*\)\s*\(([^)]*)\)\s*;")
 _OFFSETOF = re.compile(r"offsetof\s*\(\s*(CNA_[A-Za-z0-9_]+)\s*,\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)")
@@ -203,6 +212,28 @@ def _dependency_headers(header: Path) -> list[Path]:
     transcription this generator exists to remove.
     """
     return sorted(header.parent.glob("*.h"))
+
+
+def _field_documentation(raw: str) -> dict[str, dict[str, str]]:
+    """Each structure field's own ``@brief``, from the un-stripped header.
+
+    A structure with forty-seven fields is one a public projection must
+    document, and a hand-written table of forty-seven one-line summaries is
+    another transcription that drifts. CNA already writes them; this reads them,
+    so a field's documentation and its layout come from the same place.
+    """
+    documentation: dict[str, dict[str, str]] = {}
+    for name, body in _DOC_STRUCT.findall(raw):
+        fields: dict[str, str] = {}
+        for comment, declaration in _DOCUMENTED_FIELD.findall(body):
+            brief = _BRIEF.search(comment + "*/")
+            match = _FIELD.match(" ".join(declaration.split()))
+            if match is None or brief is None:
+                continue
+            text = " ".join(brief.group(1).replace("*", " ").split())
+            fields[match.group("name")] = text.strip()
+        documentation[name] = fields
+    return documentation
 
 
 def generate(header: Path) -> tuple[str, str]:
@@ -396,7 +427,14 @@ def generate(header: Path) -> tuple[str, str]:
     lines.append("")
     for name in sorted(constants):
         value = constants[name]
-        rendered = repr(value) if isinstance(value, float) else str(value)
+        if isinstance(value, float):
+            # Emitted at the width C stores it in. ``0.01F`` in a header is
+            # 0.009999999776482582, and a Python 0.01 is a *different, larger*
+            # number -- so a caller comparing a value CNA produced against this
+            # constant would find it one unit in the last place too small.
+            rendered = repr(float(ctypes.c_float(value).value))
+        else:
+            rendered = str(value)
         lines.append(f"{name} = {rendered}")
     lines.append("")
     lines.append("# --- structures ------------------------------------------------------------")
@@ -420,6 +458,22 @@ def generate(header: Path) -> tuple[str, str]:
     lines.append("")
     for name in sorted(derived):
         lines.append(f"{name} = {derived[name]}")
+    lines.append("")
+    lines.append("#: Each structure field's own ``@brief`` from the canonical header, so a")
+    lines.append("#: public projection documents a field with CNA's own words rather than a")
+    lines.append("#: second summary that can drift from it.")
+    lines.append("ENGINE_FIELD_DOCUMENTATION = {")
+    documentation = _field_documentation(raw)
+    for name, _fields_of in structures:
+        fields = documentation.get(name)
+        if not fields:
+            continue
+        lines.append(f'    "{name}": {{')
+        for field_name, text in fields.items():
+            escaped = text.replace("\\", "\\\\").replace('"', '\\"')
+            lines.append(f'        "{field_name}": "{escaped}",')
+        lines.append("    },")
+    lines.append("}")
     lines.append("")
     lines.append("#: Every generated structure, in declaration order, for the ABI audit.")
     lines.append("ENGINE_STRUCTURES = (")
