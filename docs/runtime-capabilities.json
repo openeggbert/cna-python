@@ -1348,6 +1348,86 @@
       },
       "evidence": "tools/generate_engine_abi.py emits float constants at single precision; tools/audit_cna_abi.py compares them at that width",
       "notes": "A constant declared 0.01F in a header is 0.009999999776482582, and a Python 0.01 is a different, larger number. Emitting the double would make a caller comparing a value CNA produced against the constant find it one unit in the last place too small -- which is exactly how the render pipeline's gamma floor was caught."
+    },
+    {
+      "operation": "Post-process pass state",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_bloom_pass_*, cna_tonemap_pass_*, cna_fxaa_pass_*, cna_film_grain_pass_*, cna_chromatic_aberration_pass_*, cna_lens_flare_pass_*, cna_ascii_pass_*; tests/test_engine_passes.py PassStateTests",
+      "notes": "Every pass's own state round-trips, and eight passes answer to eight different names rather than one -- which a pass constructed through the wrong route would fail. The properties are built by a factory that takes both route names as literals, so the reachability gate can still see them."
+    },
+    {
+      "operation": "Post-process CPU twins",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_bloom_pass_extract_channel, cna_tonemap_pass_tonemap_channel, the four HDR helpers, the two quality helpers",
+      "notes": "Bloom's extraction is a soft knee rather than a cutoff -- a texel exactly at the threshold contributes a quarter of itself, so bloom does not pop on and off as a highlight crosses it -- and it is compared against an independent implementation of that. Five tonemap curves give five different answers for one input and each is monotonic; PQ encode and decode are inverses across four decades; Rec.2020 keeps white and desaturates a Rec.709 primary."
+    },
+    {
+      "operation": "Tonemap rendered output",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_passes.py TonemapPixelTests",
+      "notes": "A pass that stored its settings and ignored them would pass every round trip, so one is checked against pixels: a Reinhard tonemap over a known colour lands within two levels of what the CPU twin predicts for the same three channels, and darkens them."
+    },
+    {
+      "operation": "Colour grading and cube LUTs",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified; parsing needs no device"
+      },
+      "evidence": "cna_color_grade_pass_* and cna_cube_lut_* (21 routes); tests/test_engine_passes.py",
+      "notes": "A .cube document is a file format, so parsing and inspecting one needs no device and the tests run it on any build with an engine layer. The eight corners of a 2x2x2 identity table are read back individually, which is what an index order read backwards would fail. Three malformed documents are refused."
+    },
+    {
+      "operation": "HDR display output",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "state and encoding verified"
+      },
+      "evidence": "cna_hdr_display_output_* (15 routes)",
+      "notes": "Three colour spaces encode one scene colour three different ways, roll-off never exceeds the peak and is monotonic, and the defaults are the header's own constants at single precision. Whether a display actually presents in a wide space is the renderer's answer and is reported, not assumed."
+    },
+    {
+      "operation": "Auto exposure adaptation",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_auto_exposure_ext_* (13 routes); tests/test_engine_passes.py AutoExposureTests",
+      "notes": "Adaptation is time-based, so the direction is what is predicted rather than a value: from the same starting exposure, a white scene settles below a black one, and a range of 0.5 to 0.75 holds whatever the scene. The exposure then reaches a render pipeline's settings value."
+    },
+    {
+      "operation": "ASCII pass configuration",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_ascii_pass_get_effect plus the six-route graphics_ext.h slice",
+      "notes": "Nothing in engine_layer.h can read or write the pass's cell size or quantise mode, so without the slice the pass would have a getter returning something unusable. The effect is one counted borrow, handed out once and released when the pass closes."
+    },
+    {
+      "operation": "Spatial upscaling",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna_spatial_upscale_pass_* (8 routes)",
+      "notes": "State round-trips, an upscale to the same size is reported as the identity so a caller can skip it, and a draw onto a target cleared to black leaves it not black -- which is weaker than a predicted filter kernel and is what a scaling filter admits to."
     }
   ]
 }

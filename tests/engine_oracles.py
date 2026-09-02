@@ -255,3 +255,18 @@ def sort_key(minimum: Vector3, maximum: Vector3, camera: Vector3) -> float:
 def is_inside_decal_box(point: Vector3) -> bool:
     """A decal's box is the unit cube centred on the origin."""
     return (abs(point.X) <= 0.5 and abs(point.Y) <= 0.5 and abs(point.Z) <= 0.5)
+
+
+def bloom_extract_channel(value: float, threshold: float) -> float:
+    """What one channel contributes to bloom, with a soft knee.
+
+    Not ``max(value - threshold, 0)``. The knee is half the threshold, the
+    contribution ramps across twice the knee, it is squared to soften the ramp
+    further, and the *original* value is scaled by it -- so a texel exactly at
+    the threshold contributes a quarter of itself rather than nothing. A hard
+    cutoff would make bloom pop on and off as a highlight crosses the threshold,
+    which is the artefact the knee exists to remove.
+    """
+    knee = max(threshold * 0.5, 1e-4)
+    contribution = min(max((value - threshold + knee) / (2.0 * knee), 0.0), 1.0)
+    return value * contribution * contribution

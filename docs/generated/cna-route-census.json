@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1424,
+    "BOUND_ROUTES": 1530,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -10,25 +10,25 @@
     "CNB_CNJ_BOUND": 283,
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
-    "ENGINE_ROUTES": 862,
-    "ENGINE_BOUND": 376,
+    "ENGINE_ROUTES": 870,
+    "ENGINE_BOUND": 482,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 485,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 387,
     "PURPOSE_XNA_BACKING": 1171,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1824,
     "PURPOSE_MANAGED_BY_DESIGN": 535,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1424,
-    "STATUS_ACTIONABLE_LOCAL": 485,
+    "STATUS_BOUND": 1530,
+    "STATUS_ACTIONABLE_LOCAL": 387,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
     "STATUS_BLOCKED_HARDWARE": 0,
     "STATUS_BLOCKED_FIXTURE": 0,
     "STATUS_LANGUAGE_MAPPING_LIMITATION": 0,
-    "STATUS_DELIBERATE_NON_BINDING": 2144,
+    "STATUS_DELIBERATE_NON_BINDING": 2136,
     "STATUS_UNREVIEWED": 0
   },
   "rules": [
@@ -204,6 +204,20 @@
       "status": "DELIBERATE_NON_BINDING",
       "reason": "Disposal is tracked deterministically by the Python ownership model, which is authoritative earlier than CNA's flag and stays correct after the handle is released.",
       "boundReason": "imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable"
+    },
+    {
+      "id": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "match": {
+        "prefixes": [
+          "cna_ascii_post_process_effect_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "boundReason": "imported: the ASCII pass cannot be configured without it"
     },
     {
       "id": "engine-pbr-dependency",
@@ -1731,7 +1745,8 @@
         "engine_layer.h"
       ],
       "ruleIds": [
-        "engine-pbr-dependency"
+        "engine-pbr-dependency",
+        "engine-ascii-dependency"
       ],
       "description": "`engine_layer.h`, grouped into named sub-families. There is no blanket rule:\na route no sub-family claims is UNREVIEWED and fails the gate. Every route here\nis BOUND or carries its own written non-binding reason."
     }
@@ -3578,111 +3593,111 @@
       "route": "cna_ascii_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the ASCII pass: the ASCII-art post-process pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass",
       "rule": "engine-ascii",
       "family": "ascii",
       "familyTitle": "the ASCII pass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ascii_pass_get_effect",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (the ASCII pass: the ASCII-art post-process pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass",
       "rule": "engine-ascii",
       "family": "ascii",
       "familyTitle": "the ASCII pass",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_create",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
       "bound": false
     },
     {
       "route": "cna_ascii_post_process_effect_destroy",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_draw",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
       "bound": false
     },
     {
       "route": "cna_ascii_post_process_effect_get_cell_size",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_get_last_grid_dimensions",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_get_quantize_mode",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_set_cell_size",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_set_quantize_mode",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "DELIBERATE_NON_BINDING",
-      "reason": "Modern graphics extensions beyond XNA's device surface belong to the extension profile; the selected profile is XNA 4.0 Windows.",
-      "rule": "modern-graphics-extensions",
-      "family": null,
-      "familyTitle": null,
-      "bound": false
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it",
+      "rule": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "bound": true
     },
     {
       "route": "cna_assembly_copy_title_ext",
@@ -4293,144 +4308,144 @@
       "route": "cna_auto_exposure_ext_apply_to",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_get_brightening_speed",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_get_darkening_speed",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_get_exposure",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_get_key_value",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_measure_average_luminance",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_set_adaptation_speeds",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_set_exposure",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_set_exposure_range",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_set_key_value",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_auto_exposure_ext_update",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
       "rule": "engine-auto-exposure",
       "family": "auto-exposure",
       "familyTitle": "auto exposure",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_available_network_session_collection_copy_session",
@@ -5316,111 +5331,111 @@
       "route": "cna_bloom_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_extract_channel",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_get_iterations",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_get_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_iterations_for_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_reset_targets",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_set_iterations",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bloom_pass_set_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
       "rule": "engine-bloom",
       "family": "bloom",
       "familyTitle": "bloom",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_bounding_box_contains_box",
@@ -6570,34 +6585,34 @@
       "route": "cna_chromatic_aberration_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset",
       "rule": "engine-chromatic-aberration",
       "family": "chromatic-aberration",
       "familyTitle": "chromatic aberration",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_chromatic_aberration_pass_get_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset",
       "rule": "engine-chromatic-aberration",
       "family": "chromatic-aberration",
       "familyTitle": "chromatic aberration",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_chromatic_aberration_pass_set_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset",
       "rule": "engine-chromatic-aberration",
       "family": "chromatic-aberration",
       "familyTitle": "chromatic aberration",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_clipboard_copy_text",
@@ -10860,122 +10875,122 @@
       "route": "cna_color_grade_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_create_identity_lut",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_get_interpolation",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_get_lut",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_get_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_get_volume_lut",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_lut_size_for_strip",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_set_interpolation",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_set_lut",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_set_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_grade_pass_set_volume_lut",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
       "rule": "engine-color-grade",
       "family": "color-grade",
       "familyTitle": "colour grading",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_color_init_bytes_rgb",
@@ -12686,122 +12701,122 @@
       "route": "cna_cube_lut_copy_title",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_create_strip_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_create_volume_texture",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_get_domain_max",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_get_domain_min",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_get_entry",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_get_size",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_is_unit_domain",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_load_from_file",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_lut_parse",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
       "rule": "engine-cube-lut",
       "family": "cube-lut",
       "familyTitle": "cube LUTs",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_cube_shadow_map_begin",
@@ -16976,34 +16991,34 @@
       "route": "cna_film_grain_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects film grain -- the stochastic grain pass",
       "rule": "engine-film-grain",
       "family": "film-grain",
       "familyTitle": "film grain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_film_grain_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects film grain -- the stochastic grain pass",
       "rule": "engine-film-grain",
       "family": "film-grain",
       "familyTitle": "film grain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_film_grain_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects film grain -- the stochastic grain pass",
       "rule": "engine-film-grain",
       "family": "film-grain",
       "familyTitle": "film grain",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_framework_dispatcher_update",
@@ -17240,56 +17255,56 @@
       "route": "cna_fxaa_pass_copy_fragment_glsl",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
       "rule": "engine-fxaa",
       "family": "fxaa",
       "familyTitle": "FXAA",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fxaa_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
       "rule": "engine-fxaa",
       "family": "fxaa",
       "familyTitle": "FXAA",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fxaa_pass_edge_threshold_for_quality",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
       "rule": "engine-fxaa",
       "family": "fxaa",
       "familyTitle": "FXAA",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fxaa_pass_get_edge_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
       "rule": "engine-fxaa",
       "family": "fxaa",
       "familyTitle": "FXAA",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_fxaa_pass_set_edge_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
       "rule": "engine-fxaa",
       "family": "fxaa",
       "familyTitle": "FXAA",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_game_clear",
@@ -23719,166 +23734,166 @@
       "route": "cna_hdr_display_output_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_decode_pq",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_encode",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_encode_pq",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_get_color_space",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_get_paper_white_nits",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_get_peak_nits",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_is_supported",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_rec709_to_rec2020",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_roll_off",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_set_color_space",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_set_paper_white_nits",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_hdr_display_output_set_peak_nits",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
       "rule": "engine-hdr-display-output",
       "family": "hdr-display-output",
       "familyTitle": "HDR display output",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_height_fog_pass_create",
@@ -25468,78 +25483,78 @@
       "route": "cna_lens_flare_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
       "rule": "engine-lens-flare",
       "family": "lens-flare",
       "familyTitle": "lens flare",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lens_flare_pass_get_dispersal",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
       "rule": "engine-lens-flare",
       "family": "lens-flare",
       "familyTitle": "lens flare",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lens_flare_pass_get_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
       "rule": "engine-lens-flare",
       "family": "lens-flare",
       "familyTitle": "lens flare",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lens_flare_pass_get_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
       "rule": "engine-lens-flare",
       "family": "lens-flare",
       "familyTitle": "lens flare",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lens_flare_pass_set_dispersal",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
       "rule": "engine-lens-flare",
       "family": "lens-flare",
       "familyTitle": "lens flare",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lens_flare_pass_set_intensity",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
       "rule": "engine-lens-flare",
       "family": "lens-flare",
       "familyTitle": "lens flare",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_lens_flare_pass_set_threshold",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
       "rule": "engine-lens-flare",
       "family": "lens-flare",
       "familyTitle": "lens flare",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_light_probe_baker_bake_light",
@@ -40241,89 +40256,89 @@
       "route": "cna_spatial_upscale_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spatial_upscale_pass_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spatial_upscale_pass_draw",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spatial_upscale_pass_get_edge_adaptive",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spatial_upscale_pass_get_sharpness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spatial_upscale_pass_is_identity_scale",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spatial_upscale_pass_set_edge_adaptive",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spatial_upscale_pass_set_sharpness",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
       "rule": "engine-spatial-upscale",
       "family": "spatial-upscale",
       "familyTitle": "spatial upscaling",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_spot_light_ext_init",
@@ -42606,133 +42621,133 @@
       "route": "cna_tonemap_pass_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_get_deband_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_get_exposure",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_get_gamma",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_get_mode",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_is_deband_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_set_deband_enabled",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_set_deband_strength",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_set_exposure",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_set_gamma",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_set_mode",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_tonemap_pass_tonemap_channel",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
       "rule": "engine-tonemap",
       "family": "tonemap",
       "familyTitle": "tonemapping",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_touch_capabilities_init",
@@ -49794,23 +49809,111 @@
         "route": "cna_ascii_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the ASCII pass: the ASCII-art post-process pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass",
         "rule": "engine-ascii",
         "family": "ascii",
         "familyTitle": "the ASCII pass",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_ascii_pass_get_effect",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (the ASCII pass: the ASCII-art post-process pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass",
         "rule": "engine-ascii",
         "family": "ascii",
         "familyTitle": "the ASCII pass",
+        "bound": true
+      },
+      {
+        "route": "cna_ascii_post_process_effect_create",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "ACTIONABLE_LOCAL",
+        "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
         "bound": false
+      },
+      {
+        "route": "cna_ascii_post_process_effect_destroy",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "bound": true
+      },
+      {
+        "route": "cna_ascii_post_process_effect_draw",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "ACTIONABLE_LOCAL",
+        "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "bound": false
+      },
+      {
+        "route": "cna_ascii_post_process_effect_get_cell_size",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "bound": true
+      },
+      {
+        "route": "cna_ascii_post_process_effect_get_last_grid_dimensions",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "bound": true
+      },
+      {
+        "route": "cna_ascii_post_process_effect_get_quantize_mode",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "bound": true
+      },
+      {
+        "route": "cna_ascii_post_process_effect_set_cell_size",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "bound": true
+      },
+      {
+        "route": "cna_ascii_post_process_effect_set_quantize_mode",
+        "header": "graphics_ext.h",
+        "purpose": "CNA_EXTENSION_CANDIDATE",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it",
+        "rule": "engine-ascii-dependency",
+        "family": "ascii",
+        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "bound": true
       },
       {
         "route": "cna_atmospheric_sky_copy_model_glsl",
@@ -49948,144 +50051,144 @@
         "route": "cna_auto_exposure_ext_apply_to",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_get_brightening_speed",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_get_darkening_speed",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_get_exposure",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_get_key_value",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_measure_average_luminance",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_set_adaptation_speeds",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_set_exposure",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_set_exposure_range",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_set_key_value",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_auto_exposure_ext_update",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (auto exposure: luminance measurement and adapted exposure) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects auto exposure -- luminance measurement and adapted exposure",
         "rule": "engine-auto-exposure",
         "family": "auto-exposure",
         "familyTitle": "auto exposure",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_blit_pass_create",
@@ -50102,111 +50205,111 @@
         "route": "cna_bloom_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_extract_channel",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_get_iterations",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_get_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_iterations_for_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_reset_targets",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_set_iterations",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_bloom_pass_set_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (bloom: threshold extraction and blur iterations) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects bloom -- threshold extraction and blur iterations",
         "rule": "engine-bloom",
         "family": "bloom",
         "familyTitle": "bloom",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cascaded_shadow_map_apply_to_receiver",
@@ -50476,34 +50579,34 @@
         "route": "cna_chromatic_aberration_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset",
         "rule": "engine-chromatic-aberration",
         "family": "chromatic-aberration",
         "familyTitle": "chromatic aberration",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_chromatic_aberration_pass_get_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset",
         "rule": "engine-chromatic-aberration",
         "family": "chromatic-aberration",
         "familyTitle": "chromatic aberration",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_chromatic_aberration_pass_set_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (chromatic aberration: per-channel radial offset) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects chromatic aberration -- per-channel radial offset",
         "rule": "engine-chromatic-aberration",
         "family": "chromatic-aberration",
         "familyTitle": "chromatic aberration",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_clustered_forward_effect_begin",
@@ -51631,122 +51734,122 @@
         "route": "cna_color_grade_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_create_identity_lut",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_get_interpolation",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_get_lut",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_get_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_get_volume_lut",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_lut_size_for_strip",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_set_interpolation",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_set_lut",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_set_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_color_grade_pass_set_volume_lut",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (colour grading: the colour-grade pass and its lookup table) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects colour grading -- the colour-grade pass and its lookup table",
         "rule": "engine-color-grade",
         "family": "color-grade",
         "familyTitle": "colour grading",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_compute_shader_barrier",
@@ -52071,122 +52174,122 @@
         "route": "cna_cube_lut_copy_title",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_create_strip_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_create_volume_texture",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_get_domain_max",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_get_domain_min",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_get_entry",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_get_size",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_is_unit_domain",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_load_from_file",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_lut_parse",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (cube LUTs: the .cube lookup table a colour grade samples) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects cube LUTs -- the .cube lookup table a colour grade samples",
         "rule": "engine-cube-lut",
         "family": "cube-lut",
         "familyTitle": "cube LUTs",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_cube_shadow_map_begin",
@@ -53501,34 +53604,34 @@
         "route": "cna_film_grain_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects film grain -- the stochastic grain pass",
         "rule": "engine-film-grain",
         "family": "film-grain",
         "familyTitle": "film grain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_film_grain_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects film grain -- the stochastic grain pass",
         "rule": "engine-film-grain",
         "family": "film-grain",
         "familyTitle": "film grain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_film_grain_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (film grain: the stochastic grain pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects film grain -- the stochastic grain pass",
         "rule": "engine-film-grain",
         "family": "film-grain",
         "familyTitle": "film grain",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_frustum_culler_ext_create",
@@ -53688,56 +53791,56 @@
         "route": "cna_fxaa_pass_copy_fragment_glsl",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
         "rule": "engine-fxaa",
         "family": "fxaa",
         "familyTitle": "FXAA",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fxaa_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
         "rule": "engine-fxaa",
         "family": "fxaa",
         "familyTitle": "FXAA",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fxaa_pass_edge_threshold_for_quality",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
         "rule": "engine-fxaa",
         "family": "fxaa",
         "familyTitle": "FXAA",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fxaa_pass_get_edge_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
         "rule": "engine-fxaa",
         "family": "fxaa",
         "familyTitle": "FXAA",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_fxaa_pass_set_edge_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (FXAA: fast approximate anti-aliasing) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects FXAA -- fast approximate anti-aliasing",
         "rule": "engine-fxaa",
         "family": "fxaa",
         "familyTitle": "FXAA",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_gltf_material_bridge_build_extensions",
@@ -54095,166 +54198,166 @@
         "route": "cna_hdr_display_output_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_decode_pq",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_encode",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_encode_pq",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_get_color_space",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_get_paper_white_nits",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_get_peak_nits",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_is_supported",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_rec709_to_rec2020",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_roll_off",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_set_color_space",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_set_paper_white_nits",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_hdr_display_output_set_peak_nits",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (HDR display output: HDR display encoding and its transfer functions) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects HDR display output -- HDR display encoding and its transfer functions",
         "rule": "engine-hdr-display-output",
         "family": "hdr-display-output",
         "familyTitle": "HDR display output",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_height_fog_pass_create",
@@ -54612,78 +54715,78 @@
         "route": "cna_lens_flare_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
         "rule": "engine-lens-flare",
         "family": "lens-flare",
         "familyTitle": "lens flare",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lens_flare_pass_get_dispersal",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
         "rule": "engine-lens-flare",
         "family": "lens-flare",
         "familyTitle": "lens flare",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lens_flare_pass_get_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
         "rule": "engine-lens-flare",
         "family": "lens-flare",
         "familyTitle": "lens flare",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lens_flare_pass_get_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
         "rule": "engine-lens-flare",
         "family": "lens-flare",
         "familyTitle": "lens flare",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lens_flare_pass_set_dispersal",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
         "rule": "engine-lens-flare",
         "family": "lens-flare",
         "familyTitle": "lens flare",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lens_flare_pass_set_intensity",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
         "rule": "engine-lens-flare",
         "family": "lens-flare",
         "familyTitle": "lens flare",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_lens_flare_pass_set_threshold",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (lens flare: ghost and halo lens flare) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare",
         "rule": "engine-lens-flare",
         "family": "lens-flare",
         "familyTitle": "lens flare",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_light_probe_baker_bake_light",
@@ -57791,89 +57894,89 @@
         "route": "cna_spatial_upscale_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_draw",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_get_edge_adaptive",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_get_sharpness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_is_identity_scale",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_set_edge_adaptive",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spatial_upscale_pass_set_sharpness",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (spatial upscaling: the spatial upscale pass) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass",
         "rule": "engine-spatial-upscale",
         "family": "spatial-upscale",
         "familyTitle": "spatial upscaling",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_spot_light_ext_init",
@@ -58506,133 +58609,133 @@
         "route": "cna_tonemap_pass_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_get_deband_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_get_exposure",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_get_gamma",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_get_mode",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_is_deband_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_set_deband_enabled",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_set_deband_strength",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_set_exposure",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_set_gamma",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_set_mode",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_tonemap_pass_tonemap_channel",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (tonemapping: the tonemap pass and its per-channel curve) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects tonemapping -- the tonemap pass and its per-channel curve",
         "rule": "engine-tonemap",
         "family": "tonemap",
         "familyTitle": "tonemapping",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_transparent_draw_list_camera_position_of",

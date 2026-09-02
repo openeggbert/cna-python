@@ -45,7 +45,10 @@ Importing this module needs no native library. Constructing anything in it does.
 
 from __future__ import annotations
 
-from . import compute, errors, pbr, pipeline, postprocess, scene, shadows, values
+from . import (
+    compute, errors, passes, pbr, pipeline, postprocess, scene, shadows,
+    values,
+)
 from .compute import (
     ComputeShader, GpuTimer, ImageAccess, MemoryBarrier, StorageBuffer,
     barrier_contains,
@@ -58,6 +61,18 @@ from .postprocess import (
     BlitPass, EffectPass, FullscreenPass, PassTiming, PostProcessChain,
     PostProcessContext, PostProcessPass, RenderTargetPool, RenderTargetScope,
     ShaderEffectFactory, bind_render_target,
+)
+from .passes import (
+    AsciiEffect, AsciiPass, AsciiQuantizeMode, AutoExposure, BloomPass,
+    COLOR_GRADE_MAXIMUM_LUT_SIZE, CUBE_LUT_MAXIMUM_SIZE, CUBE_LUT_MINIMUM_SIZE,
+    ChromaticAberrationPass, ColorGradePass, CubeLut, DisplayColorSpace,
+    FilmGrainPass, FxaaPass, HDR_DEFAULT_PAPER_WHITE_NITS, HDR_DEFAULT_PEAK_NITS,
+    HdrDisplayOutput, LENS_FLARE_GHOST_COUNT, LensFlarePass, LutInterpolation,
+    MOTION_BLUR_SAMPLE_COUNT, SpatialUpscalePass, ToneMapPass,
+    bloom_extract_channel, bloom_iterations_for, create_identity_lut, decode_pq,
+    encode_for_display, encode_pq, fxaa_edge_threshold_for, fxaa_fragment_glsl,
+    is_identity_scale, lut_size_for_strip, rec709_to_rec2020, roll_off,
+    tonemap_channel,
 )
 from .pbr import (
     AlphaMode, GltfMaterialExtensionSource, GltfMaterialSource, PBR_TEXTURE_SLOT_COUNT,
@@ -93,6 +108,7 @@ from .errors import (
 __all__ = [
     "compute",
     "errors",
+    "passes",
     "pbr",
     "pipeline",
     "postprocess",
@@ -135,6 +151,42 @@ __all__ = [
     "build_material",
     "thin_film_iridescence",
     "thin_film_iridescence_glsl",
+    "AsciiEffect",
+    "AsciiPass",
+    "AsciiQuantizeMode",
+    "AutoExposure",
+    "BloomPass",
+    "COLOR_GRADE_MAXIMUM_LUT_SIZE",
+    "CUBE_LUT_MAXIMUM_SIZE",
+    "CUBE_LUT_MINIMUM_SIZE",
+    "ChromaticAberrationPass",
+    "ColorGradePass",
+    "CubeLut",
+    "DisplayColorSpace",
+    "FilmGrainPass",
+    "FxaaPass",
+    "HDR_DEFAULT_PAPER_WHITE_NITS",
+    "HDR_DEFAULT_PEAK_NITS",
+    "HdrDisplayOutput",
+    "LENS_FLARE_GHOST_COUNT",
+    "LensFlarePass",
+    "LutInterpolation",
+    "MOTION_BLUR_SAMPLE_COUNT",
+    "SpatialUpscalePass",
+    "ToneMapPass",
+    "bloom_extract_channel",
+    "bloom_iterations_for",
+    "create_identity_lut",
+    "decode_pq",
+    "encode_for_display",
+    "encode_pq",
+    "fxaa_edge_threshold_for",
+    "fxaa_fragment_glsl",
+    "is_identity_scale",
+    "lut_size_for_strip",
+    "rec709_to_rec2020",
+    "roll_off",
+    "tonemap_channel",
     "FrameStatistics",
     "MINIMUM_FXAA_EDGE_THRESHOLD",
     "MINIMUM_GAMMA",

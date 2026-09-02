@@ -319,3 +319,30 @@ class DecalBoxTests(unittest.TestCase):
         self.assertTrue(oracle.is_inside_decal_box(Vector3(0.5, -0.5, 0.5)))
         self.assertFalse(oracle.is_inside_decal_box(Vector3(0.5001, 0.0, 0.0)))
         self.assertFalse(oracle.is_inside_decal_box(Vector3(0.0, 0.0, -0.6)))
+
+
+class BloomExtractionTests(unittest.TestCase):
+    def test_the_knee_is_soft_rather_than_a_cutoff(self) -> None:
+        """A value exactly at the threshold contributes a quarter of itself.
+
+        knee = 0.25, so the ramp is (0.5 - 0.5 + 0.25) / 0.5 = 0.5, squared to
+        0.25, times the value 0.5 gives 0.125. Worked here rather than taken
+        from the routine it checks.
+        """
+        self.assertAlmostEqual(oracle.bloom_extract_channel(0.5, 0.5), 0.125,
+                               places=6)
+
+    def test_well_below_the_knee_contributes_nothing(self) -> None:
+        self.assertEqual(oracle.bloom_extract_channel(0.2, 0.5), 0.0)
+        self.assertEqual(oracle.bloom_extract_channel(0.0, 1.0), 0.0)
+
+    def test_well_above_the_knee_contributes_everything(self) -> None:
+        self.assertAlmostEqual(oracle.bloom_extract_channel(0.9, 0.5), 0.9, places=6)
+        self.assertAlmostEqual(oracle.bloom_extract_channel(2.0, 0.0), 2.0, places=6)
+
+    def test_a_zero_threshold_does_not_divide_by_zero(self) -> None:
+        self.assertTrue(math.isfinite(oracle.bloom_extract_channel(0.5, 0.0)))
+
+    def test_it_rises_with_the_value(self) -> None:
+        values = [oracle.bloom_extract_channel(x / 10.0, 0.5) for x in range(11)]
+        self.assertEqual(values, sorted(values))

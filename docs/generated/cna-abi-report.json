@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1424,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1424,
-    "C_LAYOUT_MEASUREMENTS": 1704,
-    "CTYPES_LAYOUT_MEASUREMENTS": 1704,
+    "BOUND_FUNCTIONS": 1530,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1530,
+    "C_LAYOUT_MEASUREMENTS": 1706,
+    "CTYPES_LAYOUT_MEASUREMENTS": 1706,
     "MISSING_SYMBOLS": 0,
     "ABI_MISMATCHES": 0
   },
@@ -1432,7 +1432,113 @@
     "cna_render_pipeline_get_pass_timing_ext",
     "cna_render_pipeline_copy_pass_timing_name_ext",
     "cna_render_pipeline_get_skybox",
-    "cna_render_pipeline_set_skybox"
+    "cna_render_pipeline_set_skybox",
+    "cna_bloom_pass_create",
+    "cna_bloom_pass_get_threshold",
+    "cna_bloom_pass_set_threshold",
+    "cna_bloom_pass_get_intensity",
+    "cna_bloom_pass_set_intensity",
+    "cna_bloom_pass_get_iterations",
+    "cna_bloom_pass_set_iterations",
+    "cna_lens_flare_pass_create",
+    "cna_lens_flare_pass_get_threshold",
+    "cna_lens_flare_pass_set_threshold",
+    "cna_lens_flare_pass_get_intensity",
+    "cna_lens_flare_pass_set_intensity",
+    "cna_lens_flare_pass_get_dispersal",
+    "cna_lens_flare_pass_set_dispersal",
+    "cna_fxaa_pass_create",
+    "cna_fxaa_pass_get_edge_threshold",
+    "cna_fxaa_pass_set_edge_threshold",
+    "cna_spatial_upscale_pass_create",
+    "cna_spatial_upscale_pass_destroy",
+    "cna_spatial_upscale_pass_get_sharpness",
+    "cna_spatial_upscale_pass_set_sharpness",
+    "cna_spatial_upscale_pass_get_edge_adaptive",
+    "cna_spatial_upscale_pass_set_edge_adaptive",
+    "cna_chromatic_aberration_pass_create",
+    "cna_chromatic_aberration_pass_get_strength",
+    "cna_chromatic_aberration_pass_set_strength",
+    "cna_film_grain_pass_create",
+    "cna_film_grain_pass_get_intensity",
+    "cna_film_grain_pass_set_intensity",
+    "cna_ascii_pass_create",
+    "cna_bloom_pass_reset_targets",
+    "cna_bloom_pass_iterations_for_quality",
+    "cna_bloom_pass_extract_channel",
+    "cna_fxaa_pass_copy_fragment_glsl",
+    "cna_fxaa_pass_edge_threshold_for_quality",
+    "cna_spatial_upscale_pass_draw",
+    "cna_spatial_upscale_pass_is_identity_scale",
+    "cna_ascii_pass_get_effect",
+    "cna_tonemap_pass_create",
+    "cna_tonemap_pass_get_mode",
+    "cna_tonemap_pass_set_mode",
+    "cna_tonemap_pass_get_exposure",
+    "cna_tonemap_pass_set_exposure",
+    "cna_tonemap_pass_get_gamma",
+    "cna_tonemap_pass_set_gamma",
+    "cna_tonemap_pass_is_deband_enabled",
+    "cna_tonemap_pass_set_deband_enabled",
+    "cna_tonemap_pass_get_deband_strength",
+    "cna_tonemap_pass_set_deband_strength",
+    "cna_tonemap_pass_tonemap_channel",
+    "cna_color_grade_pass_create",
+    "cna_color_grade_pass_get_lut",
+    "cna_color_grade_pass_set_lut",
+    "cna_color_grade_pass_get_volume_lut",
+    "cna_color_grade_pass_set_volume_lut",
+    "cna_color_grade_pass_get_interpolation",
+    "cna_color_grade_pass_set_interpolation",
+    "cna_color_grade_pass_get_strength",
+    "cna_color_grade_pass_set_strength",
+    "cna_color_grade_pass_lut_size_for_strip",
+    "cna_color_grade_pass_create_identity_lut",
+    "cna_hdr_display_output_create",
+    "cna_hdr_display_output_destroy",
+    "cna_hdr_display_output_is_supported",
+    "cna_hdr_display_output_get_color_space",
+    "cna_hdr_display_output_set_color_space",
+    "cna_hdr_display_output_get_paper_white_nits",
+    "cna_hdr_display_output_set_paper_white_nits",
+    "cna_hdr_display_output_get_peak_nits",
+    "cna_hdr_display_output_set_peak_nits",
+    "cna_hdr_display_output_draw",
+    "cna_hdr_display_output_encode_pq",
+    "cna_hdr_display_output_decode_pq",
+    "cna_hdr_display_output_rec709_to_rec2020",
+    "cna_hdr_display_output_roll_off",
+    "cna_hdr_display_output_encode",
+    "cna_auto_exposure_ext_create",
+    "cna_auto_exposure_ext_destroy",
+    "cna_auto_exposure_ext_measure_average_luminance",
+    "cna_auto_exposure_ext_update",
+    "cna_auto_exposure_ext_apply_to",
+    "cna_auto_exposure_ext_get_exposure",
+    "cna_auto_exposure_ext_set_exposure",
+    "cna_auto_exposure_ext_get_key_value",
+    "cna_auto_exposure_ext_set_key_value",
+    "cna_auto_exposure_ext_get_brightening_speed",
+    "cna_auto_exposure_ext_get_darkening_speed",
+    "cna_auto_exposure_ext_set_adaptation_speeds",
+    "cna_auto_exposure_ext_set_exposure_range",
+    "cna_cube_lut_parse",
+    "cna_cube_lut_load_from_file",
+    "cna_cube_lut_destroy",
+    "cna_cube_lut_get_size",
+    "cna_cube_lut_copy_title",
+    "cna_cube_lut_get_domain_min",
+    "cna_cube_lut_get_domain_max",
+    "cna_cube_lut_is_unit_domain",
+    "cna_cube_lut_get_entry",
+    "cna_cube_lut_create_strip_texture",
+    "cna_cube_lut_create_volume_texture",
+    "cna_ascii_post_process_effect_get_cell_size",
+    "cna_ascii_post_process_effect_set_cell_size",
+    "cna_ascii_post_process_effect_get_quantize_mode",
+    "cna_ascii_post_process_effect_set_quantize_mode",
+    "cna_ascii_post_process_effect_get_last_grid_dimensions",
+    "cna_ascii_post_process_effect_destroy"
   ],
   "functionManifest": [
     {
@@ -16398,6 +16504,1096 @@
       ],
       "arity": 2,
       "ownership": "borrowed pipeline; the skybox is BORROWED and must outlive the pipeline"
+    },
+    {
+      "symbol": "cna_bloom_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned bloom pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_bloom_pass_get_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed bloom pass"
+    },
+    {
+      "symbol": "cna_bloom_pass_set_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed bloom pass; copies the value"
+    },
+    {
+      "symbol": "cna_bloom_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed bloom pass"
+    },
+    {
+      "symbol": "cna_bloom_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed bloom pass; copies the value"
+    },
+    {
+      "symbol": "cna_bloom_pass_get_iterations",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed bloom pass"
+    },
+    {
+      "symbol": "cna_bloom_pass_set_iterations",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int"
+      ],
+      "arity": 2,
+      "ownership": "borrowed bloom pass; copies the value"
+    },
+    {
+      "symbol": "cna_lens_flare_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned lens flare pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_lens_flare_pass_get_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed lens flare pass"
+    },
+    {
+      "symbol": "cna_lens_flare_pass_set_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed lens flare pass; copies the value"
+    },
+    {
+      "symbol": "cna_lens_flare_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed lens flare pass"
+    },
+    {
+      "symbol": "cna_lens_flare_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed lens flare pass; copies the value"
+    },
+    {
+      "symbol": "cna_lens_flare_pass_get_dispersal",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed lens flare pass"
+    },
+    {
+      "symbol": "cna_lens_flare_pass_set_dispersal",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed lens flare pass; copies the value"
+    },
+    {
+      "symbol": "cna_fxaa_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned FXAA pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_fxaa_pass_get_edge_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed FXAA pass"
+    },
+    {
+      "symbol": "cna_fxaa_pass_set_edge_threshold",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed FXAA pass; copies the value"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned spatial upscale pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes spatial upscale pass"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_get_sharpness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spatial upscale pass"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_set_sharpness",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed spatial upscale pass; copies the value"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_get_edge_adaptive",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed spatial upscale pass"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_set_edge_adaptive",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed spatial upscale pass; copies the value"
+    },
+    {
+      "symbol": "cna_chromatic_aberration_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned chromatic aberration pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_chromatic_aberration_pass_get_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed chromatic aberration pass"
+    },
+    {
+      "symbol": "cna_chromatic_aberration_pass_set_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed chromatic aberration pass; copies the value"
+    },
+    {
+      "symbol": "cna_film_grain_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned film grain pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_film_grain_pass_get_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed film grain pass"
+    },
+    {
+      "symbol": "cna_film_grain_pass_set_intensity",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed film grain pass; copies the value"
+    },
+    {
+      "symbol": "cna_ascii_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned ASCII pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_bloom_pass_reset_targets",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed bloom pass"
+    },
+    {
+      "symbol": "cna_bloom_pass_iterations_for_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_bloom_pass_extract_channel",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_fxaa_pass_copy_fragment_glsl",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_fxaa_pass_edge_threshold_for_quality",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 6,
+      "ownership": "borrowed pass; the source texture is borrowed for the call"
+    },
+    {
+      "symbol": "cna_spatial_upscale_pass_is_identity_scale",
+      "return": "c_uint",
+      "parameters": [
+        "c_int",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_ascii_pass_get_effect",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "COUNTED BORROW of the pass's effect; released with cna_ascii_post_process_effect_destroy"
+    },
+    {
+      "symbol": "cna_tonemap_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned tonemap pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_tonemap_pass_get_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed tonemap pass"
+    },
+    {
+      "symbol": "cna_tonemap_pass_set_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed tonemap pass; copies the value"
+    },
+    {
+      "symbol": "cna_tonemap_pass_get_exposure",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed tonemap pass"
+    },
+    {
+      "symbol": "cna_tonemap_pass_set_exposure",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed tonemap pass; copies the value"
+    },
+    {
+      "symbol": "cna_tonemap_pass_get_gamma",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed tonemap pass"
+    },
+    {
+      "symbol": "cna_tonemap_pass_set_gamma",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed tonemap pass; copies the value"
+    },
+    {
+      "symbol": "cna_tonemap_pass_is_deband_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed tonemap pass"
+    },
+    {
+      "symbol": "cna_tonemap_pass_set_deband_enabled",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed tonemap pass; copies the value"
+    },
+    {
+      "symbol": "cna_tonemap_pass_get_deband_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed tonemap pass"
+    },
+    {
+      "symbol": "cna_tonemap_pass_set_deband_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed tonemap pass; copies the value"
+    },
+    {
+      "symbol": "cna_tonemap_pass_tonemap_channel",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "c_float",
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_color_grade_pass_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned colour grade pass; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_color_grade_pass_get_lut",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the handle is the one that was set and is not a new borrow"
+    },
+    {
+      "symbol": "cna_color_grade_pass_set_lut",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed pass; the texture is BORROWED and must outlive the pass"
+    },
+    {
+      "symbol": "cna_color_grade_pass_get_volume_lut",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; the handle is the one that was set and is not a new borrow"
+    },
+    {
+      "symbol": "cna_color_grade_pass_set_volume_lut",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong"
+      ],
+      "arity": 2,
+      "ownership": "borrowed pass; the texture is BORROWED and must outlive the pass"
+    },
+    {
+      "symbol": "cna_color_grade_pass_get_interpolation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed colour grade pass"
+    },
+    {
+      "symbol": "cna_color_grade_pass_set_interpolation",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed colour grade pass; copies the value"
+    },
+    {
+      "symbol": "cna_color_grade_pass_get_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed colour grade pass"
+    },
+    {
+      "symbol": "cna_color_grade_pass_set_strength",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed colour grade pass; copies the value"
+    },
+    {
+      "symbol": "cna_color_grade_pass_lut_size_for_strip",
+      "return": "c_uint",
+      "parameters": [
+        "c_int",
+        "c_int",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_color_grade_pass_create_identity_lut",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "OWNED texture; the caller disposes it"
+    },
+    {
+      "symbol": "cna_hdr_display_output_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned HDR display output; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_hdr_display_output_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes HDR display output"
+    },
+    {
+      "symbol": "cna_hdr_display_output_is_supported",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed HDR display output"
+    },
+    {
+      "symbol": "cna_hdr_display_output_get_color_space",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed HDR display output"
+    },
+    {
+      "symbol": "cna_hdr_display_output_set_color_space",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed HDR display output; copies the value"
+    },
+    {
+      "symbol": "cna_hdr_display_output_get_paper_white_nits",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed HDR display output"
+    },
+    {
+      "symbol": "cna_hdr_display_output_set_paper_white_nits",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed HDR display output; copies the value"
+    },
+    {
+      "symbol": "cna_hdr_display_output_get_peak_nits",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed HDR display output"
+    },
+    {
+      "symbol": "cna_hdr_display_output_set_peak_nits",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed HDR display output; copies the value"
+    },
+    {
+      "symbol": "cna_hdr_display_output_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 5,
+      "ownership": "borrowed output; source and destination are borrowed for the call"
+    },
+    {
+      "symbol": "cna_hdr_display_output_encode_pq",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_hdr_display_output_decode_pq",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_hdr_display_output_rec709_to_rec2020",
+      "return": "c_uint",
+      "parameters": [
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_hdr_display_output_roll_off",
+      "return": "c_uint",
+      "parameters": [
+        "c_float",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_hdr_display_output_encode",
+      "return": "c_uint",
+      "parameters": [
+        "c_uint",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "c_float",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 5,
+      "ownership": "pure function over caller-owned input; nothing is retained"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned auto exposure; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes auto exposure"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_measure_average_luminance",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; the scene texture is borrowed for the call"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_update",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "c_float",
+        "pointer<c_float>"
+      ],
+      "arity": 4,
+      "ownership": "borrowed auto exposure; the scene texture is borrowed for the call"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_apply_to",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_RenderPipelineSettingsEXT>"
+      ],
+      "arity": 2,
+      "ownership": "borrowed auto exposure; writes the caller's settings value"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_get_exposure",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed auto exposure"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_set_exposure",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed auto exposure; copies the value"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_get_key_value",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed auto exposure"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_set_key_value",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float"
+      ],
+      "arity": 2,
+      "ownership": "borrowed auto exposure; copies the value"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_get_brightening_speed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed auto exposure"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_get_darkening_speed",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_float>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed auto exposure"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_set_adaptation_speeds",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 3,
+      "ownership": "borrowed auto exposure; copies both values"
+    },
+    {
+      "symbol": "cna_auto_exposure_ext_set_exposure_range",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_float",
+        "c_float"
+      ],
+      "arity": 3,
+      "ownership": "borrowed auto exposure; copies both values"
+    },
+    {
+      "symbol": "cna_cube_lut_parse",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned cube LUT; copies the text"
+    },
+    {
+      "symbol": "cna_cube_lut_load_from_file",
+      "return": "c_uint",
+      "parameters": [
+        "CNA_StringView",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned cube LUT; reads and copies the file"
+    },
+    {
+      "symbol": "cna_cube_lut_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes cube LUT"
+    },
+    {
+      "symbol": "cna_cube_lut_get_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube LUT"
+    },
+    {
+      "symbol": "cna_cube_lut_copy_title",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_char>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 4,
+      "ownership": "caller output; two-call size/copy protocol"
+    },
+    {
+      "symbol": "cna_cube_lut_get_domain_min",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube LUT"
+    },
+    {
+      "symbol": "cna_cube_lut_get_domain_max",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube LUT"
+    },
+    {
+      "symbol": "cna_cube_lut_is_unit_domain",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed cube LUT"
+    },
+    {
+      "symbol": "cna_cube_lut_get_entry",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int",
+        "c_int",
+        "pointer<CNA_Vector3>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; borrowed cube LUT"
+    },
+    {
+      "symbol": "cna_cube_lut_create_strip_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "OWNED texture; the caller disposes it"
+    },
+    {
+      "symbol": "cna_cube_lut_create_volume_texture",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 3,
+      "ownership": "OWNED texture; the caller disposes it"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_get_cell_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed ASCII effect"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_set_cell_size",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_int",
+        "c_int"
+      ],
+      "arity": 3,
+      "ownership": "borrowed ASCII effect; copies both values"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_get_quantize_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_uint>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed ASCII effect"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_set_quantize_mode",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_uint"
+      ],
+      "arity": 2,
+      "ownership": "borrowed ASCII effect; copies the value"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_get_last_grid_dimensions",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>",
+        "pointer<c_int>"
+      ],
+      "arity": 3,
+      "ownership": "caller output; borrowed ASCII effect"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "releases the counted borrow cna_ascii_pass_get_effect handed out"
     }
   ],
   "missingSymbols": [],
@@ -17977,6 +19173,8 @@
     "VALUE:CNA_AREA_LIGHT_SHAPE_DISC_EXT": 1,
     "VALUE:CNA_AREA_LIGHT_SHAPE_RECTANGLE_EXT": 0,
     "VALUE:CNA_AREA_LIGHT_SHAPE_TUBE_EXT": 2,
+    "VALUE:CNA_ASCII_QUANTIZE_MODE_BLACK_WHITE": 0,
+    "VALUE:CNA_ASCII_QUANTIZE_MODE_COLOR": 1,
     "VALUE:CNA_CLUSTERED_ASSIGNMENT_MAX_LIGHTS_EXT": 1024,
     "VALUE:CNA_CLUSTERED_COMPUTE_DEFAULT_STRIDE_EXT": 64,
     "VALUE:CNA_CLUSTERED_FORWARD_MAX_LIGHTS_PER_FRAGMENT_EXT": 128,
@@ -18357,6 +19555,8 @@
     "VALUE:CNA_AREA_LIGHT_SHAPE_DISC_EXT": 1,
     "VALUE:CNA_AREA_LIGHT_SHAPE_RECTANGLE_EXT": 0,
     "VALUE:CNA_AREA_LIGHT_SHAPE_TUBE_EXT": 2,
+    "VALUE:CNA_ASCII_QUANTIZE_MODE_BLACK_WHITE": 0,
+    "VALUE:CNA_ASCII_QUANTIZE_MODE_COLOR": 1,
     "VALUE:CNA_CLUSTERED_ASSIGNMENT_MAX_LIGHTS_EXT": 1024,
     "VALUE:CNA_CLUSTERED_COMPUTE_DEFAULT_STRIDE_EXT": 64,
     "VALUE:CNA_CLUSTERED_FORWARD_MAX_LIGHTS_PER_FRAGMENT_EXT": 128,

@@ -76,7 +76,7 @@ IMPORTED = {
 #: identity typedef. ``CNA_PBR_TEXTURE_*`` numbers the slots of an array field
 #: rather than being an enum of its own, so no typedef points at it; the values
 #: still come from the canonical header and are still measured by the C probe.
-EXTRA_CONSTANT_PREFIXES = ("CNA_PBR_TEXTURE_",)
+EXTRA_CONSTANT_PREFIXES = ("CNA_PBR_TEXTURE_", "CNA_ASCII_QUANTIZE_MODE_")
 
 _STRUCT = re.compile(r"typedef struct (CNA_[A-Za-z0-9_]+)\s*\{(.*?)\}\s*\1\s*;", re.S)
 _SCALAR_TYPEDEF = re.compile(r"^typedef\s+(uint32_t|int32_t|uint64_t|float)\s+(CNA_[A-Za-z0-9_]+)\s*;",

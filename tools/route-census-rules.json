@@ -190,6 +190,20 @@
       "boundReason": "imported for the Media catalog graph, whose facades are invalidated by their provider root and by Game generation rather than only by their own Dispose, so CNA's flag is the authority for whether the native object is still usable"
     },
     {
+      "id": "engine-ascii-dependency",
+      "family": "ascii",
+      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "match": {
+        "prefixes": [
+          "cna_ascii_post_process_effect_"
+        ]
+      },
+      "purpose": "CNA_EXTENSION_CANDIDATE",
+      "status": "ACTIONABLE_LOCAL",
+      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "boundReason": "imported: the ASCII pass cannot be configured without it"
+    },
+    {
       "id": "engine-pbr-dependency",
       "family": "pbr-effect",
       "familyTitle": "the minimal slice the PBR family cannot work without",
@@ -1715,7 +1729,8 @@
         "engine_layer.h"
       ],
       "ruleIds": [
-        "engine-pbr-dependency"
+        "engine-pbr-dependency",
+        "engine-ascii-dependency"
       ],
       "description": "`engine_layer.h`, grouped into named sub-families. There is no blanket rule:\na route no sub-family claims is UNREVIEWED and fails the gate. Every route here\nis BOUND or carries its own written non-binding reason."
     }
