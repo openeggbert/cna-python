@@ -25,7 +25,6 @@ from _cna_native import cnb_support as _support
 
 from .format import (
     AssetType,
-    ChunkFlags,
     CnbReadLimits,
     Compression,
     _chunk_ids_array,

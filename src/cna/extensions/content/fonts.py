@@ -17,8 +17,6 @@ from __future__ import annotations
 import ctypes as c
 from dataclasses import dataclass
 from enum import IntEnum
-from typing import Sequence
-
 from Microsoft.Xna.Framework import Rectangle, Vector3
 
 from _cna_native import abi as _core_abi

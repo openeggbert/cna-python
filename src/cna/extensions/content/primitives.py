@@ -20,8 +20,6 @@ from __future__ import annotations
 import ctypes as c
 import os
 from dataclasses import dataclass
-from typing import Sequence
-
 from _cna_native import cnb_abi as _abi
 from _cna_native import cnb_support as _support
 

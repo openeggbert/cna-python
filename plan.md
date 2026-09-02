@@ -1,11 +1,10 @@
 # CNA-Python implementation plan
 
-Status: the selected XNA 4.0 Windows projection is structurally complete and the
-native boundary has been migrated from the historical CNA C ABI `0.7.0` to the
-current `0.21.0`, requalified on two artifacts including a real rendering
-renderer. A first CNA extension profile is open.
+Status: the selected XNA 4.0 Windows projection is structurally complete, the
+native boundary speaks the current CNA C ABI `0.21.0`, and two CNA extension
+profiles are open. The second is CNA's own compiled content format, `.cnb`.
 
-Date: 2026-09-01.
+Date: 2026-09-02.
 
 This is the normative current-state plan. Missing XNA surface stays visible in
 the strict verifier; no allowlist, fake backend state, fabricated asset, or
@@ -53,6 +52,27 @@ asset-name special case is an acceptable way to make it green.
   machine from audible output and physical capture, which remain unverified.
 - [x] Open `cna.extensions` with renderer identity and a separate surface gate.
 
+## Completed extension family: CNB/CNJ compiled content
+
+- [x] Select CNB/CNJ as the second public `cna.extensions` family and replace the
+  blanket "outside the selected profile" census rule with per-route decisions.
+- [x] Bind 270 of `cnb.h`'s 272 routes, plus the two dependency slices the
+  family needs: eleven `curve.h` routes for the curve codec and two `content.h`
+  routes for loader invocation. The two unbound routes are checked integer
+  arithmetic Python already does exactly.
+- [x] Build `cna.extensions.content`: the container vocabulary, `CnbDocument`,
+  the reader and both writers, every typed asset codec, the model graph, the
+  source importers, `.cnj` compilation and the loader registry.
+- [x] Keep the strict XNA `ContentManager` unchanged, with a test asserting it
+  does not read a `.cnb` placed where it looks for a `.xnb`.
+- [x] Measure every CNB structure and every frozen wire constant against the
+  canonical headers with a compiler-backed probe.
+- [x] Qualify every slice against an oracle other than its own decoder,
+  including byte-identical agreement with CNA's own `cnj_to_cnb` tool across two
+  OS processes.
+- [x] Plant 35 defects across the family and kill all of them; four survivors on
+  the first run were real test gaps and were closed.
+
 ## Current measured boundary
 
 - Reference/expected projection: 257/2,964 CLR types/members and 257/2,887
@@ -60,16 +80,20 @@ asset-name special case is an acceptable way to make it green.
 - Strict target: 257 types and 2,423 strict runtime members.
 - Diagnostics: zero. Every mismatch, leak, allowlist, and unmeasured category is
   zero. Normal and leak-only strict checks pass.
-- Native manifest: 765 imported routes, 765 compiler-verified prototypes, 796 C
-  and 796 ctypes layout measurements, zero missing symbols, zero ABI mismatches.
+- Native manifest: 1,048 imported routes, 1,048 compiler-verified prototypes,
+  1,219 C and 1,219 ctypes layout measurements, zero missing symbols, zero ABI
+  mismatches.
 - Route census: 4,055 canonical routes, zero unreviewed, zero actionable-local.
+  Inside the selected CNB/CNJ family: 285 routes, 283 bound, zero unreviewed,
+  zero actionable-local.
 - Behavior evidence: 181 PURE_XNA_DERIVED observations, 1,004 assertions, zero
   failures.
 - Runtime evidence: two artifacts. A non-windowed control and an OPENGLES3
   renderer on an isolated display, both with a real SDL3 mixer on a deterministic
   device. Every capability row names the artifact that produced it.
-- Extension profile: `cna.extensions.graphics`, zero surface diagnostics, and no
-  dependency from the XNA namespace on it.
+- Extension profile: `cna.extensions.graphics` and `cna.extensions.content`,
+  163 public names, zero surface diagnostics, and no dependency from the XNA
+  namespace on either.
 
 ## Invariants
 
@@ -91,6 +115,7 @@ Current work is maintenance, further platform qualification, upstream blocker
 reconciliation, packaging/release qualification, real-game compatibility
 testing, and deliberately selected extension families. Net, wider
 GamerServices/Avatar, Content Pipeline, Xbox, and Windows Phone remain unopened
-future-profile decisions; CNB/CNJ native content, the engine layer, sensors and
-device services remain unopened extension decisions, each recorded in the census
-with its reason.
+future-profile decisions; the engine layer, sensors and device services, and
+extended input remain unopened extension decisions, each recorded in the census
+with its reason. CNB/CNJ is no longer among them: it is open and finished, and
+`docs/cnb-cnj-extensions.md` is its evidence.
