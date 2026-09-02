@@ -207,6 +207,28 @@ asset-name special case is an acceptable way to make it green.
   a surface, verified on Windows, and never a claim about hardware nobody here
   has.
 
+## The sixth scope: Windows Phone, blocked on a file and on nothing else
+
+- [x] Prove the absence rather than assert it: `tools/find_reference_assemblies.py`
+  examined 1,296,128 files across eight roots on 2026-09-02 and identified every
+  one of the thirty-six files that matched by name -- twenty-four are assemblies
+  another profile already pins, and every readable one references
+  `mscorlib 4.0.0.0`, which is a desktop assembly and not a phone one.
+- [x] Write the reader that makes those identifications possible:
+  `tools/cli_assembly.py` reads PE and CLI metadata for an assembly's identity
+  and the core library it was compiled against, checked against the two
+  platforms this repository does have.
+- [x] Declare the profile `BLOCKED_REFERENCE_ASSET` with the seven assemblies it
+  needs, the search that failed and the one directory that would unblock it.
+- [x] Make the block keep earning it: `tools/verify_blocked_profiles.py` rejects
+  a block on a profile that has a contract, a block with no written reason, a
+  block whose recorded search found the assemblies after all, and a search run
+  for another profile. Each is planted.
+- [x] Do the work that does not depend on the assemblies: the generator is
+  parameterised rather than named after Xbox, `TargetPlatform.WindowsPhone`
+  writes its own XNB platform byte, the Reach limits are enforced and measured,
+  and touch and the accelerometer are already projected.
+
 ## Current measured boundary
 
 - Strict profiles, each against its own reference contract:
@@ -255,7 +277,9 @@ asset-name special case is an acceptable way to make it green.
 - Profile separation: zero platform leaks, zero Windows-only names reachable
   from a platform root, zero unjustified removals, and the default Windows
   profile unchanged at 257 types and 2,423 members.
-- Falsifiability: 250 planted defects across seven families, all killed.
+- Blocked profiles: one, with a recorded search of 1,296,128 files, zero
+  unidentified name matches and zero candidates; zero unjustified blocks.
+- Falsifiability: 257 planted defects across eight families, all killed.
 
 ## Invariants
 
@@ -282,12 +306,14 @@ finished:
 4. The XNA Content Pipeline -- `docs/content-pipeline.md`.
 5. The Xbox 360 surface profile -- `docs/xbox360-profile.md`.
 
-One remains:
+The sixth is finished as far as this machine allows:
 
-6. **Windows Phone profile**. The reference assemblies are proven absent from
-   this machine, so every row that depends on reference metadata is
-   `BLOCKED_REFERENCE_ASSET`; the locally authoritative and structural work is
-   not blocked by that and is not excused by it.
+6. **Windows Phone** -- `docs/windowsphone-profile.md`. The reference
+   assemblies are measured absent, so the profile is `BLOCKED_REFERENCE_ASSET`
+   and has no contract: writing one from anything other than Microsoft's
+   metadata would be a guess wearing a measurement's clothes. Everything that
+   does not depend on them is done, and the gate rejects the block the moment it
+   stops being true.
 
 A giant union API is not an acceptable shape for any of them. The default
 Windows runtime profile stays exactly 257 types and 2,423 members with zero

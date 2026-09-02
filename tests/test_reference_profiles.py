@@ -34,10 +34,27 @@ import compare_contracts  # noqa: E402
 
 
 def _profiles_with_contracts() -> list[tuple[str, dict]]:
+    """Every profile that is measured against reference metadata.
+
+    A profile *blocked* on its assemblies has no contract to compare and no
+    hashes to pin -- there is nothing on this machine to hash. It is checked by
+    ``tools/verify_blocked_profiles.py`` and by
+    ``tests/test_windowsphone_profile.py`` instead, which ask the questions that
+    do apply to it.
+    """
     found = []
     for path in sorted(PROFILES.glob("*.json")):
         profile = json.loads(path.read_text())
-        if "contract" in profile:
+        if profile.get("contract"):
+            found.append((path.stem, profile))
+    return found
+
+
+def _blocked_profiles() -> list[tuple[str, dict]]:
+    found = []
+    for path in sorted(PROFILES.glob("*.json")):
+        profile = json.loads(path.read_text())
+        if profile.get("status") == "BLOCKED_REFERENCE_ASSET":
             found.append((path.stem, profile))
     return found
 
@@ -85,6 +102,18 @@ class ReferenceContractsAreGenerated(unittest.TestCase):
                     "a profile must pin exactly the assemblies it reads")
                 for digest in profile["referenceSha256"].values():
                     self.assertRegex(digest, r"^[0-9a-f]{64}$")
+
+    def test_every_profile_is_either_measured_or_declared_blocked(self) -> None:
+        """A profile with neither a contract nor a written block is a claim
+        nothing checks."""
+        for path in sorted(PROFILES.glob("*.json")):
+            with self.subTest(profile=path.stem):
+                profile = json.loads(path.read_text())
+                self.assertTrue(
+                    profile.get("contract")
+                    or profile.get("status") == "BLOCKED_REFERENCE_ASSET",
+                    "a profile is measured against its assemblies or says why "
+                    "it cannot be")
 
     def test_profile_counts_agree_with_the_contract_they_point_at(self) -> None:
         for identifier, profile in _profiles_with_contracts():

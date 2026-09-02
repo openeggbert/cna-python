@@ -39,7 +39,7 @@ assuming it.
 
 ## So the projection is generated, not written
 
-`tools/generate_xbox_profile.py` reads the Xbox contract and emits one package
+`tools/generate_platform_profile.py` reads the Xbox contract and emits one package
 per namespace under `cna.profiles.xbox360`, re-exporting the Windows
 implementation of each type it has. Writing 316 re-exports by hand would be
 writing the contract out a second time in a place nothing checks against the

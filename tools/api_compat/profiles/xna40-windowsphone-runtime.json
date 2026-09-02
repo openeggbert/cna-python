@@ -1,0 +1,25 @@
+{
+  "id": "xna40-windowsphone-runtime",
+  "name": "XNA 4.0 Windows Phone runtime",
+  "platform": "WINDOWSPHONE_RUNTIME",
+  "status": "BLOCKED_REFERENCE_ASSET",
+  "blockedReason": "The Windows Phone reference assemblies are not on this machine. A profile here is derived from Microsoft's own metadata and from nothing else -- that is what makes the other four exact -- so a contract for this one cannot be written until the assemblies are present. Searched and recorded in docs/generated/windowsphone-assembly-search.json; see docs/windowsphone-profile.md.",
+  "unblockedBy": "Any copy of the Windows Phone 7.1 XNA reference assemblies listed below, placed under ~/deps/xna40-windowsphone-assemblies. The contract, the import root, the stubs and the strict verification then follow from the same three commands the Xbox 360 profile uses, which is why the machinery is parameterised rather than named after Xbox.",
+  "contract": null,
+  "assemblyRoot": "~/deps/xna40-windowsphone-assemblies",
+  "resolveDirectories": [
+    "~/deps/xna40-windowsphone-assemblies"
+  ],
+  "coreAssemblyName": "mscorlib",
+  "referenceAssemblies": [
+    "Microsoft.Xna.Framework.dll",
+    "Microsoft.Xna.Framework.Game.dll",
+    "Microsoft.Xna.Framework.Graphics.dll",
+    "Microsoft.Xna.Framework.Input.Touch.dll",
+    "Microsoft.Xna.Framework.GamerServices.dll",
+    "Microsoft.Xna.Framework.Video.dll",
+    "Microsoft.Xna.Framework.MediaLibraryExtensions.dll"
+  ],
+  "referenceSha256": {},
+  "allowlist": []
+}

@@ -1,0 +1,444 @@
+{
+ "schemaVersion": 1,
+ "profile": "xna40-windowsphone-runtime",
+ "assembliesWanted": [
+  "Microsoft.Xna.Framework.Game.dll",
+  "Microsoft.Xna.Framework.GamerServices.dll",
+  "Microsoft.Xna.Framework.Graphics.dll",
+  "Microsoft.Xna.Framework.Input.Touch.dll",
+  "Microsoft.Xna.Framework.MediaLibraryExtensions.dll",
+  "Microsoft.Xna.Framework.Video.dll",
+  "Microsoft.Xna.Framework.dll"
+ ],
+ "roots": [
+  {
+   "root": "/home/robertvokac",
+   "status": "searched",
+   "filesExamined": 762727
+  },
+  {
+   "root": "/opt",
+   "status": "searched",
+   "filesExamined": 332
+  },
+  {
+   "root": "/usr/share",
+   "status": "searched",
+   "filesExamined": 284648
+  },
+  {
+   "root": "/usr/lib",
+   "status": "searched",
+   "filesExamined": 71090
+  },
+  {
+   "root": "/srv",
+   "status": "searched",
+   "filesExamined": 0
+  },
+  {
+   "root": "/mnt",
+   "status": "searched",
+   "filesExamined": 0
+  },
+  {
+   "root": "/media",
+   "status": "searched",
+   "filesExamined": 0
+  },
+  {
+   "root": "/rv/data/development",
+   "status": "searched",
+   "filesExamined": 177331
+  }
+ ],
+ "filesExamined": 1296128,
+ "found": [
+  {
+   "assembly": "Microsoft.Xna.Framework.Game.dll",
+   "path": "/home/robertvokac/.wine-cna-xna40/drive_c/windows/Microsoft.NET/assembly/GAC_32/Microsoft.Xna.Framework.Game/v4.0_4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Game.dll",
+   "sha256": "a0347e9d9a646779a9bb1bd512af333ae07a3db65b3259fae3220ed87a80e756",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Game, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Graphics.dll",
+   "path": "/home/robertvokac/.wine-cna-xna40/drive_c/windows/Microsoft.NET/assembly/GAC_32/Microsoft.Xna.Framework.Graphics/v4.0_4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Graphics.dll",
+   "sha256": "39aed7fd8e308ccace5ce9390256f1c829ca72c2eccd97d4a0f629f24015d3a5",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.dll",
+   "path": "/home/robertvokac/.wine-cna-xna40/drive_c/windows/Microsoft.NET/assembly/GAC_32/Microsoft.Xna.Framework/v4.0_4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.dll",
+   "sha256": "8b7aa4c4939f243b21432747281cc8aacdcda56191a16d9eaa036b4136cf0da4",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Video.dll",
+   "path": "/home/robertvokac/.wine-cna-xna40/drive_c/windows/Microsoft.NET/assembly/GAC_MSIL/Microsoft.Xna.Framework.Video/v4.0_4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Video.dll",
+   "sha256": "63c7673c936747abd9ebe779e8837c8b8add2c078a31216684fbf8c6bcab2745",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Video, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Input.Touch.dll",
+   "path": "/home/robertvokac/.wine-cna-xna40/drive_c/windows/Microsoft.NET/assembly/GAC_MSIL/Microsoft.Xna.Framework.Input.Touch/v4.0_4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Input.Touch.dll",
+   "sha256": "2191bad4540b50723acbda55bd2c6e5d80cc6f84ad989ff89ddda672348577b2",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.GamerServices.dll",
+   "path": "/home/robertvokac/.wine-cna-xna40/drive_c/windows/Microsoft.NET/assembly/GAC_MSIL/Microsoft.Xna.Framework.GamerServices/v4.0_4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.GamerServices.dll",
+   "sha256": "627e84c06cc4e409870b068c9ec9149adba425e47e64185f92d839db2aa35484",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.dll",
+   "path": "/home/robertvokac/deps/xna40-windows-assemblies/Microsoft.Xna.Framework.dll",
+   "sha256": "38e7093f52d7474bbc6256906519781a1210d7da50a1c667b52716fcf49ca130",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.dll",
+   "identity": "Microsoft.Xna.Framework, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Graphics.dll",
+   "path": "/home/robertvokac/deps/xna40-windows-assemblies/Microsoft.Xna.Framework.Graphics.dll",
+   "sha256": "560080fc39021c611ca9d076dcebed312faf6d7d1413c2dc523683ea635e9f55",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Graphics.dll",
+   "identity": "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Video.dll",
+   "path": "/home/robertvokac/deps/xna40-windows-assemblies/Microsoft.Xna.Framework.Video.dll",
+   "sha256": "17538b1ca9d48a993e2cd88c96b436df08e7abb4aec5d4758eb21feb580d6e06",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Video.dll",
+   "identity": "Microsoft.Xna.Framework.Video, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.GamerServices.dll",
+   "path": "/home/robertvokac/deps/xna40-windows-assemblies/Microsoft.Xna.Framework.GamerServices.dll",
+   "sha256": "7c6effed97aa25a95c5e095d9c261f5581e402180cc073271a367b9eef79c8af",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-online:Microsoft.Xna.Framework.GamerServices.dll",
+   "identity": "Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Game.dll",
+   "path": "/home/robertvokac/deps/xna40-windows-assemblies/Microsoft.Xna.Framework.Game.dll",
+   "sha256": "b5dffdd8125abef2a4507ba4e1d2f11062143f0a63d48fe4f298b95ad746a1f0",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Game.dll",
+   "identity": "Microsoft.Xna.Framework.Game, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Input.Touch.dll",
+   "path": "/home/robertvokac/deps/xna40-windows-assemblies/Microsoft.Xna.Framework.Input.Touch.dll",
+   "sha256": "b0585224c18022c3661057ae79544644c10f33f1dc529678364f3d6b25151c25",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Input.Touch.dll",
+   "identity": "Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.dll",
+   "path": "/home/robertvokac/deps/xna40-xbox360-assemblies/Microsoft.Xna.Framework.dll",
+   "sha256": "ba7260b4beca530a1f8591f7ee9d14a494a07330e0498c2eefe7ad827906e633",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-xbox360-runtime:Microsoft.Xna.Framework.dll",
+   "identity": "Microsoft.Xna.Framework, Version=4.0.0.0",
+   "core": "mscorlib, Version=2.0.5.0",
+   "platform": "Compact Framework or Silverlight: a candidate"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Graphics.dll",
+   "path": "/home/robertvokac/deps/xna40-xbox360-assemblies/Microsoft.Xna.Framework.Graphics.dll",
+   "sha256": "7154610170315209f7bf41d00bb3eac0d091ec108a00fc7667b3b40a95ad875f",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-xbox360-runtime:Microsoft.Xna.Framework.Graphics.dll",
+   "identity": "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0",
+   "core": "mscorlib, Version=2.0.5.0",
+   "platform": "Compact Framework or Silverlight: a candidate"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Video.dll",
+   "path": "/home/robertvokac/deps/xna40-xbox360-assemblies/Microsoft.Xna.Framework.Video.dll",
+   "sha256": "39b262fadc0902e73f3f817327b9f68e38f03d62ce3cd6ac8ae0bee8572ed1ef",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-xbox360-runtime:Microsoft.Xna.Framework.Video.dll",
+   "identity": "Microsoft.Xna.Framework.Video, Version=4.0.0.0",
+   "core": "mscorlib, Version=2.0.5.0",
+   "platform": "Compact Framework or Silverlight: a candidate"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.GamerServices.dll",
+   "path": "/home/robertvokac/deps/xna40-xbox360-assemblies/Microsoft.Xna.Framework.GamerServices.dll",
+   "sha256": "f6914968bd40660d417a56ec5e2618b9006f13c2a16b7cfd5ff745c364b72654",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-xbox360-runtime:Microsoft.Xna.Framework.GamerServices.dll",
+   "identity": "Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0",
+   "core": "mscorlib, Version=2.0.5.0",
+   "platform": "Compact Framework or Silverlight: a candidate"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Game.dll",
+   "path": "/home/robertvokac/deps/xna40-xbox360-assemblies/Microsoft.Xna.Framework.Game.dll",
+   "sha256": "12a60d001a5f50a3caaeec5b3e573a2088d578a91ac86febeeb08b06ca40a996",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-xbox360-runtime:Microsoft.Xna.Framework.Game.dll",
+   "identity": "Microsoft.Xna.Framework.Game, Version=4.0.0.0",
+   "core": "mscorlib, Version=2.0.5.0",
+   "platform": "Compact Framework or Silverlight: a candidate"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Input.Touch.dll",
+   "path": "/home/robertvokac/deps/xna40-xbox360-assemblies/Microsoft.Xna.Framework.Input.Touch.dll",
+   "sha256": "d4d4c82fb902dfbc71fef81b2d1cd0a90804b30a65eee3a8edc4cf2041e6be81",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-xbox360-runtime:Microsoft.Xna.Framework.Input.Touch.dll",
+   "identity": "Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0",
+   "core": "mscorlib, Version=2.0.5.0",
+   "platform": "Compact Framework or Silverlight: a candidate"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Game.dll",
+   "path": "/home/robertvokac/.steam/debian-installation/steamapps/common/Proton - Experimental/files/share/wine/mono/wine-mono-11.2.0/lib/mono/gac/Microsoft.Xna.Framework.Game/4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Game.dll",
+   "sha256": "bf1802a5dfcdf6eac1ffdf0f9d5bbc0a51aa14707bd7eabefb47c6d730ae9e92",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Game, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Video.dll",
+   "path": "/home/robertvokac/.steam/debian-installation/steamapps/common/Proton - Experimental/files/share/wine/mono/wine-mono-11.2.0/lib/mono/gac/Microsoft.Xna.Framework.Video/4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Video.dll",
+   "sha256": "e2ac310c223fb3e8debdfc27e5796a1a93c206c955887a87338c3b119ccd6110",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Video, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Graphics.dll",
+   "path": "/home/robertvokac/.steam/debian-installation/steamapps/common/Proton - Experimental/files/share/wine/mono/wine-mono-11.2.0/lib/mono/gac/Microsoft.Xna.Framework.Graphics/4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Graphics.dll",
+   "sha256": "a3409d33a5da8177e9401d23c1d587d342c89561df79964e1fd3ad52e8ba9344",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Input.Touch.dll",
+   "path": "/home/robertvokac/.steam/debian-installation/steamapps/common/Proton - Experimental/files/share/wine/mono/wine-mono-11.2.0/lib/mono/gac/Microsoft.Xna.Framework.Input.Touch/4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.Input.Touch.dll",
+   "sha256": "8db9c818a7c200e1eff6d2ec736cb15a5532fbae79e49539ff1436fce7ae2364",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.GamerServices.dll",
+   "path": "/home/robertvokac/.steam/debian-installation/steamapps/common/Proton - Experimental/files/share/wine/mono/wine-mono-11.2.0/lib/mono/gac/Microsoft.Xna.Framework.GamerServices/4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.GamerServices.dll",
+   "sha256": "ce6b79285b3a71a2f6d1fb4e54f2329ae08eb00cedacf42ef431b4eb65d0385a",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.dll",
+   "path": "/home/robertvokac/.steam/debian-installation/steamapps/common/Proton - Experimental/files/share/wine/mono/wine-mono-11.2.0/lib/mono/gac/Microsoft.Xna.Framework/4.0.0.0__842cf8be1de50553/Microsoft.Xna.Framework.dll",
+   "sha256": "bcc2a551a7e3340ce5a6145a7e20409703b4c157817b3e3df628721354ffd2b7",
+   "matchesPin": "no pin recorded",
+   "knownAs": "",
+   "identity": "Microsoft.Xna.Framework, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/reference/xna4/original/windows/Microsoft.Xna.Framework.dll",
+   "sha256": "38e7093f52d7474bbc6256906519781a1210d7da50a1c667b52716fcf49ca130",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.dll",
+   "identity": "Microsoft.Xna.Framework, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Graphics.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/reference/xna4/original/windows/Microsoft.Xna.Framework.Graphics.dll",
+   "sha256": "560080fc39021c611ca9d076dcebed312faf6d7d1413c2dc523683ea635e9f55",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Graphics.dll",
+   "identity": "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Video.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/reference/xna4/original/windows/Microsoft.Xna.Framework.Video.dll",
+   "sha256": "17538b1ca9d48a993e2cd88c96b436df08e7abb4aec5d4758eb21feb580d6e06",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Video.dll",
+   "identity": "Microsoft.Xna.Framework.Video, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.GamerServices.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/reference/xna4/original/windows/Microsoft.Xna.Framework.GamerServices.dll",
+   "sha256": "7c6effed97aa25a95c5e095d9c261f5581e402180cc073271a367b9eef79c8af",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-online:Microsoft.Xna.Framework.GamerServices.dll",
+   "identity": "Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Game.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/reference/xna4/original/windows/Microsoft.Xna.Framework.Game.dll",
+   "sha256": "b5dffdd8125abef2a4507ba4e1d2f11062143f0a63d48fe4f298b95ad746a1f0",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Game.dll",
+   "identity": "Microsoft.Xna.Framework.Game, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Input.Touch.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/reference/xna4/original/windows/Microsoft.Xna.Framework.Input.Touch.dll",
+   "sha256": "b0585224c18022c3661057ae79544644c10f33f1dc529678364f3d6b25151c25",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Input.Touch.dll",
+   "identity": "Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/dlls/Microsoft.Xna.Framework.dll",
+   "sha256": "38e7093f52d7474bbc6256906519781a1210d7da50a1c667b52716fcf49ca130",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.dll",
+   "identity": "Microsoft.Xna.Framework, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Graphics.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/dlls/Microsoft.Xna.Framework.Graphics.dll",
+   "sha256": "560080fc39021c611ca9d076dcebed312faf6d7d1413c2dc523683ea635e9f55",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Graphics.dll",
+   "identity": "Microsoft.Xna.Framework.Graphics, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Video.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/dlls/Microsoft.Xna.Framework.Video.dll",
+   "sha256": "17538b1ca9d48a993e2cd88c96b436df08e7abb4aec5d4758eb21feb580d6e06",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Video.dll",
+   "identity": "Microsoft.Xna.Framework.Video, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.GamerServices.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/dlls/Microsoft.Xna.Framework.GamerServices.dll",
+   "sha256": "7c6effed97aa25a95c5e095d9c261f5581e402180cc073271a367b9eef79c8af",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-online:Microsoft.Xna.Framework.GamerServices.dll",
+   "identity": "Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Game.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/dlls/Microsoft.Xna.Framework.Game.dll",
+   "sha256": "b5dffdd8125abef2a4507ba4e1d2f11062143f0a63d48fe4f298b95ad746a1f0",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Game.dll",
+   "identity": "Microsoft.Xna.Framework.Game, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  },
+  {
+   "assembly": "Microsoft.Xna.Framework.Input.Touch.dll",
+   "path": "/rv/data/development/github.com/openeggbert/xna4-decomp/dlls/Microsoft.Xna.Framework.Input.Touch.dll",
+   "sha256": "b0585224c18022c3661057ae79544644c10f33f1dc529678364f3d6b25151c25",
+   "matchesPin": "no pin recorded",
+   "knownAs": "xna40-windows-runtime:Microsoft.Xna.Framework.Input.Touch.dll",
+   "identity": "Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0",
+   "core": "mscorlib, Version=4.0.0.0",
+   "platform": "desktop .NET: not a phone or console assembly"
+  }
+ ],
+ "sdkMarkers": [
+  "/home/robertvokac/.cache/Google/AndroidStudio2025.3.4/compile-server/windowsphonespeedyblupi_a1fb01c0",
+  "/home/robertvokac/.cache/Google/AndroidStudio2025.3.4/frameworks/detection/WindowsPhoneSpeedyBlupi.c2bdbea",
+  "/home/robertvokac/.cache/Google/AndroidStudio2025.3.4/frameworks/detection/WindowsPhoneSpeedyBlupi.f00f495",
+  "/home/robertvokac/.wine-cna-xna40/drive_c/Program Files/Microsoft XNA/XNA Game Studio",
+  "/rv/data/development/github.com/openeggbert/galaxy-eggbert/android/app/.cxx/Debug/5p213u4l/arm64-v8a/CMakeFiles/main.dir/src/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/galaxy-eggbert/android/app/.cxx/Debug/5p213u4l/x86_64/CMakeFiles/main.dir/src/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/galaxy-eggbert/android/app/.cxx/RelWithDebInfo/5c5t263j/arm64-v8a/CMakeFiles/main.dir/src/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/galaxy-eggbert/android/app/.cxx/RelWithDebInfo/5c5t263j/x86_64/CMakeFiles/main.dir/src/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/mobile-eggbert-legacy/speedy-blupi-xna4/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/mobile-eggbert/include/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/mobile-eggbert/src/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/mobile-eggbertlite/android/app/.cxx/Debug/qo2p6p13/arm64-v8a/CMakeFiles/main.dir/src/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/mobile-eggbertlite/android/app/.cxx/Debug/qo2p6p13/armeabi-v7a/CMakeFiles/main.dir/src/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/mobile-eggbertlite/include/WindowsPhoneSpeedyBlupi",
+  "/rv/data/development/github.com/openeggbert/mobile-eggbertlite/src/WindowsPhoneSpeedyBlupi"
+ ],
+ "summary": {
+  "ASSEMBLIES_WANTED": 7,
+  "NAME_MATCHES": 36,
+  "PINNED_BY_ANOTHER_PROFILE": 24,
+  "IDENTIFIED_AS_DESKTOP": 30,
+  "CANDIDATES": 0,
+  "UNIDENTIFIED": 0,
+  "SDK_MARKERS_FOUND": 15
+ }
+}

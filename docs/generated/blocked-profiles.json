@@ -1,0 +1,25 @@
+{
+ "schemaVersion": 1,
+ "summary": {
+  "BLOCKED_PROFILES": 1,
+  "UNJUSTIFIED_BLOCK": 0,
+  "BLOCK_WITHOUT_REASON": 0,
+  "STALE_BLOCK": 0,
+  "SEARCH_MISSING": 0
+ },
+ "profiles": [
+  {
+   "profile": "xna40-windowsphone-runtime",
+   "assemblies": 7,
+   "filesExamined": 1296128,
+   "rootsSearched": 8,
+   "nameMatches": 36,
+   "candidates": 0,
+   "unidentified": 0
+  }
+ ],
+ "unjustified": [],
+ "unreasoned": [],
+ "stale": [],
+ "missing": []
+}

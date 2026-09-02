@@ -187,7 +187,7 @@ class GeneratorTests(unittest.TestCase):
 
     def test_regenerating_the_profile_is_a_no_op(self) -> None:
         result = subprocess.run(
-            [sys.executable, "tools/generate_xbox_profile.py", "--check"],
+            [sys.executable, "tools/generate_platform_profile.py", "--check"],
             cwd=str(ROOT), capture_output=True, text=True, env=_environment())
         self.assertEqual(result.returncode, 0,
                          result.stdout + result.stderr)
@@ -195,7 +195,7 @@ class GeneratorTests(unittest.TestCase):
 
     def test_the_generator_reports_what_it_produced(self) -> None:
         result = subprocess.run(
-            [sys.executable, "tools/generate_xbox_profile.py", "--check"],
+            [sys.executable, "tools/generate_platform_profile.py", "--check"],
             cwd=str(ROOT), capture_output=True, text=True, env=_environment())
         self.assertIn("EXPORTED_TYPES=316", result.stdout,
                       "318 contract types less the two nested ones")

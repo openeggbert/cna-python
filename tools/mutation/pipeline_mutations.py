@@ -564,8 +564,8 @@ MUTATIONS = [
 #: the generator that rebuilds each. A defect in a *generator* only reaches the
 #: code under test once the generator has run.
 GENERATORS = {
-    "tools/generate_xbox_profile.py": (
-        "tools/generate_xbox_profile.py", "src/cna/profiles"),
+    "tools/generate_platform_profile.py": (
+        "tools/generate_platform_profile.py", "src/cna/profiles"),
 }
 
 
@@ -668,7 +668,7 @@ XBOX_MUTATIONS = [
      "    if False:",
      "tests.test_xbox360_profile"),
     ("xbox: raise only when a removed member is called, not when it is read",
-     "tools/generate_xbox_profile.py",
+     "tools/generate_platform_profile.py",
      "    def __get__(self, instance: object, owner: type | None = None):\n"
      "        raise AttributeError(f\"{self._name} is not declared on this platform: \"\n"
      "                             f\"{self._reason}\")",
@@ -678,14 +678,14 @@ XBOX_MUTATIONS = [
      "        return refuse",
      "tests.test_xbox360_profile"),
     ("xbox: narrow a type without keeping it catchable as the Windows one",
-     "tools/generate_xbox_profile.py",
+     "tools/generate_platform_profile.py",
      "        bases = [f\"_Windows{name}\"]\n"
      "        if name in base_of:\n"
      "            bases.append(base_of[name])",
      "        bases = [base_of[name]] if name in base_of else [\"Exception\"]",
      "tests.test_xbox360_profile"),
     ("xbox: export a type the Xbox assemblies do not declare",
-     "tools/generate_xbox_profile.py",
+     "tools/generate_platform_profile.py",
      "        exports.setdefault(namespace, []).append(name)",
      "        exports.setdefault(namespace, []).append(name)\n"
      "        if namespace == \"Microsoft.Xna.Framework\":\n"
@@ -694,6 +694,56 @@ XBOX_MUTATIONS = [
 ]
 
 MUTATIONS = MUTATIONS + XBOX_MUTATIONS
+
+
+
+#: The Windows Phone profile: a profile blocked on a file. Nothing here can be
+#: measured against metadata, so what is planted is every way the *block* could
+#: stop being honest -- and the reader that identifies what the search found.
+PHONE_MUTATIONS = [
+    ("phone: read an assembly's class layout with the wrong row width",
+     "tools/cli_assembly.py",
+     "        0x0F: 2 + 4 + simple(_TYPE_DEF),                   # ClassLayout",
+     "        0x0F: 2 + 2 + simple(_TYPE_DEF),                   # ClassLayout",
+     "tests.test_windowsphone_profile"),
+    ("phone: report every assembly's core library as the desktop one",
+     "tools/cli_assembly.py",
+     "        for reference in self.references:\n"
+     "            if reference.name == \"mscorlib\":\n"
+     "                return reference\n"
+     "        return None",
+     "        return self.references[0] if self.references else None",
+     "tests.test_windowsphone_profile"),
+    ("phone: accept a block on a profile that has a contract",
+     "tools/verify_blocked_profiles.py",
+     "        if profile.get(\"contract\"):\n"
+     "            unjustified.append(f\"{identifier}: names a contract\")",
+     "        if False:\n"
+     "            unjustified.append(f\"{identifier}: names a contract\")",
+     "tests.test_windowsphone_profile"),
+    ("phone: accept a block with no written reason",
+     "tools/verify_blocked_profiles.py",
+     "            if len((profile.get(field) or \"\").strip()) < 80:",
+     "            if False:",
+     "tests.test_windowsphone_profile"),
+    ("phone: keep the block after the search found the assemblies",
+     "tools/verify_blocked_profiles.py",
+     "        if summary.get(\"CANDIDATES\"):",
+     "        if False:",
+     "tests.test_windowsphone_profile"),
+    ("phone: accept a search that was run for another profile",
+     "tools/verify_blocked_profiles.py",
+     "        if search.get(\"profile\") != identifier:",
+     "        if False:",
+     "tests.test_windowsphone_profile"),
+    ("phone: write the Windows platform byte for a phone build",
+     "src/Microsoft/Xna/Framework/Content/Pipeline/Serialization/Compiler/_compiler.py",
+     "    TargetPlatform.WindowsPhone: ord(\"m\"),",
+     "    TargetPlatform.WindowsPhone: ord(\"w\"),",
+     "tests.test_windowsphone_profile"),
+]
+
+MUTATIONS = MUTATIONS + PHONE_MUTATIONS
 
 if __name__ == "__main__":
     raise SystemExit(main())
