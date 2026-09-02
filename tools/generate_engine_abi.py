@@ -59,18 +59,28 @@ SCALARS = {
     "CNA_Result": "c.c_uint32",
 }
 
-#: Structures declared in other canonical headers that engine structures embed.
-#: They are already measured by the existing audit, so they are imported rather
-#: than re-declared.
-IMPORTED = {
-    "CNA_Vector2": "abi.CNA_Vector2",
-    "CNA_Vector3": "abi.CNA_Vector3",
-    "CNA_Vector4": "abi.CNA_Vector4",
-    "CNA_Matrix": "abi.CNA_Matrix",
-    "CNA_Color": "abi.CNA_Color",
-    "CNA_StringView": "abi.CNA_StringView",
-    "CNA_Rectangle": "abi.CNA_Rectangle",
-}
+def _already_measured() -> dict[str, str]:
+    """Every structure ``_cna_native.abi`` already declares.
+
+    Discovered rather than listed: a type the XNA boundary already measures must
+    not be measured a second time here, and which types those are is a fact
+    about that module rather than something to keep in step by hand.
+    """
+    import ctypes as _ctypes
+
+    sys.path.insert(0, str(ROOT / "src"))
+    from _cna_native import abi as _abi
+
+    return {name: f"abi.{name}" for name in dir(_abi)
+            if name.startswith("CNA_")
+            and isinstance(getattr(_abi, name), type)
+            and issubclass(getattr(_abi, name), _ctypes.Structure)}
+
+
+#: Structures other canonical headers declare that the XNA boundary already
+#: measures. They are imported rather than re-declared, so one layout is never
+#: measured twice under one name.
+IMPORTED = _already_measured()
 
 #: Constant families the engine needs whose names are not derivable from an
 #: identity typedef. ``CNA_PBR_TEXTURE_*`` numbers the slots of an array field
