@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_FUNCTIONS": 1894,
-    "CTYPES_SIGNATURE_MEASUREMENTS": 1894,
+    "BOUND_FUNCTIONS": 1917,
+    "CTYPES_SIGNATURE_MEASUREMENTS": 1917,
     "C_LAYOUT_MEASUREMENTS": 1672,
     "CTYPES_LAYOUT_MEASUREMENTS": 1672,
     "MISSING_SYMBOLS": 0,
@@ -1902,7 +1902,30 @@
     "cna_graphics_device_draw_primitives_indirect_ext",
     "cna_graphics_device_draw_indexed_primitives_indirect_ext",
     "cna_model_mesh_part_create",
-    "cna_model_mesh_part_destroy"
+    "cna_model_mesh_part_destroy",
+    "cna_debug_draw_create",
+    "cna_debug_draw_begin",
+    "cna_debug_draw_end",
+    "cna_debug_draw_clear",
+    "cna_debug_draw_add_line",
+    "cna_debug_draw_add_box",
+    "cna_debug_draw_add_sphere",
+    "cna_debug_draw_add_bounding_sphere",
+    "cna_debug_draw_add_frustum",
+    "cna_debug_draw_add_cross",
+    "cna_debug_draw_is_depth_tested",
+    "cna_debug_draw_set_depth_tested",
+    "cna_debug_draw_get_line_count",
+    "cna_debug_draw_copy_vertices",
+    "cna_debug_draw_add_point_light_gizmo",
+    "cna_debug_draw_add_spot_light_gizmo",
+    "cna_debug_draw_add_directional_light_gizmo",
+    "cna_debug_draw_add_probe_volume_gizmo",
+    "cna_debug_draw_add_cluster_slice_gizmo",
+    "cna_debug_draw_add_cascade_gizmo",
+    "cna_debug_draw_destroy",
+    "cna_ascii_post_process_effect_create",
+    "cna_ascii_post_process_effect_draw"
   ],
   "functionManifest": [
     {
@@ -21811,6 +21834,260 @@
       ],
       "arity": 1,
       "ownership": "consumes the native part"
+    },
+    {
+      "symbol": "cna_debug_draw_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned debug drawer; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_debug_draw_begin",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "pointer<CNA_Matrix>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed drawer; clears both lists and copies the two matrices"
+    },
+    {
+      "symbol": "cna_debug_draw_end",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed drawer; draws both lists and clears them"
+    },
+    {
+      "symbol": "cna_debug_draw_clear",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "borrowed drawer; drops every line without drawing"
+    },
+    {
+      "symbol": "cna_debug_draw_add_line",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "pointer<CNA_Vector3>",
+        "CNA_Color"
+      ],
+      "arity": 4,
+      "ownership": "borrowed drawer; copies both endpoints and the colour"
+    },
+    {
+      "symbol": "cna_debug_draw_add_box",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingBox>",
+        "CNA_Color"
+      ],
+      "arity": 3,
+      "ownership": "borrowed drawer; twelve lines from the box's own corners"
+    },
+    {
+      "symbol": "cna_debug_draw_add_sphere",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "CNA_Color",
+        "c_int"
+      ],
+      "arity": 5,
+      "ownership": "borrowed drawer; three rings of the clamped segment count"
+    },
+    {
+      "symbol": "cna_debug_draw_add_bounding_sphere",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_BoundingSphere>",
+        "CNA_Color",
+        "c_int"
+      ],
+      "arity": 4,
+      "ownership": "borrowed drawer; the same three rings, from a bounding sphere"
+    },
+    {
+      "symbol": "cna_debug_draw_add_frustum",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "CNA_BoundingFrustum",
+        "CNA_Color"
+      ],
+      "arity": 3,
+      "ownership": "borrowed drawer; the frustum crosses BY VALUE, unlike every other bound here"
+    },
+    {
+      "symbol": "cna_debug_draw_add_cross",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "CNA_Color"
+      ],
+      "arity": 4,
+      "ownership": "borrowed drawer; three axis-aligned lines through the point"
+    },
+    {
+      "symbol": "cna_debug_draw_is_depth_tested",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ubyte>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; borrowed drawer"
+    },
+    {
+      "symbol": "cna_debug_draw_set_depth_tested",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte"
+      ],
+      "arity": 2,
+      "ownership": "borrowed drawer; decides which of the two lists later lines join"
+    },
+    {
+      "symbol": "cna_debug_draw_get_line_count",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_int>"
+      ],
+      "arity": 2,
+      "ownership": "caller output; both lists together"
+    },
+    {
+      "symbol": "cna_debug_draw_copy_vertices",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ubyte",
+        "pointer<CNA_VertexPositionColor>",
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 5,
+      "ownership": "caller output; two-call size/copy protocol over one of the two lists"
+    },
+    {
+      "symbol": "cna_debug_draw_add_point_light_gizmo",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_PointLightEXT>",
+        "CNA_Color"
+      ],
+      "arity": 3,
+      "ownership": "borrowed drawer; the light value is borrowed for the call"
+    },
+    {
+      "symbol": "cna_debug_draw_add_spot_light_gizmo",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_SpotLightEXT>",
+        "CNA_Color",
+        "c_int"
+      ],
+      "arity": 4,
+      "ownership": "borrowed drawer; the light value is borrowed for the call"
+    },
+    {
+      "symbol": "cna_debug_draw_add_directional_light_gizmo",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<CNA_DirectionalLightEXT>",
+        "pointer<CNA_Vector3>",
+        "c_float",
+        "CNA_Color"
+      ],
+      "arity": 5,
+      "ownership": "borrowed drawer; the light value is borrowed for the call"
+    },
+    {
+      "symbol": "cna_debug_draw_add_probe_volume_gizmo",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CNA_Color",
+        "c_float"
+      ],
+      "arity": 4,
+      "ownership": "borrowed drawer and volume; nothing is retained"
+    },
+    {
+      "symbol": "cna_debug_draw_add_cluster_slice_gizmo",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Matrix>",
+        "CNA_Color"
+      ],
+      "arity": 4,
+      "ownership": "borrowed drawer and grid; nothing is retained"
+    },
+    {
+      "symbol": "cna_debug_draw_add_cascade_gizmo",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "CNA_Color"
+      ],
+      "arity": 3,
+      "ownership": "borrowed drawer and cascaded shadow map; nothing is retained"
+    },
+    {
+      "symbol": "cna_debug_draw_destroy",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong"
+      ],
+      "arity": 1,
+      "ownership": "consumes the drawer"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_create",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "pointer<c_ulong>"
+      ],
+      "arity": 2,
+      "ownership": "owned ASCII effect; borrows the graphics device for the call"
+    },
+    {
+      "symbol": "cna_ascii_post_process_effect_draw",
+      "return": "c_uint",
+      "parameters": [
+        "c_ulong",
+        "c_ulong",
+        "pointer<CNA_Rectangle>"
+      ],
+      "arity": 3,
+      "ownership": "borrowed effect; the source texture is borrowed for the call"
     }
   ],
   "missingSymbols": [],

@@ -2095,6 +2095,83 @@ ENGINE_MODEL_DEPENDENCY_MANIFEST: tuple[tuple[str, object, list[object], str], .
      "consumes the native part"),
 )
 
+#: Debug drawing: world-space lines, and the gizmos that build one out of an
+#: engine object so a light's reach or a grid's slices can be *seen* rather than
+#: inferred from numbers.
+ENGINE_DEBUG_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
+    ("cna_debug_draw_create", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint64)],
+     "owned debug drawer; borrows the graphics device for the call"),
+    ("cna_debug_draw_begin", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Matrix), c.POINTER(abi.CNA_Matrix)],
+     "borrowed drawer; clears both lists and copies the two matrices"),
+    ("cna_debug_draw_end", c.c_uint32, [c.c_uint64],
+     "borrowed drawer; draws both lists and clears them"),
+    ("cna_debug_draw_clear", c.c_uint32, [c.c_uint64],
+     "borrowed drawer; drops every line without drawing"),
+    ("cna_debug_draw_add_line", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Vector3), c.POINTER(abi.CNA_Vector3), abi.CNA_Color],
+     "borrowed drawer; copies both endpoints and the colour"),
+    ("cna_debug_draw_add_box", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_BoundingBox), abi.CNA_Color],
+     "borrowed drawer; twelve lines from the box's own corners"),
+    ("cna_debug_draw_add_sphere", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Vector3), c.c_float, abi.CNA_Color, c.c_int32],
+     "borrowed drawer; three rings of the clamped segment count"),
+    ("cna_debug_draw_add_bounding_sphere", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_BoundingSphere), abi.CNA_Color, c.c_int32],
+     "borrowed drawer; the same three rings, from a bounding sphere"),
+    ("cna_debug_draw_add_frustum", c.c_uint32,
+     [c.c_uint64, engine.CNA_BoundingFrustum, abi.CNA_Color],
+     "borrowed drawer; the frustum crosses BY VALUE, unlike every other bound here"),
+    ("cna_debug_draw_add_cross", c.c_uint32,
+     [c.c_uint64, c.POINTER(abi.CNA_Vector3), c.c_float, abi.CNA_Color],
+     "borrowed drawer; three axis-aligned lines through the point"),
+    ("cna_debug_draw_is_depth_tested", c.c_uint32, [c.c_uint64, c.POINTER(c.c_uint8)],
+     "caller output; borrowed drawer"),
+    ("cna_debug_draw_set_depth_tested", c.c_uint32, [c.c_uint64, c.c_uint8],
+     "borrowed drawer; decides which of the two lists later lines join"),
+    ("cna_debug_draw_get_line_count", c.c_uint32, [c.c_uint64, c.POINTER(c.c_int32)],
+     "caller output; both lists together"),
+    ("cna_debug_draw_copy_vertices", c.c_uint32,
+     [c.c_uint64, c.c_uint8, c.POINTER(abi.CNA_VertexPositionColor), c.c_uint64,
+      c.POINTER(c.c_uint64)],
+     "caller output; two-call size/copy protocol over one of the two lists"),
+    ("cna_debug_draw_add_point_light_gizmo", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_PointLightEXT), abi.CNA_Color],
+     "borrowed drawer; the light value is borrowed for the call"),
+    ("cna_debug_draw_add_spot_light_gizmo", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_SpotLightEXT), abi.CNA_Color, c.c_int32],
+     "borrowed drawer; the light value is borrowed for the call"),
+    ("cna_debug_draw_add_directional_light_gizmo", c.c_uint32,
+     [c.c_uint64, c.POINTER(engine.CNA_DirectionalLightEXT), c.POINTER(abi.CNA_Vector3),
+      c.c_float, abi.CNA_Color],
+     "borrowed drawer; the light value is borrowed for the call"),
+    ("cna_debug_draw_add_probe_volume_gizmo", c.c_uint32,
+     [c.c_uint64, c.c_uint64, abi.CNA_Color, c.c_float],
+     "borrowed drawer and volume; nothing is retained"),
+    ("cna_debug_draw_add_cluster_slice_gizmo", c.c_uint32,
+     [c.c_uint64, c.c_uint64, c.POINTER(abi.CNA_Matrix), abi.CNA_Color],
+     "borrowed drawer and grid; nothing is retained"),
+    ("cna_debug_draw_add_cascade_gizmo", c.c_uint32,
+     [c.c_uint64, c.c_uint64, abi.CNA_Color],
+     "borrowed drawer and cascaded shadow map; nothing is retained"),
+    ("cna_debug_draw_destroy", c.c_uint32, [c.c_uint64],
+     "consumes the drawer"),
+)
+
+#: The two ``graphics_ext.h`` routes that make an ASCII effect usable on its own
+#: rather than only as the thing an :class:`AsciiPass` configures. The pass
+#: cannot draw into a chosen rectangle and cannot be pointed at an arbitrary
+#: texture; these can, and nothing in ``engine_layer.h`` offers either.
+ENGINE_ASCII_EFFECT_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
+    ("cna_ascii_post_process_effect_create", c.c_uint32,
+     [c.c_uint64, c.POINTER(c.c_uint64)],
+     "owned ASCII effect; borrows the graphics device for the call"),
+    ("cna_ascii_post_process_effect_draw", c.c_uint32,
+     [c.c_uint64, c.c_uint64, c.POINTER(abi.CNA_Rectangle)],
+     "borrowed effect; the source texture is borrowed for the call"),
+)
+
 #: Every engine route this binding imports, in one tuple for the loader.
 ENGINE_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     ENGINE_IDENTITY_MANIFEST
@@ -2112,6 +2189,8 @@ ENGINE_FUNCTION_MANIFEST: tuple[tuple[str, object, list[object], str], ...] = (
     + ENGINE_PROBE_MANIFEST
     + ENGINE_CULLING_MANIFEST
     + ENGINE_MODEL_DEPENDENCY_MANIFEST
+    + ENGINE_DEBUG_MANIFEST
+    + ENGINE_ASCII_EFFECT_MANIFEST
 )
 
 # ``engine`` is imported for the structures later slices pass by pointer; the

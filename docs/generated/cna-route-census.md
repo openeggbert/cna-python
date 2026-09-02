@@ -5,7 +5,7 @@ binding status answers why it is or is not imported. They are independent.
 
 ```text
 CANONICAL_ROUTES=4055
-BOUND_ROUTES=1894
+BOUND_ROUTES=1917
 BOUND_NOT_IN_HEADERS=0
 UNREVIEWED=0
 RULE_CONTRADICTIONS=0
@@ -15,17 +15,17 @@ CNB_CNJ_BOUND=283
 CNB_CNJ_UNREVIEWED=0
 SELECTED_CNB_CNJ_ACTIONABLE_LOCAL=0
 ENGINE_ROUTES=870
-ENGINE_BOUND=844
+ENGINE_BOUND=867
 ENGINE_UNREVIEWED=0
-SELECTED_ENGINE_ACTIONABLE_LOCAL=23
+SELECTED_ENGINE_ACTIONABLE_LOCAL=0
 PURPOSE_XNA_BACKING=1171
 PURPOSE_CNA_EXTENSION_CANDIDATE=1822
 PURPOSE_MANAGED_BY_DESIGN=537
 PURPOSE_TOOLING_ONLY=1
 PURPOSE_OUT_OF_SELECTED_PROFILE=414
 PURPOSE_NOT_USEFUL_FOR_PYTHON=110
-STATUS_BOUND=1894
-STATUS_ACTIONABLE_LOCAL=23
+STATUS_BOUND=1917
+STATUS_ACTIONABLE_LOCAL=0
 STATUS_BLOCKED_UPSTREAM=2
 STATUS_BLOCKED_RENDERER=0
 STATUS_BLOCKED_PLATFORM=0
@@ -40,14 +40,13 @@ STATUS_UNREVIEWED=0
 
 | Purpose | Status | Routes |
 |---|---|---:|
-| CNA_EXTENSION_CANDIDATE | BOUND | 1150 |
+| CNA_EXTENSION_CANDIDATE | BOUND | 1173 |
 | XNA_BACKING | BOUND | 727 |
 | CNA_EXTENSION_CANDIDATE | DELIBERATE_NON_BINDING | 649 |
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 520 |
 | XNA_BACKING | DELIBERATE_NON_BINDING | 442 |
 | OUT_OF_SELECTED_PROFILE | DELIBERATE_NON_BINDING | 414 |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 110 |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 23 |
 | MANAGED_BY_DESIGN | BOUND | 17 |
 | XNA_BACKING | BLOCKED_UPSTREAM | 2 |
 | TOOLING_ONLY | DELIBERATE_NON_BINDING | 1 |
@@ -358,8 +357,7 @@ is BOUND or carries its own written non-binding reason.
 
 | Status | Routes |
 |---|---:|
-| BOUND | 844 |
-| ACTIONABLE_LOCAL | 23 |
+| BOUND | 867 |
 | DELIBERATE_NON_BINDING | 3 |
 
 ### By sub-family
@@ -369,7 +367,7 @@ is BOUND or carries its own written non-binding reason.
 | `aerial-perspective` (aerial perspective) | 12 | 12 | BOUND 12 |
 | `area-light` (area lights) | 7 | 7 | BOUND 7 |
 | `area-light-brdf-table` (the area-light BRDF table) | 9 | 9 | BOUND 9 |
-| `ascii` (the ASCII pass) | 10 | 8 | ACTIONABLE_LOCAL 2, BOUND 8 |
+| `ascii` (the ASCII pass) | 10 | 10 | BOUND 10 |
 | `atmospheric-sky` (the atmospheric sky) | 12 | 12 | BOUND 12 |
 | `auto-exposure` (auto exposure) | 13 | 13 | BOUND 13 |
 | `blit` (the blit pass) | 1 | 1 | BOUND 1 |
@@ -390,7 +388,7 @@ is BOUND or carries its own written non-binding reason.
 | `contact-shadow` (contact shadows) | 17 | 17 | BOUND 17 |
 | `cube-lut` (cube LUTs) | 11 | 11 | BOUND 11 |
 | `cube-shadow-map` (cube shadow maps) | 17 | 17 | BOUND 17 |
-| `debug-draw` (debug drawing) | 21 | 0 | ACTIONABLE_LOCAL 21 |
+| `debug-draw` (debug drawing) | 21 | 21 | BOUND 21 |
 | `decals` (decals) | 12 | 12 | BOUND 12 |
 | `depth-normal-prepass` (the depth/normal prepass) | 27 | 27 | BOUND 27 |
 | `depth-of-field` (depth of field) | 10 | 10 | BOUND 10 |
@@ -473,14 +471,14 @@ is BOUND or carries its own written non-binding reason.
 | `cna_area_light_shading_quad_of` | engine_layer.h | BOUND | imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms |
 | `cna_ascii_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass |
 | `cna_ascii_pass_get_effect` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass |
-| `cna_ascii_post_process_effect_create` | graphics_ext.h | ACTIONABLE_LOCAL | The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h. |
-| `cna_ascii_post_process_effect_destroy` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it |
-| `cna_ascii_post_process_effect_draw` | graphics_ext.h | ACTIONABLE_LOCAL | The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h. |
-| `cna_ascii_post_process_effect_get_cell_size` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it |
-| `cna_ascii_post_process_effect_get_last_grid_dimensions` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it |
-| `cna_ascii_post_process_effect_get_quantize_mode` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it |
-| `cna_ascii_post_process_effect_set_cell_size` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it |
-| `cna_ascii_post_process_effect_set_quantize_mode` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it |
+| `cna_ascii_post_process_effect_create` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
+| `cna_ascii_post_process_effect_destroy` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
+| `cna_ascii_post_process_effect_draw` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
+| `cna_ascii_post_process_effect_get_cell_size` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
+| `cna_ascii_post_process_effect_get_last_grid_dimensions` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
+| `cna_ascii_post_process_effect_get_quantize_mode` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
+| `cna_ascii_post_process_effect_set_cell_size` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
+| `cna_ascii_post_process_effect_set_quantize_mode` | graphics_ext.h | BOUND | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
 | `cna_atmospheric_sky_copy_model_glsl` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance |
 | `cna_atmospheric_sky_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance |
 | `cna_atmospheric_sky_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects the atmospheric sky -- the analytic sky and its radiance |
@@ -714,27 +712,27 @@ is BOUND or carries its own written non-binding reason.
 | `cna_cube_shadow_map_set_depth_bias` | engine_layer.h | BOUND | imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces |
 | `cna_cube_shadow_map_size_for_quality` | engine_layer.h | BOUND | imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces |
 | `cna_cube_shadow_map_update` | engine_layer.h | BOUND | imported: cna.extensions.engine projects cube shadow maps -- omnidirectional point-light shadows over six faces |
-| `cna_debug_draw_add_bounding_sphere` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_box` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_cascade_gizmo` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_cluster_slice_gizmo` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_cross` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_directional_light_gizmo` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_frustum` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_line` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_point_light_gizmo` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_probe_volume_gizmo` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_sphere` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_add_spot_light_gizmo` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_begin` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_clear` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_copy_vertices` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_create` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_destroy` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_end` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_get_line_count` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_is_depth_tested` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
-| `cna_debug_draw_set_depth_tested` | engine_layer.h | ACTIONABLE_LOCAL | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| `cna_debug_draw_add_bounding_sphere` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_box` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_cascade_gizmo` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_cluster_slice_gizmo` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_cross` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_directional_light_gizmo` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_frustum` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_line` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_point_light_gizmo` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_probe_volume_gizmo` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_sphere` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_add_spot_light_gizmo` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_begin` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_clear` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_copy_vertices` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_end` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_get_line_count` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_is_depth_tested` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
+| `cna_debug_draw_set_depth_tested` | engine_layer.h | BOUND | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
 | `cna_decal_pass_create` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
 | `cna_decal_pass_destroy` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
 | `cna_decal_pass_draw` | engine_layer.h | BOUND | imported: cna.extensions.engine projects decals -- projected decals |
@@ -1337,7 +1335,7 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 27 | imported: cna.extensions.engine projects the depth/normal prepass -- linear depth, view-space normals and velocity for the screen-space effects |
 | CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects cascaded shadow maps -- cascaded directional shadows, their splits and their texel snapping |
 | CNA_EXTENSION_CANDIDATE | BOUND | 24 | imported: cna.extensions.engine projects particle systems -- the particle system, its emitter settings and its particle value |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 21 | In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision. |
+| CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos |
 | CNA_EXTENSION_CANDIDATE | BOUND | 21 | imported: runtime capability evidence names the backend that produced it |
 | CNA_EXTENSION_CANDIDATE | BOUND | 20 | imported: cna.extensions.engine projects directional shadow maps -- the single-cascade directional shadow map and its light matrices |
 | CNA_EXTENSION_CANDIDATE | BOUND | 19 | imported: cna.extensions.engine projects light probes -- one spherical-harmonic irradiance probe |
@@ -1383,13 +1381,13 @@ is BOUND or carries its own written non-binding reason.
 | CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects the clustered light upload buffer -- the GPU buffer a clustered assignment uploads into |
 | CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects light shafts -- radial light shafts |
 | CNA_EXTENSION_CANDIDATE | BOUND | 9 | imported: cna.extensions.engine projects the transparent draw list -- back-to-front sorted transparent submission |
+| CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects the compute cluster assignment -- the compute-shader path that assigns lights to clusters on the GPU |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects post-process passes -- the shared pass vocabulary and the context a pass is applied in |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects spatial upscaling -- the spatial upscale pass |
 | CNA_EXTENSION_CANDIDATE | BOUND | 8 | imported: cna.extensions.engine projects volumetric fog -- volumetric fog |
 | CNA_EXTENSION_CANDIDATE | BOUND | 7 | imported: cna.extensions.engine projects area lights -- the area-light value and its analytic shading terms |
 | CNA_EXTENSION_CANDIDATE | BOUND | 7 | imported: cna.extensions.engine projects lens flare -- ghost and halo lens flare |
-| CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: the ASCII pass cannot be configured without it |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects the glTF material bridge -- the bridge that turns a glTF material source into a PBR material |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects render-target pools -- the pooled intermediate targets a post-process chain draws through |
 | CNA_EXTENSION_CANDIDATE | BOUND | 6 | imported: cna.extensions.engine projects shader-effect factories -- effects built from shader source rather than from a compiled asset |
@@ -1408,7 +1406,6 @@ is BOUND or carries its own written non-binding reason.
 | MANAGED_BY_DESIGN | DELIBERATE_NON_BINDING | 3 | The C form of a unique_ptr parameter: it exists because C has no way to say "keep this alive", so it transfers ownership and invalidates the caller's handle. Python's reference already guarantees exactly that lifetime -- an EffectPass holds its effect, a PostProcessChain holds its passes and a Skybox holds its environment cube -- so binding these would cost capability rather than add it: CNA would invalidate a live Effect facade, which could then no longer set a parameter. The borrowing constructors give the same guarantee with nothing invalidated. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 3 | imported: cna.extensions.engine projects scoped render targets -- the save/restore bracket around a render-target change |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects the ASCII pass -- the ASCII-art post-process pass |
-| CNA_EXTENSION_CANDIDATE | ACTIONABLE_LOCAL | 2 | The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h. |
 | NOT_USEFUL_FOR_PYTHON | DELIBERATE_NON_BINDING | 2 | These refuse instead of wrapping around when two file-declared 64-bit values are combined. Python integers are unbounded, so the same computation is already exact; calling them would convert an exact answer into a narrower one. The bound checks that do matter happen in _cna_native.cnb_support, where a value has to fit a native width. |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.content.NativeContentManager is the collaborator CNA's loader signature demands |
 | CNA_EXTENSION_CANDIDATE | BOUND | 2 | imported: cna.extensions.engine projects engine-layer identity -- the engine layer's own revision, which every capability report has to name |

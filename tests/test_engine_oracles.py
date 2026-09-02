@@ -1164,3 +1164,50 @@ class LodSelectionTests(unittest.TestCase):
         """The boundary is the lower level's, whichever way the value crosses it."""
         self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 0, 1, 4.0, 2.0), 1)
         self.assertEqual(oracle.lod_apply_hysteresis(self.THRESHOLDS, 0, 1, 1.0, 2.0), 0)
+
+
+class DebugLineCountTests(unittest.TestCase):
+    """Every debug shape's line count is exact, which is what makes it testable."""
+
+    def test_segments_clamp_rather_than_refuse(self) -> None:
+        self.assertEqual(oracle.debug_segments(0), 4)
+        self.assertEqual(oracle.debug_segments(-10), 4)
+        self.assertEqual(oracle.debug_segments(4), 4)
+        self.assertEqual(oracle.debug_segments(24), 24)
+        self.assertEqual(oracle.debug_segments(128), 128)
+        self.assertEqual(oracle.debug_segments(1000), 128)
+
+    def test_a_sphere_is_three_rings(self) -> None:
+        self.assertEqual(oracle.debug_sphere_lines(8), 24)
+        self.assertEqual(oracle.debug_sphere_lines(), 72)
+        self.assertEqual(oracle.debug_sphere_lines(1), 12)
+
+    def test_a_point_light_is_a_sphere_and_a_cross(self) -> None:
+        self.assertEqual(oracle.debug_point_light_lines(8), 24 + 3)
+        self.assertEqual(oracle.debug_point_light_lines(), 72 + 3)
+
+    def test_a_cone_has_four_ribs_whatever_the_ring(self) -> None:
+        """The rib count does not follow the ring's, on purpose."""
+        self.assertEqual(oracle.debug_cone_lines(8), 8 + 4)
+        self.assertEqual(oracle.debug_cone_lines(64), 64 + 4)
+        self.assertEqual(oracle.debug_cone_lines(1000), 128 + 4)
+
+    def test_a_spot_light_is_two_cones(self) -> None:
+        """The outer angle and the inner one, so both edges of the falloff show."""
+        self.assertEqual(oracle.debug_spot_light_lines(8), 2 * (8 + 4))
+        self.assertEqual(oracle.debug_spot_light_lines(24), 2 * (24 + 4))
+        self.assertEqual(oracle.debug_spot_light_lines(1000), 2 * (128 + 4))
+
+    def test_a_directional_light_is_a_shaft_and_an_arrowhead(self) -> None:
+        self.assertEqual(oracle.debug_directional_light_lines(), 5)
+
+    def test_a_probe_volume_is_its_box_and_a_cross_per_probe(self) -> None:
+        self.assertEqual(oracle.debug_probe_volume_lines(0), 12)
+        self.assertEqual(oracle.debug_probe_volume_lines(8), 12 + 24)
+
+    def test_a_cluster_grid_is_one_box_per_slice(self) -> None:
+        self.assertEqual(oracle.debug_cluster_slice_lines(0), 0)
+        self.assertEqual(oracle.debug_cluster_slice_lines(5), 60)
+
+    def test_a_cascade_set_is_one_frustum_per_cascade(self) -> None:
+        self.assertEqual(oracle.debug_cascade_lines(4), 48)

@@ -209,7 +209,7 @@
     {
       "id": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "match": {
         "prefixes": [
           "cna_ascii_post_process_effect_"
@@ -217,8 +217,8 @@
       },
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "ACTIONABLE_LOCAL",
-      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
-      "boundReason": "imported: the ASCII pass cannot be configured without it"
+      "reason": "The minimal graphics_ext.h slice the selected ASCII family cannot work without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are here too, because they are the only way to quantize an arbitrary texture into an arbitrary rectangle: an AsciiPass runs inside a post-process chain and can do neither. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "boundReason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle"
     },
     {
       "id": "engine-pbr-dependency",

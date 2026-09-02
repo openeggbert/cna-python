@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "BOUND_ROUTES": 1894,
-    "DIRECT_CALL_SITE": 1800,
+    "BOUND_ROUTES": 1917,
+    "DIRECT_CALL_SITE": 1823,
     "OBSERVED_CALLED_AT_RUNTIME": 506,
     "REACHED_BY_NAME_TEMPLATE": 15,
     "ADMITTED_WITH_REASON": 37,
@@ -3568,7 +3568,7 @@
       "src/_cna_native/engine_support.py:73"
     ],
     "cna_engine_layer_copy_version_string": [
-      "src/cna/extensions/engine/__init__.py:419"
+      "src/cna/extensions/engine/__init__.py:431"
     ],
     "cna_graphics_memory_barrier_has": [
       "src/cna/extensions/engine/compute.py:80"
@@ -4749,22 +4749,22 @@
       "src/cna/extensions/engine/passes.py:298"
     ],
     "cna_spatial_upscale_pass_create": [
-      "src/cna/extensions/engine/passes.py:443"
+      "src/cna/extensions/engine/passes.py:507"
     ],
     "cna_spatial_upscale_pass_destroy": [
-      "src/cna/extensions/engine/passes.py:445"
+      "src/cna/extensions/engine/passes.py:509"
     ],
     "cna_spatial_upscale_pass_get_sharpness": [
-      "src/cna/extensions/engine/passes.py:447"
+      "src/cna/extensions/engine/passes.py:511"
     ],
     "cna_spatial_upscale_pass_set_sharpness": [
-      "src/cna/extensions/engine/passes.py:448"
+      "src/cna/extensions/engine/passes.py:512"
     ],
     "cna_spatial_upscale_pass_get_edge_adaptive": [
-      "src/cna/extensions/engine/passes.py:450"
+      "src/cna/extensions/engine/passes.py:514"
     ],
     "cna_spatial_upscale_pass_set_edge_adaptive": [
-      "src/cna/extensions/engine/passes.py:451"
+      "src/cna/extensions/engine/passes.py:515"
     ],
     "cna_chromatic_aberration_pass_create": [
       "src/cna/extensions/engine/passes.py:306"
@@ -4785,31 +4785,31 @@
       "src/cna/extensions/engine/passes.py:325"
     ],
     "cna_ascii_pass_create": [
-      "src/cna/extensions/engine/passes.py:404"
+      "src/cna/extensions/engine/passes.py:468"
     ],
     "cna_bloom_pass_reset_targets": [
       "src/cna/extensions/engine/passes.py:203"
     ],
     "cna_bloom_pass_iterations_for_quality": [
-      "src/cna/extensions/engine/passes.py:756"
+      "src/cna/extensions/engine/passes.py:820"
     ],
     "cna_bloom_pass_extract_channel": [
-      "src/cna/extensions/engine/passes.py:749"
+      "src/cna/extensions/engine/passes.py:813"
     ],
     "cna_fxaa_pass_copy_fragment_glsl": [
-      "src/cna/extensions/engine/passes.py:768"
+      "src/cna/extensions/engine/passes.py:832"
     ],
     "cna_fxaa_pass_edge_threshold_for_quality": [
-      "src/cna/extensions/engine/passes.py:762"
+      "src/cna/extensions/engine/passes.py:826"
     ],
     "cna_spatial_upscale_pass_draw": [
-      "src/cna/extensions/engine/passes.py:474"
+      "src/cna/extensions/engine/passes.py:538"
     ],
     "cna_spatial_upscale_pass_is_identity_scale": [
-      "src/cna/extensions/engine/passes.py:806"
+      "src/cna/extensions/engine/passes.py:870"
     ],
     "cna_ascii_pass_get_effect": [
-      "src/cna/extensions/engine/passes.py:419"
+      "src/cna/extensions/engine/passes.py:483"
     ],
     "cna_tonemap_pass_create": [
       "src/cna/extensions/engine/passes.py:210"
@@ -4845,7 +4845,7 @@
       "src/cna/extensions/engine/passes.py:222"
     ],
     "cna_tonemap_pass_tonemap_channel": [
-      "src/cna/extensions/engine/passes.py:778"
+      "src/cna/extensions/engine/passes.py:842"
     ],
     "cna_color_grade_pass_create": [
       "src/cna/extensions/engine/passes.py:236"
@@ -4875,145 +4875,145 @@
       "src/cna/extensions/engine/passes.py:248"
     ],
     "cna_color_grade_pass_lut_size_for_strip": [
-      "src/cna/extensions/engine/passes.py:787"
+      "src/cna/extensions/engine/passes.py:851"
     ],
     "cna_color_grade_pass_create_identity_lut": [
-      "src/cna/extensions/engine/passes.py:798"
+      "src/cna/extensions/engine/passes.py:862"
     ],
     "cna_hdr_display_output_create": [
-      "src/cna/extensions/engine/passes.py:602"
-    ],
-    "cna_hdr_display_output_destroy": [
-      "src/cna/extensions/engine/passes.py:604"
-    ],
-    "cna_hdr_display_output_is_supported": [
-      "src/cna/extensions/engine/passes.py:609"
-    ],
-    "cna_hdr_display_output_get_color_space": [
-      "src/cna/extensions/engine/passes.py:612"
-    ],
-    "cna_hdr_display_output_set_color_space": [
-      "src/cna/extensions/engine/passes.py:613"
-    ],
-    "cna_hdr_display_output_get_paper_white_nits": [
-      "src/cna/extensions/engine/passes.py:616"
-    ],
-    "cna_hdr_display_output_set_paper_white_nits": [
-      "src/cna/extensions/engine/passes.py:617"
-    ],
-    "cna_hdr_display_output_get_peak_nits": [
-      "src/cna/extensions/engine/passes.py:619"
-    ],
-    "cna_hdr_display_output_set_peak_nits": [
-      "src/cna/extensions/engine/passes.py:620"
-    ],
-    "cna_hdr_display_output_draw": [
-      "src/cna/extensions/engine/passes.py:642"
-    ],
-    "cna_hdr_display_output_encode_pq": [
-      "src/cna/extensions/engine/passes.py:815"
-    ],
-    "cna_hdr_display_output_decode_pq": [
-      "src/cna/extensions/engine/passes.py:821"
-    ],
-    "cna_hdr_display_output_rec709_to_rec2020": [
-      "src/cna/extensions/engine/passes.py:829"
-    ],
-    "cna_hdr_display_output_roll_off": [
-      "src/cna/extensions/engine/passes.py:836"
-    ],
-    "cna_hdr_display_output_encode": [
-      "src/cna/extensions/engine/passes.py:850"
-    ],
-    "cna_auto_exposure_ext_create": [
-      "src/cna/extensions/engine/passes.py:662"
-    ],
-    "cna_auto_exposure_ext_destroy": [
-      "src/cna/extensions/engine/passes.py:664"
-    ],
-    "cna_auto_exposure_ext_measure_average_luminance": [
-      "src/cna/extensions/engine/passes.py:723"
-    ],
-    "cna_auto_exposure_ext_update": [
-      "src/cna/extensions/engine/passes.py:730"
-    ],
-    "cna_auto_exposure_ext_apply_to": [
-      "src/cna/extensions/engine/passes.py:740"
-    ],
-    "cna_auto_exposure_ext_get_exposure": [
       "src/cna/extensions/engine/passes.py:666"
     ],
+    "cna_hdr_display_output_destroy": [
+      "src/cna/extensions/engine/passes.py:668"
+    ],
+    "cna_hdr_display_output_is_supported": [
+      "src/cna/extensions/engine/passes.py:673"
+    ],
+    "cna_hdr_display_output_get_color_space": [
+      "src/cna/extensions/engine/passes.py:676"
+    ],
+    "cna_hdr_display_output_set_color_space": [
+      "src/cna/extensions/engine/passes.py:677"
+    ],
+    "cna_hdr_display_output_get_paper_white_nits": [
+      "src/cna/extensions/engine/passes.py:680"
+    ],
+    "cna_hdr_display_output_set_paper_white_nits": [
+      "src/cna/extensions/engine/passes.py:681"
+    ],
+    "cna_hdr_display_output_get_peak_nits": [
+      "src/cna/extensions/engine/passes.py:683"
+    ],
+    "cna_hdr_display_output_set_peak_nits": [
+      "src/cna/extensions/engine/passes.py:684"
+    ],
+    "cna_hdr_display_output_draw": [
+      "src/cna/extensions/engine/passes.py:706"
+    ],
+    "cna_hdr_display_output_encode_pq": [
+      "src/cna/extensions/engine/passes.py:879"
+    ],
+    "cna_hdr_display_output_decode_pq": [
+      "src/cna/extensions/engine/passes.py:885"
+    ],
+    "cna_hdr_display_output_rec709_to_rec2020": [
+      "src/cna/extensions/engine/passes.py:893"
+    ],
+    "cna_hdr_display_output_roll_off": [
+      "src/cna/extensions/engine/passes.py:900"
+    ],
+    "cna_hdr_display_output_encode": [
+      "src/cna/extensions/engine/passes.py:914"
+    ],
+    "cna_auto_exposure_ext_create": [
+      "src/cna/extensions/engine/passes.py:726"
+    ],
+    "cna_auto_exposure_ext_destroy": [
+      "src/cna/extensions/engine/passes.py:728"
+    ],
+    "cna_auto_exposure_ext_measure_average_luminance": [
+      "src/cna/extensions/engine/passes.py:787"
+    ],
+    "cna_auto_exposure_ext_update": [
+      "src/cna/extensions/engine/passes.py:794"
+    ],
+    "cna_auto_exposure_ext_apply_to": [
+      "src/cna/extensions/engine/passes.py:804"
+    ],
+    "cna_auto_exposure_ext_get_exposure": [
+      "src/cna/extensions/engine/passes.py:730"
+    ],
     "cna_auto_exposure_ext_set_exposure": [
-      "src/cna/extensions/engine/passes.py:667"
+      "src/cna/extensions/engine/passes.py:731"
     ],
     "cna_auto_exposure_ext_get_key_value": [
-      "src/cna/extensions/engine/passes.py:669"
+      "src/cna/extensions/engine/passes.py:733"
     ],
     "cna_auto_exposure_ext_set_key_value": [
-      "src/cna/extensions/engine/passes.py:670"
+      "src/cna/extensions/engine/passes.py:734"
     ],
     "cna_auto_exposure_ext_get_brightening_speed": [
-      "src/cna/extensions/engine/passes.py:692"
+      "src/cna/extensions/engine/passes.py:756"
     ],
     "cna_auto_exposure_ext_get_darkening_speed": [
-      "src/cna/extensions/engine/passes.py:698"
+      "src/cna/extensions/engine/passes.py:762"
     ],
     "cna_auto_exposure_ext_set_adaptation_speeds": [
-      "src/cna/extensions/engine/passes.py:708"
+      "src/cna/extensions/engine/passes.py:772"
     ],
     "cna_auto_exposure_ext_set_exposure_range": [
-      "src/cna/extensions/engine/passes.py:717"
+      "src/cna/extensions/engine/passes.py:781"
     ],
     "cna_cube_lut_parse": [
-      "src/cna/extensions/engine/passes.py:506"
+      "src/cna/extensions/engine/passes.py:570"
     ],
     "cna_cube_lut_load_from_file": [
-      "src/cna/extensions/engine/passes.py:516"
+      "src/cna/extensions/engine/passes.py:580"
     ],
     "cna_cube_lut_destroy": [
-      "src/cna/extensions/engine/passes.py:499"
+      "src/cna/extensions/engine/passes.py:563"
     ],
     "cna_cube_lut_get_size": [
-      "src/cna/extensions/engine/passes.py:539"
+      "src/cna/extensions/engine/passes.py:603"
     ],
     "cna_cube_lut_copy_title": [
-      "src/cna/extensions/engine/passes.py:544"
+      "src/cna/extensions/engine/passes.py:608"
     ],
     "cna_cube_lut_get_domain_min": [
-      "src/cna/extensions/engine/passes.py:551"
+      "src/cna/extensions/engine/passes.py:615"
     ],
     "cna_cube_lut_get_domain_max": [
-      "src/cna/extensions/engine/passes.py:559"
+      "src/cna/extensions/engine/passes.py:623"
     ],
     "cna_cube_lut_is_unit_domain": [
-      "src/cna/extensions/engine/passes.py:566"
+      "src/cna/extensions/engine/passes.py:630"
     ],
     "cna_cube_lut_get_entry": [
-      "src/cna/extensions/engine/passes.py:571"
+      "src/cna/extensions/engine/passes.py:635"
     ],
     "cna_cube_lut_create_strip_texture": [
-      "src/cna/extensions/engine/passes.py:581"
+      "src/cna/extensions/engine/passes.py:645"
     ],
     "cna_cube_lut_create_volume_texture": [
-      "src/cna/extensions/engine/passes.py:587"
+      "src/cna/extensions/engine/passes.py:651"
     ],
     "cna_ascii_post_process_effect_get_cell_size": [
-      "src/cna/extensions/engine/passes.py:379"
+      "src/cna/extensions/engine/passes.py:435"
     ],
     "cna_ascii_post_process_effect_set_cell_size": [
-      "src/cna/extensions/engine/passes.py:386"
+      "src/cna/extensions/engine/passes.py:442"
     ],
     "cna_ascii_post_process_effect_get_quantize_mode": [
-      "src/cna/extensions/engine/passes.py:370"
+      "src/cna/extensions/engine/passes.py:426"
     ],
     "cna_ascii_post_process_effect_set_quantize_mode": [
-      "src/cna/extensions/engine/passes.py:371"
+      "src/cna/extensions/engine/passes.py:427"
     ],
     "cna_ascii_post_process_effect_get_last_grid_dimensions": [
-      "src/cna/extensions/engine/passes.py:395"
+      "src/cna/extensions/engine/passes.py:459"
     ],
     "cna_ascii_post_process_effect_destroy": [
-      "src/cna/extensions/engine/passes.py:421"
+      "src/cna/extensions/engine/passes.py:370"
     ],
     "cna_contact_shadow_pass_create": [
       "src/cna/extensions/engine/atmosphere.py:243"
@@ -6107,6 +6107,75 @@
     ],
     "cna_model_mesh_part_destroy": [
       "src/cna/extensions/engine/culling.py:160"
+    ],
+    "cna_debug_draw_create": [
+      "src/cna/extensions/engine/debug.py:101"
+    ],
+    "cna_debug_draw_begin": [
+      "src/cna/extensions/engine/debug.py:112"
+    ],
+    "cna_debug_draw_end": [
+      "src/cna/extensions/engine/debug.py:121"
+    ],
+    "cna_debug_draw_clear": [
+      "src/cna/extensions/engine/debug.py:125"
+    ],
+    "cna_debug_draw_add_line": [
+      "src/cna/extensions/engine/debug.py:173"
+    ],
+    "cna_debug_draw_add_box": [
+      "src/cna/extensions/engine/debug.py:180"
+    ],
+    "cna_debug_draw_add_sphere": [
+      "src/cna/extensions/engine/debug.py:201"
+    ],
+    "cna_debug_draw_add_bounding_sphere": [
+      "src/cna/extensions/engine/debug.py:210"
+    ],
+    "cna_debug_draw_add_frustum": [
+      "src/cna/extensions/engine/debug.py:189"
+    ],
+    "cna_debug_draw_add_cross": [
+      "src/cna/extensions/engine/debug.py:217"
+    ],
+    "cna_debug_draw_is_depth_tested": [
+      "src/cna/extensions/engine/debug.py:137"
+    ],
+    "cna_debug_draw_set_depth_tested": [
+      "src/cna/extensions/engine/debug.py:142"
+    ],
+    "cna_debug_draw_get_line_count": [
+      "src/cna/extensions/engine/debug.py:148"
+    ],
+    "cna_debug_draw_copy_vertices": [
+      "src/cna/extensions/engine/debug.py:161"
+    ],
+    "cna_debug_draw_add_point_light_gizmo": [
+      "src/cna/extensions/engine/debug.py:230"
+    ],
+    "cna_debug_draw_add_spot_light_gizmo": [
+      "src/cna/extensions/engine/debug.py:245"
+    ],
+    "cna_debug_draw_add_directional_light_gizmo": [
+      "src/cna/extensions/engine/debug.py:258"
+    ],
+    "cna_debug_draw_add_probe_volume_gizmo": [
+      "src/cna/extensions/engine/debug.py:270"
+    ],
+    "cna_debug_draw_add_cluster_slice_gizmo": [
+      "src/cna/extensions/engine/debug.py:288"
+    ],
+    "cna_debug_draw_add_cascade_gizmo": [
+      "src/cna/extensions/engine/debug.py:297"
+    ],
+    "cna_debug_draw_destroy": [
+      "src/cna/extensions/engine/debug.py:98"
+    ],
+    "cna_ascii_post_process_effect_create": [
+      "src/cna/extensions/engine/passes.py:368"
+    ],
+    "cna_ascii_post_process_effect_draw": [
+      "src/cna/extensions/engine/passes.py:422"
     ]
   }
 }

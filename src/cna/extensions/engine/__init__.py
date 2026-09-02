@@ -46,7 +46,7 @@ Importing this module needs no native library. Constructing anything in it does.
 from __future__ import annotations
 
 from . import (
-    atmosphere, clustered, compute, culling, errors, passes, pbr, pipeline,
+    atmosphere, clustered, compute, culling, debug, errors, passes, pbr, pipeline,
     postprocess, probes, scene, shadows, values,
 )
 from .compute import (
@@ -102,6 +102,11 @@ from .clustered import (
     ClusteredShadowPolicy, area_light_contribution, area_light_coverage,
     area_light_quad, area_light_shading_glsl, brdf_lookup_glsl, evaluate_brdf,
     light_contribution, light_lookup_glsl, lobe_scale_for, volume_attenuation,
+)
+from .debug import (
+    DEBUG_DRAW_BOX_EDGE_COUNT, DEBUG_DRAW_DEFAULT_SEGMENTS,
+    DEBUG_DRAW_MAXIMUM_SEGMENTS, DEBUG_DRAW_MINIMUM_SEGMENTS, DebugDraw,
+    DebugLineVertex,
 )
 from .culling import (
     FrustumCuller, GPU_INSTANCE_STORAGE_BINDING, GpuCullableInstance,
@@ -171,6 +176,7 @@ __all__ = [
     "cube_face_direction",
     "cube_shadow_map_size_for",
     "culling",
+    "debug",
     "decode_pq",
     "decode_velocity",
     "depth_decode_glsl",
@@ -279,6 +285,12 @@ __all__ = [
     "CUBE_LUT_MAXIMUM_SIZE",
     "CUBE_LUT_MINIMUM_SIZE",
     "CUBE_SHADOW_FACE_COUNT",
+    "DebugDraw",
+    "DebugLineVertex",
+    "DEBUG_DRAW_BOX_EDGE_COUNT",
+    "DEBUG_DRAW_DEFAULT_SEGMENTS",
+    "DEBUG_DRAW_MAXIMUM_SEGMENTS",
+    "DEBUG_DRAW_MINIMUM_SEGMENTS",
     "DecalPass",
     "DepthEncoding",
     "DepthNormalPrepass",

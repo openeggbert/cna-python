@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "summary": {
     "CANONICAL_ROUTES": 4055,
-    "BOUND_ROUTES": 1894,
+    "BOUND_ROUTES": 1917,
     "BOUND_NOT_IN_HEADERS": 0,
     "UNREVIEWED": 0,
     "RULE_CONTRADICTIONS": 0,
@@ -12,17 +12,17 @@
     "CNB_CNJ_UNREVIEWED": 0,
     "SELECTED_CNB_CNJ_ACTIONABLE_LOCAL": 0,
     "ENGINE_ROUTES": 870,
-    "ENGINE_BOUND": 844,
+    "ENGINE_BOUND": 867,
     "ENGINE_UNREVIEWED": 0,
-    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 23,
+    "SELECTED_ENGINE_ACTIONABLE_LOCAL": 0,
     "PURPOSE_XNA_BACKING": 1171,
     "PURPOSE_CNA_EXTENSION_CANDIDATE": 1822,
     "PURPOSE_MANAGED_BY_DESIGN": 537,
     "PURPOSE_TOOLING_ONLY": 1,
     "PURPOSE_OUT_OF_SELECTED_PROFILE": 414,
     "PURPOSE_NOT_USEFUL_FOR_PYTHON": 110,
-    "STATUS_BOUND": 1894,
-    "STATUS_ACTIONABLE_LOCAL": 23,
+    "STATUS_BOUND": 1917,
+    "STATUS_ACTIONABLE_LOCAL": 0,
     "STATUS_BLOCKED_UPSTREAM": 2,
     "STATUS_BLOCKED_RENDERER": 0,
     "STATUS_BLOCKED_PLATFORM": 0,
@@ -226,7 +226,7 @@
     {
       "id": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "match": {
         "prefixes": [
           "cna_ascii_post_process_effect_"
@@ -234,8 +234,8 @@
       },
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "ACTIONABLE_LOCAL",
-      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
-      "boundReason": "imported: the ASCII pass cannot be configured without it"
+      "reason": "The minimal graphics_ext.h slice the selected ASCII family cannot work without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are here too, because they are the only way to quantize an arbitrary texture into an arbitrary rectangle: an AsciiPass runs inside a post-process chain and can do neither. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "boundReason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle"
     },
     {
       "id": "engine-pbr-dependency",
@@ -3620,44 +3620,44 @@
       "route": "cna_ascii_post_process_effect_create",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
-      "bound": false
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_destroy",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "BOUND",
-      "reason": "imported: the ASCII pass cannot be configured without it",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_draw",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+      "status": "BOUND",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
-      "bound": false
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
+      "bound": true
     },
     {
       "route": "cna_ascii_post_process_effect_get_cell_size",
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "BOUND",
-      "reason": "imported: the ASCII pass cannot be configured without it",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "bound": true
     },
     {
@@ -3665,10 +3665,10 @@
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "BOUND",
-      "reason": "imported: the ASCII pass cannot be configured without it",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "bound": true
     },
     {
@@ -3676,10 +3676,10 @@
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "BOUND",
-      "reason": "imported: the ASCII pass cannot be configured without it",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "bound": true
     },
     {
@@ -3687,10 +3687,10 @@
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "BOUND",
-      "reason": "imported: the ASCII pass cannot be configured without it",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "bound": true
     },
     {
@@ -3698,10 +3698,10 @@
       "header": "graphics_ext.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
       "status": "BOUND",
-      "reason": "imported: the ASCII pass cannot be configured without it",
+      "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
       "rule": "engine-ascii-dependency",
       "family": "ascii",
-      "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+      "familyTitle": "the minimal slice the ASCII pass and effect need",
       "bound": true
     },
     {
@@ -13663,232 +13663,232 @@
       "route": "cna_debug_draw_add_bounding_sphere",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_box",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_cascade_gizmo",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_cluster_slice_gizmo",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_cross",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_directional_light_gizmo",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_frustum",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_line",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_point_light_gizmo",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_probe_volume_gizmo",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_sphere",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_add_spot_light_gizmo",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_begin",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_clear",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_copy_vertices",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_create",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_destroy",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_end",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_get_line_count",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_is_depth_tested",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_debug_draw_set_depth_tested",
       "header": "engine_layer.h",
       "purpose": "CNA_EXTENSION_CANDIDATE",
-      "status": "ACTIONABLE_LOCAL",
-      "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+      "status": "BOUND",
+      "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
       "rule": "engine-debug-draw",
       "family": "debug-draw",
       "familyTitle": "debug drawing",
-      "bound": false
+      "bound": true
     },
     {
       "route": "cna_decal_pass_create",
@@ -49836,44 +49836,44 @@
         "route": "cna_ascii_post_process_effect_create",
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
-        "bound": false
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
+        "bound": true
       },
       {
         "route": "cna_ascii_post_process_effect_destroy",
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
         "status": "BOUND",
-        "reason": "imported: the ASCII pass cannot be configured without it",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
         "bound": true
       },
       {
         "route": "cna_ascii_post_process_effect_draw",
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "The minimal graphics_ext.h slice the selected ASCII pass cannot be configured without. cna_ascii_pass_get_effect hands out the effect that carries the pass's cell size and quantize mode, and no engine_layer.h route can read or write either, so without these the pass would have a getter returning something nothing could use. Its create and draw are not imported: the pass owns the effect and drives it. A dependency of the selected engine profile, not a decision to bind graphics_ext.h.",
+        "status": "BOUND",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
-        "bound": false
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
+        "bound": true
       },
       {
         "route": "cna_ascii_post_process_effect_get_cell_size",
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
         "status": "BOUND",
-        "reason": "imported: the ASCII pass cannot be configured without it",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
         "bound": true
       },
       {
@@ -49881,10 +49881,10 @@
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
         "status": "BOUND",
-        "reason": "imported: the ASCII pass cannot be configured without it",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
         "bound": true
       },
       {
@@ -49892,10 +49892,10 @@
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
         "status": "BOUND",
-        "reason": "imported: the ASCII pass cannot be configured without it",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
         "bound": true
       },
       {
@@ -49903,10 +49903,10 @@
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
         "status": "BOUND",
-        "reason": "imported: the ASCII pass cannot be configured without it",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
         "bound": true
       },
       {
@@ -49914,10 +49914,10 @@
         "header": "graphics_ext.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
         "status": "BOUND",
-        "reason": "imported: the ASCII pass cannot be configured without it",
+        "reason": "imported: the ASCII pass cannot be configured without it, and the standalone effect is the only way to draw one into a chosen rectangle",
         "rule": "engine-ascii-dependency",
         "family": "ascii",
-        "familyTitle": "the minimal slice the ASCII pass cannot be configured without",
+        "familyTitle": "the minimal slice the ASCII pass and effect need",
         "bound": true
       },
       {
@@ -52487,232 +52487,232 @@
         "route": "cna_debug_draw_add_bounding_sphere",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_box",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_cascade_gizmo",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_cluster_slice_gizmo",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_cross",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_directional_light_gizmo",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_frustum",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_line",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_point_light_gizmo",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_probe_volume_gizmo",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_sphere",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_add_spot_light_gizmo",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_begin",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_clear",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_copy_vertices",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_create",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_destroy",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_end",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_get_line_count",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_is_depth_tested",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_debug_draw_set_depth_tested",
         "header": "engine_layer.h",
         "purpose": "CNA_EXTENSION_CANDIDATE",
-        "status": "ACTIONABLE_LOCAL",
-        "reason": "In the selected engine-layer extension family (debug drawing: wireframe primitives and engine gizmos) and reachable from cna.extensions.engine, but not yet imported. Every remaining route here is a task, not a decision.",
+        "status": "BOUND",
+        "reason": "imported: cna.extensions.engine projects debug drawing -- wireframe primitives and engine gizmos",
         "rule": "engine-debug-draw",
         "family": "debug-draw",
         "familyTitle": "debug drawing",
-        "bound": false
+        "bound": true
       },
       {
         "route": "cna_decal_pass_create",

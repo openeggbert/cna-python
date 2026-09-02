@@ -1758,6 +1758,46 @@
       },
       "evidence": "docs/engine-upstream-findings.md ENGINE-008; tests/test_engine_culling.py::GpuInstanceCullerTests::test_the_default_instance_has_a_zero_world_and_not_an_identity",
       "notes": "engine_layer.h documents 'an identity world and an empty box'. The box is right and the matrix is all zeros, which is not a wrong position but a degenerate transform: every vertex of every instance maps to the origin, with a correct cull and an invisible draw and no error anywhere. Handed back unchanged, because default() in this package reports what CNA's defaults are; substituting an identity would make it a transcription and hide the defect. The trap is stated at the method and the test asserts both the zero and that it is not the identity."
+    },
+    {
+      "operation": "Debug drawing, counted rather than looked at",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_debug.py::DebugDrawShapeTests; tests/engine_oracles.py debug_sphere_lines and its siblings",
+      "notes": "Every shape's line count is exact and determined by its arguments, so what was built is asserted without a rasterizer deciding anything: a box is twelve edges over its own eight corners, each joining two that differ on exactly one axis; a cross is three segments of the given size on the three axes; a sphere is three rings whose every point is measured to be on the sphere, with the segment count clamped rather than refused. The vertices are read back and checked, not only counted."
+    },
+    {
+      "operation": "The two debug line lists, and which one a line joins",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_debug.py::DebugDrawShapeTests, ::DebugDrawRenderingTests",
+      "notes": "depth_tested is measured to choose the list when a line is *added* rather than how the batch is drawn, which is asserted by adding to both and reading each list back separately -- line_count adds them together, so the vertex copy is the only way to tell them apart. begin() is measured to clear both and put depth testing back on, so a batch always starts in the same state; end() draws and clears both; ending without beginning draws nothing rather than refusing."
+    },
+    {
+      "operation": "Debug gizmos, against the geometry they are made of",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "tests/test_engine_debug.py::DebugGizmoTests",
+      "notes": "A spot light is measured to be *two* cones, the outer angle and the inner: the test asserts eight lines start at the apex whatever the segment count, and that their far ends lie on two radii equal to range times the tangent of each half-angle. A point light's furthest vertex is exactly its range from its position. A probe volume's crosses are checked to sit on the grid's own probe positions. A cluster grid draws one box per slice, and a grid with no projection draws nothing rather than refusing."
+    },
+    {
+      "operation": "The ASCII effect on its own, and what its grid measures",
+      "status": "VERIFIED_NATIVE",
+      "byArtifact": {
+        "control": "unavailable (no engine layer)",
+        "gpu": "verified"
+      },
+      "evidence": "cna.extensions.engine.AsciiEffect; tests/test_engine_debug.py::StandaloneAsciiEffectTests",
+      "notes": "The standalone effect is the only way to quantize an arbitrary texture into an arbitrary rectangle; an AsciiPass runs inside a post-process chain and can do neither. last_grid_dimensions is measured to describe the *source* -- its size divided by the cell size -- and not how many cells the destination covered: a 32-pixel source with an 8-pixel cell is four by four whether it fills the viewport or a 64 by 32 rectangle. The property's documentation said the second thing and now says the first, checked over three cell sizes and three destinations."
     }
   ]
 }

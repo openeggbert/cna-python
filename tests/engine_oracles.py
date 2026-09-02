@@ -948,3 +948,75 @@ def lod_apply_hysteresis(thresholds, candidate: int, last: int, value: float,
     if boundary_index >= len(thresholds):
         return candidate
     return last if abs(value - thresholds[boundary_index]) < margin else candidate
+
+
+# --- debug drawing -------------------------------------------------------------
+
+#: A box and a frustum have the same twelve edges: XNA numbers their corners the
+#: same way, so one edge table draws both.
+DEBUG_BOX_EDGES = 12
+DEBUG_MINIMUM_SEGMENTS, DEBUG_MAXIMUM_SEGMENTS = 4, 128
+DEBUG_DEFAULT_SEGMENTS = 24
+
+
+def debug_segments(requested: int) -> int:
+    """A ring's segment count, clamped rather than refused."""
+    return min(max(requested, DEBUG_MINIMUM_SEGMENTS), DEBUG_MAXIMUM_SEGMENTS)
+
+
+def debug_sphere_lines(segments: int = DEBUG_DEFAULT_SEGMENTS) -> int:
+    """Three rings, one per axis pair, each of the clamped segment count."""
+    return 3 * debug_segments(segments)
+
+
+def debug_cross_lines() -> int:
+    """Three axis-aligned segments through a point."""
+    return 3
+
+
+def debug_point_light_lines(segments: int = DEBUG_DEFAULT_SEGMENTS) -> int:
+    """A sphere at the light's reach and a small cross at its position."""
+    return debug_sphere_lines(segments) + debug_cross_lines()
+
+
+def debug_cone_lines(segments: int = DEBUG_DEFAULT_SEGMENTS) -> int:
+    """A ring at a cone's base and four ribs -- four whatever the segment count.
+
+    One rib per ring segment would be a filled triangle on screen and would show
+    nothing, which is why the rib count does not follow the ring's.
+    """
+    return debug_segments(segments) + 4
+
+
+def debug_spot_light_lines(segments: int = DEBUG_DEFAULT_SEGMENTS) -> int:
+    """*Two* cones: the outer angle and the inner one.
+
+    A spot light has two, and drawing only the outer would show where the light
+    stops and not where it stops being at full strength -- which is the number a
+    caller is usually trying to get right.
+    """
+    return 2 * debug_cone_lines(segments)
+
+
+def debug_directional_light_lines() -> int:
+    """The shaft and the four lines of its arrowhead."""
+    return 1 + 4
+
+
+def debug_probe_volume_lines(probe_count: int) -> int:
+    """The volume's box and a cross at every probe."""
+    return DEBUG_BOX_EDGES + debug_cross_lines() * probe_count
+
+
+def debug_cluster_slice_lines(slice_count: int) -> int:
+    """One box per depth slice, spanning the whole grid at that depth.
+
+    One per slice rather than one per cluster: the full grid would be tiles
+    times tiles times slices boxes, which is a thicket rather than a picture.
+    """
+    return DEBUG_BOX_EDGES * slice_count
+
+
+def debug_cascade_lines(cascade_count: int) -> int:
+    """One frustum per cascade."""
+    return DEBUG_BOX_EDGES * cascade_count

@@ -346,26 +346,82 @@ class LensFlarePass(_ConfiguredPass):
 class AsciiEffect:
     """The cell size and quantisation an :class:`AsciiPass` draws with.
 
-    A counted borrow of the pass's own effect. The pass hands it out once and
-    releases it on close, so a caller never holds a second one.
+    Either the pass's own effect, handed out once as a counted borrow and
+    released when the pass closes, or one built directly with a device. The
+    standalone form is what draws an *arbitrary* texture into an *arbitrary*
+    rectangle: an :class:`AsciiPass` runs inside a post-process chain and can do
+    neither.
 
     Its routes live in ``graphics_ext.h`` rather than in the engine layer, which
     is why they are a dependency slice: without them the pass would have a
     getter returning something nothing could read.
     """
 
-    __slots__ = ("_handle",)
+    __slots__ = ("_handle", "_owned")
 
-    def __init__(self) -> None:
-        raise TypeError(
-            "AsciiEffect is handed out by AsciiPass.ascii_effect and is not "
-            "constructed directly")
+    def __init__(self, device: "GraphicsDevice | None" = None) -> None:
+        if device is None:
+            raise TypeError(
+                "AsciiEffect() needs a GraphicsDevice; the pass's own effect is "
+                "handed out by AsciiPass.ascii_effect")
+        self._handle = _support.NativeHandle(
+            _support.out_handle("cna_ascii_post_process_effect_create",
+                                _device_handle(device)),
+            "cna_ascii_post_process_effect_destroy", "ASCII effect")
+        self._owned = True
 
     @classmethod
     def _wrap(cls, handle: "_support.NativeHandle") -> "AsciiEffect":
         self = cls.__new__(cls)
         self._handle = handle
+        self._owned = False
         return self
+
+    @property
+    def is_closed(self) -> bool:
+        """True once this effect has been released."""
+        return self._handle.closed
+
+    def close(self) -> None:
+        """Releases the effect. Calling it twice is not an error.
+
+        A view handed out by an :class:`AsciiPass` is released when the pass
+        closes as well; releasing it early is allowed and releases only the
+        view.
+        """
+        self._handle.close()
+
+    def __enter__(self) -> "AsciiEffect":
+        self._handle.value
+        return self
+
+    def __exit__(self, *_exception: object) -> None:
+        self.close()
+
+    def draw(self, source, destination_rectangle=None) -> None:
+        """Quantises ``source`` and draws the glyph grid into the current target.
+
+        ``destination_rectangle`` is in render-target pixels; ``None`` fills the
+        viewport. The source is borrowed for the call.
+        """
+        from Microsoft.Xna.Framework import Rectangle
+
+        if not hasattr(source, "_require_handle"):
+            raise TypeError("source must be a graphics texture")
+        rectangle = None
+        if destination_rectangle is not None:
+            if not isinstance(destination_rectangle, Rectangle):
+                raise TypeError(
+                    "destination_rectangle must be a "
+                    "Microsoft.Xna.Framework.Rectangle or None")
+            rectangle = _abi.CNA_Rectangle(
+                _support.checked(int(destination_rectangle.X), "int32", "X"),
+                _support.checked(int(destination_rectangle.Y), "int32", "Y"),
+                _support.checked(int(destination_rectangle.Width), "int32", "Width"),
+                _support.checked(int(destination_rectangle.Height), "int32", "Height"))
+        _support.call("cna_ascii_post_process_effect_draw", self._handle.argument,
+                      c.c_uint64(int(source._require_handle())),
+                      None if rectangle is None else c.byref(rectangle))
 
     quantize_mode = _identity("cna_ascii_post_process_effect_get_quantize_mode",
                               "cna_ascii_post_process_effect_set_quantize_mode",
@@ -390,7 +446,15 @@ class AsciiEffect:
 
     @property
     def last_grid_dimensions(self) -> tuple[int, int]:
-        """How many cells the last draw covered, as ``(columns, rows)``."""
+        """How the last draw quantised its *source*, as ``(columns, rows)``.
+
+        The source's size divided by :attr:`cell_size`, measured -- **not** how
+        many cells the destination covered. Drawing a 32-pixel source with an
+        8-pixel cell is always four by four, whether it fills the viewport or a
+        64 by 32 rectangle; the destination only decides how far apart the
+        glyphs land. Written down because "grid dimensions" reads like the
+        second thing and is the first.
+        """
         columns, rows = c.c_int32(), c.c_int32()
         _support.call("cna_ascii_post_process_effect_get_last_grid_dimensions",
                       self._handle.argument, c.byref(columns), c.byref(rows))
