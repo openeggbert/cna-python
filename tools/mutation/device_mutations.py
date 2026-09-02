@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Plants one defect at a time in the device family and reports which test kills it.
+"""Plants one defect at a time in the device and input families.
 
 A test suite that has never been shown to fail is a suite nobody has measured.
 Each mutation below is a plausible mistake in this family specifically -- an axis
@@ -246,6 +246,130 @@ MUTATIONS = [
      "        array[index].r = int(colour.R)",
      "        array[index].r = int(colour.B)",
      "tests.test_devices_services"),
+
+    # --- extended input: UTF-16 ---------------------------------------------
+    ("accumulator: treat every code unit as a whole character",
+     "src/cna/extensions/input/text.py",
+     "        if 0xD800 <= unit <= 0xDBFF:",
+     "        if False:",
+     "tests.test_input_extensions"),
+    ("accumulator: combine the surrogate pair with the wrong shift",
+     "src/cna/extensions/input/text.py",
+     "            self._parts.append(chr(0x10000 + ((high - 0xD800) << 10) + (unit - 0xDC00)))",
+     "            self._parts.append(chr(0x10000 + ((high - 0xD800) << 11) + (unit - 0xDC00)))",
+     "tests.test_input_extensions"),
+    ("accumulator: replace an unpaired surrogate instead of reporting it",
+     "src/cna/extensions/input/text.py",
+     "            if self._pending is None:\n"
+     "                self.unpaired.append(unit)\n"
+     "                return",
+     "            if self._pending is None:\n"
+     "                self._parts.append(chr(0xFFFD))\n"
+     "                return",
+     "tests.test_input_extensions"),
+    ("accumulator: forget the pending surrogate when a plain unit follows",
+     "src/cna/extensions/input/text.py",
+     "        if self._pending is not None:\n"
+     "            self.unpaired.append(self._pending)\n"
+     "            self._pending = None\n"
+     "        self._parts.append(chr(unit))",
+     "        self._pending = None\n"
+     "        self._parts.append(chr(unit))",
+     "tests.test_input_extensions"),
+    ("text input: encode the raised string as UTF-8 rather than UTF-16",
+     "src/cna/extensions/input/testing.py",
+     "    encoded = text.encode(\"utf-16-le\")",
+     "    encoded = text.encode(\"utf-8\") + b\"\\x00\"",
+     "tests.test_input_extensions"),
+
+    # --- extended input: IME -------------------------------------------------
+    ("candidates: read one candidate fewer than the event carries",
+     "src/cna/extensions/input/text.py",
+     "        count = int(info.candidate_count)",
+     "        count = max(int(info.candidate_count) - 1, 0)",
+     "tests.test_input_extensions"),
+    ("candidates: let the no-selection sentinel through as an index",
+     "src/cna/extensions/input/text.py",
+     "            candidates, None if selected < 0 else selected,",
+     "            candidates, selected,",
+     "tests.test_input_extensions"),
+    ("composition: interchange the selection start and length",
+     "src/cna/extensions/input/text.py",
+     "        handler(TextEditing(_text_of(info.text), int(info.start), int(info.length)))",
+     "        handler(TextEditing(_text_of(info.text), int(info.length), int(info.start)))",
+     "tests.test_input_extensions"),
+    ("text subscription: keep the trampoline rooted after unsubscribing",
+     "src/cna/extensions/input/text.py",
+     "        _roots.release(self._key)\n"
+     "        _support.call(\"cna_text_input_unsubscribe_ext\", c.c_uint64(self._handle))",
+     "        pass",
+     "tests.test_input_extensions"),
+
+    # --- extended input: hotplug and devices ---------------------------------
+    ("hotplug: send every input-device event to the keyboard-connected route",
+     "src/cna/extensions/input/devices.py",
+     "def on_mouse_connected(handler: Callable[[int], None]) -> InputDeviceSubscription:\n"
+     "    \"\"\"Calls ``handler(device_id)`` when a mouse is plugged in.\"\"\"\n"
+     "    return _subscribe(\"cna_input_devices_subscribe_mouse_connected_ext\", handler)",
+     "def on_mouse_connected(handler: Callable[[int], None]) -> InputDeviceSubscription:\n"
+     "    \"\"\"Calls ``handler(device_id)`` when a mouse is plugged in.\"\"\"\n"
+     "    return _subscribe(\"cna_input_devices_subscribe_keyboard_connected_ext\", handler)",
+     "tests.test_input_extensions"),
+    ("device sensors: report an absent reading as a zero vector",
+     "src/cna/extensions/input/devices.py",
+     "    if not available.value:\n        return None",
+     "    if False:\n        return None",
+     "tests.test_input_extensions"),
+    ("device power: let the unknown sentinels through as values",
+     "src/cna/extensions/input/devices.py",
+     "        None if seconds.value < 0 else int(seconds.value),\n"
+     "        None if percent.value < 0 else int(percent.value))",
+     "        int(seconds.value), int(percent.value))",
+     "tests.test_input_extensions"),
+    ("enumeration: read the mouse list where the keyboard list belongs",
+     "src/cna/extensions/input/devices.py",
+     "    return _devices(game, \"keyboard\")",
+     "    return _devices(game, \"mouse\")",
+     "tests.test_input_extensions"),
+
+    # --- extended input: joysticks and haptics -------------------------------
+    ("hat position: project the identities as a bit set",
+     "src/cna/extensions/input/values.py",
+     "class JoystickHatPosition(IntEnum):",
+     "class JoystickHatPosition(IntFlag):",
+     "tests.test_input_extensions"),
+    ("joystick capabilities: let the unknown battery sentinel through",
+     "src/cna/extensions/input/joystick.py",
+     "        None if percent < 0 else percent, bool(native.is_connected),",
+     "        percent, bool(native.is_connected),",
+     "tests.test_input_extensions"),
+    ("haptic capabilities: let the -1 limits through as counts",
+     "src/cna/extensions/input/haptics.py",
+     "            None if limit < 0 else limit, None if playing < 0 else playing,",
+     "            limit, playing,",
+     "tests.test_input_extensions"),
+    ("haptic effect: skip the per-axis range check",
+     "src/cna/extensions/input/haptics.py",
+     "            target[index] = checked(value, width, f\"{name}[{index}]\")",
+     "            target[index] = value & 0xFFFF",
+     "tests.test_input_extensions"),
+    ("haptic effect: drop the custom sample data",
+     "src/cna/extensions/input/haptics.py",
+     "    samples = tuple(effect.custom_data)",
+     "    samples = ()",
+     "tests.test_input_extensions"),
+    ("haptic effect: interchange the deadband and the centre",
+     "src/cna/extensions/input/haptics.py",
+     "    \"deadband\": \"uint16\", \"center\": \"int16\",",
+     "    \"deadband\": \"int16\", \"center\": \"uint16\",",
+     "tests.test_input_extensions"),
+
+    # --- extended input: cursors ---------------------------------------------
+    ("cursor: let the active cursor be closed underneath the platform",
+     "src/cna/extensions/input/cursor.py",
+     "        if _active is self and not force:",
+     "        if False:",
+     "tests.test_input_extensions"),
 ]
 
 

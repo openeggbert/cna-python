@@ -376,9 +376,7 @@ GROUPS: dict[str, dict[str, tuple[str, str]]] = {
 #: rather than a decision -- but it is *imported* only when its Python consumer
 #: exists. An imported route with no caller is dead native surface, and
 #: ``tools/verify_route_reachability.py`` fails on one.
-LANDED: dict[str, tuple[str, ...]] = {
-    "input": ("clipboard",),
-}
+LANDED: dict[str, tuple[str, ...]] = {}
 
 def refused_routes() -> dict[str, str]:
     """Every route the census already decided may not be imported.
