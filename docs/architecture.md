@@ -27,22 +27,31 @@ else: a member CNA offers but XNA never had does not belong there, because a
 name in that namespace is a claim about XNA. CNA-only capabilities live under
 `cna.extensions`, which the XNA namespace never imports and does not depend on.
 
-Two extension families are open. `cna.extensions.graphics` reports renderer
+Three extension families are open. `cna.extensions.graphics` reports renderer
 identity and selection. `cna.extensions.content` projects CNA's own `.cnb`
 compiled content format and its `.cnj` source documents; the strict XNA
 `ContentManager` is unchanged by it, still reads `.xnb` and only `.xnb`, and
-keeps its own separate cache. The dependency runs extension -> strict only: the
-content extension reuses `Curve`, `Rectangle`, `Vector3`, `Matrix` and
-`SurfaceFormat` where those are exactly the natural representation, and a test in
-a fresh interpreter asserts that importing the XNA namespace loads no `cna`
-module at all. See `docs/cnb-cnj-extensions.md`.
+keeps its own separate cache. `cna.extensions.engine` projects `engine_layer.h`
+-- compute, physically based materials, shadows, post-processing, clustered
+lighting, light probes, culling and instancing, and a debug line batch -- none of
+which XNA ever had. The dependency runs extension -> strict only: the content
+extension reuses `Curve`, `Rectangle`, `Vector3`, `Matrix` and `SurfaceFormat`,
+and the engine extension reuses those plus `Color`, `BoundingBox`,
+`BoundingSphere`, `BoundingFrustum`, `Effect`, `Texture2D`, `TextureCube`,
+`RenderTarget2D` and `ModelMeshPart`, where each is exactly the natural
+representation; a test in a fresh interpreter asserts that importing the XNA
+namespace loads no `cna` module at all. See `docs/cnb-cnj-extensions.md` and
+`docs/engine-extensions.md`.
 
 Opening a family may require a small slice of another header, and that is a
 dependency rather than a second decision: the CNB curve codec speaks in native
 `Curve` handles, so eleven `curve.h` routes are imported and used only inside two
 functions, and `cna_cnb_loader_invoke` requires a content manager, so exactly two
-`content.h` routes are imported. Each carries its own census rule and its own
-written reason.
+`content.h` routes are imported. The engine family needs three such slices --
+five routes for PBR effects and materials, eight for the ASCII effect, and two
+`models.h` routes to project a strict `ModelMeshPart` into the native handle
+level-of-detail and instancing demand. Each carries its own census rule and its
+own written reason, and none makes the header it came from public.
 
 Public namespaces preserve XNA names. Private modules split math, geometry,
 game hosting, component/services, display/presentation, graphics states,

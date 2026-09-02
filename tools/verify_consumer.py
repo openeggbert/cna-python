@@ -87,11 +87,16 @@ def main() -> int:
         # import it and compile one `.cnj` asset through it.
         extensions = run(
             [str(python), "-c",
-             "from cna.extensions import graphics, content; "
-             "print('EXTENSION_PROBE=PASS', len(content.__all__))"],
+             "from cna.extensions import graphics, content, engine; "
+             "print('EXTENSION_PROBE=PASS', len(content.__all__), len(engine.__all__))"],
             cwd=consumer, env=environment,
         )
         cnb_smoke = run([str(python), "main.py", "--verify-cnb"], cwd=consumer, env=environment)
+        # The engine layer has to reach an installed wheel too. A CNA build
+        # configured without one is a supported answer, so both "ok" and
+        # "absent" are a pass here and only a crash or a wrong revision is not.
+        engine_smoke = run([str(python), "main.py", "--verify-engine"],
+                           cwd=consumer, env=environment)
 
         print(f"WHEEL={wheel.name}")
         print(f"WHEEL_SHA256={sha256(wheel)}")
@@ -103,14 +108,20 @@ def main() -> int:
         print("STABILITY_600=PASS" if stability_passed else "STABILITY_600=FAIL")
         extensions_passed = "EXTENSION_PROBE=PASS" in extensions
         cnb_passed = "CNB_VERIFICATION=ok" in cnb_smoke
+        engine_passed = ("ENGINE_VERIFICATION=ok" in engine_smoke
+                         or "ENGINE_VERIFICATION=absent" in engine_smoke)
         print("EXTENSION_IMPORT=PASS" if extensions_passed else "EXTENSION_IMPORT=FAIL")
         print("CNB_SMOKE=PASS" if cnb_passed else "CNB_SMOKE=FAIL")
+        print("ENGINE_SMOKE=PASS" if engine_passed else "ENGINE_SMOKE=FAIL")
+        print("ENGINE_LAYER="
+              + ("present" if "ENGINE_VERIFICATION=ok" in engine_smoke else "absent"))
         print(f"ABSOLUTE_DEVELOPER_PATHS={absolute_leaks}")
         print(f"SIBLING_SOURCE_DEPENDENCIES={sibling_leaks}")
         print(f"PYTHONPATH_SOURCE_DEPENDENCIES={pythonpath_leaks}")
         return 1 if (absolute_leaks or sibling_leaks or pythonpath_leaks
                      or not smoke_passed or not stability_passed
-                     or not extensions_passed or not cnb_passed) else 0
+                     or not extensions_passed or not cnb_passed
+                     or not engine_passed) else 0
 
 
 if __name__ == "__main__":
